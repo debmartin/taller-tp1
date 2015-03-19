@@ -7,7 +7,7 @@ int main(int argc, char* args[])
 	g_game = new Game();
 
 	//levantar la información inicial mediante json
-	//... usar libreria jsonCpp
+	//...
 
 	g_game->init("Chapter 1: Setting up SDL", 100, 100, 640, 480, false);
 
