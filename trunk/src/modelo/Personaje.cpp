@@ -40,6 +40,20 @@ void Personaje::setIndex(int index) {
 	z_index = index;
 }
 
+void Personaje::setPosicion(int x, int y) {
+	this->coordenada_x = x;
+	this->coordenada_y = y;
+}
+
+void Personaje::moverse(int delta_x, int delta_y){
+	this->coordenada_x += delta_x;
+	this->coordenada_y += delta_y;
+}
+
+void Personaje::saltar(){
+
+}
+
 Personaje::~Personaje() {
 	// TODO Auto-generated destructor stub
 }
