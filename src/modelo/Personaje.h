@@ -19,6 +19,9 @@ private:
 	float alto;
 	int z_index;
 	vector<string> sprites;
+	int coordenada_x;
+	int coordenada_y;
+
 public:
 	Personaje();
 	virtual ~Personaje();
@@ -30,6 +33,10 @@ public:
 	void setSprites(vector<string> sprites);
 	int getIndex() const;
 	void setIndex(int index);
+	void setPosicion(int coordenada_x, int coordenada_y);
+	void moverse(int delta_x, int delta_y);
+	void saltar();
+
 };
 
 #endif /* SRC_MODELO_PERSONAJE_H_ */
