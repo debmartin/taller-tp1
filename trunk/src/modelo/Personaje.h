@@ -11,6 +11,7 @@
 #include <iostream>
 #include <vector>
 #include <string.h>
+#include "Coordenada.h"
 using namespace std;
 
 class Personaje {
@@ -19,8 +20,7 @@ private:
 	float alto;
 	int z_index;
 	vector<string> sprites;
-	int coordenada_x;
-	int coordenada_y;
+	Coordenada unaCoordenada;
 
 public:
 	Personaje();
@@ -33,7 +33,8 @@ public:
 	void setSprites(vector<string> sprites);
 	int getIndex() const;
 	void setIndex(int index);
-	void setPosicion(int coordenada_x, int coordenada_y);
+	void setPosicion(int posicion_x, int posicion_y);
+	Coordenada getPosicion();
 	void moverse(int delta_x, int delta_y);
 	void saltar();
 
