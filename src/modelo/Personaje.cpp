@@ -41,13 +41,16 @@ void Personaje::setIndex(int index) {
 }
 
 void Personaje::setPosicion(int x, int y) {
-	this->coordenada_x = x;
-	this->coordenada_y = y;
+	this->unaCoordenada.setCoordenada(x,y);
+}
+
+Coordenada Personaje::getPosicion(){
+	return this->unaCoordenada;
 }
 
 void Personaje::moverse(int delta_x, int delta_y){
-	this->coordenada_x += delta_x;
-	this->coordenada_y += delta_y;
+	this->unaCoordenada.mover_en_X(delta_x);
+	this->unaCoordenada.mover_en_Y(delta_y);
 }
 
 void Personaje::saltar(){
