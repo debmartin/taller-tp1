@@ -7,6 +7,7 @@
 
 #include "Personaje.h"
 
+#define ANCHO_ESCENARIO 600
 
 float Personaje::getAlto() const {
 	return alto;
@@ -48,16 +49,42 @@ Coordenada Personaje::getPosicion(){
 	return this->unaCoordenada;
 }
 
-void Personaje::moverse(int delta_x, int delta_y){
-	this->unaCoordenada.mover_en_X(delta_x);
-	this->unaCoordenada.mover_en_Y(delta_y);
+void Personaje::setVida(int cantidad){
+	this->vida += cantidad;
 }
 
-void Personaje::saltar(){
-
+int Personaje::getVida(){
+	return this->vida;
 }
 
-Personaje::~Personaje() {
+void Personaje::caminarDerecha(){
+	//Valido que no camine fuera del escenario
+	if((this->unaCoordenada.getCoordenadaX() + this->ancho) < ANCHO_ESCENARIO){
+		this->unaCoordenada.mover_en_X(this->velocidad);
+	}
+}
+
+void Personaje::caminarIzquierda(){
+	//Valido que no camine fuera del escenario
+	if(this->unaCoordenada.getCoordenadaX() > 0){
+		this->unaCoordenada.mover_en_X(-this->velocidad);
+	}
+}
+void Personaje::moverArriba(){
+	//Valido que no camine fuera del escenario
+	if((this->unaCoordenada.getCoordenadaY() + this->alto) < ALTO_ESCENARIO){
+		this->unaCoordenada.mover_en_Y(this->velocidad);
+	}
+}
+
+void Personaje::moverAbajo(){
+	//Valido que no camine fuera del escenario
+	if(this->unaCoordenada.getCoordenadaY() > 0){
+		this->unaCoordenada.mover_en_Y(-this->velocidad);
+	}
+}
+
+Personaje::~Personaje(){
 	// TODO Auto-generated destructor stub
 }
 
