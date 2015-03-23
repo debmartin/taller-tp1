@@ -12,6 +12,11 @@
 #include <vector>
 #include <string.h>
 #include "Coordenada.h"
+
+#define DELTA_PASO 1
+#define ANCHO_ESCENARIO 600
+#define ALTO_ESCENARIO 400
+
 using namespace std;
 
 class Personaje {
@@ -21,6 +26,8 @@ private:
 	int z_index;
 	vector<string> sprites;
 	Coordenada unaCoordenada;
+	int velocidad;
+	int vida;
 
 public:
 	Personaje();
@@ -34,10 +41,13 @@ public:
 	int getIndex() const;
 	void setIndex(int index);
 	void setPosicion(int posicion_x, int posicion_y);
+	void setVida(int cantidad);
+	int getVida();
 	Coordenada getPosicion();
-	void moverse(int delta_x, int delta_y);
-	void saltar();
-
+	void caminarDerecha();
+	void caminarIzquierda();
+	void moverArriba();
+	void moverAbajo();
 };
 
 #endif /* SRC_MODELO_PERSONAJE_H_ */
