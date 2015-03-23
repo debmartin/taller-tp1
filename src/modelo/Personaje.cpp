@@ -45,7 +45,7 @@ void Personaje::setPosicion(int x, int y) {
 	this->unaCoordenada.setCoordenada(x,y);
 }
 
-Coordenada Personaje::getPosicion(){
+Vector2 Personaje::getPosicion(){
 	return this->unaCoordenada;
 }
 
