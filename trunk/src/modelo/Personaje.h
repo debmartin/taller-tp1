@@ -11,7 +11,8 @@
 #include <iostream>
 #include <vector>
 #include <string.h>
-#include "Coordenada.h"
+
+#include "Vector2.h"
 
 #define DELTA_PASO 1
 #define ANCHO_ESCENARIO 600
@@ -25,7 +26,7 @@ private:
 	float alto;
 	int z_index;
 	vector<string> sprites;
-	Coordenada unaCoordenada;
+	Vector2 unaCoordenada;
 	int velocidad;
 	int vida;
 
@@ -43,7 +44,7 @@ public:
 	void setPosicion(int posicion_x, int posicion_y);
 	void setVida(int cantidad);
 	int getVida();
-	Coordenada getPosicion();
+	Vector2 getPosicion();
 	void caminarDerecha();
 	void caminarIzquierda();
 	void moverArriba();
