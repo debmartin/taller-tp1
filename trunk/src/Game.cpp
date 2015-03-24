@@ -1,5 +1,6 @@
 #include "Game.h"
 #include <cstddef>
+#include <Box2D/Box2D.h>
 
 Game::Game() : m_bRunning(false), m_pWindow(NULL), m_pRenderer(NULL) {}
 

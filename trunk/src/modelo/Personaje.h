@@ -18,6 +18,8 @@
 #define ANCHO_ESCENARIO 600
 #define ALTO_ESCENARIO 400
 
+enum estado{en_espera, caminando, saltando};
+
 using namespace std;
 
 class Personaje {
@@ -27,8 +29,9 @@ private:
 	int z_index;
 	vector<string> sprites;
 	Vector2 unaCoordenada;
-	int velocidad;
+	Vector2 velocidad;
 	int vida;
+	int estado;
 
 public:
 	Personaje();
@@ -42,13 +45,18 @@ public:
 	int getIndex() const;
 	void setIndex(int index);
 	void setPosicion(int posicion_x, int posicion_y);
+	Vector2 getPosicion();
+	void setLimiteSuperior();
+	void setLimiteInferior();
+	void setEstado(int estado);
+	int getEstado();
 	void setVida(int cantidad);
 	int getVida();
-	Vector2 getPosicion();
-	void caminarDerecha();
-	void caminarIzquierda();
-	void moverArriba();
-	void moverAbajo();
+	void aumentar_velocidadX();
+	void disminuir_velocidadX();
+	void aumentar_velocidadY();
+	void disminuir_velocidadY();
+	void mover();
 };
 
 #endif /* SRC_MODELO_PERSONAJE_H_ */
