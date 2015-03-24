@@ -9,6 +9,9 @@
 
 #define ANCHO_ESCENARIO 600
 
+Personaje::Personaje() {
+}
+
 float Personaje::getAlto() const {
 	return alto;
 }
@@ -33,12 +36,12 @@ void Personaje::setSprites(vector<string> sprites) {
 	this->sprites = sprites;
 }
 
-int Personaje::getIndex() const {
+int Personaje::getZindex() const {
 	return z_index;
 }
 
-void Personaje::setIndex(int index) {
-	z_index = index;
+void Personaje::setZindex(int z_index) {
+	this->z_index = z_index;
 }
 
 void Personaje::setPosicion(int x, int y) {

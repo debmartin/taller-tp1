@@ -12,7 +12,7 @@ class Escenario {
 private:
 	float ancho;
 	float alto;
-	int y_piso;
+	int ypiso;
 	//string fondo;
 
 public:
@@ -22,8 +22,8 @@ public:
 	void setAlto(float alto);
 	float getAncho() const;
 	void setAncho(float ancho);
-	int getPiso() const;
-	void setPiso(int piso);
+	int getYpiso() const;
+	void setYpiso(int ypiso);
 };
 
 #endif /* SRC_MODELO_ESCENARIO_H_ */

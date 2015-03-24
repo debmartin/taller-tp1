@@ -7,6 +7,9 @@
 
 #include "Escenario.h"
 
+Escenario::Escenario() {
+}
+
 float Escenario::getAlto() const {
 	return alto;
 }
@@ -23,12 +26,12 @@ void Escenario::setAncho(float ancho) {
 	this->ancho = ancho;
 }
 
-int Escenario::getPiso() const {
-	return y_piso;
+int Escenario::getYpiso() const {
+	return ypiso;
 }
 
-void Escenario::setPiso(int piso) {
-	y_piso = piso;
+void Escenario::setYpiso(int ypiso) {
+	this->ypiso = ypiso;
 }
 
 Escenario::~Escenario() {

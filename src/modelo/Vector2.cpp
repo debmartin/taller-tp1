@@ -6,6 +6,9 @@
  */
 #include "Vector2.h"
 
+Vector2::Vector2() {
+}
+
 void Vector2::setCoordenada(int x, int y) {
 	this->coordenada_x = x;
 	this->coordenada_y = y;
@@ -30,3 +33,4 @@ void Vector2::mover_en_Y(int delta_y){
 Vector2::~Vector2() {
 	// TODO Auto-generated destructor stub
 }
+

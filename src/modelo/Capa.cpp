@@ -7,6 +7,9 @@
 
 #include "Capa.h"
 
+Capa::Capa() {
+}
+
 float Capa::getAncho() const {
 	return ancho;
 }

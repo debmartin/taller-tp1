@@ -11,7 +11,7 @@
 class ParserTests {
 public:
 	ParserTests();
-	void ejecutar();
+	bool ejecutar();
 	virtual ~ParserTests();
 };
 
