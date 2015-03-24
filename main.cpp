@@ -1,7 +1,12 @@
-#include "Game.h"
+#include "src/Game.h"
+#include "test/Test.h"
 
 int main(int argc, char* args[])
 {	
+	//para correr las pruebas comentar o descomentar estas 2 lineas
+	Test tests;
+	tests.ejecutar();
+
 	Game* g_game = NULL;
 
 	g_game = new Game();
