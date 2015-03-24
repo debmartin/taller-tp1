@@ -7,6 +7,9 @@
 
 #include "Ventana.h"
 
+Ventana::Ventana() {
+}
+
 int Ventana::getAltoPx() const {
 	return alto_px;
 }

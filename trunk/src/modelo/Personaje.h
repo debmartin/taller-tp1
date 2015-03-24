@@ -42,8 +42,8 @@ public:
 	void setAncho(float ancho);
 	vector<string> getSprites() const;
 	void setSprites(vector<string> sprites);
-	int getIndex() const;
-	void setIndex(int index);
+	int getZindex() const;
+	void setZindex(int z_index);
 	void setPosicion(int posicion_x, int posicion_y);
 	Vector2 getPosicion();
 	void setLimiteSuperior();

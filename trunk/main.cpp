@@ -14,7 +14,7 @@ int main(int argc, char* args[])
 	//levantar la información inicial mediante json
 	//... usar libreria jsonCpp
 
-	g_game->init("Chapter 1: Setting up SDL", 100, 100, 640, 480, false);
+	g_game->init("Taller de programacion TP", 100, 100, 640, 480, false);
 
 	while (g_game->running())
 	{

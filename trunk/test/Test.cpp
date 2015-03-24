@@ -13,10 +13,13 @@ Test::Test() {
 
 }
 
-void Test::ejecutar() {
+bool Test::ejecutar() {
 
+	bool salida = true;
 	ParserTests parserTests;
-	parserTests.ejecutar();
+	salida = parserTests.ejecutar();
+
+	return salida;
 }
 
 Test::~Test() {
