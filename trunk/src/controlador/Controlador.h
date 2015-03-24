@@ -8,7 +8,8 @@
 #ifndef SRC_CONTROLADOR_CONTROLADOR_H_
 #define SRC_CONTROLADOR_CONTROLADOR_H_
 
-#include "Personaje.h"
+#include "../modelo/Personaje.h"
+#include <SDL2/SDL.h>
 
 using namespace std;
 
