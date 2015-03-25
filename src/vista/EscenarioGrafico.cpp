@@ -1,10 +1,3 @@
-/*
- * EscenarioGrafico.cpp
- *
- *  Created on: 24/3/2015
- *      Author: gaston
- */
-
 #include "EscenarioGrafico.h"
 
 EscenarioGrafico::EscenarioGrafico() {
