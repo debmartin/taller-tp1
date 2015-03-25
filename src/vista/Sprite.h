@@ -2,7 +2,7 @@
 #ifndef SRC_VISTA_SPRITE_H_
 #define SRC_VISTA_SPRITE_H_
 #include <SDL2/SDL.h>
-#include "../../src/modelo/Vector2.h";
+#include "../../src/modelo/Vector2.h"
 #include <string>
 
 using namespace std;
@@ -14,11 +14,13 @@ private:
 	Vector2 posicion;
 	int anchoPx;
 	int altoPx;
+	int cantidadFotogramas;
 	int anchoFotogramaPx;
 	int fotogramaActual;
+	SDL_RendererFlip flip;
 
 public:
-	Sprite(string id_textura, Vector2 posicionInicial, int anchoFotogramaPx);
+	Sprite(string id_textura, Vector2 posicionInicial, int cantidadFotogramas);
 	virtual ~Sprite();
 
 	void dibujar();
