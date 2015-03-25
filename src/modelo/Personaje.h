@@ -15,8 +15,6 @@
 #include "Vector2.h"
 
 #define DELTA_PASO 1
-#define ANCHO_ESCENARIO 600
-#define ALTO_ESCENARIO 400
 
 enum estado{en_espera, caminando, saltando};
 
@@ -27,6 +25,10 @@ private:
 	float ancho;
 	float alto;
 	int z_index;
+	int limite_superior;
+	int limite_inferior;
+	int limite_derecho;
+	int limite_izquierdo;
 	vector<string> sprites;
 	Vector2 unaCoordenada;
 	Vector2 velocidad;
@@ -46,8 +48,14 @@ public:
 	void setZindex(int z_index);
 	void setPosicion(int posicion_x, int posicion_y);
 	Vector2 getPosicion();
-	void setLimiteSuperior();
-	void setLimiteInferior();
+	void setLimiteSuperior(int limite);
+	int getLimiteSuperior();
+	void setLimiteInferior(int limite);
+	int getLimiteInferior();
+	void setLimiteDerecho(int limite);
+	int getLimiteDerecho();
+	void setLimiteIzquierdo(int limite);
+	int getLimiteIzquierdo();
 	void setEstado(int estado);
 	int getEstado();
 	void setVida(int cantidad);

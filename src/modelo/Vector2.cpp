@@ -7,6 +7,8 @@
 #include "Vector2.h"
 
 Vector2::Vector2() {
+	coordenada_x = 0;
+	coordenada_y = 0;
 }
 
 void Vector2::setCoordenada(int x, int y) {

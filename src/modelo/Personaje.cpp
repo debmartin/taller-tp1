@@ -44,6 +44,38 @@ void Personaje::setZindex(int z_index) {
 	this->z_index = z_index;
 }
 
+void Personaje::setLimiteSuperior(int limite){
+	this->limite_superior = limite;
+}
+
+int Personaje::getLimiteSuperior(){
+	return this->limite_superior;
+}
+
+void Personaje::setLimiteInferior(int limite){
+	this->limite_inferior = limite;
+}
+
+int Personaje::getLimiteInferior(){
+	return this->limite_inferior;
+}
+
+void Personaje::setLimiteDerecho(int limite){
+	this->limite_derecho = limite;
+}
+
+int Personaje::getLimiteDerecho(){
+	return this->limite_derecho;
+}
+
+void Personaje::setLimiteIzquierdo(int limite){
+	this->limite_izquierdo = limite;
+}
+
+int Personaje::getLimiteIzquierdo(){
+	return this->limite_izquierdo;
+}
+
 void Personaje::setPosicion(int x, int y) {
 	this->unaCoordenada.setCoordenada(x,y);
 }
@@ -86,11 +118,11 @@ void Personaje::disminuir_velocidadY(){
 
 void Personaje::mover(){
 	//Valido que no camine fuera del escenario en X
-	if((this->unaCoordenada.getCoordenadaX() > 0) && (this->unaCoordenada.getCoordenadaX() + this->ancho) < ANCHO_ESCENARIO){
+	if((this->unaCoordenada.getCoordenadaX() > this->limite_izquierdo) && (this->unaCoordenada.getCoordenadaX() + this->ancho) < this->limite_derecho){
 		this->unaCoordenada.mover_en_X(this->velocidad.getCoordenadaX());
 	}
 	//Valido que no camine fuera del escenario en Y
-	if((this->unaCoordenada.getCoordenadaY() > 0) && (this->unaCoordenada.getCoordenadaY() + this->alto) < ALTO_ESCENARIO){
+	if((this->unaCoordenada.getCoordenadaY() > this->limite_inferior) && (this->unaCoordenada.getCoordenadaY() + this->alto) < this->limite_superior){
 		this->unaCoordenada.mover_en_Y(this->velocidad.getCoordenadaY());
 	}
 }
