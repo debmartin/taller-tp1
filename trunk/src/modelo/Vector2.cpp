@@ -11,6 +11,8 @@ Vector2::Vector2() {
 	coordenada_y = 0;
 }
 
+Vector2::Vector2(int x, int y):coordenada_x(x), coordenada_y(y) {};
+
 void Vector2::setCoordenada(int x, int y) {
 	this->coordenada_x = x;
 	this->coordenada_y = y;
