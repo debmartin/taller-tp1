@@ -4,24 +4,29 @@
 #ifndef SRC_VISTA_SPRITE_H_
 #define SRC_VISTA_SPRITE_H_
 
+using namespace std;
+
 class Sprite {
 
 private:
+	string id_textura;
 	Vector2 posicion;
 	int anchoPx;
 	int altoPx;
+	int anchoFotogramaPx;
+	int fotogramaActual;
 
 public:
-	Sprite();
+	Sprite(string id_textura, Vector2 posicionInicial, int anchoFotogramaPx);
 	virtual ~Sprite();
 
 	void dibujar();
 	void setPosicion(Vector2 p);
 	void setFlip(SDL_RendererFlip f);
-	virtual void avanzarFotograma() = 0;
+	void avanzarFotograma();
 
 protected:
-	virtual SDL_Rect getAreaDibujable() = 0;
+	SDL_Rect* getAreaDibujable();
 
 };
 
