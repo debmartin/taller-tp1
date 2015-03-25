@@ -29,9 +29,8 @@ bool ParserTests::ejecutar() {
 
 	cout<<"Iniciar test del parser(jsoncpp) ..."<<endl;
 
-	string entrada = "src/recursos/escenario2.json";
 	Parser parser;
-	parser.setEntrada("src/recursos/escenario2.json");
+	parser.setEntrada("src/recursos/escenario.json");
 	parser.inicializar();
 
 	bool construirObjetos = parser.ejecutar();

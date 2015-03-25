@@ -1,0 +1,29 @@
+{ 
+    "ventana": { 
+        "ancho­px": 800, 
+        "alto­px": 600, 
+        "ancho": 200 
+    }, 
+    "escenario": { 
+        "ancho": 1000.5, 
+        "alto": 150, 
+        "y­piso": 20 
+    }, 
+    "capas": [ 
+        { 
+            "imagen_fondo": "fondo1.png", 
+            "ancho": 500 
+        }, 
+        { 
+            "imagen_fondo": "fondo2.png", 
+            "ancho": 1000.5 
+        } 
+    ], 
+    "personaje": { 
+        "ancho": 20, 
+        "alto": 35, 
+        "z­index": 1, 
+        "sprites": "strings" 
+    } 
+}
+

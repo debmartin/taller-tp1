@@ -1,10 +1,25 @@
 #include "Game.h"
 #include <cstddef>
-#include <Box2D/Box2D.h>
 
-Game::Game() : m_bRunning(false), m_pWindow(NULL), m_pRenderer(NULL) {}
+Game* Game::instancia_unica = NULL;
 
-Game::~Game() {}
+Game* Game::Instance()
+{
+	if (instancia_unica == NULL)
+	{
+		instancia_unica = new Game();
+	}
+	return instancia_unica;
+}
+
+Game::Game()
+{
+	m_bRunning = false;
+	m_pWindow = NULL;
+	m_pRenderer = NULL;
+}
+
+Game::~Game() { }
 
 // simply set the running variable to true
 bool Game::init(const char* title, int xpos, int ypos, int height, int width, bool fullscreen)

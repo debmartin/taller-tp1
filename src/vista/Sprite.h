@@ -1,8 +1,9 @@
-#include <SDL2/SDL.h>
-#include "../../src/modelo/Vector2.h";
 
 #ifndef SRC_VISTA_SPRITE_H_
 #define SRC_VISTA_SPRITE_H_
+#include <SDL2/SDL.h>
+#include "../../src/modelo/Vector2.h";
+#include <string>
 
 using namespace std;
 
