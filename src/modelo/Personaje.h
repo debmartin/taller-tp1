@@ -16,7 +16,7 @@
 
 #define DELTA_PASO 1
 
-enum estado{en_espera, caminando, saltando};
+enum estado{en_espera, caminando_derecha, caminando_izquierda, saltando};
 
 using namespace std;
 
