@@ -9,7 +9,7 @@ int main(int argc, char* args[])
 
 	Game* g_game = NULL;
 
-	g_game = new Game();
+	g_game = Game::Instance();
 
 	//levantar la información inicial mediante json
 	//... usar libreria jsonCpp

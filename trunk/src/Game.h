@@ -3,6 +3,10 @@
 #include <vector>
 #include <SDL2/SDL.h>
 
+#include <iostream>
+#include <string>
+using namespace std;
+
 class Game {
 private:
 	bool m_bRunning;
@@ -10,8 +14,8 @@ private:
 	SDL_Renderer* m_pRenderer;
 
 	// SINGLETON
-	Game(): m_bRunning(true), m_pWindow(NULL), m_pRenderer(NULL) {}
-	static Game* s_pInstance;
+	Game();
+	static Game* instancia_unica;
 
 public:
 
@@ -22,17 +26,10 @@ public:
 	void handleEvents();
 	void clean();
 	bool running();
+	~Game();
 
 	// create the public  instance function
-	static Game* Instance()
-	{
-		if (s_pInstance == nullptr)
-		{
-			s_pInstance = new Game();
-			return s_pInstance;
-		}
-		return s_pInstance;
-	}
+	static Game* Instance();
 };
 
 typedef Game TheGame;
