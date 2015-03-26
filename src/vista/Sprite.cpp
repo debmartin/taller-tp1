@@ -53,5 +53,21 @@ void Sprite::avanzarFotograma() {
 		fotogramaActual = 1;
 }
 
+void Sprite::escalar(float factor_x, float factor_y){
+
+}
+
+void Sprite::escalar(int tamanioXpx, int tamanioYpx){
+
+}
+
+void Sprite::setFotogramaActual(int nroFotograma){
+	this->fotogramaActual = nroFotograma;
+}
+
+void Sprite::setZindex(int z_index){
+	this->zIndex = z_index;
+}
+
 //SDL_Rect* getAreaDibujable();
 Sprite::~Sprite() {}
