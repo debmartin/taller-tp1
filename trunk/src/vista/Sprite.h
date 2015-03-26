@@ -17,16 +17,22 @@ private:
 	int cantidadFotogramas;
 	int anchoFotogramaPx;
 	int fotogramaActual;
+	int zIndex;
 	SDL_RendererFlip flip;
 
 public:
 	Sprite(string id_textura, Vector2 posicionInicial, int cantidadFotogramas);
 	virtual ~Sprite();
 
-	void dibujar();
+	void setSentidoReproduccion(int sentido);
 	void setPosicion(Vector2 p);
 	void setFlip(SDL_RendererFlip f);
 	void avanzarFotograma();
+	void escalar(float factor_x, float factor_y);
+	void escalar(int tamanioXpx, int tamanioYpx);
+	void setFotogramaActual(int nroFotograma);
+	void setZindex(int z_index);
+	void dibujar();
 
 protected:
 	SDL_Rect* getAreaDibujable();
