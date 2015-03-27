@@ -17,7 +17,6 @@
 using namespace std;
 
 enum estado{en_espera, caminando_derecha, caminando_izquierda, saltando};
-//enum SentidoReproduccion{derecha, izquierda};
 
 class PersonajeDibujable{
 private:
