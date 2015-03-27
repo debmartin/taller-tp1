@@ -11,6 +11,8 @@
 #include <vector>
 #include <SDL2/SDL.h>
 #include "vista/Sprite.h" // TODO: solo para test
+#include "controlador/Controlador.h"
+#include "vista/PersonajeDibujable.h"
 #include <iostream>
 #include <string>
 using namespace std;
@@ -18,6 +20,9 @@ using namespace std;
 class Juego {
 private:
 	bool juegoCorriendo;
+	Controlador controladorJuego;
+	Personaje jugador1;
+	PersonajeDibujable jugadorDibujable1;
 	Sprite* sprSubZeroQuieto; // TODO: solo para test
 	Sprite* sprSubZeroCaminando; // TODO: solo para test
 public:

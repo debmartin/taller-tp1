@@ -59,9 +59,12 @@ Juego::Juego(const char* titulo, int xpos, int ypos, int altura, int ancho, bool
 	sprSubZeroCaminando->setPosicion(Vector2(80,195));
 	sprSubZeroCaminando->escalarConFactor(2,2);
 
+	jugadorDibujable1.setSprite(sprSubZeroQuieto);
+	jugadorDibujable1.setSprite(sprSubZeroCaminando);
+	jugadorDibujable1.setSprite(sprSubZeroCaminando);
 
-
-
+	controladorJuego.setPersonaje(jugador1);
+	controladorJuego.setPersonajeDibujable(jugadorDibujable1);
 	// FIN CODIGO USUARIO
 }
 
@@ -87,6 +90,12 @@ void Juego::handleEvents()
 	{
 		if (evento.type == SDL_QUIT)
 			juegoCorriendo = false;
+		else{
+			this->controladorJuego.manejar_Evento(evento);
+		}
+	}
+}
+/*
 		else if( evento.type == SDL_KEYDOWN )
 		{
 
@@ -113,9 +122,8 @@ void Juego::handleEvents()
 			VentanaGrafica::Instance()->setSprite(sprSubZeroQuieto, "sprSubZero");
 
 	}
-
+*/
 	// FIN CODIGO USUARIO
-}
 
 void Juego::clean() {
 	VentanaGrafica::Instance()->cerrar();

@@ -23,6 +23,8 @@ public:
 	Controlador();
 	virtual ~Controlador();
 	void manejar_Evento(SDL_Event &evento);
+	void setPersonaje(Personaje personaje);
+	void setPersonajeDibujable(PersonajeDibujable personaje);
 
 };
 
