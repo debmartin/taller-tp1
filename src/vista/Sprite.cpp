@@ -6,8 +6,12 @@
 #include <math.h>
 #include <jsoncpp/json/json.h>
 
-Sprite::Sprite(string id_textura, Vector2 posicion, int cantidadFotogramas)
+Sprite::Sprite(string id_textura, Vector2 posicion, int cantidadFotogramas, int zIndex, int fps)
 {
+	this->factorEscalaX = 1.0f;
+	this->factorEscalaY = 1.0f;
+	this->zIndex = zIndex;
+
 	int w, h;
 	SDL_Texture* textura = GestorTexturas::Instance()->getTextura(id_textura);
 	SDL_QueryTexture(textura, NULL, NULL, &w, &h);
@@ -32,10 +36,10 @@ void Sprite::dibujar(){
 	SDL_Rect destRect;
 	srcRect.x = posicion.getCoordenadaX();
 	srcRect.y = posicion.getCoordenadaY();
-	srcRect.w = anchoFotogramaPx;
-	srcRect.h = altoPx;
+	srcRect.w = (int)(anchoFotogramaPx * factorEscalaX);
+	srcRect.h = (int)(altoPx * factorEscalaY);
 
-	SDL_RenderCopyEx(Game::Instance()->getRenderer(),GestorTexturas::Instance()->getTextura(id_textura),&srcRect,&destRect,	0,NULL,SDL_FLIP_NONE);
+	SDL_RenderCopyEx(VentanaGrafica::Instance()->getRenderer(),GestorTexturas::Instance()->getTextura(id_textura),&srcRect,&destRect,	0,NULL,SDL_FLIP_NONE);
 }
 
 void Sprite::setPosicion(Vector2 nuevaPosicion) {
@@ -54,11 +58,13 @@ void Sprite::avanzarFotograma() {
 }
 
 void Sprite::escalar(float factor_x, float factor_y){
-
+	this->factorEscalaX = factor_x;
+	this->factorEscalaY = factor_y;
 }
 
-void Sprite::escalar(int tamanioXpx, int tamanioYpx){
-
+void Sprite::escalar(int anchoNuevoPx, int altoNuevoPx){
+	this->factorEscalaX = (float) anchoNuevoPx / (float) anchoPx;
+	this->factorEscalaY = (float) altoNuevoPx / (float) altoPx;
 }
 
 void Sprite::setFotogramaActual(int nroFotograma){
@@ -69,5 +75,4 @@ void Sprite::setZindex(int z_index){
 	this->zIndex = z_index;
 }
 
-//SDL_Rect* getAreaDibujable();
 Sprite::~Sprite() {}
