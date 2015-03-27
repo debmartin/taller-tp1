@@ -5,9 +5,18 @@
 #include "../../src/modelo/Vector2.h"
 #include <string>
 
+typedef enum
+{
+    HACIA_ADELANTE,
+    HACIA_ATRAS
+} SentidoReproduccion;
+
+
 using namespace std;
 
 class Sprite {
+
+public:
 
 private:
 	string id_textura;
@@ -20,7 +29,9 @@ private:
 	int anchoFotogramaPx;
 	int fotogramaActual;
 	int zIndex;
+	int fps;
 	SDL_RendererFlip flip;
+	SentidoReproduccion sentidoReproduccion;
 
 public:
 	Sprite(string id_textura, Vector2 posicionInicial, int cantidadFotogramas, int zIndex, int fps);
@@ -28,13 +39,16 @@ public:
 
 	void setSentidoReproduccion(int sentido);
 	void setPosicion(Vector2 p);
-	void setFlip(SDL_RendererFlip f);
-	void avanzarFotograma();
-	void escalar(float factor_x, float factor_y);
-	void escalar(int anchoNuevoPx, int altoNuevoPx);
+	void desplazar(Vector2 p);
+	void setFlip(SDL_RendererFlip f); //OK
+	//void avanzarFotograma();
+	void escalarConFactor(float factor_x, float factor_y); //OK
+	void escalarConTamanio(int anchoNuevoPx, int altoNuevoPx); //OK
 	void setFotogramaActual(int nroFotograma);
+	void setSentidoReproduccion(SentidoReproduccion sr);
 	void setZindex(int z_index);
-	void dibujar();
+	void dibujar(); // OK
+	void update();
 
 };
 
