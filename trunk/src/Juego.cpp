@@ -59,12 +59,12 @@ Juego::Juego(const char* titulo, int xpos, int ypos, int altura, int ancho, bool
 	sprSubZeroCaminando->setPosicion(Vector2(80,195));
 	sprSubZeroCaminando->escalarConFactor(2,2);
 
-	jugadorDibujable1.setSprite(sprSubZeroQuieto);
-	jugadorDibujable1.setSprite(sprSubZeroCaminando);
-	jugadorDibujable1.setSprite(sprSubZeroCaminando);
+	this->jugadorDibujable1.setSprite(sprSubZeroQuieto);
+	this->jugadorDibujable1.setSprite(sprSubZeroCaminando);
+	this->jugadorDibujable1.setSprite(sprSubZeroCaminando);
 
-	controladorJuego.setPersonaje(jugador1);
-	controladorJuego.setPersonajeDibujable(jugadorDibujable1);
+	this->controladorJuego.setPersonaje(jugador1);
+	this->controladorJuego.setPersonajeDibujable(jugadorDibujable1);
 	// FIN CODIGO USUARIO
 }
 
