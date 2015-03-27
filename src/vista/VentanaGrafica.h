@@ -24,7 +24,7 @@ public:
 	SDL_Renderer* getRenderer();
 	void setSprite(Sprite* unSprite, string nombre);
 	void quitarSprite(string id);
-	void cambiarSprite(string id, Sprite* nuevoSprite);
+	//void cambiarSprite(string id, Sprite* nuevoSprite);
 	Sprite* getSprite(string id);
 	void dibujarTodo();
 	void cerrar();

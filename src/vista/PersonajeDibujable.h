@@ -8,8 +8,9 @@
 #ifndef SRC_VISTA_PERSONAJEDIBUJABLE_H_
 #define SRC_VISTA_PERSONAJEDIBUJABLE_H_
 
-#include "Sprite.h"
 #include "VentanaGrafica.h"
+
+#include "Sprite.h"
 #include <iostream>
 #include <vector>
 #include <string.h>
@@ -22,6 +23,7 @@ class PersonajeDibujable{
 private:
 	vector<Sprite*> sprites;
 	int estado;
+	string nombre;
 
 public:
 	PersonajeDibujable();

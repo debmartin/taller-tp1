@@ -83,9 +83,9 @@ void VentanaGrafica::quitarSprite(string id){
 	this->mapaSprites.erase(id);
 }
 
-void VentanaGrafica::cambiarSprite(string id, Sprite* nuevoSprite){
-	this->mapaSprites[id] = nuevoSprite;
-}
+//void VentanaGrafica::cambiarSprite(string id, Sprite* nuevoSprite){
+//	this->mapaSprites[id] = nuevoSprite;
+//}
 
 Sprite* VentanaGrafica::getSprite(string id){
 	return this->mapaSprites[id];
