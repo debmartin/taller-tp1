@@ -8,6 +8,7 @@
 #include "PersonajeDibujable.h"
 
 PersonajeDibujable::PersonajeDibujable(){
+	estado = en_espera;
 }
 
 void PersonajeDibujable::setEstado(int unEstado){
@@ -17,23 +18,26 @@ void PersonajeDibujable::setEstado(int unEstado){
 void PersonajeDibujable::seleccionarSprite(){
 	switch(this->estado){
 		case caminando_derecha:
-			this->sprite_actual = this->sprites_caminar[this->numero_sprite];
+			//this->sprites.at(caminando_derecha).setSentidoReproduccion(derecha);
+			//ventana_grafica.agregarSprite(this->sprites[caminando_derecha]);
 			break;
 		case caminando_izquierda:
-			this->sprite_actual = this->sprites_caminar[this->numero_sprite];
+			//this->sprites[caminando_izquierda].setSentidoReproduccion(izquierda);
+			//ventana_grafica.agregarSprite(this->sprites[caminando_izquierda]);
 			break;
 		case en_espera:
-			this->sprite_actual = this->sprites_en_espera[this->numero_sprite];
+			//this->sprites[en_espera].setSentidoReproduccion(derecha);
+			//ventana_grafica.agregarSprite(this->sprites[en_espera]);
 			break;
 		case saltando:
-			this->sprite_actual = this->sprites_saltar[this->numero_sprite];
+			//this->sprites[saltando].setSentidoReproduccion(derecha);
+			//ventana_grafica.agregarSprite(this->sprites[saltando]);
 			break;
 	}
 }
 
-string PersonajeDibujable::obtenerSprite(){
-	seleccionarSprite();
-	return this->sprite_actual;
+void PersonajeDibujable::setSprite(Sprite unSprite){
+	this->sprites.push_back(unSprite);
 }
 PersonajeDibujable::~PersonajeDibujable() {
 	// TODO Auto-generated destructor stub
