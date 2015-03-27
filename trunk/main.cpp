@@ -1,5 +1,8 @@
-#include "src/Game.h"
+#include "src/Juego.h"
 #include "test/Test.h"
+
+#include "src/vista/VentanaGrafica.h"
+
 #include <SDL2/SDL.h>
 
 int main(int argc, char* args[])
@@ -13,10 +16,15 @@ int main(int argc, char* args[])
 	Test tests;
 	tests.ejecutar();
 
-	Game g_game("Taller de programacion TP", 100, 100, 640, 480, false);
+	Juego g_game("Taller de programacion TP: Mortal Kombat", 100, 100, 640, 480, false);
 
 	//levantar la información inicial mediante json
 	//... usar libreria jsonCpp
+
+
+	VentanaGrafica* ventana_grafica = NULL;
+	ventana_grafica = VentanaGrafica::Instance();
+
 
 
 	while (g_game.running())
