@@ -12,19 +12,19 @@ void Controlador::manejar_Evento(SDL_Event &evento){
 		switch( evento.key.keysym.sym ){
 			case SDLK_LEFT:
 				this->unPersonaje.disminuir_velocidadX();
-				this->unPersonajeDibujable.setEstado(caminando_izquierda);
+				this->unPersonajeDibujable.setEstado(CAMINANDO_IZQUIERDA);
 				break;
 		 	case SDLK_RIGHT:
 		 		this->unPersonaje.aumentar_velocidadX();
-		 		this->unPersonajeDibujable.setEstado(caminando_derecha);
+		 		this->unPersonajeDibujable.setEstado(CAMINANDO_DERECHA);
 		 		break;
 			case SDLK_UP:
 				this->unPersonaje.aumentar_velocidadY();
-				this->unPersonajeDibujable.setEstado(saltando);
+				this->unPersonajeDibujable.setEstado(SALTANDO);
 				break;
 			case SDLK_DOWN:
 				this->unPersonaje.disminuir_velocidadY();
-				this->unPersonajeDibujable.setEstado(saltando);
+				this->unPersonajeDibujable.setEstado(SALTANDO);
 				break;
 		}
 	}
@@ -33,19 +33,19 @@ void Controlador::manejar_Evento(SDL_Event &evento){
 		switch( evento.key.keysym.sym ){
 			case SDLK_LEFT:
 				this->unPersonaje.aumentar_velocidadX();
-				this->unPersonajeDibujable.setEstado(caminando_izquierda);
+				this->unPersonajeDibujable.setEstado(EN_ESPERA);
 				break;
 			case SDLK_RIGHT:
 				this->unPersonaje.disminuir_velocidadX();
-				this->unPersonajeDibujable.setEstado(caminando_izquierda);
+				this->unPersonajeDibujable.setEstado(EN_ESPERA);
 				break;
 			case SDLK_UP:
 				this->unPersonaje.disminuir_velocidadY();
-				this->unPersonajeDibujable.setEstado(caminando_izquierda);
+				this->unPersonajeDibujable.setEstado(EN_ESPERA);
 				break;
 			case SDLK_DOWN:
 				this->unPersonaje.aumentar_velocidadY();
-				this->unPersonajeDibujable.setEstado(caminando_izquierda);
+				this->unPersonajeDibujable.setEstado(EN_ESPERA);
 				break;
 		}
 	}
