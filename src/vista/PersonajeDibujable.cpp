@@ -8,30 +8,29 @@
 #include "PersonajeDibujable.h"
 
 PersonajeDibujable::PersonajeDibujable(){
-	estado = en_espera;
 }
 
-void PersonajeDibujable::setEstado(int unEstado){
+void PersonajeDibujable::setEstado(estado_personaje unEstado){
 	this->estado = unEstado;
 }
 
 void PersonajeDibujable::seleccionarSprite(){
 	switch(this->estado){
-		case caminando_derecha:
-			this->sprites.at(caminando_derecha)->setSentidoReproduccion(HACIA_ADELANTE);
-			VentanaGrafica::Instance()->setSprite(this->sprites[caminando_derecha], this->nombre);
+		case CAMINANDO_DERECHA:
+			this->sprites.at(CAMINANDO_DERECHA)->setSentidoReproduccion(HACIA_ADELANTE);
+			VentanaGrafica::Instance()->setSprite(this->sprites[CAMINANDO_DERECHA], this->nombre);
 			break;
-		case caminando_izquierda:
-			this->sprites[caminando_izquierda]->setSentidoReproduccion(HACIA_ATRAS);
-			VentanaGrafica::Instance()->setSprite(this->sprites[caminando_izquierda], this->nombre);
+		case CAMINANDO_IZQUIERDA:
+			this->sprites[CAMINANDO_IZQUIERDA]->setSentidoReproduccion(HACIA_ATRAS);
+			VentanaGrafica::Instance()->setSprite(this->sprites[CAMINANDO_IZQUIERDA], this->nombre);
 			break;
-		case en_espera:
-			this->sprites[en_espera]->setSentidoReproduccion(HACIA_ADELANTE);
-			VentanaGrafica::Instance()->setSprite(this->sprites[en_espera], this->nombre);
+		case EN_ESPERA:
+			this->sprites[EN_ESPERA]->setSentidoReproduccion(HACIA_ADELANTE);
+			VentanaGrafica::Instance()->setSprite(this->sprites[EN_ESPERA], this->nombre);
 			break;
-		case saltando:
-			this->sprites[saltando]->setSentidoReproduccion(HACIA_ADELANTE);
-			VentanaGrafica::Instance()->setSprite(this->sprites[saltando], this->nombre);
+		case SALTANDO:
+			this->sprites[SALTANDO]->setSentidoReproduccion(HACIA_ADELANTE);
+			VentanaGrafica::Instance()->setSprite(this->sprites[SALTANDO], this->nombre);
 			break;
 	}
 }

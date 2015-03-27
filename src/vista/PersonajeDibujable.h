@@ -17,19 +17,19 @@
 
 using namespace std;
 
-enum estado_personaje{en_espera, caminando_derecha, caminando_izquierda, saltando};
+enum estado_personaje {EN_ESPERA, CAMINANDO_DERECHA, CAMINANDO_IZQUIERDA, SALTANDO};
 
 class PersonajeDibujable{
 private:
 	vector<Sprite*> sprites;
-	int estado;
+	estado_personaje estado;
 	string nombre;
 
 public:
 	PersonajeDibujable();
 	virtual ~PersonajeDibujable();
 	void seleccionarSprite();
-	void setEstado(int unEstado);
+	void setEstado(estado_personaje unEstado);
 	void setSprite(Sprite* pSprite);
 };
 
