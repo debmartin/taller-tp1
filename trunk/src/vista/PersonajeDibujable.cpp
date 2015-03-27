@@ -12,16 +12,19 @@ PersonajeDibujable::PersonajeDibujable(){
 
 void PersonajeDibujable::setEstado(estado_personaje unEstado){
 	this->estado = unEstado;
+	seleccionarSprite();
 }
 
 void PersonajeDibujable::seleccionarSprite(){
 	switch(this->estado){
 		case CAMINANDO_DERECHA:
 			this->sprites.at(CAMINANDO_DERECHA)->setSentidoReproduccion(HACIA_ADELANTE);
+			this->sprites.at(CAMINANDO_DERECHA)->desplazar(Vector2(5,0));
 			VentanaGrafica::Instance()->setSprite(this->sprites[CAMINANDO_DERECHA], this->nombre);
 			break;
 		case CAMINANDO_IZQUIERDA:
 			this->sprites[CAMINANDO_IZQUIERDA]->setSentidoReproduccion(HACIA_ATRAS);
+			this->sprites.at(CAMINANDO_DERECHA)->desplazar(Vector2(-5,0));
 			VentanaGrafica::Instance()->setSprite(this->sprites[CAMINANDO_IZQUIERDA], this->nombre);
 			break;
 		case EN_ESPERA:
