@@ -19,7 +19,7 @@ void PersonajeDibujable::seleccionarSprite(){
 	switch(this->estado){
 		case caminando_derecha:
 			//this->sprites.at(caminando_derecha).setSentidoReproduccion(derecha);
-			//ventana_grafica.agregarSprite(this->sprites[caminando_derecha]);
+			//VentanaGrafica::Instance()->agregarSprite(this->sprites[caminando_derecha]);
 			break;
 		case caminando_izquierda:
 			//this->sprites[caminando_izquierda].setSentidoReproduccion(izquierda);
@@ -36,8 +36,8 @@ void PersonajeDibujable::seleccionarSprite(){
 	}
 }
 
-void PersonajeDibujable::setSprite(Sprite unSprite){
-	this->sprites.push_back(unSprite);
+void PersonajeDibujable::setSprite(Sprite* pSprite){
+	//this->sprites.push_back(pSprite);
 }
 PersonajeDibujable::~PersonajeDibujable() {
 	// TODO Auto-generated destructor stub

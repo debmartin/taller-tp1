@@ -21,7 +21,7 @@ enum estado{en_espera, caminando_derecha, caminando_izquierda, saltando};
 
 class PersonajeDibujable{
 private:
-	vector<Sprite> sprites;
+	vector<Sprite*> sprites;
 	int estado;
 
 public:
@@ -29,7 +29,7 @@ public:
 	virtual ~PersonajeDibujable();
 	void seleccionarSprite();
 	void setEstado(int unEstado);
-	void setSprite(Sprite unSprite);
+	void setSprite(Sprite* pSprite);
 };
 
 #endif /* SRC_VISTA_PERSONAJEDIBUJABLE_H_ */
