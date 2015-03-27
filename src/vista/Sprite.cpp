@@ -2,6 +2,7 @@
 #include "../Game.h"
 #include "GestorTexturas.h"
 #include "../modelo/Vector2.h"
+#include "VentanaGrafica.h"
 #include <SDL2/SDL.h>
 #include <math.h>
 #include <jsoncpp/json/json.h>
