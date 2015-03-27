@@ -1,100 +1,72 @@
 #include "Game.h"
 #include <cstddef>
-
-Game* Game::instancia_unica = NULL;
-
-Game* Game::Instance()
-{
-	if (instancia_unica == NULL)
-	{
-		instancia_unica = new Game();
-	}
-	return instancia_unica;
-}
-
-Game::Game()
-{
-	m_bRunning = false;
-	m_pWindow = NULL;
-	m_pRenderer = NULL;
-}
-
+#include <SDL2/SDL.h> //TODO: Solo para tests
+#include "vista/VentanaGrafica.h"
+#include "vista/GestorTexturas.h"
+#include "vista/Sprite.h"
 Game::~Game() { }
 
 // simply set the running variable to true
-bool Game::init(const char* title, int xpos, int ypos, int height, int width, bool fullscreen)
+Game::Game(const char* title, int xpos, int ypos, int height, int width, bool fullscreen)
 {
 
-	// attempt to initialize SDL
-	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
-	{
-		std::cout << "SDL init success\n";
+	bool exito = VentanaGrafica::Instance()->init(title, xpos, ypos, height, width, fullscreen);
 
-		// init the window
-		int flags;
-		if (fullscreen)
-			flags = SDL_WINDOW_FULLSCREEN;
-		else
-			flags = 0;
+	if (!exito)
+		cout << "Error al inicializar juego" << endl;
 
-		m_pWindow = SDL_CreateWindow(title, xpos, ypos, height, width, flags);
-
-		if (m_pWindow != NULL) // window init success
-		{
-			std::cout << "window creation success\n";
-			m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, 0);
-
-			if (m_pRenderer != NULL) // renderer init success
-			{
-				std::cout << "renderer creation success\n";
-				SDL_SetRenderDrawColor(m_pRenderer, 255, 0, 0, 255);
-			}
-			else
-			{
-				std::cout << "renderer init fail\n";
-				return false; // renderer init fail
-			}
-		}
-		else
-		{
-			std::cout << "window init fail\n";
-			return false; // window init fail
-		}
-	}
-	else
-	{
-		std::cout << "SDL init fail\n";
-		return false; // SDL init fail
-	}
-
-	std::cout << "init success\n";
 	m_bRunning = true; // everything inited successfully, start the main loop
 
 	// INICIO CODIGO USUARIO
 
+	// 1) Cargar Texturas
+	exito = GestorTexturas::Instance()->cargarImagen("screen-pit.png", "screen-pit", VentanaGrafica::Instance()->getRenderer());
+	if (!exito) {
+		cout << "ERRROR AL CREAR TEXTURA" << endl;
+		exit(1);
+	}
+
+	exito = GestorTexturas::Instance()->cargarImagen("zubzero-quieto.png", "zubzero-quieto", VentanaGrafica::Instance()->getRenderer());
+	if (!exito) {
+		cout << "ERRROR AL CREAR TEXTURA" << endl;
+		exit(1);
+	}
+
+	exito = GestorTexturas::Instance()->cargarImagen("zubzero-caminando.png", "zubzero-caminando", VentanaGrafica::Instance()->getRenderer());
+	if (!exito) {
+		cout << "ERRROR AL CREAR TEXTURA" << endl;
+		exit(1);
+	}
+
+	// 2) Cargar Sprites
+	Sprite* sprPit;
+	sprPit = new Sprite("screen-pit", Vector2(0, 0), 1, 1, 1);
+	sprPit->escalarConTamanio(640,480);
+	VentanaGrafica::Instance()->setSprite(sprPit, "sprPit");
+
+	sprSubZeroQuieto = new Sprite("zubzero-quieto", Vector2(0, 0), 12, 1, 10);
+	sprSubZeroQuieto->setPosicion(Vector2(80,195));
+	sprSubZeroQuieto->escalarConFactor(2,2);
+
+	sprSubZeroCaminando = new Sprite("zubzero-caminando", Vector2(0, 0), 9, 1, 10);
+	sprSubZeroCaminando->setPosicion(Vector2(80,195));
+	sprSubZeroCaminando->escalarConFactor(2,2);
+
+
+
+
 	// FIN CODIGO USUARIO
-
-
-	return true;
 }
 
 void Game::render()
 {
-	// clear the window to black
-	SDL_RenderClear(m_pRenderer); // clear the renderer to the draw color
-
-	// INICIO CODIGO USUARIO
-
-	// FIN CODIGO USUARIO
-
-	// show the window
-	SDL_RenderPresent(m_pRenderer); // draw to the screen
+	VentanaGrafica::Instance()->dibujarTodo();
 }
 
 void Game::update()
 {
 	// INICIO CODIGO USUARIO
-
+	VentanaGrafica::Instance()->update();
 	// FIN CODIGO USUARIO
 }
 
@@ -106,24 +78,41 @@ void Game::handleEvents()
 
 	if (SDL_PollEvent(&event))
 	{
-		switch (event.type)
-		{
-		case SDL_QUIT:
+		if (event.type == SDL_QUIT)
 			m_bRunning = false;
-			break;
-		default:
-			break;
+		else if( event.type == SDL_KEYDOWN )
+		{
+
+			switch( event.key.keysym.sym )
+			{
+				case SDLK_RIGHT:
+					VentanaGrafica::Instance()->setSprite(sprSubZeroCaminando, "sprSubZero");
+					sprSubZeroCaminando->setSentidoReproduccion(HACIA_ADELANTE);
+					sprSubZeroCaminando->desplazar(Vector2(5,0));
+					sprSubZeroQuieto->desplazar(Vector2(5,0));
+				break;
+
+				case SDLK_LEFT:
+					VentanaGrafica::Instance()->setSprite(sprSubZeroCaminando, "sprSubZero");
+					sprSubZeroCaminando->setSentidoReproduccion(HACIA_ATRAS);
+					sprSubZeroCaminando->desplazar(Vector2(-5,0));
+					sprSubZeroQuieto->desplazar(Vector2(-5,0));
+
+				break;
+
+			}
 		}
+		else
+			VentanaGrafica::Instance()->setSprite(sprSubZeroQuieto, "sprSubZero");
+
 	}
 
 	// FIN CODIGO USUARIO
 }
 
 void Game::clean() {
-	std::cout << "cleaning game\n";
-	SDL_DestroyWindow(m_pWindow);
-	SDL_DestroyRenderer(m_pRenderer);
-	SDL_Quit();
+	VentanaGrafica::Instance()->cerrar();
+	GestorTexturas::Instance()->clean();
 }
 
 // a function to access the private running variable
