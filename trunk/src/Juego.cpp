@@ -49,7 +49,7 @@ Juego::Juego(const char* titulo, int xpos, int ypos, int altura, int ancho, bool
 	Sprite* sprPit;
 	sprPit = new Sprite("screen-pit", Vector2(0, 0), 1, 1, 1);
 	sprPit->escalarConTamanio(640,480);
-	VentanaGrafica::Instance()->setSprite(sprPit, "sprPit");
+	//VentanaGrafica::Instance()->setSprite(sprPit, "sprPit");
 
 	sprSubZeroQuieto = new Sprite("zubzero-quieto", Vector2(0, 0), 12, 1, 10);
 	sprSubZeroQuieto->setPosicion(Vector2(80,195));
