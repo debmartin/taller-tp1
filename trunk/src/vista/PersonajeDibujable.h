@@ -17,7 +17,7 @@
 
 using namespace std;
 
-enum estado{en_espera, caminando_derecha, caminando_izquierda, saltando};
+enum estado_personaje{en_espera, caminando_derecha, caminando_izquierda, saltando};
 
 class PersonajeDibujable{
 private:
