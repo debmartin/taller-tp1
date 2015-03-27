@@ -20,6 +20,7 @@ VentanaGrafica* VentanaGrafica::Instance()
 
 VentanaGrafica::VentanaGrafica(){
 	vWindow = NULL;
+	vRenderer = NULL;
 }
 
 void VentanaGrafica::init(string titulo, SDL_Rect disposicion, bool fullscreen){
@@ -28,23 +29,23 @@ void VentanaGrafica::init(string titulo, SDL_Rect disposicion, bool fullscreen){
 }
 
 SDL_Renderer* VentanaGrafica::getRenderer(){
-
+	return this->vRenderer;
 }
 
-void VentanaGrafica::agregarSprite(Sprite* unSprite, string s){
-
+void VentanaGrafica::agregarSprite(Sprite* unSprite, string nombre){
+	this->mapaSprites[nombre] = unSprite;
 }
 
 void VentanaGrafica::quitarSprite(string id){
-
+	this->mapaSprites.erase(id);
 }
 
 void VentanaGrafica::cambiarSprite(string id, Sprite* nuevoSprite){
-
+	this->mapaSprites[id] = nuevoSprite;
 }
 
-void VentanaGrafica::getSprite(string id){
-
+Sprite* VentanaGrafica::getSprite(string id){
+	return this->mapaSprites[id];
 }
 
 void VentanaGrafica::dibujarTodo(){

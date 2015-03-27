@@ -3,14 +3,16 @@
 
 #include <SDL2/SDL.h>
 #include <string>
+#include <map>
 #include "Sprite.h"
 
 using namespace std;
 
 class VentanaGrafica {
 private:
-	//SRL_Renderer* vRenderer;
+	SDL_Renderer* vRenderer;
 	SDL_Window* vWindow;
+	map<string, Sprite*> mapaSprites;
 
 	// SINGLETON
 	VentanaGrafica();
@@ -20,10 +22,10 @@ public:
 	virtual ~VentanaGrafica();
 	void init(string titulo, SDL_Rect disposicion, bool fullscreen);
 	SDL_Renderer* getRenderer();
-	void agregarSprite(Sprite* unSprite, string s);
+	void agregarSprite(Sprite* unSprite, string nombre);
 	void quitarSprite(string id);
 	void cambiarSprite(string id, Sprite* nuevoSprite);
-	void getSprite(string id);
+	Sprite* getSprite(string id);
 	void dibujarTodo();
 
 	static VentanaGrafica* Instance();
