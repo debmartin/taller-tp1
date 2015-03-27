@@ -2,7 +2,7 @@
 #define __Game__
 #include <vector>
 #include <SDL2/SDL.h>
-
+#include "vista/Sprite.h" // TODO: solo para test
 #include <iostream>
 #include <string>
 using namespace std;
@@ -10,17 +10,11 @@ using namespace std;
 class Game {
 private:
 	bool m_bRunning;
-	SDL_Window* m_pWindow;
-	SDL_Renderer* m_pRenderer;
-
-	// SINGLETON
-	Game();
-	static Game* instancia_unica;
-
+	Sprite* sprSubZeroQuieto; // TODO: solo para test
+	Sprite* sprSubZeroCaminando; // TODO: solo para test
 public:
 
-	SDL_Renderer* getRenderer() const { return  m_pRenderer; }
-	bool init(const char* title, int xpos, int ypos, int height, int width, bool fullscreen);
+	Game(const char* title, int xpos, int ypos, int height, int width, bool fullscreen);
 	void render();
 	void update();
 	void handleEvents();
