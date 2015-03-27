@@ -19,19 +19,19 @@ void PersonajeDibujable::seleccionarSprite(){
 	switch(this->estado){
 		case caminando_derecha:
 			this->sprites.at(caminando_derecha)->setSentidoReproduccion(HACIA_ADELANTE);
-			VentanaGrafica::Instance()->agregarSprite(this->sprites[caminando_derecha]);
+			VentanaGrafica::Instance()->setSprite(this->sprites[caminando_derecha], this->nombre);
 			break;
 		case caminando_izquierda:
 			this->sprites[caminando_izquierda]->setSentidoReproduccion(HACIA_ATRAS);
-			VentanaGrafica::Instance()->agregarSprite(this->sprites[caminando_izquierda]);
+			VentanaGrafica::Instance()->setSprite(this->sprites[caminando_izquierda], this->nombre);
 			break;
 		case en_espera:
-			this->sprites[en_espera]->setSentidoReproduccion(HACIA_ADELANTE));
-			VentanaGrafica::Instance()->agregarSprite(this->sprites[en_espera]);
+			this->sprites[en_espera]->setSentidoReproduccion(HACIA_ADELANTE);
+			VentanaGrafica::Instance()->setSprite(this->sprites[en_espera], this->nombre);
 			break;
 		case saltando:
 			this->sprites[saltando]->setSentidoReproduccion(HACIA_ADELANTE);
-			VentanaGrafica::Instance()->agregarSprite(this->sprites[saltando]);
+			VentanaGrafica::Instance()->setSprite(this->sprites[saltando], this->nombre);
 			break;
 	}
 }
