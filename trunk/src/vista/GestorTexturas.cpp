@@ -3,8 +3,9 @@
 #include <SDL2/SDL_image.h>
 #include "GestorTexturas.h"
 
-GestorTexturas* GestorTexturas::s_pInstance = NULL;
+using namespace std; // TODO : VER AMBITO
 
+GestorTexturas* GestorTexturas::s_pInstance = NULL;
 
 bool GestorTexturas::cargarImagen(std::string pathImagen, std::string id, SDL_Renderer* pRenderer)
 {
@@ -26,4 +27,9 @@ bool GestorTexturas::cargarImagen(std::string pathImagen, std::string id, SDL_Re
 
 SDL_Texture* GestorTexturas::getTextura(std::string id) {
 	return m_textureMap[id];
+}
+
+void GestorTexturas::clean() {
+	for (std::map<string, SDL_Texture*>::iterator it=m_textureMap.begin(); it!=m_textureMap.end(); ++it)
+		SDL_DestroyTexture(it->second);
 }

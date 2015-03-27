@@ -10,8 +10,8 @@ using namespace std;
 
 class VentanaGrafica {
 private:
-	SDL_Renderer* vRenderer;
 	SDL_Window* vWindow;
+	SDL_Renderer* vRenderer;
 	map<string, Sprite*> mapaSprites;
 
 	// SINGLETON
@@ -20,14 +20,15 @@ private:
 
 public:
 	virtual ~VentanaGrafica();
-	void init(string titulo, SDL_Rect disposicion, bool fullscreen);
+	bool init(string titulo, int xpos, int ypos, int height, int width, bool fullscreen);
 	SDL_Renderer* getRenderer();
-	void agregarSprite(Sprite* unSprite, string nombre);
+	void setSprite(Sprite* unSprite, string nombre);
 	void quitarSprite(string id);
 	void cambiarSprite(string id, Sprite* nuevoSprite);
 	Sprite* getSprite(string id);
 	void dibujarTodo();
-
+	void cerrar();
+	void update();
 	static VentanaGrafica* Instance();
 };
 

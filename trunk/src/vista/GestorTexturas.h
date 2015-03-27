@@ -25,7 +25,7 @@ public:
 
 	SDL_Texture* getTextura(std::string id);
 
-	void clean(); // TODO: limipar
+	void clean();
 };
 
 #endif /* defined (__TextureManager__) */
