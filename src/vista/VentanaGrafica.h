@@ -2,6 +2,8 @@
 #define SRC_VISTA_VENTANAGRAFICA_H_
 
 #include <SDL2/SDL.h>
+#include <string>
+#include "Sprite.h"
 
 using namespace std;
 
@@ -12,7 +14,7 @@ private:
 
 	// SINGLETON
 	VentanaGrafica();
-	static VentanaGrafica* instancia_unica_ventana;
+	static VentanaGrafica* instancia_unica;
 
 public:
 	virtual ~VentanaGrafica();
@@ -23,6 +25,8 @@ public:
 	void cambiarSprite(string id, Sprite* nuevoSprite);
 	void getSprite(string id);
 	void dibujarTodo();
+
+	static VentanaGrafica* Instance();
 };
 
 #endif /* SRC_VISTA_VENTANAGRAFICA_H_ */
