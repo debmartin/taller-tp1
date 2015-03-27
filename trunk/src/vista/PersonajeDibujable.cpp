@@ -41,7 +41,7 @@ void PersonajeDibujable::seleccionarSprite(){
 }
 
 void PersonajeDibujable::setSprite(Sprite* pSprite){
-	//this->sprites.push_back(pSprite);
+	this->sprites.push_back(pSprite);
 }
 PersonajeDibujable::~PersonajeDibujable() {
 	// TODO Auto-generated destructor stub

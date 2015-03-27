@@ -22,11 +22,6 @@ int main(int argc, char* args[])
 	//... usar libreria jsonCpp
 
 
-	VentanaGrafica* ventana_grafica = NULL;
-	ventana_grafica = VentanaGrafica::Instance();
-
-
-
 	while (g_game.running())
 	{
 		frameStart = SDL_GetTicks();

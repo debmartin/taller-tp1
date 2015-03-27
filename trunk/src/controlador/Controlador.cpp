@@ -6,6 +6,9 @@
  */
 #include "Controlador.h"
 
+Controlador::Controlador(){
+}
+
 void Controlador::manejar_Evento(SDL_Event &evento){
 	//Si se presiona una tecla
 	if( evento.type == SDL_KEYDOWN && evento.key.repeat == 0 ){
@@ -49,6 +52,14 @@ void Controlador::manejar_Evento(SDL_Event &evento){
 				break;
 		}
 	}
+}
+
+void Controlador::setPersonaje(Personaje personaje){
+	this->unPersonaje = personaje;
+}
+
+void Controlador::setPersonajeDibujable(PersonajeDibujable personaje){
+	this->unPersonajeDibujable = personaje;
 }
 
 Controlador::~Controlador() {
