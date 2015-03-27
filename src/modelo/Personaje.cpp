@@ -10,6 +10,17 @@
 #define ANCHO_ESCENARIO 600
 
 Personaje::Personaje() {
+	this->ancho = 0;
+	this->alto = 0;
+	this->limite_superior = 480;
+	this->limite_inferior = 80;
+	this->limite_derecho = 640;
+	this->limite_izquierdo = 0;
+	this->unaCoordenada;
+	this->velocidad;
+
+	this->unaCoordenada.setCoordenada(80,195);
+	this->velocidad.setCoordenada(0,0);
 }
 
 float Personaje::getAlto() const {
