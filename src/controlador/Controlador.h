@@ -9,6 +9,7 @@
 #define SRC_CONTROLADOR_CONTROLADOR_H_
 
 #include "../modelo/Personaje.h"
+#include "../vista/PersonajeDibujable.h"
 #include <SDL2/SDL.h>
 
 using namespace std;
@@ -16,6 +17,8 @@ using namespace std;
 class Controlador {
 private:
 	Personaje unPersonaje;
+	PersonajeDibujable unPersonajeDibujable;
+
 public:
 	Controlador();
 	virtual ~Controlador();
