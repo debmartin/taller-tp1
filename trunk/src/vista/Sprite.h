@@ -28,7 +28,7 @@ private:
 	int cantidadFotogramas;
 	int anchoFotogramaPx;
 	int fotogramaActual;
-	int zIndex;
+	float zIndex;
 	int fps;
 	SDL_RendererFlip flip;
 	SentidoReproduccion sentidoReproduccion;
@@ -37,7 +37,6 @@ public:
 	Sprite(string id_textura, Vector2 posicionInicial, int cantidadFotogramas, int zIndex, int fps);
 	virtual ~Sprite();
 
-	void setSentidoReproduccion(int sentido);
 	void setPosicion(Vector2 p);
 	void desplazar(Vector2 p);
 	void setFlip(SDL_RendererFlip f); //OK
@@ -46,7 +45,8 @@ public:
 	void escalarConTamanio(int anchoNuevoPx, int altoNuevoPx); //OK
 	void setFotogramaActual(int nroFotograma);
 	void setSentidoReproduccion(SentidoReproduccion sr);
-	void setZindex(int z_index);
+	void setZindex(float z_index);
+	float getZindex() { return zIndex; }
 	void dibujar(); // OK
 	void update();
 

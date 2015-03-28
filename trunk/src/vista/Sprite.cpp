@@ -78,7 +78,7 @@ void Sprite::setFotogramaActual(int nroFotograma){
 	this->fotogramaActual = nroFotograma;
 }
 
-void Sprite::setZindex(int z_index){
+void Sprite::setZindex(float z_index){
 	this->zIndex = z_index;
 }
 
