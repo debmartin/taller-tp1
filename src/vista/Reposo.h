@@ -1,20 +1,21 @@
 #ifndef SRC_VISTA_REPOSO_H_
 #define SRC_VISTA_REPOSO_H_
-#include "../modelo/Vector2.h"
+#include "../modelo/Vector2f.h"
 
 class Reposo: public Trayectoria {
 
 private:
-	Vector2 posInicial;
+	Vector2f posInicial;
 
 public:
 
-	Reposo(Vector2 posInicial):posInicial(posInicial) {};
+	Reposo(Vector2f posInicial):posInicial(posInicial) {};
 
-	virtual void avanzarTiempo() {};
+	Vector2f getPosicion(float tActual) {
+		return this->posInicial;
+	};
 
-	virtual Vector2 getPosicion() {	return this->posInicial; };
-
+	~Reposo() {}
 };
 
 #endif /* SRC_VISTA_REPOSO_H_ */

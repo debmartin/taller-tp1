@@ -7,26 +7,19 @@ class MRU: public Trayectoria {
 private:
 	Vector2f posInicial;
 	Vector2f velInicial;
-	float deltaTiempo;
-	float tActual;
 
 public:
 
-	MRU(Vector2f posInicial, Vector2f velInicial, float deltaTiempo):
+	MRU(Vector2f posInicial, Vector2f velInicial):
 		posInicial(posInicial),
-		velInicial(velInicial),
-		deltaTiempo(deltaTiempo),
-		tActual(0) {};
+		velInicial(velInicial) {};
 
-	virtual void avanzarTiempo() {
-		tActual += deltaTiempo;
+	virtual Vector2f getPosicion(float tActual) {
+		//cout << "v0:[" << velInicial.X() << "," << velInicial.Y() << endl;
+		return velInicial*tActual;
 	};
 
-	virtual Vector2f getPosicion() {
-		Vector2f posActual= posInicial + velInicial * tActual;
-		return posActual;
-	};
-
+	~MRU() {}
 };
 
 #endif /* SRC_VISTA_REPOSO_H_ */
