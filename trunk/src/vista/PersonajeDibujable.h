@@ -14,6 +14,9 @@
 #include <iostream>
 #include <vector>
 #include <string.h>
+#include "../modelo/Vector2.h"
+#include "../modelo/Vector2f.h"
+#include "MRU.h"
 
 using namespace std;
 

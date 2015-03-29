@@ -1,6 +1,7 @@
 #ifndef SRC_MODELO_VECTOR2F_H_
 #define SRC_MODELO_VECTOR2F_H_
 #include "Vector2.h"
+#include <math.h>
 
 class Vector2f{
 private:
@@ -9,6 +10,7 @@ private:
 
 public:
 	Vector2f():x(0.0f), y(0.0f) {};
+	Vector2f(Vector2 v):x(v.getCoordenadaX()), y(v.getCoordenadaY()) {};
 	Vector2f(float xn, float yn): x(xn), y(yn) {};
 	virtual ~Vector2f() {};
 
@@ -46,7 +48,7 @@ public:
 	}
 
 	operator Vector2() {
-		return Vector2((int)x, (int)y);
+		return Vector2(lround(x), lround(y));
 	}
 
 };

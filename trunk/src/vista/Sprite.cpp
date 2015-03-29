@@ -13,6 +13,7 @@ Sprite::Sprite(string id_textura, Vector2 posicion, int cantidadFotogramas, int 
 	this->factorEscalaY = 1.0f;
 	this->zIndex = zIndex;
 	this->fps = fps;
+	this->tCreacion = 0; //ARREGLAR
 
 	int w, h;
 	SDL_Texture* textura = GestorTexturas::Instance()->getTextura(id_textura);
@@ -27,6 +28,7 @@ Sprite::Sprite(string id_textura, Vector2 posicion, int cantidadFotogramas, int 
 	this->flip = SDL_FLIP_NONE;
 
 	this->sentidoReproduccion = HACIA_ADELANTE;
+	this->trayectoria = new Reposo(Vector2f(posicion));
 }
 
 void Sprite::dibujar(){
@@ -92,6 +94,11 @@ void Sprite::update() {
 	else
 		this->setFotogramaActual(cantidadFotogramas + 1 - nuevoFotograma);
 
+
+	// RECALCULA LA POSICION EN BASE AL OBJETO TRAYECTORIA
+	float tActual = ((float)(SDL_GetTicks())/1000.0f) - tCreacion;
+	this->posicion = this->trayectoria->getPosicion(tActual);
+	cout << "SPRITE->UPDATE:" << this->id_textura << " - poiscion:[" << posicion.getCoordenadaX() << "," << posicion.getCoordenadaY() << "],tiempo:[" << tActual << "]" << endl;
 	//cout << "nº fotogarma:" << this->fotogramaActual << endl; TODO: para test
 }
 
@@ -99,4 +106,11 @@ void Sprite::setSentidoReproduccion(SentidoReproduccion sr) {
 	this->sentidoReproduccion = sr;
 }
 
-Sprite::~Sprite() {}
+void Sprite::setTrayectoria(Trayectoria* t) {
+	this->trayectoria = t;
+	tCreacion = ((float)(SDL_GetTicks()))/1000.0f; //TODO: Solo funciona en el caso particular de este video juego porque anda lo suficientemente rapido
+}
+
+Sprite::~Sprite() {
+	delete(trayectoria); // TODO: borrar trayectoria usando setTrayectoria pude traer problemas, gestionar bien la memoria.
+}

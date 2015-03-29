@@ -4,6 +4,8 @@
 #include <SDL2/SDL.h>
 #include "../../src/modelo/Vector2.h"
 #include <string>
+#include "Trayectoria.h"
+#include "Reposo.h"
 
 typedef enum
 {
@@ -32,6 +34,8 @@ private:
 	int fps;
 	SDL_RendererFlip flip;
 	SentidoReproduccion sentidoReproduccion;
+	Trayectoria* trayectoria;
+	float tCreacion;
 
 public:
 	Sprite(string id_textura, Vector2 posicionInicial, int cantidadFotogramas, int zIndex, int fps);
@@ -49,7 +53,8 @@ public:
 	float getZindex() { return zIndex; }
 	void dibujar(); // OK
 	void update();
-
+	void setTrayectoria(Trayectoria* t);
+	Vector2 getPosicion() { return this->posicion; };
 };
 
 #endif /* SRC_VISTA_SPRITE_H_ */

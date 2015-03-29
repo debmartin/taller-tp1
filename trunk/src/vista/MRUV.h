@@ -9,27 +9,19 @@ private:
 	Vector2f posInicial;
 	Vector2f velInicial;
 	Vector2f gravedad;
-	float deltaTiempo;
-	float tActual;
 
 public:
 
-	MRUV(Vector2f posInicial, Vector2f velInicial, Vector2f gravedad, float deltaTiempo):
+	MRUV(Vector2f posInicial, Vector2f velInicial, Vector2f gravedad):
 		posInicial(posInicial),
 		velInicial(velInicial),
-		gravedad(gravedad),
-		deltaTiempo(deltaTiempo),
-		tActual(0) {};
+		gravedad(gravedad) {};
 
-	virtual void avanzarTiempo() {
-		tActual += deltaTiempo;
+	virtual Vector2f getPosicion(float tActual) {
+		return posInicial + velInicial * tActual + 0.5 * tActual * tActual *  gravedad;
 	};
 
-	virtual Vector2f getPosicion() {
-		Vector2f posActual= posInicial + velInicial * tActual + 0.5 * tActual * tActual *  gravedad;
-		return posActual;
-	};
-
+	~MRUV() {}
 };
 
 #endif /* SRC_VISTA_MRUV_H_ */
