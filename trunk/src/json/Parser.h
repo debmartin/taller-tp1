@@ -14,10 +14,11 @@
 #include <jsoncpp/json/json.h>
 using namespace std;
 
-struct capa{
+typedef struct
+{
 	string imagen_fondo;
-	float ancho;
-};
+	double ancho;
+} tCapa;
 
 class Parser {
 private:
@@ -28,18 +29,19 @@ private:
 
 	int ventana_anchopx;
 	int ventana_altopx;
-	int ventana_ancho;
+	double ventana_ancho;
 
-	float escenario_ancho;
-	float escenario_alto;
+	double escenario_ancho;
+	double escenario_alto;
 	int escenario_ypiso;
 
-	vector <capa> capas;
+	vector<tCapa> capas;
 
-	int personaje_ancho;
-	int personaje_alto;
+	double personaje_ancho;
+	double personaje_alto;
 	int personaje_zindex;
-	vector<string> personaje_sprites;
+	string personaje_sprites_imagen;
+	double personaje_sprites_ancho;
 
 public:
 	Parser();
@@ -47,22 +49,24 @@ public:
 	bool ejecutar();
 
 	virtual ~Parser();
-	bool isBienParseado() const;
-	const vector<capa>& getCapas() const;
-	float getEscenarioAlto() const;
-	float getEscenarioAncho() const;
-	int getPersonajeAlto() const;
-	int getPersonajeAncho() const;
-	const vector<string>& getPersonajeSprites() const;
+	vector<tCapa> getCapas();
+	double getEscenarioAlto() const;
+	double getEscenarioAncho() const;
+	double getPersonajeAlto() const;
+	double getPersonajeAncho() const;
 	int getPersonajeZindex() const;
 	const Json::Reader& getReader() const;
 	const Json::Value& getRoot() const;
 	int getVentanaAltopx() const;
-	int getVentanaAncho() const;
+	double getVentanaAncho() const;
 	int getVentanaAnchopx() const;
 	int getEscenarioYpiso() const;
 	const string& getEntrada() const;
 	void setEntrada(const string& entrada);
+	double getPersonajeSpritesAncho() const;
+	void setPersonajeSpritesAncho(double personajeSpritesAncho);
+	const string& getPersonajeSpritesImagen() const;
+	void setPersonajeSpritesImagen(const string& personajeSpritesImagen);
 };
 
 #endif /* SRC_JSON_PARSER_H_ */

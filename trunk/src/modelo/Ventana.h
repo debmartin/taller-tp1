@@ -8,6 +8,9 @@
 #ifndef SRC_MODELO_VENTANA_H_
 #define SRC_MODELO_VENTANA_H_
 
+#include <iostream>
+using namespace std;
+
 class Ventana {
 private:
 	int ancho_px;
@@ -22,6 +25,9 @@ public:
 	void setAncho(float ancho);
 	int getAnchoPx() const;
 	void setAnchoPx(int anchoPx);
+
+	friend ostream& operator<<(ostream &o, const Ventana &v);
+
 };
 
 #endif /* SRC_MODELO_VENTANA_H_ */

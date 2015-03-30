@@ -22,14 +22,15 @@ using namespace std;
 
 class Personaje {
 private:
-	float ancho;
-	float alto;
+	double ancho;
+	double alto;
 	int z_index;
 	int limite_superior;
 	int limite_inferior;
 	int limite_derecho;
 	int limite_izquierdo;
-	vector<string> sprites;
+	string sprites_imagen;
+	double sprites_ancho;
 	Vector2 unaCoordenada;
 	Vector2 velocidad;
 	int vida;
@@ -38,12 +39,11 @@ private:
 public:
 	Personaje();
 	virtual ~Personaje();
-	float getAlto() const;
-	void setAlto(float alto);
-	float getAncho() const;
-	void setAncho(float ancho);
+	double getAlto() const;
+	void setAlto(double alto);
+	double getAncho() const;
+	void setAncho(double ancho);
 	vector<string> getSprites() const;
-	void setSprites(vector<string> sprites);
 	int getZindex() const;
 	void setZindex(int z_index);
 	void setPosicion(int posicion_x, int posicion_y);
@@ -65,6 +65,13 @@ public:
 	void aumentar_velocidadY();
 	void disminuir_velocidadY();
 	void mover();
+	double getSpritesAncho() const;
+	void setSpritesAncho(double spritesAncho);
+	const string& getSpritesImagen() const;
+	void setSpritesImagen(const string& spritesImagen);
+
+	friend ostream& operator<<(ostream &o, const Personaje &p);
+
 };
 
 #endif /* SRC_MODELO_PERSONAJE_H_ */

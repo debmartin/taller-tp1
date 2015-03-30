@@ -23,6 +23,8 @@ public:
 	void setAncho(float ancho);
 	string getImagenFondo() const;
 	void setImagenFondo(string imagenFondo);
+
+	friend ostream& operator<<(ostream &o, const Capa &c);
 };
 
 #endif /* SRC_MODELO_CAPA_H_ */
