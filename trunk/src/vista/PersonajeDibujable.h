@@ -17,6 +17,7 @@
 #include "../modelo/Vector2.h"
 #include "../modelo/Vector2f.h"
 #include "MRU.h"
+#include "MRUV.h"
 
 using namespace std;
 
@@ -24,7 +25,7 @@ enum estado_personaje {EN_ESPERA, CAMINANDO_DERECHA, CAMINANDO_IZQUIERDA, SALTAN
 
 class PersonajeDibujable{
 private:
-	vector<Sprite*> sprites;
+	Sprite* personaje;
 	estado_personaje estado;
 	string nombre;
 

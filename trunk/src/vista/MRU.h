@@ -15,8 +15,7 @@ public:
 		velInicial(velInicial) {};
 
 	virtual Vector2f getPosicion(float tActual) {
-		//cout << "v0:[" << velInicial.X() << "," << velInicial.Y() << endl;
-		return velInicial*tActual;
+		return posInicial + velInicial*tActual;
 	};
 
 	~MRU() {}
