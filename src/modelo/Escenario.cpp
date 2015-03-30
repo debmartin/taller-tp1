@@ -10,19 +10,19 @@
 Escenario::Escenario() {
 }
 
-float Escenario::getAlto() const {
+double Escenario::getAlto() const {
 	return alto;
 }
 
-void Escenario::setAlto(float alto) {
+void Escenario::setAlto(double alto) {
 	this->alto = alto;
 }
 
-float Escenario::getAncho() const {
+double Escenario::getAncho() const {
 	return ancho;
 }
 
-void Escenario::setAncho(float ancho) {
+void Escenario::setAncho(double ancho) {
 	this->ancho = ancho;
 }
 
@@ -38,3 +38,8 @@ Escenario::~Escenario() {
 	// TODO Auto-generated destructor stub
 }
 
+ostream& operator <<(ostream &o, const Escenario &e) {
+
+        o<<"escenario -> [ancho, alto, ypiso]=["<<e.ancho<<", "<<e.alto<<", "<<e.ypiso<<"]";
+        return o;
+}

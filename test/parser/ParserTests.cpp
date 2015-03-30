@@ -8,6 +8,7 @@
 #include "ParserTests.h"
 
 #include <iostream>
+#include <iterator>
 #include <string>
 #include <vector>
 
@@ -41,11 +42,21 @@ bool ParserTests::ejecutar() {
 		ventana.setAnchoPx(parser.getVentanaAnchopx());
 		ventana.setAltoPx(parser.getVentanaAltopx());
 		ventana.setAncho(parser.getVentanaAncho());
+		//cout<<ventana<<endl;
 
 		Escenario escenario;
 		escenario.setAncho(parser.getEscenarioAncho());
 		escenario.setAlto(parser.getEscenarioAlto());
 		escenario.setYpiso(parser.getEscenarioYpiso());
+		//cout<<escenario<<endl;
+
+		//vector<Capa> capas;
+		/*
+		cout<<"se muestran las capas"<<endl;
+		for (vector<tCapa*>::iterator it = parser.getCapas()->begin() ; it != parser.getCapas()->end(); ++it)
+		{
+			cout<<"capa: "<<(*it)->imagen_fondo<<", "<<(*it)->ancho<<endl;
+		}*/
 
 		Capa capa1;
 		capa1.setImagenFondo("fondo1.png");
@@ -59,13 +70,9 @@ bool ParserTests::ejecutar() {
 		personaje.setAncho(parser.getPersonajeAncho());
 		personaje.setAlto(parser.getPersonajeAlto());
 		personaje.setZindex(parser.getPersonajeZindex());
-
-		vector<string> sprites;
-		sprites.push_back("sprites_1");
-		sprites.push_back("sprites_2");
-		sprites.push_back("sprites_3");
-
-		personaje.setSprites(sprites);
+		personaje.setSpritesImagen(parser.getPersonajeSpritesImagen());
+		personaje.setSpritesAncho(parser.getPersonajeSpritesAncho());
+		//cout<<personaje<<endl;
 	}
 
 	return true;

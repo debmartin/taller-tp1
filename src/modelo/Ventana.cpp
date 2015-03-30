@@ -38,3 +38,10 @@ Ventana::~Ventana() {
 	// TODO Auto-generated destructor stub
 }
 
+ostream& operator <<(ostream &o, const Ventana &v) {
+
+        o<<"ventana -> [anchopx, altopx, ancho]=["<<v.ancho_px<<", "<<v.alto_px<<", "<<v.ancho<<"]";
+
+        return o;
+}
+

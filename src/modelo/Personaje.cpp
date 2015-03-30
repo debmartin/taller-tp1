@@ -23,28 +23,20 @@ Personaje::Personaje() {
 	this->velocidad.setCoordenada(0,0);
 }
 
-float Personaje::getAlto() const {
+double Personaje::getAlto() const {
 	return alto;
 }
 
-void Personaje::setAlto(float alto) {
+void Personaje::setAlto(double alto) {
 	this->alto = alto;
 }
 
-float Personaje::getAncho() const {
+double Personaje::getAncho() const {
 	return ancho;
 }
 
-void Personaje::setAncho(float ancho) {
+void Personaje::setAncho(double ancho) {
 	this->ancho = ancho;
-}
-
-vector<string> Personaje::getSprites() const {
-	return sprites;
-}
-
-void Personaje::setSprites(vector<string> sprites) {
-	this->sprites = sprites;
 }
 
 int Personaje::getZindex() const {
@@ -127,6 +119,22 @@ void Personaje::disminuir_velocidadY(){
 	this->velocidad.mover_en_X(-DELTA_PASO);
 }
 
+double Personaje::getSpritesAncho() const {
+	return sprites_ancho;
+}
+
+void Personaje::setSpritesAncho(double spritesAncho) {
+	sprites_ancho = spritesAncho;
+}
+
+const string& Personaje::getSpritesImagen() const {
+	return sprites_imagen;
+}
+
+void Personaje::setSpritesImagen(const string& spritesImagen) {
+	sprites_imagen = spritesImagen;
+}
+
 void Personaje::mover(){
 	//Valido que no camine fuera del escenario en X
 	if((this->unaCoordenada.getCoordenadaX() > this->limite_izquierdo) && (this->unaCoordenada.getCoordenadaX() + this->ancho) < this->limite_derecho){
@@ -142,3 +150,10 @@ Personaje::~Personaje(){
 	// TODO Auto-generated destructor stub
 }
 
+ostream& operator <<(ostream &o, const Personaje &p) {
+
+        o<<"personaje -> [ancho, alto, zindex, sprites_imagen, sprites_ancho]=["<<
+        o<<p.ancho<<", "<<p.alto<<", "<<p.z_index<<", "<<p.sprites_imagen<<", "<<p.sprites_ancho<<"]";
+
+        return o;
+}

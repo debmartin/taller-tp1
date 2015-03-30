@@ -30,3 +30,9 @@ Capa::~Capa() {
 	// TODO Auto-generated destructor stub
 }
 
+ostream& operator <<(ostream &o, const Capa &c) {
+
+        o<<"capa -> [imagen_fondo, ancho]=["<<c.imagen_fondo<<", "<<c.ancho<<"]";
+        return o;
+}
+
