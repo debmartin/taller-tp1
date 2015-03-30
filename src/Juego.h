@@ -15,6 +15,7 @@
 #include "vista/PersonajeDibujable.h"
 #include <iostream>
 #include <string>
+
 using namespace std;
 
 class Juego {
@@ -23,8 +24,7 @@ private:
 	Controlador controladorJuego;
 	Personaje jugador1;
 	PersonajeDibujable jugadorDibujable1;
-	Sprite* sprSubZeroQuieto; // TODO: solo para test
-	Sprite* sprSubZeroCaminando; // TODO: solo para test
+	Sprite* subzero;
 public:
 
 	Juego(const char* titulo, int xpos, int ypos, int altura, int ancho, bool fullscreen);

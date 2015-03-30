@@ -17,49 +17,32 @@ void PersonajeDibujable::setEstado(estado_personaje unEstado){
 
 void PersonajeDibujable::seleccionarSprite(){
 
-	Vector2 posActual;
-	Vector2 velActual;
 	switch(this->estado){
 		case CAMINANDO_DERECHA:
-			/*
-			this->sprites[CAMINANDO_DERECHA]->setSentidoReproduccion(HACIA_ADELANTE);
-			this->sprites[CAMINANDO_DERECHA]->desplazar(Vector2(5,0));
-			++++
-			this->sprites[EN_ESPERA]->desplazar(Vector2(5,0));
-			VentanaGrafica::Instance()->setSprite(this->sprites[CAMINANDO_DERECHA], this->nombre);
-			*/
-			posActual = sprites[CAMINANDO_DERECHA]->getPosicion();
-			velActual = Vector2f(100.0f, 0.0f);
-			this->sprites[CAMINANDO_DERECHA]->setSentidoReproduccion(HACIA_ADELANTE);
-			this->sprites[CAMINANDO_DERECHA]->setTrayectoria(new MRU(posActual, velActual));
-			this->sprites[EN_ESPERA]->setTrayectoria(new MRU(posActual, velActual));
-			VentanaGrafica::Instance()->setSprite(this->sprites[CAMINANDO_DERECHA], this->nombre);
-			cout << "UN PASO DERECHA" << endl;
+			this->personaje->cambiarAnimacion("zubzero-caminando");
+			this->personaje->setSentidoReproduccion(HACIA_ADELANTE);
+			this->personaje->setTrayectoria(new MRU(personaje->getPosicion(), Vector2f(180.0f, 0.0f)));
 			break;
 		case CAMINANDO_IZQUIERDA:
-			this->sprites[CAMINANDO_IZQUIERDA]->setSentidoReproduccion(HACIA_ATRAS);
-			this->sprites.at(CAMINANDO_DERECHA)->desplazar(Vector2(-5,0));
-			this->sprites.at(EN_ESPERA)->desplazar(Vector2(-5,0));
-			VentanaGrafica::Instance()->setSprite(this->sprites[CAMINANDO_IZQUIERDA], this->nombre);
+			this->personaje->cambiarAnimacion("zubzero-caminando");
+			this->personaje->setSentidoReproduccion(HACIA_ATRAS);
+			this->personaje->setTrayectoria(new MRU(personaje->getPosicion(), Vector2f(-180.0f, 0.0f)));
 			break;
 		case EN_ESPERA:
-			/*
-			this->sprites[EN_ESPERA]->setSentidoReproduccion(HACIA_ADELANTE);
-			VentanaGrafica::Instance()->setSprite(this->sprites[EN_ESPERA], this->nombre);
-			*/
-			this->sprites[EN_ESPERA]->setSentidoReproduccion(HACIA_ADELANTE);
-			this->sprites[EN_ESPERA]->setTrayectoria(new Reposo(posActual));
-			VentanaGrafica::Instance()->setSprite(this->sprites[EN_ESPERA], this->nombre);
+			this->personaje->cambiarAnimacion("zubzero-quieto");
+			this->personaje->setSentidoReproduccion(HACIA_ADELANTE);
+			this->personaje->setTrayectoria(new Reposo(personaje->getPosicion()));
 			break;
 		case SALTANDO:
-			this->sprites[SALTANDO]->setSentidoReproduccion(HACIA_ADELANTE);
-			VentanaGrafica::Instance()->setSprite(this->sprites[SALTANDO], this->nombre);
+			this->personaje->cambiarAnimacion("zubzero-quieto");
+			this->personaje->setSentidoReproduccion(HACIA_ADELANTE);
+			this->personaje->setTrayectoria(new MRUV(personaje->getPosicion(), Vector2f(0,-800.0f), Vector2f(0,1600.0f)));
 			break;
 	}
 }
 
 void PersonajeDibujable::setSprite(Sprite* pSprite){
-	this->sprites.push_back(pSprite);
+	this->personaje = pSprite;
 }
 PersonajeDibujable::~PersonajeDibujable() {
 	// TODO Auto-generated destructor stub

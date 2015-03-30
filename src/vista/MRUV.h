@@ -18,7 +18,7 @@ public:
 		gravedad(gravedad) {};
 
 	virtual Vector2f getPosicion(float tActual) {
-		return posInicial + velInicial * tActual + 0.5 * tActual * tActual *  gravedad;
+		return posInicial + velInicial * tActual + gravedad * 0.5 * tActual * tActual;
 	};
 
 	~MRUV() {}

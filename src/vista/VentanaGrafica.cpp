@@ -118,7 +118,11 @@ void VentanaGrafica::dibujarTodo(){
 	//for (std::map<string,Sprite*>::iterator it=mapaSprites.begin(); it!=mapaSprites.end(); ++it)
 	//	(it->second)->dibujar();
 
+	//this->mapaSprites["subzero-caminando"]
+
 	SDL_RenderPresent(vRenderer);
+
+	cout << "VentanaGrafica::dibujarTodo()" << endl;
 }
 
 void VentanaGrafica::cerrar() {

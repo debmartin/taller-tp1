@@ -21,7 +21,7 @@ class Sprite {
 public:
 
 private:
-	string id_textura;
+	string id_animacion;
 	Vector2 posicion;
 	int anchoPx;
 	int altoPx;
@@ -38,7 +38,7 @@ private:
 	float tCreacion;
 
 public:
-	Sprite(string id_textura, Vector2 posicionInicial, int cantidadFotogramas, int zIndex, int fps);
+	Sprite(string id_animacion, Vector2 posicion, int zIndex);
 	virtual ~Sprite();
 
 	void setPosicion(Vector2 p);
@@ -54,7 +54,8 @@ public:
 	void dibujar(); // OK
 	void update();
 	void setTrayectoria(Trayectoria* t);
-	Vector2 getPosicion() { return this->posicion; };
+	void cambiarAnimacion(string id_animacion);
+	Vector2 getPosicion();
 };
 
 #endif /* SRC_VISTA_SPRITE_H_ */
