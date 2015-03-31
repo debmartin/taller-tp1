@@ -38,14 +38,11 @@ private:
 
 public:
 	Personaje();
+	Personaje(double ancho, double alto, int zindex, string sprites_imagen, double sprites_ancho);
 	virtual ~Personaje();
 	double getAlto() const;
-	void setAlto(double alto);
 	double getAncho() const;
-	void setAncho(double ancho);
-	vector<string> getSprites() const;
 	int getZindex() const;
-	void setZindex(int z_index);
 	void setPosicion(int posicion_x, int posicion_y);
 	Vector2 getPosicion();
 	void setLimiteSuperior(int limite);
@@ -66,9 +63,7 @@ public:
 	void disminuir_velocidadY();
 	void mover();
 	double getSpritesAncho() const;
-	void setSpritesAncho(double spritesAncho);
 	const string& getSpritesImagen() const;
-	void setSpritesImagen(const string& spritesImagen);
 
 	friend ostream& operator<<(ostream &o, const Personaje &p);
 

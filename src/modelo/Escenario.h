@@ -16,17 +16,14 @@ private:
 	double ancho;
 	double alto;
 	int ypiso;
-	//string fondo;
 
 public:
 	Escenario();
+	Escenario(double ancho, double alto, int ypiso);
 	virtual ~Escenario();
 	double getAlto() const;
-	void setAlto(double alto);
 	double getAncho() const;
-	void setAncho(double ancho);
 	int getYpiso() const;
-	void setYpiso(int ypiso);
 
 	friend ostream& operator<<(ostream &o, const Escenario &e);
 };

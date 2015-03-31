@@ -10,7 +10,7 @@
 #include <iostream>
 #include <iterator>
 #include <string>
-#include <vector>
+#include <list>
 
 #include "../../src/modelo/Capa.h"
 #include "../../src/modelo/Escenario.h"
@@ -30,50 +30,23 @@ bool ParserTests::ejecutar() {
 
 	cout<<"Iniciar test del parser(jsoncpp) ..."<<endl;
 
-	Parser parser;
-	parser.setEntrada("src/recursos/escenario.json");
-	parser.inicializar();
+	Parser* parser = new Parser("src/recursos/escenario.json");
 
-	bool construirObjetos = parser.ejecutar();
+	parser->parsearDesdeJson();
 
-	if ( construirObjetos )
+	Ventana* ventana = parser->getVentana();
+	cout<<*ventana<<endl;
+
+	Escenario* escenario = parser->getEscenario();
+	cout<<*escenario<<endl;
+
+	for (list<Capa*>::iterator it_capas = parser->getCapas()->begin() ; it_capas != parser->getCapas()->end(); it_capas++)
 	{
-		Ventana ventana;
-		ventana.setAnchoPx(parser.getVentanaAnchopx());
-		ventana.setAltoPx(parser.getVentanaAltopx());
-		ventana.setAncho(parser.getVentanaAncho());
-		//cout<<ventana<<endl;
-
-		Escenario escenario;
-		escenario.setAncho(parser.getEscenarioAncho());
-		escenario.setAlto(parser.getEscenarioAlto());
-		escenario.setYpiso(parser.getEscenarioYpiso());
-		//cout<<escenario<<endl;
-
-		//vector<Capa> capas;
-		/*
-		cout<<"se muestran las capas"<<endl;
-		for (vector<tCapa*>::iterator it = parser.getCapas()->begin() ; it != parser.getCapas()->end(); ++it)
-		{
-			cout<<"capa: "<<(*it)->imagen_fondo<<", "<<(*it)->ancho<<endl;
-		}*/
-
-		Capa capa1;
-		capa1.setImagenFondo("fondo1.png");
-		capa1.setAncho(500);
-
-		Capa capa2;
-		capa2.setImagenFondo("fondo2.png");
-		capa2.setAncho(1000.5);
-
-		Personaje personaje;
-		personaje.setAncho(parser.getPersonajeAncho());
-		personaje.setAlto(parser.getPersonajeAlto());
-		personaje.setZindex(parser.getPersonajeZindex());
-		personaje.setSpritesImagen(parser.getPersonajeSpritesImagen());
-		personaje.setSpritesAncho(parser.getPersonajeSpritesAncho());
-		//cout<<personaje<<endl;
+		cout<<**it_capas<<endl;
 	}
+
+	Personaje* personaje = parser->getPersonaje();
+	cout<<*personaje<<endl;
 
 	return true;
 }

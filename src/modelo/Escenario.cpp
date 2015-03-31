@@ -10,28 +10,23 @@
 Escenario::Escenario() {
 }
 
-double Escenario::getAlto() const {
-	return alto;
+Escenario::Escenario(double ancho, double alto, int ypiso)
+{
+	this->ancho = ancho;
+	this->alto = alto;
+	this->ypiso = ypiso;
 }
 
-void Escenario::setAlto(double alto) {
-	this->alto = alto;
+double Escenario::getAlto() const {
+	return alto;
 }
 
 double Escenario::getAncho() const {
 	return ancho;
 }
 
-void Escenario::setAncho(double ancho) {
-	this->ancho = ancho;
-}
-
 int Escenario::getYpiso() const {
 	return ypiso;
-}
-
-void Escenario::setYpiso(int ypiso) {
-	this->ypiso = ypiso;
 }
 
 Escenario::~Escenario() {

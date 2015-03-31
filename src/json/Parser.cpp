@@ -6,20 +6,32 @@
  */
 
 #include "Parser.h"
+#include <fstream>
 
 Parser::Parser() {
-	// TODO Auto-generated constructor stub
+	this->entrada = "archivo_json_defecto";
+	this->ventana = new Ventana();
+	this->escenario = new Escenario();
+	this->capas = new list<Capa*>;
+	this->inicializar();
+}
 
+Parser::Parser(string archivo_json)
+{
+	this->entrada = archivo_json;
+	this->ventana = new Ventana();
+	this->escenario = new Escenario();
+	this->capas = new list<Capa*>;
+	this->inicializar();
 }
 
 void Parser::inicializar()
 {
 	ifstream archivo_escenario(this->entrada.c_str());
 	this->bienParseado = this->reader.parse(archivo_escenario, this->root, false);
-
 }
 
-bool Parser::ejecutar() {
+void Parser::parsearDesdeJson() {
 
 	 if( !this->bienParseado )
 	 {
@@ -27,10 +39,28 @@ bool Parser::ejecutar() {
 	   cout<<"Failed to parse JSON"<<endl
 	       <<reader.getFormatedErrorMessages()
 	       <<endl;
-	   return false;
 	 }
+	 else
+	 {
+		 if( root.size() > 0 ) {
 
-	 if( root.size() > 0 ) {
+			//atributos de la ventana
+			int v_alto_px = 0;
+			double v_ancho = 0;
+			int v_ancho_px = 0;
+
+			//atributos del escenario
+			double e_alto = 0;
+			double e_ancho = 0;
+			int e_ypiso = 0;
+
+			//atributos del personaje
+			double p_alto = 0;
+			double p_ancho = 0;
+			int p_zindex = 0;
+			string p_sprites_imagen = "";
+			double p_sprites_ancho = 0;
+
 	 		for( Json::ValueIterator it = root.begin() ; it != root.end() ; it++ )
 	 		{
 	 			const Json::Value key_nivel1 = it.key();
@@ -46,26 +76,29 @@ bool Parser::ejecutar() {
 	 				{
 						for (unsigned int idx_capas = 0; idx_capas < root2.size(); ++idx_capas)
 						{
-							tCapa capa_actual;
-
+							Capa* capa;
+							string imagen_fondo = "";
+							double ancho = 0;
 							for( Json::ValueIterator it3 = root2[idx_capas].begin() ; it3 != root2[idx_capas].end() ; it3++ )
 							{
+
 								const Json::Value key_nivel2 = it3.key();
+
 								if ( key_nivel2.asString() == "imagen_fondo" )
 								{
-									capa_actual.imagen_fondo = (*it)[idx_capas]["imagen_fondo"].asString();
+									imagen_fondo = (*it)[idx_capas]["imagen_fondo"].asString();
 								}
 								else if ( key_nivel2.asString() == "ancho" )
 								{
-									capa_actual.ancho = (*it)[idx_capas]["ancho"].asDouble();
+									ancho = (*it)[idx_capas]["ancho"].asDouble();
 								}
 								else
 								{
 									cout<<"parametro no encontrado!"<<endl;
 								}
 							}
-
-							capas.push_back(capa_actual);
+							capa = new Capa(imagen_fondo, ancho);
+							capas->push_back(capa);
 						}
 	 				}
 	 			}
@@ -79,35 +112,36 @@ bool Parser::ejecutar() {
 						{
 							if ( key_nivel2.asString() == "altopx" )
 							{
-								this->ventana_altopx = (*it)["altopx"].asInt();
+								v_alto_px = (*it)["altopx"].asInt();
 							}
 							else if ( key_nivel2.asString() == "ancho" )
 							{
-								this->ventana_ancho = (*it)["ancho"].asDouble();
+								v_ancho = (*it)["ancho"].asDouble();
 							}
 							else if ( key_nivel2.asString() == "anchopx" )
 							{
-								this->ventana_anchopx = (*it)["anchopx"].asInt();
+								v_ancho_px = (*it)["anchopx"].asInt();
 							}
 							else
 							{
 								cout<<"parametro no encontrado!"<<endl;
 							}
+
 						}
 						else if ( tag_padre == "escenario" )
 						{
 							if ( key_nivel2.asString() == "alto" )
 							{
-								this->escenario_alto = (*it)["alto"].asDouble();
+								e_alto = (*it)["alto"].asDouble();
 							}
 							else if ( key_nivel2.asString() == "ancho" )
 							{
-								this->escenario_ancho = (*it)["ancho"].asDouble();
+								e_ancho = (*it)["ancho"].asDouble();
 							}
 							//TODO revisar porque este parametro tiene una longitud mas grande. mide 7 en vez de 5!
 							else if ( key_nivel2.asString().compare("ypiso") >= 0 )
 							{
-								this->escenario_ypiso = (*it)[key_nivel2.asString()].asInt();
+								e_ypiso = (*it)[key_nivel2.asString()].asInt();
 							}
 							else
 							{
@@ -118,20 +152,20 @@ bool Parser::ejecutar() {
 						{
 							if ( key_nivel2.asString() == "alto" )
 							{
-								this->personaje_alto = (*it)["alto"].asDouble();
+								p_alto = (*it)["alto"].asDouble();
 							}
 							else if ( key_nivel2.asString().compare("ancho") == 0 )
 							{
-								this->personaje_ancho = (*it)[key_nivel2.asString()].asDouble();
+								p_ancho = (*it)[key_nivel2.asString()].asDouble();
 							}
 							else if ( key_nivel2.asString().compare("zindex") >= 0 )
 							{
-								this->personaje_zindex = (*it)[key_nivel2.asString()].asInt();
+								p_zindex = (*it)[key_nivel2.asString()].asInt();
 							}
 							else if ( key_nivel2.asString() == "sprites" )
 							{
-								this->personaje_sprites_imagen = (*it2)["imagen"].asString();
-								this->personaje_sprites_ancho = (*it2)["ancho"].asDouble();
+								p_sprites_imagen = (*it2)["imagen"].asString();
+								p_sprites_ancho = (*it2)["ancho"].asDouble();
 							}
 							else
 							{
@@ -145,83 +179,31 @@ bool Parser::ejecutar() {
 					}
 	 			}
 	 		}
-	 	}
 
-	 return true;
+			this->ventana = new Ventana(v_ancho_px, v_alto_px, v_ancho);
+			this->escenario = new Escenario(e_ancho, e_alto, e_ypiso);
+			this->personaje = new Personaje(p_ancho, p_alto, p_zindex, p_sprites_imagen, p_sprites_ancho);
+
+	 	}
+	 }
 }
 
 Parser::~Parser() {
 	// TODO Auto-generated destructor stub
 }
 
-vector<tCapa> Parser::getCapas() {
+list<Capa*>* Parser::getCapas() const {
 	return capas;
 }
 
-double Parser::getEscenarioAlto() const {
-	return escenario_alto;
+Escenario* Parser::getEscenario() const {
+	return escenario;
 }
 
-double Parser::getEscenarioAncho() const {
-	return escenario_ancho;
+Personaje* Parser::getPersonaje() const {
+	return personaje;
 }
 
-double Parser::getPersonajeAlto() const {
-	return personaje_alto;
-}
-
-double Parser::getPersonajeAncho() const {
-	return personaje_ancho;
-}
-
-int Parser::getPersonajeZindex() const {
-	return personaje_zindex;
-}
-
-const Json::Reader& Parser::getReader() const {
-	return reader;
-}
-
-const Json::Value& Parser::getRoot() const {
-	return root;
-}
-
-int Parser::getVentanaAltopx() const {
-	return ventana_altopx;
-}
-
-double Parser::getVentanaAncho() const {
-	return ventana_ancho;
-}
-
-int Parser::getVentanaAnchopx() const {
-	return ventana_anchopx;
-}
-
-const string& Parser::getEntrada() const {
-	return entrada;
-}
-
-double Parser::getPersonajeSpritesAncho() const {
-	return personaje_sprites_ancho;
-}
-
-void Parser::setPersonajeSpritesAncho(double personajeSpritesAncho) {
-	personaje_sprites_ancho = personajeSpritesAncho;
-}
-
-const string& Parser::getPersonajeSpritesImagen() const {
-	return personaje_sprites_imagen;
-}
-
-void Parser::setPersonajeSpritesImagen(const string& personajeSpritesImagen) {
-	personaje_sprites_imagen = personajeSpritesImagen;
-}
-
-void Parser::setEntrada(const string& entrada) {
-	this->entrada = entrada;
-}
-
-int Parser::getEscenarioYpiso() const {
-	return escenario_ypiso;
+Ventana* Parser::getVentana() const {
+	return ventana;
 }
