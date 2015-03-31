@@ -10,28 +10,23 @@
 Ventana::Ventana() {
 }
 
+Ventana::Ventana(int ancho_px, int alto_px, double ancho)
+{
+	this->ancho_px = ancho_px;
+	this->alto_px = alto_px;
+	this->ancho = ancho;
+}
+
 int Ventana::getAltoPx() const {
 	return alto_px;
 }
 
-void Ventana::setAltoPx(int altoPx) {
-	alto_px = altoPx;
-}
-
-float Ventana::getAncho() const {
+double Ventana::getAncho() const {
 	return ancho;
-}
-
-void Ventana::setAncho(float ancho) {
-	this->ancho = ancho;
 }
 
 int Ventana::getAnchoPx() const {
 	return ancho_px;
-}
-
-void Ventana::setAnchoPx(int anchoPx) {
-	ancho_px = anchoPx;
 }
 
 Ventana::~Ventana() {

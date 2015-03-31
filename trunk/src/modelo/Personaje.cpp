@@ -23,28 +23,26 @@ Personaje::Personaje() {
 	this->velocidad.setCoordenada(0,0);
 }
 
-double Personaje::getAlto() const {
-	return alto;
+Personaje::Personaje(double ancho, double alto, int zindex,
+		string sprites_imagen, double sprites_ancho)
+{
+	this->ancho = ancho;
+	this->alto = alto;
+	this->z_index = zindex;
+	this->sprites_imagen = sprites_imagen;
+	this->sprites_ancho = sprites_ancho;
 }
 
-void Personaje::setAlto(double alto) {
-	this->alto = alto;
+double Personaje::getAlto() const {
+	return alto;
 }
 
 double Personaje::getAncho() const {
 	return ancho;
 }
 
-void Personaje::setAncho(double ancho) {
-	this->ancho = ancho;
-}
-
 int Personaje::getZindex() const {
 	return z_index;
-}
-
-void Personaje::setZindex(int z_index) {
-	this->z_index = z_index;
 }
 
 void Personaje::setLimiteSuperior(int limite){
@@ -123,16 +121,8 @@ double Personaje::getSpritesAncho() const {
 	return sprites_ancho;
 }
 
-void Personaje::setSpritesAncho(double spritesAncho) {
-	sprites_ancho = spritesAncho;
-}
-
 const string& Personaje::getSpritesImagen() const {
 	return sprites_imagen;
-}
-
-void Personaje::setSpritesImagen(const string& spritesImagen) {
-	sprites_imagen = spritesImagen;
 }
 
 void Personaje::mover(){
@@ -152,8 +142,9 @@ Personaje::~Personaje(){
 
 ostream& operator <<(ostream &o, const Personaje &p) {
 
-        o<<"personaje -> [ancho, alto, zindex, sprites_imagen, sprites_ancho]=["<<
+        o<<"personaje -> [ancho, alto, zindex, sprites_imagen, sprites_ancho]=[";
         o<<p.ancho<<", "<<p.alto<<", "<<p.z_index<<", "<<p.sprites_imagen<<", "<<p.sprites_ancho<<"]";
 
         return o;
 }
+

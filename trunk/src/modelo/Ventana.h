@@ -15,16 +15,14 @@ class Ventana {
 private:
 	int ancho_px;
 	int alto_px;
-	float ancho;
+	double ancho;
 public:
 	Ventana();
+	Ventana(int ancho_px, int alto_px, double ancho);
 	virtual ~Ventana();
 	int getAltoPx() const;
-	void setAltoPx(int altoPx);
-	float getAncho() const;
-	void setAncho(float ancho);
+	double getAncho() const;
 	int getAnchoPx() const;
-	void setAnchoPx(int anchoPx);
 
 	friend ostream& operator<<(ostream &o, const Ventana &v);
 

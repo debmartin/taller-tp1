@@ -15,14 +15,13 @@ using namespace std;
 class Capa {
 private:
 	string imagen_fondo;
-	float ancho;
+	double ancho;
 public:
 	Capa();
+	Capa(string imagen_fondo, double ancho);
 	virtual ~Capa();
-	float getAncho() const;
-	void setAncho(float ancho);
+	double getAncho() const;
 	string getImagenFondo() const;
-	void setImagenFondo(string imagenFondo);
 
 	friend ostream& operator<<(ostream &o, const Capa &c);
 };

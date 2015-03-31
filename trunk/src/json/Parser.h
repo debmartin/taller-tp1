@@ -7,18 +7,17 @@
 
 #ifndef SRC_JSON_PARSER_H_
 #define SRC_JSON_PARSER_H_
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <vector>
-#include <jsoncpp/json/json.h>
-using namespace std;
 
-typedef struct
-{
-	string imagen_fondo;
-	double ancho;
-} tCapa;
+#include <jsoncpp/json/json.h>
+#include <list>
+#include <string>
+
+#include "../../src/modelo/Capa.h"
+#include "../../src/modelo/Escenario.h"
+#include "../../src/modelo/Personaje.h"
+#include "../../src/modelo/Ventana.h"
+
+using namespace std;
 
 class Parser {
 private:
@@ -27,46 +26,33 @@ private:
 	bool bienParseado;
 	string entrada;
 
-	int ventana_anchopx;
-	int ventana_altopx;
-	double ventana_ancho;
+	//objectos que devolvera el parseador json
+	Ventana* ventana;
+	Escenario * escenario;
+	list<Capa*>* capas;
+	Personaje* personaje;
 
-	double escenario_ancho;
-	double escenario_alto;
-	int escenario_ypiso;
-
-	vector<tCapa> capas;
-
-	double personaje_ancho;
-	double personaje_alto;
-	int personaje_zindex;
-	string personaje_sprites_imagen;
-	double personaje_sprites_ancho;
 
 public:
 	Parser();
-	void inicializar();
-	bool ejecutar();
+	Parser(string archivo_json);
+
+	list<Capa*>* getCapas() const;
+	Escenario* getEscenario() const;
+	Personaje* getPersonaje() const;
+	Ventana* getVentana() const;
+
+	void parsearDesdeJson();
 
 	virtual ~Parser();
-	vector<tCapa> getCapas();
-	double getEscenarioAlto() const;
-	double getEscenarioAncho() const;
-	double getPersonajeAlto() const;
-	double getPersonajeAncho() const;
-	int getPersonajeZindex() const;
 	const Json::Reader& getReader() const;
 	const Json::Value& getRoot() const;
-	int getVentanaAltopx() const;
-	double getVentanaAncho() const;
-	int getVentanaAnchopx() const;
-	int getEscenarioYpiso() const;
-	const string& getEntrada() const;
-	void setEntrada(const string& entrada);
 	double getPersonajeSpritesAncho() const;
 	void setPersonajeSpritesAncho(double personajeSpritesAncho);
-	const string& getPersonajeSpritesImagen() const;
-	void setPersonajeSpritesImagen(const string& personajeSpritesImagen);
+
+private:
+	void inicializar();
+
 };
 
 #endif /* SRC_JSON_PARSER_H_ */

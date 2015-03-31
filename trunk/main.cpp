@@ -15,7 +15,7 @@ int main(int argc, char* args[])
 	//para correr las pruebas comentar o descomentar estas 2 lineas
 	Test tests;
 	tests.ejecutar();
-
+/*
 	Juego g_game("Taller de programacion TP: Mortal Kombat", 100, 100, 640, 480, false);
 
 	//levantar la información inicial mediante json
@@ -37,6 +37,6 @@ int main(int argc, char* args[])
 	}
 
 	g_game.clean();
-
+*/
 	return 0;
 }

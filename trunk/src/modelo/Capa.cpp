@@ -10,20 +10,12 @@
 Capa::Capa() {
 }
 
-float Capa::getAncho() const {
+double Capa::getAncho() const {
 	return ancho;
-}
-
-void Capa::setAncho(float ancho) {
-	this->ancho = ancho;
 }
 
 string Capa::getImagenFondo() const {
 	return imagen_fondo;
-}
-
-void Capa::setImagenFondo(string imagenFondo) {
-	imagen_fondo = imagenFondo;
 }
 
 Capa::~Capa() {
@@ -36,3 +28,7 @@ ostream& operator <<(ostream &o, const Capa &c) {
         return o;
 }
 
+Capa::Capa(string imagen_fondo, double ancho){
+	this->imagen_fondo = imagen_fondo;
+	this->ancho = ancho;
+}
