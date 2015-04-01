@@ -8,14 +8,13 @@
 #include "ParserTests.h"
 
 #include <iostream>
-#include <iterator>
-#include <string>
 #include <list>
 
 #include "../../src/modelo/Capa.h"
 #include "../../src/modelo/Escenario.h"
 #include "../../src/modelo/Personaje.h"
 #include "../../src/modelo/Ventana.h"
+#include "../../src/utils/Logger.h"
 
 using namespace std;
 
@@ -35,18 +34,18 @@ bool ParserTests::ejecutar() {
 	parser->parsearDesdeJson();
 
 	Ventana* ventana = parser->getVentana();
-	cout<<*ventana<<endl;
+	//cout<<*ventana<<endl;
 
 	Escenario* escenario = parser->getEscenario();
-	cout<<*escenario<<endl;
+	//cout<<*escenario<<endl;
 
 	for (list<Capa*>::iterator it_capas = parser->getCapas()->begin() ; it_capas != parser->getCapas()->end(); it_capas++)
 	{
-		cout<<**it_capas<<endl;
+		//cout<<**it_capas<<endl;
 	}
 
 	Personaje* personaje = parser->getPersonaje();
-	cout<<*personaje<<endl;
+	//cout<<*personaje<<endl;
 
 	return true;
 }

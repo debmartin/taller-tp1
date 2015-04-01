@@ -16,16 +16,17 @@ private:
 	int ancho_px;
 	int alto_px;
 	double ancho;
+	double margen_x;
 public:
 	Ventana();
-	Ventana(int ancho_px, int alto_px, double ancho);
+	Ventana(int ancho_px, int alto_px, double ancho, double margen_x);
 	virtual ~Ventana();
 	int getAltoPx() const;
 	double getAncho() const;
 	int getAnchoPx() const;
+	double getMargenX() const;
 
 	friend ostream& operator<<(ostream &o, const Ventana &v);
-
 };
 
 #endif /* SRC_MODELO_VENTANA_H_ */
