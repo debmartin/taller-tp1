@@ -2,7 +2,8 @@
     "ventana": { 
         "anchopx": 800, 
         "altopx": 600, 
-        "ancho": 200.5 
+        "ancho": 200.5,
+        "margen_x": 2.5 
     }, 
     "escenario": { 
         "ancho": 1000.5, 
@@ -26,7 +27,8 @@
         "sprites": { 
 		            "imagen": "sprites.png", 
         		    "ancho": 15.4 
-        			} 
+        			},
+		"direccion": 1 
     } 
 }
 

@@ -31,6 +31,8 @@ private:
 	int limite_izquierdo;
 	string sprites_imagen;
 	double sprites_ancho;
+	int direccion;
+
 	Vector2 unaCoordenada;
 	Vector2 velocidad;
 	int vida;
@@ -38,11 +40,15 @@ private:
 
 public:
 	Personaje();
-	Personaje(double ancho, double alto, int zindex, string sprites_imagen, double sprites_ancho);
+	Personaje(double ancho, double alto, int zindex, string sprites_imagen, double sprites_ancho, int direccion);
 	virtual ~Personaje();
 	double getAlto() const;
 	double getAncho() const;
 	int getZindex() const;
+	double getSpritesAncho() const;
+	const string& getSpritesImagen() const;
+	int getDireccion() const;
+
 	void setPosicion(int posicion_x, int posicion_y);
 	Vector2 getPosicion();
 	void setLimiteSuperior(int limite);
@@ -62,11 +68,9 @@ public:
 	void aumentar_velocidadY();
 	void disminuir_velocidadY();
 	void mover();
-	double getSpritesAncho() const;
-	const string& getSpritesImagen() const;
+
 
 	friend ostream& operator<<(ostream &o, const Personaje &p);
-
 };
 
 #endif /* SRC_MODELO_PERSONAJE_H_ */

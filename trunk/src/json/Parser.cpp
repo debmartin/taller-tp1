@@ -6,13 +6,18 @@
  */
 
 #include "Parser.h"
-#include <fstream>
+
+#include <jsoncpp/json/value.h>
+#include <iostream>
+
+#include "../utils/Logger.h"
 
 Parser::Parser() {
 	this->entrada = "archivo_json_defecto";
 	this->ventana = new Ventana();
 	this->escenario = new Escenario();
 	this->capas = new list<Capa*>;
+	this->personaje = new Personaje();
 	this->inicializar();
 }
 
@@ -22,6 +27,7 @@ Parser::Parser(string archivo_json)
 	this->ventana = new Ventana();
 	this->escenario = new Escenario();
 	this->capas = new list<Capa*>;
+	this->personaje = new Personaje();
 	this->inicializar();
 }
 
@@ -39,6 +45,7 @@ void Parser::parsearDesdeJson() {
 	   cout<<"Failed to parse JSON"<<endl
 	       <<reader.getFormatedErrorMessages()
 	       <<endl;
+	   Logger::getInstance()->error("No se parser bien el json del escenario");
 	 }
 	 else
 	 {
@@ -48,6 +55,7 @@ void Parser::parsearDesdeJson() {
 			int v_alto_px = 0;
 			double v_ancho = 0;
 			int v_ancho_px = 0;
+			double v_margen_x = 0;
 
 			//atributos del escenario
 			double e_alto = 0;
@@ -60,6 +68,7 @@ void Parser::parsearDesdeJson() {
 			int p_zindex = 0;
 			string p_sprites_imagen = "";
 			double p_sprites_ancho = 0;
+			int p_direccion = 0;
 
 	 		for( Json::ValueIterator it = root.begin() ; it != root.end() ; it++ )
 	 		{
@@ -122,9 +131,13 @@ void Parser::parsearDesdeJson() {
 							{
 								v_ancho_px = (*it)["anchopx"].asInt();
 							}
+							else if ( key_nivel2.asString() == "margen_x" )
+							{
+								v_margen_x= (*it)["margen_x"].asDouble();
+							}
 							else
 							{
-								cout<<"parametro no encontrado!"<<endl;
+								cout<<"parametro "<<key_nivel2.asString()<< "no encontrado!"<<endl;
 							}
 
 						}
@@ -167,9 +180,13 @@ void Parser::parsearDesdeJson() {
 								p_sprites_imagen = (*it2)["imagen"].asString();
 								p_sprites_ancho = (*it2)["ancho"].asDouble();
 							}
+							else if ( key_nivel2.asString() == "direccion" )
+							{
+								p_direccion = (*it)["direccion"].asInt();
+							}
 							else
 							{
-								cout<<"parametro "<<key_nivel2.asString()<<" no encontrado!"<<endl;
+								cout<<"parametro no encontrado!"<<endl;
 							}
 						}
 						else
@@ -180,9 +197,9 @@ void Parser::parsearDesdeJson() {
 	 			}
 	 		}
 
-			this->ventana = new Ventana(v_ancho_px, v_alto_px, v_ancho);
+			this->ventana = new Ventana(v_ancho_px, v_alto_px, v_ancho, v_margen_x);
 			this->escenario = new Escenario(e_ancho, e_alto, e_ypiso);
-			this->personaje = new Personaje(p_ancho, p_alto, p_zindex, p_sprites_imagen, p_sprites_ancho);
+			this->personaje = new Personaje(p_ancho, p_alto, p_zindex, p_sprites_imagen, p_sprites_ancho, p_direccion);
 
 	 	}
 	 }

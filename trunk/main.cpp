@@ -21,7 +21,6 @@ int main(int argc, char* args[])
 	//levantar la información inicial mediante json
 	//... usar libreria jsonCpp
 
-
 	while (g_game.running())
 	{
 		frameStart = SDL_GetTicks();

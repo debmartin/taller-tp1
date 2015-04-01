@@ -24,13 +24,14 @@ Personaje::Personaje() {
 }
 
 Personaje::Personaje(double ancho, double alto, int zindex,
-		string sprites_imagen, double sprites_ancho)
+		string sprites_imagen, double sprites_ancho, int direccion)
 {
 	this->ancho = ancho;
 	this->alto = alto;
 	this->z_index = zindex;
 	this->sprites_imagen = sprites_imagen;
 	this->sprites_ancho = sprites_ancho;
+	this->direccion = direccion;
 }
 
 double Personaje::getAlto() const {
@@ -142,9 +143,12 @@ Personaje::~Personaje(){
 
 ostream& operator <<(ostream &o, const Personaje &p) {
 
-        o<<"personaje -> [ancho, alto, zindex, sprites_imagen, sprites_ancho]=[";
-        o<<p.ancho<<", "<<p.alto<<", "<<p.z_index<<", "<<p.sprites_imagen<<", "<<p.sprites_ancho<<"]";
+        o<<"personaje -> [ancho, alto, zindex, sprites_imagen, sprites_ancho, direccion]=[";
+        o<<p.ancho<<", "<<p.alto<<", "<<p.z_index<<", "<<p.sprites_imagen<<", "<<p.sprites_ancho<<", "<<p.direccion<<"]";
 
         return o;
 }
 
+int Personaje::getDireccion() const {
+	return direccion;
+}
