@@ -6,7 +6,8 @@
  */
 #include "Controlador.h"
 
-Controlador::Controlador(){
+Controlador::Controlador(Personaje* pers) :
+    unPersonaje(pers) {
 }
 
 void Controlador::manejar_Evento(SDL_Event &evento){
@@ -14,19 +15,19 @@ void Controlador::manejar_Evento(SDL_Event &evento){
 	if( evento.type == SDL_KEYDOWN && evento.key.repeat == 0 ){
 		switch( evento.key.keysym.sym ){
 			case SDLK_LEFT:
-				this->unPersonaje.disminuir_velocidadX();
+				this->unPersonaje->disminuir_velocidadX();
 //				this->unPersonajeDibujable.setEstado(CAMINANDO_IZQUIERDA);
 				break;
 		 	case SDLK_RIGHT:
-		 		this->unPersonaje.aumentar_velocidadX();
+		 		this->unPersonaje->aumentar_velocidadX();
 //		 		this->unPersonajeDibujable.setEstado(CAMINANDO_DERECHA);
 		 		break;
 			case SDLK_UP:
-				this->unPersonaje.aumentar_velocidadY();
+				this->unPersonaje->aumentar_velocidadY();
 //				this->unPersonajeDibujable.setEstado(SALTANDO);
 				break;
 			case SDLK_DOWN:
-				this->unPersonaje.disminuir_velocidadY();
+				this->unPersonaje->disminuir_velocidadY();
 //				this->unPersonajeDibujable.setEstado(SALTANDO);
 				break;
 		}
@@ -35,26 +36,26 @@ void Controlador::manejar_Evento(SDL_Event &evento){
 	if( evento.type == SDL_KEYUP && evento.key.repeat == 0 ){
 		switch( evento.key.keysym.sym ){
 			case SDLK_LEFT:
-				this->unPersonaje.aumentar_velocidadX();
+				this->unPersonaje->aumentar_velocidadX();
 //				this->unPersonajeDibujable.setEstado(EN_ESPERA);
 				break;
 			case SDLK_RIGHT:
-				this->unPersonaje.disminuir_velocidadX();
+				this->unPersonaje->disminuir_velocidadX();
 //				this->unPersonajeDibujable.setEstado(EN_ESPERA);
 				break;
 			case SDLK_UP:
-				this->unPersonaje.disminuir_velocidadY();
+				this->unPersonaje->disminuir_velocidadY();
 //				this->unPersonajeDibujable.setEstado(EN_ESPERA);
 				break;
 			case SDLK_DOWN:
-				this->unPersonaje.aumentar_velocidadY();
+				this->unPersonaje->aumentar_velocidadY();
 //				this->unPersonajeDibujable.setEstado(EN_ESPERA);
 				break;
 		}
 	}
 }
 
-void Controlador::setPersonaje(Personaje personaje){
+void Controlador::setPersonaje(Personaje* personaje){
 	this->unPersonaje = personaje;
 }
 
