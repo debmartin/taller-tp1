@@ -22,7 +22,7 @@ double Capa::getAncho() {
 //}
 
 Capa::~Capa() {
-	// TODO Auto-generated destructor stub
+	SDL_DestroyTexture(animacionCapa->getTextura());
 }
 
 void Capa::dibujar(){

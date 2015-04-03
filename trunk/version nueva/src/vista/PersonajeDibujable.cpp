@@ -47,7 +47,8 @@ void PersonajeDibujable::setSprite(Sprite* pSprite){
 	this->personaje = pSprite;
 }
 PersonajeDibujable::~PersonajeDibujable() {
-	// TODO Auto-generated destructor stub
+    for (std::map<string, Animacion*>::iterator it = animaciones.begin(); it != animaciones.end(); ++it)
+        SDL_DestroyTexture(it->second->getTextura());
 }
 
 void PersonajeDibujable::agregarAnimacion(Animacion* nuevaAnimacion){
