@@ -42,11 +42,12 @@ int main(int argc, char* args[])
 		cout << "Error al inicializar juego" << endl;
 
     Animacion fondoAnim(IMAGEN_FONDO, 1, 1, ID_FONDO, VentanaGrafica::Instance()->getRenderer());
-    Animacion zubCaminando(IMAGEN_ZUBZERO_CAMINANDO, 9, 10, ID_ZUBZERO_CAMINANDO, VentanaGrafica::Instance()->getRenderer());
     Animacion zubQuieto(IMAGEN_ZUBZERO_QUIETO, 12, 10,  ID_ZUBZERO_QUIETO, VentanaGrafica::Instance()->getRenderer());
+    Animacion zubCaminando(IMAGEN_ZUBZERO_CAMINANDO, 9, 10, ID_ZUBZERO_CAMINANDO, VentanaGrafica::Instance()->getRenderer());
 
-    Vector2f posIniCapa(0,0);
-    Capa fondoCapa(&fondoAnim, 640, posIniCapa);
+    Vector2f posIniCapa(0, 0);
+    Vector2 tamIniCapa(640, 480);
+    Capa fondoCapa(&fondoAnim, tamIniCapa, posIniCapa);
 
     Vector2f posInicialPersonaje(100, 195);
     PersonajeDibujable personaje(posInicialPersonaje, &zubQuieto);
