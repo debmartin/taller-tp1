@@ -16,7 +16,7 @@ Animacion::Animacion(string pathImagen, int cantFotogramas, int fps, string id, 
 	SDL_FreeSurface(pTempSurface);
 
 	if (!textura)
-		return;//agregar error
+		cout << "ERROR";//agregar error
 
 }
 
