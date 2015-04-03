@@ -10,6 +10,7 @@ class Dibujable
         /** Default destructor */
         virtual ~Dibujable();
         virtual void dibujar() = 0;
+        virtual void actualizar() = 0;
     protected:
     private:
 };

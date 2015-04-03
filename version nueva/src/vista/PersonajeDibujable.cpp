@@ -57,3 +57,7 @@ void PersonajeDibujable::agregarAnimacion(Animacion* nuevaAnimacion){
 void PersonajeDibujable::dibujar(){
     personaje->dibujar();
 }
+
+void PersonajeDibujable::actualizar(){
+    personaje->update();
+}

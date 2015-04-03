@@ -76,21 +76,21 @@ SDL_Renderer* VentanaGrafica::getRenderer(){
 	return this->vRenderer;
 }
 
-void VentanaGrafica::setSprite(Sprite* unSprite, string nombre){
-	this->mapaSprites[nombre] = unSprite;
-}
+//void VentanaGrafica::setSprite(Sprite* unSprite, string nombre){
+//	this->mapaSprites[nombre] = unSprite;
+//}
 
-void VentanaGrafica::quitarSprite(string id){
-	this->mapaSprites.erase(id);
-}
+//void VentanaGrafica::quitarSprite(string id){
+//	this->mapaSprites.erase(id);
+//}
 
 //void VentanaGrafica::cambiarSprite(string id, Sprite* nuevoSprite){
 //	this->mapaSprites[id] = nuevoSprite;
 //}
 
-Sprite* VentanaGrafica::getSprite(string id){
-	return this->mapaSprites[id];
-}
+//Sprite* VentanaGrafica::getSprite(string id){
+//	return this->mapaSprites[id];
+//}
 
 void VentanaGrafica::dibujarTodo(EscenarioGrafico* escenario){
 
@@ -133,8 +133,9 @@ void VentanaGrafica::cerrar() {
 	cout << "Cerrando ventana" << endl;
 }
 
-void VentanaGrafica::update() {
-	for (std::map<string,Sprite*>::iterator it=mapaSprites.begin(); it!=mapaSprites.end(); ++it)
-		(it->second)->update();
+void VentanaGrafica::actualizar(EscenarioGrafico* escenario) {
+//	for (std::map<string,Sprite*>::iterator it=mapaSprites.begin(); it!=mapaSprites.end(); ++it)
+//		(it->second)->update();
+    escenario->actualizar();
 }
 VentanaGrafica::~VentanaGrafica(){}

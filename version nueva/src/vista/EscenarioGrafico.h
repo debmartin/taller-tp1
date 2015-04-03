@@ -17,6 +17,7 @@ public:
 	double getAlto() const;
 	double getAncho() const;
 	void dibujar();
+	void actualizar();
 };
 
 #endif /* SRC_VISTA_ESCENARIOGRAFICO_H_ */

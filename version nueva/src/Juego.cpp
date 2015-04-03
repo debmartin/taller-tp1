@@ -68,7 +68,7 @@ void Juego::render()
 void Juego::update()
 {
 	// INICIO CODIGO USUARIO
-	VentanaGrafica::Instance()->update();
+	VentanaGrafica::Instance()->actualizar(escenarioG);
 	// FIN CODIGO USUARIO
 }
 
