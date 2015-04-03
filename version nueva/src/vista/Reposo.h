@@ -1,6 +1,5 @@
 #ifndef SRC_VISTA_REPOSO_H_
 #define SRC_VISTA_REPOSO_H_
-#include "../modelo/Vector2f.h"
 
 class Reposo: public Trayectoria {
 

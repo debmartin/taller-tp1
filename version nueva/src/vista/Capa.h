@@ -12,7 +12,7 @@
 #include <string.h>
 #include "Dibujable.h"
 #include "Animacion.h"
-
+#include "Sprite.h"
 
 using namespace std;
 
@@ -22,10 +22,10 @@ private:
 	double ancho;
 	Sprite* sprite;
 public:
-	Capa(Animacion* animCapa, double ancho);
+	Capa(Animacion* animCapa, double anchoInicial, Vector2f& posInicial);
 	virtual ~Capa();
 	double getAncho() const;
-	string getImagenFondo() const;
+//	string getImagenFondo() const;
     void dibujar();
 //	friend ostream& operator<<(ostream &o, const Capa &c);
 };

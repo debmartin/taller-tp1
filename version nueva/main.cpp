@@ -45,18 +45,21 @@ int main(int argc, char* args[])
     Animacion zubCaminando(IMAGEN_ZUBZERO_CAMINANDO, 9, 10, ID_ZUBZERO_CAMINANDO, VentanaGrafica::Instance()->getRenderer());
     Animacion zubQuieto(IMAGEN_ZUBZERO_QUIETO, 12, 10,  ID_ZUBZERO_QUIETO, VentanaGrafica::Instance()->getRenderer());
 
-    Capa fondoCapa(&fondoAnim, 640);
-    std::pair<double,double> posInicialPersonaje(100, 195);
+    Vector2f posIniCapa(0,0);
+    Capa fondoCapa(&fondoAnim, 640, posIniCapa);
+
+    Vector2f posInicialPersonaje(100, 195);
     PersonajeDibujable personaje(posInicialPersonaje, &zubQuieto);
     personaje.agregarAnimacion(&zubQuieto);
     personaje.agregarAnimacion(&zubCaminando);
+    Personaje jugador;
 
     list<Dibujable*> capasYPersonajes;
     capasYPersonajes.push_back((Dibujable*) &fondoCapa);
     capasYPersonajes.push_back((Dibujable*) &personaje);
 
-    EscenarioGrafico* escenario = new EscenarioGrafico(ANCHO_ESCENARIO, ALTO_VENTANA_INICIO, &capasYPersonajes);
-	Juego g_game(VentanaGrafica::Instance());
+    EscenarioGrafico escenario(ANCHO_ESCENARIO, ALTO_VENTANA_INICIO, &capasYPersonajes);
+	Juego g_game(VentanaGrafica::Instance(), &escenario, &jugador, &personaje);
 
 	//levantar la información inicial mediante json
 	//... usar libreria jsonCpp

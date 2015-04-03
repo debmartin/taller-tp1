@@ -19,23 +19,24 @@
 #include "MRU.h"
 #include "MRUV.h"
 #include "Animacion.h"
-
+#include "Dibujable.h"
 
 enum estado_personaje {EN_ESPERA, CAMINANDO_DERECHA, CAMINANDO_IZQUIERDA, SALTANDO};
 
-class PersonajeDibujable{
+class PersonajeDibujable : public Dibujable {
 private:
 	Sprite* personaje;
 	estado_personaje estado;
 	std::string nombre;
     std::map<std::string, Animacion*> animaciones;
 public:
-	PersonajeDibujable(std::pair<double,double> posicionIni, Animacion* animIni);
+	PersonajeDibujable(Vector2f posicionIni, Animacion* animIni);
 	virtual ~PersonajeDibujable();
 	void seleccionarSprite();
 	void setEstado(estado_personaje unEstado);
 	void setSprite(Sprite* pSprite);
 	void agregarAnimacion(Animacion* nuevaAnimacion);
+	void dibujar();
 };
 
 #endif /* SRC_VISTA_PERSONAJEDIBUJABLE_H_ */

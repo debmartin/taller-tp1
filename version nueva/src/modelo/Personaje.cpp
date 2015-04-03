@@ -16,11 +16,9 @@ Personaje::Personaje() {
 	this->limite_inferior = 80;
 	this->limite_derecho = 640;
 	this->limite_izquierdo = 0;
-	this->unaCoordenada;
-	this->velocidad;
-
 	this->unaCoordenada.setCoordenada(80,195);
 	this->velocidad.setCoordenada(0,0);
+
 }
 
 Personaje::Personaje(double ancho, double alto, int zindex,
@@ -81,7 +79,7 @@ void Personaje::setPosicion(int x, int y) {
 	this->unaCoordenada.setCoordenada(x,y);
 }
 
-Vector2 Personaje::getPosicion(){
+Vector2f Personaje::getPosicion(){
 	return this->unaCoordenada;
 }
 

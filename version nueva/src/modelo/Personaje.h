@@ -12,7 +12,7 @@
 #include <vector>
 #include <string.h>
 
-#include "Vector2.h"
+#include "Vector2f.h"
 
 #define DELTA_PASO 1
 
@@ -44,7 +44,7 @@ public:
 	double getAncho() const;
 	int getZindex() const;
 	void setPosicion(int posicion_x, int posicion_y);
-	Vector2 getPosicion();
+	Vector2f getPosicion();
 	void setLimiteSuperior(int limite);
 	int getLimiteSuperior();
 	void setLimiteInferior(int limite);
