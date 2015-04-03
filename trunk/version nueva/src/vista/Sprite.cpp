@@ -5,7 +5,6 @@
 #include <math.h>
 #include <iostream>
 
-#include "GestorAnimaciones.h"
 
 
 Sprite::Sprite(Animacion* animacion, Vector2f& posicionIni) :
