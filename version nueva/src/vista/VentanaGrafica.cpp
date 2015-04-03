@@ -37,7 +37,7 @@ bool VentanaGrafica::init(string titulo, int xpos, int ypos, int height, int wid
 		else
 			flags = 0;
 
-		vWindow = SDL_CreateWindow(titulo.c_str(), xpos, ypos, height, width, flags);
+		vWindow = SDL_CreateWindow(titulo.c_str(), xpos, ypos, width, height, flags);
 
 		if (vWindow != NULL) // window init success
 		{

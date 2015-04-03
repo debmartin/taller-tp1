@@ -19,12 +19,12 @@ using namespace std;
 class Capa : public Dibujable{
 private:
 	Animacion* animacionCapa;
-	double ancho;
+	Vector2 tamanio;
 	Sprite* sprite;
 public:
-	Capa(Animacion* animCapa, double anchoInicial, Vector2f& posInicial);
+	Capa(Animacion* animCapa, Vector2& tamInicial, Vector2f& posInicial);
 	virtual ~Capa();
-	double getAncho() const;
+	double getAncho();
 //	string getImagenFondo() const;
     void dibujar();
 //	friend ostream& operator<<(ostream &o, const Capa &c);
