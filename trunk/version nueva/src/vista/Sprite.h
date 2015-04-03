@@ -22,7 +22,7 @@ public:
 
 private:
 	Animacion* animacionAct;
-	std::pair<double,double> posicion;
+	Vector2 posicion;
 	int anchoPx;
 	int altoPx;
 	float factorEscalaX;
@@ -38,11 +38,11 @@ private:
 	float tCreacion;
 
 public:
-	Sprite(Animacion* animInicial, std::pair<double,double>& posicion);
+	Sprite(Animacion* animInicial, Vector2f& posicion);
 	virtual ~Sprite();
 
-	void setPosicion(std::pair<double,double>& posicion);
-	void desplazar(std::pair<double,double>& posicion);
+	void setPosicion(Vector2f& posicion);
+	void desplazar(Vector2f& posicion);
 	void setFlip(SDL_RendererFlip f); //OK
 	//void avanzarFotograma();
 	void escalarConFactor(float factor_x, float factor_y); //OK
@@ -55,7 +55,7 @@ public:
 	void update();
 	void setTrayectoria(Trayectoria* t);
 	void cambiarAnimacion(Animacion* nuevaAnim);
-	std::pair<double,double> getPosicion();
+	Vector2f getPosicion();
 };
 
 #endif /* SRC_VISTA_SPRITE_H_ */

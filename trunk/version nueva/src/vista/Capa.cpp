@@ -11,9 +11,9 @@ double Capa::getAncho() const {
 	return ancho;
 }
 
-string Capa::getImagenFondo() const {
-	return imagen_fondo;
-}
+//string Capa::getImagenFondo() const {
+//	return imagen_fondo;
+//}
 
 Capa::~Capa() {
 	// TODO Auto-generated destructor stub
@@ -28,7 +28,7 @@ void Capa::dibujar(){
 //        return o;
 //}
 
-Capa::Capa(Animacion* animCapa, double anchoInicial, pair<double,double>& posInicial) :
+Capa::Capa(Animacion* animCapa, double anchoInicial, Vector2f& posInicial) :
     ancho(anchoInicial), animacionCapa(animCapa) {
     sprite = new Sprite(animacionCapa, posInicial);
 }

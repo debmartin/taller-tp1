@@ -5,6 +5,7 @@
 #include <string>
 #include <map>
 #include "Sprite.h"
+#include "EscenarioGrafico.h"
 
 using namespace std;
 
@@ -26,7 +27,7 @@ public:
 	void quitarSprite(string id);
 	//void cambiarSprite(string id, Sprite* nuevoSprite);
 	Sprite* getSprite(string id);
-	void dibujarTodo();
+	void dibujarTodo(EscenarioGrafico* escenario);
 	void cerrar();
 	void update();
 	static VentanaGrafica* Instance();

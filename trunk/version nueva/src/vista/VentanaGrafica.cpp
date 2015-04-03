@@ -92,28 +92,29 @@ Sprite* VentanaGrafica::getSprite(string id){
 	return this->mapaSprites[id];
 }
 
-void VentanaGrafica::dibujarTodo(){
+void VentanaGrafica::dibujarTodo(EscenarioGrafico* escenario){
 
-	vector<Sprite*> vs;
-	for (std::map<string,Sprite*>::iterator it=mapaSprites.begin(); it!=mapaSprites.end(); ++it)
-		vs.push_back(it->second);
-
-	size_t i,j;
-	Sprite* temp;
-
-	for (i=1; i < vs.size(); i++)
-		for (j=0 ; j < vs.size() - 1; j++)
-	    	if (vs[j]->getZindex() > vs[j+1]->getZindex()) {
-	        	temp = vs[j];
-	            vs[j] = vs[j+1];
-	            vs[j+1] = temp;
-	        }
+//	vector<Sprite*> vs;
+//	for (std::map<string,Sprite*>::iterator it=mapaSprites.begin(); it!=mapaSprites.end(); ++it)
+//		vs.push_back(it->second);
+//
+//	size_t i,j;
+//	Sprite* temp;
+//
+//	for (i=1; i < vs.size(); i++)
+//		for (j=0 ; j < vs.size() - 1; j++)
+//	    	if (vs[j]->getZindex() > vs[j+1]->getZindex()) {
+//	        	temp = vs[j];
+//	            vs[j] = vs[j+1];
+//	            vs[j+1] = temp;
+//	        }
 
 	//SDL_SetRenderDrawColor(vRenderer, 255, 0, 0, 255);
 	SDL_RenderClear(vRenderer);
 
-	for (i=0; i < vs.size(); i++)
-		vs[i]->dibujar();
+    escenario->dibujar();
+//	for (i=0; i < vs.size(); i++)
+//		vs[i]->dibujar();
 
 	//for (std::map<string,Sprite*>::iterator it=mapaSprites.begin(); it!=mapaSprites.end(); ++it)
 	//	(it->second)->dibujar();

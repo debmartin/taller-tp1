@@ -15,6 +15,7 @@
 #include "vista/PersonajeDibujable.h"
 #include <iostream>
 #include <string>
+#include "vista/EscenarioGrafico.h"
 
 using namespace std;
 
@@ -22,13 +23,14 @@ class Juego {
 private:
 	bool juegoCorriendo;
 	Controlador controladorJuego;
-	Personaje jugador1;
-	PersonajeDibujable jugadorDibujable1;
+	Personaje* jugador1;
+	PersonajeDibujable* jugadorDibujable1;
 	Sprite* subzero;
 	VentanaGrafica* ventanaG;
-public:
+	EscenarioGrafico* escenarioG;
 
-	Juego(VentanaGrafica* ventana);
+public:
+	Juego(VentanaGrafica* ventana, EscenarioGrafico* escenario, Personaje* pers, PersonajeDibujable* persDib);
 	void render();
 	void update();
 	void handleEvents();

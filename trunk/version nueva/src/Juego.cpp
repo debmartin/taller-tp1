@@ -16,8 +16,8 @@
 #define TEXTO_ERROR_TEXTURA "ERROR AL CREAR TEXTURA"
 
 // simply set the running variable to true
-Juego::Juego(VentanaGrafica* ventana) : ventanaG(ventana)
-{
+Juego::Juego(VentanaGrafica* ventana, EscenarioGrafico* escenario, Personaje* pers, PersonajeDibujable* persDib) :
+    ventanaG(ventana), escenarioG(escenario), jugador1(pers), jugadorDibujable1(jugadorDibujable1){
 
 	juegoCorriendo = true; // everything inited successfully, start the main loop
 
@@ -62,7 +62,7 @@ Juego::Juego(VentanaGrafica* ventana) : ventanaG(ventana)
 
 void Juego::render()
 {
-	VentanaGrafica::Instance()->dibujarTodo();
+	VentanaGrafica::Instance()->dibujarTodo(escenarioG);
 }
 
 void Juego::update()

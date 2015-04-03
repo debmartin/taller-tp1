@@ -17,7 +17,6 @@ using namespace std;
 class Controlador {
 private:
 	Personaje unPersonaje;
-	PersonajeDibujable unPersonajeDibujable;
 
 public:
 	Controlador();

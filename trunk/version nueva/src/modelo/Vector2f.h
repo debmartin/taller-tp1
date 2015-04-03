@@ -9,9 +9,8 @@ private:
 	float y;
 
 public:
-	Vector2f():x(0.0f), y(0.0f) {};
 	Vector2f(Vector2 v):x(v.getCoordenadaX()), y(v.getCoordenadaY()) {};
-	Vector2f(float xn, float yn): x(xn), y(yn) {};
+	Vector2f(float xn = 0.0f, float yn = 0.0f): x(xn), y(yn) {};
 	virtual ~Vector2f() {};
 
 	float X() { return x; };
@@ -50,7 +49,10 @@ public:
 	operator Vector2() {
 		return Vector2(lround(x), lround(y));
 	}
-
+    void setCoordenada(int x, int y) {
+        this->x = x;
+        this->y = y;
+    }
 };
 
 #endif /* SRC_MODELO_VECTOR2F_H_ */

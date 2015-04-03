@@ -7,9 +7,8 @@
 
 #include "GestorAnimaciones.h"
 
-using std::pair;
 
-Sprite::Sprite(Animacion* animacion, pair<double,double>& posicionIni) :
+Sprite::Sprite(Animacion* animacion, Vector2f& posicionIni) :
     animacionAct(animacion), posicion(posicionIni) {
 	this->factorEscalaX = 1.0f;
 	this->factorEscalaY = 1.0f;
@@ -53,11 +52,11 @@ void Sprite::dibujar(){
 
 }
 
-void Sprite::setPosicion(pair<double,double>& nuevaPosicion) {
+void Sprite::setPosicion(Vector2f& nuevaPosicion) {
 	posicion = nuevaPosicion;
 }
 
-void Sprite::desplazar(pair<double,double>& p) {
+void Sprite::desplazar(Vector2f& p) {
 	posicion += p;
 }
 
@@ -135,7 +134,7 @@ void Sprite::cambiarAnimacion(Animacion* nuevaAnim) {
 	cout << "Sprite::cambiarAnimacion" << endl;
 }
 
-pair<double,double> Sprite::getPosicion() {
+Vector2f Sprite::getPosicion() {
 	return posicion;
 }
 

@@ -12,8 +12,8 @@
 #include <list>
 #include <string>
 
-#include "../../src/modelo/Capa.h"
-#include "../../src/modelo/Escenario.h"
+#include "../../src/vista/Capa.h"
+#include "../../src/vista/EscenarioGrafico.h"
 #include "../../src/modelo/Personaje.h"
 #include "../../src/vista/VentanaGrafica.h"
 
@@ -30,7 +30,7 @@ private:
 
 	//objectos que devolvera el parseador json
 	VentanaGrafica* ventana;
-	Escenario * escenario;
+	EscenarioGrafico * escenario;
 	list<Capa*>* capas;
 	Personaje* personaje;
 
@@ -40,7 +40,7 @@ public:
 	Parser(string archivo_json  = NOMBRE_ARCHIVO_DEFECTO);
 
 	list<Capa*>* getCapas() const;
-	Escenario* getEscenario() const;
+	EscenarioGrafico* getEscenario() const;
 	Personaje* getPersonaje() const;
 	VentanaGrafica* getVentana() const;
 
