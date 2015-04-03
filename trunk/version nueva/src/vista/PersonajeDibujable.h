@@ -37,6 +37,7 @@ public:
 	void setSprite(Sprite* pSprite);
 	void agregarAnimacion(Animacion* nuevaAnimacion);
 	void dibujar();
+	void actualizar();
 };
 
 #endif /* SRC_VISTA_PERSONAJEDIBUJABLE_H_ */

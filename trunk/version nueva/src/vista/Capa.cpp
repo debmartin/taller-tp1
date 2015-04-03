@@ -28,6 +28,10 @@ Capa::~Capa() {
 void Capa::dibujar(){
     sprite->dibujar();
 }
+
+void Capa::actualizar(){
+    sprite->update();
+}
 //ostream& operator <<(ostream &o, const Capa &c) {
 //
 //        o<<"capa -> [imagen_fondo, ancho]=["<<c.imagen_fondo<<", "<<c.ancho<<"]";

@@ -27,6 +27,7 @@ public:
 	double getAncho();
 //	string getImagenFondo() const;
     void dibujar();
+    void actualizar();
 //	friend ostream& operator<<(ostream &o, const Capa &c);
 };
 

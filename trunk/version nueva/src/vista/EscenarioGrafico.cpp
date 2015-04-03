@@ -27,6 +27,12 @@ void EscenarioGrafico::dibujar(){
         (*it)->dibujar();
     }
 }
+
+void EscenarioGrafico::actualizar(){
+    for (list<Dibujable*>::iterator it = dibujables->begin(); it != dibujables->end(); ++it){
+        (*it)->actualizar();
+    }
+}
 //ostream& operator <<(ostream &o, const Escenario &e) {
 //
 //        o<<"escenario -> [ancho, alto, ypiso]=["<<e.ancho<<", "<<e.alto<<", "<<e.ypiso<<"]";

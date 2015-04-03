@@ -13,7 +13,7 @@ class VentanaGrafica {
 private:
 	SDL_Window* vWindow;
 	SDL_Renderer* vRenderer;
-	map<string, Sprite*> mapaSprites;
+//	map<string, Sprite*> mapaSprites;
 
 	// SINGLETON
 	VentanaGrafica();
@@ -23,13 +23,13 @@ public:
 	virtual ~VentanaGrafica();
 	bool init(string titulo, int xpos, int ypos, int height, int width, bool fullscreen);
 	SDL_Renderer* getRenderer();
-	void setSprite(Sprite* unSprite, string nombre);
-	void quitarSprite(string id);
+//	void setSprite(Sprite* unSprite, string nombre);
+//	void quitarSprite(string id);
 	//void cambiarSprite(string id, Sprite* nuevoSprite);
-	Sprite* getSprite(string id);
+//	Sprite* getSprite(string id);
 	void dibujarTodo(EscenarioGrafico* escenario);
 	void cerrar();
-	void update();
+	void actualizar(EscenarioGrafico* escenario);
 	static VentanaGrafica* Instance();
 };
 
