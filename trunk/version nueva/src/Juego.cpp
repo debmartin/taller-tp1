@@ -9,7 +9,6 @@
 #include <cstddef>
 #include <SDL2/SDL.h> //TODO: Solo para tests
 
-#include "vista/GestorAnimaciones.h"
 #include "vista/VentanaGrafica.h"
 #include "vista/Sprite.h"
 
@@ -17,7 +16,7 @@
 
 // simply set the running variable to true
 Juego::Juego(VentanaGrafica* ventana, EscenarioGrafico* escenario, Personaje* pers, PersonajeDibujable* persDib) :
-    ventanaG(ventana), escenarioG(escenario), jugador1(pers), jugadorDibujable1(jugadorDibujable1){
+    ventanaG(ventana), escenarioG(escenario), jugador1(pers), jugadorDibujable1(persDib){
 
 	juegoCorriendo = true; // everything inited successfully, start the main loop
 
@@ -119,7 +118,6 @@ void Juego::handleEvents()
 
 void Juego::clean() {
 	VentanaGrafica::Instance()->cerrar();
-	GestorAnimaciones::Instance()->clean();
 }
 
 // a function to access the private running variable
