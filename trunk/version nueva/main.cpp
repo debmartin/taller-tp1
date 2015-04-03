@@ -14,9 +14,9 @@
 #define INICIAR_FULLSCREEN false
 #define ANCHO_ESCENARIO 3000
 
-#define IMAGEN_FONDO "../../imagenes/screen-pit.png"
-#define IMAGEN_ZUBZERO_CAMINANDO "../../imagenes/zubzero-caminando.png"
-#define IMAGEN_ZUBZERO_QUIETO "../../imagenes/zubzero-quieto.png"
+#define IMAGEN_FONDO "../version nueva/imagenes/screen-pit.png"
+#define IMAGEN_ZUBZERO_CAMINANDO "../version nueva/imagenes/screen-pit.png"
+#define IMAGEN_ZUBZERO_QUIETO "../version nueva/imagenes/screen-pit.png"
 
 #define ID_FONDO "screen-pit"
 #define ID_ZUBZERO_CAMINANDO "zubzero-caminando"

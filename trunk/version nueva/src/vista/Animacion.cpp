@@ -9,6 +9,7 @@ Animacion::Animacion(string pathImagen, int cantFotogramas, int fps, string id, 
     SDL_Surface* pTempSurface = IMG_Load(pathImagen.c_str());
     cout << pathImagen;
 	if (!pTempSurface)
+        cout<<"errorTextura";
 		return;//agregar error
 
 	textura = SDL_CreateTextureFromSurface(pRenderer, pTempSurface);
