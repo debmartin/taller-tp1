@@ -54,7 +54,7 @@ Juego::Juego(VentanaGrafica* ventana, EscenarioGrafico* escenario, Personaje* pe
 //
 //	// Configuracion del controlador
 //	this->jugadorDibujable1.setSprite(subzero);
-//	this->controladorJuego.setPersonaje(jugador1);
+	this->controladorJuego = new Controlador(jugador1);
 //	this->controladorJuego.setPersonajeDibujable(jugadorDibujable1);
 	// FIN CODIGO USUARIO
 }
@@ -82,7 +82,7 @@ void Juego::handleEvents()
 		if (evento.type == SDL_QUIT)
 			juegoCorriendo = false;
 		else{
-			this->controladorJuego.manejar_Evento(evento);
+			this->controladorJuego->manejar_Evento(evento);
 		}
 	}
 }

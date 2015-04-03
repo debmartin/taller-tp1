@@ -22,7 +22,7 @@ using namespace std;
 class Juego {
 private:
 	bool juegoCorriendo;
-	Controlador controladorJuego;
+	Controlador* controladorJuego;
 	Personaje* jugador1;
 	PersonajeDibujable* jugadorDibujable1;
 	Sprite* subzero;

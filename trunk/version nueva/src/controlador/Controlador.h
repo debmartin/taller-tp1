@@ -16,14 +16,14 @@ using namespace std;
 
 class Controlador {
 private:
-	Personaje unPersonaje;
+	Personaje* unPersonaje;
 
 public:
-	Controlador();
+	Controlador(Personaje* pers);
 	virtual ~Controlador();
 	void manejar_Evento(SDL_Event &evento);
-	void setPersonaje(Personaje personaje);
-	void setPersonajeDibujable(PersonajeDibujable personaje);
+	void setPersonaje(Personaje* personaje);
+//	void setPersonajeDibujable(PersonajeDibujable personaje);
 
 };
 
