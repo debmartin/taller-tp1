@@ -61,13 +61,13 @@ Juego::Juego(VentanaGrafica* ventana, EscenarioGrafico* escenario, Personaje* pe
 
 void Juego::render()
 {
-	VentanaGrafica::Instance()->dibujarTodo(escenarioG);
+	VentanaGrafica::Instance()->dibujarTodo();
 }
 
 void Juego::update()
 {
 	// INICIO CODIGO USUARIO
-	VentanaGrafica::Instance()->actualizar(escenarioG);
+	VentanaGrafica::Instance()->actualizar();
 	// FIN CODIGO USUARIO
 }
 
