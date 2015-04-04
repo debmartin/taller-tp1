@@ -8,6 +8,7 @@
 #ifndef SRC_MODELO_PERSONAJE_H_
 #define SRC_MODELO_PERSONAJE_H_
 
+#include "../vista/Posicionable.h"
 #include <iostream>
 #include <vector>
 #include <string.h>
@@ -24,35 +25,23 @@ class Personaje {
 private:
 	double ancho;
 	double alto;
+	double sprites_ancho; //TODO: ¿este ancho de Sprite deberia ir en el personaje dibujable?
+	Vector2f unaCoordenada;
+	Vector2f velocidad;
+	Posicionable* limites;
 	int z_index;
-	int limite_superior;
-	int limite_inferior;
-	int limite_derecho;
-	int limite_izquierdo;
-	string sprites_imagen;
-	double sprites_ancho;
-	Vector2 unaCoordenada;
-	Vector2 velocidad;
 	int vida;
 	int estado;
 
 public:
 	Personaje();
-	Personaje(double ancho, double alto, int zindex, string sprites_imagen, double sprites_ancho);
+	Personaje(double ancho, double alto, int zindex, Posicionable* limites, double sprites_ancho);
 	virtual ~Personaje();
 	double getAlto() const;
 	double getAncho() const;
 	int getZindex() const;
 	void setPosicion(int posicion_x, int posicion_y);
 	Vector2f getPosicion();
-	void setLimiteSuperior(int limite);
-	int getLimiteSuperior();
-	void setLimiteInferior(int limite);
-	int getLimiteInferior();
-	void setLimiteDerecho(int limite);
-	int getLimiteDerecho();
-	void setLimiteIzquierdo(int limite);
-	int getLimiteIzquierdo();
 	void setEstado(int estado);
 	int getEstado();
 	void setVida(int cantidad);
@@ -63,7 +52,7 @@ public:
 	void disminuir_velocidadY();
 	void mover();
 	double getSpritesAncho() const;
-	const string& getSpritesImagen() const;
+	Vector2f getPosicionEnVentana();
 
 	friend ostream& operator<<(ostream &o, const Personaje &p);
 

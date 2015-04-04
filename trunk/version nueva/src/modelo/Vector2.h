@@ -8,7 +8,7 @@
 #ifndef SRC_MODELO_VECTOR2_H_
 #define SRC_MODELO_VECTOR2_H_
 
-class Vector2{
+class Vector2{//TODO: borrar Vector2
 private:
 	int coordenada_x;
 	int coordenada_y;
