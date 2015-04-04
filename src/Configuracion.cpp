@@ -46,8 +46,7 @@ void Configuracion::cargar() {
 				const Json::Value clave = it.key();
 				if ( clave.asString() == "nivel_debug" )
 				{
-					nivel_debug = "DEBUG";
-					//nivel_debug = (*it)[clave.asString()].asString();
+					nivel_debug = root[clave.asString()].asString();
 				}
 			}
 

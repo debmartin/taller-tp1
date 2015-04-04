@@ -8,7 +8,7 @@
 #ifndef TEST_PARSER_PARSERTESTS_H_
 #define TEST_PARSER_PARSERTESTS_H_
 
-class ParserTests {
+class ParserTests{
 public:
 	ParserTests();
 	bool ejecutar();

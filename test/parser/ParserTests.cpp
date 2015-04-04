@@ -27,25 +27,23 @@ ParserTests::ParserTests() {
 
 bool ParserTests::ejecutar() {
 
-	cout<<"Iniciar test del parser(jsoncpp) ..."<<endl;
-
 	Parser* parser = new Parser("src/recursos/escenario.json");
 
 	parser->parsearDesdeJson();
 
 	Ventana* ventana = parser->getVentana();
-	//cout<<*ventana<<endl;
+	cout<<*ventana<<endl;
 
 	Escenario* escenario = parser->getEscenario();
-	//cout<<*escenario<<endl;
+	cout<<*escenario<<endl;
 
 	for (list<Capa*>::iterator it_capas = parser->getCapas()->begin() ; it_capas != parser->getCapas()->end(); it_capas++)
 	{
-		//cout<<**it_capas<<endl;
+		cout<<**it_capas<<endl;
 	}
 
 	Personaje* personaje = parser->getPersonaje();
-	//cout<<*personaje<<endl;
+	cout<<*personaje<<endl;
 
 	return true;
 }

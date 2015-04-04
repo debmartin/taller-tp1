@@ -6,6 +6,8 @@
  */
 
 #include "Test.h"
+
+#include "LoggerTest.h"
 #include "parser/ParserTests.h"
 
 Test::Test() {
@@ -13,13 +15,13 @@ Test::Test() {
 
 }
 
-bool Test::ejecutar() {
+void Test::ejecutar() {
 
-	bool salida = true;
 	ParserTests parserTests;
-	salida = parserTests.ejecutar();
+	parserTests.ejecutar();
 
-	return salida;
+	LoggerTest loggerTest;
+	loggerTest.ejecutar();
 }
 
 Test::~Test() {

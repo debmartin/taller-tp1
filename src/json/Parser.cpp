@@ -18,6 +18,9 @@ Parser::Parser() {
 	this->escenario = new Escenario();
 	this->capas = new list<Capa*>;
 	this->personaje = new Personaje();
+	this->bienParseado = false;
+	this->existe_archivo = false;
+
 	this->inicializar();
 }
 
@@ -28,6 +31,9 @@ Parser::Parser(string archivo_json)
 	this->escenario = new Escenario();
 	this->capas = new list<Capa*>;
 	this->personaje = new Personaje();
+	this->bienParseado = false;
+	this->existe_archivo = false;
+
 	this->inicializar();
 }
 
