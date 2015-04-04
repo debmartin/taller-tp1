@@ -1,5 +1,5 @@
 #include "src/Juego.h"
-#include "test/Test.h"
+//#include "test/Test.h"
 
 #include "src/vista/VentanaGrafica.h"
 #include "src/vista/EscenarioGrafico.h"
@@ -14,9 +14,9 @@
 #define INICIAR_FULLSCREEN false
 #define ANCHO_ESCENARIO 3000
 
-#define IMAGEN_FONDO "../version nueva/imagenes/screen-pit.png"
-#define IMAGEN_ZUBZERO_CAMINANDO "../version nueva/imagenes/screen-pit.png"
-#define IMAGEN_ZUBZERO_QUIETO "../version nueva/imagenes/screen-pit.png"
+#define IMAGEN_FONDO "../taller-tp1/imagenes/screen-pit.png"
+#define IMAGEN_ZUBZERO_CAMINANDO "../taller-tp1/imagenes/zubzero-caminando.png"
+#define IMAGEN_ZUBZERO_QUIETO "../taller-tp1/imagenes/zubzero-quieto.png"
 
 #define ID_FONDO "screen-pit"
 #define ID_ZUBZERO_CAMINANDO "zubzero-caminando"
@@ -33,34 +33,35 @@ int main(int argc, char* args[])
 //	Test tests;
 //	tests.ejecutar();
 
+	Animacion fondoAnim(IMAGEN_FONDO, 1, 1, ID_FONDO, VentanaGrafica::Instance()->getRenderer());
+	Animacion zubQuieto(IMAGEN_ZUBZERO_QUIETO, 12, 10,  ID_ZUBZERO_QUIETO, VentanaGrafica::Instance()->getRenderer());
+	Animacion zubCaminando(IMAGEN_ZUBZERO_CAMINANDO, 9, 10, ID_ZUBZERO_CAMINANDO, VentanaGrafica::Instance()->getRenderer());
+
+	Vector2f posIniCapa(0, 0);
+	Vector2 tamIniCapa(640, 480);
+	Capa fondoCapa(&fondoAnim, tamIniCapa, posIniCapa);
+
+	Vector2f posInicialPersonaje(100, 195);
+	PersonajeDibujable personaje(posInicialPersonaje, &zubQuieto);
+	personaje.agregarAnimacion(&zubQuieto);
+	personaje.agregarAnimacion(&zubCaminando);
+	Personaje jugador;
+
+	list<Dibujable*> capasYPersonajes;
+	capasYPersonajes.push_back((Dibujable*) &fondoCapa);
+	capasYPersonajes.push_back((Dibujable*) &personaje);
+
+	EscenarioGrafico escenario(ANCHO_ESCENARIO, ALTO_VENTANA_INICIO, &capasYPersonajes);
+	Juego g_game(VentanaGrafica::Instance(), &escenario, &jugador, &personaje);
 
     bool exito = VentanaGrafica::Instance()->init(TITULO_VENTANA, \
     XPOS_VENTANA_INICIO, YPOS_VENTANA_INICIO, ALTO_VENTANA_INICIO, \
-    ANCHO_VENTANA_INICIO, INICIAR_FULLSCREEN);
+    ANCHO_VENTANA_INICIO, INICIAR_FULLSCREEN, &escenario);
 
     if (! exito)
 		cout << "Error al inicializar juego" << endl;
 
-    Animacion fondoAnim(IMAGEN_FONDO, 1, 1, ID_FONDO, VentanaGrafica::Instance()->getRenderer());
-    Animacion zubQuieto(IMAGEN_ZUBZERO_QUIETO, 12, 10,  ID_ZUBZERO_QUIETO, VentanaGrafica::Instance()->getRenderer());
-    Animacion zubCaminando(IMAGEN_ZUBZERO_CAMINANDO, 9, 10, ID_ZUBZERO_CAMINANDO, VentanaGrafica::Instance()->getRenderer());
 
-    Vector2f posIniCapa(0, 0);
-    Vector2 tamIniCapa(640, 480);
-    Capa fondoCapa(&fondoAnim, tamIniCapa, posIniCapa);
-
-    Vector2f posInicialPersonaje(100, 195);
-    PersonajeDibujable personaje(posInicialPersonaje, &zubQuieto);
-    personaje.agregarAnimacion(&zubQuieto);
-    personaje.agregarAnimacion(&zubCaminando);
-    Personaje jugador;
-
-    list<Dibujable*> capasYPersonajes;
-    capasYPersonajes.push_back((Dibujable*) &fondoCapa);
-    capasYPersonajes.push_back((Dibujable*) &personaje);
-
-    EscenarioGrafico escenario(ANCHO_ESCENARIO, ALTO_VENTANA_INICIO, &capasYPersonajes);
-	Juego g_game(VentanaGrafica::Instance(), &escenario, &jugador, &personaje);
 
 	//levantar la información inicial mediante json
 	//... usar libreria jsonCpp
