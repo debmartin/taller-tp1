@@ -6,14 +6,16 @@
 #include <map>
 #include "Sprite.h"
 #include "EscenarioGrafico.h"
+#include "Posicionable.h"
+#include "LimitesLogicos.h"
 
 using namespace std;
 
-class VentanaGrafica {
+class VentanaGrafica: public Posicionable{
 private:
 	SDL_Window* vWindow;
 	SDL_Renderer* vRenderer;
-//	map<string, Sprite*> mapaSprites;
+	EscenarioGrafico* escenario;
 
 	// SINGLETON
 	VentanaGrafica();
@@ -21,15 +23,12 @@ private:
 
 public:
 	virtual ~VentanaGrafica();
-	bool init(string titulo, int xpos, int ypos, int height, int width, bool fullscreen);
+	bool init(string titulo, int xpos, int ypos, int height, int width, bool fullscreen, EscenarioGrafico* unEscenario);
 	SDL_Renderer* getRenderer();
-//	void setSprite(Sprite* unSprite, string nombre);
-//	void quitarSprite(string id);
-	//void cambiarSprite(string id, Sprite* nuevoSprite);
-//	Sprite* getSprite(string id);
-	void dibujarTodo(EscenarioGrafico* escenario);
+	void dibujarTodo();
 	void cerrar();
-	void actualizar(EscenarioGrafico* escenario);
+	void actualizar();
+	LimitesLogicos getLimitesLogicos();
 	static VentanaGrafica* Instance();
 };
 

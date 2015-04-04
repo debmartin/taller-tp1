@@ -17,7 +17,6 @@ class Posicionable
         Posicionable();
         virtual ~Posicionable();
         virtual LimitesLogicos getLimitesLogicos() = 0;
-        virtual Vector2f obtenerCoordenadaLogica();
 };
 
 
