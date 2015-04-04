@@ -3,20 +3,21 @@
 using std::list;
 
 EscenarioGrafico::EscenarioGrafico(double ancho, double alto, list<Dibujable*>* dibujables) :
-    ancho(ancho), alto(alto), dibujables(dibujables) {
+    ancho_logico(ancho), alto_logico(alto), dibujables(dibujables) {
 }
 
-double EscenarioGrafico::getAlto() const {
-	return alto;
+double EscenarioGrafico::getAltoLogico() const {
+	return alto_logico;
 }
 
-double EscenarioGrafico::getAncho() const {
-	return ancho;
+double EscenarioGrafico::getAnchoLogico() const {
+	return ancho_logico;
 }
 
-//int EscenarioGrafico::getYpiso() const {
-//	return ypiso;
-//}
+
+double EscenarioGrafico::getYPisoLogico() const {
+	return y_piso_logico;
+}
 
 EscenarioGrafico::~EscenarioGrafico() {
 	// TODO Auto-generated destructor stub
