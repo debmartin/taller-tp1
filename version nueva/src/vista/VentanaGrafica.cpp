@@ -21,9 +21,11 @@ VentanaGrafica* VentanaGrafica::Instance()
 	return instancia_unica;
 }
 
-VentanaGrafica::VentanaGrafica():vWindow(NULL), vRenderer(NULL) { }
+VentanaGrafica::VentanaGrafica():vWindow(NULL), vRenderer(NULL), escenario(NULL){ }
 
-bool VentanaGrafica::init(string titulo, int xpos, int ypos, int height, int width, bool fullscreen){
+bool VentanaGrafica::init(string titulo, int xpos, int ypos, int height, int width, bool fullscreen, EscenarioGrafico* unEscenario){
+
+	this->escenario = unEscenario;
 
 	// attempt to initialize SDL
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
@@ -39,12 +41,12 @@ bool VentanaGrafica::init(string titulo, int xpos, int ypos, int height, int wid
 
 		vWindow = SDL_CreateWindow(titulo.c_str(), xpos, ypos, width, height, flags);
 
-		if (vWindow != NULL) // window init success
+		if (vWindow != NULL)
 		{
 			std::cout << "window creation success\n";
 			vRenderer = SDL_CreateRenderer(vWindow, -1, SDL_RENDERER_SOFTWARE);
 
-			if (vRenderer != NULL) // renderer init success
+			if (vRenderer != NULL)
 			{
 				std::cout << "renderer creation success\n";
 				SDL_SetRenderDrawColor(vRenderer, 255, 0, 0, 255);
@@ -52,19 +54,19 @@ bool VentanaGrafica::init(string titulo, int xpos, int ypos, int height, int wid
 			else
 			{
 				std::cout << "renderer init fail\n";
-				return false; // renderer init fail
+				return false;
 			}
 		}
 		else
 		{
 			std::cout << "window init fail\n";
-			return false; // window init fail
+			return false;
 		}
 	}
 	else
 	{
 		std::cout << "SDL init fail\n";
-		return false; // SDL init fail
+		return false;
 	}
 
 	std::cout << "init success\n" << endl;
@@ -76,53 +78,10 @@ SDL_Renderer* VentanaGrafica::getRenderer(){
 	return this->vRenderer;
 }
 
-//void VentanaGrafica::setSprite(Sprite* unSprite, string nombre){
-//	this->mapaSprites[nombre] = unSprite;
-//}
-
-//void VentanaGrafica::quitarSprite(string id){
-//	this->mapaSprites.erase(id);
-//}
-
-//void VentanaGrafica::cambiarSprite(string id, Sprite* nuevoSprite){
-//	this->mapaSprites[id] = nuevoSprite;
-//}
-
-//Sprite* VentanaGrafica::getSprite(string id){
-//	return this->mapaSprites[id];
-//}
-
-void VentanaGrafica::dibujarTodo(EscenarioGrafico* escenario){
-
-//	vector<Sprite*> vs;
-//	for (std::map<string,Sprite*>::iterator it=mapaSprites.begin(); it!=mapaSprites.end(); ++it)
-//		vs.push_back(it->second);
-//
-//	size_t i,j;
-//	Sprite* temp;
-//
-//	for (i=1; i < vs.size(); i++)
-//		for (j=0 ; j < vs.size() - 1; j++)
-//	    	if (vs[j]->getZindex() > vs[j+1]->getZindex()) {
-//	        	temp = vs[j];
-//	            vs[j] = vs[j+1];
-//	            vs[j+1] = temp;
-//	        }
-
-	//SDL_SetRenderDrawColor(vRenderer, 255, 0, 0, 255);
+void VentanaGrafica::dibujarTodo(){
 	SDL_RenderClear(vRenderer);
-
-    escenario->dibujar();
-//	for (i=0; i < vs.size(); i++)
-//		vs[i]->dibujar();
-
-	//for (std::map<string,Sprite*>::iterator it=mapaSprites.begin(); it!=mapaSprites.end(); ++it)
-	//	(it->second)->dibujar();
-
-	//this->mapaSprites["subzero-caminando"]
-
+    this->escenario->dibujar();
 	SDL_RenderPresent(vRenderer);
-
 	cout << "VentanaGrafica::dibujarTodo()" << endl;
 }
 
@@ -133,9 +92,15 @@ void VentanaGrafica::cerrar() {
 	cout << "Cerrando ventana" << endl;
 }
 
-void VentanaGrafica::actualizar(EscenarioGrafico* escenario) {
-//	for (std::map<string,Sprite*>::iterator it=mapaSprites.begin(); it!=mapaSprites.end(); ++it)
-//		(it->second)->update();
+void VentanaGrafica::actualizar() {
     escenario->actualizar();
 }
+
+//Devuelve limites logicos del escenario
+LimitesLogicos VentanaGrafica::getLimitesLogicos(){
+
+	LimitesLogicos limitesLogicos(this->escenario->getAnchoLogico(), this->escenario->getAltoLogico(), this->escenario->getYPisoLogico());
+	return limitesLogicos;
+}
+
 VentanaGrafica::~VentanaGrafica(){}
