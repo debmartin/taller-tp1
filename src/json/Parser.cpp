@@ -39,19 +39,27 @@ Parser::Parser(string archivo_json)
 
 void Parser::inicializar()
 {
-	ifstream archivo_escenario(this->entrada.c_str());
-	this->bienParseado = this->reader.parse(archivo_escenario, this->root, false);
+	FILE* fd = fopen(this->entrada.c_str(),"r");
+	if ( fd != NULL )
+	{
+		this->existe_archivo = true;
+		ifstream archivo_escenario(this->entrada.c_str());
+		this->bienParseado = this->reader.parse(archivo_escenario, this->root, false);
+	}
+	else
+	{
+		Logger::getInstance()->error("No existe el archivo "+this->entrada);
+	}
+
 }
 
 void Parser::parsearDesdeJson() {
 
 	 if( !this->bienParseado )
 	 {
-	   // Report failures and their locations in the document.
-	   cout<<"Failed to parse JSON"<<endl
-	       <<reader.getFormatedErrorMessages()
-	       <<endl;
-	   Logger::getInstance()->error("No se parser bien el json del escenario");
+	   Logger::getInstance()->error("No se pudo parsear con JSON. "+reader.getFormatedErrorMessages());
+	   Logger::getInstance()->info("Se va a cargar un escenario por defecto");
+	   this->crearEscenerioPorDefecto();
 	 }
 	 else
 	 {
@@ -209,6 +217,9 @@ void Parser::parsearDesdeJson() {
 
 	 	}
 	 }
+
+	 this->inciarValidacionSemantica();
+
 }
 
 Parser::~Parser() {
@@ -229,4 +240,54 @@ Personaje* Parser::getPersonaje() const {
 
 Ventana* Parser::getVentana() const {
 	return ventana;
+}
+
+void Parser::crearEscenerioPorDefecto() {
+
+	this->ventana = new Ventana(800, 600, 200, 2);
+	this->escenario = new Escenario(1000, 150, 20);
+	this->personaje = new Personaje(20, 35, 1, "zubzero-caminando.png", 15, 1);
+
+	Capa* capa_1 = new Capa("capa_1.png", 900);
+	Capa* capa_2 = new Capa("capa_2.png", 800);
+
+	capas->push_back(capa_1);
+	capas->push_back(capa_2);
+}
+
+void Parser::inciarValidacionSemantica() {
+
+	//validar el escenario
+	double escenario_ancho_nuevo = this->escenario->getAncho();
+	double escenario_alto_nuevo = this->escenario->getAlto();
+	int escenario_ypiso_nuevo = this->escenario->getYpiso();
+	if ( escenario_ancho_nuevo <= 0 )
+	{
+		escenario_ancho_nuevo = 1200;
+	}
+
+	if ( escenario_alto_nuevo <= 0 )
+	{
+		escenario_alto_nuevo = 170;
+	}
+
+	if ( escenario_ypiso_nuevo < 0 )
+	{
+		escenario_ypiso_nuevo = 15;
+	}
+	delete this->escenario;
+	this->escenario = NULL;
+	this->escenario = new Escenario(escenario_ancho_nuevo, escenario_alto_nuevo, escenario_ypiso_nuevo);
+
+	//validar la ventana
+	int ventana_anchopx_nuevo = this->ventana->getAnchoPx();
+	int ventana_altopx_nuevo = this->ventana->getAltoPx();
+	double ventana_ancho_nuevo = this->ventana->getAncho();
+	double ventana_margenx_nuevo = this->ventana->getMargenX();
+	//TODO continuar....
+
+	//validar el personaje
+
+	//validar las capas
+
 }

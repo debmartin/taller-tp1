@@ -53,6 +53,8 @@ public:
 
 private:
 	void inicializar();
+	void crearEscenerioPorDefecto();
+	void inciarValidacionSemantica();
 
 };
 
