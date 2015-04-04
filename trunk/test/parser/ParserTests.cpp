@@ -27,7 +27,9 @@ ParserTests::ParserTests() {
 
 bool ParserTests::ejecutar() {
 
-	Parser* parser = new Parser("src/recursos/escenario.json");
+	string nombre_escenario("src/recursos/escenario.json");
+
+	Parser* parser = new Parser(nombre_escenario.c_str());
 
 	parser->parsearDesdeJson();
 

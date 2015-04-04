@@ -1,7 +1,7 @@
-#include <SDL2/SDL_stdinc.h>
-#include <SDL2/SDL_timer.h>
+#include <SDL2/SDL.h>
 
 #include "src/Juego.h"
+#include "test/Test.h"
 
 int main(int argc, char* args[])
 {	
