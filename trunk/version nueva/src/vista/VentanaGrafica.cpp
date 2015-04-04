@@ -103,4 +103,18 @@ LimitesLogicos VentanaGrafica::getLimitesLogicos(){
 	return limitesLogicos;
 }
 
+//Devuelte true si un punto es válido dentro del escenario.
+bool VentanaGrafica::esPosicionValida(Vector2f posicion){
+	int limite_izquierdo = 0;
+	int limite_inferior = 0;
+
+	if (posicion.X() < limite_izquierdo || (posicion.X() > this->escenario->getAnchoLogico())){
+		return false;
+	}
+	if (posicion.Y() < limite_inferior || (posicion.Y() > this->escenario->getAltoLogico())){
+		return false;
+	}
+	return true;
+}
+
 VentanaGrafica::~VentanaGrafica(){}

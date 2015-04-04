@@ -29,6 +29,7 @@ public:
 	void cerrar();
 	void actualizar();
 	LimitesLogicos getLimitesLogicos();
+	bool esPosicionValida(Vector2f posicion);
 	static VentanaGrafica* Instance();
 };
 
