@@ -1,9 +1,7 @@
+#include <SDL2/SDL_stdinc.h>
+#include <SDL2/SDL_timer.h>
+
 #include "src/Juego.h"
-#include "test/Test.h"
-
-#include "src/vista/VentanaGrafica.h"
-
-#include <SDL2/SDL.h>
 
 int main(int argc, char* args[])
 {	
@@ -12,9 +10,9 @@ int main(int argc, char* args[])
 
 	Uint32 frameStart, frameTime;
 
-	//para correr las pruebas comentar o descomentar estas 2 lineas
-	Test tests;
-	tests.ejecutar();
+	//para correr las pruebas descomentar estas 2 lineas
+	//Test tests;
+	//tests.ejecutar();
 
 	Juego g_game("Taller de programacion TP: Mortal Kombat", 100, 100, 640, 480, false);
 

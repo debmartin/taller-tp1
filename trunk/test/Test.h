@@ -11,7 +11,7 @@
 class Test {
 public:
 	Test();
-	bool ejecutar();
+	void ejecutar();
 	virtual ~Test();
 };
 
