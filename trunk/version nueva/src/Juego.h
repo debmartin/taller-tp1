@@ -30,6 +30,7 @@ private:
 	EscenarioGrafico* escenarioG;
 
 public:
+	//TODO: Debbie juego debe recibir una lista o pares de personaje y personajeDibujable.
 	Juego(VentanaGrafica* ventana, EscenarioGrafico* escenario, Personaje* pers, PersonajeDibujable* persDib);
 	void render();
 	void update();
