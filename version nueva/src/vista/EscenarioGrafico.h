@@ -7,7 +7,7 @@
 
 class EscenarioGrafico : public Dibujable {
 private:
-	std::list<Dibujable*>* dibujables;
+	std::list<Dibujable*>* capas;
 	double ancho_logico;
 	double alto_logico;
 	double y_piso_logico;

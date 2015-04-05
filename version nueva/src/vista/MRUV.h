@@ -1,7 +1,7 @@
 #ifndef SRC_VISTA_MRUV_H_
 #define SRC_VISTA_MRUV_H_
 
-#include "../modelo/Vector2.h"
+#include "../modelo/Vector2f.h"
 
 class MRUV: public Trayectoria {
 

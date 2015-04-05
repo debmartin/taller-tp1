@@ -1,5 +1,5 @@
 #include "Sprite.h"
-#include "../modelo/Vector2.h"
+#include "../modelo/Vector2f.h"
 #include "VentanaGrafica.h"
 #include <SDL2/SDL.h>
 #include <math.h>
@@ -40,8 +40,8 @@ void Sprite::dibujar(){
 	srcRect.h = altoPx;
 
 	SDL_Rect destRect;
-	destRect.x = posicion.getCoordenadaX();
-	destRect.y = posicion.getCoordenadaY();
+	destRect.x = posicion.X();
+	destRect.y = posicion.Y();
 	destRect.w = (int)(anchoFotogramaPx * factorEscalaX);
 	destRect.h = (int)(altoPx * factorEscalaY);
 

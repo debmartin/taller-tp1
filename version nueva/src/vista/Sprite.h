@@ -2,7 +2,7 @@
 #ifndef SRC_VISTA_SPRITE_H_
 #define SRC_VISTA_SPRITE_H_
 #include <SDL2/SDL.h>
-#include "../../src/modelo/Vector2.h"
+#include "../../src/modelo/Vector2f.h"
 #include <string>
 #include "Trayectoria.h"
 #include "Reposo.h"
@@ -22,7 +22,7 @@ public:
 
 private:
 	Animacion* animacionAct;
-	Vector2 posicion;
+	Vector2f posicion;
 	int anchoPx;
 	int altoPx;
 	float factorEscalaX;
@@ -30,7 +30,7 @@ private:
 	int cantidadFotogramas;
 	int anchoFotogramaPx;
 	int fotogramaActual;
-	float zIndex;
+//	float zIndex;
 	int fps;
 	SDL_RendererFlip flip;
 	SentidoReproduccion sentidoReproduccion;

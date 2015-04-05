@@ -3,7 +3,7 @@
 using std::list;
 
 EscenarioGrafico::EscenarioGrafico(double ancho, double alto, list<Dibujable*>* dibujables) :
-    ancho_logico(ancho), alto_logico(alto), dibujables(dibujables) {
+    ancho_logico(ancho), alto_logico(alto), capas(dibujables) {
 }
 
 double EscenarioGrafico::getAltoLogico() const {
@@ -24,13 +24,13 @@ EscenarioGrafico::~EscenarioGrafico() {
 }
 
 void EscenarioGrafico::dibujar(){
-    for (list<Dibujable*>::iterator it = dibujables->begin(); it != dibujables->end(); ++it){
+    for (list<Dibujable*>::iterator it = capas->begin(); it != capas->end(); ++it){
         (*it)->dibujar();
     }
 }
 
 void EscenarioGrafico::actualizar(){
-    for (list<Dibujable*>::iterator it = dibujables->begin(); it != dibujables->end(); ++it){
+    for (list<Dibujable*>::iterator it = capas->begin(); it != capas->end(); ++it){
         (*it)->actualizar();
     }
 }

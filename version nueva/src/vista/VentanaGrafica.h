@@ -23,7 +23,8 @@ private:
 
 public:
 	virtual ~VentanaGrafica();
-	bool init(string titulo, int xpos, int ypos, int height, int width, bool fullscreen, EscenarioGrafico* unEscenario);
+	bool init(string titulo, int xpos, int ypos, int height, int width, bool fullscreen);
+	void setEscenario(EscenarioGrafico* unEscenario);
 	SDL_Renderer* getRenderer();
 	void dibujarTodo();
 	void cerrar();

@@ -23,9 +23,9 @@ VentanaGrafica* VentanaGrafica::Instance()
 
 VentanaGrafica::VentanaGrafica():vWindow(NULL), vRenderer(NULL), escenario(NULL){ }
 
-bool VentanaGrafica::init(string titulo, int xpos, int ypos, int height, int width, bool fullscreen, EscenarioGrafico* unEscenario){
+bool VentanaGrafica::init(string titulo, int xpos, int ypos, int height, int width, bool fullscreen){
 
-	this->escenario = unEscenario;
+//	this->escenario = unEscenario;
 
 	// attempt to initialize SDL
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
@@ -72,6 +72,10 @@ bool VentanaGrafica::init(string titulo, int xpos, int ypos, int height, int wid
 	std::cout << "init success\n" << endl;
 	return true;
 
+}
+
+void VentanaGrafica::setEscenario(EscenarioGrafico* esc) {
+    escenario = esc;
 }
 
 SDL_Renderer* VentanaGrafica::getRenderer(){

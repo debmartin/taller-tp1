@@ -14,7 +14,6 @@
 #include <iostream>
 #include <vector>
 #include <string.h>
-#include "../modelo/Vector2.h"
 #include "../modelo/Vector2f.h"
 #include "MRU.h"
 #include "MRUV.h"
@@ -30,7 +29,7 @@ private:
 	std::string nombre;
     std::map<std::string, Animacion*> animaciones;
 public:
-	PersonajeDibujable(Vector2f posicionIni, Animacion* animIni);
+	PersonajeDibujable(Animacion* animIni, Vector2f posicionIni, Vector2f factorEscala);
 	virtual ~PersonajeDibujable();
 	void seleccionarSprite();
 	void setEstado(estado_personaje unEstado);
