@@ -13,16 +13,17 @@
 #include "Dibujable.h"
 #include "Animacion.h"
 #include "Sprite.h"
+#include "../modelo/Vector2f.h"
 
 using namespace std;
 
 class Capa : public Dibujable{
 private:
 	Animacion* animacionCapa;
-	Vector2 tamanio;
+	Vector2f tamanio;
 	Sprite* sprite;
 public:
-	Capa(Animacion* animCapa, Vector2& tamInicial, Vector2f& posInicial);
+	Capa(Animacion* animCapa, Vector2f& tamInicial, Vector2f& posInicial);
 	virtual ~Capa();
 	double getAncho();
 //	string getImagenFondo() const;

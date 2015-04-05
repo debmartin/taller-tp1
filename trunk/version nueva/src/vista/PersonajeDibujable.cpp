@@ -8,8 +8,10 @@
 #include "PersonajeDibujable.h"
 
 
-PersonajeDibujable::PersonajeDibujable(Vector2f posicionIni, Animacion* animIni){
+PersonajeDibujable::PersonajeDibujable(Animacion* animIni, Vector2f posicionIni, Vector2f factorEscala){
     personaje = new Sprite(animIni, posicionIni);
+    personaje->escalarConFactor(factorEscala.X(), factorEscala.Y());
+    animaciones[animIni->getId()] = animIni;
 }
 
 void PersonajeDibujable::setEstado(estado_personaje unEstado){

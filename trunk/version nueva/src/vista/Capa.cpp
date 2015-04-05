@@ -7,14 +7,14 @@
 
 #include "Capa.h"
 
-Capa::Capa(Animacion* animCapa, Vector2& tamInicial, Vector2f& posInicial) :
+Capa::Capa(Animacion* animCapa, Vector2f& tamInicial, Vector2f& posInicial) :
     animacionCapa(animCapa), tamanio(tamInicial) {
     sprite = new Sprite(animacionCapa, posInicial);
-    sprite->escalarConTamanio(tamanio.getCoordenadaX(), tamanio.getCoordenadaY());
+    sprite->escalarConTamanio(tamanio.X(), tamanio.Y());
 }
 
 double Capa::getAncho() {
-	return tamanio.getCoordenadaX();
+	return tamanio.X();
 }
 
 //string Capa::getImagenFondo() const {
