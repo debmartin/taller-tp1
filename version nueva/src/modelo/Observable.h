@@ -18,7 +18,7 @@ class Observable{
         virtual void agregarObservador(Observador& unObservador) = 0;
         virtual void notificarObservadores() = 0;
     private:
-        std::list<Observador>* observadores;
+        std::list<Observador*>* observadores;
 };
 
 #endif /* SRC_MODELO_OBSERVABLE_H_ */
