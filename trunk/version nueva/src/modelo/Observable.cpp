@@ -19,7 +19,7 @@ void Observable::agregarObservador(Observador& unObservador){
 void Observable::notificarObservadores(){
 	std::list<Observador>::iterator iterador = this->observadores->begin();
 	while (iterador != this->observadores->end()){
-		iterador->actualizar();
+		iterador->actualizarNotificacion();
 	};
 }
 

@@ -56,7 +56,7 @@ int Personaje::getVida(){
 }
 
 //Devuelve un vector posicion referenciado desde el eje con origen de coordenadas arriba izquierda.
-Vector2f Personaje::getPosicionEnVentana(){
+Vector2f Personaje::obtenerPosicionEnVentana(){
 
 	Vector2f P1(this->unaCoordenada.X(), this->unaCoordenada.Y() + getAlto());
 	float alto_mundo = this->limites->getLimitesLogicos().getAltoLogico();
@@ -66,18 +66,22 @@ Vector2f Personaje::getPosicionEnVentana(){
 
 //TODO: en esta parte iria la parte de los objetos trayectoria en lugar de los métodos siguientes:
 void Personaje::aumentar_velocidadX(){
+	void notificarObservadores();
 	//this->velocidad.mover_en_X(DELTA_PASO);
 }
 
 void Personaje::disminuir_velocidadX(){
+	void notificarObservadores();
 	//this->velocidad.mover_en_X(-DELTA_PASO);
 }
 
 void Personaje::aumentar_velocidadY(){
+	void notificarObservadores();
 	//this->velocidad.mover_en_X(DELTA_PASO);
 }
 
 void Personaje::disminuir_velocidadY(){
+	void notificarObservadores();
 	//this->velocidad.mover_en_X(-DELTA_PASO);
 }
 

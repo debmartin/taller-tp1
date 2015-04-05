@@ -9,6 +9,7 @@
 #define SRC_MODELO_PERSONAJE_H_
 
 #include "../vista/Posicionable.h"
+#include "Observable.h"
 #include <iostream>
 #include <vector>
 #include <string.h>
@@ -21,7 +22,7 @@ enum estado{en_espera, caminando_derecha, caminando_izquierda, saltando};
 
 using namespace std;
 
-class Personaje {
+class Personaje: public Observable {
 private:
 	double ancho;
 	double alto;
@@ -52,8 +53,10 @@ public:
 	void disminuir_velocidadY();
 	void mover();
 	double getSpritesAncho() const;
-	Vector2f getPosicionEnVentana();
-
+	Vector2f obtenerPosicionEnVentana();
+	void actualizar();
+	void notificarObservadores();
+	void agregarObservador(Observador& unObservador);
 	friend ostream& operator<<(ostream &o, const Personaje &p);
 
 };
