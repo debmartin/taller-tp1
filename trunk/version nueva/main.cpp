@@ -51,7 +51,8 @@ int main(int argc, char* args[])
 
 	Vector2f posInicialPersonaje(100, 195);
 	Vector2f factorEscalaPer(2.0f, 2.0f);
-	PersonajeDibujable personaje(&zubQuieto, posInicialPersonaje, factorEscalaPer);
+	Personaje jugador1;
+	PersonajeDibujable personaje(&zubQuieto, posInicialPersonaje, factorEscalaPer, jugador1);
 	personaje.agregarAnimacion(&zubQuieto);
 	personaje.agregarAnimacion(&zubCaminando);
 	Personaje jugador;
