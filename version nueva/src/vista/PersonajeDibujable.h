@@ -17,19 +17,22 @@
 #include "../modelo/Vector2f.h"
 #include "../modelo/MRU.h"
 #include "../modelo/MRUV.h"
+#include "../modelo/Personaje.h"
 #include "Animacion.h"
 #include "Dibujable.h"
+#include "Observador.h"
 
 enum estado_personaje {EN_ESPERA, CAMINANDO_DERECHA, CAMINANDO_IZQUIERDA, SALTANDO};
 
-class PersonajeDibujable : public Dibujable {
+class PersonajeDibujable : public Dibujable, Observador {
 private:
-	Sprite* personaje;
+	Personaje personaje;
+	Sprite* spritePersonaje;
 	estado_personaje estado;
 	std::string nombre;
     std::map<std::string, Animacion*> animaciones;
 public:
-	PersonajeDibujable(Animacion* animIni, Vector2f posicionIni, Vector2f factorEscala);
+	PersonajeDibujable(Animacion* animIni, Vector2f posicionIni, Vector2f factorEscala, Personaje personajeModelo);
 	virtual ~PersonajeDibujable();
 	void seleccionarSprite();
 	void setEstado(estado_personaje unEstado);
@@ -37,6 +40,7 @@ public:
 	void agregarAnimacion(Animacion* nuevaAnimacion);
 	void dibujar();
 	void actualizar();
+	void actualizarNotificacion();
 };
 
 #endif /* SRC_VISTA_PERSONAJEDIBUJABLE_H_ */

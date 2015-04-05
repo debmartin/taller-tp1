@@ -12,7 +12,7 @@ class Observador{
     public:
         Observador();
         virtual ~Observador();
-        virtual void actualizar() = 0;
+        virtual void actualizarNotificacion() = 0;
 };
 
 #endif /* SRC_VISTA_OBSERVADOR_H_ */
