@@ -15,8 +15,8 @@
 #include <vector>
 #include <string.h>
 #include "../modelo/Vector2f.h"
-#include "MRU.h"
-#include "MRUV.h"
+#include "../modelo/MRU.h"
+#include "../modelo/MRUV.h"
 #include "Animacion.h"
 #include "Dibujable.h"
 

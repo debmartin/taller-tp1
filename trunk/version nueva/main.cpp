@@ -46,7 +46,7 @@ int main(int argc, char* args[])
 	Animacion zubCaminando(IMAGEN_ZUBZERO_CAMINANDO, 9, 10, ID_ZUBZERO_CAMINANDO, VentanaGrafica::Instance()->getRenderer());
 
 	Vector2f posIniCapa(0, 0);
-	Vector2f tamIniCapa(640, 480);
+	Vector2f tamIniCapa(ANCHO_VENTANA_INICIO, ALTO_VENTANA_INICIO);
 	Capa fondoCapa(&fondoAnim, tamIniCapa, posIniCapa);
 
 	Vector2f posInicialPersonaje(100, 195);

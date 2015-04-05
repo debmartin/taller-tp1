@@ -4,8 +4,8 @@
 #include <SDL2/SDL.h>
 #include "../../src/modelo/Vector2f.h"
 #include <string>
-#include "Trayectoria.h"
-#include "Reposo.h"
+#include "../modelo/Trayectoria.h"
+#include "../modelo/Reposo.h"
 #include "Animacion.h"
 
 typedef enum
