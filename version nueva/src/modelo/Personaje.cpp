@@ -14,13 +14,12 @@ Personaje::Personaje() {
 
 }
 
-Personaje::Personaje(double ancho, double alto, int zindex,
+Personaje::Personaje(double ancho, double alto,
 		Posicionable* limites, double sprites_ancho)
 {
 	this->ancho = ancho;
 	this->alto = alto;
 	this->sprites_ancho = sprites_ancho;
-	this->z_index = zindex;
 	this->limites = limites;
 }
 
@@ -30,10 +29,6 @@ double Personaje::getAlto() const {
 
 double Personaje::getAncho() const {
 	return ancho;
-}
-
-int Personaje::getZindex() const {
-	return z_index;
 }
 
 void Personaje::setPosicion(int x, int y) {

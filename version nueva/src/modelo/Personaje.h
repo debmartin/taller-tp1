@@ -35,7 +35,7 @@ private:
 
 public:
 	Personaje();
-	Personaje(double ancho, double alto, int zindex, Posicionable* limites, double sprites_ancho);
+	Personaje(double ancho, double alto, Posicionable* limites, double sprites_ancho);
 	virtual ~Personaje();
 	double getAlto() const;
 	double getAncho() const;
