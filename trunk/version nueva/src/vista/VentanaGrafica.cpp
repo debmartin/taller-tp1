@@ -25,7 +25,7 @@ VentanaGrafica::VentanaGrafica():vWindow(NULL), vRenderer(NULL), escenario(NULL)
 
 bool VentanaGrafica::init(string titulo, int xpos, int ypos, int height, int width, bool fullscreen, Personaje unPersonaje){
 
-//	this->escenario = unEscenario;
+	this->personaje = personaje;
 
 	// attempt to initialize SDL
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
@@ -122,7 +122,21 @@ bool VentanaGrafica::esPosicionValida(Vector2f posicion){
 }
 
 void VentanaGrafica::actualizarNotificacion(){
-	//Verificar posicion del jugador, si llego al limite de la ventana, scrollear.
+	//Verifico posicion del jugador, si llego al limite de la ventana, scrollar.
+	Vector2f posicionPersonaje = this->personaje->getPosicion();
+
+	//Personaje en el margen izquierdo.
+	float posicion = posicionPersonaje.X();
+	if( posicion <= this->limite_izquierdo){
+		this->escenario->scrollear_capas(IZQUIERDA);
+		this->limite_izquierdo = posicionPersonaje.X();
+	}
+	//Personaje en el margen derecho
+	posicion = posicionPersonaje.X()+ this->personaje->getAncho();
+	if( posicion >= this->limite_derecho){
+		this->escenario->scrollear_capas(DERECHA);
+		this->limite_derecho = posicion;
+	}
 }
 
 VentanaGrafica::~VentanaGrafica(){}

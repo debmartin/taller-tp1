@@ -4,6 +4,11 @@
 #include "Dibujable.h"
 #include <list>
 
+typedef enum
+{
+    DERECHA,
+    IZQUIERDA
+} Sentido;
 
 class EscenarioGrafico : public Dibujable {
 private:
@@ -21,7 +26,7 @@ public:
 	double getYPisoLogico() const;
 	void dibujar();
 	void actualizar();
-	void scrollear_capas();
+	void scrollear_capas(Sentido sentido);
 };
 
 #endif /* SRC_VISTA_ESCENARIOGRAFICO_H_ */
