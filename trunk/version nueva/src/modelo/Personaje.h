@@ -55,8 +55,6 @@ public:
 	double getSpritesAncho() const;
 	Vector2f obtenerPosicionEnVentana();
 	void actualizar();
-	void notificarObservadores();
-	void agregarObservador(Observador& unObservador);
 	friend ostream& operator<<(ostream &o, const Personaje &p);
 
 };

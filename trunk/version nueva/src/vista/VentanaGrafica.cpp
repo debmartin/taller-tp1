@@ -23,7 +23,7 @@ VentanaGrafica* VentanaGrafica::Instance()
 
 VentanaGrafica::VentanaGrafica():vWindow(NULL), vRenderer(NULL), escenario(NULL){ }
 
-bool VentanaGrafica::init(string titulo, int xpos, int ypos, int height, int width, bool fullscreen){
+bool VentanaGrafica::init(string titulo, int xpos, int ypos, int height, int width, bool fullscreen, Personaje unPersonaje){
 
 //	this->escenario = unEscenario;
 
@@ -119,6 +119,10 @@ bool VentanaGrafica::esPosicionValida(Vector2f posicion){
 		return false;
 	}
 	return true;
+}
+
+void VentanaGrafica::actualizarNotificacion(){
+	//Verificar posicion del jugador, si llego al limite de la ventana, scrollear.
 }
 
 VentanaGrafica::~VentanaGrafica(){}

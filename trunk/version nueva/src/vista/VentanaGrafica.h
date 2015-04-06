@@ -8,14 +8,17 @@
 #include "EscenarioGrafico.h"
 #include "Posicionable.h"
 #include "LimitesLogicos.h"
+#include "../modelo/Personaje.h"
 
 using namespace std;
 
-class VentanaGrafica: public Posicionable{
+class VentanaGrafica: public Posicionable, public Observador{
 private:
 	SDL_Window* vWindow;
 	SDL_Renderer* vRenderer;
 	EscenarioGrafico* escenario;
+	double limite_izquierdo;
+	double limite_derecho;
 
 	// SINGLETON
 	VentanaGrafica();
@@ -23,7 +26,7 @@ private:
 
 public:
 	virtual ~VentanaGrafica();
-	bool init(string titulo, int xpos, int ypos, int height, int width, bool fullscreen);
+	bool init(string titulo, int xpos, int ypos, int height, int width, bool fullscreen, Personaje unPersonaje);
 	void setEscenario(EscenarioGrafico* unEscenario);
 	SDL_Renderer* getRenderer();
 	void dibujarTodo();
@@ -31,6 +34,7 @@ public:
 	void actualizar();
 	LimitesLogicos getLimitesLogicos();
 	bool esPosicionValida(Vector2f posicion);
+	void actualizarNotificacion();
 	static VentanaGrafica* Instance();
 };
 
