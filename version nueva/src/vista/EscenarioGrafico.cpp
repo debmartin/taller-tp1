@@ -35,7 +35,7 @@ void EscenarioGrafico::actualizar(){
     }
 }
 
-void EscenarioGrafico::scrollear_capas(){
+void EscenarioGrafico::scrollear_capas(Sentido sentido){
 
 }
 

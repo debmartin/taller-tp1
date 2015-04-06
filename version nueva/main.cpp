@@ -32,11 +32,11 @@ int main(int argc, char* args[])
 	//para correr las pruebas comentar o descomentar estas 2 lineas
 //	Test tests;
 //	tests.ejecutar();
-
+	Personaje jugador1;
 
     bool exito = VentanaGrafica::Instance()->init(TITULO_VENTANA, \
     XPOS_VENTANA_INICIO, YPOS_VENTANA_INICIO, ALTO_VENTANA_INICIO, \
-    ANCHO_VENTANA_INICIO, INICIAR_FULLSCREEN);
+    ANCHO_VENTANA_INICIO, INICIAR_FULLSCREEN, jugador1);
 
     if (! exito)
 		cout << "Error al inicializar juego" << endl;
@@ -51,7 +51,6 @@ int main(int argc, char* args[])
 
 	Vector2f posInicialPersonaje(100, 195);
 	Vector2f factorEscalaPer(2.0f, 2.0f);
-	Personaje jugador1;
 	PersonajeDibujable personaje(&zubQuieto, posInicialPersonaje, factorEscalaPer, jugador1);
 	personaje.agregarAnimacion(&zubQuieto);
 	personaje.agregarAnimacion(&zubCaminando);

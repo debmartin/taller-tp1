@@ -17,6 +17,7 @@ private:
 	SDL_Window* vWindow;
 	SDL_Renderer* vRenderer;
 	EscenarioGrafico* escenario;
+	Personaje* personaje;
 	double limite_izquierdo;
 	double limite_derecho;
 
