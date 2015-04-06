@@ -34,6 +34,11 @@ void EscenarioGrafico::actualizar(){
         (*it)->actualizar();
     }
 }
+
+void EscenarioGrafico::scrollear_capas(){
+
+}
+
 //ostream& operator <<(ostream &o, const Escenario &e) {
 //
 //        o<<"escenario -> [ancho, alto, ypiso]=["<<e.ancho<<", "<<e.alto<<", "<<e.ypiso<<"]";

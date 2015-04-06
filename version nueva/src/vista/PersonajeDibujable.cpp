@@ -9,7 +9,7 @@
 
 
 PersonajeDibujable::PersonajeDibujable(Animacion* animIni, Vector2f posicionIni, Vector2f factorEscala, Personaje personajeModelo){
-    spritePersonaje = new Sprite(animIni, posicionIni);
+	spritePersonaje = new Sprite(animIni, posicionIni);
     spritePersonaje->escalarConFactor(factorEscala.X(), factorEscala.Y());
     animaciones[animIni->getId()] = animIni;
 }

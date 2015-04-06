@@ -89,14 +89,6 @@ double Personaje::getSpritesAncho() const {
 	return sprites_ancho;
 }
 
-void Personaje::agregarObservador(Observador& unObservador){
-
-}
-
-void Personaje::notificarObservadores(){
-
-}
-
 void Personaje::mover(){
 	//Valido que no camine fuera del escenario en X
 	//if((this->unaCoordenada.getCoordenadaX() > this->limite_izquierdo) && (this->unaCoordenada.getCoordenadaX() + this->ancho) < this->limite_derecho){

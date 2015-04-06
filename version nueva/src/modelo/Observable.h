@@ -15,8 +15,8 @@ class Observable{
     public:
         Observable();
         virtual ~Observable();
-        virtual void agregarObservador(Observador& unObservador) = 0;
-        virtual void notificarObservadores() = 0;
+        void agregarObservador(Observador& unObservador);
+        void notificarObservadores();
     private:
         std::list<Observador*>* observadores;
 };

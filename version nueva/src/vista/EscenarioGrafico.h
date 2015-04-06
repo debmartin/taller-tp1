@@ -21,6 +21,7 @@ public:
 	double getYPisoLogico() const;
 	void dibujar();
 	void actualizar();
+	void scrollear_capas();
 };
 
 #endif /* SRC_VISTA_ESCENARIOGRAFICO_H_ */
