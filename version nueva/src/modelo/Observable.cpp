@@ -6,22 +6,24 @@
  */
 
 #include "Observable.h"
-#include <list>
+
 
 Observable::Observable(){
 	this->observadores = new std::list<Observador*>;
 }
 
-void Observable::agregarObservador(Observador& unObservador){
-	this->observadores->push_back(&unObservador);
+void Observable::agregarObservador(Observador* unObservador){
+	this->observadores->push_back(unObservador);
 }
 
 void Observable::notificarObservadores(){
 	std::list<Observador*>::iterator iterador = this->observadores->begin();
 	while (iterador != this->observadores->end()){
-		(*iterador)->actualizarNotificacion();
+		(*iterador)->recibirNotificacion(this);
 	};
 }
+
+
 
 Observable::~Observable(){}
 

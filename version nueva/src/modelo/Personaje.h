@@ -8,7 +8,10 @@
 #ifndef SRC_MODELO_PERSONAJE_H_
 #define SRC_MODELO_PERSONAJE_H_
 
+#include <SDL2/SDL.h>
 #include "../vista/Posicionable.h"
+#include "Trayectoria.h"
+#include "Reposo.h"
 #include "Observable.h"
 #include <iostream>
 #include <vector>
@@ -27,12 +30,14 @@ private:
 	double ancho;
 	double alto;
 	double sprites_ancho; //TODO: ¿este ancho de Sprite deberia ir en el personaje dibujable?
-	Vector2f unaCoordenada;
+	Vector2f posicion;
 	Vector2f velocidad;
 	Posicionable* limites;
 	int z_index;
 	int vida;
 	int estado;
+	Trayectoria* trayectoria;
+	float tCreacion;
 
 public:
 	Personaje();
@@ -47,14 +52,10 @@ public:
 	int getEstado();
 	void setVida(int cantidad);
 	int getVida();
-	void aumentar_velocidadX();
-	void disminuir_velocidadX();
-	void aumentar_velocidadY();
-	void disminuir_velocidadY();
-	void mover();
 	double getSpritesAncho() const;
 	Vector2f obtenerPosicionEnVentana();
 	void actualizar();
+	void setTrayectoria(Trayectoria* t);
 	friend ostream& operator<<(ostream &o, const Personaje &p);
 
 };

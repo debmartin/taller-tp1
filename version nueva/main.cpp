@@ -14,9 +14,13 @@
 #define INICIAR_FULLSCREEN false
 #define ANCHO_ESCENARIO 3000
 
-#define IMAGEN_FONDO "../version nueva/imagenes/screen-pit.png"
-#define IMAGEN_ZUBZERO_CAMINANDO "../version nueva/imagenes/zubzero-caminando.png"
-#define IMAGEN_ZUBZERO_QUIETO "../version nueva/imagenes/zubzero-quieto.png"
+#define IMAGEN_FONDO "screen-pit.png"
+#define IMAGEN_ZUBZERO_CAMINANDO "zubzero-caminando.png"
+#define IMAGEN_ZUBZERO_QUIETO "zubzero-quieto.png"
+
+//#define IMAGEN_FONDO "../version nueva/imagenes/screen-pit.png"
+//#define IMAGEN_ZUBZERO_CAMINANDO "../version nueva/imagenes/zubzero-caminando.png"
+//#define IMAGEN_ZUBZERO_QUIETO "../version nueva/imagenes/zubzero-quieto.png"
 
 #define ID_FONDO "screen-pit"
 #define ID_ZUBZERO_CAMINANDO "zubzero-caminando"
@@ -36,14 +40,14 @@ int main(int argc, char* args[])
 
     bool exito = VentanaGrafica::Instance()->init(TITULO_VENTANA, \
     XPOS_VENTANA_INICIO, YPOS_VENTANA_INICIO, ALTO_VENTANA_INICIO, \
-    ANCHO_VENTANA_INICIO, INICIAR_FULLSCREEN, jugador1);
+    ANCHO_VENTANA_INICIO, INICIAR_FULLSCREEN);
 
     if (! exito)
 		cout << "Error al inicializar juego" << endl;
 
-	Animacion fondoAnim(IMAGEN_FONDO, 1, 1, ID_FONDO, VentanaGrafica::Instance()->getRenderer());
-	Animacion zubQuieto(IMAGEN_ZUBZERO_QUIETO, 12, 10,  ID_ZUBZERO_QUIETO, VentanaGrafica::Instance()->getRenderer());
-	Animacion zubCaminando(IMAGEN_ZUBZERO_CAMINANDO, 9, 10, ID_ZUBZERO_CAMINANDO, VentanaGrafica::Instance()->getRenderer());
+	Animacion fondoAnim(IMAGEN_FONDO, 1, 1, ID_FONDO, Renderizador::Instance()->getRenderer());
+	Animacion zubQuieto(IMAGEN_ZUBZERO_QUIETO, 12, 10,  ID_ZUBZERO_QUIETO, Renderizador::Instance()->getRenderer());
+	Animacion zubCaminando(IMAGEN_ZUBZERO_CAMINANDO, 9, 10, ID_ZUBZERO_CAMINANDO, Renderizador::Instance()->getRenderer());
 
 	Vector2f posIniCapa(0, 0);
 	Vector2f tamIniCapa(ANCHO_VENTANA_INICIO, ALTO_VENTANA_INICIO);

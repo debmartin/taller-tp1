@@ -8,14 +8,14 @@
 #ifndef SRC_MODELO_OBSERVABLE_H_
 #define SRC_MODELO_OBSERVABLE_H_
 
-#include "../vista/Observador.h"
+#include "Observador.h"
 #include <list>
 
 class Observable{
     public:
         Observable();
         virtual ~Observable();
-        void agregarObservador(Observador& unObservador);
+        void agregarObservador(Observador* unObservador);
         void notificarObservadores();
     private:
         std::list<Observador*>* observadores;

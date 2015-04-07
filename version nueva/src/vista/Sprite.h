@@ -53,9 +53,9 @@ public:
 //	float getZindex() { return zIndex; }
 	void dibujar(); // OK
 	void update();
-	void setTrayectoria(Trayectoria* t);
 	void cambiarAnimacion(Animacion* nuevaAnim);
 	Vector2f getPosicion();
+	void setTrayectoria(Trayectoria* t);
 };
 
 #endif /* SRC_VISTA_SPRITE_H_ */
