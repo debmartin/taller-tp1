@@ -57,6 +57,7 @@ Juego::Juego(VentanaGrafica* ventana, EscenarioGrafico* escenario, Personaje* pe
 	this->controladorJuego = new Controlador(jugador1);
 //	this->controladorJuego.setPersonajeDibujable(jugadorDibujable1);
 	// FIN CODIGO USUARIO
+
 }
 
 void Juego::render()

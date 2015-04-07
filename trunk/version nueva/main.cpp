@@ -67,19 +67,19 @@ int main(int argc, char* args[])
 	EscenarioGrafico escenario(ANCHO_ESCENARIO, ALTO_VENTANA_INICIO, &capasYPersonajes);
     VentanaGrafica::Instance()->setEscenario(&escenario);
 
+    cout << "carga correcta" << endl;
 	Juego g_game(VentanaGrafica::Instance(), &escenario, &jugador, &personaje);
-
-
-
-
 
 
 	//levantar la información inicial mediante json
 	//... usar libreria jsonCpp
+    cout << "creacion juego correcta" << endl;
 
 
 	while (g_game.running())
 	{
+	    cout << "game running" << endl;
+
 		frameStart = SDL_GetTicks();
 
 		g_game.handleEvents();
