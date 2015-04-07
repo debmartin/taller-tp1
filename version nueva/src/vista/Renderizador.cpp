@@ -19,7 +19,7 @@ Renderizador* Renderizador::Instance()
 	return instancia_unica;
 }
 
-Renderizador::Renderizador(){
+Renderizador::Renderizador():vWindow(NULL), vRenderer(NULL){
 
 }
 
@@ -37,17 +37,17 @@ bool Renderizador::init(string titulo, int xpos, int ypos, int alto, int ancho, 
 		else
 			flags = 0;
 
-		vWindow = SDL_CreateWindow(titulo.c_str(), xpos, ypos, ancho, alto, flags);
+		this->vWindow = SDL_CreateWindow(titulo.c_str(), xpos, ypos, ancho, alto, flags);
 
-		if (vWindow != NULL) // window init success
+		if (this->vWindow != NULL) // window init success
 		{
 			std::cout << "window creation success\n";
-			vRenderer = SDL_CreateRenderer(vWindow, -1, SDL_RENDERER_SOFTWARE);
+			this->vRenderer = SDL_CreateRenderer(vWindow, -1, SDL_RENDERER_SOFTWARE);
 
-			if (vRenderer != NULL) // renderer init success
+			if (this->vRenderer != NULL) // renderer init success
 			{
 				std::cout << "renderer creation success\n";
-				SDL_SetRenderDrawColor(vRenderer, 255, 0, 0, 255);
+				SDL_SetRenderDrawColor(this->vRenderer, 255, 0, 0, 255);
 			}
 			else
 			{
@@ -69,7 +69,6 @@ bool Renderizador::init(string titulo, int xpos, int ypos, int alto, int ancho, 
 
 	std::cout << "init success\n" << endl;
 	return true;
-
 }
 
 SDL_Renderer* Renderizador::getRenderer(){

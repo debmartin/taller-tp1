@@ -25,10 +25,17 @@ VentanaGrafica::VentanaGrafica():escenario(NULL){ }
 
 bool VentanaGrafica::init(string titulo, int xpos, int ypos, int height, int width, bool fullscreen){
 
-	//Inicializamos el Renderizador.
-	Renderizador::Instance()->init(titulo, xpos, ypos, height, width, fullscreen);
 	this->ancho = width;
 
+	//Inicializamos el Renderizador.
+	bool exito = Renderizador::Instance()->init(titulo, xpos, ypos, height, width, fullscreen);
+	cout << "VentanaGrafica:: creo Render" << endl;
+	if(!exito){
+		cout << "Renderizador init es falso" << endl;
+		return false;
+	}
+	cout << "Renderizador inicializado correctamente" << endl;
+	return true;
 }
 
 void VentanaGrafica::setEscenario(EscenarioGrafico* esc) {
