@@ -14,6 +14,8 @@ Sprite::Sprite(Animacion* animacion, Vector2f& posicionIni) :
 //	this->zIndex = zIndex;
 	this->fps = animacion->getFps();
 	this->tCreacion = 0; //ARREGLAR
+	this->trayectoria = new Reposo(this->posicion);
+
 
 	int w, h;
 	SDL_Texture* textura = animacion->getTextura();
@@ -104,6 +106,8 @@ void Sprite::update() {
 	this->posicion = this->trayectoria->getPosicion(tActual); //TODO: Val. El personaje dibujable le setea la posicion a Sprite afuera
 	//cout << "SPRITE->UPDATE:" << this->id_textura << " - poiscion:[" << posicion.getCoordenadaX() << "," << posicion.getCoordenadaY() << "],tiempo:[" << tActual << "]" << endl;
 	//cout << "nº fotogarma:" << this->fotogramaActual << endl; TODO: para test
+    cout << "sprite update: ok" << endl;
+
 }
 
 void Sprite::setSentidoReproduccion(SentidoReproduccion sr) {
