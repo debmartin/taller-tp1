@@ -74,7 +74,7 @@ void Parser::parsearDesdeJson() {
 			//atributos del escenario
 			double e_alto = 0;
 			double e_ancho = 0;
-			int e_ypiso = 0;
+			double e_ypiso = 0;
 
 			//atributos del personaje
 			double p_alto = 0;
@@ -168,7 +168,7 @@ void Parser::parsearDesdeJson() {
 							//TODO revisar porque este parametro tiene una longitud mas grande. mide 7 en vez de 5!
 							else if ( key_nivel2.asString().compare("ypiso") >= 0 )
 							{
-								e_ypiso = (*it)[key_nivel2.asString()].asInt();
+								e_ypiso = (*it)[key_nivel2.asString()].asDouble();
 							}
 							else
 							{
@@ -257,10 +257,23 @@ void Parser::crearEscenerioPorDefecto() {
 
 void Parser::inciarValidacionSemantica() {
 
-	//validar el escenario
 	double escenario_ancho_nuevo = this->escenario->getAncho();
 	double escenario_alto_nuevo = this->escenario->getAlto();
-	int escenario_ypiso_nuevo = this->escenario->getYpiso();
+	double escenario_ypiso_nuevo = this->escenario->getYpiso();
+
+	int ventana_anchopx_nuevo = this->ventana->getAnchoPx();
+	int ventana_altopx_nuevo = this->ventana->getAltoPx();
+	double ventana_ancho_nuevo = this->ventana->getAncho();
+	double ventana_margenx_nuevo = this->ventana->getMargenX();
+
+	double personaje_ancho_nuevo = this->personaje->getAncho();
+	double personaje_alto_nuevo = this->personaje->getAlto();
+	int personale_zindex_nuevo = this->personaje->getZindex();
+	string personaje_sprites_imagen_nuevo = this->personaje->getSpritesImagen();
+	double personaje_sprites_ancho_nuevo = this->personaje->getSpritesAncho();
+	double personaje_direccion_nuevo = this->personaje->getDireccion();
+
+	//validar el escenario
 	if ( escenario_ancho_nuevo <= 0 )
 	{
 		escenario_ancho_nuevo = 1200;
@@ -268,26 +281,87 @@ void Parser::inciarValidacionSemantica() {
 
 	if ( escenario_alto_nuevo <= 0 )
 	{
-		escenario_alto_nuevo = 170;
+		escenario_alto_nuevo = 180;
 	}
 
-	if ( escenario_ypiso_nuevo < 0 )
+	//validacion de la altura del personaje
+	if ( personaje_alto_nuevo <= 0 )
 	{
-		escenario_ypiso_nuevo = 15;
+		//la eligo como la tercera parte de la altura del escenario
+		personaje_alto_nuevo = escenario_alto_nuevo / 3;
 	}
+
+	if ( escenario_ypiso_nuevo < 0 || (escenario_alto_nuevo - escenario_ypiso_nuevo) < personaje_alto_nuevo)
+	{
+		escenario_ypiso_nuevo = escenario_alto_nuevo - personaje_alto_nuevo;
+	}
+
 	delete this->escenario;
 	this->escenario = NULL;
 	this->escenario = new Escenario(escenario_ancho_nuevo, escenario_alto_nuevo, escenario_ypiso_nuevo);
 
 	//validar la ventana
-	int ventana_anchopx_nuevo = this->ventana->getAnchoPx();
-	int ventana_altopx_nuevo = this->ventana->getAltoPx();
-	double ventana_ancho_nuevo = this->ventana->getAncho();
-	double ventana_margenx_nuevo = this->ventana->getMargenX();
-	//TODO continuar....
+	if ( ventana_ancho_nuevo <= 0 )
+	{
+		ventana_ancho_nuevo = 800;
+	}
+
+	if ( ventana_altopx_nuevo <= 0 )
+	{
+		ventana_altopx_nuevo = 600;
+	}
+
+	if ( ventana_ancho_nuevo <= 0 || ventana_ancho_nuevo > escenario_ancho_nuevo)
+	{
+		ventana_ancho_nuevo = escenario_ancho_nuevo / 2;
+	}
+
+	if ( ventana_margenx_nuevo <= 0 )
+	{
+		ventana_margenx_nuevo = ventana_ancho_nuevo / 100;
+	}
+
+	delete this->ventana;
+	this->ventana = NULL;
+	this->ventana = new Ventana(ventana_anchopx_nuevo, ventana_altopx_nuevo, ventana_ancho_nuevo, ventana_margenx_nuevo);
 
 	//validar el personaje
+	if ( personaje_ancho_nuevo <= 0 )
+	{
+		personaje_ancho_nuevo = 15;
+	}
+
+	if ( personale_zindex_nuevo < 0 )
+	{
+		personale_zindex_nuevo = 0;
+	}
+
+	if ( !this->existeImagen(personaje_sprites_imagen_nuevo) )
+	{
+		personaje_sprites_imagen_nuevo = "sprites_defecto.png";
+	}
+
+	if ( personaje_sprites_ancho_nuevo != 15.4)
+	{
+		personaje_sprites_ancho_nuevo = 15.4;
+	}
+
+	if ( personaje_direccion_nuevo != -1 && personaje_direccion_nuevo != 1 )
+	{
+		personaje_direccion_nuevo = 1;
+	}
+
+	delete this->personaje;
+	this->personaje = NULL;
+	this->personaje = new Personaje(personaje_ancho_nuevo, personaje_alto_nuevo, personale_zindex_nuevo,
+										personaje_sprites_imagen_nuevo, personaje_sprites_ancho_nuevo,
+											personaje_direccion_nuevo);
+
 
 	//validar las capas
 
+}
+
+bool Parser::existeImagen(string nombre_imagen) {
+	return true;
 }

@@ -15,15 +15,15 @@ class Escenario {
 private:
 	double ancho;
 	double alto;
-	int ypiso;
+	double ypiso;
 
 public:
 	Escenario();
-	Escenario(double ancho, double alto, int ypiso);
+	Escenario(double ancho, double alto, double ypiso);
 	virtual ~Escenario();
 	double getAlto() const;
 	double getAncho() const;
-	int getYpiso() const;
+	double getYpiso() const;
 
 	friend ostream& operator<<(ostream &o, const Escenario &e);
 };
