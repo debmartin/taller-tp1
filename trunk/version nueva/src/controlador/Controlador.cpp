@@ -11,6 +11,7 @@ Controlador::Controlador(Personaje* pers) :
 }
 
 void Controlador::manejar_Evento(SDL_Event &evento){
+
 	//Si se presiona una tecla
 	if( evento.type == SDL_KEYDOWN && evento.key.repeat == 0 ){
 		switch( evento.key.keysym.sym ){

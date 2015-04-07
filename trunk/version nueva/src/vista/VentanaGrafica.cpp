@@ -43,7 +43,7 @@ void VentanaGrafica::setEscenario(EscenarioGrafico* esc) {
 }
 
 void VentanaGrafica::dibujarTodo(){
-
+	Renderizador::Instance()->dibujar(this->escenario);
 	cout << "VentanaGrafica::dibujarTodo()" << endl;
 }
 

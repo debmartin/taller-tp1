@@ -80,8 +80,9 @@ void Juego::handleEvents()
 
 	if (SDL_PollEvent(&evento))
 	{
-		if (evento.type == SDL_QUIT)
+		if (evento.type == SDL_QUIT){
 			juegoCorriendo = false;
+		}
 		else{
 			this->controladorJuego->manejar_Evento(evento);
 		}
