@@ -28,7 +28,7 @@ Sprite::Sprite(Animacion* animacion, Vector2f& posicionIni) :
 	this->flip = SDL_FLIP_NONE;
 
 	this->sentidoReproduccion = HACIA_ADELANTE;
-	this->trayectoria = new Reposo(posicion);
+
 }
 
 void Sprite::dibujar(){
@@ -40,12 +40,12 @@ void Sprite::dibujar(){
 	srcRect.h = altoPx;
 
 	SDL_Rect destRect;
-	destRect.x = posicion.X();
-	destRect.y = posicion.Y();
+	destRect.x = (int) posicion.X();
+	destRect.y = (int) posicion.Y();
 	destRect.w = (int)(anchoFotogramaPx * factorEscalaX);
 	destRect.h = (int)(altoPx * factorEscalaY);
 
-	SDL_RenderCopyEx(VentanaGrafica::Instance()->getRenderer(),	animacionAct->getTextura(), &srcRect, &destRect, 0,	NULL, flip);
+	SDL_RenderCopyEx(Renderizador::Instance()->getRenderer(),	animacionAct->getTextura(), &srcRect, &destRect, 0,	NULL, flip);
 
 	cout << "Sprite::dibujar(" << animacionAct->getId() << ")fotogramaActual:" << fotogramaActual << endl;
 
@@ -100,8 +100,8 @@ void Sprite::update() {
 
 
 	// RECALCULA LA POSICION EN BASE AL OBJETO TRAYECTORIA
-	float tActual = ((float)(SDL_GetTicks())/1000.0f) - tCreacion;
-	this->posicion = this->trayectoria->getPosicion(tActual);
+	float tActual = ((float)(SDL_GetTicks())/1000.0f) - tCreacion; //TODO: pasar a personaje
+	this->posicion = this->trayectoria->getPosicion(tActual); //TODO: Val. El personaje dibujable le setea la posicion a Sprite afuera
 	//cout << "SPRITE->UPDATE:" << this->id_textura << " - poiscion:[" << posicion.getCoordenadaX() << "," << posicion.getCoordenadaY() << "],tiempo:[" << tActual << "]" << endl;
 	//cout << "nº fotogarma:" << this->fotogramaActual << endl; TODO: para test
 }

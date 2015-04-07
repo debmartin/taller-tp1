@@ -9,7 +9,6 @@
 #define SRC_VISTA_PERSONAJEDIBUJABLE_H_
 
 #include "VentanaGrafica.h"
-
 #include "Sprite.h"
 #include <iostream>
 #include <vector>
@@ -20,7 +19,6 @@
 #include "../modelo/Personaje.h"
 #include "Animacion.h"
 #include "Dibujable.h"
-#include "Observador.h"
 
 enum estado_personaje {EN_ESPERA, CAMINANDO_DERECHA, CAMINANDO_IZQUIERDA, SALTANDO};
 
@@ -40,7 +38,7 @@ public:
 	void agregarAnimacion(Animacion* nuevaAnimacion);
 	void dibujar();
 	void actualizar();
-	void actualizarNotificacion();
+	void recibirNotificacion(Observable* unObservable);
 };
 
 #endif /* SRC_VISTA_PERSONAJEDIBUJABLE_H_ */

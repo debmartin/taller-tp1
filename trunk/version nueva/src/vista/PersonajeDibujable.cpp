@@ -65,9 +65,9 @@ void PersonajeDibujable::actualizar(){
 	spritePersonaje->update();
 }
 
-void PersonajeDibujable::actualizarNotificacion(){
-
-	Vector2f posicionEnVentana = this->personaje.obtenerPosicionEnVentana();
+void PersonajeDibujable::recibirNotificacion(Observable* unObservable){
+	Personaje* unPersonaje = (Personaje*) unObservable;
+	Vector2f posicionPersonaje = unPersonaje->obtenerPosicionEnVentana();
 	//TODO: Val. Actualizar el sprite con la nueva posicion.
 	//Actualizo la posicion del Sprite.
 	//this->spritePersonaje->setTrayectoria(new MRU(spritePersonaje->getPosicion(), Vector2f(180.0f, 0.0f)));
