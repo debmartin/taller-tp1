@@ -55,6 +55,7 @@ private:
 	void inicializar();
 	void crearEscenerioPorDefecto();
 	void inciarValidacionSemantica();
+	bool existeImagen(string nombre_imagen);
 
 };
 
