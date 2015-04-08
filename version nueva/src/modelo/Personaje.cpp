@@ -10,15 +10,14 @@
 Personaje::Personaje() {
 	this->ancho = 0;
 	this->alto = 0;
-	this->velocidad.setCoordenada(0,0);
-
 }
 
-Personaje::Personaje(double ancho, double alto, Posicionable* limites, double sprites_ancho){
+Personaje::Personaje(double ancho, double alto, double sprites_ancho, Vector2f posInicial){
 	this->ancho = ancho;
 	this->alto = alto;
 	this->sprites_ancho = sprites_ancho;
-	this->limites = limites;
+	//this->limites = limites;
+	this->posicion = posInicial;
 	this->trayectoria = new Reposo(this->posicion);
 	this->tCreacion = 0;
 }
@@ -59,8 +58,11 @@ int Personaje::getVida(){
 Vector2f Personaje::obtenerPosicionEnVentana(){
 
 	Vector2f P1(this->posicion.X(), this->posicion.Y() + getAlto());
+
 	float alto_mundo = this->limites->getLimitesLogicos().getAltoLogico();
+	cout<<"Calcule coordenadas de ventana"<<endl;
 	Vector2f P2(this->posicion.X(), alto_mundo - P1.Y());
+
 	return P2;
 }
 
@@ -104,14 +106,17 @@ void Personaje::agregarObservador(Observador* unObservador){
 }
 
 void Personaje::notificarObservadores(){
+	cout<<"Entro a notificar"<<endl;
+
 	Observable::notificarObservadores();
 }
 
 void Personaje::update(){
+	cout<<"Update personaje"<<endl;
+
 	// RECALCULA LA POSICION EN BASE AL OBJETO TRAYECTORIA
 	float tActual = ((float)(SDL_GetTicks())/1000.0f) - tCreacion; //TODO: pasar a personaje
 	this->posicion = this->trayectoria->getPosicion(tActual); //TODO: Val. El personaje dibujable le setea la posicion a Sprite afuera
-	cout<<"Update personaje"<<endl;
 	notificarObservadores();
 }
 
