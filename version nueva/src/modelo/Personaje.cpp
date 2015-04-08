@@ -59,7 +59,7 @@ Vector2f Personaje::obtenerPosicionEnVentana(){
 
 	Vector2f P1(this->posicion.X(), this->posicion.Y() + getAlto());
 
-	float alto_mundo = this->limites->getLimitesLogicos().getAltoLogico();
+	float alto_mundo = VentanaGrafica::Instance()->getLimitesLogicos().getAltoLogico();
 	cout<<"Calcule coordenadas de ventana"<<endl;
 	Vector2f P2(this->posicion.X(), alto_mundo - P1.Y());
 

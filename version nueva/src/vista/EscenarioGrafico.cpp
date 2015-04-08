@@ -2,7 +2,7 @@
 
 using std::list;
 
-EscenarioGrafico::EscenarioGrafico(double ancho, double alto, list<Dibujable*>* dibujables) :
+EscenarioGrafico::EscenarioGrafico(double ancho, double alto, double y_piso, list<Dibujable*>* dibujables) :
     ancho_logico(ancho), alto_logico(alto), capas(dibujables) {
 }
 
