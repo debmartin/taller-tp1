@@ -111,6 +111,7 @@ void Personaje::update(){
 	// RECALCULA LA POSICION EN BASE AL OBJETO TRAYECTORIA
 	float tActual = ((float)(SDL_GetTicks())/1000.0f) - tCreacion; //TODO: pasar a personaje
 	this->posicion = this->trayectoria->getPosicion(tActual); //TODO: Val. El personaje dibujable le setea la posicion a Sprite afuera
+	cout<<"Update personaje"<<endl;
 	notificarObservadores();
 }
 

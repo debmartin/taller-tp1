@@ -58,7 +58,7 @@ Juego::Juego(VentanaGrafica* ventana, EscenarioGrafico* escenario, Personaje* pe
 //
 //	// Configuracion del controlador
 //	this->jugadorDibujable1.setSprite(subzero);
-	this->controladorJuego = new Controlador(jugador1);
+	this->controladorJuego = new Controlador(this->jugador1);
 //	this->controladorJuego.setPersonajeDibujable(jugadorDibujable1);
 	// FIN CODIGO USUARIO
 
@@ -73,6 +73,7 @@ void Juego::update()
 {
 	// INICIO CODIGO USUARIO
 	VentanaGrafica::Instance()->actualizar();
+	this->jugador1->update();
 	// FIN CODIGO USUARIO
 }
 
