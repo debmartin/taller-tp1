@@ -75,6 +75,7 @@ public:
 	void setTrayectoria(Trayectoria* t);
 	void agregarObservador(Observador* unObservador);
 	void notificarObservadores();
+	void update();
 	friend ostream& operator<<(ostream &o, const Personaje &p);
 
 };

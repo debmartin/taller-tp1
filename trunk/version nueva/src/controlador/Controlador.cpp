@@ -14,11 +14,14 @@ void Controlador::manejar_Evento(SDL_Event &evento){
 
 	//Si se presiona una tecla
 	if( evento.type == SDL_KEYDOWN && evento.key.repeat == 0 ){
+		cout<<"Entro tecla"<<endl;
 		switch( evento.key.keysym.sym ){
 			case SDLK_LEFT:
 				this->unPersonaje->mover(CAMINAR_IZQUIERDA);
 				break;
 		 	case SDLK_RIGHT:
+				cout<<"Entro tecla derecha"<<endl;
+
 		 		this->unPersonaje->mover(CAMINAR_DERECHA);
 		 		break;
 			case SDLK_UP:
@@ -38,6 +41,7 @@ void Controlador::manejar_Evento(SDL_Event &evento){
 //				this->unPersonajeDibujable.setEstado(EN_ESPERA);
 				break;
 			case SDLK_RIGHT:
+				cout<<"suelto tecla derecha"<<endl;
 				this->unPersonaje->mover(REPOSO);
 //				this->unPersonajeDibujable.setEstado(EN_ESPERA);
 				break;
