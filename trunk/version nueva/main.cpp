@@ -58,8 +58,7 @@ int main(int argc, char* args[])
 	PersonajeDibujable personaje(&zubQuieto, posInicialPersonaje, factorEscalaPer, jugador1);
 	personaje.agregarAnimacion(&zubQuieto);
 	personaje.agregarAnimacion(&zubCaminando);
-	Personaje* jugador = new Personaje();
-	jugador->setPosicion(100,195);
+	Personaje* jugador = new Personaje(20,35,20,posInicialPersonaje);
 
 	list<Dibujable*> capasYPersonajes;
 	capasYPersonajes.push_back((Dibujable*) &fondoCapa);

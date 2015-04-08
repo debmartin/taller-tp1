@@ -47,7 +47,6 @@ private:
 	double alto;
 	double sprites_ancho; //TODO: ¿este ancho de Sprite deberia ir en el personaje dibujable?
 	Vector2f posicion;
-	Vector2f velocidad;
 	Posicionable* limites;
 	int z_index;
 	int vida;
@@ -57,7 +56,7 @@ private:
 
 public:
 	Personaje();
-	Personaje(double ancho, double alto, Posicionable* limites, double sprites_ancho);
+	Personaje(double ancho, double alto, double sprites_ancho, Vector2f posInicial);
 	virtual ~Personaje();
 	double getAlto() const;
 	double getAncho() const;

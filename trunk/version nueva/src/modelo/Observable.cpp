@@ -17,10 +17,12 @@ void Observable::agregarObservador(Observador* unObservador){
 }
 
 void Observable::notificarObservadores(){
-	cout<<"notificar observador"<<endl;
+	cout<<"notificar observador de Observable"<<endl;
 
 	std::list<Observador*>::iterator iterador = this->observadores->begin();
 	while (iterador != this->observadores->end()){
+		cout<<"Itero lista"<<endl;
+
 		(*iterador)->recibirNotificacion(this);
 	};
 }

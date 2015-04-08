@@ -62,10 +62,12 @@ void PersonajeDibujable::actualizar(){
 }
 
 void PersonajeDibujable::recibirNotificacion(Observable* unObservable){
+	cout<<"PersonajeDibujable:Recibio notificacion personaje"<<endl;
+
 	Personaje* unPersonaje = (Personaje*) unObservable;
 	Vector2f nueva_posicion = unPersonaje->obtenerPosicionEnVentana();
 
-	cout<<"Recibio notificacion personaje"<<endl;
+
 	//Actualizo la posicion del Sprite.
 	this->spritePersonaje->setPosicion(nueva_posicion);
 
