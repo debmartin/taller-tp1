@@ -17,6 +17,10 @@ double Capa::getAncho() {
 	return tamanio.X();
 }
 
+Sprite* Capa::getSprite(){
+	return this->sprite;
+}
+
 //string Capa::getImagenFondo() const {
 //	return imagen_fondo;
 //}

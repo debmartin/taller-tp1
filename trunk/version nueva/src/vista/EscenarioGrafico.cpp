@@ -35,8 +35,13 @@ void EscenarioGrafico::actualizar(){
     }
 }
 
-void EscenarioGrafico::scrollear_capas(Sentido sentido){
-
+void EscenarioGrafico::scrollear_capas(){
+	Dibujable* dib = this->capas->front();
+	Capa* capa = (Capa*) dib;
+	Sprite* sprite = capa->getSprite();
+	Vector2f v(VentanaGrafica::Instance()->getLimiteLogicoIzquierdo() * VentanaGrafica::Instance()->relacion_de_aspectoX(), 0.0f);
+	v*=-1;
+	sprite->setPosicion(v);
 }
 
 //ostream& operator <<(ostream &o, const Escenario &e) {

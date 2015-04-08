@@ -2,6 +2,8 @@
 #define SRC_VISTA_ESCENARIOGRAFICO_H_
 
 #include "Dibujable.h"
+#include "Sprite.h"
+#include "Capa.h"
 #include <list>
 
 typedef enum
@@ -26,7 +28,9 @@ public:
 	double getYPisoLogico() const;
 	void dibujar();
 	void actualizar();
-	void scrollear_capas(Sentido sentido);
+	void scrollear_capas();
 };
+
+#include "VentanaGrafica.h"
 
 #endif /* SRC_VISTA_ESCENARIOGRAFICO_H_ */

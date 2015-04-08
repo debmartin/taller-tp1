@@ -92,7 +92,7 @@ void Personaje::mover(Movimiento unMovimiento){
 			break;
 		case SALTAR_VERTICAL:
 			setEstado(SALTANDO_VERTICAL);
-			setTrayectoria(new MRUV(getPosicion(), Vector2f(0,-800.0f), Vector2f(0,1600.0f)));
+			setTrayectoria(new MRUV(getPosicion(), Vector2f(0,800.0f), Vector2f(0,-1600.0f)));
 			break;
 	}
 }
