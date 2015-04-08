@@ -29,6 +29,7 @@ public:
 //	string getImagenFondo() const;
     void dibujar();
     void actualizar();
+    Sprite* getSprite(); //TODO: DANGER!!
 //	friend ostream& operator<<(ostream &o, const Capa &c);
 };
 

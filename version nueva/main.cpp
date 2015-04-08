@@ -10,12 +10,17 @@
 #define XPOS_VENTANA_INICIO 100
 #define YPOS_VENTANA_INICIO 100
 #define ALTO_VENTANA_INICIO 480
-#define ANCHO_VENTANA_INICIO 640
+#define ANCHO_PX_VENTANA_INICIO 640
+#define ANCHO_LOGICO_VENTANA_INICIO 640
 #define INICIAR_FULLSCREEN false
 #define ANCHO_ESCENARIO 3000
 #define Y_PISO 40
 
-#define IMAGEN_FONDO "screen-pit.png"
+#define IMAGEN_FONDO "mario.jpg"
+//#define IMAGEN_FONDO "Pit2.png"
+//#define IMAGEN_FONDO "Pit.jpg"
+//#define IMAGEN_FONDO "escenario2.gif"
+//#define IMAGEN_FONDO "screen-pit.png"
 #define IMAGEN_ZUBZERO_CAMINANDO "zubzero-caminando.png"
 #define IMAGEN_ZUBZERO_QUIETO "zubzero-quieto.png"
 
@@ -41,7 +46,7 @@ int main(int argc, char* args[])
 
     bool exito = VentanaGrafica::Instance()->init(TITULO_VENTANA, \
     XPOS_VENTANA_INICIO, YPOS_VENTANA_INICIO, ALTO_VENTANA_INICIO, \
-    ANCHO_VENTANA_INICIO, INICIAR_FULLSCREEN);
+    ANCHO_PX_VENTANA_INICIO, ANCHO_LOGICO_VENTANA_INICIO, INICIAR_FULLSCREEN);
 
     if (! exito)
 		cout << "Error al inicializar juego" << endl;
@@ -51,7 +56,9 @@ int main(int argc, char* args[])
 	Animacion zubCaminando(IMAGEN_ZUBZERO_CAMINANDO, 9, 10, ID_ZUBZERO_CAMINANDO, Renderizador::Instance()->getRenderer());
 
 	Vector2f posIniCapa(0, 0);
-	Vector2f tamIniCapa(ANCHO_VENTANA_INICIO, ALTO_VENTANA_INICIO);
+	Vector2f tamIniCapa(ANCHO_PX_VENTANA_INICIO*2, ALTO_VENTANA_INICIO);
+
+	//Vector2f tamIniCapa(ANCHO_VENTANA_INICIO, ALTO_VENTANA_INICIO);
 	Capa fondoCapa(&fondoAnim, tamIniCapa, posIniCapa);
 
 	Vector2f posInicialPersonaje(100, 195);

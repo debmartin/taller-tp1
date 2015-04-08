@@ -15,9 +15,11 @@ using namespace std;
 class VentanaGrafica: public Posicionable, public Observador{
 private:
 	EscenarioGrafico* escenario;
-	double ancho;
-	double limite_izquierdo;
-	double limite_derecho;
+	double ancho_ventanaPx;
+	double ancho_logico_ventana;
+	//TODO: Val. borrar uno de los limites.
+	double limite_logico_izquierdo;
+	double limite_logico_derecho;
 
 	// SINGLETON
 	VentanaGrafica();
@@ -25,14 +27,17 @@ private:
 
 public:
 	virtual ~VentanaGrafica();
-	bool init(string titulo, int xpos, int ypos, int height, int width, bool fullscreen);
+	bool init(string titulo, int xpos, int ypos, int alto, int anchoPx, int ancho_logico, bool fullscreen);
 	void setEscenario(EscenarioGrafico* unEscenario);
 	void dibujarTodo();
 	void cerrar();
 	void actualizar();
+	float getLimiteLogicoIzquierdo();
+	float getLimiteLogicoDerecho();
 	LimitesLogicos getLimitesLogicos();
 	bool esPosicionValida(Vector2f posicion);
 	void recibirNotificacion(Observable* unObservable);
+	float relacion_de_aspectoX();
 	static VentanaGrafica* Instance();
 };
 
