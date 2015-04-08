@@ -31,7 +31,7 @@ typedef enum
     CAMINAR_IZQUIERDA,
 	SALTAR_VERTICAL
 } Movimiento;
-
+/*
 typedef enum
 {
 	EN_ESPERA,
@@ -39,7 +39,9 @@ typedef enum
 	CAMINANDO_IZQUIERDA,
 	SALTANDO_VERTICAL
 } estado_personaje;
+*/
 
+enum estado_personaje{EN_ESPERA,CAMINANDO_DERECHA,CAMINANDO_IZQUIERDA,SALTANDO_VERTICAL};
 using namespace std;
 
 class Personaje: public Observable {
