@@ -84,10 +84,10 @@ int main(int argc, char* args[])
 		g_game.handleEvents();
 
 		g_game.update();
-	    cout << "game running" << endl;
+	    //cout << "game running" << endl;
 
 		g_game.render();
-	    cout << "game running2" << endl;
+	    //cout << "game running2" << endl;
 
 		frameTime = SDL_GetTicks() - frameStart;
 

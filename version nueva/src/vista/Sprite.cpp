@@ -49,7 +49,7 @@ void Sprite::dibujar(){
 
 	SDL_RenderCopyEx(Renderizador::Instance()->getRenderer(),	animacionAct->getTextura(), &srcRect, &destRect, 0,	NULL, flip);
 
-	cout << "Sprite::dibujar(" << animacionAct->getId() << ")fotogramaActual:" << fotogramaActual << endl;
+	//cout << "Sprite::dibujar(" << animacionAct->getId() << ")fotogramaActual:" << fotogramaActual << endl;
 
 }
 
@@ -106,17 +106,12 @@ void Sprite::update() {
 	this->posicion = this->trayectoria->getPosicion(tActual); //TODO: Val. El personaje dibujable le setea la posicion a Sprite afuera
 	//cout << "SPRITE->UPDATE:" << this->id_textura << " - poiscion:[" << posicion.getCoordenadaX() << "," << posicion.getCoordenadaY() << "],tiempo:[" << tActual << "]" << endl;
 	//cout << "nº fotogarma:" << this->fotogramaActual << endl; TODO: para test
-    cout << "sprite update: ok" << endl;
+    //cout << "sprite update: ok" << endl;
 
 }
 
 void Sprite::setSentidoReproduccion(SentidoReproduccion sr) {
 	this->sentidoReproduccion = sr;
-}
-
-void Sprite::setTrayectoria(Trayectoria* t) {
-	this->trayectoria = t;
-	tCreacion = ((float)(SDL_GetTicks()))/1000.0f; //TODO: Solo funciona en el caso particular de este video juego porque anda lo suficientemente rapido
 }
 
 void Sprite::cambiarAnimacion(Animacion* nuevaAnim) {
