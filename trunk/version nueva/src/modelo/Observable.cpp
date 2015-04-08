@@ -8,6 +8,7 @@
 #include "Observable.h"
 #include <iostream>
 using namespace std;
+
 Observable::Observable(){
 	this->observadores = new std::list<Observador*>;
 }
@@ -17,14 +18,14 @@ void Observable::agregarObservador(Observador* unObservador){
 }
 
 void Observable::notificarObservadores(){
-	cout<<"notificar observador de Observable"<<endl;
+	cout<<"Observable:notificar observador"<<endl;
 
-	std::list<Observador*>::iterator iterador = this->observadores->begin();
-	while (iterador != this->observadores->end()){
-		cout<<"Itero lista"<<endl;
-
+	for(std::list<Observador*>::iterator iterador = this->observadores->begin(); iterador != this->observadores->end(); ++iterador)
+	{
+		cout<<"Itero lista de Observadores"<<endl;
 		(*iterador)->recibirNotificacion(this);
-	};
+	}
+
 }
 
 

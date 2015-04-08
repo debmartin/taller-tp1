@@ -100,6 +100,7 @@ void Sprite::update() {
 	else
 		this->setFotogramaActual(cantidadFotogramas + 1 - nuevoFotograma);
 
+	cout<<"Sprite: update()"<<endl;
 
 
 	//cout << "SPRITE->UPDATE:" << this->id_textura << " - poiscion:[" << posicion.getCoordenadaX() << "," << posicion.getCoordenadaY() << "],tiempo:[" << tActual << "]" << endl;

@@ -13,7 +13,7 @@
 #define ANCHO_VENTANA_INICIO 640
 #define INICIAR_FULLSCREEN false
 #define ANCHO_ESCENARIO 3000
-#define Y_PISO 20
+#define Y_PISO 40
 
 #define IMAGEN_FONDO "screen-pit.png"
 #define IMAGEN_ZUBZERO_CAMINANDO "zubzero-caminando.png"
