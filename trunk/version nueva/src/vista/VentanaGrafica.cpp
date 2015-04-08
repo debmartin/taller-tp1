@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include "VentanaGrafica.h"
+#include "../modelo/Observable.h"
 #include <SDL2/SDL.h>
 #include <vector>
 

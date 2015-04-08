@@ -9,6 +9,7 @@
 #define SRC_MODELO_PERSONAJE_H_
 
 #include <SDL2/SDL.h>
+#include "../vista/VentanaGrafica.h"
 #include "../vista/Posicionable.h"
 #include "Trayectoria.h"
 #include "Reposo.h"

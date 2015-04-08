@@ -13,6 +13,7 @@
 #define ANCHO_VENTANA_INICIO 640
 #define INICIAR_FULLSCREEN false
 #define ANCHO_ESCENARIO 3000
+#define Y_PISO 20
 
 #define IMAGEN_FONDO "screen-pit.png"
 #define IMAGEN_ZUBZERO_CAMINANDO "zubzero-caminando.png"
@@ -64,7 +65,7 @@ int main(int argc, char* args[])
 	capasYPersonajes.push_back((Dibujable*) &fondoCapa);
 	capasYPersonajes.push_back((Dibujable*) &personaje);
 
-	EscenarioGrafico escenario(ANCHO_ESCENARIO, ALTO_VENTANA_INICIO, &capasYPersonajes);
+	EscenarioGrafico escenario(ANCHO_ESCENARIO, ALTO_VENTANA_INICIO, Y_PISO, &capasYPersonajes);
     VentanaGrafica::Instance()->setEscenario(&escenario);
 
     cout << "carga correcta" << endl;
