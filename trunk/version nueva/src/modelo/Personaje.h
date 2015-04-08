@@ -24,24 +24,22 @@
 
 #define DELTA_PASO 1
 
-typedef enum
+typedef enum Movimiento
 {
 	REPOSO,
     CAMINAR_DERECHA,
     CAMINAR_IZQUIERDA,
 	SALTAR_VERTICAL
 } Movimiento;
-/*
-typedef enum
+
+typedef enum estado_personaje
 {
 	EN_ESPERA,
 	CAMINANDO_DERECHA,
 	CAMINANDO_IZQUIERDA,
 	SALTANDO_VERTICAL
 } estado_personaje;
-*/
 
-enum estado_personaje{EN_ESPERA,CAMINANDO_DERECHA,CAMINANDO_IZQUIERDA,SALTANDO_VERTICAL};
 using namespace std;
 
 class Personaje: public Observable {
