@@ -8,14 +8,16 @@
 #ifndef SRC_JSON_PARSER_H_
 #define SRC_JSON_PARSER_H_
 
-#include <jsoncpp/json/json.h>
+#include <jsoncpp/json/reader.h>
+#include <jsoncpp/json/value.h>
 #include <list>
 #include <string>
 
-#include "../../src/modelo/Capa.h"
-#include "../../src/modelo/Escenario.h"
-#include "../../src/modelo/Personaje.h"
-#include "../../src/modelo/Ventana.h"
+#include "../modelo/Capa.h"
+
+class Escenario;
+class Personaje;
+class Ventana;
 
 using namespace std;
 
@@ -55,7 +57,6 @@ private:
 	void inicializar();
 	void crearEscenerioPorDefecto();
 	void inciarValidacionSemantica();
-	bool existeImagen(string nombre_imagen);
 
 };
 
