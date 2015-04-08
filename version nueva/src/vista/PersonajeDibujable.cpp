@@ -32,6 +32,7 @@ void PersonajeDibujable::seleccionarSprite(){
 			break;
 		case EN_ESPERA:
 			this->spritePersonaje->cambiarAnimacion(animaciones["zubzero-quieto"]);
+			cout<<"Personaje dibujable: Seteo sentido reproduccion"<<endl;
 			this->spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
 			break;
 		case SALTANDO_VERTICAL:
