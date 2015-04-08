@@ -13,11 +13,11 @@ PersonajeDibujable::PersonajeDibujable(Animacion* animIni, Vector2f posicionIni,
     spritePersonaje->escalarConFactor(factorEscala.X(), factorEscala.Y());
     animaciones[animIni->getId()] = animIni;
 }
-/*
+
 void PersonajeDibujable::setEstado(estado_personaje unEstado){
 	this->estado = unEstado;
 	//seleccionarSprite();
-}*/
+}
 
 void PersonajeDibujable::seleccionarSprite(){
 
@@ -72,7 +72,7 @@ void PersonajeDibujable::recibirNotificacion(Observable* unObservable){
 	this->spritePersonaje->setPosicion(nueva_posicion);
 
 	//Actualizo el estado del personajeDibujable
-	//setEstado(unPersonaje->getEstado());
+	setEstado(unPersonaje->getEstado());
 
 	seleccionarSprite();
 }
