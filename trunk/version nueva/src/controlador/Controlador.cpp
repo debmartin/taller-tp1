@@ -16,13 +16,13 @@ void Controlador::manejar_Evento(SDL_Event &evento){
 	if( evento.type == SDL_KEYDOWN && evento.key.repeat == 0 ){
 		switch( evento.key.keysym.sym ){
 			case SDLK_LEFT:
-				this->unPersonaje->setTrayectoria(new MRU(unPersonaje->getPosicion(), Vector2f(-180.0f, 0.0f)));
+				this->unPersonaje->mover(CAMINAR_IZQUIERDA);
 				break;
 		 	case SDLK_RIGHT:
-		 		this->unPersonaje->setTrayectoria(new MRU(unPersonaje->getPosicion(), Vector2f(180.0f, 0.0f)));
+		 		this->unPersonaje->mover(CAMINAR_DERECHA);
 		 		break;
 			case SDLK_UP:
-				this->unPersonaje->setTrayectoria(new MRUV(unPersonaje->getPosicion(), Vector2f(0,-800.0f), Vector2f(0,1600.0f)));
+				this->unPersonaje->mover(SALTAR_VERTICAL);
 				break;
 			case SDLK_DOWN:
 				//this->unPersonaje->disminuir_velocidadY();
@@ -34,19 +34,19 @@ void Controlador::manejar_Evento(SDL_Event &evento){
 	if( evento.type == SDL_KEYUP && evento.key.repeat == 0 ){
 		switch( evento.key.keysym.sym ){
 			case SDLK_LEFT:
-				this->unPersonaje->setTrayectoria(new Reposo(unPersonaje->getPosicion()));
+				this->unPersonaje->mover(REPOSO);
 //				this->unPersonajeDibujable.setEstado(EN_ESPERA);
 				break;
 			case SDLK_RIGHT:
-				this->unPersonaje->setTrayectoria(new Reposo(unPersonaje->getPosicion()));
+				this->unPersonaje->mover(REPOSO);
 //				this->unPersonajeDibujable.setEstado(EN_ESPERA);
 				break;
 			case SDLK_UP:
-				this->unPersonaje->setTrayectoria(new Reposo(unPersonaje->getPosicion()));
+				this->unPersonaje->mover(REPOSO);
 //				this->unPersonajeDibujable.setEstado(EN_ESPERA);
 				break;
 			case SDLK_DOWN:
-				this->unPersonaje->setTrayectoria(new Reposo(unPersonaje->getPosicion()));
+				this->unPersonaje->mover(REPOSO);
 //				this->unPersonajeDibujable.setEstado(EN_ESPERA);
 				break;
 		}

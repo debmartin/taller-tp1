@@ -39,11 +39,11 @@ Vector2f Personaje::getPosicion(){
 	return this->posicion;
 }
 
-void Personaje::setEstado(int unEstado){
+void Personaje::setEstado(estado_personaje unEstado){
 	this->estado = unEstado;
 }
 
-int Personaje::getEstado(){
+estado_personaje Personaje::getEstado(){
 	return this->estado;
 }
 
@@ -68,9 +68,39 @@ double Personaje::getSpritesAncho() const {
 	return sprites_ancho;
 }
 
+void Personaje::mover(Movimiento unMovimiento){
+	switch(unMovimiento){
+		case REPOSO:
+			setEstado(EN_ESPERA);
+			setTrayectoria(new Reposo(getPosicion()));
+			notificarObservadores();
+			break;
+		case CAMINAR_DERECHA:
+			setEstado(CAMINANDO_DERECHA);
+			setTrayectoria(new MRU(getPosicion(), Vector2f(180.0f, 0.0f)));
+			break;
+		case CAMINAR_IZQUIERDA:
+			setEstado(CAMINANDO_IZQUIERDA);
+			setTrayectoria(new MRU(getPosicion(), Vector2f(-180.0f, 0.0f)));
+			break;
+		case SALTAR_VERTICAL:
+			setEstado(SALTANDO_VERTICAL);
+			setTrayectoria(new MRUV(getPosicion(), Vector2f(0,-800.0f), Vector2f(0,1600.0f)));
+			break;
+	}
+}
+
 void Personaje::setTrayectoria(Trayectoria* t) {
 	this->trayectoria = t;
 	this->tCreacion = ((float)(SDL_GetTicks()))/1000.0f; //TODO: Solo funciona en el caso particular de este video juego porque anda lo suficientemente rapido
+}
+
+void Personaje::agregarObservador(Observador* unObservador){
+	Observable::agregarObservador(unObservador);
+}
+
+void Personaje::notificarObservadores(){
+	Observable::notificarObservadores();
 }
 
 Personaje::~Personaje(){

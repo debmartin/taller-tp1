@@ -13,11 +13,11 @@ PersonajeDibujable::PersonajeDibujable(Animacion* animIni, Vector2f posicionIni,
     spritePersonaje->escalarConFactor(factorEscala.X(), factorEscala.Y());
     animaciones[animIni->getId()] = animIni;
 }
-
+/*
 void PersonajeDibujable::setEstado(estado_personaje unEstado){
 	this->estado = unEstado;
-	seleccionarSprite();
-}
+	//seleccionarSprite();
+}*/
 
 void PersonajeDibujable::seleccionarSprite(){
 
@@ -25,22 +25,18 @@ void PersonajeDibujable::seleccionarSprite(){
 		case CAMINANDO_DERECHA:
 			this->spritePersonaje->cambiarAnimacion(animaciones["zubzero-caminando"]);
 			this->spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
-			this->spritePersonaje->setTrayectoria(new MRU(spritePersonaje->getPosicion(), Vector2f(180.0f, 0.0f)));
 			break;
 		case CAMINANDO_IZQUIERDA:
 			this->spritePersonaje->cambiarAnimacion(animaciones["zubzero-caminando"]);
 			this->spritePersonaje->setSentidoReproduccion(HACIA_ATRAS);
-			this->spritePersonaje->setTrayectoria(new MRU(spritePersonaje->getPosicion(), Vector2f(-180.0f, 0.0f)));
 			break;
 		case EN_ESPERA:
 			this->spritePersonaje->cambiarAnimacion(animaciones["zubzero-quieto"]);
 			this->spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
-			this->spritePersonaje->setTrayectoria(new Reposo(spritePersonaje->getPosicion()));
 			break;
-		case SALTANDO:
+		case SALTANDO_VERTICAL:
 			this->spritePersonaje->cambiarAnimacion(animaciones["zubzero-quieto"]);
 			this->spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
-			this->spritePersonaje->setTrayectoria(new MRUV(spritePersonaje->getPosicion(), Vector2f(0,-800.0f), Vector2f(0,1600.0f)));
 			break;
 	}
 }
@@ -67,8 +63,14 @@ void PersonajeDibujable::actualizar(){
 
 void PersonajeDibujable::recibirNotificacion(Observable* unObservable){
 	Personaje* unPersonaje = (Personaje*) unObservable;
-	Vector2f posicionPersonaje = unPersonaje->obtenerPosicionEnVentana();
-	//TODO: Val. Actualizar el sprite con la nueva posicion.
+	Vector2f nueva_posicion = unPersonaje->obtenerPosicionEnVentana();
+
+	cout<<"Recibio notificacion personaje"<<endl;
 	//Actualizo la posicion del Sprite.
-	//this->spritePersonaje->setTrayectoria(new MRU(spritePersonaje->getPosicion(), Vector2f(180.0f, 0.0f)));
+	this->spritePersonaje->setPosicion(nueva_posicion);
+
+	//Actualizo el estado del personajeDibujable
+	//setEstado(unPersonaje->getEstado());
+
+	seleccionarSprite();
 }

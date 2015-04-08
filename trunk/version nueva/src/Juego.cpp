@@ -15,10 +15,14 @@
 #define TEXTO_ERROR_TEXTURA "ERROR AL CREAR TEXTURA"
 
 // simply set the running variable to true
-Juego::Juego(VentanaGrafica* ventana, EscenarioGrafico* escenario, Personaje* pers, PersonajeDibujable* persDib) :
-    ventanaG(ventana), escenarioG(escenario), jugador1(pers), jugadorDibujable1(persDib){
+Juego::Juego(VentanaGrafica* ventana, EscenarioGrafico* escenario, Personaje* personaje, PersonajeDibujable* personajeDib) :
+    ventanaG(ventana), escenarioG(escenario), jugador1(personaje), jugadorDibujable1(personajeDib){
 
 	juegoCorriendo = true; // everything inited successfully, start the main loop
+
+	//Agrego observadores del Personaje.
+	personaje->agregarObservador(personajeDib);
+	personaje->agregarObservador(ventana);
 
 	// INICIO CODIGO USUARIO
 

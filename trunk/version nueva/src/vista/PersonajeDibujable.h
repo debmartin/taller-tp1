@@ -20,8 +20,6 @@
 #include "Animacion.h"
 #include "Dibujable.h"
 
-enum estado_personaje {EN_ESPERA, CAMINANDO_DERECHA, CAMINANDO_IZQUIERDA, SALTANDO};
-
 class PersonajeDibujable : public Dibujable, public Observador {
 private:
 	Personaje personaje;

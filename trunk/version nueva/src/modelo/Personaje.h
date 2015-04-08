@@ -12,6 +12,8 @@
 #include "../vista/Posicionable.h"
 #include "Trayectoria.h"
 #include "Reposo.h"
+#include "MRU.h"
+#include "MRUV.h"
 #include "Observable.h"
 #include <iostream>
 #include <vector>
@@ -21,7 +23,21 @@
 
 #define DELTA_PASO 1
 
-enum estado{en_espera, caminando_derecha, caminando_izquierda, saltando};
+typedef enum
+{
+	REPOSO,
+    CAMINAR_DERECHA,
+    CAMINAR_IZQUIERDA,
+	SALTAR_VERTICAL
+} Movimiento;
+
+typedef enum
+{
+	EN_ESPERA,
+	CAMINANDO_DERECHA,
+	CAMINANDO_IZQUIERDA,
+	SALTANDO_VERTICAL
+} estado_personaje;
 
 using namespace std;
 
@@ -35,7 +51,7 @@ private:
 	Posicionable* limites;
 	int z_index;
 	int vida;
-	int estado;
+	estado_personaje estado;
 	Trayectoria* trayectoria;
 	float tCreacion;
 
@@ -48,14 +64,17 @@ public:
 	int getZindex() const;
 	void setPosicion(int posicion_x, int posicion_y);
 	Vector2f getPosicion();
-	void setEstado(int estado);
-	int getEstado();
+	void setEstado(estado_personaje estado);
+	estado_personaje getEstado();
 	void setVida(int cantidad);
 	int getVida();
 	double getSpritesAncho() const;
 	Vector2f obtenerPosicionEnVentana();
-	void actualizar();
+	//void actualizar();
+	void mover(Movimiento unMovimiento);
 	void setTrayectoria(Trayectoria* t);
+	void agregarObservador(Observador* unObservador);
+	void notificarObservadores();
 	friend ostream& operator<<(ostream &o, const Personaje &p);
 
 };
