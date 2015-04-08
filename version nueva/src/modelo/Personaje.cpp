@@ -16,6 +16,7 @@ Personaje::Personaje(double ancho, double alto, double sprites_ancho, Vector2f p
 	this->ancho = ancho;
 	this->alto = alto;
 	this->sprites_ancho = sprites_ancho;
+	this->estado = EN_ESPERA;
 	//this->limites = limites;
 	this->posicion = posInicial;
 	this->trayectoria = new Reposo(this->posicion);
