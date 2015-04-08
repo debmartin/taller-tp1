@@ -58,7 +58,8 @@ int main(int argc, char* args[])
 	PersonajeDibujable personaje(&zubQuieto, posInicialPersonaje, factorEscalaPer, jugador1);
 	personaje.agregarAnimacion(&zubQuieto);
 	personaje.agregarAnimacion(&zubCaminando);
-	Personaje jugador;
+	Personaje* jugador = new Personaje();
+	jugador->setPosicion(100,195);
 
 	list<Dibujable*> capasYPersonajes;
 	capasYPersonajes.push_back((Dibujable*) &fondoCapa);
@@ -68,7 +69,7 @@ int main(int argc, char* args[])
     VentanaGrafica::Instance()->setEscenario(&escenario);
 
     cout << "carga correcta" << endl;
-	Juego g_game(VentanaGrafica::Instance(), &escenario, &jugador, &personaje);
+	Juego g_game(VentanaGrafica::Instance(), &escenario, jugador, &personaje);
 
 
 	//levantar la información inicial mediante json
