@@ -7,10 +7,14 @@
 
 #include "Parser.h"
 
-#include <jsoncpp/json/value.h>
+#include <cstdio>
 #include <iostream>
 
+#include "../modelo/Escenario.h"
+#include "../modelo/Personaje.h"
+#include "../modelo/Ventana.h"
 #include "../utils/Logger.h"
+#include "../utils/Util.h"
 
 Parser::Parser() {
 	this->entrada = "archivo_json_defecto";
@@ -218,6 +222,7 @@ void Parser::parsearDesdeJson() {
 	 	}
 	 }
 
+	 Logger::getInstance()->info("Se inicia la validacion semantica");
 	 this->inciarValidacionSemantica();
 
 }
@@ -336,7 +341,7 @@ void Parser::inciarValidacionSemantica() {
 		personale_zindex_nuevo = 0;
 	}
 
-	if ( !this->existeImagen(personaje_sprites_imagen_nuevo) )
+	if ( !Util::getInstancia()->existeArchivo(personaje_sprites_imagen_nuevo) )
 	{
 		personaje_sprites_imagen_nuevo = "sprites_defecto.png";
 	}
@@ -360,8 +365,28 @@ void Parser::inciarValidacionSemantica() {
 
 	//validar las capas
 
+	list<Capa*>* capas_nuevas = new list<Capa*>;
+
+	for (list<Capa*>::iterator it_capas = this->capas->begin() ; it_capas != this->capas->end(); it_capas++)
+	{
+		string nuevo_fondo = (*it_capas)->getImagenFondo();
+		double nuevo_ancho = (*it_capas)->getAncho();
+
+		if ( !Util::getInstancia()->existeArchivo(nuevo_fondo) )
+		{
+			nuevo_fondo = "fondo_capa_defecto.png";
+		}
+
+		if ( nuevo_ancho <= 0 || nuevo_ancho > escenario_ancho_nuevo )
+		{
+			nuevo_ancho = escenario_ancho_nuevo;
+		}
+
+		Capa* capa_nueva = new Capa(nuevo_fondo, nuevo_ancho);
+		capas_nuevas->push_back(capa_nueva);
+	}
+
+	this->capas = capas_nuevas;
+
 }
 
-bool Parser::existeImagen(string nombre_imagen) {
-	return true;
-}
