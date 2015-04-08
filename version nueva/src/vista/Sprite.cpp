@@ -101,9 +101,7 @@ void Sprite::update() {
 		this->setFotogramaActual(cantidadFotogramas + 1 - nuevoFotograma);
 
 
-	// RECALCULA LA POSICION EN BASE AL OBJETO TRAYECTORIA
-	float tActual = ((float)(SDL_GetTicks())/1000.0f) - tCreacion; //TODO: pasar a personaje
-	this->posicion = this->trayectoria->getPosicion(tActual); //TODO: Val. El personaje dibujable le setea la posicion a Sprite afuera
+
 	//cout << "SPRITE->UPDATE:" << this->id_textura << " - poiscion:[" << posicion.getCoordenadaX() << "," << posicion.getCoordenadaY() << "],tiempo:[" << tActual << "]" << endl;
 	//cout << "nº fotogarma:" << this->fotogramaActual << endl; TODO: para test
     //cout << "sprite update: ok" << endl;

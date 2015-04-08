@@ -73,11 +73,15 @@ void Personaje::mover(Movimiento unMovimiento){
 		case REPOSO:
 			setEstado(EN_ESPERA);
 			setTrayectoria(new Reposo(getPosicion()));
-			notificarObservadores();
+			cout<<"seteo trayectoria"<<endl;
+
 			break;
 		case CAMINAR_DERECHA:
+			cout<<"Estado derecha"<<endl;
 			setEstado(CAMINANDO_DERECHA);
 			setTrayectoria(new MRU(getPosicion(), Vector2f(180.0f, 0.0f)));
+			cout<<"seteo trayectoria"<<endl;
+
 			break;
 		case CAMINAR_IZQUIERDA:
 			setEstado(CAMINANDO_IZQUIERDA);
@@ -101,6 +105,13 @@ void Personaje::agregarObservador(Observador* unObservador){
 
 void Personaje::notificarObservadores(){
 	Observable::notificarObservadores();
+}
+
+void Personaje::update(){
+	// RECALCULA LA POSICION EN BASE AL OBJETO TRAYECTORIA
+	float tActual = ((float)(SDL_GetTicks())/1000.0f) - tCreacion; //TODO: pasar a personaje
+	this->posicion = this->trayectoria->getPosicion(tActual); //TODO: Val. El personaje dibujable le setea la posicion a Sprite afuera
+	notificarObservadores();
 }
 
 Personaje::~Personaje(){
