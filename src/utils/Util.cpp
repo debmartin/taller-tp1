@@ -24,9 +24,7 @@ Util* Util::getInstancia() {
 
 bool Util::existeArchivo(string ruta_archivo) {
 	FILE* fd = fopen(ruta_archivo.c_str(),"r");
-	//return ( fd != NULL );
-	//TODO ¿en el json cargar la ruta de las imagenes o solo el nombre de la imagen?
-	return true;
+	return ( fd != NULL );
 }
 
 Util::~Util() {

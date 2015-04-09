@@ -115,11 +115,6 @@ void Logger::info(std::string message){
 	Logger::insert(key,message);
 }
 
-void Logger::warn(std::string  message){
-	std::string key = "WARN";
-	Logger::insert(key,message);
-}
-
 void Logger::error(std::string  message){
 	std::string key = "ERROR";
 	Logger::insert(key,message);
@@ -143,18 +138,9 @@ void Logger::insert(std::string& key, std::string& value){
 				Logger::count++;
 			}
 		}
-		else if ( this->nivel_log == "WARN")
-		{
-			if ( key == "ERROR" || key == "WARN" )
-			{
-				ioFile << Logger::getTime() << key << " : " << value << std::endl;
-				ioFile.flush();
-				Logger::count++;
-			}
-		}
 		else if ( this->nivel_log == "INFO")
 		{
-			if ( key == "ERROR" || key == "WARN" || key == "INFO")
+			if ( key == "ERROR" || key == "INFO")
 				{
 					ioFile << Logger::getTime() << key << " : " << value << std::endl;
 					ioFile.flush();

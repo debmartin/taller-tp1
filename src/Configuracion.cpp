@@ -61,6 +61,5 @@ string Configuracion::getNivelLogger()
 }
 
 Configuracion::~Configuracion() {
-	// TODO Auto-generated destructor stub
 }
 
