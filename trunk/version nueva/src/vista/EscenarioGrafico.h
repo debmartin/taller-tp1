@@ -14,14 +14,16 @@ typedef enum
 
 class EscenarioGrafico : public Dibujable {
 private:
-	std::list<Dibujable*>* capas;
+	std::list<Dibujable*>* dibujables;
+	std::list<Capa*>* capas;
+
 	double ancho_logico;
 	double alto_logico;
 	double y_piso_logico;
 
 
 public:
-	EscenarioGrafico(double ancho_logico, double alto_logico, double y_piso_logico, std::list<Dibujable*>* dibujables);
+	EscenarioGrafico(double ancho_logico, double alto_logico, double y_piso_logico, std::list<Dibujable*>* dibujables, std::list<Capa*>*);
 	virtual ~EscenarioGrafico();
 	double getAltoLogico() const;
 	double getAnchoLogico() const;

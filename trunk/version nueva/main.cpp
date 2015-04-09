@@ -17,10 +17,10 @@
 #define ANCHO_ESCENARIO 3000
 #define Y_PISO 40
 
-#define IMAGEN_FONDO "mario.jpg"
+#define IMAGEN_FONDO2 "mario.jpg"
 //#define IMAGEN_FONDO "Pit2.png"
 //#define IMAGEN_FONDO "Pit.jpg"
-//#define IMAGEN_FONDO "escenario2.gif"
+#define IMAGEN_FONDO "escenario2.gif"
 //#define IMAGEN_FONDO "screen-pit.png"
 #define IMAGEN_ZUBZERO_CAMINANDO "zubzero-caminando.png"
 #define IMAGEN_ZUBZERO_QUIETO "zubzero-quieto.png"
@@ -53,14 +53,16 @@ int main(int argc, char* args[])
 		cout << "Error al inicializar juego" << endl;
 
 	Animacion fondoAnim(IMAGEN_FONDO, 1, 1, ID_FONDO, Renderizador::Instance()->getRenderer());
+	Animacion fondoAnim2(IMAGEN_FONDO2, 1, 1, ID_FONDO, Renderizador::Instance()->getRenderer());
+
 	Animacion zubQuieto(IMAGEN_ZUBZERO_QUIETO, 12, 10,  ID_ZUBZERO_QUIETO, Renderizador::Instance()->getRenderer());
 	Animacion zubCaminando(IMAGEN_ZUBZERO_CAMINANDO, 9, 10, ID_ZUBZERO_CAMINANDO, Renderizador::Instance()->getRenderer());
 
 	Vector2f posIniCapa(0, 0);
 	Vector2f tamIniCapa(ANCHO_PX_VENTANA_INICIO*2, ALTO_VENTANA_INICIO);
-
-	//Vector2f tamIniCapa(ANCHO_VENTANA_INICIO, ALTO_VENTANA_INICIO);
+	Vector2f tamIniCapa2(ANCHO_PX_VENTANA_INICIO, ALTO_VENTANA_INICIO);
 	Capa fondoCapa(&fondoAnim, tamIniCapa, posIniCapa);
+	Capa fondoCapa2(&fondoAnim2, tamIniCapa2, posIniCapa);
 
 	Vector2f posInicialPersonaje(100, 195);
 	Vector2f factorEscalaPer(2.0f, 2.0f);
@@ -69,11 +71,18 @@ int main(int argc, char* args[])
 	personaje.agregarAnimacion(&zubCaminando);
 	Personaje* jugador = new Personaje(20,35,20,posInicialPersonaje, VentanaGrafica::Instance());
 
+	list<Capa*> capas;
+	capas.push_back(&fondoCapa);
+	capas.push_back(&fondoCapa2);
+
 	list<Dibujable*> capasYPersonajes;
 	capasYPersonajes.push_back((Dibujable*) &fondoCapa);
+	capasYPersonajes.push_back((Dibujable*) &fondoCapa2);
 	capasYPersonajes.push_back((Dibujable*) &personaje);
 
-	EscenarioGrafico escenario(ANCHO_ESCENARIO, ALTO_VENTANA_INICIO, Y_PISO, &capasYPersonajes);
+
+
+	EscenarioGrafico escenario(ANCHO_ESCENARIO, ALTO_VENTANA_INICIO, Y_PISO, &capasYPersonajes, &capas);
     VentanaGrafica::Instance()->setEscenario(&escenario);
 
     cout << "carga correcta" << endl;
