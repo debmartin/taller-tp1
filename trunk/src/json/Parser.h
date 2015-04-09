@@ -25,8 +25,6 @@ class Parser {
 private:
 	Json::Value root;
 	Json::Reader reader;
-	bool bienParseado;
-	bool existe_archivo;
 	string entrada;
 
 	//objectos que devolvera el parseador json
@@ -55,7 +53,6 @@ public:
 
 private:
 	void inicializar();
-	void crearEscenerioPorDefecto();
 	void inciarValidacionSemantica();
 
 };

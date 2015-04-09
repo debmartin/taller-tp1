@@ -8,11 +8,10 @@
 #include "Const.h"
 
 Const::Const() {
-	// TODO Auto-generated constructor stub
 
 }
 
 Const::~Const() {
-	// TODO Auto-generated destructor stub
+
 }
 

@@ -9,7 +9,6 @@
 #include "LoggerTest.h"
 
 LoggerTest::LoggerTest() {
-	// TODO Auto-generated constructor stub
 
 }
 
@@ -28,7 +27,6 @@ void LoggerTest::ejecutar() {
 
 	Logger::getInstance()->debug("mensaje de debug");
 	Logger::getInstance()->info("mensaje de informacion");
-	Logger::getInstance()->warn("mensaje de warning");
 	Logger::getInstance()->error("mensaje de error");
 }
 

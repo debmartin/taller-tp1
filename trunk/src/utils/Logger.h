@@ -80,8 +80,7 @@ private:
 	 * para definir los niveles de logging con los siguientes valores y orden:
 	 * 1) DEBUG
 	 * 2) INFO
-	 * 3) WARN
-	 * 4) ERROR
+	 * 3) ERROR
 	 */
 	std::string nivel_log;
 
@@ -106,11 +105,6 @@ public:
 	 * Escribe un mensaje de informacion sobre el log.
 	 */
 	void info(std::string message);
-
-	/**
-	 * Escribe un mensaje de warning sobre el log.
-	 */
-	void warn(std::string message);
 
 	/**
 	 * Escribe un mensaje de error sobre el log.
