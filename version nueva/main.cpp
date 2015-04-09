@@ -4,6 +4,7 @@
 #include "src/vista/VentanaGrafica.h"
 #include "src/vista/EscenarioGrafico.h"
 #include "src/vista/Capa.h"
+#include "src/modelo/Personaje.h"
 #include <SDL2/SDL.h>
 
 #define TITULO_VENTANA "Taller de programacion TP: Mortal Kombat"
@@ -66,7 +67,7 @@ int main(int argc, char* args[])
 	PersonajeDibujable personaje(&zubQuieto, posInicialPersonaje, factorEscalaPer, jugador1);
 	personaje.agregarAnimacion(&zubQuieto);
 	personaje.agregarAnimacion(&zubCaminando);
-	Personaje* jugador = new Personaje(20,35,20,posInicialPersonaje);
+	Personaje* jugador = new Personaje(20,35,20,posInicialPersonaje, VentanaGrafica::Instance());
 
 	list<Dibujable*> capasYPersonajes;
 	capasYPersonajes.push_back((Dibujable*) &fondoCapa);

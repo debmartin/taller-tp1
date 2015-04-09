@@ -17,15 +17,15 @@ void Controlador::manejar_Evento(SDL_Event &evento){
 		cout<<"Entro tecla"<<endl;
 		switch( evento.key.keysym.sym ){
 			case SDLK_LEFT:
-				this->unPersonaje->mover(CAMINAR_IZQUIERDA);
+				this->unPersonaje->caminarIzquierda();
 				break;
 		 	case SDLK_RIGHT:
 				cout<<"Entro tecla derecha"<<endl;
 
-		 		this->unPersonaje->mover(CAMINAR_DERECHA);
+		 		this->unPersonaje->caminarDerecha();
 		 		break;
 			case SDLK_UP:
-				this->unPersonaje->mover(SALTAR_VERTICAL);
+				this->unPersonaje->saltarVertical();
 				break;
 			case SDLK_DOWN:
 				//this->unPersonaje->disminuir_velocidadY();
@@ -37,20 +37,20 @@ void Controlador::manejar_Evento(SDL_Event &evento){
 	if( evento.type == SDL_KEYUP && evento.key.repeat == 0 ){
 		switch( evento.key.keysym.sym ){
 			case SDLK_LEFT:
-				this->unPersonaje->mover(REPOSO);
+				this->unPersonaje->mantenerReposo();
 //				this->unPersonajeDibujable.setEstado(EN_ESPERA);
 				break;
 			case SDLK_RIGHT:
 				cout<<"suelto tecla derecha"<<endl;
-				this->unPersonaje->mover(REPOSO);
+				this->unPersonaje->mantenerReposo();
 //				this->unPersonajeDibujable.setEstado(EN_ESPERA);
 				break;
 			case SDLK_UP:
-				this->unPersonaje->mover(REPOSO);
+				this->unPersonaje->mantenerReposo();
 //				this->unPersonajeDibujable.setEstado(EN_ESPERA);
 				break;
 			case SDLK_DOWN:
-				this->unPersonaje->mover(REPOSO);
+				this->unPersonaje->mantenerReposo();
 //				this->unPersonajeDibujable.setEstado(EN_ESPERA);
 				break;
 		}
