@@ -39,6 +39,7 @@ public:
 	void recibirNotificacion(Observable* unObservable);
 	float relacion_de_aspectoX();
 	static VentanaGrafica* Instance();
+    bool esValida(Vector2f posicion);
 };
 
 #endif /* SRC_VISTA_VENTANAGRAFICA_H_ */

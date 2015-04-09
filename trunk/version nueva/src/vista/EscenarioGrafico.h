@@ -29,6 +29,7 @@ public:
 	void dibujar();
 	void actualizar();
 	void scrollear_capas();
+	bool esValida(Vector2f posicion);
 };
 
 #include "VentanaGrafica.h"

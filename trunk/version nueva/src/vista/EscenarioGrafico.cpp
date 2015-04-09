@@ -44,6 +44,13 @@ void EscenarioGrafico::scrollear_capas(){
 	sprite->setPosicion(v);
 }
 
+bool EscenarioGrafico::esValida(Vector2f posicion){
+    if (posicion.X() < 0 || posicion.X() > ancho_logico)
+        return false;
+    if (posicion.Y() < 0 || posicion.Y() > alto_logico)
+        return false;
+    return true;
+}
 //ostream& operator <<(ostream &o, const Escenario &e) {
 //
 //        o<<"escenario -> [ancho, alto, ypiso]=["<<e.ancho<<", "<<e.alto<<", "<<e.ypiso<<"]";

@@ -7,17 +7,21 @@
 
 #include "Personaje.h"
 
+#define VELOCIDAD_DESP_HORIZONTAL 180.0f
+#define VELOCIDAD_DESP_VERTICAL 180.0f
+#define VECTOR_GRAVEDAD Vector2f(0, -9.8)
+
 Personaje::Personaje() {
 	this->ancho = 0;
 	this->alto = 0;
 }
 
-Personaje::Personaje(double ancho, double alto, double sprites_ancho, Vector2f posInicial){
+Personaje::Personaje(double ancho, double alto, double sprites_ancho, Vector2f posInicial, Posicionable* posc){
 	this->ancho = ancho;
 	this->alto = alto;
 	this->sprites_ancho = sprites_ancho;
 	this->estado = EN_ESPERA;
-	//this->limites = limites;
+	posicionable = posc;
 	this->posicion = posInicial;
 	this->trayectoria = new Reposo(this->posicion);
 	this->tCreacion = 0;
@@ -71,30 +75,57 @@ double Personaje::getSpritesAncho() const {
 	return sprites_ancho;
 }
 
-void Personaje::mover(Movimiento unMovimiento){
-	switch(unMovimiento){
-		case REPOSO:
-			setEstado(EN_ESPERA);
-			setTrayectoria(new Reposo(getPosicion()));
-			cout<<"seteo trayectoria"<<endl;
+//void Personaje::mover(Movimiento unMovimiento){
+//	switch(unMovimiento){
+//		case REPOSO:
+//			setEstado(EN_ESPERA);
+//			setTrayectoria(new Reposo(getPosicion()));
+//			cout<<"seteo trayectoria"<<endl;
+//
+//			break;
+//		case CAMINAR_DERECHA:
+//			cout<<"Estado derecha"<<endl;
+//			setEstado(CAMINANDO_DERECHA);
+//			setTrayectoria(new MRU(getPosicion(), Vector2f(180.0f, 0.0f)));
+//			cout<<"seteo trayectoria"<<endl;
+//
+//			break;
+//		case CAMINAR_IZQUIERDA:
+//			setEstado(CAMINANDO_IZQUIERDA);
+//			setTrayectoria(new MRU(getPosicion(), Vector2f(-180.0f, 0.0f)));
+//			break;
+//		case SALTAR_VERTICAL:
+//			setEstado(SALTANDO_VERTICAL);
+//			setTrayectoria(new MRUV(getPosicion(), Vector2f(0,800.0f), Vector2f(0,-1600.0f)));
+//			break;
+//	}
+//}
 
-			break;
-		case CAMINAR_DERECHA:
-			cout<<"Estado derecha"<<endl;
-			setEstado(CAMINANDO_DERECHA);
-			setTrayectoria(new MRU(getPosicion(), Vector2f(180.0f, 0.0f)));
-			cout<<"seteo trayectoria"<<endl;
+void Personaje::caminarDerecha(){
+    cout<<"Estado derecha"<<endl;
+    setEstado(CAMINANDO_DERECHA);
+    setTrayectoria(new MRU(posicion, Vector2f(VELOCIDAD_DESP_HORIZONTAL, 0.0f)));
+    cout<<"seteo trayectoria"<<endl;
+}
 
-			break;
-		case CAMINAR_IZQUIERDA:
-			setEstado(CAMINANDO_IZQUIERDA);
-			setTrayectoria(new MRU(getPosicion(), Vector2f(-180.0f, 0.0f)));
-			break;
-		case SALTAR_VERTICAL:
-			setEstado(SALTANDO_VERTICAL);
-			setTrayectoria(new MRUV(getPosicion(), Vector2f(0,800.0f), Vector2f(0,-1600.0f)));
-			break;
-	}
+void Personaje::caminarIzquierda(){
+    setEstado(CAMINANDO_IZQUIERDA);
+    setTrayectoria(new MRU(posicion, Vector2f(-VELOCIDAD_DESP_HORIZONTAL, 0.0f)));
+}
+
+void Personaje::saltarVertical(){
+    setEstado(SALTANDO_VERTICAL);
+    setTrayectoria(new MRUV(posicion, Vector2f(0,VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD));
+}
+
+void Personaje::saltarOblicuo(){
+    setEstado(SALTANDO_OBLICUO);
+    setTrayectoria(new MRUV(posicion, Vector2f(VELOCIDAD_DESP_HORIZONTAL, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD));
+}
+
+void Personaje::mantenerReposo(){
+    setEstado(EN_ESPERA);
+    setTrayectoria(new Reposo(posicion));
 }
 
 void Personaje::setTrayectoria(Trayectoria* t) {
@@ -117,7 +148,15 @@ void Personaje::update(){
 
 	// RECALCULA LA POSICION EN BASE AL OBJETO TRAYECTORIA
 	float tActual = ((float)(SDL_GetTicks())/1000.0f) - tCreacion; //TODO: pasar a personaje
-	this->posicion = this->trayectoria->getPosicion(tActual); //TODO: Val. El personaje dibujable le setea la posicion a Sprite afuera
+	Vector2f posicionCandidata = this->trayectoria->getPosicion(tActual); //TODO: Val. El personaje dibujable le setea la posicion a Sprite afuera
+	if (posicionable->esValida(posicionCandidata)) {
+        posicion = posicionCandidata;
+    } else if (posicionCandidata.Y() > 0) {
+        setTrayectoria(new MRUV(posicion, Vector2f(0,0), VECTOR_GRAVEDAD));
+        posicion = trayectoria->getPosicion(tActual);
+    } else {
+        mantenerReposo();
+    }
 	notificarObservadores();
 }
 

@@ -22,7 +22,8 @@ VentanaGrafica* VentanaGrafica::Instance()
 	return instancia_unica;
 }
 
-VentanaGrafica::VentanaGrafica():escenario(NULL){ }
+VentanaGrafica::VentanaGrafica() :
+    escenario(NULL), limite_logico_derecho(0), limite_logico_izquierdo(0), ancho_logico_ventana(0), ancho_ventanaPx(0) { }
 
 bool VentanaGrafica::init(string titulo, int xpos, int ypos, int alto, int anchoPx, int ancho_logico, bool fullscreen){
 
@@ -121,3 +122,7 @@ float VentanaGrafica::relacion_de_aspectoX(){
 }
 
 VentanaGrafica::~VentanaGrafica(){}
+
+bool VentanaGrafica::esValida(Vector2f posicion){
+    return escenario->esValida(posicion); //Cuando haya mas de un personaje se agregarán el resto de las condiciones
+}

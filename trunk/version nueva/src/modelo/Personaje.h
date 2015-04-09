@@ -37,7 +37,8 @@ typedef enum estado_personaje
 	EN_ESPERA,
 	CAMINANDO_DERECHA,
 	CAMINANDO_IZQUIERDA,
-	SALTANDO_VERTICAL
+	SALTANDO_VERTICAL,
+    SALTANDO_OBLICUO
 } estado_personaje;
 
 using namespace std;
@@ -48,7 +49,7 @@ private:
 	double alto;
 	double sprites_ancho; //TODO: ¿este ancho de Sprite deberia ir en el personaje dibujable?
 	Vector2f posicion;
-	Posicionable* limites;
+	Posicionable* posicionable;
 	int z_index;
 	int vida;
 	estado_personaje estado;
@@ -57,11 +58,10 @@ private:
 
 public:
 	Personaje();
-	Personaje(double ancho, double alto, double sprites_ancho, Vector2f posInicial);
+	Personaje(double ancho, double alto, double sprites_ancho, Vector2f posInicial, Posicionable* posc);
 	virtual ~Personaje();
 	double getAlto() const;
 	double getAncho() const;
-	int getZindex() const;
 	void setPosicion(int posicion_x, int posicion_y);
 	Vector2f getPosicion();
 	void setEstado(estado_personaje estado);
@@ -71,12 +71,17 @@ public:
 	double getSpritesAncho() const;
 	Vector2f obtenerPosicionEnVentana();
 	//void actualizar();
-	void mover(Movimiento unMovimiento);
+//	void mover(Movimiento unMovimiento);
+    void caminarDerecha();
+    void caminarIzquierda();
+    void saltarVertical();
+    void saltarOblicuo();
+    void mantenerReposo();
 	void setTrayectoria(Trayectoria* t);
 	void agregarObservador(Observador* unObservador);
 	void notificarObservadores();
 	void update();
-	friend ostream& operator<<(ostream &o, const Personaje &p);
+//	friend ostream& operator<<(ostream &o, const Personaje &p);
 
 };
 
