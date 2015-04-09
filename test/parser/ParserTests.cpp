@@ -10,10 +10,10 @@
 #include <iostream>
 #include <list>
 
-#include "../../src/modelo/Capa.h"
-#include "../../src/modelo/Escenario.h"
-#include "../../src/modelo/Personaje.h"
-#include "../../src/modelo/Ventana.h"
+#include "../../src/json/CapaDef.h"
+#include "../../src/json/EscenarioDef.h"
+#include "../../src/json/PersonajeDef.h"
+#include "../../src/json/VentanaDef.h"
 #include "../../src/utils/Logger.h"
 
 using namespace std;
@@ -33,18 +33,18 @@ bool ParserTests::ejecutar() {
 
 	parser->parsearDesdeJson();
 
-	Ventana* ventana = parser->getVentana();
+	VentanaDef* ventana = parser->getVentanaDef();
 	cout<<*ventana<<endl;
 
-	Escenario* escenario = parser->getEscenario();
+	EscenarioDef* escenario = parser->getEscenarioDef();
 	cout<<*escenario<<endl;
 
-	for (list<Capa*>::iterator it_capas = parser->getCapas()->begin() ; it_capas != parser->getCapas()->end(); it_capas++)
+	for (list<CapaDef*>::iterator it_capas = parser->getCapasDef()->begin() ; it_capas != parser->getCapasDef()->end(); it_capas++)
 	{
 		cout<<**it_capas<<endl;
 	}
 
-	Personaje* personaje = parser->getPersonaje();
+	PersonajeDef* personaje = parser->getPersonajeDef();
 	cout<<*personaje<<endl;
 
 	return true;
