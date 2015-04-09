@@ -13,11 +13,11 @@
 #include <list>
 #include <string>
 
-#include "../modelo/Capa.h"
+#include "../json/CapaDef.h"
 
-class Escenario;
-class Personaje;
-class Ventana;
+class EscenarioDef;
+class PersonajeDef;
+class VentanaDef;
 
 using namespace std;
 
@@ -28,28 +28,28 @@ private:
 	string entrada;
 
 	//objectos que devolvera el parseador json
-	Ventana* ventana;
-	Escenario * escenario;
-	list<Capa*>* capas;
-	Personaje* personaje;
+	VentanaDef* ventana;
+	EscenarioDef * escenario;
+	list<CapaDef*>* capas;
+	PersonajeDef* personaje;
 
 
 public:
 	Parser();
 	Parser(string archivo_json);
 
-	list<Capa*>* getCapas() const;
-	Escenario* getEscenario() const;
-	Personaje* getPersonaje() const;
-	Ventana* getVentana() const;
+	list<CapaDef*>* getCapasDef() const;
+	EscenarioDef* getEscenarioDef() const;
+	PersonajeDef* getPersonajeDef() const;
+	VentanaDef* getVentanaDef() const;
 
 	void parsearDesdeJson();
 
 	virtual ~Parser();
 	const Json::Reader& getReader() const;
 	const Json::Value& getRoot() const;
-	double getPersonajeSpritesAncho() const;
-	void setPersonajeSpritesAncho(double personajeSpritesAncho);
+	double getPersonajeDefSpritesAncho() const;
+	void setPersonajeDefSpritesAncho(double personajeSpritesAncho);
 
 private:
 	void inicializar();

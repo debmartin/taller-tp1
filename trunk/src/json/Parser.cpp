@@ -9,9 +9,9 @@
 
 #include <iostream>
 
-#include "../modelo/Escenario.h"
-#include "../modelo/Personaje.h"
-#include "../modelo/Ventana.h"
+#include "../json/EscenarioDef.h"
+#include "../json/PersonajeDef.h"
+#include "../json/VentanaDef.h"
 #include "../utils/Logger.h"
 #include "../utils/Util.h"
 
@@ -22,10 +22,10 @@ Parser::Parser() {
 Parser::Parser(string archivo_json)
 {
 	this->entrada = archivo_json;
-	this->ventana = new Ventana();
-	this->escenario = new Escenario();
-	this->capas = new list<Capa*>;
-	this->personaje = new Personaje();
+	this->ventana = new VentanaDef();
+	this->escenario = new EscenarioDef();
+	this->capas = new list<CapaDef*>;
+	this->personaje = new PersonajeDef();
 
 	this->inicializar();
 }
@@ -96,7 +96,7 @@ if( root.size() > 0 ) {
 			{
 				for (unsigned int idx_capas = 0; idx_capas < root2.size(); ++idx_capas)
 				{
-					Capa* capa;
+					CapaDef* capa;
 					string imagen_fondo = "";
 					double ancho = 0;
 					for( Json::ValueIterator it3 = root2[idx_capas].begin() ; it3 != root2[idx_capas].end() ; it3++ )
@@ -117,7 +117,7 @@ if( root.size() > 0 ) {
 						}
 
 					}
-					capa = new Capa(imagen_fondo, ancho);
+					capa = new CapaDef(imagen_fondo, ancho);
 					capas->push_back(capa);
 				}
 			}
@@ -208,9 +208,9 @@ if( root.size() > 0 ) {
 		}
 	}
 
-	this->ventana = new Ventana(v_ancho_px, v_alto_px, v_ancho, v_margen_x);
-	this->escenario = new Escenario(e_ancho, e_alto, e_ypiso);
-	this->personaje = new Personaje(p_ancho, p_alto, p_zindex, p_sprites_imagen, p_sprites_ancho, p_direccion);
+	this->ventana = new VentanaDef(v_ancho_px, v_alto_px, v_ancho, v_margen_x);
+	this->escenario = new EscenarioDef(e_ancho, e_alto, e_ypiso);
+	this->personaje = new PersonajeDef(p_ancho, p_alto, p_zindex, p_sprites_imagen, p_sprites_ancho, p_direccion);
 
 }
 
@@ -224,19 +224,19 @@ Parser::~Parser() {
 	// TODO Auto-generated destructor stub
 }
 
-list<Capa*>* Parser::getCapas() const {
+list<CapaDef*>* Parser::getCapasDef() const {
 	return capas;
 }
 
-Escenario* Parser::getEscenario() const {
+EscenarioDef* Parser::getEscenarioDef() const {
 	return escenario;
 }
 
-Personaje* Parser::getPersonaje() const {
+PersonajeDef* Parser::getPersonajeDef() const {
 	return personaje;
 }
 
-Ventana* Parser::getVentana() const {
+VentanaDef* Parser::getVentanaDef() const {
 	return ventana;
 }
 
@@ -296,7 +296,7 @@ void Parser::inciarValidacionSemantica() {
 
 	delete this->escenario;
 	this->escenario = NULL;
-	this->escenario = new Escenario(escenario_ancho_nuevo, escenario_alto_nuevo, escenario_ypiso_nuevo);
+	this->escenario = new EscenarioDef(escenario_ancho_nuevo, escenario_alto_nuevo, escenario_ypiso_nuevo);
 
 	//validar la ventana
 	if ( ventana_anchopx_nuevo <= 0 )
@@ -334,7 +334,7 @@ void Parser::inciarValidacionSemantica() {
 
 	delete this->ventana;
 	this->ventana = NULL;
-	this->ventana = new Ventana(ventana_anchopx_nuevo, ventana_altopx_nuevo, ventana_ancho_nuevo, ventana_margenx_nuevo);
+	this->ventana = new VentanaDef(ventana_anchopx_nuevo, ventana_altopx_nuevo, ventana_ancho_nuevo, ventana_margenx_nuevo);
 
 	//validar el personaje
 	if ( personaje_ancho_nuevo <= 0 )
@@ -369,16 +369,16 @@ void Parser::inciarValidacionSemantica() {
 
 	delete this->personaje;
 	this->personaje = NULL;
-	this->personaje = new Personaje(personaje_ancho_nuevo, personaje_alto_nuevo, personale_zindex_nuevo,
+	this->personaje = new PersonajeDef(personaje_ancho_nuevo, personaje_alto_nuevo, personale_zindex_nuevo,
 										personaje_sprites_imagen_nuevo, personaje_sprites_ancho_nuevo,
 											personaje_direccion_nuevo);
 
 
 	//validar las capas
 
-	list<Capa*>* capas_nuevas = new list<Capa*>;
+	list<CapaDef*>* capas_nuevas = new list<CapaDef*>;
 
-	for (list<Capa*>::iterator it_capas = this->capas->begin() ; it_capas != this->capas->end(); it_capas++)
+	for (list<CapaDef*>::iterator it_capas = this->capas->begin() ; it_capas != this->capas->end(); it_capas++)
 	{
 		string nuevo_fondo = (*it_capas)->getImagenFondo();
 		double nuevo_ancho = (*it_capas)->getAncho();
@@ -404,7 +404,7 @@ void Parser::inciarValidacionSemantica() {
 			nuevo_ancho = escenario_ancho_nuevo;
 		}
 
-		Capa* capa_nueva = new Capa(nuevo_fondo, nuevo_ancho);
+		CapaDef* capa_nueva = new CapaDef(nuevo_fondo, nuevo_ancho);
 		capas_nuevas->push_back(capa_nueva);
 	}
 
