@@ -8,23 +8,18 @@
 #include "Personaje.h"
 
 #define VELOCIDAD_DESP_HORIZONTAL 180.0f
-#define VELOCIDAD_DESP_VERTICAL 180.0f
-#define VECTOR_GRAVEDAD Vector2f(0, -9.8)
+#define VELOCIDAD_DESP_VERTICAL 800.0f
+#define VECTOR_GRAVEDAD Vector2f(0, -1600.f)
 
 Personaje::Personaje() {
 	this->ancho = 0;
 	this->alto = 0;
 }
 
-Personaje::Personaje(double ancho, double alto, double sprites_ancho, Vector2f posInicial, Posicionable* posc){
-	this->ancho = ancho;
-	this->alto = alto;
+Personaje::Personaje(double anchoIn, double altoIn, double sprites_ancho, Vector2f posInicial, Posicionable* posc) :
+    posicionInicial(posInicial), ancho(anchoIn), alto(altoIn), estado(EN_ESPERA), posicionable(posc), posicion(posInicial), tCreacion(0) {
 	this->sprites_ancho = sprites_ancho;
-	this->estado = EN_ESPERA;
-	posicionable = posc;
-	this->posicion = posInicial;
 	this->trayectoria = new Reposo(this->posicion);
-	this->tCreacion = 0;
 }
 
 double Personaje::getAlto() const {
@@ -114,6 +109,8 @@ void Personaje::caminarIzquierda(){
 }
 
 void Personaje::saltarVertical(){
+//    if (posicion.Y() != 0)
+//        return
     setEstado(SALTANDO_VERTICAL);
     setTrayectoria(new MRUV(posicion, Vector2f(0,VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD));
 }
@@ -149,11 +146,14 @@ void Personaje::update(){
 	// RECALCULA LA POSICION EN BASE AL OBJETO TRAYECTORIA
 	float tActual = ((float)(SDL_GetTicks())/1000.0f) - tCreacion; //TODO: pasar a personaje
 	Vector2f posicionCandidata = this->trayectoria->getPosicion(tActual); //TODO: Val. El personaje dibujable le setea la posicion a Sprite afuera
-	if (posicionable->esValida(posicionCandidata)) {
+	if (posicionable->esValida(posicionCandidata) && posicionCandidata.Y() >= posicionInicial.Y()) {
         posicion = posicionCandidata;
-    } else if (posicionCandidata.Y() > 0) {
+    } else if (posicionCandidata.Y() >= posicionInicial.Y()) {
+        estado = SALTANDO_VERTICAL;
         setTrayectoria(new MRUV(posicion, Vector2f(0,0), VECTOR_GRAVEDAD));
         posicion = trayectoria->getPosicion(tActual);
+    } else if (posicion.Y() != posicionInicial.Y()){
+        posicion = Vector2f(posicion.X(), posicionInicial.Y());
     } else {
         mantenerReposo();
     }
@@ -164,6 +164,9 @@ Personaje::~Personaje(){
 	// TODO Auto-generated destructor stub
 }
 
+bool Personaje::estaSaltando(){
+    return (estado == SALTANDO_OBLICUO || estado == SALTANDO_VERTICAL);
+}
 /*
 ostream& operator <<(ostream &o, const Personaje &p) {
 

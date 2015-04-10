@@ -49,9 +49,9 @@ void EscenarioGrafico::scrollear_capas(){
 }
 
 bool EscenarioGrafico::esValida(Vector2f posicion){
-    if (posicion.X() < 0 || posicion.X() > ancho_logico)
+    if (posicion.X() < 0 || posicion.X() >= ancho_logico)
         return false;
-    if (posicion.Y() < 0 || posicion.Y() > alto_logico)
+    if (posicion.Y() < 0 || posicion.Y() >= alto_logico)
         return false;
     return true;
 }

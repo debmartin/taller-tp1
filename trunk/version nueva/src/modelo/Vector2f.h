@@ -11,8 +11,8 @@ public:
 	Vector2f(float xn = 0.0f, float yn = 0.0f): x(xn), y(yn) {};
 	virtual ~Vector2f() {};
 
-	float X() { return x; };
-	float Y() { return y; };
+	float X() const { return x; };
+	float Y() const { return y; };
 
 	Vector2f operator+(const Vector2f& v2) const;
 	Vector2f& operator+=(const Vector2f& v2);

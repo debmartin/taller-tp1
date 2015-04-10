@@ -88,8 +88,9 @@ void Juego::handleEvents()
 	{
 		if (evento.type == SDL_QUIT){
 			juegoCorriendo = false;
-		}
-		else{
+		} else if (jugador1->estaSaltando()){
+		    return;
+		} else {
 			this->controladorJuego->manejar_Evento(evento);
 		}
 	}
