@@ -43,7 +43,6 @@ int main(int argc, char* args[])
 	//para correr las pruebas comentar o descomentar estas 2 lineas
 //	Test tests;
 //	tests.ejecutar();
-	Personaje jugador1;
 
     bool exito = VentanaGrafica::Instance()->init(TITULO_VENTANA, \
     XPOS_VENTANA_INICIO, YPOS_VENTANA_INICIO, ALTO_VENTANA_INICIO, \
@@ -66,10 +65,12 @@ int main(int argc, char* args[])
 
 	Vector2f posInicialPersonaje(100, 195);
 	Vector2f factorEscalaPer(2.0f, 2.0f);
-	PersonajeDibujable personaje(&zubQuieto, posInicialPersonaje, factorEscalaPer, jugador1);
+
+	Personaje jugador(20,35,20,posInicialPersonaje, VentanaGrafica::Instance());
+
+	PersonajeDibujable personaje(&zubQuieto, posInicialPersonaje, factorEscalaPer, &jugador);
 	personaje.agregarAnimacion(&zubQuieto);
 	personaje.agregarAnimacion(&zubCaminando);
-	Personaje* jugador = new Personaje(20,35,20,posInicialPersonaje, VentanaGrafica::Instance());
 
 	list<Capa*> capas;
 	capas.push_back(&fondoCapa);
@@ -86,7 +87,7 @@ int main(int argc, char* args[])
     VentanaGrafica::Instance()->setEscenario(&escenario);
 
     cout << "carga correcta" << endl;
-	Juego g_game(VentanaGrafica::Instance(), &escenario, jugador, &personaje);
+	Juego g_game(VentanaGrafica::Instance(), &escenario, &jugador, &personaje);
 
 
 	//levantar la información inicial mediante json

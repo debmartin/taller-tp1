@@ -8,7 +8,8 @@
 #include "PersonajeDibujable.h"
 
 
-PersonajeDibujable::PersonajeDibujable(Animacion* animIni, Vector2f posicionIni, Vector2f factorEscala, Personaje personajeModelo){
+PersonajeDibujable::PersonajeDibujable(Animacion* animIni, Vector2f posicionIni, Vector2f factorEscala, Personaje* personajeModelo) :
+    personaje(personajeModelo) {
 	spritePersonaje = new Sprite(animIni, posicionIni);
     spritePersonaje->escalarConFactor(factorEscala.X(), factorEscala.Y());
     animaciones[animIni->getId()] = animIni;
