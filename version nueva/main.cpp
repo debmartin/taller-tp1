@@ -15,7 +15,7 @@
 #define INICIAR_FULLSCREEN false
 #define ANCHO_ESCENARIO 1500
 #define ALTO_ESCENARIO 600
-#define Y_PISO 40
+#define Y_PISO 100
 #define ANCHO_LOGICO_CAPA1	600
 #define ANCHO_LOGICO_CAPA2	1000
 
@@ -43,7 +43,7 @@
 //#define IMAGEN_ZUBZERO_QUIETO "../version nueva/imagenes/zubzero-quieto.png"
 
 #define POSICION_INICIAL_CAPA Vector2f(0, 0)
-#define POSICION_INICIAL_PERSONAJE Vector2f(100, 195)
+#define POSICION_INICIAL_PERSONAJE Vector2f(100, 300)
 #define FACTOR_ESCALA_PERSONAJE Vector2f(2.0f, 2.0f)
 
 #define ANCHO_PERSONAJE 20
