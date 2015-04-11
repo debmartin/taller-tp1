@@ -25,10 +25,12 @@ VentanaGrafica* VentanaGrafica::Instance()
 VentanaGrafica::VentanaGrafica() :
     escenario(NULL), limite_logico_izquierdo(0), ancho_logico_ventana(0), ancho_ventanaPx(0) { }
 
-bool VentanaGrafica::init(string titulo, Vector2f posicion, Vector2f tamanioPixels, int ancho_logico, bool fullscreen){
+bool VentanaGrafica::init(string titulo, Vector2f posicion, Vector2f tamanioPixels, Vector2f tamanioLogico, bool fullscreen){
 
 	this->ancho_ventanaPx = tamanioPixels.X();
-	this->ancho_logico_ventana = ancho_logico;
+	this->alto_ventanaPx = tamanioPixels.Y();
+	this->ancho_logico_ventana = tamanioLogico.X();
+	this->alto_logico_ventana = tamanioLogico.Y();
 
 	//Inicializamos el Renderizador.
 	bool exito = Renderizador::Instance()->init(titulo, posicion, tamanioPixels, fullscreen);
@@ -46,6 +48,10 @@ void VentanaGrafica::agregarEscenario(EscenarioGrafico* esc) {
 
     //Seteo los limites logicos de la ventana en base al escenario dado.
     limite_logico_izquierdo = (escenario->getAnchoLogico()/2.0) - (ancho_logico_ventana/2.0);
+}
+
+void VentanaGrafica::centrar_ventana(){
+	this->limite_logico_izquierdo = (this->escenario->getAnchoLogico()/2.0) - (this->ancho_logico_ventana/2.0);
 }
 
 Vector2f VentanaGrafica::calcularPosicionEnVentana(Vector2f posicionLogica){
@@ -90,8 +96,21 @@ float VentanaGrafica::getLimiteLogicoDerecho(){
 	return limite_logico_izquierdo + ancho_logico_ventana;
 }
 
+/*
 float VentanaGrafica::relacion_de_aspectoX(){
 	return this->ancho_ventanaPx / (getLimiteLogicoDerecho() - this->limite_logico_izquierdo);
+}
+*/
+float VentanaGrafica::relacion_de_aspectoX(){
+	//cout << "VentanaGrafica:Aspectos:" << this->ancho_ventanaPx<<";"<< this->limite_logico_derecho<<";"<< this->limite_logico_izquierdo<<endl;
+	float res = this->ancho_ventanaPx / ((this->limite_logico_izquierdo + this->ancho_logico_ventana) - this->limite_logico_izquierdo);
+	//cout << "VentanaGrafica:relacion de aspectoX:" << res << endl;
+	return res;
+}
+
+float VentanaGrafica::relacion_de_aspectoY(){
+	//cout << "VentanaGrafica:relacion de aspectoY:" << this->ancho_ventanaPx<<";"<< this->alto_logico_ventana<<endl;
+	return this->alto_ventanaPx / (this->alto_logico_ventana);
 }
 
 VentanaGrafica::~VentanaGrafica(){

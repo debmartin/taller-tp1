@@ -20,13 +20,15 @@ using namespace std;
 class Capa : public Dibujable{
 private:
 	Animacion* animacionCapa;
-	Vector2f tamanio;
+	Vector2f tamanioLogico;
+	float limite_logico_izquierdo;
 	Sprite* sprite;
 public:
 	Capa(Animacion* animCapa, Vector2f& tamInicial, Vector2f& posInicial);
 	virtual ~Capa();
-	double getAncho();
-//	string getImagenFondo() const;
+	double getAnchoLogico();
+	double getLimiteLogicoIzquierdo();
+	void centrar_en(Vector2f posicion);
     void dibujar();
     void actualizar();
     Sprite* getSprite(); //TODO: DANGER!!

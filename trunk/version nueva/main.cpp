@@ -9,12 +9,15 @@
 
 #define TITULO_VENTANA "Taller de programacion TP: Mortal Kombat"
 #define POS_VENTANA_INICIO Vector2f(100, 100)
-#define ALTO_VENTANA_INICIO 480
+#define ALTO_PX_VENTANA_INICIO 480
 #define ANCHO_PX_VENTANA_INICIO 640
 #define ANCHO_LOGICO_VENTANA_INICIO 640
 #define INICIAR_FULLSCREEN false
-#define ANCHO_ESCENARIO 3000
+#define ANCHO_ESCENARIO 1500
+#define ALTO_ESCENARIO 600
 #define Y_PISO 40
+#define ANCHO_LOGICO_CAPA1	600
+#define ANCHO_LOGICO_CAPA2	1000
 
 #define IMAGEN_FONDO2 "mario.jpg"
 //#define IMAGEN_FONDO "Pit2.png"
@@ -55,8 +58,9 @@ int main(int argc, char* args[])
 	//para correr las pruebas comentar o descomentar estas 2 lineas
 //	Test tests;
 //	tests.ejecutar();
-    Vector2f tamanioVentana(ANCHO_PX_VENTANA_INICIO, ALTO_VENTANA_INICIO);
-    bool exito = VentanaGrafica::Instance()->init(TITULO_VENTANA, POS_VENTANA_INICIO, tamanioVentana, ANCHO_LOGICO_VENTANA_INICIO, INICIAR_FULLSCREEN);
+    Vector2f tamanioVentanaPx(ANCHO_PX_VENTANA_INICIO, ALTO_PX_VENTANA_INICIO);
+    Vector2f tamanioVentanaLogico(ANCHO_LOGICO_VENTANA_INICIO, ALTO_ESCENARIO);
+    bool exito = VentanaGrafica::Instance()->init(TITULO_VENTANA, POS_VENTANA_INICIO, tamanioVentanaPx, tamanioVentanaLogico, INICIAR_FULLSCREEN);
 
     if (! exito)
 		cout << "Error al inicializar juego" << endl;
@@ -67,8 +71,8 @@ int main(int argc, char* args[])
 	Animacion zubQuieto(IMAGEN_ZUBZERO_QUIETO, CANT_FOTOGRAMAS_ZUBQUIETO, FPS_ZUBQUIETO,  ID_ZUBZERO_QUIETO, Renderizador::Instance()->getRenderer());
 	Animacion zubCaminando(IMAGEN_ZUBZERO_CAMINANDO, CANT_FOTOGRAMAS_ZUBCAMINANDO, FPS_ZUBCAMINANDO, ID_ZUBZERO_CAMINANDO, Renderizador::Instance()->getRenderer());
 
-	Vector2f tamIniCapa(ANCHO_PX_VENTANA_INICIO*2, ALTO_VENTANA_INICIO);
-	Vector2f tamIniCapa2(ANCHO_PX_VENTANA_INICIO, ALTO_VENTANA_INICIO);
+	Vector2f tamIniCapa(ANCHO_PX_VENTANA_INICIO*2, ALTO_ESCENARIO);
+	Vector2f tamIniCapa2(ANCHO_PX_VENTANA_INICIO, ALTO_ESCENARIO);
 
     Vector2f posInCapa = POSICION_INICIAL_CAPA;
 	Capa fondoCapa(&fondoAnim, tamIniCapa, posInCapa);
@@ -91,7 +95,7 @@ int main(int argc, char* args[])
 
 
 
-	EscenarioGrafico escenario(ANCHO_ESCENARIO, ALTO_VENTANA_INICIO, Y_PISO, &capasYPersonajes, &capas);
+	EscenarioGrafico escenario(ANCHO_ESCENARIO, ALTO_ESCENARIO, Y_PISO, &capasYPersonajes, &capas);
     VentanaGrafica::Instance()->agregarEscenario(&escenario);
 
     cout << "carga correcta" << endl;
