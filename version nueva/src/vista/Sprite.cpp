@@ -5,18 +5,15 @@
 #include <math.h>
 #include <iostream>
 
-
+#define FACTOR_ESCALA_INICIAL_X 1.0f
+#define FACTOR_ESCALA_INICIAL_Y 1.0f
+#define TIEMPO_INICIAL 0
+#define FOTOGRAMA_INICIAL 1
 
 Sprite::Sprite(Animacion* animacion, Vector2f& posicionIni) :
-    animacionAct(animacion), posicion(posicionIni) {
-	this->factorEscalaX = 1.0f;
-	this->factorEscalaY = 1.0f;
-//	this->zIndex = zIndex;
-	this->fps = animacion->getFps();
-	this->tCreacion = 0; //ARREGLAR
-	this->trayectoria = new Reposo(this->posicion);
-
-
+    animacionAct(animacion), posicion(posicionIni), factorEscalaX (FACTOR_ESCALA_INICIAL_X), \
+	factorEscalaY(FACTOR_ESCALA_INICIAL_Y), fps(animacion->getFps()), tCreacion(TIEMPO_INICIAL) {
+    //ARREGLAR tCreacion
 	int w, h;
 	SDL_Texture* textura = animacion->getTextura();
 	SDL_QueryTexture(textura, NULL, NULL, &w, &h);
@@ -24,9 +21,9 @@ Sprite::Sprite(Animacion* animacion, Vector2f& posicionIni) :
 	this->anchoPx = w;
 	this->altoPx = h;
 
-	this->cantidadFotogramas = animacion->getCantidadFotogramas();
-	this->anchoFotogramaPx = lround((double) anchoPx / (double) cantidadFotogramas);
-	this->fotogramaActual = 1;
+	double cantidadFotogramas = animacion->getCantidadFotogramas();
+	this->anchoFotogramaPx = lround((double) anchoPx / cantidadFotogramas);
+	this->fotogramaActual = FOTOGRAMA_INICIAL;
 	this->flip = SDL_FLIP_NONE;
 
 	this->sentidoReproduccion = HACIA_ADELANTE;
@@ -47,7 +44,7 @@ void Sprite::dibujar(){
 	destRect.w = (int)(anchoFotogramaPx * factorEscalaX);
 	destRect.h = (int)(altoPx * factorEscalaY);
 
-	SDL_RenderCopyEx(Renderizador::Instance()->getRenderer(),	animacionAct->getTextura(), &srcRect, &destRect, 0,	NULL, flip);
+	SDL_RenderCopyEx(Renderizador::Instance()->getRenderer(), animacionAct->getTextura(), &srcRect, &destRect, 0, NULL, flip);
 
 	//cout << "Sprite::dibujar(" << animacionAct->getId() << ")fotogramaActual:" << fotogramaActual << endl;
 
@@ -72,9 +69,9 @@ void Sprite::avanzarFotograma() {
 		fotogramaActual = 1;
 }
 */
-void Sprite::escalarConFactor(float factor_x, float factor_y){
-	this->factorEscalaX = factor_x;
-	this->factorEscalaY = factor_y;
+void Sprite::escalarConFactor(Vector2f& factor){
+	this->factorEscalaX = factor.X();
+	this->factorEscalaY = factor.Y();
 }
 
 void Sprite::escalarConTamanio(int anchoNuevoPx, int altoNuevoPx){
@@ -86,14 +83,11 @@ void Sprite::setFotogramaActual(int nroFotograma){
 	this->fotogramaActual = nroFotograma;
 }
 
-//void Sprite::setZindex(float z_index){
-//	this->zIndex = z_index;
-//}
-
 void Sprite::update() {
 	int delayTime = 1000.0f / fps;
 
-	int nuevoFotograma = (int(SDL_GetTicks()/delayTime) % this->cantidadFotogramas) + 1;
+    int cantidadFotogramas = animacionAct->getCantidadFotogramas();
+	int nuevoFotograma = (int(SDL_GetTicks()/delayTime) % cantidadFotogramas) + 1;
 
 	if (this->sentidoReproduccion == HACIA_ADELANTE)
 		this->setFotogramaActual(nuevoFotograma);
@@ -124,8 +118,8 @@ void Sprite::cambiarAnimacion(Animacion* nuevaAnim) {
 	this->anchoPx = w;
 	this->altoPx = h;
 
-	this->cantidadFotogramas = animacionAct->getCantidadFotogramas();
-	this->anchoFotogramaPx = lround((double)this->anchoPx / (double)cantidadFotogramas);
+	double cantidadFotogramas = animacionAct->getCantidadFotogramas();
+	this->anchoFotogramaPx = lround((double)this->anchoPx / cantidadFotogramas);
 
 	this->fotogramaActual = 1;
 	cout << "Sprite::cambiarAnimacion" << endl;
@@ -136,5 +130,4 @@ Vector2f Sprite::getPosicion() {
 }
 
 Sprite::~Sprite() {
-	delete(trayectoria); // TODO: borrar trayectoria usando setTrayectoria pude traer problemas, gestionar bien la memoria.
 }

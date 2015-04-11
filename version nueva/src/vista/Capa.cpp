@@ -26,7 +26,7 @@ Sprite* Capa::getSprite(){
 //}
 
 Capa::~Capa() {
-	SDL_DestroyTexture(animacionCapa->getTextura());
+    delete sprite;
 }
 
 void Capa::dibujar(){

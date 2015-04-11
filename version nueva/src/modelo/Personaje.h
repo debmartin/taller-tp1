@@ -71,14 +71,12 @@ public:
 	int getVida();
 	double getSpritesAncho() const;
 	Vector2f obtenerPosicionEnVentana();
-	//void actualizar();
-//	void mover(Movimiento unMovimiento);
     void caminarDerecha();
     void caminarIzquierda();
     void saltarVertical();
     void saltarOblicuo();
     void mantenerReposo();
-	void setTrayectoria(Trayectoria* t);
+	void cambiarTrayectoria(Trayectoria* t);
 	void agregarObservador(Observador* unObservador);
 	void notificarObservadores();
 	void update();

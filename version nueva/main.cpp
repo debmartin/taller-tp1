@@ -37,10 +37,6 @@
 //#define IMAGEN_ZUBZERO_CAMINANDO "../version nueva/imagenes/zubzero-caminando.png"
 //#define IMAGEN_ZUBZERO_QUIETO "../version nueva/imagenes/zubzero-quieto.png"
 
-#define ID_FONDO "screen-pit"
-#define ID_ZUBZERO_CAMINANDO "zubzero-caminando"
-#define ID_ZUBZERO_QUIETO "zubzero-quieto"
-
 #define POSICION_INICIAL_CAPA Vector2f(0, 0)
 #define POSICION_INICIAL_PERSONAJE Vector2f(100, 195)
 #define FACTOR_ESCALA_PERSONAJE Vector2f(2.0f, 2.0f)

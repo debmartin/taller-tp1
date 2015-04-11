@@ -8,7 +8,6 @@
 #ifndef SRC_VISTA_POSICIONABLE_H_
 #define SRC_VISTA_POSICIONABLE_H_
 
-#include "LimitesLogicos.h"
 #include "../modelo/Vector2f.h"
 
 class Posicionable

@@ -30,6 +30,8 @@ void Observable::notificarObservadores(){
 
 
 
-Observable::~Observable(){}
+Observable::~Observable(){
+    delete observadores;
+}
 
 
