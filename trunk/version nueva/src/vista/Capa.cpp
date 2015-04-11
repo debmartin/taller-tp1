@@ -45,7 +45,7 @@ void Capa::actualizar(){
 void Capa::centrar_en(Vector2f posicion){
 	//Centro la capa en la posición dada.
 	this->limite_logico_izquierdo = posicion.X() - (getAnchoLogico()/2.0);
-	Vector2f vec(this->limite_logico_izquierdo, 0);
+	Vector2f vec(this->limite_logico_izquierdo, posicion.Y());
 	this->sprite->setPosicion(vec);
 }
 
