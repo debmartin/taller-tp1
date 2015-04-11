@@ -56,14 +56,8 @@ int Personaje::getVida(){
 
 //Devuelve un vector posicion referenciado desde el eje con origen de coordenadas arriba izquierda.
 Vector2f Personaje::obtenerPosicionEnVentana(){
-
-	Vector2f P1(this->posicion.X(), this->posicion.Y() + getAlto());
-
-	float alto_mundo = VentanaGrafica::Instance()->getLimitesLogicos().getAltoLogico();
-	cout<<"Calcule coordenadas de ventana"<<endl;
-	Vector2f P2(this->posicion.X(), alto_mundo - P1.Y());
-
-	return P2;
+	Vector2f P1(posicion.X(), posicion.Y() + getAlto());
+	return VentanaGrafica::Instance()->calcularPosicionEnVentana(P1);
 }
 
 double Personaje::getSpritesAncho() const {

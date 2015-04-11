@@ -25,8 +25,6 @@ private:
 	Controlador* controladorJuego;
 	Personaje* jugador1;
 	PersonajeDibujable* jugadorDibujable1;
-	Sprite* subzero;
-	VentanaGrafica* ventanaG;
 	EscenarioGrafico* escenarioG;
 
 public:
@@ -35,7 +33,6 @@ public:
 	void render();
 	void update();
 	void handleEvents();
-	void clean();
 	bool running();
 	~Juego();
 

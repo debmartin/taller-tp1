@@ -23,15 +23,15 @@ VentanaGrafica* VentanaGrafica::Instance()
 }
 
 VentanaGrafica::VentanaGrafica() :
-    escenario(NULL), limite_logico_derecho(0), limite_logico_izquierdo(0), ancho_logico_ventana(0), ancho_ventanaPx(0) { }
+    escenario(NULL), limite_logico_izquierdo(0), ancho_logico_ventana(0), ancho_ventanaPx(0) { }
 
-bool VentanaGrafica::init(string titulo, int xpos, int ypos, int alto, int anchoPx, int ancho_logico, bool fullscreen){
+bool VentanaGrafica::init(string titulo, Vector2f posicion, Vector2f tamanioPixels, int ancho_logico, bool fullscreen){
 
-	this->ancho_ventanaPx = anchoPx;
+	this->ancho_ventanaPx = tamanioPixels.X();
 	this->ancho_logico_ventana = ancho_logico;
 
 	//Inicializamos el Renderizador.
-	bool exito = Renderizador::Instance()->init(titulo, xpos, ypos, alto, anchoPx, fullscreen);
+	bool exito = Renderizador::Instance()->init(titulo, posicion, tamanioPixels, fullscreen);
 	cout << "VentanaGrafica:: creo Render" << endl;
 	if(!exito){
 		cout << "Renderizador init es falso" << endl;
@@ -41,48 +41,23 @@ bool VentanaGrafica::init(string titulo, int xpos, int ypos, int alto, int ancho
 	return true;
 }
 
-void VentanaGrafica::setEscenario(EscenarioGrafico* esc) {
-    this->escenario = esc;
-    LimitesLogicos limites_logicos = getLimitesLogicos();
+void VentanaGrafica::agregarEscenario(EscenarioGrafico* esc) {
+    escenario = esc;
 
     //Seteo los limites logicos de la ventana en base al escenario dado.
-    this->limite_logico_izquierdo = (limites_logicos.getAnchoLogico()/2.0) - (this->ancho_logico_ventana/2.0);
-    this->limite_logico_derecho = this->limite_logico_izquierdo + this->ancho_logico_ventana;
+    limite_logico_izquierdo = (escenario->getAnchoLogico()/2.0) - (ancho_logico_ventana/2.0);
+}
+
+Vector2f VentanaGrafica::calcularPosicionEnVentana(Vector2f posicionLogica){
+    return Vector2f(posicionLogica.X(), escenario->getAltoLogico() - posicionLogica.Y());
 }
 
 void VentanaGrafica::dibujarTodo(){
-	Renderizador::Instance()->dibujar(this->escenario);
-	//cout << "VentanaGrafica::dibujarTodo()" << endl;
-}
-
-void VentanaGrafica::cerrar() {
-	Renderizador::Instance()->cerrar();
-	cout << "Cerrando ventana" << endl;
+	Renderizador::Instance()->dibujar(escenario);
 }
 
 void VentanaGrafica::actualizar() {
     escenario->actualizar();
-}
-
-//Devuelve limites logicos del escenario
-LimitesLogicos VentanaGrafica::getLimitesLogicos(){
-
-	LimitesLogicos limitesLogicos(this->escenario->getAnchoLogico(), this->escenario->getAltoLogico(), this->escenario->getYPisoLogico());
-	return limitesLogicos;
-}
-
-//Devuelte true si un punto es válido dentro del escenario.
-bool VentanaGrafica::esPosicionValida(Vector2f posicion){
-	int limite_izquierdo = 0;
-	int limite_inferior = this->escenario->getYPisoLogico();
-
-	if (posicion.X() < limite_izquierdo || (posicion.X() > this->escenario->getAnchoLogico())){
-		return false;
-	}
-	if (posicion.Y() < limite_inferior || (posicion.Y() > this->escenario->getAltoLogico())){
-		return false;
-	}
-	return true;
 }
 
 void VentanaGrafica::recibirNotificacion(Observable* unObservable){
@@ -95,15 +70,13 @@ void VentanaGrafica::recibirNotificacion(Observable* unObservable){
 	float posicion = posicionPersonaje.X();
 	if( posicion <= this->limite_logico_izquierdo){
 		this->limite_logico_izquierdo = posicionPersonaje.X();
-		this->limite_logico_derecho = limite_logico_izquierdo + this->ancho_logico_ventana;
 		this->escenario->scrollear_capas();
 	}
 	//Personaje en el margen derecho
 	posicion = posicionPersonaje.X()+ unPersonaje->getAncho();
-	if( posicion >= this->limite_logico_derecho){
+	if( posicion >= getLimiteLogicoDerecho()){
 		//Muevo los limites de la ventana.
-		this->limite_logico_derecho = posicion;
-		this->limite_logico_izquierdo = limite_logico_derecho - this->ancho_logico_ventana;
+		this->limite_logico_izquierdo = posicion - this->ancho_logico_ventana;
 
 		this->escenario->scrollear_capas();
 	}
@@ -114,14 +87,16 @@ float VentanaGrafica::getLimiteLogicoIzquierdo(){
 }
 
 float VentanaGrafica::getLimiteLogicoDerecho(){
-	return this->limite_logico_derecho;
+	return limite_logico_izquierdo + ancho_logico_ventana;
 }
 
 float VentanaGrafica::relacion_de_aspectoX(){
-	return this->ancho_ventanaPx / (this->limite_logico_derecho - this->limite_logico_izquierdo);
+	return this->ancho_ventanaPx / (getLimiteLogicoDerecho() - this->limite_logico_izquierdo);
 }
 
-VentanaGrafica::~VentanaGrafica(){}
+VentanaGrafica::~VentanaGrafica(){
+    delete Renderizador::Instance();
+}
 
 bool VentanaGrafica::esValida(Vector2f posicion){
     return escenario->esValida(posicion); //Cuando haya mas de un personaje se agregarán el resto de las condiciones

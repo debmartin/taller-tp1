@@ -1,5 +1,7 @@
 #include "EscenarioGrafico.h"
 
+#define LIMITE_IZQUIERDO 0
+
 using std::list;
 
 EscenarioGrafico::EscenarioGrafico(double ancho, double alto, double y_piso, list<Dibujable*>* dibujables, list<Capa*>* capas) :
@@ -49,9 +51,9 @@ void EscenarioGrafico::scrollear_capas(){
 }
 
 bool EscenarioGrafico::esValida(Vector2f posicion){
-    if (posicion.X() < 0 || posicion.X() >= ancho_logico)
+    if (posicion.X() < LIMITE_IZQUIERDO || posicion.X() >= ancho_logico)
         return false;
-    if (posicion.Y() < 0 || posicion.Y() >= alto_logico)
+    if (posicion.Y() < y_piso_logico || posicion.Y() >= alto_logico)
         return false;
     return true;
 }

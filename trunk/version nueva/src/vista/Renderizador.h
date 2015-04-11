@@ -11,6 +11,7 @@
 #include <SDL2/SDL.h>
 #include <string>
 #include "Dibujable.h"
+#include "../modelo/Vector2f.h"
 
 using namespace std;
 
@@ -25,10 +26,9 @@ class Renderizador{
 
 	public:
 		virtual ~Renderizador();
-		bool init(string titulo, int xpos, int ypos, int alto, int ancho, bool fullscreen);
+		bool init(string titulo, Vector2f posicion, Vector2f tamanio, bool fullscreen);
 		SDL_Renderer* getRenderer();
 		void dibujar(Dibujable* dibujable);
-		void cerrar();
 		static Renderizador* Instance();
 };
 
