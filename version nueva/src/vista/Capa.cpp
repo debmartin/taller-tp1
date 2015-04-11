@@ -7,8 +7,8 @@
 
 #include "Capa.h"
 
-Capa::Capa(Animacion* animCapa, Vector2f& tamInicialLogico, Vector2f& posInicial) :
-    animacionCapa(animCapa), tamanioLogico(tamInicialLogico) {
+Capa::Capa(Animacion* animCapa, Vector2f& tamInicialLogico, Vector2f& posInicial, Vector2f& aspectos) :
+    animacionCapa(animCapa), tamanioLogico(tamInicialLogico), relacionAspectos(aspectos) {
 	limite_logico_izquierdo = posInicial.X();
     sprite = new Sprite(animacionCapa, posInicial);
     sprite->escalarConTamanio(tamanioLogico.X(), tamanioLogico.Y());

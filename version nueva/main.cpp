@@ -71,12 +71,13 @@ int main(int argc, char* args[])
 	Animacion zubQuieto(IMAGEN_ZUBZERO_QUIETO, CANT_FOTOGRAMAS_ZUBQUIETO, FPS_ZUBQUIETO,  ID_ZUBZERO_QUIETO, Renderizador::Instance()->getRenderer());
 	Animacion zubCaminando(IMAGEN_ZUBZERO_CAMINANDO, CANT_FOTOGRAMAS_ZUBCAMINANDO, FPS_ZUBCAMINANDO, ID_ZUBZERO_CAMINANDO, Renderizador::Instance()->getRenderer());
 
-	Vector2f tamIniCapa(ANCHO_PX_VENTANA_INICIO*2, ALTO_ESCENARIO);
-	Vector2f tamIniCapa2(ANCHO_PX_VENTANA_INICIO, ALTO_ESCENARIO);
-
+	Vector2f tamIniCapa(ANCHO_LOGICO_CAPA1, ALTO_ESCENARIO);
+	Vector2f tamIniCapa2(ANCHO_LOGICO_CAPA2, ALTO_ESCENARIO);
     Vector2f posInCapa = POSICION_INICIAL_CAPA;
-	Capa fondoCapa(&fondoAnim, tamIniCapa, posInCapa);
-	Capa fondoCapa2(&fondoAnim2, tamIniCapa2, posInCapa);
+
+    Vector2f relacionAspectos = VentanaGrafica::Instance()->obtener_relacion_aspectos();
+	Capa fondoCapa(&fondoAnim, tamIniCapa, posInCapa, relacionAspectos);
+	Capa fondoCapa2(&fondoAnim2, tamIniCapa2, posInCapa, relacionAspectos);
 
 	Personaje jugador(ANCHO_PERSONAJE, ALTO_PERSONAJE, ANCHO_PERSONAJE_SPRITES, POSICION_INICIAL_PERSONAJE, VentanaGrafica::Instance());
 
@@ -97,6 +98,8 @@ int main(int argc, char* args[])
 
 	EscenarioGrafico escenario(ANCHO_ESCENARIO, ALTO_ESCENARIO, Y_PISO, &capasYPersonajes, &capas);
     VentanaGrafica::Instance()->agregarEscenario(&escenario);
+    VentanaGrafica::Instance()->centrar_ventana();
+    escenario.centrar_capas();
 
     cout << "carga correcta" << endl;
 	Juego g_game(VentanaGrafica::Instance(), &escenario, &jugador, &personaje);

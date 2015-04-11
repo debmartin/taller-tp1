@@ -37,6 +37,7 @@ public:
 	void recibirNotificacion(Observable* unObservable);
 	float relacion_de_aspectoX();
 	float relacion_de_aspectoY();
+	Vector2f obtener_relacion_aspectos();
 	static VentanaGrafica* Instance();
     bool esValida(Vector2f posicion);
     Vector2f calcularPosicionEnVentana(Vector2f posicionLogica);
