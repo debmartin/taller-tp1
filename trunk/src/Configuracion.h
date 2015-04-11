@@ -10,6 +10,8 @@
 
 #include <jsoncpp/json/json.h>
 #include <string>
+#include <iostream> // TODO: Lo agrego yo Gaston para que compile la linea 34 de Configuracion.cpp
+
 using namespace std;
 
 class Configuracion {
