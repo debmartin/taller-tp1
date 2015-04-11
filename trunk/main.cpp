@@ -81,10 +81,6 @@ int main(int argc, char* args[])
 	Capa fondoCapa(&fondoAnim, tamIniCapa, posInCapa, relacionAspectos);
 	Capa fondoCapa2(&fondoAnim2, tamIniCapa2, posInCapa, relacionAspectos);
 
-    Vector2f posInCapa = POSICION_INICIAL_CAPA;
-	Capa fondoCapa(&fondoAnim, tamIniCapa, posInCapa);
-	//Capa fondoCapa2(&fondoAnim2, tamIniCapa2, posInCapa);
-
 	Personaje jugador(ANCHO_PERSONAJE, ALTO_PERSONAJE, ANCHO_PERSONAJE_SPRITES, POSICION_INICIAL_PERSONAJE, VentanaGrafica::Instance());
 
 	PersonajeDibujable personaje(&zubQuieto, POSICION_INICIAL_PERSONAJE, FACTOR_ESCALA_PERSONAJE, &jugador);
@@ -93,11 +89,11 @@ int main(int argc, char* args[])
 
 	list<Capa*> capas;
 	capas.push_back(&fondoCapa);
-	//capas.push_back(&fondoCapa2);
+	capas.push_back(&fondoCapa2);
 
 	list<Dibujable*> capasYPersonajes;
 	capasYPersonajes.push_back((Dibujable*) &fondoCapa);
-	//capasYPersonajes.push_back((Dibujable*) &fondoCapa2);
+	capasYPersonajes.push_back((Dibujable*) &fondoCapa2);
 	capasYPersonajes.push_back((Dibujable*) &personaje);
 
 
