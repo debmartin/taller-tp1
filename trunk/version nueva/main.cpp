@@ -19,10 +19,12 @@
 #define ANCHO_LOGICO_CAPA1	600
 #define ANCHO_LOGICO_CAPA2	1000
 
-#define IMAGEN_FONDO2 "mario.jpg"
+#define IMAGEN_FONDO1 "Goro1.jpg"
+#define IMAGEN_FONDO2 "Goro2.jpg"
+//#define IMAGEN_FONDO2 "mario.jpg"
 //#define IMAGEN_FONDO "Pit2.png"
 //#define IMAGEN_FONDO "Pit.jpg"
-#define IMAGEN_FONDO "escenario2.gif"
+//#define IMAGEN_FONDO "escenario2.gif"
 //#define IMAGEN_FONDO "screen-pit.png"
 #define IMAGEN_ZUBZERO_CAMINANDO "zubzero-caminando.png"
 #define IMAGEN_ZUBZERO_QUIETO "zubzero-quieto.png"
@@ -65,7 +67,7 @@ int main(int argc, char* args[])
     if (! exito)
 		cout << "Error al inicializar juego" << endl;
 
-	Animacion fondoAnim(IMAGEN_FONDO, CANT_FOTOGRAMAS_FONDO, FPS_FONDO, ID_FONDO, Renderizador::Instance()->getRenderer());
+	Animacion fondoAnim(IMAGEN_FONDO1, CANT_FOTOGRAMAS_FONDO, FPS_FONDO, ID_FONDO, Renderizador::Instance()->getRenderer());
 	Animacion fondoAnim2(IMAGEN_FONDO2, CANT_FOTOGRAMAS_FONDO2, FPS_FONDO2, ID_FONDO, Renderizador::Instance()->getRenderer());
 
 	Animacion zubQuieto(IMAGEN_ZUBZERO_QUIETO, CANT_FOTOGRAMAS_ZUBQUIETO, FPS_ZUBQUIETO,  ID_ZUBZERO_QUIETO, Renderizador::Instance()->getRenderer());
