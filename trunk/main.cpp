@@ -19,8 +19,8 @@
 #define ANCHO_LOGICO_CAPA1	600
 #define ANCHO_LOGICO_CAPA2	1000
 
-#define IMAGEN_FONDO1 "Goro1.jpg"
-#define IMAGEN_FONDO2 "Goro2.jpg"
+#define IMAGEN_FONDO1 "goro1.png"
+#define IMAGEN_FONDO2 "goro2.png"
 //#define IMAGEN_FONDO2 "mario.jpg"
 //#define IMAGEN_FONDO "Pit2.png"
 //#define IMAGEN_FONDO "Pit.jpg"
