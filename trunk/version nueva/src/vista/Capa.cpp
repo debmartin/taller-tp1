@@ -7,21 +7,14 @@
 
 #include "Capa.h"
 
-Capa::Capa(Animacion* animCapa, Vector2f& tamInicialLogico, Vector2f& posInicial, Vector2f& aspectos) :
-    animacionCapa(animCapa), tamanioLogico(tamInicialLogico), relacionAspectos(aspectos) {
-	limite_logico_izquierdo = posInicial.X();
+Capa::Capa(Animacion* animCapa, Vector2f& tamInicial, Vector2f& posInicial) :
+    animacionCapa(animCapa), tamanio(tamInicial) {
     sprite = new Sprite(animacionCapa, posInicial);
-
-    sprite->escalarConTamanio(tamanioLogico.X()*aspectos.X(), tamanioLogico.Y()*aspectos.Y());
-    //sprite->escalarConTamanio(tamanioLogico.X(), tamanioLogico.Y());
+    sprite->escalarConTamanio(tamanio.X(), tamanio.Y());
 }
 
-double Capa::getAnchoLogico() {
-	return tamanioLogico.X();
-}
-
-double Capa::getLimiteLogicoIzquierdo() {
-	return this->limite_logico_izquierdo;
+double Capa::getAncho() {
+	return tamanio.X();
 }
 
 Sprite* Capa::getSprite(){
@@ -43,14 +36,6 @@ void Capa::dibujar(){
 void Capa::actualizar(){
     sprite->update();
 }
-
-void Capa::centrar_en(Vector2f posicion){
-	//Centro la capa en la posición dada.
-	this->limite_logico_izquierdo = posicion.X() - (getAnchoLogico()/2.0);
-	Vector2f vec(this->limite_logico_izquierdo, posicion.Y());
-	this->sprite->setPosicion(vec);
-}
-
 //ostream& operator <<(ostream &o, const Capa &c) {
 //
 //        o<<"capa -> [imagen_fondo, ancho]=["<<c.imagen_fondo<<", "<<c.ancho<<"]";
