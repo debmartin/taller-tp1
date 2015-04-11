@@ -61,10 +61,6 @@ void Controlador::setPersonaje(Personaje* personaje){
 	this->unPersonaje = personaje;
 }
 
-//void Controlador::setPersonajeDibujable(PersonajeDibujable personaje){
-//	this->unPersonajeDibujable = personaje;
-//}
-
 Controlador::~Controlador() {
 	// TODO Auto-generated destructor stub
 }

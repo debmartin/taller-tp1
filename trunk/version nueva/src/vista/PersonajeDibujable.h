@@ -20,6 +20,10 @@
 #include "Animacion.h"
 #include "Dibujable.h"
 
+#define ID_FONDO "screen-pit"
+#define ID_ZUBZERO_CAMINANDO "zubzero-caminando"
+#define ID_ZUBZERO_QUIETO "zubzero-quieto"
+
 class PersonajeDibujable : public Dibujable, public Observador {
 private:
 	Personaje* personaje;
@@ -32,7 +36,6 @@ public:
 	virtual ~PersonajeDibujable();
 	void seleccionarSprite();
 	void setEstado(estado_personaje unEstado);
-	void setSprite(Sprite* pSprite);
 	void agregarAnimacion(Animacion* nuevaAnimacion);
 	void dibujar();
 	void actualizar();

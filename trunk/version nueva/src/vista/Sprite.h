@@ -27,14 +27,12 @@ private:
 	int altoPx;
 	float factorEscalaX;
 	float factorEscalaY;
-	int cantidadFotogramas;
 	int anchoFotogramaPx;
 	int fotogramaActual;
 //	float zIndex;
 	int fps;
 	SDL_RendererFlip flip;
 	SentidoReproduccion sentidoReproduccion;
-	Trayectoria* trayectoria;
 	float tCreacion;
 
 public:
@@ -45,17 +43,14 @@ public:
 	void desplazar(Vector2f& posicion);
 	void setFlip(SDL_RendererFlip f); //OK
 	//void avanzarFotograma();
-	void escalarConFactor(float factor_x, float factor_y); //OK
+	void escalarConFactor(Vector2f& factor); //OK
 	void escalarConTamanio(int anchoNuevoPx, int altoNuevoPx); //OK
 	void setFotogramaActual(int nroFotograma);
 	void setSentidoReproduccion(SentidoReproduccion sr);
-//	void setZindex(float z_index);
-//	float getZindex() { return zIndex; }
 	void dibujar(); // OK
 	void update();
 	void cambiarAnimacion(Animacion* nuevaAnim);
 	Vector2f getPosicion();
-	void setTrayectoria(Trayectoria* t);
 };
 
 #endif /* SRC_VISTA_SPRITE_H_ */

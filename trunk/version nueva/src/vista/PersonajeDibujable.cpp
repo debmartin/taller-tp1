@@ -11,7 +11,7 @@
 PersonajeDibujable::PersonajeDibujable(Animacion* animIni, Vector2f posicionIni, Vector2f factorEscala, Personaje* personajeModelo) :
     personaje(personajeModelo) {
 	spritePersonaje = new Sprite(animIni, posicionIni);
-    spritePersonaje->escalarConFactor(factorEscala.X(), factorEscala.Y());
+    spritePersonaje->escalarConFactor(factorEscala);
     animaciones[animIni->getId()] = animIni;
 }
 
@@ -24,31 +24,27 @@ void PersonajeDibujable::seleccionarSprite(){
 
 	switch(this->estado){
 		case CAMINANDO_DERECHA:
-			this->spritePersonaje->cambiarAnimacion(animaciones["zubzero-caminando"]);
+			this->spritePersonaje->cambiarAnimacion(animaciones[ID_ZUBZERO_CAMINANDO]);
 			this->spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
 			break;
 		case CAMINANDO_IZQUIERDA:
-			this->spritePersonaje->cambiarAnimacion(animaciones["zubzero-caminando"]);
+			this->spritePersonaje->cambiarAnimacion(animaciones[ID_ZUBZERO_CAMINANDO]);
 			this->spritePersonaje->setSentidoReproduccion(HACIA_ATRAS);
 			break;
 		case EN_ESPERA:
-			this->spritePersonaje->cambiarAnimacion(animaciones["zubzero-quieto"]);
+			this->spritePersonaje->cambiarAnimacion(animaciones[ID_ZUBZERO_QUIETO]);
 			cout<<"Personaje dibujable: Seteo sentido reproduccion"<<endl;
 			this->spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
 			break;
 		case SALTANDO_VERTICAL:
-			this->spritePersonaje->cambiarAnimacion(animaciones["zubzero-quieto"]);
+			this->spritePersonaje->cambiarAnimacion(animaciones[ID_ZUBZERO_QUIETO]);
 			this->spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
 			break;
 	}
 }
 
-void PersonajeDibujable::setSprite(Sprite* pSprite){
-	this->spritePersonaje = pSprite;
-}
 PersonajeDibujable::~PersonajeDibujable() {
-    for (std::map<string, Animacion*>::iterator it = animaciones.begin(); it != animaciones.end(); ++it)
-        SDL_DestroyTexture(it->second->getTextura());
+    delete spritePersonaje;
 }
 
 void PersonajeDibujable::agregarAnimacion(Animacion* nuevaAnimacion){

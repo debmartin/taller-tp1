@@ -6,7 +6,6 @@
 #include "Sprite.h"
 #include "EscenarioGrafico.h"
 #include "Posicionable.h"
-#include "LimitesLogicos.h"
 #include "../modelo/Observador.h"
 #include "../modelo/Personaje.h"
 

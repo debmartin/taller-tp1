@@ -9,6 +9,8 @@
 
 #define VELOCIDAD_DESP_HORIZONTAL 180.0f
 #define VELOCIDAD_DESP_VERTICAL 800.0f
+#define VELOCIDAD_NULA 0.0f
+#define VECTOR_VELOCIDAD_NULA Vector2f(0, 0)
 #define VECTOR_GRAVEDAD Vector2f(0, -1600.f)
 
 Personaje::Personaje() {
@@ -64,62 +66,35 @@ double Personaje::getSpritesAncho() const {
 	return sprites_ancho;
 }
 
-//void Personaje::mover(Movimiento unMovimiento){
-//	switch(unMovimiento){
-//		case REPOSO:
-//			setEstado(EN_ESPERA);
-//			setTrayectoria(new Reposo(getPosicion()));
-//			cout<<"seteo trayectoria"<<endl;
-//
-//			break;
-//		case CAMINAR_DERECHA:
-//			cout<<"Estado derecha"<<endl;
-//			setEstado(CAMINANDO_DERECHA);
-//			setTrayectoria(new MRU(getPosicion(), Vector2f(180.0f, 0.0f)));
-//			cout<<"seteo trayectoria"<<endl;
-//
-//			break;
-//		case CAMINAR_IZQUIERDA:
-//			setEstado(CAMINANDO_IZQUIERDA);
-//			setTrayectoria(new MRU(getPosicion(), Vector2f(-180.0f, 0.0f)));
-//			break;
-//		case SALTAR_VERTICAL:
-//			setEstado(SALTANDO_VERTICAL);
-//			setTrayectoria(new MRUV(getPosicion(), Vector2f(0,800.0f), Vector2f(0,-1600.0f)));
-//			break;
-//	}
-//}
-
 void Personaje::caminarDerecha(){
     cout<<"Estado derecha"<<endl;
     setEstado(CAMINANDO_DERECHA);
-    setTrayectoria(new MRU(posicion, Vector2f(VELOCIDAD_DESP_HORIZONTAL, 0.0f)));
+    cambiarTrayectoria(new MRU(posicion, Vector2f(VELOCIDAD_DESP_HORIZONTAL, VELOCIDAD_NULA)));
     cout<<"seteo trayectoria"<<endl;
 }
 
 void Personaje::caminarIzquierda(){
     setEstado(CAMINANDO_IZQUIERDA);
-    setTrayectoria(new MRU(posicion, Vector2f(-VELOCIDAD_DESP_HORIZONTAL, 0.0f)));
+    cambiarTrayectoria(new MRU(posicion, Vector2f(-VELOCIDAD_DESP_HORIZONTAL, VELOCIDAD_NULA)));
 }
 
 void Personaje::saltarVertical(){
-//    if (posicion.Y() != 0)
-//        return
     setEstado(SALTANDO_VERTICAL);
-    setTrayectoria(new MRUV(posicion, Vector2f(0,VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD));
+    cambiarTrayectoria(new MRUV(posicion, Vector2f(VELOCIDAD_NULA, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD));
 }
 
 void Personaje::saltarOblicuo(){
     setEstado(SALTANDO_OBLICUO);
-    setTrayectoria(new MRUV(posicion, Vector2f(VELOCIDAD_DESP_HORIZONTAL, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD));
+    cambiarTrayectoria(new MRUV(posicion, Vector2f(VELOCIDAD_DESP_HORIZONTAL, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD));
 }
 
 void Personaje::mantenerReposo(){
     setEstado(EN_ESPERA);
-    setTrayectoria(new Reposo(posicion));
+    cambiarTrayectoria(new Reposo(posicion));
 }
 
-void Personaje::setTrayectoria(Trayectoria* t) {
+void Personaje::cambiarTrayectoria(Trayectoria* t) {
+    delete trayectoria;
 	this->trayectoria = t;
 	this->tCreacion = ((float)(SDL_GetTicks()))/1000.0f; //TODO: Solo funciona en el caso particular de este video juego porque anda lo suficientemente rapido
 }
@@ -144,7 +119,7 @@ void Personaje::update(){
         posicion = posicionCandidata;
     } else if (posicionCandidata.Y() >= posicionInicial.Y()) {
         estado = SALTANDO_VERTICAL;
-        setTrayectoria(new MRUV(posicion, Vector2f(0,0), VECTOR_GRAVEDAD));
+        cambiarTrayectoria(new MRUV(posicion, VECTOR_VELOCIDAD_NULA, VECTOR_GRAVEDAD));
         posicion = trayectoria->getPosicion(tActual);
     } else if (posicion.Y() != posicionInicial.Y()){
         posicion = Vector2f(posicion.X(), posicionInicial.Y());
@@ -155,7 +130,7 @@ void Personaje::update(){
 }
 
 Personaje::~Personaje(){
-	// TODO Auto-generated destructor stub
+    delete trayectoria;
 }
 
 bool Personaje::estaSaltando(){
