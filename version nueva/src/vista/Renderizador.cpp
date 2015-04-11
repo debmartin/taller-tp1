@@ -23,7 +23,7 @@ Renderizador::Renderizador():vWindow(NULL), vRenderer(NULL){
 
 }
 
-bool Renderizador::init(string titulo, int xpos, int ypos, int alto, int ancho, bool fullscreen){
+bool Renderizador::init(string titulo, Vector2f posicion, Vector2f tamanio, bool fullscreen){
 
 	// attempt to initialize SDL
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
@@ -37,7 +37,7 @@ bool Renderizador::init(string titulo, int xpos, int ypos, int alto, int ancho, 
 		else
 			flags = 0;
 
-		this->vWindow = SDL_CreateWindow(titulo.c_str(), xpos, ypos, ancho, alto, flags);
+		this->vWindow = SDL_CreateWindow(titulo.c_str(), posicion.X(), posicion.Y(), tamanio.X(), tamanio.Y(), flags);
 
 		if (this->vWindow != NULL) // window init success
 		{
@@ -81,10 +81,9 @@ void Renderizador::dibujar(Dibujable* dibujable){
 	SDL_RenderPresent(this->vRenderer);
 }
 
-void Renderizador::cerrar(){
-	SDL_DestroyWindow(this->vWindow);
+Renderizador::~Renderizador(){
+    SDL_DestroyWindow(this->vWindow);
 	SDL_DestroyRenderer(this->vRenderer);
 	SDL_Quit();
 }
-Renderizador::~Renderizador(){}
 

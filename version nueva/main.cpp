@@ -8,8 +8,7 @@
 #include <SDL2/SDL.h>
 
 #define TITULO_VENTANA "Taller de programacion TP: Mortal Kombat"
-#define XPOS_VENTANA_INICIO 100
-#define YPOS_VENTANA_INICIO 100
+#define POS_VENTANA_INICIO Vector2f(100, 100)
 #define ALTO_VENTANA_INICIO 480
 #define ANCHO_PX_VENTANA_INICIO 640
 #define ANCHO_LOGICO_VENTANA_INICIO 640
@@ -25,6 +24,15 @@
 #define IMAGEN_ZUBZERO_CAMINANDO "zubzero-caminando.png"
 #define IMAGEN_ZUBZERO_QUIETO "zubzero-quieto.png"
 
+#define CANT_FOTOGRAMAS_FONDO 1
+#define CANT_FOTOGRAMAS_FONDO2 1
+#define CANT_FOTOGRAMAS_ZUBQUIETO 12
+#define CANT_FOTOGRAMAS_ZUBCAMINANDO 9
+
+#define FPS_FONDO 1
+#define FPS_FONDO2 1
+#define FPS_ZUBQUIETO 10
+#define FPS_ZUBCAMINANDO 10
 //#define IMAGEN_FONDO "../version nueva/imagenes/screen-pit.png"
 //#define IMAGEN_ZUBZERO_CAMINANDO "../version nueva/imagenes/zubzero-caminando.png"
 //#define IMAGEN_ZUBZERO_QUIETO "../version nueva/imagenes/zubzero-quieto.png"
@@ -32,6 +40,14 @@
 #define ID_FONDO "screen-pit"
 #define ID_ZUBZERO_CAMINANDO "zubzero-caminando"
 #define ID_ZUBZERO_QUIETO "zubzero-quieto"
+
+#define POSICION_INICIAL_CAPA Vector2f(0, 0)
+#define POSICION_INICIAL_PERSONAJE Vector2f(100, 195)
+#define FACTOR_ESCALA_PERSONAJE Vector2f(2.0f, 2.0f)
+
+#define ANCHO_PERSONAJE 20
+#define ALTO_PERSONAJE 35
+#define ANCHO_PERSONAJE_SPRITES 20
 
 int main(int argc, char* args[])
 {
@@ -43,32 +59,28 @@ int main(int argc, char* args[])
 	//para correr las pruebas comentar o descomentar estas 2 lineas
 //	Test tests;
 //	tests.ejecutar();
-
-    bool exito = VentanaGrafica::Instance()->init(TITULO_VENTANA, \
-    XPOS_VENTANA_INICIO, YPOS_VENTANA_INICIO, ALTO_VENTANA_INICIO, \
-    ANCHO_PX_VENTANA_INICIO, ANCHO_LOGICO_VENTANA_INICIO, INICIAR_FULLSCREEN);
+    Vector2f tamanioVentana(ANCHO_PX_VENTANA_INICIO, ALTO_VENTANA_INICIO);
+    bool exito = VentanaGrafica::Instance()->init(TITULO_VENTANA, POS_VENTANA_INICIO, tamanioVentana, ANCHO_LOGICO_VENTANA_INICIO, INICIAR_FULLSCREEN);
 
     if (! exito)
 		cout << "Error al inicializar juego" << endl;
 
-	Animacion fondoAnim(IMAGEN_FONDO, 1, 1, ID_FONDO, Renderizador::Instance()->getRenderer());
-	Animacion fondoAnim2(IMAGEN_FONDO2, 1, 1, ID_FONDO, Renderizador::Instance()->getRenderer());
+	Animacion fondoAnim(IMAGEN_FONDO, CANT_FOTOGRAMAS_FONDO, FPS_FONDO, ID_FONDO, Renderizador::Instance()->getRenderer());
+	Animacion fondoAnim2(IMAGEN_FONDO2, CANT_FOTOGRAMAS_FONDO2, FPS_FONDO2, ID_FONDO, Renderizador::Instance()->getRenderer());
 
-	Animacion zubQuieto(IMAGEN_ZUBZERO_QUIETO, 12, 10,  ID_ZUBZERO_QUIETO, Renderizador::Instance()->getRenderer());
-	Animacion zubCaminando(IMAGEN_ZUBZERO_CAMINANDO, 9, 10, ID_ZUBZERO_CAMINANDO, Renderizador::Instance()->getRenderer());
+	Animacion zubQuieto(IMAGEN_ZUBZERO_QUIETO, CANT_FOTOGRAMAS_ZUBQUIETO, FPS_ZUBQUIETO,  ID_ZUBZERO_QUIETO, Renderizador::Instance()->getRenderer());
+	Animacion zubCaminando(IMAGEN_ZUBZERO_CAMINANDO, CANT_FOTOGRAMAS_ZUBCAMINANDO, FPS_ZUBCAMINANDO, ID_ZUBZERO_CAMINANDO, Renderizador::Instance()->getRenderer());
 
-	Vector2f posIniCapa(0, 0);
 	Vector2f tamIniCapa(ANCHO_PX_VENTANA_INICIO*2, ALTO_VENTANA_INICIO);
 	Vector2f tamIniCapa2(ANCHO_PX_VENTANA_INICIO, ALTO_VENTANA_INICIO);
-	Capa fondoCapa(&fondoAnim, tamIniCapa, posIniCapa);
-	Capa fondoCapa2(&fondoAnim2, tamIniCapa2, posIniCapa);
 
-	Vector2f posInicialPersonaje(100, 195);
-	Vector2f factorEscalaPer(2.0f, 2.0f);
+    Vector2f posInCapa = POSICION_INICIAL_CAPA;
+	Capa fondoCapa(&fondoAnim, tamIniCapa, posInCapa);
+	Capa fondoCapa2(&fondoAnim2, tamIniCapa2, posInCapa);
 
-	Personaje jugador(20,35,20,posInicialPersonaje, VentanaGrafica::Instance());
+	Personaje jugador(ANCHO_PERSONAJE, ALTO_PERSONAJE, ANCHO_PERSONAJE_SPRITES, POSICION_INICIAL_PERSONAJE, VentanaGrafica::Instance());
 
-	PersonajeDibujable personaje(&zubQuieto, posInicialPersonaje, factorEscalaPer, &jugador);
+	PersonajeDibujable personaje(&zubQuieto, POSICION_INICIAL_PERSONAJE, FACTOR_ESCALA_PERSONAJE, &jugador);
 	personaje.agregarAnimacion(&zubQuieto);
 	personaje.agregarAnimacion(&zubCaminando);
 
@@ -84,7 +96,7 @@ int main(int argc, char* args[])
 
 
 	EscenarioGrafico escenario(ANCHO_ESCENARIO, ALTO_VENTANA_INICIO, Y_PISO, &capasYPersonajes, &capas);
-    VentanaGrafica::Instance()->setEscenario(&escenario);
+    VentanaGrafica::Instance()->agregarEscenario(&escenario);
 
     cout << "carga correcta" << endl;
 	Juego g_game(VentanaGrafica::Instance(), &escenario, &jugador, &personaje);
@@ -113,8 +125,6 @@ int main(int argc, char* args[])
 		if (frameTime < DELAY_TIME)
 			SDL_Delay((int)(DELAY_TIME - frameTime));
 	}
-
-	g_game.clean();
 
 	return 0;
 }

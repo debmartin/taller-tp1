@@ -16,7 +16,6 @@ class Posicionable
     public:
         Posicionable();
         virtual ~Posicionable();
-        virtual LimitesLogicos getLimitesLogicos() = 0;
         virtual bool esValida(Vector2f posicion) = 0;
 };
 

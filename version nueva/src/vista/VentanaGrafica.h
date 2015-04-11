@@ -17,9 +17,7 @@ private:
 	EscenarioGrafico* escenario;
 	double ancho_ventanaPx;
 	double ancho_logico_ventana;
-	//TODO: Val. borrar uno de los limites.
 	double limite_logico_izquierdo;
-	double limite_logico_derecho;
 
 	// SINGLETON
 	VentanaGrafica();
@@ -27,19 +25,18 @@ private:
 
 public:
 	virtual ~VentanaGrafica();
-	bool init(string titulo, int xpos, int ypos, int alto, int anchoPx, int ancho_logico, bool fullscreen);
-	void setEscenario(EscenarioGrafico* unEscenario);
+	bool init(string titulo, Vector2f posicion, Vector2f tamanioPixels, int ancho_logico, bool fullscreen);
+	void agregarEscenario(EscenarioGrafico* unEscenario);
 	void dibujarTodo();
-	void cerrar();
 	void actualizar();
 	float getLimiteLogicoIzquierdo();
 	float getLimiteLogicoDerecho();
-	LimitesLogicos getLimitesLogicos();
 	bool esPosicionValida(Vector2f posicion);
 	void recibirNotificacion(Observable* unObservable);
 	float relacion_de_aspectoX();
 	static VentanaGrafica* Instance();
     bool esValida(Vector2f posicion);
+    Vector2f calcularPosicionEnVentana(Vector2f posicionLogica);
 };
 
 #endif /* SRC_VISTA_VENTANAGRAFICA_H_ */
