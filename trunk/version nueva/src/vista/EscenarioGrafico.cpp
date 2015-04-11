@@ -37,6 +37,14 @@ void EscenarioGrafico::actualizar(){
     }
 }
 
+void EscenarioGrafico::centrar_capas(){
+	float posicionInicialY = 0.0f;
+	Vector2f vec(this->ancho_logico/2.0, posicionInicialY);
+	for (list<Capa*>::iterator it = capas->begin(); it != capas->end(); ++it){
+		(*it)->centrar_en(vec);
+	}
+}
+
 void EscenarioGrafico::scrollear_capas(){
 /*	Dibujable* dib = this->capas->front();
 	Capa* capa = (Capa*) dib;

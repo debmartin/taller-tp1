@@ -22,9 +22,10 @@ private:
 	Animacion* animacionCapa;
 	Vector2f tamanioLogico;
 	float limite_logico_izquierdo;
+	Vector2f relacionAspectos;
 	Sprite* sprite;
 public:
-	Capa(Animacion* animCapa, Vector2f& tamInicial, Vector2f& posInicial);
+	Capa(Animacion* animCapa, Vector2f& tamInicial, Vector2f& posInicial, Vector2f& relacionAspectos);
 	virtual ~Capa();
 	double getAnchoLogico();
 	double getLimiteLogicoIzquierdo();

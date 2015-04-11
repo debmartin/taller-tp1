@@ -113,6 +113,11 @@ float VentanaGrafica::relacion_de_aspectoY(){
 	return this->alto_ventanaPx / (this->alto_logico_ventana);
 }
 
+Vector2f VentanaGrafica::obtener_relacion_aspectos(){
+	Vector2f vec(relacion_de_aspectoX(), relacion_de_aspectoY());
+	return vec;
+}
+
 VentanaGrafica::~VentanaGrafica(){
     delete Renderizador::Instance();
 }
