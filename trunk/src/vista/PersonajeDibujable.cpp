@@ -64,10 +64,10 @@ void PersonajeDibujable::recibirNotificacion(Observable* unObservable){
 
 	Personaje* unPersonaje = (Personaje*) unObservable;
 	Vector2f nueva_posicion = unPersonaje->obtenerPosicionEnVentana();
-
+	Vector2f posicion_final(nueva_posicion.X()*VentanaGrafica::Instance()->relacion_de_aspectoX(), nueva_posicion.Y());
 
 	//Actualizo la posicion del Sprite.
-	this->spritePersonaje->setPosicion(nueva_posicion);
+	this->spritePersonaje->setPosicion(posicion_final);
 
 	//Actualizo el estado del personajeDibujable
 	setEstado(unPersonaje->getEstado());
