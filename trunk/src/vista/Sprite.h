@@ -51,6 +51,8 @@ public:
 	void update();
 	void cambiarAnimacion(Animacion* nuevaAnim);
 	Vector2f getPosicion();
+	int getAnchoPx();
+	int getAltoPx();
 };
 
 #endif /* SRC_VISTA_SPRITE_H_ */

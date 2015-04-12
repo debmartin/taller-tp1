@@ -83,7 +83,6 @@ void VentanaGrafica::recibirNotificacion(Observable* unObservable){
 	if( posicion >= getLimiteLogicoDerecho()){
 		//Muevo los limites de la ventana.
 		this->limite_logico_izquierdo = posicion - this->ancho_logico_ventana;
-
 		this->escenario->scrollear_capas();
 	}
 }
@@ -96,6 +95,9 @@ float VentanaGrafica::getLimiteLogicoDerecho(){
 	return limite_logico_izquierdo + ancho_logico_ventana;
 }
 
+float VentanaGrafica::getAnchoLogico() {
+	return ancho_logico_ventana;
+}
 /*
 float VentanaGrafica::relacion_de_aspectoX(){
 	return this->ancho_ventanaPx / (getLimiteLogicoDerecho() - this->limite_logico_izquierdo);

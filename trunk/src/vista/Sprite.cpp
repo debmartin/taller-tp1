@@ -61,6 +61,14 @@ void Sprite::desplazar(Vector2f& p) {
 void Sprite::setFlip(SDL_RendererFlip f) {
 	this->flip = f;
 }
+
+int Sprite::getAnchoPx(){
+	return this->anchoPx * factorEscalaX;
+}
+
+int Sprite::getAltoPx(){
+	return this->altoPx * factorEscalaY;
+}
 /*
 void Sprite::avanzarFotograma() {
 	if (fotogramaActual < cantidadFotogramas)

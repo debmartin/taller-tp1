@@ -5,7 +5,20 @@
 using std::list;
 
 EscenarioGrafico::EscenarioGrafico(double ancho, double alto, double y_piso, list<Dibujable*>* dibujables, list<Capa*>* capas) :
-    ancho_logico(ancho), alto_logico(alto), dibujables(dibujables), capas(capas) {
+    ancho_logico(ancho),
+	alto_logico(alto),
+	dibujables(dibujables),
+	capas(capas) {
+
+	float velocidadCapa;
+
+	for (list<Capa*>::iterator it = capas->begin(); it != capas->end(); ++it){
+		velocidadCapa = this->getAnchoLogico() - (*it)->getAnchoLogico();
+		velocidadCapa /= this->getAnchoLogico() - VentanaGrafica::Instance()->getAnchoLogico();
+
+		this->listaVelocidades.push_back(velocidadCapa);
+		cout << "VELOCIDAD DE CAPA:" << velocidadCapa << endl;
+	}
 }
 
 double EscenarioGrafico::getAltoLogico() const {
@@ -50,11 +63,20 @@ void EscenarioGrafico::scrollear_capas(){
 	Capa* capa = (Capa*) dib;
 	Sprite* sprite = capa->getSprite();*/
 
+	size_t poslListaVelocidades = 0;
 	for (list<Capa*>::iterator it = capas->begin(); it != capas->end(); ++it){
+		/*
 		Vector2f v(VentanaGrafica::Instance()->getLimiteLogicoIzquierdo() * VentanaGrafica::Instance()->relacion_de_aspectoX(), 0.0f);
 		v*=-1;
 		Sprite* sprite = (*it)->getSprite();
 	    sprite->setPosicion(v);
+	    */
+		float nuevaPosicionXCapa = this->listaVelocidades[poslListaVelocidades] * VentanaGrafica::Instance()->getLimiteLogicoIzquierdo();
+		(*it)->setPosicionX(nuevaPosicionXCapa);
+		float posicionXRespectoAVentana = nuevaPosicionXCapa - VentanaGrafica::Instance()->getLimiteLogicoIzquierdo();
+		Vector2f posPXSprite(posicionXRespectoAVentana * VentanaGrafica::Instance()->relacion_de_aspectoX(), 0.0f);
+		(*it)->getSprite()->setPosicion(posPXSprite);
+		poslListaVelocidades++;
 	}
 }
 
