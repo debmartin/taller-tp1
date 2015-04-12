@@ -17,7 +17,7 @@
 #define ANCHO_ESCENARIO 1500
 #define ALTO_ESCENARIO 600
 #define Y_PISO 100
-#define ANCHO_LOGICO_CAPA1	600
+#define ANCHO_LOGICO_CAPA1	800
 #define ANCHO_LOGICO_CAPA2	1000
 
 //#define IMAGEN_FONDO1 "goro1-transparente.png"
