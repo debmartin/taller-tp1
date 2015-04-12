@@ -29,10 +29,12 @@ public:
 	virtual ~Capa();
 	double getAnchoLogico();
 	double getLimiteLogicoIzquierdo();
+	double getLimiteLogicoDerecho();
 	void centrar_en(Vector2f posicion);
     void dibujar();
     void actualizar();
     Sprite* getSprite(); //TODO: DANGER!!
+    void setPosicionX(float nuevoX);
 //	friend ostream& operator<<(ostream &o, const Capa &c);
 };
 

@@ -5,6 +5,7 @@
 #include "Sprite.h"
 #include "Capa.h"
 #include <list>
+#include <vector>
 
 typedef enum
 {
@@ -16,6 +17,7 @@ class EscenarioGrafico : public Dibujable {
 private:
 	std::list<Dibujable*>* dibujables;
 	std::list<Capa*>* capas;
+	vector<float> listaVelocidades;
 
 	double ancho_logico;
 	double alto_logico;

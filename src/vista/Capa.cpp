@@ -23,7 +23,9 @@ double Capa::getAnchoLogico() {
 double Capa::getLimiteLogicoIzquierdo() {
 	return this->limite_logico_izquierdo;
 }
-
+double Capa::getLimiteLogicoDerecho() {
+	return this->limite_logico_izquierdo + this->tamanioLogico.X();
+}
 Sprite* Capa::getSprite(){
 	return this->sprite;
 }
@@ -51,6 +53,9 @@ void Capa::centrar_en(Vector2f posicion){
 	this->sprite->setPosicion(vec);
 }
 
+void Capa::setPosicionX(float nuevoX){
+	this->limite_logico_izquierdo = nuevoX;
+}
 //ostream& operator <<(ostream &o, const Capa &c) {
 //
 //        o<<"capa -> [imagen_fondo, ancho]=["<<c.imagen_fondo<<", "<<c.ancho<<"]";

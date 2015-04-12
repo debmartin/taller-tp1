@@ -5,6 +5,7 @@
 #include "src/vista/EscenarioGrafico.h"
 #include "src/vista/Capa.h"
 #include "src/modelo/Personaje.h"
+#include "src/vista/Sprite.h"
 #include <SDL2/SDL.h>
 
 #define TITULO_VENTANA "Taller de programacion TP: Mortal Kombat"
@@ -16,10 +17,14 @@
 #define ANCHO_ESCENARIO 1500
 #define ALTO_ESCENARIO 600
 #define Y_PISO 100
-#define ANCHO_LOGICO_CAPA1	600
+#define ANCHO_LOGICO_CAPA1	800
 #define ANCHO_LOGICO_CAPA2	1000
 
+//#define IMAGEN_FONDO1 "goro1-transparente.png"
+//#define IMAGEN_FONDO1 "goro1-grilla.png"
 #define IMAGEN_FONDO1 "goro1.png"
+//#define IMAGEN_FONDO2 "goro2-transparente.png"
+//#define IMAGEN_FONDO2 "goro2-grilla.png"
 #define IMAGEN_FONDO2 "goro2.png"
 //#define IMAGEN_FONDO2 "mario.jpg"
 //#define IMAGEN_FONDO "Pit2.png"
@@ -49,6 +54,7 @@
 #define ANCHO_PERSONAJE 20
 #define ALTO_PERSONAJE 35
 #define ANCHO_PERSONAJE_SPRITES 20
+
 
 int main(int argc, char* args[])
 {
@@ -100,8 +106,8 @@ int main(int argc, char* args[])
 
 	EscenarioGrafico escenario(ANCHO_ESCENARIO, ALTO_ESCENARIO, Y_PISO, &capasYPersonajes, &capas);
     VentanaGrafica::Instance()->agregarEscenario(&escenario);
-    VentanaGrafica::Instance()->centrar_ventana();
-    escenario.centrar_capas();
+    VentanaGrafica::Instance()->centrar_ventana();////////////////////////////////////////////////////////////////////////////////////
+    escenario.centrar_capas();////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     cout << "carga correcta" << endl;
 	Juego g_game(VentanaGrafica::Instance(), &escenario, &jugador, &personaje);
@@ -110,6 +116,7 @@ int main(int argc, char* args[])
 	//levantar la información inicial mediante json
 	//... usar libreria jsonCpp
     cout << "creacion juego correcta" << endl;
+
 
 
 	while (g_game.running())
@@ -124,7 +131,36 @@ int main(int argc, char* args[])
 
 		g_game.render();
 	    //cout << "game running2" << endl;
-
+		cout << "============INICIO INFORMACION DE OBJETOS============" << endl;
+		cout << "ESCENARIO->alto-logico:" << escenario.getAltoLogico() << endl;
+		cout << "ESCENARIO->ancho-logico:" << escenario.getAnchoLogico() << endl;
+		cout << "ESCENARIO->y-piso-logico:" << escenario.getYPisoLogico() << endl;
+		cout << "-------------------------------------------------------" << endl;
+		cout << "VENTANA-GRAFICA->limite logico Izquierdo:" << VentanaGrafica::Instance()->getLimiteLogicoIzquierdo() << endl;
+		cout << "VENTANA-GRAFICA->limite logico Derecho:" << VentanaGrafica::Instance()->getLimiteLogicoDerecho() << endl;
+		cout << "VENTANA-GRAFICA->relacion de aspecto X:" << VentanaGrafica::Instance()->relacion_de_aspectoX() << endl;
+		cout << "VENTANA-GRAFICA->relacion de aspecto Y:" << VentanaGrafica::Instance()->relacion_de_aspectoY() << endl;
+		cout << "-------------------------------------------------------" << endl;
+		cout << "CAPA1->limite logico Izquierdo:" << fondoCapa.getLimiteLogicoIzquierdo() << endl;
+		cout << "CAPA1->limite logico Derecho:" << fondoCapa.getLimiteLogicoDerecho() << endl;
+		cout << "CAPA1->sprite->altpPx:" << fondoCapa.getSprite()->getAltoPx() << endl;
+		cout << "CAPA1->sprite->anchoPx:" << fondoCapa.getSprite()->getAnchoPx() << endl;
+		cout << "CAPA1->sprite->posicionPx-X:" << fondoCapa.getSprite()->getPosicion().X() << endl;
+		cout << "CAPA1->sprite->posicionPx-Y:" << fondoCapa.getSprite()->getPosicion().Y() << endl;
+		cout << "-------------------------------------------------------" << endl;
+		cout << "CAPA2->limite logico Izquierdo:" << fondoCapa2.getLimiteLogicoIzquierdo() << endl;
+		cout << "CAPA2->limite logico Derecho:" << fondoCapa2.getLimiteLogicoDerecho() << endl;
+		cout << "CAPA2->sprite->altpPx:" << fondoCapa2.getSprite()->getAltoPx() << endl;
+		cout << "CAPA2->sprite->anchoPx:" << fondoCapa2.getSprite()->getAnchoPx() << endl;
+		cout << "CAPA2->sprite->posicionPx-X:" << fondoCapa2.getSprite()->getPosicion().X() << endl;
+		cout << "CAPA2->sprite->posicionPx-Y:" << fondoCapa2.getSprite()->getPosicion().Y() << endl;
+		cout << "-------------------------------------------------------" << endl;
+		cout << "PERSONAJE-LOGICO->posicion-logica-X:" << jugador.getPosicion().X() << endl;
+		cout << "PERSONAJE-LOGICO->posicion-logica-Y:" << jugador.getPosicion().Y() << endl;
+		cout << "-------------------------------------------------------" << endl;
+		cout << "PERSONAJE-DIBUJABLE->SPRITE->posicionPx-X:" << personaje._getSprite()->getPosicion().X() << endl;
+		cout << "PERSONAJE-DIBUJABLE->SPRITE->posicionPx-Y:" << personaje._getSprite()->getPosicion().Y() << endl;
+		cout << "=============FIN INFORMACION DE OBJETOS==============" << endl;
 		frameTime = SDL_GetTicks() - frameStart;
 
 		if (frameTime < DELAY_TIME)
