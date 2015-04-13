@@ -66,18 +66,11 @@ void EscenarioGrafico::centrar_dibujables(){
 	//Centro el personaje
 	Vector2f vec2(this->ancho_logico/2.0, getYPisoLogico());
 	this->dibujables->back()->centrar_en(vec);
-	//((PersonajeDibujable*)(this->dibujables))->centrar_en(vec);
 }
 
 void EscenarioGrafico::scrollear_capas(){
 	size_t poslListaVelocidades = 0;
 	for (list<Capa*>::iterator it = capas->begin(); it != capas->end(); ++it){
-		/*
-		Vector2f v(VentanaGrafica::Instance()->getLimiteLogicoIzquierdo() * VentanaGrafica::Instance()->relacion_de_aspectoX(), 0.0f);
-		v*=-1;
-		Sprite* sprite = (*it)->getSprite();
-	    sprite->setPosicion(v);
-	    */
 		float nuevaPosicionXCapa = this->listaVelocidades[poslListaVelocidades] * VentanaGrafica::Instance()->getLimiteLogicoIzquierdo();
 		(*it)->setPosicionX(nuevaPosicionXCapa);
 		float posicionXRespectoAVentana = nuevaPosicionXCapa - VentanaGrafica::Instance()->getLimiteLogicoIzquierdo();
