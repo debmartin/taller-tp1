@@ -66,6 +66,11 @@ double Personaje::getSpritesAncho() const {
 	return sprites_ancho;
 }
 
+void Personaje::centrar_en(Vector2f& v){
+	this->posicionInicial = v;
+	this->posicion = v;
+}
+
 void Personaje::caminarDerecha(){
     cout<<"Estado derecha"<<endl;
     setEstado(CAMINANDO_DERECHA);

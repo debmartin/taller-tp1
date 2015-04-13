@@ -51,6 +51,10 @@ void PersonajeDibujable::agregarAnimacion(Animacion* nuevaAnimacion){
     animaciones[nuevaAnimacion->getId()] = nuevaAnimacion;
 }
 
+void PersonajeDibujable::centrar_en(Vector2f v){
+	this->spritePersonaje->setPosicion(v);
+}
+
 void PersonajeDibujable::dibujar(){
 	spritePersonaje->dibujar();
 }
