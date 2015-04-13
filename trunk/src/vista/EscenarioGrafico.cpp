@@ -58,7 +58,7 @@ void EscenarioGrafico::centrar_en(Vector2f v){
 void EscenarioGrafico::centrar_dibujables(){
 	//Centro las capas
 	float posicionInicialY = 0.0f;
-	Vector2f vec(this->ancho_logico/2.0, posicionInicialY);
+	Vector2f vec(VentanaGrafica::Instance()->getAnchoPx()/2.0, posicionInicialY);
 	for (list<Capa*>::iterator it = capas->begin(); it != capas->end(); ++it){
 		(*it)->centrar_en(vec);
 	}
@@ -70,10 +70,6 @@ void EscenarioGrafico::centrar_dibujables(){
 }
 
 void EscenarioGrafico::scrollear_capas(){
-/*	Dibujable* dib = this->capas->front();
-	Capa* capa = (Capa*) dib;
-	Sprite* sprite = capa->getSprite();*/
-
 	size_t poslListaVelocidades = 0;
 	for (list<Capa*>::iterator it = capas->begin(); it != capas->end(); ++it){
 		/*
