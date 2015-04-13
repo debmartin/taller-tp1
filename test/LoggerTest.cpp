@@ -16,7 +16,7 @@ void LoggerTest::ejecutar() {
 
 	/*
 	 * En el archivo src/recursos/configuracion.json se encuentra el parametro "nivel_debug" que define el nivel de logeo.
-	 * Los mensajes de logging se cargar en logger.log que se encuentra en el duirectorio raiz.
+	 * Los mensajes de logging se cargan en logger.log que se encuentra en el directorio raiz.
 	 *
 	 * Ejemplo 1: si se elige nivel_debug": "ERROR", solo logean los mensajes de error.
 	 *
