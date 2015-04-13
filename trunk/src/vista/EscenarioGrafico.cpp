@@ -7,6 +7,7 @@ using std::list;
 EscenarioGrafico::EscenarioGrafico(double ancho, double alto, double y_piso, list<Dibujable*>* dibujables, list<Capa*>* capas) :
     ancho_logico(ancho),
 	alto_logico(alto),
+	y_piso_logico(y_piso),
 	dibujables(dibujables),
 	capas(capas) {
 
@@ -50,12 +51,22 @@ void EscenarioGrafico::actualizar(){
     }
 }
 
-void EscenarioGrafico::centrar_capas(){
+void EscenarioGrafico::centrar_en(Vector2f v){
+
+}
+
+void EscenarioGrafico::centrar_dibujables(){
+	//Centro las capas
 	float posicionInicialY = 0.0f;
 	Vector2f vec(this->ancho_logico/2.0, posicionInicialY);
 	for (list<Capa*>::iterator it = capas->begin(); it != capas->end(); ++it){
 		(*it)->centrar_en(vec);
 	}
+
+	//Centro el personaje
+	Vector2f vec2(this->ancho_logico/2.0, getYPisoLogico());
+	this->dibujables->back()->centrar_en(vec);
+	//((PersonajeDibujable*)(this->dibujables))->centrar_en(vec);
 }
 
 void EscenarioGrafico::scrollear_capas(){

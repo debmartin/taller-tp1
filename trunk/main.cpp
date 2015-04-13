@@ -48,7 +48,7 @@
 //#define IMAGEN_ZUBZERO_QUIETO "../version nueva/imagenes/zubzero-quieto.png"
 
 #define POSICION_INICIAL_CAPA Vector2f(0, 0)
-#define POSICION_INICIAL_PERSONAJE Vector2f(100, 300)
+#define POSICION_INICIAL_PERSONAJE Vector2f(750, 300)
 #define FACTOR_ESCALA_PERSONAJE Vector2f(2.0f, 2.0f)
 
 #define ANCHO_PERSONAJE 20
@@ -107,7 +107,9 @@ int main(int argc, char* args[])
 	EscenarioGrafico escenario(ANCHO_ESCENARIO, ALTO_ESCENARIO, Y_PISO, &capasYPersonajes, &capas);
     VentanaGrafica::Instance()->agregarEscenario(&escenario);
     VentanaGrafica::Instance()->centrar_ventana();////////////////////////////////////////////////////////////////////////////////////
-    escenario.centrar_capas();////////////////////////////////////////////////////////////////////////////////////////////////////////
+    escenario.centrar_dibujables();////////////////////////////////////////////////////////////////////////////////////////////////////////
+    Vector2f vector_centrado(escenario.getAnchoLogico()/2.0, escenario.getYPisoLogico());
+    jugador.centrar_en(vector_centrado);////////////////////////////////////////////////////////////////////////////////
 
     cout << "carga correcta" << endl;
 	Juego g_game(VentanaGrafica::Instance(), &escenario, &jugador, &personaje);

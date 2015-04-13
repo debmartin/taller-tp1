@@ -37,6 +37,7 @@ public:
 	void seleccionarSprite();
 	void setEstado(estado_personaje unEstado);
 	void agregarAnimacion(Animacion* nuevaAnimacion);
+	void centrar_en(Vector2f v);
 	void dibujar();
 	void actualizar();
 	void recibirNotificacion(Observable* unObservable);

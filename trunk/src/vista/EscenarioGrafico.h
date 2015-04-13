@@ -32,7 +32,8 @@ public:
 	double getYPisoLogico() const;
 	void dibujar();
 	void actualizar();
-	void centrar_capas();
+	void centrar_en(Vector2f);
+	void centrar_dibujables();
 	void scrollear_capas();
 	bool esValida(Vector2f posicion);
 };
