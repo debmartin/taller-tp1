@@ -34,6 +34,7 @@ public:
 	float getLimiteLogicoIzquierdo();
 	float getLimiteLogicoDerecho();
 	float getAnchoLogico();
+	float getAnchoPx();
 	bool esPosicionValida(Vector2f posicion);
 	void recibirNotificacion(Observable* unObservable);
 	float relacion_de_aspectoX();

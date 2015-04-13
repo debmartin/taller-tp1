@@ -98,11 +98,11 @@ float VentanaGrafica::getLimiteLogicoDerecho(){
 float VentanaGrafica::getAnchoLogico() {
 	return ancho_logico_ventana;
 }
-/*
-float VentanaGrafica::relacion_de_aspectoX(){
-	return this->ancho_ventanaPx / (getLimiteLogicoDerecho() - this->limite_logico_izquierdo);
+
+float VentanaGrafica::getAnchoPx(){
+	return this->ancho_ventanaPx;
 }
-*/
+
 float VentanaGrafica::relacion_de_aspectoX(){
 	//cout << "VentanaGrafica:Aspectos:" << this->ancho_ventanaPx<<";"<< this->limite_logico_derecho<<";"<< this->limite_logico_izquierdo<<endl;
 	float res = this->ancho_ventanaPx / ((this->limite_logico_izquierdo + this->ancho_logico_ventana) - this->limite_logico_izquierdo);
