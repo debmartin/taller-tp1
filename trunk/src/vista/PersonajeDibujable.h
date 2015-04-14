@@ -23,6 +23,10 @@
 #define ID_FONDO "screen-pit"
 #define ID_ZUBZERO_CAMINANDO "zubzero-caminando"
 #define ID_ZUBZERO_QUIETO "zubzero-quieto"
+#define ID_ZUBZERO_SALTANDOVERTICAL "zubzero-saltando-vertical"
+#define ID_ZUBZERO_SALTANDODIAGONAL "sub-zero-saltando-diagonal"
+#define ID_ZUBZERO_AGACHADO "sub-zero-saltando-agachado"
+
 //#define ID_ZUBZERO_SALTANDO "zubzero-saltando"
 //#define ID_ZUBZERO_AGACHADO "zubzero-agachado"
 
