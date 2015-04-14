@@ -45,7 +45,7 @@ public:
 	void dibujar();
 	void actualizar();
 	void recibirNotificacion(Observable* unObservable);
-	Sprite* _getSprite() { return spritePersonaje; }z
+	Sprite* _getSprite() { return spritePersonaje; }
 };
 
 #endif /* SRC_VISTA_PERSONAJEDIBUJABLE_H_ */
