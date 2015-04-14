@@ -33,7 +33,7 @@
 //#define IMAGEN_FONDO2 "goro2-transparente.png"
 //#define IMAGEN_FONDO2 "goro2-grilla.png"
 #define IMAGEN_FONDO2 "goro2.png"
-//#define IMAGEN_FONDO2 "fondo-warrior-shrine-02.png"
+//#define IMAGEN_FONDO2 "fondo-warrior-shrine-03.png"
 //#define IMAGEN_FONDO2 "mario.jpg"
 //#define IMAGEN_FONDO "Pit2.png"
 //#define IMAGEN_FONDO "Pit.jpg"
