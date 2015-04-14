@@ -32,7 +32,7 @@ private:
 	std::string nombre;
     std::map<std::string, Animacion*> animaciones;
 public:
-	PersonajeDibujable(Animacion* animIni, Vector2f posicionIni, Vector2f factorEscala, Personaje* personajeModelo);
+	PersonajeDibujable(Animacion* animIni, Vector2f posicionIni, Vector2f tamanioPx);
 	virtual ~PersonajeDibujable();
 	void seleccionarSprite();
 	void setEstado(estado_personaje unEstado);

@@ -18,9 +18,8 @@ Personaje::Personaje() {
 	this->alto = 0;
 }
 
-Personaje::Personaje(double anchoIn, double altoIn, double sprites_ancho, Vector2f posInicial, Posicionable* posc) :
+Personaje::Personaje(double anchoIn, double altoIn, Vector2f posInicial, Posicionable* posc) :
     posicionInicial(posInicial), ancho(anchoIn), alto(altoIn), estado(EN_ESPERA), posicionable(posc), posicion(posInicial), tCreacion(0) {
-	this->sprites_ancho = sprites_ancho;
 	this->trayectoria = new Reposo(this->posicion);
 }
 
@@ -62,12 +61,7 @@ Vector2f Personaje::obtenerPosicionEnVentana(){
 	return VentanaGrafica::Instance()->calcularPosicionEnVentana(P1);
 }
 
-double Personaje::getSpritesAncho() const {
-	return sprites_ancho;
-}
-
 void Personaje::centrar_en(Vector2f& v){
-	this->posicionInicial = v;
 	this->posicion = v;
 }
 
