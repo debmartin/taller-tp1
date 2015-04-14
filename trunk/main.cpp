@@ -100,36 +100,33 @@ int main(int argc, char* args[])
 
 	Vector2f relacionAspectos = VentanaGrafica::Instance()->obtener_relacion_aspectos();
 
-
+	list<Capa*> capas;
+	list<Dibujable*> capasYPersonajes;
 	for (list<CapaDef*>::iterator it_capas = parser->getCapasDef()->begin() ; it_capas != parser->getCapasDef()->end(); it_capas++)
 	{
 		cout<<**it_capas<<endl;
-		Animacion fondoAnim(IMAGEN_FONDO1, CANT_FOTOGRAMAS_FONDO, FPS_FONDO, ID_FONDO, Renderizador::Instance()->getRenderer());
-		Animacion fondoAnim2(IMAGEN_FONDO2, CANT_FOTOGRAMAS_FONDO2, FPS_FONDO2, ID_FONDO, Renderizador::Instance()->getRenderer());
 
-		Animacion zubQuieto(IMAGEN_ZUBZERO_QUIETO, CANT_FOTOGRAMAS_ZUBQUIETO, FPS_ZUBQUIETO,  ID_ZUBZERO_QUIETO, Renderizador::Instance()->getRenderer());
-		Animacion zubCaminando(IMAGEN_ZUBZERO_CAMINANDO, CANT_FOTOGRAMAS_ZUBCAMINANDO, FPS_ZUBCAMINANDO, ID_ZUBZERO_CAMINANDO, Renderizador::Instance()->getRenderer());
+		Animacion fondoAnim((*it_capas)->getImagenFondo(), CANT_FOTOGRAMAS_FONDO, FPS_FONDO, ID_FONDO, Renderizador::Instance()->getRenderer());
 
-		Vector2f tamIniCapa(ANCHO_LOGICO_CAPA1, ALTO_ESCENARIO);
-		Vector2f tamIniCapa2(ANCHO_LOGICO_CAPA2, ALTO_ESCENARIO);
+
+
+		Vector2f tamIniCapa((*it_capas)->getAncho(), escenarioDef->getAlto());
 		Vector2f posInCapa = POSICION_INICIAL_CAPA;
 
 		Capa fondoCapa(&fondoAnim, tamIniCapa, posInCapa, relacionAspectos);
-		Capa fondoCapa2(&fondoAnim2, tamIniCapa2, posInCapa, relacionAspectos);
-
-		list<Capa*> capas;
 		capas.push_back(&fondoCapa);
-		capas.push_back(&fondoCapa2);
-
-		list<Dibujable*> capasYPersonajes;
 		capasYPersonajes.push_back((Dibujable*) &fondoCapa);
-		capasYPersonajes.push_back((Dibujable*) &fondoCapa2);
 
 	}
 
-	Personaje jugador(personajeDef->getAncho(), personajeDef->getAlto(), personajeDef->getSpritesAncho(), POSICION_INICIAL_PERSONAJE, VentanaGrafica::Instance());
+	Animacion zubQuieto(IMAGEN_ZUBZERO_QUIETO, CANT_FOTOGRAMAS_ZUBQUIETO, FPS_ZUBQUIETO,  ID_ZUBZERO_QUIETO, Renderizador::Instance()->getRenderer());
+	Animacion zubCaminando(IMAGEN_ZUBZERO_CAMINANDO, CANT_FOTOGRAMAS_ZUBCAMINANDO, FPS_ZUBCAMINANDO, ID_ZUBZERO_CAMINANDO, Renderizador::Instance()->getRenderer());
 
-	PersonajeDibujable personaje(&zubQuieto, POSICION_INICIAL_PERSONAJE, FACTOR_ESCALA_PERSONAJE, &jugador);
+	Personaje jugador(personajeDef->getAncho(), personajeDef->getAlto(), POSICION_INICIAL_PERSONAJE, VentanaGrafica::Instance());
+	Vector2f tamanioPx(
+    		jugador.getAncho()*VentanaGrafica::Instance()->relacion_de_aspectoX(),
+			jugador.getAlto()*VentanaGrafica::Instance()->relacion_de_aspectoY());
+	PersonajeDibujable personaje(&zubQuieto, POSICION_INICIAL_PERSONAJE, tamanioPx);
 	personaje.agregarAnimacion(&zubQuieto);
 	personaje.agregarAnimacion(&zubCaminando);
 
