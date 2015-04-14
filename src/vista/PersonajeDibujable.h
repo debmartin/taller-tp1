@@ -27,8 +27,6 @@
 #define ID_ZUBZERO_SALTANDODIAGONAL "sub-zero-saltando-diagonal"
 #define ID_ZUBZERO_AGACHADO "sub-zero-saltando-agachado"
 
-//#define ID_ZUBZERO_SALTANDO "zubzero-saltando"
-//#define ID_ZUBZERO_AGACHADO "zubzero-agachado"
 
 class PersonajeDibujable : public Dibujable, public Observador {
 private:

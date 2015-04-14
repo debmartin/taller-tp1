@@ -11,10 +11,10 @@ Controlador::Controlador(Personaje* pers) :
 }
 
 void Controlador::manejar_Evento(SDL_Event &evento){
-    SDL_PumpEvents();
+//    SDL_PumpEvents();
     const Uint8* estadoTeclado = SDL_GetKeyboardState(NULL);
 	//Si se presiona una tecla
-	if( evento.key.repeat == 0 ){
+	if ( evento.key.repeat == 0 ){
 		cout<<"Entro tecla"<<endl;
 
         if (estadoTeclado[SDL_SCANCODE_LEFT] && estadoTeclado[SDL_SCANCODE_UP])
