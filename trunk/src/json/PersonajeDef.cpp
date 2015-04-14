@@ -15,13 +15,16 @@ PersonajeDef::PersonajeDef() {
 }
 
 PersonajeDef::PersonajeDef(double ancho, double alto, int zindex,
-		string sprites_imagen, double sprites_ancho, int direccion)
+		string sprites_imagen, double sprites_ancho, int sprites_cant_fotogramas,
+		int sprites_fps, int direccion)
 {
 	this->ancho = ancho;
 	this->alto = alto;
 	this->z_index = zindex;
 	this->sprites_imagen = sprites_imagen;
 	this->sprites_ancho = sprites_ancho;
+	this->sprites_cant_fotogramas = sprites_cant_fotogramas;
+	this->sprites_fps = sprites_fps;
 	this->direccion = direccion;
 }
 
@@ -49,10 +52,19 @@ PersonajeDef::~PersonajeDef(){
 	// TODO Auto-generated destructor stub
 }
 
+int PersonajeDef::getSpritesCantFotogramas() const {
+	return sprites_cant_fotogramas;
+}
+
+int PersonajeDef::getSpritesFps() const {
+	return sprites_fps;
+}
+
 ostream& operator <<(ostream &o, const PersonajeDef &p) {
 
-        o<<"PersonajeDef -> [ancho, alto, zindex, sprites_imagen, sprites_ancho, direccion]=[";
-        o<<p.ancho<<", "<<p.alto<<", "<<p.z_index<<", "<<p.sprites_imagen<<", "<<p.sprites_ancho<<", "<<p.direccion<<"]";
+        o<<"PersonajeDef -> [ancho, alto, zindex, sprites_imagen, sprites_ancho, sprites_cant_fotogramas, sprites_fps, direccion]=[";
+        o<<p.ancho<<", "<<p.alto<<", "<<p.z_index<<", "<<p.sprites_imagen<<", "<<p.sprites_ancho<<", ";
+        o<<p.sprites_cant_fotogramas<<", "<<p.sprites_fps<<", "<<p.direccion<<"]";
 
         return o;
 }
