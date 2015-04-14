@@ -82,9 +82,19 @@ void Personaje::saltarVertical(){
     cambiarTrayectoria(new MRUV(posicion, Vector2f(VELOCIDAD_NULA, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD));
 }
 
-void Personaje::saltarOblicuo(){
-    setEstado(SALTANDO_OBLICUO);
+void Personaje::saltarOblicuoDerecha(){
+    setEstado(SALTANDO_OBLICUO_DERECHA);
     cambiarTrayectoria(new MRUV(posicion, Vector2f(VELOCIDAD_DESP_HORIZONTAL, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD));
+}
+
+void Personaje::saltarOblicuoIzquierda(){
+    setEstado(SALTANDO_OBLICUO_IZQUIERDA);
+    cambiarTrayectoria(new MRUV(posicion, Vector2f(-VELOCIDAD_DESP_HORIZONTAL, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD));
+}
+
+void Personaje::agacharse(){
+    setEstado(AGACHADO);
+    cambiarTrayectoria(new Reposo(posicion));
 }
 
 void Personaje::mantenerReposo(){
@@ -133,7 +143,7 @@ Personaje::~Personaje(){
 }
 
 bool Personaje::estaSaltando(){
-    return (estado == SALTANDO_OBLICUO || estado == SALTANDO_VERTICAL);
+    return (estado == SALTANDO_OBLICUO_DERECHA || estado == SALTANDO_OBLICUO_IZQUIERDA || estado == SALTANDO_VERTICAL);
 }
 /*
 ostream& operator <<(ostream &o, const Personaje &p) {
@@ -143,4 +153,3 @@ ostream& operator <<(ostream &o, const Personaje &p) {
 
         return o;
 }*/
-

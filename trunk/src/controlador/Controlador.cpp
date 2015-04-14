@@ -11,50 +11,42 @@ Controlador::Controlador(Personaje* pers) :
 }
 
 void Controlador::manejar_Evento(SDL_Event &evento){
-
+    SDL_PumpEvents();
+    const Uint8* estadoTeclado = SDL_GetKeyboardState(NULL);
 	//Si se presiona una tecla
-	if( evento.type == SDL_KEYDOWN && evento.key.repeat == 0 ){
+	if( evento.key.repeat == 0 ){
 		cout<<"Entro tecla"<<endl;
-		switch( evento.key.keysym.sym ){
-			case SDLK_LEFT:
-				this->unPersonaje->caminarIzquierda();
-				break;
-		 	case SDLK_RIGHT:
-				cout<<"Entro tecla derecha"<<endl;
 
-		 		this->unPersonaje->caminarDerecha();
-		 		break;
-			case SDLK_UP:
-				this->unPersonaje->saltarVertical();
-				break;
-			case SDLK_DOWN:
-				//this->unPersonaje->disminuir_velocidadY();
-
-				break;
-		}
+        if (estadoTeclado[SDL_SCANCODE_LEFT] && estadoTeclado[SDL_SCANCODE_UP])
+            unPersonaje->saltarOblicuoIzquierda();
+        else if (estadoTeclado[SDL_SCANCODE_RIGHT] && estadoTeclado[SDL_SCANCODE_UP])
+            unPersonaje->saltarOblicuoDerecha();
+        else if (estadoTeclado[SDL_SCANCODE_LEFT])
+            unPersonaje->caminarIzquierda();
+        else if (estadoTeclado[SDL_SCANCODE_RIGHT])
+            unPersonaje->caminarDerecha();
+        else if (estadoTeclado[SDL_SCANCODE_UP])
+            unPersonaje->saltarVertical();
+        else if (estadoTeclado[SDL_SCANCODE_DOWN])
+            unPersonaje->agacharse();
+        else
+            unPersonaje->mantenerReposo();
 	}
-	//Si se suelta una tecla
-	if( evento.type == SDL_KEYUP && evento.key.repeat == 0 ){
-		switch( evento.key.keysym.sym ){
-			case SDLK_LEFT:
-				this->unPersonaje->mantenerReposo();
-//				this->unPersonajeDibujable.setEstado(EN_ESPERA);
-				break;
-			case SDLK_RIGHT:
-				cout<<"suelto tecla derecha"<<endl;
-				this->unPersonaje->mantenerReposo();
-//				this->unPersonajeDibujable.setEstado(EN_ESPERA);
-				break;
-			case SDLK_UP:
-				this->unPersonaje->mantenerReposo();
-//				this->unPersonajeDibujable.setEstado(EN_ESPERA);
-				break;
-			case SDLK_DOWN:
-				this->unPersonaje->mantenerReposo();
-//				this->unPersonajeDibujable.setEstado(EN_ESPERA);
-				break;
-		}
-	}
+//	//Si se suelta una tecla
+//	if( evento.type == SDL_KEYUP && evento.key.repeat == 0 ){
+//		switch( evento.key.keysym.sym ){
+//			case SDLK_LEFT:
+//			case SDLK_RIGHT:
+//			case SDLK_DOWN:
+//				this->unPersonaje->mantenerReposo();
+//				break;
+//            case SDLK_UP:
+//        if (estadoTeclado[SDL_SCANCODE_RIGHT])
+//            unPersonaje->caminarDerecha();
+//        else if (estadoTeclado[SDL_SCANCODE_LEFT])
+//            unPersonaje->caminarIzquierda();
+//		}
+//	}
 }
 
 void Controlador::setPersonaje(Personaje* personaje){

@@ -23,6 +23,8 @@
 #define ID_FONDO "screen-pit"
 #define ID_ZUBZERO_CAMINANDO "zubzero-caminando"
 #define ID_ZUBZERO_QUIETO "zubzero-quieto"
+//#define ID_ZUBZERO_SALTANDO "zubzero-saltando"
+//#define ID_ZUBZERO_AGACHADO "zubzero-agachado"
 
 class PersonajeDibujable : public Dibujable, public Observador {
 private:
