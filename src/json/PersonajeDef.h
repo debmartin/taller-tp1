@@ -9,7 +9,12 @@
 #define SRC_JSON_PERSONAJEDEF_H_
 
 #include <iostream>
+#include <list>
 #include <string>
+
+#include "SpriteDef.h"
+
+class SpriteDef;
 
 using namespace std;
 
@@ -18,27 +23,23 @@ private:
 	double ancho;
 	double alto;
 	int z_index;
-	string sprites_imagen;
-	double sprites_ancho;
-	int sprites_cant_fotogramas;
-	int sprites_fps;
+	list<SpriteDef*>* spritesDef;
 	int direccion;
 
 public:
 	PersonajeDef();
-	PersonajeDef(double ancho, double alto, int zindex, string sprites_imagen, double sprites_ancho,
-			int sprites_cant_fotogramas, int sprites_fps, int direccion);
+	PersonajeDef(double ancho, double alto, int zindex, int direccion);
 	virtual ~PersonajeDef();
 	double getAlto() const;
 	double getAncho() const;
 	int getZindex() const;
-	double getSpritesAncho() const;
-	const string& getSpritesImagen() const;
+
+	list<SpriteDef*>* getSpritesDef() const;
+	void agregarSpritesDef(SpriteDef* spriteDef);
+
 	int getDireccion() const;
 
 	friend ostream& operator<<(ostream &o, const PersonajeDef &p);
-	int getSpritesCantFotogramas() const;
-	int getSpritesFps() const;
 };
 
 #endif /* SRC_JSON_PERSONAJEDEF_H_ */
