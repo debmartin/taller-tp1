@@ -39,16 +39,26 @@
 //#define IMAGEN_FONDO "screen-pit.png"
 #define IMAGEN_ZUBZERO_CAMINANDO "sub-zero-caminando.png"
 #define IMAGEN_ZUBZERO_QUIETO "sub-zero-reposo.png"
+#define IMAGEN_ZUBZERO_SALTANDO_VERTICAL "sub-zero-saltando-vertical.png"
+#define IMAGEN_ZUBZERO_SALTANDO_DIAGONAL "sub-zero-saltando-diagonal.png"
+#define IMAGEN_ZUBZERO_AGACHADO "sub-zero-agachado.png"
 
 #define CANT_FOTOGRAMAS_FONDO 1
 #define CANT_FOTOGRAMAS_FONDO2 1
 #define CANT_FOTOGRAMAS_ZUBQUIETO 12
 #define CANT_FOTOGRAMAS_ZUBCAMINANDO 9
+#define CANT_FOTOGRAMAS_ZUBSALTANDOVERTICAL 3
+#define CANT_FOTOGRAMAS_ZUBSALTANDODIAGONAL 7
+#define CANT_FOTOGRAMAS_ZUBSAGACHADO 1
 
 #define FPS_FONDO 1
 #define FPS_FONDO2 1
 #define FPS_ZUBQUIETO 10
 #define FPS_ZUBCAMINANDO 10
+#define FPS_ZUBSALTANDOVERTICAL 3
+#define FPS_ZUBSALTANDODIAGONAL 10
+#define FPS_ZUBSAGACHADO 1
+
 //#define IMAGEN_FONDO "../version nueva/imagenes/screen-pit.png"
 //#define IMAGEN_ZUBZERO_CAMINANDO "../version nueva/imagenes/zubzero-caminando.png"
 //#define IMAGEN_ZUBZERO_QUIETO "../version nueva/imagenes/zubzero-quieto.png"
@@ -219,6 +229,9 @@ int main(int argc, char* args[])
 //	Animacion zubAgachado(IMAGEN_ZUBZERO_QUIETO, CANT_FOTOGRAMAS_ZUBQUIETO, FPS_ZUBQUIETO,  ID_ZUBZERO_AGACHADO, Renderizador::Instance()->getRenderer());
 	Animacion zubCaminando(IMAGEN_ZUBZERO_CAMINANDO, CANT_FOTOGRAMAS_ZUBCAMINANDO, FPS_ZUBCAMINANDO, ID_ZUBZERO_CAMINANDO, Renderizador::Instance()->getRenderer());
 //	Animacion zubSaltando(IMAGEN_ZUBZERO_CAMINANDO, CANT_FOTOGRAMAS_ZUBCAMINANDO, FPS_ZUBCAMINANDO, ID_ZUBZERO_SALTANDO, Renderizador::Instance()->getRenderer());
+	Animacion zubSaltandoVertical(IMAGEN_ZUBZERO_SALTANDO_VERTICAL, CANT_FOTOGRAMAS_ZUBSALTANDOVERTICAL, FPS_ZUBSALTANDOVERTICAL, ID_ZUBZERO_SALTANDOVERTICAL, Renderizador::Instance()->getRenderer());
+	Animacion zubSaltandoDiagonal(IMAGEN_ZUBZERO_SALTANDO_DIAGONAL, CANT_FOTOGRAMAS_ZUBSALTANDODIAGONAL, FPS_ZUBSALTANDODIAGONAL, ID_ZUBZERO_SALTANDODIAGONAL, Renderizador::Instance()->getRenderer());
+	Animacion zubAgachado(IMAGEN_ZUBZERO_AGACHADO, CANT_FOTOGRAMAS_ZUBSAGACHADO, FPS_ZUBSAGACHADO, ID_ZUBZERO_AGACHADO, Renderizador::Instance()->getRenderer());
 
 	Vector2f tamIniCapa(ANCHO_LOGICO_CAPA1, ALTO_ESCENARIO);
 	Vector2f tamIniCapa2(ANCHO_LOGICO_CAPA2, ALTO_ESCENARIO);
@@ -237,6 +250,9 @@ int main(int argc, char* args[])
 	PersonajeDibujable personaje(&zubQuieto, POSICION_INICIAL_PERSONAJE, tamanioPx);
 	personaje.agregarAnimacion(&zubQuieto);
 	personaje.agregarAnimacion(&zubCaminando);
+	personaje.agregarAnimacion(&zubSaltandoVertical);
+	personaje.agregarAnimacion(&zubSaltandoDiagonal);
+	personaje.agregarAnimacion(&zubAgachado);
 
 	list<Capa*> capas;
 	capas.push_back(&fondoCapa);
