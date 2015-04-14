@@ -14,17 +14,12 @@ PersonajeDef::PersonajeDef() {
 	this->alto = 0;
 }
 
-PersonajeDef::PersonajeDef(double ancho, double alto, int zindex,
-		string sprites_imagen, double sprites_ancho, int sprites_cant_fotogramas,
-		int sprites_fps, int direccion)
+PersonajeDef::PersonajeDef(double ancho, double alto, int zindex, int direccion)
 {
 	this->ancho = ancho;
 	this->alto = alto;
 	this->z_index = zindex;
-	this->sprites_imagen = sprites_imagen;
-	this->sprites_ancho = sprites_ancho;
-	this->sprites_cant_fotogramas = sprites_cant_fotogramas;
-	this->sprites_fps = sprites_fps;
+	this->spritesDef = new list<SpriteDef*>;
 	this->direccion = direccion;
 }
 
@@ -40,32 +35,24 @@ int PersonajeDef::getZindex() const {
 	return z_index;
 }
 
-double PersonajeDef::getSpritesAncho() const {
-	return sprites_ancho;
-}
-
-const string& PersonajeDef::getSpritesImagen() const {
-	return sprites_imagen;
-}
-
 PersonajeDef::~PersonajeDef(){
 	// TODO Auto-generated destructor stub
 }
 
-int PersonajeDef::getSpritesCantFotogramas() const {
-	return sprites_cant_fotogramas;
-}
-
-int PersonajeDef::getSpritesFps() const {
-	return sprites_fps;
+list<SpriteDef*>* PersonajeDef::getSpritesDef() const {
+	return spritesDef;
 }
 
 ostream& operator <<(ostream &o, const PersonajeDef &p) {
 
-        o<<"PersonajeDef -> [ancho, alto, zindex, sprites_imagen, sprites_ancho, sprites_cant_fotogramas, sprites_fps, direccion]=[";
-        o<<p.ancho<<", "<<p.alto<<", "<<p.z_index<<", "<<p.sprites_imagen<<", "<<p.sprites_ancho<<", ";
-        o<<p.sprites_cant_fotogramas<<", "<<p.sprites_fps<<", "<<p.direccion<<"]";
-
+        o<<"PersonajeDef -> [ancho, alto, zindex, direccion]=[";
+        o<<p.ancho<<", "<<p.alto<<", "<<p.z_index<<", "<<p.direccion<<"]"<<endl;
+        o<<"{"<<endl;
+    	for (list<SpriteDef*>::iterator it_spritesDef = p.getSpritesDef()->begin() ; it_spritesDef !=  p.getSpritesDef()->end(); it_spritesDef++)
+    	{
+    		cout<<**it_spritesDef<<endl;
+    	}
+    	o<<"}";
         return o;
 }
 
@@ -73,3 +60,6 @@ int PersonajeDef::getDireccion() const {
 	return direccion;
 }
 
+void PersonajeDef::agregarSpritesDef(SpriteDef* spriteDef) {
+	this->spritesDef->push_back(spriteDef);
+}

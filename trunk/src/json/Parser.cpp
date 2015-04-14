@@ -78,10 +78,17 @@ if( root.size() > 0 ) {
 	double p_alto = 0;
 	double p_ancho = 0;
 	int p_zindex = 0;
-	string p_sprites_imagen = "";
-	double p_sprites_ancho = 0;
-	int p_sprites_cant_fotogramas = 0;
-	int p_sprites_fps = 0;
+	// del sprites reposo
+	string p_sprites_imagen_1 = "";
+	double p_sprites_ancho_1 = 0;
+	int p_sprites_cant_fotogramas_1 = 0;
+	int p_sprites_fps_1 = 0;
+	// del sprites caminando
+	string p_sprites_imagen_2 = "";
+	double p_sprites_ancho_2 = 0;
+	int p_sprites_cant_fotogramas_2 = 0;
+	int p_sprites_fps_2 = 0;
+
 	int p_direccion = 0;
 
 	for( Json::ValueIterator it = root.begin() ; it != root.end() ; it++ )
@@ -188,12 +195,19 @@ if( root.size() > 0 ) {
 					{
 						p_zindex = (*it)[key_nivel2.asString()].asInt();
 					}
-					else if ( key_nivel2.asString() == "sprites" )
+					else if ( key_nivel2.asString() == "sprites_reposo" )
 					{
-						p_sprites_imagen = (*it2)["imagen"].asString();
-						p_sprites_ancho = (*it2)["ancho"].asDouble();
-						p_sprites_cant_fotogramas = (*it2)["cant_fotogramas"].asInt();
-						p_sprites_fps = (*it2)["fps"].asInt();
+						p_sprites_imagen_1 = (*it2)["imagen"].asString();
+						p_sprites_ancho_1 = (*it2)["ancho"].asDouble();
+						p_sprites_cant_fotogramas_1 = (*it2)["cant_fotogramas"].asInt();
+						p_sprites_fps_1 = (*it2)["fps"].asInt();
+					}
+					else if ( key_nivel2.asString() == "sprites_caminando" )
+					{
+						p_sprites_imagen_2 = (*it2)["imagen"].asString();
+						p_sprites_ancho_2 = (*it2)["ancho"].asDouble();
+						p_sprites_cant_fotogramas_2 = (*it2)["cant_fotogramas"].asInt();
+						p_sprites_fps_2 = (*it2)["fps"].asInt();
 					}
 					else if ( key_nivel2.asString() == "direccion" )
 					{
@@ -214,8 +228,13 @@ if( root.size() > 0 ) {
 
 	this->ventana = new VentanaDef(v_ancho_px, v_alto_px, v_ancho, v_margen_x);
 	this->escenario = new EscenarioDef(e_ancho, e_alto, e_ypiso);
-	this->personaje = new PersonajeDef(p_ancho, p_alto, p_zindex, p_sprites_imagen,
-							p_sprites_ancho, p_sprites_cant_fotogramas, p_sprites_fps, p_direccion);
+	this->personaje = new PersonajeDef(p_ancho, p_alto, p_zindex, p_direccion);
+
+	//se cargan los sprites del personaje
+	SpriteDef* spriteDef_reposo = new SpriteDef(p_sprites_imagen_1,p_sprites_ancho_1, p_sprites_cant_fotogramas_1, p_sprites_fps_1);
+	SpriteDef* spriteDef_caminando = new SpriteDef(p_sprites_imagen_2,p_sprites_ancho_2, p_sprites_cant_fotogramas_2, p_sprites_fps_2);
+	this->personaje->agregarSpritesDef(spriteDef_reposo);
+	this->personaje->agregarSpritesDef(spriteDef_caminando);
 
 }
 
@@ -259,10 +278,7 @@ void Parser::inciarValidacionSemantica() {
 	double personaje_ancho_nuevo = this->personaje->getAncho();
 	double personaje_alto_nuevo = this->personaje->getAlto();
 	int personale_zindex_nuevo = this->personaje->getZindex();
-	string personaje_sprites_imagen_nuevo = this->personaje->getSpritesImagen();
-	double personaje_sprites_ancho_nuevo = this->personaje->getSpritesAncho();
-	int personaje_sprites_cant_fotogramas_nuevo = this->personaje->getSpritesCantFotogramas();
-	int personaje_sprites_fps_nuevo = this->personaje->getSpritesFps();
+
 	double personaje_direccion_nuevo = this->personaje->getDireccion();
 
 	//validar el escenario
@@ -356,42 +372,55 @@ void Parser::inciarValidacionSemantica() {
 		Logger::getInstance()->debug("El zindex del personaje es menor a cero. Se elije uno nuevo con el valor de 0");
 	}
 
-	if ( !Util::getInstancia()->existeArchivo(personaje_sprites_imagen_nuevo) )
-	{
-		Logger::getInstance()->info("No existes las imagenes del sprites "+personaje_sprites_imagen_nuevo+". Por defecto se usa sprites_defecto.png");
-		personaje_sprites_imagen_nuevo = "sprites_defecto.png";
-	}
-
-	if ( personaje_sprites_ancho_nuevo < 0)
-	{
-		personaje_sprites_ancho_nuevo = 20;
-		Logger::getInstance()->debug("el ancho del sprite del personaje es negativo. Se elije uno nuevo con el valor de 20");
-	}
-
-	if ( personaje_sprites_cant_fotogramas_nuevo <= 0 )
-	{
-		personaje_sprites_cant_fotogramas_nuevo = 1;
-		Logger::getInstance()->debug("la cant. de fotogramas de la imagen del sprite del personaje es menor o igual a cerop. Se elije uno nuevo con el valor de 1");
-	}
-
-	if ( personaje_sprites_fps_nuevo <= 0 )
-	{
-		personaje_sprites_fps_nuevo = 10;
-		Logger::getInstance()->debug("el valor de los fps del sprite del personaje es menor o igual a cerop. Se elije uno nuevo con el valor de 10");
-	}
-
 	if ( personaje_direccion_nuevo != -1 && personaje_direccion_nuevo != 1 )
 	{
 		personaje_direccion_nuevo = 1;
 		Logger::getInstance()->debug("La configuracion de la direccion del personaje no es la correcta. Se lo dirije en direccion derecha");
 	}
 
+	//validar los sprites def del personaje
+
+	list<SpriteDef*>* spritesDef_actual = new list<SpriteDef*>;
+	spritesDef_actual = this->personaje->getSpritesDef();
+
 	delete this->personaje;
 	this->personaje = NULL;
-	this->personaje = new PersonajeDef(personaje_ancho_nuevo, personaje_alto_nuevo, personale_zindex_nuevo,personaje_sprites_imagen_nuevo,
-								personaje_sprites_ancho_nuevo, personaje_sprites_cant_fotogramas_nuevo, personaje_sprites_fps_nuevo,
-											personaje_direccion_nuevo);
+	this->personaje = new PersonajeDef(personaje_ancho_nuevo, personaje_alto_nuevo, personale_zindex_nuevo,personaje_direccion_nuevo);
 
+	for (list<SpriteDef*>::iterator it_sprites = spritesDef_actual->begin() ; it_sprites != spritesDef_actual->end(); it_sprites++)
+	{
+		string nueva_imagen = (*it_sprites)->getImagen();
+		double nuevo_ancho = (*it_sprites)->getAncho();
+		int nuevo_cant_fotograma = (*it_sprites)->getCantFotogramas();
+		int nuevo_fps = (*it_sprites)->getFps();
+
+		if ( !Util::getInstancia()->existeArchivo(nueva_imagen) )
+		{
+			Logger::getInstance()->info("No existes las imagenes del sprites "+nueva_imagen+". Por defecto se usa sprites_defecto.png");
+			nueva_imagen = "sprites_defecto.png";
+		}
+
+		if ( nuevo_ancho < 0)
+		{
+			nuevo_ancho = 20;
+			Logger::getInstance()->debug("el ancho del sprite del personaje es negativo. Se elije uno nuevo con el valor de 20");
+		}
+
+		if ( nuevo_cant_fotograma <= 0 )
+		{
+			nuevo_cant_fotograma = 1;
+			Logger::getInstance()->debug("la cant. de fotogramas de la imagen del sprite del personaje es menor o igual a cerop. Se elije uno nuevo con el valor de 1");
+		}
+
+		if ( nuevo_fps <= 0 )
+		{
+			nuevo_fps = 10;
+			Logger::getInstance()->debug("el valor de los fps del sprite del personaje es menor o igual a cerop. Se elije uno nuevo con el valor de 10");
+		}
+
+		SpriteDef* spriteDef = new SpriteDef(nueva_imagen, nuevo_ancho, nuevo_cant_fotograma, nuevo_fps);
+		this->personaje->agregarSpritesDef(spriteDef);
+	}
 
 	//validar las capas
 

@@ -24,12 +24,18 @@
         "ancho": 20.1, 	
         "alto": 35.2, 
         "z­index": 1, 
-        "sprites": { 
-		            "imagen": "zubzero-caminando.png", 
+        "sprites_reposo": { 
+		            "imagen": "sub-zero-reposo.png", 
+        		    "ancho": 12.4,
+        		    "cant_fotogramas": 12,
+        		    "fps": 10
+        			},
+        "sprites_caminando": { 
+		            "imagen": "sub-zero-caminando.png", 
         		    "ancho": 15.4,
         		    "cant_fotogramas": 9,
         		    "fps": 10
-        			},
+        			},        			
 		"direccion": 1 
     } 
 }
