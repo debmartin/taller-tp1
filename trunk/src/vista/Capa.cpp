@@ -13,7 +13,6 @@ Capa::Capa(Animacion* animCapa, Vector2f& tamInicialLogico, Vector2f& posInicial
     sprite = new Sprite(animacionCapa, posInicial);
 
     sprite->escalarConTamanio(tamanioLogico.X()*aspectos.X(), tamanioLogico.Y()*aspectos.Y());
-    //sprite->escalarConTamanio(tamanioLogico.X(), tamanioLogico.Y());
 }
 
 double Capa::getAnchoLogico() {
@@ -29,10 +28,6 @@ double Capa::getLimiteLogicoDerecho() {
 Sprite* Capa::getSprite(){
 	return this->sprite;
 }
-
-//string Capa::getImagenFondo() const {
-//	return imagen_fondo;
-//}
 
 Capa::~Capa() {
     delete sprite;

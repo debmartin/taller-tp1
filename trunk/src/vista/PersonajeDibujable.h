@@ -21,9 +21,9 @@
 #include "Dibujable.h"
 
 #define ID_FONDO "screen-pit"
-#define ID_ZUBZERO_CAMINANDO "zubzero-caminando"
-#define ID_ZUBZERO_QUIETO "zubzero-quieto"
-#define ID_ZUBZERO_SALTANDOVERTICAL "zubzero-saltando-vertical"
+#define ID_ZUBZERO_CAMINANDO "subzero-caminando"
+#define ID_ZUBZERO_QUIETO "subzero-quieto"
+#define ID_ZUBZERO_SALTANDOVERTICAL "subzero-saltando-vertical"
 #define ID_ZUBZERO_SALTANDODIAGONAL "sub-zero-saltando-diagonal"
 #define ID_ZUBZERO_AGACHADO "sub-zero-saltando-agachado"
 
@@ -45,7 +45,7 @@ public:
 	void dibujar();
 	void actualizar();
 	void recibirNotificacion(Observable* unObservable);
-	Sprite* _getSprite() { return spritePersonaje; }
+	Sprite* _getSprite() { return spritePersonaje; }z
 };
 
 #endif /* SRC_VISTA_PERSONAJEDIBUJABLE_H_ */
