@@ -1,19 +1,5 @@
 #include "src/Juego.h"
 #include "test/Test.h"
-/*
-#include "src/json/Parser.h"
-#include "src/utils/Logger.h"
-#include "src/json/EscenarioDef.h"
-#include "src/json/VentanaDef.h"
-#include "src/json/PersonajeDef.h"
-#include "src/json/CapaDef.h"
-#include "src/vista/VentanaGrafica.h"
-#include "src/vista/EscenarioGrafico.h"
-#include "src/vista/Capa.h"
-#include "src/modelo/Personaje.h"
-#include "src/vista/Sprite.h"
-#include <jsoncpp/json/json.h>
-#include <SDL2/SDL.h>*/
 #include "src/modelo/CargadorDeObjetos.h"
 
 #define TITULO_VENTANA "Taller de programacion TP: Mortal Kombat"
