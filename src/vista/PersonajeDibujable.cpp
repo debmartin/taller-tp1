@@ -40,20 +40,20 @@ void PersonajeDibujable::seleccionarSprite(){
 			this->spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
 			break;
 		case SALTANDO_VERTICAL:
-			this->spritePersonaje->cambiarAnimacion(animaciones[ID_ZUBZERO_QUIETO]);
+			this->spritePersonaje->cambiarAnimacion(animaciones[ID_ZUBZERO_SALTANDOVERTICAL]);
 			this->spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
 			break;
-//        case SALTANDO_OBLICUO_DERECHA:
-//            spritePersonaje->cambiarAnimacion(animaciones[ID_ZUBZERO_SALTANDO]);
-//            spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
-//            break;
-//        case SALTANDO_OBLICUO_IZQUIERDA:
-//            spritePersonaje->cambiarAnimacion(animaciones[ID_ZUBZERO_SALTANDO]);
-//            spritePersonaje->setSentidoReproduccion(HACIA_ATRAS);
-//            break;
-//        case AGACHADO:
-//            spritePersonaje->cambiarAnimacion(animaciones[ID_ZUBZERO_AGACHADO]);
-//            spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
+        case SALTANDO_OBLICUO_DERECHA:
+            this->spritePersonaje->cambiarAnimacion(animaciones[ID_ZUBZERO_SALTANDODIAGONAL]);
+            this->spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
+            break;
+        case SALTANDO_OBLICUO_IZQUIERDA:
+            this->spritePersonaje->cambiarAnimacion(animaciones[ID_ZUBZERO_SALTANDODIAGONAL]);
+            this->spritePersonaje->setSentidoReproduccion(HACIA_ATRAS);
+            break;
+        case AGACHADO:
+            spritePersonaje->cambiarAnimacion(animaciones[ID_ZUBZERO_AGACHADO]);
+            spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
 	}
 }
 
