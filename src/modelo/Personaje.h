@@ -35,10 +35,12 @@ typedef enum Movimiento
 typedef enum estado_personaje
 {
 	EN_ESPERA,
+	AGACHADO,
 	CAMINANDO_DERECHA,
 	CAMINANDO_IZQUIERDA,
 	SALTANDO_VERTICAL,
-    SALTANDO_OBLICUO
+    SALTANDO_OBLICUO_DERECHA,
+    SALTANDO_OBLICUO_IZQUIERDA
 } estado_personaje;
 
 using namespace std;
@@ -73,8 +75,10 @@ public:
     void caminarDerecha();
     void caminarIzquierda();
     void saltarVertical();
-    void saltarOblicuo();
+    void saltarOblicuoDerecha();
+    void saltarOblicuoIzquierda();
     void mantenerReposo();
+    void agacharse();
 	void cambiarTrayectoria(Trayectoria* t);
 	void agregarObservador(Observador* unObservador);
 	void notificarObservadores();
