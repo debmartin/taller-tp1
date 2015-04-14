@@ -29,9 +29,11 @@
 //#define IMAGEN_FONDO1 "goro1-transparente.png"
 //#define IMAGEN_FONDO1 "goro1-grilla.png"
 #define IMAGEN_FONDO1 "goro1.png"
+//#define IMAGEN_FONDO1 "fondo-warrior-shrine-01.png"
 //#define IMAGEN_FONDO2 "goro2-transparente.png"
 //#define IMAGEN_FONDO2 "goro2-grilla.png"
 #define IMAGEN_FONDO2 "goro2.png"
+//#define IMAGEN_FONDO2 "fondo-warrior-shrine-02.png"
 //#define IMAGEN_FONDO2 "mario.jpg"
 //#define IMAGEN_FONDO "Pit2.png"
 //#define IMAGEN_FONDO "Pit.jpg"
@@ -66,7 +68,7 @@
 #define POSICION_INICIAL_CAPA Vector2f(0, 0)
 #define POSICION_INICIAL_PERSONAJE Vector2f(750, 100)
 
-#define ANCHO_LOGICO_PERSONAJE 120
+#define ANCHO_LOGICO_PERSONAJE 105
 #define ALTO_LOGICO_PERSONAJE 280
 
 
