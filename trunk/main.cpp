@@ -37,8 +37,8 @@
 //#define IMAGEN_FONDO "Pit.jpg"
 //#define IMAGEN_FONDO "escenario2.gif"
 //#define IMAGEN_FONDO "screen-pit.png"
-#define IMAGEN_ZUBZERO_CAMINANDO "zubzero-caminando.png"
-#define IMAGEN_ZUBZERO_QUIETO "zubzero-quieto.png"
+#define IMAGEN_ZUBZERO_CAMINANDO "sub-zero-caminando.png"
+#define IMAGEN_ZUBZERO_QUIETO "sub-zero-reposo.png"
 
 #define CANT_FOTOGRAMAS_FONDO 1
 #define CANT_FOTOGRAMAS_FONDO2 1
@@ -54,12 +54,10 @@
 //#define IMAGEN_ZUBZERO_QUIETO "../version nueva/imagenes/zubzero-quieto.png"
 
 #define POSICION_INICIAL_CAPA Vector2f(0, 0)
-#define POSICION_INICIAL_PERSONAJE Vector2f(750, 300)
-#define FACTOR_ESCALA_PERSONAJE Vector2f(2.0f, 2.0f)
+#define POSICION_INICIAL_PERSONAJE Vector2f(750, 100)
 
-#define ANCHO_PERSONAJE 20
-#define ALTO_PERSONAJE 35
-#define ANCHO_PERSONAJE_SPRITES 20
+#define ANCHO_LOGICO_PERSONAJE 120
+#define ALTO_LOGICO_PERSONAJE 280
 
 
 int main(int argc, char* args[])
@@ -204,13 +202,13 @@ int main(int argc, char* args[])
 		if (frameTime < DELAY_TIME)
 			SDL_Delay((int)(DELAY_TIME - frameTime));
 	}
-*/
+
 ////////Fin//////////
 
 	//para correr las pruebas comentar o descomentar estas 2 lineas
 //	Test tests;
 //	tests.ejecutar();
-    Vector2f tamanioVentanaPx(ANCHO_PX_VENTANA_INICIO, ALTO_PX_VENTANA_INICIO);
+*/    Vector2f tamanioVentanaPx(ANCHO_PX_VENTANA_INICIO, ALTO_PX_VENTANA_INICIO);
     Vector2f tamanioVentanaLogico(ANCHO_LOGICO_VENTANA_INICIO, ALTO_ESCENARIO);
     bool exito = VentanaGrafica::Instance()->init(TITULO_VENTANA, POS_VENTANA_INICIO, tamanioVentanaPx, tamanioVentanaLogico, INICIAR_FULLSCREEN);
 
@@ -231,9 +229,13 @@ int main(int argc, char* args[])
 	Capa fondoCapa(&fondoAnim, tamIniCapa, posInCapa, relacionAspectos);
 	Capa fondoCapa2(&fondoAnim2, tamIniCapa2, posInCapa, relacionAspectos);
 
-	Personaje jugador(ANCHO_PERSONAJE, ALTO_PERSONAJE, ANCHO_PERSONAJE_SPRITES, POSICION_INICIAL_PERSONAJE, VentanaGrafica::Instance());
-
-	PersonajeDibujable personaje(&zubQuieto, POSICION_INICIAL_PERSONAJE, FACTOR_ESCALA_PERSONAJE, &jugador);
+	Personaje jugador(ANCHO_LOGICO_PERSONAJE, ALTO_LOGICO_PERSONAJE, POSICION_INICIAL_PERSONAJE, VentanaGrafica::Instance());
+    Vector2f tamanioPx(
+    		jugador.getAncho()*VentanaGrafica::Instance()->relacion_de_aspectoX(),
+			jugador.getAlto()*VentanaGrafica::Instance()->relacion_de_aspectoY());
+    cout<<"Gaston:"<<jugador.getAlto()*VentanaGrafica::Instance()->relacion_de_aspectoY()<<endl;
+    cout<<"Relaciones de aspectos:"<<VentanaGrafica::Instance()->relacion_de_aspectoX()<<";"<<VentanaGrafica::Instance()->relacion_de_aspectoY()<<endl;
+	PersonajeDibujable personaje(&zubQuieto, POSICION_INICIAL_PERSONAJE, tamanioPx);
 	personaje.agregarAnimacion(&zubQuieto);
 	personaje.agregarAnimacion(&zubCaminando);
 
@@ -245,8 +247,6 @@ int main(int argc, char* args[])
 	capasYPersonajes.push_back((Dibujable*) &fondoCapa);
 	capasYPersonajes.push_back((Dibujable*) &fondoCapa2);
 	capasYPersonajes.push_back((Dibujable*) &personaje);
-
-
 
 	EscenarioGrafico escenario(ANCHO_ESCENARIO, ALTO_ESCENARIO, Y_PISO, &capasYPersonajes, &capas);
     VentanaGrafica::Instance()->agregarEscenario(&escenario);
@@ -306,6 +306,8 @@ int main(int argc, char* args[])
 		cout << "-------------------------------------------------------" << endl;
 		cout << "PERSONAJE-DIBUJABLE->SPRITE->posicionPx-X:" << personaje._getSprite()->getPosicion().X() << endl;
 		cout << "PERSONAJE-DIBUJABLE->SPRITE->posicionPx-Y:" << personaje._getSprite()->getPosicion().Y() << endl;
+		cout << "PERSONAJE-DIBUJABLE->SPRITE->AnchoPx:" << personaje._getSprite()->getAnchoPx() << endl;
+		cout << "PERSONAJE-DIBUJABLE->SPRITE->AltoPx:" << personaje._getSprite()->getAltoPx() << endl;
 		cout << "=============FIN INFORMACION DE OBJETOS==============" << endl;
 		frameTime = SDL_GetTicks() - frameStart;
 

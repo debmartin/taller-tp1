@@ -8,10 +8,13 @@
 #include "PersonajeDibujable.h"
 
 
-PersonajeDibujable::PersonajeDibujable(Animacion* animIni, Vector2f posicionIni, Vector2f factorEscala, Personaje* personajeModelo) :
-    personaje(personajeModelo) {
+PersonajeDibujable::PersonajeDibujable(Animacion* animIni, Vector2f posicionIni, Vector2f tamanioPx){
 	spritePersonaje = new Sprite(animIni, posicionIni);
-    spritePersonaje->escalarConFactor(factorEscala);
+
+	cout << "----PersonajeDibujable::PersonajeDibujable.x:" << tamanioPx.X();
+	cout << "----PersonajeDibujable::PersonajeDibujable.y:" << tamanioPx.Y();
+
+    spritePersonaje->escalarConTamanio(tamanioPx.X(), tamanioPx.Y());
     animaciones[animIni->getId()] = animIni;
 }
 

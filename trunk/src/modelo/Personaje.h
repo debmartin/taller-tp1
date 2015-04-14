@@ -45,10 +45,9 @@ using namespace std;
 
 class Personaje: public Observable {
 private:
-    Vector2f posicionInicial;
+    const Vector2f posicionInicial;
 	double ancho;
 	double alto;
-	double sprites_ancho; //TODO: ¿este ancho de Sprite deberia ir en el personaje dibujable?
 	Vector2f posicion;
 	Posicionable* posicionable;
 	int z_index;
@@ -59,7 +58,7 @@ private:
 
 public:
 	Personaje();
-	Personaje(double ancho, double alto, double sprites_ancho, Vector2f posInicial, Posicionable* posc);
+	Personaje(double ancho, double alto, Vector2f posInicial, Posicionable* posc);
 	virtual ~Personaje();
 	double getAlto() const;
 	double getAncho() const;
@@ -69,7 +68,6 @@ public:
 	estado_personaje getEstado();
 	void setVida(int cantidad);
 	int getVida();
-	double getSpritesAncho() const;
 	Vector2f obtenerPosicionEnVentana();
 	void centrar_en(Vector2f& v);
     void caminarDerecha();

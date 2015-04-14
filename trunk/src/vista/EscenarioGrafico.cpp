@@ -81,7 +81,7 @@ void EscenarioGrafico::scrollear_capas(){
 }
 
 bool EscenarioGrafico::esValida(Vector2f posicion){
-    if (posicion.X() < LIMITE_IZQUIERDO || posicion.X() > (ancho_logico-20*VentanaGrafica::Instance()->relacion_de_aspectoX()))
+    if (posicion.X() < LIMITE_IZQUIERDO || posicion.X() > (ancho_logico-200*VentanaGrafica::Instance()->relacion_de_aspectoX()))
         return false;
     if (posicion.Y() < y_piso_logico || posicion.Y() >= alto_logico)
         return false;

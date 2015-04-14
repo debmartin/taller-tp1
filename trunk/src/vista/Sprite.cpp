@@ -11,7 +11,7 @@
 #define FOTOGRAMA_INICIAL 1
 
 Sprite::Sprite(Animacion* animacion, Vector2f& posicionIni) :
-    animacionAct(animacion), posicion(posicionIni), factorEscalaX (FACTOR_ESCALA_INICIAL_X), \
+    animacionAct(animacion), posicion(posicionIni), factorEscalaX (FACTOR_ESCALA_INICIAL_X),
 	factorEscalaY(FACTOR_ESCALA_INICIAL_Y), fps(animacion->getFps()), tCreacion(TIEMPO_INICIAL) {
     //ARREGLAR tCreacion
 	int w, h;
@@ -44,6 +44,8 @@ void Sprite::dibujar(){
 	destRect.w = (int)(anchoFotogramaPx * factorEscalaX);
 	destRect.h = (int)(altoPx * factorEscalaY);
 
+	cout << "ññññññw" << factorEscalaX << endl;
+	cout << "ññññññh" << anchoFotogramaPx <<endl;
 	SDL_RenderCopyEx(Renderizador::Instance()->getRenderer(), animacionAct->getTextura(), &srcRect, &destRect, 0, NULL, flip);
 
 	//cout << "Sprite::dibujar(" << animacionAct->getId() << ")fotogramaActual:" << fotogramaActual << endl;
@@ -63,7 +65,7 @@ void Sprite::setFlip(SDL_RendererFlip f) {
 }
 
 int Sprite::getAnchoPx(){
-	return this->anchoPx * factorEscalaX;
+	return this->anchoFotogramaPx * factorEscalaX;
 }
 
 int Sprite::getAltoPx(){
@@ -83,7 +85,10 @@ void Sprite::escalarConFactor(Vector2f& factor){
 }
 
 void Sprite::escalarConTamanio(int anchoNuevoPx, int altoNuevoPx){
-	this->factorEscalaX = (float) anchoNuevoPx / (float) anchoPx;
+
+	cout<<"++++++++++++++++++AnchoNuevoPx"<<anchoNuevoPx<<endl;
+	cout<<"+++++++++++++++++++++AltoNuevoPx"<<altoNuevoPx<<endl;
+	this->factorEscalaX = (float) anchoNuevoPx / (float) anchoFotogramaPx;
 	this->factorEscalaY = (float) altoNuevoPx / (float) altoPx;
 }
 
