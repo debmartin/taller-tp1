@@ -17,7 +17,7 @@ CargadorDeOjbetos::~CargadorDeOjbetos(){
 void CargadorDeOjbetos::cargarObjetos(){
 
 			////Inicialización desde Parser////
-			string nombre_escenario("src/recursos/escenario.json");
+			string nombre_escenario("src/recursos/escenario_defecto.json");
 			Parser* parser = new Parser(nombre_escenario.c_str());
 			parser->parsearDesdeJson();
 
@@ -30,7 +30,7 @@ void CargadorDeOjbetos::cargarObjetos(){
 			PersonajeDef* personajeDef = parser->getPersonajeDef();
 			cout<<*personajeDef<<endl;
 
-			Logger::getInstance()->info("Inicialiazación de Parser correcta.");
+			Logger::getInstance()->info("Inicialiazación desde Parser finalizada.");
 
 
 			////Inicializacion de VentanaGrafica////
@@ -55,13 +55,13 @@ void CargadorDeOjbetos::cargarObjetos(){
 			{
 				cout<<**it_capas<<endl;
 
-				Animacion fondoAnim((*it_capas)->getImagenFondo(), CANT_FOTOGRAMAS_FONDO, FPS_FONDO, ID_FONDO, Renderizador::Instance()->getRenderer());
+				Animacion fondoAnim((*it_capas)->getImagenFondo(), CANT_FOTOGRAMAS_FONDO, FPS_FONDO, (*it_capas)->getIdCapa(), Renderizador::Instance()->getRenderer());
 				Vector2f tamIniCapa((*it_capas)->getAncho(), escenarioDef->getAlto());
 				Vector2f posInCapa = POSICION_INICIAL_CAPA;
 
 				Capa fondoCapa(&fondoAnim, tamIniCapa, posInCapa, relacionAspectos);
 				capas.push_back(&fondoCapa);
-				capasYPersonajes.push_back((Dibujable*) &fondoCapa);
+				capasYPersonajes.push_back(&fondoCapa);
 
 			}
 			Logger::getInstance()->info("Inicialiazación de Capas correcta.");
@@ -80,19 +80,19 @@ void CargadorDeOjbetos::cargarObjetos(){
 					jugador->getAlto()*VentanaGrafica::Instance()->relacion_de_aspectoY());
 
 			SpriteDef* primerSpriteSubQuieto = *(personajeDef->getSpritesDef()->begin());
-			Animacion SubQuieto(primerSpriteSubQuieto->getImagen(), primerSpriteSubQuieto->getCantFotogramas(), primerSpriteSubQuieto->getFps(),  ID_ZUBZERO_QUIETO, Renderizador::Instance()->getRenderer());
+			Animacion SubQuieto(primerSpriteSubQuieto->getImagen(), primerSpriteSubQuieto->getCantFotogramas(), primerSpriteSubQuieto->getFps(),  primerSpriteSubQuieto->getIdSprite(), Renderizador::Instance()->getRenderer());
 			PersonajeDibujable personajeDibujable1(&SubQuieto, POSICION_INICIAL_PERSONAJE, tamanioPx);
 
 			for (list<SpriteDef*>::iterator it_sprites = personajeDef->getSpritesDef()->begin() ; it_sprites != personajeDef->getSpritesDef()->end(); it_sprites++)
 			{
-				Animacion sub_zero((*it_sprites)->getImagen(), (*it_sprites)->getCantFotogramas(), (*it_sprites)->getFps(),  ID_ZUBZERO_QUIETO, Renderizador::Instance()->getRenderer());
+				Animacion sub_zero((*it_sprites)->getImagen(), (*it_sprites)->getCantFotogramas(), (*it_sprites)->getFps(), primerSpriteSubQuieto->getIdSprite(), Renderizador::Instance()->getRenderer());
 				personajeDibujable1.agregarAnimacion(&sub_zero);
 			}
 
 			this->personajeDibujable = &personajeDibujable1;
 			Logger::getInstance()->info("Inicialiazación de PersonajeDibujable correcta.");
 
-			capasYPersonajes.push_back((Dibujable*) &personajeDibujable1);
+			capasYPersonajes.push_back(&personajeDibujable1);
 
 			////Inicializacion de EscenarioGrafico////
 			EscenarioGrafico escenarioDibujable(escenarioDef->getAncho(), escenarioDef->getAlto(), escenarioDef->getYpiso(), &capasYPersonajes, &capas);

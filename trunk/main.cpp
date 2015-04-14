@@ -67,9 +67,10 @@ int main(int argc, char* args[])
 
 	Uint32 frameStart, frameTime;
 
-	////Inicializacion del Cargador de Objetos////
+	///////////////Inicializacion del Cargador de Objetos////
 /*	CargadorDeOjbetos cargador_de_objetos;
 	cargador_de_objetos.cargarObjetos();
+    cout << "Objetos cargados" << endl;
 
 	EscenarioGrafico escenario = *(cargador_de_objetos.getEscenarioGrafico());
 	Personaje jugador = *(cargador_de_objetos.getPersonaje());
@@ -99,7 +100,7 @@ int main(int argc, char* args[])
 		}
 
 
-	////Fin de inicializacion desde Parser////
+	/////////////Fin de inicializacion desde Parser////
 */
 	//para correr las pruebas comentar o descomentar estas 2 lineas
 	//Test tests;
