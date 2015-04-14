@@ -80,6 +80,8 @@ if( root.size() > 0 ) {
 	int p_zindex = 0;
 	string p_sprites_imagen = "";
 	double p_sprites_ancho = 0;
+	int p_sprites_cant_fotogramas = 0;
+	int p_sprites_fps = 0;
 	int p_direccion = 0;
 
 	for( Json::ValueIterator it = root.begin() ; it != root.end() ; it++ )
@@ -190,6 +192,8 @@ if( root.size() > 0 ) {
 					{
 						p_sprites_imagen = (*it2)["imagen"].asString();
 						p_sprites_ancho = (*it2)["ancho"].asDouble();
+						p_sprites_cant_fotogramas = (*it2)["cant_fotogramas"].asInt();
+						p_sprites_fps = (*it2)["fps"].asInt();
 					}
 					else if ( key_nivel2.asString() == "direccion" )
 					{
@@ -210,7 +214,8 @@ if( root.size() > 0 ) {
 
 	this->ventana = new VentanaDef(v_ancho_px, v_alto_px, v_ancho, v_margen_x);
 	this->escenario = new EscenarioDef(e_ancho, e_alto, e_ypiso);
-	this->personaje = new PersonajeDef(p_ancho, p_alto, p_zindex, p_sprites_imagen, p_sprites_ancho, p_direccion);
+	this->personaje = new PersonajeDef(p_ancho, p_alto, p_zindex, p_sprites_imagen,
+							p_sprites_ancho, p_sprites_cant_fotogramas, p_sprites_fps, p_direccion);
 
 }
 
@@ -256,6 +261,8 @@ void Parser::inciarValidacionSemantica() {
 	int personale_zindex_nuevo = this->personaje->getZindex();
 	string personaje_sprites_imagen_nuevo = this->personaje->getSpritesImagen();
 	double personaje_sprites_ancho_nuevo = this->personaje->getSpritesAncho();
+	int personaje_sprites_cant_fotogramas_nuevo = this->personaje->getSpritesCantFotogramas();
+	int personaje_sprites_fps_nuevo = this->personaje->getSpritesFps();
 	double personaje_direccion_nuevo = this->personaje->getDireccion();
 
 	//validar el escenario
@@ -361,6 +368,18 @@ void Parser::inciarValidacionSemantica() {
 		Logger::getInstance()->debug("el ancho del sprite del personaje es negativo. Se elije uno nuevo con el valor de 20");
 	}
 
+	if ( personaje_sprites_cant_fotogramas_nuevo <= 0 )
+	{
+		personaje_sprites_cant_fotogramas_nuevo = 1;
+		Logger::getInstance()->debug("la cant. de fotogramas de la imagen del sprite del personaje es menor o igual a cerop. Se elije uno nuevo con el valor de 1");
+	}
+
+	if ( personaje_sprites_fps_nuevo <= 0 )
+	{
+		personaje_sprites_fps_nuevo = 10;
+		Logger::getInstance()->debug("el valor de los fps del sprite del personaje es menor o igual a cerop. Se elije uno nuevo con el valor de 10");
+	}
+
 	if ( personaje_direccion_nuevo != -1 && personaje_direccion_nuevo != 1 )
 	{
 		personaje_direccion_nuevo = 1;
@@ -369,8 +388,8 @@ void Parser::inciarValidacionSemantica() {
 
 	delete this->personaje;
 	this->personaje = NULL;
-	this->personaje = new PersonajeDef(personaje_ancho_nuevo, personaje_alto_nuevo, personale_zindex_nuevo,
-										personaje_sprites_imagen_nuevo, personaje_sprites_ancho_nuevo,
+	this->personaje = new PersonajeDef(personaje_ancho_nuevo, personaje_alto_nuevo, personale_zindex_nuevo,personaje_sprites_imagen_nuevo,
+								personaje_sprites_ancho_nuevo, personaje_sprites_cant_fotogramas_nuevo, personaje_sprites_fps_nuevo,
 											personaje_direccion_nuevo);
 
 

@@ -20,11 +20,14 @@ private:
 	int z_index;
 	string sprites_imagen;
 	double sprites_ancho;
+	int sprites_cant_fotogramas;
+	int sprites_fps;
 	int direccion;
 
 public:
 	PersonajeDef();
-	PersonajeDef(double ancho, double alto, int zindex, string sprites_imagen, double sprites_ancho, int direccion);
+	PersonajeDef(double ancho, double alto, int zindex, string sprites_imagen, double sprites_ancho,
+			int sprites_cant_fotogramas, int sprites_fps, int direccion);
 	virtual ~PersonajeDef();
 	double getAlto() const;
 	double getAncho() const;
@@ -34,6 +37,8 @@ public:
 	int getDireccion() const;
 
 	friend ostream& operator<<(ostream &o, const PersonajeDef &p);
+	int getSpritesCantFotogramas() const;
+	int getSpritesFps() const;
 };
 
 #endif /* SRC_JSON_PERSONAJEDEF_H_ */
