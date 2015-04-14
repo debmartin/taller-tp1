@@ -14,13 +14,15 @@ using namespace std;
 class CapaDef {
 private:
 	string imagen_fondo;
+	string id_capa;
 	double ancho;
 public:
 	CapaDef();
-	CapaDef(string imagen_fondo, double ancho);
+	CapaDef(string imagen_fondo, string id, double ancho);
 	virtual ~CapaDef();
 	double getAncho() const;
 	string getImagenFondo() const;
+	string getIdCapa() const;
 
 	friend ostream& operator<<(ostream &o, const CapaDef &c);
 };

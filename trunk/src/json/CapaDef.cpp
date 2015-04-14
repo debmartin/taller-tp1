@@ -18,6 +18,10 @@ string CapaDef::getImagenFondo() const {
 	return imagen_fondo;
 }
 
+string CapaDef::getIdCapa() const {
+	return id_capa;
+}
+
 CapaDef::~CapaDef() {
 	// TODO Auto-generated destructor stub
 }
@@ -28,7 +32,8 @@ ostream& operator <<(ostream &o, const CapaDef &c) {
         return o;
 }
 
-CapaDef::CapaDef(string imagen_fondo, double ancho){
+CapaDef::CapaDef(string imagen_fondo, string id, double ancho){
 	this->imagen_fondo = imagen_fondo;
+	this->id_capa = id;
 	this->ancho = ancho;
 }

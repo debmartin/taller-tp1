@@ -11,10 +11,11 @@ SpriteDef::SpriteDef() {
 
 }
 
-SpriteDef::SpriteDef(string imagen, double ancho, int cant_fotogramas,
+SpriteDef::SpriteDef(string imagen, string id, double ancho, int cant_fotogramas,
 		int fps) {
 
 	this->imagen = imagen;
+	this->id_sprite = id;
 	this->ancho = ancho;
 	this->cant_fotogramas = cant_fotogramas;
 	this->fps = fps;
@@ -34,6 +35,10 @@ int SpriteDef::getFps() const {
 
 const string& SpriteDef::getImagen() const {
 	return imagen;
+}
+
+const string& SpriteDef::getIdSprite() const {
+	return id_sprite;
 }
 
 SpriteDef::~SpriteDef() {

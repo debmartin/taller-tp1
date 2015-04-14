@@ -80,14 +80,34 @@ if( root.size() > 0 ) {
 	int p_zindex = 0;
 	// del sprites reposo
 	string p_sprites_imagen_1 = "";
+	string p_sprites_id_1 = "";
 	double p_sprites_ancho_1 = 0;
 	int p_sprites_cant_fotogramas_1 = 0;
 	int p_sprites_fps_1 = 0;
 	// del sprites caminando
 	string p_sprites_imagen_2 = "";
+	string p_sprites_id_2 = "";
 	double p_sprites_ancho_2 = 0;
 	int p_sprites_cant_fotogramas_2 = 0;
 	int p_sprites_fps_2 = 0;
+	// del sprites agachado
+	string p_sprites_imagen_3 = "";
+	string p_sprites_id_3 = "";
+	double p_sprites_ancho_3 = 0;
+	int p_sprites_cant_fotogramas_3 = 0;
+	int p_sprites_fps_3 = 0;
+	// del sprites salto vertical
+	string p_sprites_imagen_4 = "";
+	string p_sprites_id_4 = "";
+	double p_sprites_ancho_4 = 0;
+	int p_sprites_cant_fotogramas_4 = 0;
+	int p_sprites_fps_4 = 0;
+	// del sprites salto oblicuo
+	string p_sprites_imagen_5 = "";
+	string p_sprites_id_5 = "";
+	double p_sprites_ancho_5 = 0;
+	int p_sprites_cant_fotogramas_5 = 0;
+	int p_sprites_fps_5 = 0;
 
 	int p_direccion = 0;
 
@@ -107,6 +127,7 @@ if( root.size() > 0 ) {
 				{
 					CapaDef* capa;
 					string imagen_fondo = "";
+					string id_capa = "";
 					double ancho = 0;
 					for( Json::ValueIterator it3 = root2[idx_capas].begin() ; it3 != root2[idx_capas].end() ; it3++ )
 					{
@@ -115,6 +136,10 @@ if( root.size() > 0 ) {
 						if ( key_nivel2.asString() == "imagen_fondo" )
 						{
 							imagen_fondo = (*it)[idx_capas]["imagen_fondo"].asString();
+						}
+						else if ( key_nivel2.asString() == "id_capa" )
+						{
+							id_capa = (*it)[idx_capas]["id_capa"].asString();
 						}
 						else if ( key_nivel2.asString() == "ancho" )
 						{
@@ -126,7 +151,7 @@ if( root.size() > 0 ) {
 						}
 
 					}
-					capa = new CapaDef(imagen_fondo, ancho);
+					capa = new CapaDef(imagen_fondo, id_capa, ancho);
 					capas->push_back(capa);
 				}
 			}
@@ -198,6 +223,7 @@ if( root.size() > 0 ) {
 					else if ( key_nivel2.asString() == "sprites_reposo" )
 					{
 						p_sprites_imagen_1 = (*it2)["imagen"].asString();
+						p_sprites_id_1 = (*it2)["id_sprite"].asString();
 						p_sprites_ancho_1 = (*it2)["ancho"].asDouble();
 						p_sprites_cant_fotogramas_1 = (*it2)["cant_fotogramas"].asInt();
 						p_sprites_fps_1 = (*it2)["fps"].asInt();
@@ -205,9 +231,34 @@ if( root.size() > 0 ) {
 					else if ( key_nivel2.asString() == "sprites_caminando" )
 					{
 						p_sprites_imagen_2 = (*it2)["imagen"].asString();
+						p_sprites_id_2 = (*it2)["id_sprite"].asString();
 						p_sprites_ancho_2 = (*it2)["ancho"].asDouble();
 						p_sprites_cant_fotogramas_2 = (*it2)["cant_fotogramas"].asInt();
 						p_sprites_fps_2 = (*it2)["fps"].asInt();
+					}
+					else if ( key_nivel2.asString() == "sprites_agachado" )
+					{
+						p_sprites_imagen_3 = (*it2)["imagen"].asString();
+						p_sprites_id_3 = (*it2)["id_sprite"].asString();
+						p_sprites_ancho_3 = (*it2)["ancho"].asDouble();
+						p_sprites_cant_fotogramas_3 = (*it2)["cant_fotogramas"].asInt();
+						p_sprites_fps_3 = (*it2)["fps"].asInt();
+					}
+					else if ( key_nivel2.asString() == "sprites_salto_vertical" )
+					{
+						p_sprites_imagen_4 = (*it2)["imagen"].asString();
+						p_sprites_id_4 = (*it2)["id_sprite"].asString();
+						p_sprites_ancho_4 = (*it2)["ancho"].asDouble();
+						p_sprites_cant_fotogramas_4 = (*it2)["cant_fotogramas"].asInt();
+						p_sprites_fps_4 = (*it2)["fps"].asInt();
+					}
+					else if ( key_nivel2.asString() == "sprites_salto_oblicuo" )
+					{
+						p_sprites_imagen_5 = (*it2)["imagen"].asString();
+						p_sprites_id_5 = (*it2)["id_sprite"].asString();
+						p_sprites_ancho_5 = (*it2)["ancho"].asDouble();
+						p_sprites_cant_fotogramas_5 = (*it2)["cant_fotogramas"].asInt();
+						p_sprites_fps_5 = (*it2)["fps"].asInt();
 					}
 					else if ( key_nivel2.asString() == "direccion" )
 					{
@@ -231,8 +282,8 @@ if( root.size() > 0 ) {
 	this->personaje = new PersonajeDef(p_ancho, p_alto, p_zindex, p_direccion);
 
 	//se cargan los sprites del personaje
-	SpriteDef* spriteDef_reposo = new SpriteDef(p_sprites_imagen_1,p_sprites_ancho_1, p_sprites_cant_fotogramas_1, p_sprites_fps_1);
-	SpriteDef* spriteDef_caminando = new SpriteDef(p_sprites_imagen_2,p_sprites_ancho_2, p_sprites_cant_fotogramas_2, p_sprites_fps_2);
+	SpriteDef* spriteDef_reposo = new SpriteDef(p_sprites_imagen_1, p_sprites_id_1, p_sprites_ancho_1, p_sprites_cant_fotogramas_1, p_sprites_fps_1);
+	SpriteDef* spriteDef_caminando = new SpriteDef(p_sprites_imagen_2, p_sprites_id_2, p_sprites_ancho_2, p_sprites_cant_fotogramas_2, p_sprites_fps_2);
 	this->personaje->agregarSpritesDef(spriteDef_reposo);
 	this->personaje->agregarSpritesDef(spriteDef_caminando);
 
@@ -390,6 +441,7 @@ void Parser::inciarValidacionSemantica() {
 	for (list<SpriteDef*>::iterator it_sprites = spritesDef_actual->begin() ; it_sprites != spritesDef_actual->end(); it_sprites++)
 	{
 		string nueva_imagen = (*it_sprites)->getImagen();
+		string nuevo_id = (*it_sprites)->getIdSprite();
 		double nuevo_ancho = (*it_sprites)->getAncho();
 		int nuevo_cant_fotograma = (*it_sprites)->getCantFotogramas();
 		int nuevo_fps = (*it_sprites)->getFps();
@@ -399,7 +451,12 @@ void Parser::inciarValidacionSemantica() {
 			Logger::getInstance()->info("No existes las imagenes del sprites "+nueva_imagen+". Por defecto se usa sprites_defecto.png");
 			nueva_imagen = "sprites_defecto.png";
 		}
-
+		//Falta validacion del id.
+		/*if ( nuevo_id != "?")
+		{
+			nuevo_id = "";
+			Logger::getInstance()->debug("No existe el id del sprite");
+		}*/
 		if ( nuevo_ancho < 0)
 		{
 			nuevo_ancho = 20;
@@ -418,7 +475,7 @@ void Parser::inciarValidacionSemantica() {
 			Logger::getInstance()->debug("el valor de los fps del sprite del personaje es menor o igual a cerop. Se elije uno nuevo con el valor de 10");
 		}
 
-		SpriteDef* spriteDef = new SpriteDef(nueva_imagen, nuevo_ancho, nuevo_cant_fotograma, nuevo_fps);
+		SpriteDef* spriteDef = new SpriteDef(nueva_imagen, nuevo_id, nuevo_ancho, nuevo_cant_fotograma, nuevo_fps);
 		this->personaje->agregarSpritesDef(spriteDef);
 	}
 
@@ -429,6 +486,7 @@ void Parser::inciarValidacionSemantica() {
 	for (list<CapaDef*>::iterator it_capas = this->capas->begin() ; it_capas != this->capas->end(); it_capas++)
 	{
 		string nuevo_fondo = (*it_capas)->getImagenFondo();
+		string nuevo_id = (*it_capas)->getIdCapa();
 		double nuevo_ancho = (*it_capas)->getAncho();
 
 		if ( !Util::getInstancia()->existeArchivo(nuevo_fondo) )
@@ -436,6 +494,8 @@ void Parser::inciarValidacionSemantica() {
 			Logger::getInstance()->info("No existe la imagen de fondo para la capa "+nuevo_fondo+". Por defecto se usa fondo_capa_defecto.png");
 			nuevo_fondo = "fondo_capa_defecto.png";
 		}
+
+		//Falta validacion del id_capa//
 
 		if ( nuevo_ancho <= 0 || nuevo_ancho > escenario_ancho_nuevo )
 		{
@@ -452,7 +512,7 @@ void Parser::inciarValidacionSemantica() {
 			nuevo_ancho = escenario_ancho_nuevo;
 		}
 
-		CapaDef* capa_nueva = new CapaDef(nuevo_fondo, nuevo_ancho);
+		CapaDef* capa_nueva = new CapaDef(nuevo_fondo, nuevo_id, nuevo_ancho);
 		capas_nuevas->push_back(capa_nueva);
 	}
 
