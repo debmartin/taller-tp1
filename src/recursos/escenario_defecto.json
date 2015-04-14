@@ -1,31 +1,54 @@
 { 
     "ventana": { 
-        "anchopx": 700, 
-        "altopx": 600, 
-        "ancho": 200.5,
+        "anchopx": 640, 
+        "altopx": 480, 
+        "ancho": 640,
         "margen_x": 2.5 
     }, 
     "escenario": { 
-        "ancho": 1000.5, 
-        "alto": 150.3, 
-        "y­piso": 20
+        "ancho": 1500, 
+        "alto": 600, 
+        "y­piso": 100
     }, 
     "capas": [
         { 
-            "imagen_fondo": "screen-pit.png", 
-            "ancho": 1000.5 
+            "imagen_fondo": "goro1.png",
+            "id_capa": "goro1", 
+            "ancho": 800 
         },    
         { 
-            "imagen_fondo": "screen-pit.png", 
-            "ancho": 900.5 
+            "imagen_fondo": "goro2.png",
+            "id_capa": "goro2", 
+            "ancho": 1000 
         } 
     ], 
     "personaje": { 
-        "ancho": 20.1, 	
-        "alto": 35.2, 
+        "ancho": 105, 	
+        "alto": 280, 
         "z­index": 1, 
-        "sprites": { 
-		            "imagen": "zubzero-caminando.png", 
+        "sprites_reposo": { 
+		            "imagen": "sub-zero-reposo.png",
+		            "id_sprite": "sub-zero-reposo" 
+        		    "ancho": 15.4 
+        			},
+        "sprites_caminando": { 
+		            "imagen": "sub-zero-caminando.png",
+		            "id_sprite": "sub-zero-caminando" 
+        		    "ancho": 15.4 
+        			},
+        "sprites_agachado": { 
+		            "imagen": "sub-zero-agachado.png",
+		            "id_sprite": "sub-zero-agachado" 
+        		    "ancho": 15.4 
+        			},
+        "sprites_salto_vertical": { 
+		            "imagen": "sub-zero-salto_vertical.png",
+		            "id_sprite": "sub-zero-salto_vertical" 
+        		    "ancho": 15.4 
+        			},
+        "sprites_salto_oblicuo": { 
+		            "imagen": "sub-zero-salto_oblicuo.png",
+		            "id_sprite": "sub-zero-salto_oblicuo" 
         		    "ancho": 15.4 
         			},
 		"direccion": 1 

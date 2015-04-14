@@ -28,7 +28,6 @@ private:
 	EscenarioGrafico* escenarioG;
 
 public:
-	//TODO: Debbie juego debe recibir una lista o pares de personaje y personajeDibujable.
 	Juego(VentanaGrafica* ventana, EscenarioGrafico* escenario, Personaje* pers, PersonajeDibujable* persDib);
 	void render();
 	void update();
@@ -36,7 +35,7 @@ public:
 	bool running();
 	~Juego();
 
-	// create the public  instance function
+	//
 	static Juego* Instance();
 };
 
