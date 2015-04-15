@@ -33,11 +33,15 @@ public:
 	double getAlto() const;
 	double getAncho() const;
 	int getZindex() const;
+	void setAlto(double nuevoAlto);
+	void setAncho(double nuevoAncho);
+	void setZIndex(int z);
 
 	list<SpriteDef*>* getSpritesDef() const;
 	void agregarSpritesDef(SpriteDef* spriteDef);
 
 	int getDireccion() const;
+	void setDireccion(int nuevaDir);
 
 	friend ostream& operator<<(ostream &o, const PersonajeDef &p);
 };

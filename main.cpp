@@ -70,8 +70,8 @@ int main(int argc, char* args[])
 		if ( opcion_consola == "-test" )
 		{
 			//para correr las pruebas comentar o descomentar estas 2 lineas
-			Test tests;
-			tests.ejecutar();
+//			Test tests;
+//			tests.ejecutar();
 			return 0;
 		}
 	}
@@ -116,20 +116,20 @@ int main(int argc, char* args[])
 
 	/////////////Fin de inicializacion desde Parser////
 
-	Parser* parser = new Parser("src/recursos/escenario.json");
-	parser->parsearDesdeJson();
-	VentanaDef* ventanaDef = parser->getVentanaDef();
-	EscenarioDef* escenarioDef = parser->getEscenarioDef();
-	PersonajeDef* personajeDef = parser->getPersonajeDef();
-
-	//tomar valores
-	float ventana_anchopx = (float)ventanaDef->getAnchoPx();
-	float ventana_altopx = (float)ventanaDef->getAltoPx();
-	float ventana_ancho = (float)ventanaDef->getAncho();
-	float ventana_alto = (float)escenarioDef->getAlto();
-
-	float escenario_ancho = (float)escenarioDef->getAncho();
-	float escenario_alto = (float)escenarioDef->getAlto();
+//	Parser* parser = new Parser("src/recursos/escenario.json");
+//	parser->parsearDesdeJson();
+//	VentanaDef* ventanaDef = parser->getVentanaDef();
+//	EscenarioDef* escenarioDef = parser->getEscenarioDef();
+//	PersonajeDef* personajeDef = parser->getPersonajeDef();
+//
+//	//tomar valores
+//	float ventana_anchopx = (float)ventanaDef->getAnchoPx();
+//	float ventana_altopx = (float)ventanaDef->getAltoPx();
+//	float ventana_ancho = (float)ventanaDef->getAncho();
+//	float ventana_alto = (float)escenarioDef->getAlto();
+//
+//	float escenario_ancho = (float)escenarioDef->getAncho();
+//	float escenario_alto = (float)escenarioDef->getAlto();
 
     /*******************************************/
     /******** creando la ventana grafica *******/
