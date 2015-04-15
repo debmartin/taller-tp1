@@ -25,10 +25,10 @@ Renderizador::Renderizador():vWindow(NULL), vRenderer(NULL){
 
 bool Renderizador::init(string titulo, Vector2f posicion, Vector2f tamanio, bool fullscreen){
 
-	// attempt to initialize SDL
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
 	{
-		std::cout << "SDL init success\n";
+
+		Logger::getInstance()->debug("Renderizador: SDL init.");
 
 		// init the window
 		int flags;
@@ -39,35 +39,34 @@ bool Renderizador::init(string titulo, Vector2f posicion, Vector2f tamanio, bool
 
 		this->vWindow = SDL_CreateWindow(titulo.c_str(), posicion.X(), posicion.Y(), tamanio.X(), tamanio.Y(), flags);
 
-		if (this->vWindow != NULL) // window init success
+		if (this->vWindow != NULL)
 		{
-			std::cout << "window creation success\n";
+			Logger::getInstance()->debug("Renderizador: ventana creada.");
 			this->vRenderer = SDL_CreateRenderer(vWindow, -1, SDL_RENDERER_SOFTWARE);
 
-			if (this->vRenderer != NULL) // renderer init success
+			if (this->vRenderer != NULL)
 			{
-				std::cout << "renderer creation success\n";
+				Logger::getInstance()->debug("Renderizador: creacion correcta..");
 				SDL_SetRenderDrawColor(this->vRenderer, 255, 0, 0, 255);
 			}
 			else
 			{
-				std::cout << "renderer init fail\n";
-				return false; // renderer init fail
+				Logger::getInstance()->error("Renderizador: falla al crear el renderizador.");
+				return false;
 			}
 		}
 		else
 		{
-			std::cout << "window init fail\n";
-			return false; // window init fail
+			Logger::getInstance()->error("Renderizador: falla al crear la ventana");
+			return false;
 		}
 	}
 	else
 	{
-		std::cout << "SDL init fail\n";
-		return false; // SDL init fail
+		Logger::getInstance()->debug("Renderizador: falla en SDL init.");
+		return false;
 	}
-
-	std::cout << "init success\n" << endl;
+	Logger::getInstance()->debug("Renderizador: inicializacion finalizada.");
 	return true;
 }
 
