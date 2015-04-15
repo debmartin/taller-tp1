@@ -12,6 +12,7 @@
 #include <string>
 #include "Dibujable.h"
 #include "../modelo/Vector2f.h"
+#include "../utils/Logger.h"
 
 using namespace std;
 
