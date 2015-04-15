@@ -29,8 +29,8 @@
 //#define IMAGEN_FONDO "screen-pit.png"
 #define IMAGEN_ZUBZERO_CAMINANDO "sub-zero-caminando.png"
 #define IMAGEN_ZUBZERO_QUIETO "sub-zero-reposo.png"
-#define IMAGEN_ZUBZERO_SALTANDO_VERTICAL "sub-zero-saltando-vertical.png"
-#define IMAGEN_ZUBZERO_SALTANDO_DIAGONAL "sub-zero-saltando-diagonal.png"
+#define IMAGEN_ZUBZERO_SALTANDO_VERTICAL "sub-zero-salto-vertical.png"
+#define IMAGEN_ZUBZERO_SALTANDO_DIAGONAL "sub-zero-salto-oblicuo.png"
 #define IMAGEN_ZUBZERO_AGACHADO "sub-zero-agachado.png"
 
 #define CANT_FOTOGRAMAS_FONDO 1
