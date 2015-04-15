@@ -82,6 +82,7 @@ void Renderizador::dibujar(Dibujable* dibujable){
 }
 
 Renderizador::~Renderizador(){
+    instancia_unica = NULL;
     SDL_DestroyWindow(this->vWindow);
 	SDL_DestroyRenderer(this->vRenderer);
 	SDL_Quit();

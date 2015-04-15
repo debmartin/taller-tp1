@@ -116,6 +116,7 @@ Vector2f VentanaGrafica::obtener_relacion_aspectos(){
 
 VentanaGrafica::~VentanaGrafica(){
     delete Renderizador::Instance();
+    instancia_unica = NULL;
 }
 
 bool VentanaGrafica::esValida(Vector2f posicion){

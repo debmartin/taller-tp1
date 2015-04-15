@@ -10,7 +10,7 @@ Controlador::Controlador(Personaje* pers) :
     unPersonaje(pers) {
 }
 
-void Controlador::manejar_Evento(SDL_Event &evento){
+bool Controlador::manejar_Evento(SDL_Event &evento){
 //    SDL_PumpEvents();
     const Uint8* estadoTeclado = SDL_GetKeyboardState(NULL);
 	//Si se presiona una tecla
@@ -35,8 +35,11 @@ void Controlador::manejar_Evento(SDL_Event &evento){
         }else if (estadoTeclado[SDL_SCANCODE_DOWN]){
         	Logger::getInstance()->debug("Se presiona: Tecla abajo.");
             unPersonaje->agacharse();
+        } else if (estadoTeclado[SDL_SCANCODE_R]) {
+            Logger::getInstance()->debug("Se presiona: Tecla R.");
+            return false;
         }else{
-        	("No se presiona tecla.");
+        	Logger::getInstance()->debug("No se presiona tecla.");
             unPersonaje->mantenerReposo();
         }
 	}
@@ -55,6 +58,7 @@ void Controlador::manejar_Evento(SDL_Event &evento){
 //            unPersonaje->caminarIzquierda();
 //		}
 //	}
+    return true;
 }
 
 void Controlador::setPersonaje(Personaje* personaje){

@@ -31,7 +31,7 @@ public:
 	Juego(VentanaGrafica* ventana, EscenarioGrafico* escenario, Personaje* pers, PersonajeDibujable* persDib);
 	void render();
 	void update();
-	void handleEvents();
+	void handleEvents(bool& recargar);
 	bool running();
 	~Juego();
 
