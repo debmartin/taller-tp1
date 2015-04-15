@@ -157,7 +157,6 @@ bool Parser::parsearDesdeJson() {
                         try {
                             capa = new CapaDef(imagen_fondo, id_capa, ancho);
                         } catch (exception) {
-                            cout << "Error con capas\n";
                             return false;
                         }
                         capas->push_back(capa);
@@ -285,12 +284,10 @@ bool Parser::parsearDesdeJson() {
             this->escenario = new EscenarioDef(e_ancho, e_alto, e_ypiso);
             this->personaje = new PersonajeDef(p_ancho, p_alto, p_zindex, p_direccion);
         } catch (exception) {
-            cout << "Error con clases mayores";
             return false;
         }
         //se cargan los sprites del personaje
         try {
-            cout << "FPSREPOSO: " << p_sprites_fps_1 << "\n";
             SpriteDef* spriteDef_reposo = new SpriteDef(p_sprites_imagen_1, p_sprites_id_1, p_sprites_cant_fotogramas_1, p_sprites_fps_1);
             SpriteDef* spriteDef_caminando = new SpriteDef(p_sprites_imagen_2, p_sprites_id_2, p_sprites_cant_fotogramas_2, p_sprites_fps_2);
             SpriteDef* spriteDef_agachado = new SpriteDef(p_sprites_imagen_3, p_sprites_id_3, p_sprites_cant_fotogramas_3, p_sprites_fps_3);
@@ -303,7 +300,6 @@ bool Parser::parsearDesdeJson() {
             this->personaje->agregarSpritesDef(spriteDef_saltando_vert);
             this->personaje->agregarSpritesDef(spriteDef_saltando_obli);
         } catch (exception) {
-            cout << "Error con sprites\n";
             return false;
         }
 

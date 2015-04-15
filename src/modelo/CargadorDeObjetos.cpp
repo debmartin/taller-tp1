@@ -19,7 +19,6 @@ void CargadorDeOjbetos::cargarObjetos(string escenario_path){
 			////Inicialización desde Parser////
 			Parser* parser = new Parser(escenario_path);
 			if (! parser->parsearDesdeJson()) {
-                cout << "Carga Json por defecto\n";
                 parser->cargarJsonPorDefecto();
                 parser->parsearDesdeJson();
 			}
@@ -74,7 +73,7 @@ void CargadorDeOjbetos::cargarObjetos(string escenario_path){
             list<SpriteDef*>::iterator it_sprites = spritesDef->begin();
 			SpriteDef* primerSpriteSubQuieto = *it_sprites;
 			Animacion* SubQuieto = new Animacion(primerSpriteSubQuieto->getImagen(), primerSpriteSubQuieto->getCantFotogramas(), primerSpriteSubQuieto->getFps(),  primerSpriteSubQuieto->getIdSprite(), Renderizador::Instance()->getRenderer());
-			cout << "fpsReposo: " << SubQuieto->getFps() << "\n";
+
 			int direccion_personaje = personajeDef->getDireccion();
 			OrientacionSprite direccion;
 			if(direccion_personaje == 1){
@@ -88,7 +87,6 @@ void CargadorDeOjbetos::cargarObjetos(string escenario_path){
 			for (; it_sprites != spritesDef->end(); ++it_sprites)
 			{
 				Animacion* sub_zero = new Animacion((*it_sprites)->getImagen(), (*it_sprites)->getCantFotogramas(), (*it_sprites)->getFps(), (*it_sprites)->getIdSprite(), Renderizador::Instance()->getRenderer());
-				cout << "fps: " << sub_zero->getFps() << "\n";
 				personajeDibujable->agregarAnimacion(sub_zero);
 			}
 
