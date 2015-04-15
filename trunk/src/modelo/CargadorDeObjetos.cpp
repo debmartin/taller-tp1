@@ -94,7 +94,12 @@ void CargadorDeOjbetos::cargarObjetos(string escenario_path){
 
 			Logger::getInstance()->info("Inicialización de PersonajeDibujable correcta.");
 
-			capasYPersonajes->push_back(personajeDibujable);
+
+            list<Dibujable*>::iterator it_dibujables = capasYPersonajes->begin();
+            for (int i = 0; (it_dibujables != capasYPersonajes->end()) && i < personajeDef->getZindex(); ++it_dibujables){
+                i++;
+            }
+			capasYPersonajes->insert(it_dibujables, personajeDibujable);
 
 			////Inicializacion de EscenarioGrafico////
 			escenario = new EscenarioGrafico(escenarioDef->getAncho(), escenarioDef->getAlto(), escenarioDef->getYpiso(), capasYPersonajes, capas);
