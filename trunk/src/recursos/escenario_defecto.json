@@ -48,15 +48,15 @@
         		    "fps": 1
         			},
         "sprites_salto_vertical": { 
-		            "imagen": "sub-zero-salto-vertical.png",
-		            "id_sprite": "sub-zero-salto-vertical", 
+		            "imagen": "sub-zero-saltando-vertical.png",
+		            "id_sprite": "sub-zero-saltando-vertical", 
         		    "ancho": 15.4,
         		    "cant_fotogramas": 3,
         		    "fps": 3
         			},
         "sprites_salto_oblicuo": { 
-		            "imagen": "sub-zero-salto-oblicuo.png",
-		            "id_sprite": "sub-zero-salto-diagonal",
+		            "imagen": "sub-zero-saltando-diagonal.png",
+		            "id_sprite": "sub-zero-saltando-diagonal",
         		    "ancho": 15.4,
         		    "cant_fotogramas": 7,
         		    "fps": 10 
@@ -64,3 +64,4 @@
 		"direccion": 1 
     } 
 }
+
