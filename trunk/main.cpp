@@ -62,6 +62,19 @@
 
 int main(int argc, char* args[])
 {
+	//para correr los test
+	if ( argc > 1 )
+	{
+		string opcion_consola(args[1]);
+		Logger::getInstance()->info("opcion_consola: "+opcion_consola);
+		if ( opcion_consola == "-test" )
+		{
+			//para correr las pruebas comentar o descomentar estas 2 lineas
+			Test tests;
+			tests.ejecutar();
+		}
+	}
+
 	static const int FPS = 60;
 	static const int DELAY_TIME = 1000.0f / FPS;
 
@@ -102,9 +115,6 @@ int main(int argc, char* args[])
 */
 	/////////////Fin de inicializacion desde Parser////
 
-	//para correr las pruebas comentar o descomentar estas 2 lineas
-	//Test tests;
-	//tests.ejecutar();
     Vector2f tamanioVentanaPx(ANCHO_PX_VENTANA_INICIO, ALTO_PX_VENTANA_INICIO);
     Vector2f tamanioVentanaLogico(ANCHO_LOGICO_VENTANA_INICIO, ALTO_ESCENARIO);
     bool exito = VentanaGrafica::Instance()->init(TITULO_VENTANA, POS_VENTANA_INICIO, tamanioVentanaPx, tamanioVentanaLogico, INICIAR_FULLSCREEN);
