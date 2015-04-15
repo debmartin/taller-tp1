@@ -17,21 +17,11 @@ CargadorDeOjbetos::~CargadorDeOjbetos(){
 void CargadorDeOjbetos::cargarObjetos(){
 
 			////Inicialización desde Parser////
-			string nombre_escenario("src/recursos/escenario.json");
-			Parser* parser = new Parser(nombre_escenario.c_str());
+			Parser* parser = new Parser("src/recursos/escenario.json");
 			parser->parsearDesdeJson();
-
 			VentanaDef* ventanaDef = parser->getVentanaDef();
-			cout<<*ventanaDef<<endl;
-
 			EscenarioDef* escenarioDef = parser->getEscenarioDef();
-			cout<<*escenarioDef<<endl;
-
 			PersonajeDef* personajeDef = parser->getPersonajeDef();
-			cout<<*personajeDef<<endl;
-
-			Logger::getInstance()->info("Inicialiazación desde Parser finalizada.");
-
 
 			////Inicializacion de VentanaGrafica////
 		    Vector2f tamanioVentanaPx(ventanaDef->getAnchoPx(), ventanaDef->getAltoPx());
