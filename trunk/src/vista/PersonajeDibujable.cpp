@@ -72,7 +72,7 @@ void PersonajeDibujable::actualizar(){
 }
 
 void PersonajeDibujable::recibirNotificacion(Observable* unObservable){
-	Logger::getInstance()->info("PersonajeDibujable: Recibio notificacion personaje");
+	Logger::getInstance()->debug("PersonajeDibujable: Recibio notificacion personaje");
 
 	Personaje* unPersonaje = (Personaje*) unObservable;
 	Vector2f nueva_posicion = unPersonaje->obtenerPosicionEnVentana();

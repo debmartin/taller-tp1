@@ -15,7 +15,7 @@ bool Controlador::manejar_Evento(SDL_Event &evento){
     const Uint8* estadoTeclado = SDL_GetKeyboardState(NULL);
 	//Si se presiona una tecla
 	if ( evento.key.repeat == 0 ){
-    	Logger::getInstance()->info("Se recibe un evento de teclado.");
+    	Logger::getInstance()->debug("Se recibe un evento de teclado.");
 
         if (estadoTeclado[SDL_SCANCODE_LEFT] && estadoTeclado[SDL_SCANCODE_UP]){
         	Logger::getInstance()->debug("Se presiona: Tecla izquierda+Tecla arriba.");
