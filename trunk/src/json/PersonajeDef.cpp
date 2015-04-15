@@ -41,6 +41,23 @@ int PersonajeDef::getZindex() const {
 	return z_index;
 }
 
+void PersonajeDef::setAlto(double nuevoAlto) {
+	alto = nuevoAlto;
+}
+
+void PersonajeDef::setAncho(double nuevoAncho){
+	ancho = nuevoAncho;
+}
+
+void PersonajeDef::setZIndex(int nuevoZIndex) {
+	z_index = nuevoZIndex;
+}
+
+void PersonajeDef::setDireccion(int nuevaDireccion) {
+	direccion = nuevaDireccion;
+}
+
+
 PersonajeDef::~PersonajeDef(){
 	for (list<SpriteDef*>::iterator it_spritesDef = spritesDef->begin() ; it_spritesDef !=  spritesDef->end(); it_spritesDef++){
             delete *it_spritesDef;

@@ -306,9 +306,6 @@ bool Parser::parsearDesdeJson() {
             SpriteDef* spriteDef_agachado = new SpriteDef(p_sprites_imagen_3, p_sprites_id_3, p_sprites_ancho_3, p_sprites_cant_fotogramas_3, p_sprites_fps_3);
             SpriteDef* spriteDef_saltando_vert = new SpriteDef(p_sprites_imagen_4, p_sprites_id_4, p_sprites_ancho_4, p_sprites_cant_fotogramas_4, p_sprites_fps_4);
             SpriteDef* spriteDef_saltando_obli = new SpriteDef(p_sprites_imagen_5, p_sprites_id_5, p_sprites_ancho_5, p_sprites_cant_fotogramas_5, p_sprites_fps_5);
-	this->personaje->agregarSpritesDef(spriteDef_agachado);
-	this->personaje->agregarSpritesDef(spriteDef_salto_vertical);
-	this->personaje->agregarSpritesDef(spriteDef_salto_oblicuo);
 
             this->personaje->agregarSpritesDef(spriteDef_reposo);
             this->personaje->agregarSpritesDef(spriteDef_caminando);
@@ -450,30 +447,25 @@ void Parser::inciarValidacionSemantica() {
 	//validar el personaje
 	if ( personaje_ancho_nuevo <= 0 )
 	{
-		personaje_ancho_nuevo = 15;
+		personaje->setAncho(15);
 		Logger::getInstance()->debug("El ancho del personaje es menor o igual a cero. Se elije uno nuevo con el valor de 15");
 	}
 
 	if ( personale_zindex_nuevo < 0 )
 	{
-		personale_zindex_nuevo = 0;
+		personaje->setZIndex(0);
 		Logger::getInstance()->debug("El zindex del personaje es menor a cero. Se elije uno nuevo con el valor de 0");
 	}
 
 	if ( personaje_direccion_nuevo != -1 && personaje_direccion_nuevo != 1 )
 	{
-		personaje_direccion_nuevo = 1;
+		personaje->setDireccion(1);
 		Logger::getInstance()->debug("La configuracion de la direccion del personaje no es la correcta. Se lo dirije en direccion derecha");
 	}
 
 	//validar los sprites def del personaje
 
-	list<SpriteDef*>* spritesDef_actual = new list<SpriteDef*>;
-	spritesDef_actual = this->personaje->getSpritesDef();
-
-	delete this->personaje;
-	this->personaje = NULL;
-	this->personaje = new PersonajeDef(personaje_ancho_nuevo, personaje_alto_nuevo, personale_zindex_nuevo,personaje_direccion_nuevo);
+	list<SpriteDef*>* spritesDef_actual = this->personaje->getSpritesDef();
 
 	for (list<SpriteDef*>::iterator it_sprites = spritesDef_actual->begin() ; it_sprites != spritesDef_actual->end(); ++it_sprites)
 	{
