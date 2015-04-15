@@ -11,6 +11,7 @@
 #include <SDL2/SDL.h>
 #include "../vista/VentanaGrafica.h"
 #include "../vista/Posicionable.h"
+#include "../utils/Logger.h"
 #include "Trayectoria.h"
 #include "Reposo.h"
 #include "MRU.h"
