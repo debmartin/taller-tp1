@@ -125,7 +125,9 @@ void CargadorDeOjbetosTest::ejecutar() {
 
 	VentanaGrafica::Instance()->agregarEscenario(&escenarioDibujable);
     VentanaGrafica::Instance()->centrar_ventana();
+
     escenario->centrar_dibujables();
+
     Vector2f vector_centrado(escenarioDef->getAncho()/2.0, escenarioDef->getYpiso());
     jugador->centrar_en(vector_centrado);
     Logger::getInstance()->info("Carga correcta.");

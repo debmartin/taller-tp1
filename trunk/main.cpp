@@ -72,6 +72,7 @@ int main(int argc, char* args[])
 			//para correr las pruebas comentar o descomentar estas 2 lineas
 			Test tests;
 			tests.ejecutar();
+			return 0;
 		}
 	}
 
