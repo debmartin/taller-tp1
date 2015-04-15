@@ -137,6 +137,7 @@ int main(int argc, char* args[])
     Vector2f tamanioVentanaPx(ventana_anchopx, ventana_altopx);
     Vector2f tamanioVentana(ventana_ancho, ventana_alto);
     bool exito = VentanaGrafica::Instance()->init(TITULO_VENTANA, POS_VENTANA_INICIO, tamanioVentanaPx, tamanioVentana, INICIAR_FULLSCREEN);
+    Vector2f relacionAspectos = VentanaGrafica::Instance()->obtener_relacion_aspectos();
 
     if (! exito)
 		cout << "Error al inicializar juego" << endl;
@@ -144,24 +145,20 @@ int main(int argc, char* args[])
     /**********************************/
     /******** creando las capas *******/
 
-    for (list<CapaDef*>::iterator it_capas = parser->getCapasDef()->begin() ; it_capas != parser->getCapasDef()->end(); it_capas++)
-	{
-		cout<<**it_capas<<endl;
-	}
-
-    Animacion* fondoAnim = new Animacion(IMAGEN_FONDO1, CANT_FOTOGRAMAS_FONDO, FPS_FONDO, ID_FONDO, Renderizador::Instance()->getRenderer());
-	Animacion* fondoAnim2 = new Animacion(IMAGEN_FONDO2, CANT_FOTOGRAMAS_FONDO2, FPS_FONDO2, ID_FONDO, Renderizador::Instance()->getRenderer());
-	Vector2f tamIniCapa(ANCHO_LOGICO_CAPA1, escenario_alto);
-	Vector2f tamIniCapa2(ANCHO_LOGICO_CAPA2, escenario_alto);
     Vector2f posInCapa = POSICION_INICIAL_CAPA;
+    list<Capa*>* capas = new list<Capa*>();
 
-    Vector2f relacionAspectos = VentanaGrafica::Instance()->obtener_relacion_aspectos();
-	Capa* fondoCapa = new Capa(fondoAnim, tamIniCapa, posInCapa, relacionAspectos);
-	Capa* fondoCapa2 = new Capa(fondoAnim2, tamIniCapa2, posInCapa, relacionAspectos);
+    for (list<CapaDef*>::iterator it_capasDef = parser->getCapasDef()->begin() ; it_capasDef != parser->getCapasDef()->end(); it_capasDef++)
+	{
+    	string capa_imagen_fondo 	= (*it_capasDef)->getImagenFondo();
+    	string capa_id 				= (*it_capasDef)->getIdCapa();
+    	float capa_ancho 			= (float)(*it_capasDef)->getAncho();
 
-	list<Capa*>* capas = new list<Capa*>();
-	capas->push_back(fondoCapa);
-	capas->push_back(fondoCapa2);
+    	Animacion* fondoAnim = new Animacion(capa_imagen_fondo, 1, 1, capa_id, Renderizador::Instance()->getRenderer());
+    	Vector2f tamIniCapa(capa_ancho, escenario_alto);
+    	Capa* fondoCapa = new Capa(fondoAnim, tamIniCapa, posInCapa, relacionAspectos);
+    	capas->push_back(fondoCapa);
+	}
 
     /**********************************/
     /******** creando el personaje *******/
@@ -186,8 +183,11 @@ int main(int argc, char* args[])
 	personaje.agregarAnimacion(&zubAgachado);
 
 	list<Dibujable*> capasYPersonajes;
-	capasYPersonajes.push_back((Dibujable*) fondoCapa);
-	capasYPersonajes.push_back((Dibujable*) fondoCapa2);
+	for (list<Capa*>::iterator it_capas = capas->begin() ; it_capas != capas->end(); it_capas++)
+	{
+		capasYPersonajes.push_back((Dibujable*)(*it_capas));
+	}
+
 	capasYPersonajes.push_back((Dibujable*) &personaje);
 
 	EscenarioGrafico escenario(ANCHO_ESCENARIO, ALTO_ESCENARIO, Y_PISO, &capasYPersonajes, capas);
@@ -229,19 +229,17 @@ int main(int argc, char* args[])
 		cout << "VENTANA-GRAFICA->relacion de aspecto X:" << VentanaGrafica::Instance()->relacion_de_aspectoX() << endl;
 		cout << "VENTANA-GRAFICA->relacion de aspecto Y:" << VentanaGrafica::Instance()->relacion_de_aspectoY() << endl;
 		cout << "-------------------------------------------------------" << endl;
-		cout << "CAPA1->limite logico Izquierdo:" << fondoCapa->getLimiteLogicoIzquierdo() << endl;
-		cout << "CAPA1->limite logico Derecho:" << fondoCapa->getLimiteLogicoDerecho() << endl;
-		cout << "CAPA1->sprite->altpPx:" << fondoCapa->getSprite()->getAltoPx() << endl;
-		cout << "CAPA1->sprite->anchoPx:" << fondoCapa->getSprite()->getAnchoPx() << endl;
-		cout << "CAPA1->sprite->posicionPx-X:" << fondoCapa->getSprite()->getPosicion().X() << endl;
-		cout << "CAPA1->sprite->posicionPx-Y:" << fondoCapa->getSprite()->getPosicion().Y() << endl;
-		cout << "-------------------------------------------------------" << endl;
-		cout << "CAPA2->limite logico Izquierdo:" << fondoCapa2->getLimiteLogicoIzquierdo() << endl;
-		cout << "CAPA2->limite logico Derecho:" << fondoCapa2->getLimiteLogicoDerecho() << endl;
-		cout << "CAPA2->sprite->altpPx:" << fondoCapa2->getSprite()->getAltoPx() << endl;
-		cout << "CAPA2->sprite->anchoPx:" << fondoCapa2->getSprite()->getAnchoPx() << endl;
-		cout << "CAPA2->sprite->posicionPx-X:" << fondoCapa2->getSprite()->getPosicion().X() << endl;
-		cout << "CAPA2->sprite->posicionPx-Y:" << fondoCapa2->getSprite()->getPosicion().Y() << endl;
+		int idx_capa = 0;
+		for (list<Capa*>::iterator it_capas = capas->begin() ; it_capas != capas->end(); it_capas++)
+		{
+			cout << "CAPA_"<<idx_capa<<"->limite logico Izquierdo:" << (*it_capas)->getLimiteLogicoIzquierdo() << endl;
+			cout << "CAPA_"<<idx_capa<<"->limite logico Derecho:" << (*it_capas)->getLimiteLogicoDerecho() << endl;
+			cout << "CAPA_"<<idx_capa<<"->sprite->altpPx:" << (*it_capas)->getSprite()->getAltoPx() << endl;
+			cout << "CAPA_"<<idx_capa<<"->sprite->anchoPx:" << (*it_capas)->getSprite()->getAnchoPx() << endl;
+			cout << "CAPA_"<<idx_capa<<"->sprite->posicionPx-X:" << (*it_capas)->getSprite()->getPosicion().X() << endl;
+			cout << "CAPA_"<<idx_capa<<"->sprite->posicionPx-Y:" << (*it_capas)->getSprite()->getPosicion().Y() << endl;
+			idx_capa++;
+		}
 		cout << "-------------------------------------------------------" << endl;
 		cout << "PERSONAJE-LOGICO->posicion-logica-X:" << jugador.getPosicion().X() << endl;
 		cout << "PERSONAJE-LOGICO->posicion-logica-Y:" << jugador.getPosicion().Y() << endl;
