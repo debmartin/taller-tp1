@@ -34,12 +34,9 @@ bool VentanaGrafica::init(string titulo, Vector2f posicion, Vector2f tamanioPixe
 
 	//Inicializamos el Renderizador.
 	bool exito = Renderizador::Instance()->init(titulo, posicion, tamanioPixels, fullscreen);
-	cout << "VentanaGrafica:: creo Render" << endl;
 	if(!exito){
-		cout << "Renderizador init es falso" << endl;
 		return false;
 	}
-	cout << "Renderizador inicializado correctamente" << endl;
 	return true;
 }
 
