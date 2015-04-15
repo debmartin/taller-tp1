@@ -117,8 +117,6 @@ void Personaje::notificarObservadores(){
 }
 
 void Personaje::update(){
-	cout<<"Update personaje"<<endl;
-
 	// RECALCULA LA POSICION EN BASE AL OBJETO TRAYECTORIA
 	float tActual = ((float)(SDL_GetTicks())/1000.0f) - tCreacion;
 	Vector2f posicionCandidata = this->trayectoria->getPosicion(tActual);
