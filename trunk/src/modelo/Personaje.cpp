@@ -66,40 +66,45 @@ void Personaje::centrar_en(Vector2f& v){
 }
 
 void Personaje::caminarDerecha(){
-    cout<<"Estado derecha"<<endl;
     setEstado(CAMINANDO_DERECHA);
     cambiarTrayectoria(new MRU(posicion, Vector2f(VELOCIDAD_DESP_HORIZONTAL, VELOCIDAD_NULA)));
-    cout<<"seteo trayectoria"<<endl;
+    Logger::getInstance()->debug("Personaje: caminando derecha. Se setea trayectoria.");
 }
 
 void Personaje::caminarIzquierda(){
     setEstado(CAMINANDO_IZQUIERDA);
     cambiarTrayectoria(new MRU(posicion, Vector2f(-VELOCIDAD_DESP_HORIZONTAL, VELOCIDAD_NULA)));
+    Logger::getInstance()->debug("Personaje: caminando izquierda. Se setea trayectoria.");
 }
 
 void Personaje::saltarVertical(){
     setEstado(SALTANDO_VERTICAL);
     cambiarTrayectoria(new MRUV(posicion, Vector2f(VELOCIDAD_NULA, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD));
+    Logger::getInstance()->debug("Personaje: salto vertical. Se setea trayectoria.");
 }
 
 void Personaje::saltarOblicuoDerecha(){
     setEstado(SALTANDO_OBLICUO_DERECHA);
     cambiarTrayectoria(new MRUV(posicion, Vector2f(VELOCIDAD_DESP_HORIZONTAL, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD));
+    Logger::getInstance()->debug("Personaje: salto oblicuo derecha. Se setea trayectoria.");
 }
 
 void Personaje::saltarOblicuoIzquierda(){
     setEstado(SALTANDO_OBLICUO_IZQUIERDA);
     cambiarTrayectoria(new MRUV(posicion, Vector2f(-VELOCIDAD_DESP_HORIZONTAL, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD));
+    Logger::getInstance()->debug("Personaje: salto oblicuo izquierda. Se setea trayectoria.");
 }
 
 void Personaje::agacharse(){
     setEstado(AGACHADO);
     cambiarTrayectoria(new Reposo(posicion));
+    Logger::getInstance()->debug("Personaje: agachado.");
 }
 
 void Personaje::mantenerReposo(){
     setEstado(EN_ESPERA);
     cambiarTrayectoria(new Reposo(posicion));
+    Logger::getInstance()->debug("Personaje: en reposo.");
 }
 
 void Personaje::cambiarTrayectoria(Trayectoria* t) {
@@ -117,6 +122,8 @@ void Personaje::notificarObservadores(){
 }
 
 void Personaje::update(){
+	Logger::getInstance()->debug("Personaje: update.");
+
 	// RECALCULA LA POSICION EN BASE AL OBJETO TRAYECTORIA
 	float tActual = ((float)(SDL_GetTicks())/1000.0f) - tCreacion;
 	Vector2f posicionCandidata = this->trayectoria->getPosicion(tActual);
