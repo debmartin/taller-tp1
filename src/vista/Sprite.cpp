@@ -25,7 +25,7 @@ Sprite::Sprite(Animacion* animacion, Vector2f& posicionIni, OrientacionSprite or
 	this->anchoFotogramaPx = lround((double) anchoPx / cantidadFotogramas);
 	this->fotogramaActual = FOTOGRAMA_INICIAL;
 
-	Logger::getInstance()->info("Sprite::Sprite() - Construccion exitosa");
+	Logger::getInstance()->debug("Sprite::Sprite() - Construccion exitosa");
 }
 
 void Sprite::dibujar() {
@@ -100,7 +100,7 @@ void Sprite::update() {
 	else if (this->orientacion == ORIENTACION_IZQUIERDA && this->sentidoReproduccion == HACIA_ATRAS)
 		this->setFotogramaActual(nuevoFotograma);
 
-	Logger::getInstance()->info("Sprite::update()");
+	Logger::getInstance()->debug("Sprite::update()");
 }
 
 void Sprite::setSentidoReproduccion(SentidoReproduccion sr) {
@@ -122,7 +122,7 @@ void Sprite::cambiarAnimacion(Animacion* nuevaAnim) {
 	this->anchoFotogramaPx = lround((double)this->anchoPx / cantidadFotogramas);
 
 	this->fotogramaActual = 1;
-	Logger::getInstance()->info("Sprite::cambiarAnimacion() - La animacion a sido cambiada");
+	Logger::getInstance()->debug("Sprite::cambiarAnimacion() - La animacion a sido cambiada");
 }
 
 Vector2f Sprite::getPosicion() {
