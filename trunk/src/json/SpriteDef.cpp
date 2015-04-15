@@ -12,28 +12,13 @@ SpriteDef::SpriteDef() {
 
 }
 
-SpriteDef::SpriteDef(string imagen, string id, double ancho, int cant_fotogramas,
+SpriteDef::SpriteDef(string imagen, string id, int cant_fotogramas,
 		int fps) {
 
 	this->imagen = imagen;
 	this->id_sprite = id;
-	this->ancho = ancho;
 	this->cant_fotogramas = cant_fotogramas;
 	this->fps = fps;
-//	if ( !Util::getInstancia()->existeArchivo(imagen) ){
-//        cout << "No existe sprite arch: " << imagen << "\n";
-//        throw exception();
-//    } if (ancho <= 0) {
-//        cout << "ancho mal\n";
-//        throw exception();
-//    } if (cant_fotogramas <= 0 || fps <= 0) {
-//        cout << "fotogramas y fps mal\n";
-//        throw exception();
-//    }
-}
-
-double SpriteDef::getAncho() const {
-	return ancho;
 }
 
 int SpriteDef::getCantFotogramas() const {
@@ -46,10 +31,6 @@ int SpriteDef::getFps() const {
 
 void SpriteDef::setImagen(string nuevaImagen){
     imagen = nuevaImagen;
-}
-
-void SpriteDef::setAncho(double nuevoAncho){
-	ancho = nuevoAncho;
 }
 
 void SpriteDef::setCantFotogramas(int nuevaCant){
@@ -74,8 +55,8 @@ SpriteDef::~SpriteDef() {
 
 ostream& operator <<(ostream &o, const SpriteDef &p) {
 
-        o<<"SpriteDef -> [imagen, id_sprite, ancho, cant_fotogramas, fps]=[";
-        o<<p.imagen<<", "<<p.id_sprite<<", "<<p.ancho<<", "<<p.cant_fotogramas<<", "<<p.fps<<"]";
+        o<<"SpriteDef -> [imagen, id_sprite, cant_fotogramas, fps]=[";
+        o<<p.imagen<<", "<<p.id_sprite<<", "<<p.cant_fotogramas<<", "<<p.fps<<"]";
 
         return o;
 }

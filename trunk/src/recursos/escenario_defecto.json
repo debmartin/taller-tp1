@@ -1,4 +1,4 @@
-{ 
+{
     "ventana": { 
         "anchopx": 640, 
         "altopx": 480, 
@@ -29,35 +29,30 @@
         "sprites_reposo": { 
 		            "imagen": "sub-zero-reposo.png",
 		            "id_sprite": "sub-zero-reposo", 
-        		    "ancho": 15.4,
         		    "cant_fotogramas": 12,
         		    "fps": 10 
         			},
         "sprites_caminando": { 
 		            "imagen": "sub-zero-caminando.png",
 		            "id_sprite": "sub-zero-caminando", 
-        		    "ancho": 15.4,
         		    "cant_fotogramas": 9,
         		    "fps": 10 
         			},
         "sprites_agachado": { 
 		            "imagen": "sub-zero-agachado.png",
 		            "id_sprite": "sub-zero-agachado",
-        		    "ancho": 15.4,
         		    "cant_fotogramas": 1,
         		    "fps": 1
         			},
         "sprites_salto_vertical": { 
 		            "imagen": "sub-zero-saltando-vertical.png",
-		            "id_sprite": "sub-zero-saltando-vertical", 
-        		    "ancho": 15.4,
+		            "id_sprite": "sub-zero-saltando-vertical",
         		    "cant_fotogramas": 3,
         		    "fps": 3
         			},
         "sprites_salto_oblicuo": { 
 		            "imagen": "sub-zero-saltando-diagonal.png",
 		            "id_sprite": "sub-zero-saltando-diagonal",
-        		    "ancho": 15.4,
         		    "cant_fotogramas": 7,
         		    "fps": 10 
         			},
