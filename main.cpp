@@ -68,7 +68,7 @@ int main(int argc, char* args[])
 	Uint32 frameStart, frameTime;
 
 	///////////////Inicializacion del Cargador de Objetos////
-	CargadorDeOjbetos cargador_de_objetos;
+/*	CargadorDeOjbetos cargador_de_objetos;
 	cargador_de_objetos.cargarObjetos();
     cout << "Objetos cargados" << endl;
 
@@ -99,13 +99,13 @@ int main(int argc, char* args[])
 				SDL_Delay((int)(DELAY_TIME - frameTime));
 		}
 
-
+*/
 	/////////////Fin de inicializacion desde Parser////
 
 	//para correr las pruebas comentar o descomentar estas 2 lineas
 	//Test tests;
 	//tests.ejecutar();
-/*    Vector2f tamanioVentanaPx(ANCHO_PX_VENTANA_INICIO, ALTO_PX_VENTANA_INICIO);
+    Vector2f tamanioVentanaPx(ANCHO_PX_VENTANA_INICIO, ALTO_PX_VENTANA_INICIO);
     Vector2f tamanioVentanaLogico(ANCHO_LOGICO_VENTANA_INICIO, ALTO_ESCENARIO);
     bool exito = VentanaGrafica::Instance()->init(TITULO_VENTANA, POS_VENTANA_INICIO, tamanioVentanaPx, tamanioVentanaLogico, INICIAR_FULLSCREEN);
 
@@ -217,6 +217,6 @@ int main(int argc, char* args[])
 		if (frameTime < DELAY_TIME)
 			SDL_Delay((int)(DELAY_TIME - frameTime));
 	}
-*/
+
 	return 0;
 }
