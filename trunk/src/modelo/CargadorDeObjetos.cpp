@@ -14,10 +14,10 @@ CargadorDeOjbetos::~CargadorDeOjbetos(){
 
 }
 
-void CargadorDeOjbetos::cargarObjetos(){
+void CargadorDeOjbetos::cargarObjetos(string escenario_path){
 
 			////Inicialización desde Parser////
-			Parser* parser = new Parser("src/recursos/escenario.json");
+			Parser* parser = new Parser(escenario_path);
 			if (! parser->parsearDesdeJson()) {
                 cout << "Carga Json por defecto\n";
                 parser->cargarJsonPorDefecto();
