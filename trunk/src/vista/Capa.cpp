@@ -41,11 +41,18 @@ void Capa::actualizar(){
     sprite->update();
 }
 
-void Capa::centrar_en(Vector2f posicion){
+void Capa::centrar_en(Vector2f v, float limiteLogicoIzquierdoVentana, float relacion_de_aspectoX){
 	//Centro la capa en la posición dada.
+
+	this->limite_logico_izquierdo = v.X() - (this->tamanioLogico.X() / 2.0f);
+	float xPosSpritePx = (this->getLimiteLogicoIzquierdo() - limiteLogicoIzquierdoVentana ) * relacion_de_aspectoX;
+	Vector2f nuevaPosicionPx(xPosSpritePx, v.Y());
+	this->sprite->setPosicion(nuevaPosicionPx);
+	/*
 	this->limite_logico_izquierdo = posicion.X() - (getAnchoLogico()/2.0);
 	Vector2f vec(this->limite_logico_izquierdo, posicion.Y());
 	this->sprite->setPosicion(vec);
+	*/
 }
 
 void Capa::setPosicionX(float nuevoX){

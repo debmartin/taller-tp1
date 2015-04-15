@@ -30,7 +30,7 @@ public:
 	double getAnchoLogico();
 	double getLimiteLogicoIzquierdo();
 	double getLimiteLogicoDerecho();
-	void centrar_en(Vector2f posicion);
+	void centrar_en(Vector2f posicion, float limiteLogicoIzquierdoVentana, float relacion_de_aspectoX);
     void dibujar();
     void actualizar();
     Sprite* getSprite();

@@ -11,7 +11,7 @@ class Dibujable
         virtual ~Dibujable();
         virtual void dibujar() = 0;
         virtual void actualizar() = 0;
-        virtual void centrar_en(Vector2f posicion) = 0;
+        virtual void centrar_en(Vector2f posicion, float limiteLogicoIzquierdoVentana, float relacion_de_aspectoX) = 0;
     protected:
     private:
 };
