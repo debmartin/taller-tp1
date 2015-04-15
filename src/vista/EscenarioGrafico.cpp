@@ -58,8 +58,10 @@ void EscenarioGrafico::centrar_dibujables(){
 	//Centro las capas
 	float posicionInicialY = 0.0f;
 	Vector2f vec(VentanaGrafica::Instance()->getAnchoPx()/2.0, posicionInicialY);
+	cout<<"EscenarioGrafico::centrar_dibujables() -> informacion de capas: "<<endl;
 	for (list<Capa*>::iterator it = capas->begin(); it != capas->end(); ++it){
-		(*it)->centrar_en(vec);
+		//(*it)->centrar_en(vec);
+		cout<<(*it)<<endl;
 	}
 
 	//Centro el personaje
