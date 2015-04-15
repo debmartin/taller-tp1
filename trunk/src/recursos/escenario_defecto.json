@@ -29,21 +29,21 @@
         "sprites_reposo": { 
 		            "imagen": "sub-zero-reposo.png",
 		            "id_sprite": "sub-zero-reposo", 
-        		    "ancho": 15.4
+        		    "ancho": 15.4,
         		    "cant_fotogramas": 12,
         		    "fps": 10 
         			},
         "sprites_caminando": { 
 		            "imagen": "sub-zero-caminando.png",
 		            "id_sprite": "sub-zero-caminando", 
-        		    "ancho": 15.4
+        		    "ancho": 15.4,
         		    "cant_fotogramas": 9,
         		    "fps": 10 
         			},
         "sprites_agachado": { 
 		            "imagen": "sub-zero-agachado.png",
 		            "id_sprite": "sub-zero-agachado",
-        		    "ancho": 15.4
+        		    "ancho": 15.4,
         		    "cant_fotogramas": 1,
         		    "fps": 10
         			},
