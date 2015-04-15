@@ -32,7 +32,7 @@ public:
 	double getYPisoLogico() const;
 	void dibujar();
 	void actualizar();
-	void centrar_en(Vector2f);
+	void centrar_en(Vector2f posicion, float limiteLogicoIzquierdoVentana, float relacion_de_aspectoX);
 	void centrar_dibujables();
 	void scrollear_capas();
 	bool esValida(Vector2f posicion);
