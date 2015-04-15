@@ -116,9 +116,26 @@ int main(int argc, char* args[])
 */
 	/////////////Fin de inicializacion desde Parser////
 
-    Vector2f tamanioVentanaPx(ANCHO_PX_VENTANA_INICIO, ALTO_PX_VENTANA_INICIO);
-    Vector2f tamanioVentanaLogico(ANCHO_LOGICO_VENTANA_INICIO, ALTO_ESCENARIO);
-    bool exito = VentanaGrafica::Instance()->init(TITULO_VENTANA, POS_VENTANA_INICIO, tamanioVentanaPx, tamanioVentanaLogico, INICIAR_FULLSCREEN);
+	Parser* parser = new Parser("src/recursos/escenario.json");
+	parser->parsearDesdeJson();
+	VentanaDef* ventanaDef = parser->getVentanaDef();
+	EscenarioDef* escenarioDef = parser->getEscenarioDef();
+	PersonajeDef* personajeDef = parser->getPersonajeDef();
+
+	//tomar valores
+	float ventana_anchopx = (float)ventanaDef->getAnchoPx();
+	float ventana_altopx = (float)ventanaDef->getAltoPx();
+	float ventana_ancho = ventanaDef->getAncho();
+	float ventana_alto = escenarioDef->getAlto();
+
+	for (list<CapaDef*>::iterator it_capas = parser->getCapasDef()->begin() ; it_capas != parser->getCapasDef()->end(); it_capas++)
+	{
+		cout<<**it_capas<<endl;
+	}
+
+    Vector2f tamanioVentanaPx(ventana_anchopx, ventana_altopx);
+    Vector2f tamanioVentana(ventana_ancho, ventana_alto);
+    bool exito = VentanaGrafica::Instance()->init(TITULO_VENTANA, POS_VENTANA_INICIO, tamanioVentanaPx, tamanioVentana, INICIAR_FULLSCREEN);
 
     if (! exito)
 		cout << "Error al inicializar juego" << endl;
