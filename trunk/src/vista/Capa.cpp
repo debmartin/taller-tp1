@@ -10,7 +10,7 @@
 Capa::Capa(Animacion* animCapa, Vector2f& tamInicialLogico, Vector2f& posInicial, Vector2f& aspectos) :
     animacionCapa(animCapa), tamanioLogico(tamInicialLogico), relacionAspectos(aspectos) {
 	limite_logico_izquierdo = posInicial.X();
-    sprite = new Sprite(animacionCapa, posInicial);
+    sprite = new Sprite(animacionCapa, posInicial, ORIENTACION_DERECHA);
 
     sprite->escalarConTamanio(tamanioLogico.X()*aspectos.X(), tamanioLogico.Y()*aspectos.Y());
 }

@@ -81,7 +81,7 @@ void CargadorDeOjbetos::cargarObjetos(){
 
 			SpriteDef* primerSpriteSubQuieto = *(personajeDef->getSpritesDef()->begin());
 			Animacion SubQuieto(primerSpriteSubQuieto->getImagen(), primerSpriteSubQuieto->getCantFotogramas(), primerSpriteSubQuieto->getFps(),  primerSpriteSubQuieto->getIdSprite(), Renderizador::Instance()->getRenderer());
-			PersonajeDibujable personajeDibujable1(&SubQuieto, POSICION_INICIAL_PERSONAJE, tamanioPx);
+			PersonajeDibujable personajeDibujable1(&SubQuieto, POSICION_INICIAL_PERSONAJE, tamanioPx, ORIENTACION_IZQUIERDA);
 
 			for (list<SpriteDef*>::iterator it_sprites = personajeDef->getSpritesDef()->begin() ; it_sprites != personajeDef->getSpritesDef()->end(); it_sprites++)
 			{

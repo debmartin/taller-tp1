@@ -8,8 +8,8 @@
 #include "PersonajeDibujable.h"
 
 
-PersonajeDibujable::PersonajeDibujable(Animacion* animIni, Vector2f posicionIni, Vector2f tamanioPx){
-	spritePersonaje = new Sprite(animIni, posicionIni);
+PersonajeDibujable::PersonajeDibujable(Animacion* animIni, Vector2f posicionIni, Vector2f tamanioPx, OrientacionSprite orientacion){
+	spritePersonaje = new Sprite(animIni, posicionIni, orientacion);
 
 	cout << "----PersonajeDibujable::PersonajeDibujable.x:" << tamanioPx.X();
 	cout << "----PersonajeDibujable::PersonajeDibujable.y:" << tamanioPx.Y();

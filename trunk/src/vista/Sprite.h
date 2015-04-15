@@ -8,13 +8,17 @@
 #include "../modelo/Reposo.h"
 #include "Animacion.h"
 
-typedef enum
+typedef enum SentidoReproduccion
 {
     HACIA_ADELANTE,
     HACIA_ATRAS
 } SentidoReproduccion;
 
-
+typedef enum OrientacionSprite
+{
+    ORIENTACION_DERECHA,
+	ORIENTACION_IZQUIERDA
+} OrientacionSprite;
 
 class Sprite {
 
@@ -36,7 +40,7 @@ private:
 	float tCreacion;
 
 public:
-	Sprite(Animacion* animInicial, Vector2f& posicion);
+	Sprite(Animacion* animInicial, Vector2f& posicion, OrientacionSprite orientacion);
 	virtual ~Sprite();
 
 	void setPosicion(Vector2f& posicion);

@@ -30,13 +30,12 @@
 
 class PersonajeDibujable : public Dibujable, public Observador {
 private:
-	Personaje* personaje;
 	Sprite* spritePersonaje;
 	estado_personaje estado;
 	std::string nombre;
     std::map<std::string, Animacion*> animaciones;
 public:
-	PersonajeDibujable(Animacion* animIni, Vector2f posicionIni, Vector2f tamanioPx);
+	PersonajeDibujable(Animacion* animIni, Vector2f posicionIni, Vector2f tamanioPx, OrientacionSprite orientacion);
 	virtual ~PersonajeDibujable();
 	void seleccionarSprite();
 	void setEstado(estado_personaje unEstado);
