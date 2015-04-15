@@ -15,22 +15,30 @@ void Controlador::manejar_Evento(SDL_Event &evento){
     const Uint8* estadoTeclado = SDL_GetKeyboardState(NULL);
 	//Si se presiona una tecla
 	if ( evento.key.repeat == 0 ){
-		cout<<"Entro tecla"<<endl;
+    	Logger::getInstance()->info("Se recibe un evento de teclado.");
 
-        if (estadoTeclado[SDL_SCANCODE_LEFT] && estadoTeclado[SDL_SCANCODE_UP])
+        if (estadoTeclado[SDL_SCANCODE_LEFT] && estadoTeclado[SDL_SCANCODE_UP]){
+        	Logger::getInstance()->debug("Se presiona: Tecla izquierda+Tecla arriba.");
             unPersonaje->saltarOblicuoIzquierda();
-        else if (estadoTeclado[SDL_SCANCODE_RIGHT] && estadoTeclado[SDL_SCANCODE_UP])
+        }else if (estadoTeclado[SDL_SCANCODE_RIGHT] && estadoTeclado[SDL_SCANCODE_UP]){
+        	Logger::getInstance()->debug("Se presiona: Tecla derecha+Tecla arriba.");
             unPersonaje->saltarOblicuoDerecha();
-        else if (estadoTeclado[SDL_SCANCODE_LEFT])
+        }else if (estadoTeclado[SDL_SCANCODE_LEFT]){
+        	Logger::getInstance()->debug("Se presiona: Tecla izquierda.");
             unPersonaje->caminarIzquierda();
-        else if (estadoTeclado[SDL_SCANCODE_RIGHT])
+        }else if (estadoTeclado[SDL_SCANCODE_RIGHT]){
+        	Logger::getInstance()->debug("Se presiona: Tecla derecha.");
             unPersonaje->caminarDerecha();
-        else if (estadoTeclado[SDL_SCANCODE_UP])
+        }else if (estadoTeclado[SDL_SCANCODE_UP]){
+        	Logger::getInstance()->debug("Se presiona: Tecla arriba.");
             unPersonaje->saltarVertical();
-        else if (estadoTeclado[SDL_SCANCODE_DOWN])
+        }else if (estadoTeclado[SDL_SCANCODE_DOWN]){
+        	Logger::getInstance()->debug("Se presiona: Tecla abajo.");
             unPersonaje->agacharse();
-        else
+        }else{
+        	("No se presiona tecla.");
             unPersonaje->mantenerReposo();
+        }
 	}
 //	//Si se suelta una tecla
 //	if( evento.type == SDL_KEYUP && evento.key.repeat == 0 ){
