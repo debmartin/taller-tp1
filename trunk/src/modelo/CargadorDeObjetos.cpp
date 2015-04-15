@@ -17,7 +17,7 @@ CargadorDeOjbetos::~CargadorDeOjbetos(){
 void CargadorDeOjbetos::cargarObjetos(){
 
 			////Inicialización desde Parser////
-			string nombre_escenario("src/recursos/escenario_defecto.json");
+			string nombre_escenario("src/recursos/escenario.json");
 			Parser* parser = new Parser(nombre_escenario.c_str());
 			parser->parsearDesdeJson();
 
