@@ -12,12 +12,12 @@
     }, 
     "capas": [
         { 
-            "imagen_fondo": "goro1.png",
+            "imagen_fondo": "img_default/fondo-capa_default_2.png",
             "id_capa": "goro1", 
             "ancho": 800 
         },    
         { 
-            "imagen_fondo": "goro2.png",
+            "imagen_fondo": "img_default/fondo-capa_default_1.png",
             "id_capa": "goro2", 
             "ancho": 1000 
         } 
@@ -27,33 +27,33 @@
         "alto": 280, 
         "z­index": 2, 
         "sprites_reposo": { 
-		            "imagen": "sub-zero-reposo.png",
+		            "imagen": "img_default/sprite_default_p1.png",
 		            "id_sprite": "sub-zero-reposo", 
         		    "cant_fotogramas": 12,
         		    "fps": 10 
         			},
         "sprites_caminando": { 
-		            "imagen": "sub-zero-caminando.png",
+		            "imagen": "img_default/sprite_default_p1.png",
 		            "id_sprite": "sub-zero-caminando", 
-        		    "cant_fotogramas": 9,
+        		    "cant_fotogramas": 12,
         		    "fps": 10 
         			},
         "sprites_agachado": { 
-		            "imagen": "sub-zero-agachado.png",
+		            "imagen": "img_default/sprite_default_p1.png",
 		            "id_sprite": "sub-zero-agachado",
-        		    "cant_fotogramas": 1,
-        		    "fps": 1
+        		    "cant_fotogramas": 12,
+        		    "fps": 10
         			},
         "sprites_salto_vertical": { 
-		            "imagen": "sub-zero-saltando-vertical.png",
+		            "imagen": "img_default/sprite_default_p1.png",
 		            "id_sprite": "sub-zero-saltando-vertical",
-        		    "cant_fotogramas": 3,
-        		    "fps": 3
+        		    "cant_fotogramas": 12,
+        		    "fps": 10
         			},
         "sprites_salto_oblicuo": { 
-		            "imagen": "sub-zero-saltando-diagonal.png",
+		            "imagen": "img_default/sprite_default_p1.png",
 		            "id_sprite": "sub-zero-saltando-diagonal",
-        		    "cant_fotogramas": 7,
+        		    "cant_fotogramas": 12,
         		    "fps": 10 
         			},
 		"direccion": 1 
