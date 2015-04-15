@@ -135,7 +135,7 @@ int main(int argc, char* args[])
 			jugador.getAlto()*VentanaGrafica::Instance()->relacion_de_aspectoY());
     cout<<"Gaston:"<<jugador.getAlto()*VentanaGrafica::Instance()->relacion_de_aspectoY()<<endl;
     cout<<"Relaciones de aspectos:"<<VentanaGrafica::Instance()->relacion_de_aspectoX()<<";"<<VentanaGrafica::Instance()->relacion_de_aspectoY()<<endl;
-	PersonajeDibujable personaje(&zubQuieto, POSICION_INICIAL_PERSONAJE, tamanioPx);
+	PersonajeDibujable personaje(&zubQuieto, POSICION_INICIAL_PERSONAJE, tamanioPx, ORIENTACION_IZQUIERDA);
 	personaje.agregarAnimacion(&zubQuieto);
 	personaje.agregarAnimacion(&zubCaminando);
 	personaje.agregarAnimacion(&zubSaltandoVertical);

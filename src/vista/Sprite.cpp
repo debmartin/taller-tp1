@@ -10,7 +10,7 @@
 #define TIEMPO_INICIAL 0
 #define FOTOGRAMA_INICIAL 1
 
-Sprite::Sprite(Animacion* animacion, Vector2f& posicionIni) :
+Sprite::Sprite(Animacion* animacion, Vector2f& posicionIni, OrientacionSprite orientacion) :
     animacionAct(animacion), posicion(posicionIni), factorEscalaX (FACTOR_ESCALA_INICIAL_X),
 	factorEscalaY(FACTOR_ESCALA_INICIAL_Y), fps(animacion->getFps()), tCreacion(TIEMPO_INICIAL) {
     //ARREGLAR tCreacion
@@ -24,7 +24,11 @@ Sprite::Sprite(Animacion* animacion, Vector2f& posicionIni) :
 	double cantidadFotogramas = animacion->getCantidadFotogramas();
 	this->anchoFotogramaPx = lround((double) anchoPx / cantidadFotogramas);
 	this->fotogramaActual = FOTOGRAMA_INICIAL;
-	this->flip = SDL_FLIP_NONE;
+
+	if (orientacion == ORIENTACION_DERECHA)
+		this->flip = SDL_FLIP_NONE;
+	else
+		this->flip = SDL_FLIP_HORIZONTAL;
 
 	this->sentidoReproduccion = HACIA_ADELANTE;
 
@@ -102,10 +106,14 @@ void Sprite::update() {
     int cantidadFotogramas = animacionAct->getCantidadFotogramas();
 	int nuevoFotograma = (int(SDL_GetTicks()/delayTime) % cantidadFotogramas) + 1;
 
-	if (this->sentidoReproduccion == HACIA_ADELANTE)
+	if (this->flip == SDL_FLIP_NONE && this->sentidoReproduccion == HACIA_ADELANTE)
 		this->setFotogramaActual(nuevoFotograma);
-	else
+	else if (this->flip == SDL_FLIP_NONE && this->sentidoReproduccion == HACIA_ATRAS)
 		this->setFotogramaActual(cantidadFotogramas + 1 - nuevoFotograma);
+	else if (this->flip == SDL_FLIP_HORIZONTAL && this->sentidoReproduccion == HACIA_ADELANTE)
+		this->setFotogramaActual(cantidadFotogramas + 1 - nuevoFotograma);
+	else if (this->flip == SDL_FLIP_HORIZONTAL && this->sentidoReproduccion == HACIA_ATRAS)
+		this->setFotogramaActual(nuevoFotograma);
 
 	cout<<"Sprite: update()"<<endl;
 
