@@ -39,6 +39,14 @@ void Capa::dibujar(){
 
 void Capa::actualizar(){
     sprite->update();
+    cout << "---------------------capa------------------------" << endl;
+    cout << "CAPA1->limite logico Izquierdo:" << this->getLimiteLogicoIzquierdo() << endl;
+    cout << "CAPA1->limite logico Derecho:" <<  this->getLimiteLogicoDerecho() << endl;
+    cout << "CAPA1->sprite->altpPx:" <<  this->getSprite()->getAltoPx() << endl;
+    cout << "CAPA1->sprite->anchoPx:" <<  this->getSprite()->getAnchoPx() << endl;
+    cout << "CAPA1->sprite->posicionPx-X:" <<  this->getSprite()->getPosicion().X() << endl;
+    cout << "CAPA1->sprite->posicionPx-Y:" <<  this->getSprite()->getPosicion().Y() << endl;
+    cout << "-------------------fin capa----------------------" << endl;
 }
 
 void Capa::centrar_en(Vector2f v, float limiteLogicoIzquierdoVentana, float relacion_de_aspectoX){
