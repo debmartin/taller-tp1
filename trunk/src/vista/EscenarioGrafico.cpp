@@ -58,7 +58,7 @@ void EscenarioGrafico::centrar_dibujables(){
 	//Centro las capas
 	float posicionInicialY = 0.0f;
 
-	Vector2f vec(VentanaGrafica::Instance()->getAnchoPx()/2.0, posicionInicialY);
+	Vector2f vec(this->getAnchoLogico()/2.0, posicionInicialY);
 	for (list<Capa*>::iterator it = capas->begin(); it != capas->end(); ++it){
 		(*it)->centrar_en(vec, VentanaGrafica::Instance()->getLimiteLogicoIzquierdo(), VentanaGrafica::Instance()->relacion_de_aspectoX());
 	}
