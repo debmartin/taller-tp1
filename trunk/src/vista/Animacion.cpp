@@ -4,8 +4,8 @@
 using std::string;
 using std::cout;
 
-Animacion::Animacion(string pathImagen, int cantFotogramas, int fps, string id, SDL_Renderer* pRenderer):
-	cantidadFotogramas(cantFotogramas), fps(fps), id(id) {
+Animacion::Animacion(string pathImagen, int cantFotogramas, int fpsIn, string idIn, SDL_Renderer* pRenderer):
+	cantidadFotogramas(cantFotogramas), fps(fpsIn), id(idIn) {
     SDL_Surface* pTempSurface = IMG_Load(pathImagen.c_str());
 	if (!pTempSurface) {
         cout<<"errorTextura";

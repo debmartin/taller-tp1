@@ -18,7 +18,11 @@ void CargadorDeOjbetos::cargarObjetos(){
 
 			////Inicialización desde Parser////
 			Parser* parser = new Parser("src/recursos/escenario.json");
-			parser->parsearDesdeJson();
+			if (! parser->parsearDesdeJson()) {
+                cout << "Carga Json por defecto\n";
+                parser->cargarJsonPorDefecto();
+                parser->parsearDesdeJson();
+			}
 			VentanaDef* ventanaDef = parser->getVentanaDef();
 			EscenarioDef* escenarioDef = parser->getEscenarioDef();
 			PersonajeDef* personajeDef = parser->getPersonajeDef();
@@ -39,19 +43,20 @@ void CargadorDeOjbetos::cargarObjetos(){
 
 
 			////Inicializacion de capas////
-			list<Capa*> capas;
-			list<Dibujable*> capasYPersonajes;
-			for (list<CapaDef*>::iterator it_capas = parser->getCapasDef()->begin() ; it_capas != parser->getCapasDef()->end(); it_capas++)
+			list<Capa*>* capas = new list<Capa*>();
+			list<Dibujable*>* capasYPersonajes = new list<Dibujable*>();
+			list<CapaDef*>* capasDef = parser->getCapasDef();
+			for (list<CapaDef*>::iterator it_capas = capasDef->begin() ; it_capas != capasDef->end(); ++it_capas)
 			{
 				cout<<**it_capas<<endl;
 
-				Animacion fondoAnim((*it_capas)->getImagenFondo(), CANT_FOTOGRAMAS_FONDO, FPS_FONDO, (*it_capas)->getIdCapa(), Renderizador::Instance()->getRenderer());
+				Animacion* fondoAnim = new Animacion((*it_capas)->getImagenFondo(), CANT_FOTOGRAMAS_FONDO, FPS_FONDO, (*it_capas)->getIdCapa(), Renderizador::Instance()->getRenderer());
 				Vector2f tamIniCapa((*it_capas)->getAncho(), escenarioDef->getAlto());
 				Vector2f posInCapa = POSICION_INICIAL_CAPA;
 
-				Capa fondoCapa(&fondoAnim, tamIniCapa, posInCapa, relacionAspectos);
-				capas.push_back(&fondoCapa);
-				capasYPersonajes.push_back(&fondoCapa);
+				Capa* fondoCapa = new Capa(fondoAnim, tamIniCapa, posInCapa, relacionAspectos);
+				capas->push_back(fondoCapa);
+				capasYPersonajes->push_back(fondoCapa);
 
 			}
 			Logger::getInstance()->info("Inicialiazación de Capas correcta.");
@@ -60,37 +65,36 @@ void CargadorDeOjbetos::cargarObjetos(){
 			////Inicializacion de Personaje////
 			Logger::getInstance()->info("Inicialiazación de Personaje.");
 
-			Personaje jugador1(personajeDef->getAncho(), personajeDef->getAlto(), POSICION_INICIAL_PERSONAJE, VentanaGrafica::Instance());
-			this->jugador = &jugador1;
-
-
-			////Inicializacion de PersonajeDibujable////
+			jugador = new Personaje(personajeDef->getAncho(), personajeDef->getAlto(), POSICION_INICIAL_PERSONAJE, VentanaGrafica::Instance());			////Inicializacion de PersonajeDibujable////
 			Vector2f tamanioPx(
 		    		jugador->getAncho()*VentanaGrafica::Instance()->relacion_de_aspectoX(),
 					jugador->getAlto()*VentanaGrafica::Instance()->relacion_de_aspectoY());
 
-			SpriteDef* primerSpriteSubQuieto = *(personajeDef->getSpritesDef()->begin());
-			Animacion SubQuieto(primerSpriteSubQuieto->getImagen(), primerSpriteSubQuieto->getCantFotogramas(), primerSpriteSubQuieto->getFps(),  primerSpriteSubQuieto->getIdSprite(), Renderizador::Instance()->getRenderer());
-			PersonajeDibujable personajeDibujable1(&SubQuieto, POSICION_INICIAL_PERSONAJE, tamanioPx, ORIENTACION_IZQUIERDA);
+            list<SpriteDef*>* spritesDef = personajeDef->getSpritesDef();
+            list<SpriteDef*>::iterator it_sprites = spritesDef->begin();
+			SpriteDef* primerSpriteSubQuieto = *it_sprites;
+			Animacion* SubQuieto = new Animacion(primerSpriteSubQuieto->getImagen(), primerSpriteSubQuieto->getCantFotogramas(), primerSpriteSubQuieto->getFps(),  primerSpriteSubQuieto->getIdSprite(), Renderizador::Instance()->getRenderer());
+			cout << "fpsReposo: " << SubQuieto->getFps() << "\n";
+			personajeDibujable = new PersonajeDibujable(SubQuieto, POSICION_INICIAL_PERSONAJE, tamanioPx, ORIENTACION_IZQUIERDA);
 
-			for (list<SpriteDef*>::iterator it_sprites = personajeDef->getSpritesDef()->begin() ; it_sprites != personajeDef->getSpritesDef()->end(); it_sprites++)
+
+			for (; it_sprites != spritesDef->end(); ++it_sprites)
 			{
-				Animacion sub_zero((*it_sprites)->getImagen(), (*it_sprites)->getCantFotogramas(), (*it_sprites)->getFps(), primerSpriteSubQuieto->getIdSprite(), Renderizador::Instance()->getRenderer());
-				personajeDibujable1.agregarAnimacion(&sub_zero);
+				Animacion* sub_zero = new Animacion((*it_sprites)->getImagen(), (*it_sprites)->getCantFotogramas(), (*it_sprites)->getFps(), (*it_sprites)->getIdSprite(), Renderizador::Instance()->getRenderer());
+				cout << "fps: " << sub_zero->getFps() << "\n";
+				personajeDibujable->agregarAnimacion(sub_zero);
 			}
 
-			this->personajeDibujable = &personajeDibujable1;
-			Logger::getInstance()->info("Inicialiazación de PersonajeDibujable correcta.");
+			Logger::getInstance()->info("Inicialización de PersonajeDibujable correcta.");
 
-			capasYPersonajes.push_back(&personajeDibujable1);
+			capasYPersonajes->push_back(personajeDibujable);
 
 			////Inicializacion de EscenarioGrafico////
-			EscenarioGrafico escenarioDibujable(escenarioDef->getAncho(), escenarioDef->getAlto(), escenarioDef->getYpiso(), &capasYPersonajes, &capas);
-		    this->escenario = &escenarioDibujable;
+			escenario = new EscenarioGrafico(escenarioDef->getAncho(), escenarioDef->getAlto(), escenarioDef->getYpiso(), capasYPersonajes, capas);
 			Logger::getInstance()->info("Inicializacion de EscenarioGrafico correcta.");
 
 
-			VentanaGrafica::Instance()->agregarEscenario(&escenarioDibujable);
+			VentanaGrafica::Instance()->agregarEscenario(escenario);
 		    VentanaGrafica::Instance()->centrar_ventana();
 		    escenario->centrar_dibujables();
 		    Vector2f vector_centrado(escenarioDef->getAncho()/2.0, escenarioDef->getYpiso());

@@ -42,8 +42,8 @@ public:
 	EscenarioDef* getEscenarioDef() const;
 	PersonajeDef* getPersonajeDef() const;
 	VentanaDef* getVentanaDef() const;
-
-	void parsearDesdeJson();
+    void cargarJsonPorDefecto();
+	bool parsearDesdeJson();
 
 	virtual ~Parser();
 	const Json::Reader& getReader() const;
