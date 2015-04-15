@@ -47,8 +47,8 @@ SpriteDef::~SpriteDef() {
 
 ostream& operator <<(ostream &o, const SpriteDef &p) {
 
-        o<<"SpriteDef -> [imagen, ancho, cant_fotogramas, fps]=[";
-        o<<p.imagen<<", "<<p.ancho<<", "<<p.cant_fotogramas<<", "<<p.fps<<"]";
+        o<<"SpriteDef -> [imagen, id_sprite, ancho, cant_fotogramas, fps]=[";
+        o<<p.imagen<<", "<<p.id_sprite<<", "<<p.ancho<<", "<<p.cant_fotogramas<<", "<<p.fps<<"]";
 
         return o;
 }
