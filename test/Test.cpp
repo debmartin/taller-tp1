@@ -7,6 +7,7 @@
 
 #include "Test.h"
 
+#include "CargadorDeOjbetosTest.h"
 #include "LoggerTest.h"
 #include "parser/ParserTests.h"
 
@@ -22,6 +23,9 @@ void Test::ejecutar() {
 
 	LoggerTest loggerTest;
 	loggerTest.ejecutar();
+
+	CargadorDeOjbetosTest cargadorDeOjbetosTest;
+	cargadorDeOjbetosTest.ejecutar();
 }
 
 Test::~Test() {
