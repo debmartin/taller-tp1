@@ -57,11 +57,9 @@ void EscenarioGrafico::centrar_en(Vector2f v){
 void EscenarioGrafico::centrar_dibujables(){
 	//Centro las capas
 	float posicionInicialY = 0.0f;
-	//Vector2f vec(VentanaGrafica::Instance()->getLimiteLogicoIzquierdo()+(VentanaGrafica::Instance()->getAnchoPx()/2.0), posicionInicialY);
 
 	Vector2f vec(VentanaGrafica::Instance()->getAnchoPx()/2.0, posicionInicialY);
 	for (list<Capa*>::iterator it = capas->begin(); it != capas->end(); ++it){
-		cout << "ancho logico:" << (*it)->getAnchoLogico() << endl;
 		(*it)->centrar_en(vec);
 	}
 	//Centro el personaje

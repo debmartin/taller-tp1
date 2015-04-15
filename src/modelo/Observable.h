@@ -7,7 +7,7 @@
 
 #ifndef SRC_MODELO_OBSERVABLE_H_
 #define SRC_MODELO_OBSERVABLE_H_
-
+#include "../utils/Logger.h"
 #include "Observador.h"
 #include <list>
 
