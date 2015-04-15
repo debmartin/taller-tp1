@@ -21,7 +21,7 @@ private:
 public:
 	Controlador(Personaje* pers);
 	virtual ~Controlador();
-	void manejar_Evento(SDL_Event &evento);
+	bool manejar_Evento(SDL_Event &evento);
 	void setPersonaje(Personaje* personaje);
 };
 

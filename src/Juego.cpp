@@ -40,7 +40,7 @@ void Juego::update()
 	// FIN CODIGO USUARIO
 }
 
-void Juego::handleEvents()
+void Juego::handleEvents(bool& recargar)
 {
 	SDL_Event evento;
 
@@ -52,8 +52,9 @@ void Juego::handleEvents()
 			juegoCorriendo = false;
 		} else if (jugador1->estaSaltando()){
 		    return;
-		} else {
-			this->controladorJuego->manejar_Evento(evento);
+		} else if (! controladorJuego->manejar_Evento(evento)){
+            juegoCorriendo = false;
+            recargar = true;
 		}
 	}
 }
@@ -63,6 +64,10 @@ bool Juego::running() { return juegoCorriendo; }
 
 Juego::~Juego(){
     delete controladorJuego;
+//    delete VentanaGrafica::Instance();
+//    delete jugadorDibujable1;
+//    delete jugador1;
+//    delete escenarioG;
 }
 
 
