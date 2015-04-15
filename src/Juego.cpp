@@ -37,24 +37,6 @@ void Juego::update()
 	this->jugador1->update();
 	VentanaGrafica::Instance()->actualizar();
 	// FIN CODIGO USUARIO
-    cout << "=====================Juego::update===================" << endl;
-    cout << "ESCENARIO->alto-logico:" << escenarioG->getAltoLogico() << endl;
-    cout << "ESCENARIO->ancho-logico:" << escenarioG->getAnchoLogico() << endl;
-    cout << "ESCENARIO->y-piso-logico:" << escenarioG->getYPisoLogico() << endl;
-    cout << "-------------------------------------------------------" << endl;
-    cout << "VENTANA-GRAFICA->limite logico Izquierdo:" << VentanaGrafica::Instance()->getLimiteLogicoIzquierdo() << endl;
-    cout << "VENTANA-GRAFICA->limite logico Derecho:" << VentanaGrafica::Instance()->getLimiteLogicoDerecho() << endl;
-    cout << "VENTANA-GRAFICA->relacion de aspecto X:" << VentanaGrafica::Instance()->relacion_de_aspectoX() << endl;
-    cout << "VENTANA-GRAFICA->relacion de aspecto Y:" << VentanaGrafica::Instance()->relacion_de_aspectoY() << endl;
-    cout << "-------------------------------------------------------" << endl;
-    cout << "PERSONAJE-LOGICO->posicion-logica-X:" << jugador1->getPosicion().X() << endl;
-    cout << "PERSONAJE-LOGICO->posicion-logica-Y:" << jugador1->getPosicion().Y() << endl;
-    cout << "-------------------------------------------------------" << endl;
-    cout << "PERSONAJE-DIBUJABLE->SPRITE->posicionPx-X:" << jugadorDibujable1->_getSprite()->getPosicion().X() << endl;
-    cout << "PERSONAJE-DIBUJABLE->SPRITE->posicionPx-Y:" << jugadorDibujable1->_getSprite()->getPosicion().Y() << endl;
-    cout << "PERSONAJE-DIBUJABLE->SPRITE->AnchoPx:" << jugadorDibujable1->_getSprite()->getAnchoPx() << endl;
-    cout << "PERSONAJE-DIBUJABLE->SPRITE->AltoPx:" << jugadorDibujable1->_getSprite()->getAltoPx() << endl;
-    cout << "=====================================================" << endl;
 }
 
 void Juego::handleEvents(bool& recargar)
