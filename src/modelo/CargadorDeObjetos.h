@@ -33,11 +33,6 @@
 #define CANT_FOTOGRAMAS_FONDO 1
 #define FPS_FONDO 1
 
-#define CANT_FOTOGRAMAS_FONDO 1
-#define CANT_FOTOGRAMAS_FONDO2 1
-#define POSICION_INICIAL_CAPA Vector2f(0, 0)
-#define POSICION_INICIAL_PERSONAJE Vector2f(750, 100)
-
 using namespace std;
 
 class CargadorDeOjbetos{
