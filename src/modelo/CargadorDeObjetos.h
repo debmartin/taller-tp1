@@ -44,7 +44,7 @@ private:
 public:
 	CargadorDeOjbetos();
 	virtual ~CargadorDeOjbetos();
-	void cargarObjetos();
+	void cargarObjetos(string escenario_path);
 	EscenarioGrafico* getEscenarioGrafico();
 	Personaje* getPersonaje();
 	PersonajeDibujable* getPersonajeDibujable();
