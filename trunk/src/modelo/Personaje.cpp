@@ -105,7 +105,7 @@ void Personaje::mantenerReposo(){
 void Personaje::cambiarTrayectoria(Trayectoria* t) {
     delete trayectoria;
 	this->trayectoria = t;
-	this->tCreacion = ((float)(SDL_GetTicks()))/1000.0f; //TODO: Solo funciona en el caso particular de este video juego porque anda lo suficientemente rapido
+	this->tCreacion = ((float)(SDL_GetTicks()))/1000.0f;
 }
 
 void Personaje::agregarObservador(Observador* unObservador){
@@ -122,8 +122,8 @@ void Personaje::update(){
 	cout<<"Update personaje"<<endl;
 
 	// RECALCULA LA POSICION EN BASE AL OBJETO TRAYECTORIA
-	float tActual = ((float)(SDL_GetTicks())/1000.0f) - tCreacion; //TODO: pasar a personaje
-	Vector2f posicionCandidata = this->trayectoria->getPosicion(tActual); //TODO: Val. El personaje dibujable le setea la posicion a Sprite afuera
+	float tActual = ((float)(SDL_GetTicks())/1000.0f) - tCreacion;
+	Vector2f posicionCandidata = this->trayectoria->getPosicion(tActual);
 	if (posicionable->esValida(posicionCandidata) && posicionCandidata.Y() >= posicionInicial.Y()) {
         posicion = posicionCandidata;
     } else if (posicionCandidata.Y() >= posicionInicial.Y()) {
@@ -145,11 +145,4 @@ Personaje::~Personaje(){
 bool Personaje::estaSaltando(){
     return (estado == SALTANDO_OBLICUO_DERECHA || estado == SALTANDO_OBLICUO_IZQUIERDA || estado == SALTANDO_VERTICAL);
 }
-/*
-ostream& operator <<(ostream &o, const Personaje &p) {
 
-        o<<"personaje -> [ancho, alto, zindex, sprites_imagen, sprites_ancho]=[";
-        o<<p.ancho<<", "<<p.alto<<", "<<p.z_index<<", "<<p.sprites_imagen<<", "<<p.sprites_ancho<<"]";
-
-        return o;
-}*/
