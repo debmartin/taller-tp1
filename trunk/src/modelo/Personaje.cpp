@@ -113,8 +113,6 @@ void Personaje::agregarObservador(Observador* unObservador){
 }
 
 void Personaje::notificarObservadores(){
-	cout<<"Entro a notificar"<<endl;
-
 	Observable::notificarObservadores();
 }
 

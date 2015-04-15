@@ -18,11 +18,10 @@ void Observable::agregarObservador(Observador* unObservador){
 }
 
 void Observable::notificarObservadores(){
-	cout<<"Observable:notificar observador"<<endl;
+	Logger::getInstance()->info("Personaje notifica a sus observadores.");
 
 	for(std::list<Observador*>::iterator iterador = this->observadores->begin(); iterador != this->observadores->end(); ++iterador)
 	{
-		cout<<"Itero lista de Observadores"<<endl;
 		(*iterador)->recibirNotificacion(this);
 	}
 
