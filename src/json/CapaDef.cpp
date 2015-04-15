@@ -6,6 +6,7 @@
  */
 
 #include "CapaDef.h"
+#include "../utils/Util.h"
 
 CapaDef::CapaDef() {
 }
@@ -36,4 +37,8 @@ CapaDef::CapaDef(string imagen_fondo, string id, double ancho){
 	this->imagen_fondo = imagen_fondo;
 	this->id_capa = id;
 	this->ancho = ancho;
+//	if ( !Util::getInstancia()->existeArchivo(imagen_fondo) )
+//        throw exception();
+//    if (ancho <= 0)
+//        throw exception();
 }

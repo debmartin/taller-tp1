@@ -9,6 +9,8 @@
 #define SRC_JSON_CAPADEF_H_
 #include <iostream>
 #include <string.h>
+#include <exception>
+
 using namespace std;
 
 class CapaDef {

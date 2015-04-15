@@ -16,6 +16,10 @@ VentanaDef::VentanaDef(int ancho_px, int alto_px, double ancho, double margen_x)
 	this->alto_px = alto_px;
 	this->ancho = ancho;
 	this->margen_x = margen_x;
+//	if (ancho_px <= 0 || alto_px <= 0)
+//        throw exception();
+//    if (margen_x <= 0)
+//        throw exception();
 }
 
 int VentanaDef::getAltoPx() const {

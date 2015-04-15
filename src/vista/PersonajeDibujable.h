@@ -21,7 +21,7 @@
 #include "Dibujable.h"
 
 #define ID_FONDO "screen-pit"
-#define ID_ZUBZERO_QUIETO "sub-zero-quieto"
+#define ID_ZUBZERO_QUIETO "sub-zero-reposo"
 #define ID_ZUBZERO_CAMINANDO "sub-zero-caminando"
 #define ID_ZUBZERO_AGACHADO "sub-zero-agachado"
 #define ID_ZUBZERO_SALTANDOVERTICAL "sub-zero-saltando-vertical"

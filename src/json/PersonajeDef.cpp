@@ -19,8 +19,14 @@ PersonajeDef::PersonajeDef(double ancho, double alto, int zindex, int direccion)
 	this->ancho = ancho;
 	this->alto = alto;
 	this->z_index = zindex;
-	this->spritesDef = new list<SpriteDef*>;
+	this->spritesDef = new list<SpriteDef*>();
 	this->direccion = direccion;
+//	if (alto <= 0 || ancho <= 0)
+//        throw exception();
+//    if (zindex <= 0)
+//        throw exception();
+//    if (direccion != 1 && direccion != -1)
+//        throw exception();
 }
 
 double PersonajeDef::getAlto() const {
@@ -36,7 +42,10 @@ int PersonajeDef::getZindex() const {
 }
 
 PersonajeDef::~PersonajeDef(){
-	// TODO Auto-generated destructor stub
+	for (list<SpriteDef*>::iterator it_spritesDef = spritesDef->begin() ; it_spritesDef !=  spritesDef->end(); it_spritesDef++){
+            delete *it_spritesDef;
+	}
+	delete spritesDef;
 }
 
 list<SpriteDef*>* PersonajeDef::getSpritesDef() const {

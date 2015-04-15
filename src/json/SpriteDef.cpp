@@ -6,6 +6,7 @@
  */
 
 #include "SpriteDef.h"
+#include "../utils/Util.h"
 
 SpriteDef::SpriteDef() {
 
@@ -19,6 +20,16 @@ SpriteDef::SpriteDef(string imagen, string id, double ancho, int cant_fotogramas
 	this->ancho = ancho;
 	this->cant_fotogramas = cant_fotogramas;
 	this->fps = fps;
+//	if ( !Util::getInstancia()->existeArchivo(imagen) ){
+//        cout << "No existe sprite arch: " << imagen << "\n";
+//        throw exception();
+//    } if (ancho <= 0) {
+//        cout << "ancho mal\n";
+//        throw exception();
+//    } if (cant_fotogramas <= 0 || fps <= 0) {
+//        cout << "fotogramas y fps mal\n";
+//        throw exception();
+//    }
 }
 
 double SpriteDef::getAncho() const {

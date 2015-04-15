@@ -22,30 +22,37 @@ void PersonajeDibujable::seleccionarSprite(){
 
 	switch(this->estado){
 		case CAMINANDO_DERECHA:
+		    cout << "fps2: " << animaciones[ID_ZUBZERO_CAMINANDO];
 			this->spritePersonaje->cambiarAnimacion(animaciones[ID_ZUBZERO_CAMINANDO]);
 			this->spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
 			break;
 		case CAMINANDO_IZQUIERDA:
+		    cout << "fps3: " << animaciones[ID_ZUBZERO_CAMINANDO];
 			this->spritePersonaje->cambiarAnimacion(animaciones[ID_ZUBZERO_CAMINANDO]);
 			this->spritePersonaje->setSentidoReproduccion(HACIA_ATRAS);
 			break;
 		case EN_ESPERA:
+		    cout << "fps4: " << (animaciones[ID_ZUBZERO_QUIETO])->getFps();
 			this->spritePersonaje->cambiarAnimacion(animaciones[ID_ZUBZERO_QUIETO]);
 			this->spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
 			break;
 		case SALTANDO_VERTICAL:
+		    cout << "fps5: " << animaciones[ID_ZUBZERO_SALTANDOVERTICAL];
 			this->spritePersonaje->cambiarAnimacion(animaciones[ID_ZUBZERO_SALTANDOVERTICAL]);
 			this->spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
 			break;
         case SALTANDO_OBLICUO_DERECHA:
+            cout << "fps6: " << animaciones[ID_ZUBZERO_SALTANDODIAGONAL];
             this->spritePersonaje->cambiarAnimacion(animaciones[ID_ZUBZERO_SALTANDODIAGONAL]);
             this->spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
             break;
         case SALTANDO_OBLICUO_IZQUIERDA:
+            cout << "fps7: " << animaciones[ID_ZUBZERO_SALTANDODIAGONAL];
             this->spritePersonaje->cambiarAnimacion(animaciones[ID_ZUBZERO_SALTANDODIAGONAL]);
             this->spritePersonaje->setSentidoReproduccion(HACIA_ATRAS);
             break;
         case AGACHADO:
+            cout << "fps8: " << animaciones[ID_ZUBZERO_AGACHADO];
             spritePersonaje->cambiarAnimacion(animaciones[ID_ZUBZERO_AGACHADO]);
             spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
 	}

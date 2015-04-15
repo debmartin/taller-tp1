@@ -6,6 +6,7 @@
  */
 
 #include "EscenarioDef.h"
+#define ANCHO_DEFAULT 1200
 
 EscenarioDef::EscenarioDef() {
 }
@@ -15,6 +16,8 @@ EscenarioDef::EscenarioDef(double ancho, double alto, double ypiso)
 	this->ancho = ancho;
 	this->alto = alto;
 	this->ypiso = ypiso;
+//	if (ancho <= 0 || alto <= 0)
+//        throw exception();    //poner algo mejor
 }
 
 double EscenarioDef::getAlto() const {
