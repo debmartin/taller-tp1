@@ -315,7 +315,7 @@ Parser::~Parser() {
 	delete personaje;
 	delete escenario;
     for (list<CapaDef*>::iterator it_capas = capas->begin() ; it_capas != capas->end(); ++capas)
-        delete *it_capas;
+        delete (*it_capas);
     delete ventana;
 }
 

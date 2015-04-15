@@ -97,6 +97,8 @@ void CargadorDeOjbetos::cargarObjetos(string escenario_path){
             for (int i = 0; (it_dibujables != capasYPersonajes->end()) && i < personajeDef->getZindex(); ++it_dibujables){
                 i++;
             }
+            if (i < personajeDef->getZindex())
+                Logger::getInstance()->error("ZIndex del Personaje es mayor al valor posible.");
 			capasYPersonajes->insert(it_dibujables, personajeDibujable);
 
 			////Inicializacion de EscenarioGrafico////
@@ -111,6 +113,7 @@ void CargadorDeOjbetos::cargarObjetos(string escenario_path){
 		    jugador->centrar_en(vector_centrado);
 		    Logger::getInstance()->info("Carga correcta.");
 		    cout << "carga correcta" << endl;
+//		    delete parser;
 }
 
 EscenarioGrafico* CargadorDeOjbetos::getEscenarioGrafico(){
