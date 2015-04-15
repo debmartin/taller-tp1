@@ -319,10 +319,10 @@ bool Parser::parsearDesdeJson() {
 
     }
 
-//	 Logger::getInstance()->info("Inicia la validacion semantica del json");
-//	 this->inciarValidacionSemantica();
-//	 Logger::getInstance()->info("Termina la validacion semantica del json");
-
+	 Logger::getInstance()->info("Inicia la validacion semantica del json");
+	 this->inciarValidacionSemantica();
+	 Logger::getInstance()->info("Termina la validacion semantica del json");
+    return true;
 }
 
 Parser::~Parser() {
@@ -478,7 +478,7 @@ void Parser::inciarValidacionSemantica() {
 		if ( !Util::getInstancia()->existeArchivo(nueva_imagen) )
 		{
 			Logger::getInstance()->info("No existes las imagenes del sprites "+nueva_imagen+". Por defecto se usa sprites_defecto.png");
-			nueva_imagen = "sprites_defecto.png";
+			(*it_sprites)->setImagen("sprites_defecto.png");
 		}
 		//Falta validacion del id.
 		/*if ( nuevo_id != "?")
@@ -488,24 +488,24 @@ void Parser::inciarValidacionSemantica() {
 		}*/
 		if ( nuevo_ancho < 0)
 		{
-			nuevo_ancho = 20;
+			(*it_sprites)->setAncho(20);
 			Logger::getInstance()->debug("el ancho del sprite del personaje es negativo. Se elije uno nuevo con el valor de 20");
 		}
 
 		if ( nuevo_cant_fotograma <= 0 )
 		{
-			nuevo_cant_fotograma = 1;
+			(*it_sprites)->setCantFotogramas(1);
 			Logger::getInstance()->debug("la cant. de fotogramas de la imagen del sprite del personaje es menor o igual a cerop. Se elije uno nuevo con el valor de 1");
 		}
 
 		if ( nuevo_fps <= 0 )
 		{
-			nuevo_fps = 10;
+			(*it_sprites)->setFps(10);
 			Logger::getInstance()->debug("el valor de los fps del sprite del personaje es menor o igual a cerop. Se elije uno nuevo con el valor de 10");
 		}
 
-		SpriteDef* spriteDef = new SpriteDef(nueva_imagen, nuevo_id, nuevo_ancho, nuevo_cant_fotograma, nuevo_fps);
-		this->personaje->agregarSpritesDef(spriteDef);
+//		SpriteDef* spriteDef = new SpriteDef(nueva_imagen, nuevo_id, nuevo_ancho, nuevo_cant_fotograma, nuevo_fps);
+//		this->personaje->agregarSpritesDef(spriteDef);
 	}
 
 	//validar las capas
