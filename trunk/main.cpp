@@ -7,16 +7,17 @@ int main(int argc, char* args[])
 	//para correr los test
 	if ( argc > 1 )
 	{
-		string parametro(args[1]);
-		Logger::getInstance()->info("opcion_consola: "+parametro);
-		if ( parametro == "-test" )
+		string argumento(args[1]);
+		Logger::getInstance()->info("argumento desde la consola: "+argumento);
+
+		if ( argumento == "-test" )
 		{
 			Test tests;
 			tests.ejecutar();
 		}
 		else
 		{
-			string escenario_path(parametro);
+			string escenario_path(argumento);
 
 			static const int FPS = 60;
 			static const int DELAY_TIME = 1000.0f / FPS;
