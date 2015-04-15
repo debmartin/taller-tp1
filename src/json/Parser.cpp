@@ -89,31 +89,26 @@ bool Parser::parsearDesdeJson() {
         // del sprites reposo
         string p_sprites_imagen_1 = "";
         string p_sprites_id_1 = "";
-        double p_sprites_ancho_1 = 0;
         int p_sprites_cant_fotogramas_1 = 0;
         int p_sprites_fps_1 = 0;
         // del sprites caminando
         string p_sprites_imagen_2 = "";
         string p_sprites_id_2 = "";
-        double p_sprites_ancho_2 = 0;
         int p_sprites_cant_fotogramas_2 = 0;
         int p_sprites_fps_2 = 0;
         // del sprites agachado
         string p_sprites_imagen_3 = "";
         string p_sprites_id_3 = "";
-        double p_sprites_ancho_3 = 0;
         int p_sprites_cant_fotogramas_3 = 0;
         int p_sprites_fps_3 = 0;
         // del sprites salto vertical
         string p_sprites_imagen_4 = "";
         string p_sprites_id_4 = "";
-        double p_sprites_ancho_4 = 0;
         int p_sprites_cant_fotogramas_4 = 0;
         int p_sprites_fps_4 = 0;
         // del sprites salto oblicuo
         string p_sprites_imagen_5 = "";
         string p_sprites_id_5 = "";
-        double p_sprites_ancho_5 = 0;
         int p_sprites_cant_fotogramas_5 = 0;
         int p_sprites_fps_5 = 0;
 
@@ -237,7 +232,6 @@ bool Parser::parsearDesdeJson() {
                         {
                             p_sprites_imagen_1 = (*it2)["imagen"].asString();
                             p_sprites_id_1 = (*it2)["id_sprite"].asString();
-                            p_sprites_ancho_1 = (*it2)["ancho"].asDouble();
                             p_sprites_cant_fotogramas_1 = (*it2)["cant_fotogramas"].asInt();
                             p_sprites_fps_1 = (*it2)["fps"].asInt();
                         }
@@ -245,7 +239,6 @@ bool Parser::parsearDesdeJson() {
                         {
                             p_sprites_imagen_2 = (*it2)["imagen"].asString();
                             p_sprites_id_2 = (*it2)["id_sprite"].asString();
-                            p_sprites_ancho_2 = (*it2)["ancho"].asDouble();
                             p_sprites_cant_fotogramas_2 = (*it2)["cant_fotogramas"].asInt();
                             p_sprites_fps_2 = (*it2)["fps"].asInt();
                         }
@@ -253,7 +246,6 @@ bool Parser::parsearDesdeJson() {
                         {
                             p_sprites_imagen_3 = (*it2)["imagen"].asString();
                             p_sprites_id_3 = (*it2)["id_sprite"].asString();
-                            p_sprites_ancho_3 = (*it2)["ancho"].asDouble();
                             p_sprites_cant_fotogramas_3 = (*it2)["cant_fotogramas"].asInt();
                             p_sprites_fps_3 = (*it2)["fps"].asInt();
                         }
@@ -261,7 +253,6 @@ bool Parser::parsearDesdeJson() {
                         {
                             p_sprites_imagen_4 = (*it2)["imagen"].asString();
                             p_sprites_id_4 = (*it2)["id_sprite"].asString();
-                            p_sprites_ancho_4 = (*it2)["ancho"].asDouble();
                             p_sprites_cant_fotogramas_4 = (*it2)["cant_fotogramas"].asInt();
                             p_sprites_fps_4 = (*it2)["fps"].asInt();
                         }
@@ -269,7 +260,6 @@ bool Parser::parsearDesdeJson() {
                         {
                             p_sprites_imagen_5 = (*it2)["imagen"].asString();
                             p_sprites_id_5 = (*it2)["id_sprite"].asString();
-                            p_sprites_ancho_5 = (*it2)["ancho"].asDouble();
                             p_sprites_cant_fotogramas_5 = (*it2)["cant_fotogramas"].asInt();
                             p_sprites_fps_5 = (*it2)["fps"].asInt();
                         }
@@ -301,11 +291,11 @@ bool Parser::parsearDesdeJson() {
         //se cargan los sprites del personaje
         try {
             cout << "FPSREPOSO: " << p_sprites_fps_1 << "\n";
-            SpriteDef* spriteDef_reposo = new SpriteDef(p_sprites_imagen_1, p_sprites_id_1, p_sprites_ancho_1, p_sprites_cant_fotogramas_1, p_sprites_fps_1);
-            SpriteDef* spriteDef_caminando = new SpriteDef(p_sprites_imagen_2, p_sprites_id_2, p_sprites_ancho_2, p_sprites_cant_fotogramas_2, p_sprites_fps_2);
-            SpriteDef* spriteDef_agachado = new SpriteDef(p_sprites_imagen_3, p_sprites_id_3, p_sprites_ancho_3, p_sprites_cant_fotogramas_3, p_sprites_fps_3);
-            SpriteDef* spriteDef_saltando_vert = new SpriteDef(p_sprites_imagen_4, p_sprites_id_4, p_sprites_ancho_4, p_sprites_cant_fotogramas_4, p_sprites_fps_4);
-            SpriteDef* spriteDef_saltando_obli = new SpriteDef(p_sprites_imagen_5, p_sprites_id_5, p_sprites_ancho_5, p_sprites_cant_fotogramas_5, p_sprites_fps_5);
+            SpriteDef* spriteDef_reposo = new SpriteDef(p_sprites_imagen_1, p_sprites_id_1, p_sprites_cant_fotogramas_1, p_sprites_fps_1);
+            SpriteDef* spriteDef_caminando = new SpriteDef(p_sprites_imagen_2, p_sprites_id_2, p_sprites_cant_fotogramas_2, p_sprites_fps_2);
+            SpriteDef* spriteDef_agachado = new SpriteDef(p_sprites_imagen_3, p_sprites_id_3, p_sprites_cant_fotogramas_3, p_sprites_fps_3);
+            SpriteDef* spriteDef_saltando_vert = new SpriteDef(p_sprites_imagen_4, p_sprites_id_4, p_sprites_cant_fotogramas_4, p_sprites_fps_4);
+            SpriteDef* spriteDef_saltando_obli = new SpriteDef(p_sprites_imagen_5, p_sprites_id_5, p_sprites_cant_fotogramas_5, p_sprites_fps_5);
 
             this->personaje->agregarSpritesDef(spriteDef_reposo);
             this->personaje->agregarSpritesDef(spriteDef_caminando);
@@ -471,7 +461,6 @@ void Parser::inciarValidacionSemantica() {
 	{
 		string nueva_imagen = (*it_sprites)->getImagen();
 		string nuevo_id = (*it_sprites)->getIdSprite();
-		double nuevo_ancho = (*it_sprites)->getAncho();
 		int nuevo_cant_fotograma = (*it_sprites)->getCantFotogramas();
 		int nuevo_fps = (*it_sprites)->getFps();
 
@@ -479,17 +468,6 @@ void Parser::inciarValidacionSemantica() {
 		{
 			Logger::getInstance()->info("No existes las imagenes del sprites "+nueva_imagen+". Por defecto se usa sprites_defecto.png");
 			(*it_sprites)->setImagen("sprites_defecto.png");
-		}
-		//Falta validacion del id.
-		/*if ( nuevo_id != "?")
-		{
-			nuevo_id = "";
-			Logger::getInstance()->debug("No existe el id del sprite");
-		}*/
-		if ( nuevo_ancho < 0)
-		{
-			(*it_sprites)->setAncho(20);
-			Logger::getInstance()->debug("el ancho del sprite del personaje es negativo. Se elije uno nuevo con el valor de 20");
 		}
 
 		if ( nuevo_cant_fotograma <= 0 )

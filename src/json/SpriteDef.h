@@ -18,17 +18,14 @@ class SpriteDef {
 private:
 	string imagen;
 	string id_sprite;
-	double ancho;
 	int cant_fotogramas;
 	int fps;
 public:
 	SpriteDef();
-	SpriteDef(string imagen, string id, double ancho, int cant_fotogramas, int fps);
+	SpriteDef(string imagen, string id, int cant_fotogramas, int fps);
 	virtual ~SpriteDef();
-	double getAncho() const;
 	int getCantFotogramas() const;
 	int getFps() const;
-	void setAncho(double nuevoAncho);
 	void setCantFotogramas(int nuevaCant);
 	void setFps(int nuevoFps);
 	void setImagen(string nuevaImagen);
