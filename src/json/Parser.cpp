@@ -284,8 +284,18 @@ if( root.size() > 0 ) {
 	//se cargan los sprites del personaje
 	SpriteDef* spriteDef_reposo = new SpriteDef(p_sprites_imagen_1, p_sprites_id_1, p_sprites_ancho_1, p_sprites_cant_fotogramas_1, p_sprites_fps_1);
 	SpriteDef* spriteDef_caminando = new SpriteDef(p_sprites_imagen_2, p_sprites_id_2, p_sprites_ancho_2, p_sprites_cant_fotogramas_2, p_sprites_fps_2);
+	SpriteDef* spriteDef_agachado = new SpriteDef(p_sprites_imagen_3, p_sprites_id_3, p_sprites_ancho_3, p_sprites_cant_fotogramas_3, p_sprites_fps_3);
+	SpriteDef* spriteDef_salto_vertical = new SpriteDef(p_sprites_imagen_4, p_sprites_id_4, p_sprites_ancho_4, p_sprites_cant_fotogramas_4, p_sprites_fps_4);
+	SpriteDef* spriteDef_salto_oblicuo = new SpriteDef(p_sprites_imagen_5, p_sprites_id_5, p_sprites_ancho_5, p_sprites_cant_fotogramas_5, p_sprites_fps_5);
+
+
 	this->personaje->agregarSpritesDef(spriteDef_reposo);
 	this->personaje->agregarSpritesDef(spriteDef_caminando);
+	this->personaje->agregarSpritesDef(spriteDef_agachado);
+	this->personaje->agregarSpritesDef(spriteDef_salto_vertical);
+	this->personaje->agregarSpritesDef(spriteDef_salto_oblicuo);
+
+
 
 }
 
