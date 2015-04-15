@@ -6,26 +6,31 @@
         "margen_x": 2.5 
     }, 
     "escenario": { 
-        "ancho": 1500, 
+        "ancho": 2000, 
         "alto": 600, 
         "y­piso": 100
     }, 
     "capas": [
         { 
-            "imagen_fondo": "img_default/fondo-capa_default_2.png",
-            "id_capa": "goro1", 
-            "ancho": 800 
+            "imagen_fondo": "img_default/fondo-warrior-shrine-01.png",
+            "id_capa": "shrine1", 
+            "ancho": 750 
         },    
         { 
-            "imagen_fondo": "img_default/fondo-capa_default_1.png",
-            "id_capa": "goro2", 
-            "ancho": 1000 
+            "imagen_fondo": "img_default/fondo-warrior-shrine-02.png",
+            "id_capa": "shrine2", 
+            "ancho": 1150 
+        },
+        { 
+            "imagen_fondo": "img_default/fondo-warrior-shrine-03.png",
+            "id_capa": "shrine3", 
+            "ancho": 1700
         } 
     ], 
     "personaje": { 
         "ancho": 105, 	
         "alto": 280, 
-        "z­index": 2, 
+        "z­index": 3, 
         "sprites_reposo": { 
 		            "imagen": "img_default/sprite_default_p1.png",
 		            "id_sprite": "sub-zero-reposo", 
