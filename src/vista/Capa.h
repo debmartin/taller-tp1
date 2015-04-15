@@ -33,9 +33,8 @@ public:
 	void centrar_en(Vector2f posicion);
     void dibujar();
     void actualizar();
-    Sprite* getSprite(); //TODO: DANGER!!
+    Sprite* getSprite();
     void setPosicionX(float nuevoX);
-//	friend ostream& operator<<(ostream &o, const Capa &c);
 };
 
 #endif /* SRC_MODELO_CAPA_H_ */
