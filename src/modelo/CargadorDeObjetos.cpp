@@ -75,7 +75,14 @@ void CargadorDeOjbetos::cargarObjetos(){
 			SpriteDef* primerSpriteSubQuieto = *it_sprites;
 			Animacion* SubQuieto = new Animacion(primerSpriteSubQuieto->getImagen(), primerSpriteSubQuieto->getCantFotogramas(), primerSpriteSubQuieto->getFps(),  primerSpriteSubQuieto->getIdSprite(), Renderizador::Instance()->getRenderer());
 			cout << "fpsReposo: " << SubQuieto->getFps() << "\n";
-			personajeDibujable = new PersonajeDibujable(SubQuieto, POSICION_INICIAL_PERSONAJE, tamanioPx, ORIENTACION_IZQUIERDA);
+			int direccion_personaje = personajeDef->getDireccion();
+			OrientacionSprite direccion;
+			if(direccion_personaje == 1){
+				direccion = ORIENTACION_IZQUIERDA;
+			}else{
+				direccion = ORIENTACION_IZQUIERDA;
+			}
+			personajeDibujable = new PersonajeDibujable(SubQuieto, POSICION_INICIAL_PERSONAJE, tamanioPx, direccion);
 
 
 			for (; it_sprites != spritesDef->end(); ++it_sprites)
