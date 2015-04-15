@@ -48,7 +48,7 @@
         		    "fps": 10
         			},
         "sprites_salto_vertical": { 
-		            "imagen": "sub-zero-salto_vertical.png",
+		            "imagen": "sub-zero-salto-vertical.png",
 		            "id_sprite": "sub-zero-salto_vertical", 
         		    "ancho": 15.4,
         		    "cant_fotogramas": 3,
