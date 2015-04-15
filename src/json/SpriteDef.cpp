@@ -44,6 +44,22 @@ int SpriteDef::getFps() const {
 	return fps;
 }
 
+void SpriteDef::setImagen(string nuevaImagen){
+    imagen = nuevaImagen;
+}
+
+void SpriteDef::setAncho(double nuevoAncho){
+	ancho = nuevoAncho;
+}
+
+void SpriteDef::setCantFotogramas(int nuevaCant){
+	cant_fotogramas = nuevaCant;
+}
+
+void SpriteDef::setFps(int nuevoFps){
+    fps = nuevoFps;
+}
+
 const string& SpriteDef::getImagen() const {
 	return imagen;
 }

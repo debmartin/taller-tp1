@@ -28,6 +28,10 @@ public:
 	double getAncho() const;
 	int getCantFotogramas() const;
 	int getFps() const;
+	void setAncho(double nuevoAncho);
+	void setCantFotogramas(int nuevaCant);
+	void setFps(int nuevoFps);
+	void setImagen(string nuevaImagen);
 	const string& getImagen() const;
 	const string& getIdSprite() const;
 	friend ostream& operator<<(ostream &o, const SpriteDef &s);
