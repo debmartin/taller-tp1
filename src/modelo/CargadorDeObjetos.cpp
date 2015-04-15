@@ -94,6 +94,7 @@ void CargadorDeOjbetos::cargarObjetos(string escenario_path){
 
 
             list<Dibujable*>::iterator it_dibujables = capasYPersonajes->begin();
+            int i;
             for (int i = 0; (it_dibujables != capasYPersonajes->end()) && i < personajeDef->getZindex(); ++it_dibujables){
                 i++;
             }
