@@ -10,17 +10,12 @@
 
 PersonajeDibujable::PersonajeDibujable(Animacion* animIni, Vector2f posicionIni, Vector2f tamanioPx, OrientacionSprite orientacion){
 	spritePersonaje = new Sprite(animIni, posicionIni, orientacion);
-
-	cout << "----PersonajeDibujable::PersonajeDibujable.x:" << tamanioPx.X();
-	cout << "----PersonajeDibujable::PersonajeDibujable.y:" << tamanioPx.Y();
-
     spritePersonaje->escalarConTamanio(tamanioPx.X(), tamanioPx.Y());
     animaciones[animIni->getId()] = animIni;
 }
 
 void PersonajeDibujable::setEstado(estado_personaje unEstado){
 	this->estado = unEstado;
-	//seleccionarSprite();
 }
 
 void PersonajeDibujable::seleccionarSprite(){
@@ -36,7 +31,6 @@ void PersonajeDibujable::seleccionarSprite(){
 			break;
 		case EN_ESPERA:
 			this->spritePersonaje->cambiarAnimacion(animaciones[ID_ZUBZERO_QUIETO]);
-			cout<<"Personaje dibujable: Seteo sentido reproduccion"<<endl;
 			this->spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
 			break;
 		case SALTANDO_VERTICAL:
@@ -78,13 +72,12 @@ void PersonajeDibujable::actualizar(){
 }
 
 void PersonajeDibujable::recibirNotificacion(Observable* unObservable){
-	cout<<"PersonajeDibujable:Recibio notificacion personaje"<<endl;
+	Logger::getInstance()->info("PersonajeDibujable: Recibio notificacion personaje");
 
 	Personaje* unPersonaje = (Personaje*) unObservable;
 	Vector2f nueva_posicion = unPersonaje->obtenerPosicionEnVentana();
 	Vector2f posicion_final(nueva_posicion.X()*VentanaGrafica::Instance()->relacion_de_aspectoX(), nueva_posicion.Y());
 
-	cout<<"XXXXXXXXXXXXXXXXX"<<nueva_posicion.X()<<endl;
 	//Actualizo la posicion del Sprite.
 	this->spritePersonaje->setPosicion(posicion_final);
 

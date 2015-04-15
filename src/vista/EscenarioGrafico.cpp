@@ -18,7 +18,6 @@ EscenarioGrafico::EscenarioGrafico(double ancho, double alto, double y_piso, lis
 		velocidadCapa /= this->getAnchoLogico() - VentanaGrafica::Instance()->getAnchoLogico();
 
 		this->listaVelocidades.push_back(velocidadCapa);
-		cout << "VELOCIDAD DE CAPA:" << velocidadCapa << endl;
 	}
 }
 
@@ -88,8 +87,4 @@ bool EscenarioGrafico::esValida(Vector2f posicion){
         return false;
     return true;
 }
-//ostream& operator <<(ostream &o, const Escenario &e) {
-//
-//        o<<"escenario -> [ancho, alto, ypiso]=["<<e.ancho<<", "<<e.alto<<", "<<e.ypiso<<"]";
-//        return o;
-//}
+

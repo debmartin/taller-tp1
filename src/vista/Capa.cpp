@@ -51,10 +51,6 @@ void Capa::centrar_en(Vector2f posicion){
 void Capa::setPosicionX(float nuevoX){
 	this->limite_logico_izquierdo = nuevoX;
 }
-//ostream& operator <<(ostream &o, const Capa &c) {
-//
-//        o<<"capa -> [imagen_fondo, ancho]=["<<c.imagen_fondo<<", "<<c.ancho<<"]";
-//        return o;
-//}
+
 
 

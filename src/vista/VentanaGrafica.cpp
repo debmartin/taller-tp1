@@ -104,14 +104,11 @@ float VentanaGrafica::getAnchoPx(){
 }
 
 float VentanaGrafica::relacion_de_aspectoX(){
-	//cout << "VentanaGrafica:Aspectos:" << this->ancho_ventanaPx<<";"<< this->limite_logico_derecho<<";"<< this->limite_logico_izquierdo<<endl;
 	float res = this->ancho_ventanaPx / ((this->limite_logico_izquierdo + this->ancho_logico_ventana) - this->limite_logico_izquierdo);
-	//cout << "VentanaGrafica:relacion de aspectoX:" << res << endl;
 	return res;
 }
 
 float VentanaGrafica::relacion_de_aspectoY(){
-	//cout << "VentanaGrafica:relacion de aspectoY:" << this->ancho_ventanaPx<<";"<< this->alto_logico_ventana<<endl;
 	return this->alto_ventanaPx / (this->alto_logico_ventana);
 }
 
@@ -125,5 +122,5 @@ VentanaGrafica::~VentanaGrafica(){
 }
 
 bool VentanaGrafica::esValida(Vector2f posicion){
-    return escenario->esValida(posicion); //Cuando haya mas de un personaje se agregarán el resto de las condiciones
+    return escenario->esValida(posicion);
 }
