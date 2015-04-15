@@ -50,7 +50,7 @@ void EscenarioGrafico::actualizar(){
     }
 }
 
-void EscenarioGrafico::centrar_en(Vector2f v){
+void EscenarioGrafico::centrar_en(Vector2f posicion, float limiteLogicoIzquierdoVentana, float relacion_de_aspectoX){
 
 }
 
@@ -60,11 +60,11 @@ void EscenarioGrafico::centrar_dibujables(){
 
 	Vector2f vec(VentanaGrafica::Instance()->getAnchoPx()/2.0, posicionInicialY);
 	for (list<Capa*>::iterator it = capas->begin(); it != capas->end(); ++it){
-		(*it)->centrar_en(vec);
+		(*it)->centrar_en(vec, VentanaGrafica::Instance()->getLimiteLogicoIzquierdo(), VentanaGrafica::Instance()->relacion_de_aspectoX());
 	}
 	//Centro el personaje
 	Vector2f vec2(this->ancho_logico/2.0, getYPisoLogico());
-	this->dibujables->back()->centrar_en(vec);
+	this->dibujables->back()->centrar_en(vec, VentanaGrafica::Instance()->getLimiteLogicoIzquierdo(), VentanaGrafica::Instance()->relacion_de_aspectoX());
 
 	Logger::getInstance()->info("Se centran las capas.");
 }
