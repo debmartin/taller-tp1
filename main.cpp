@@ -2,7 +2,7 @@
 #include "test/Test.h"
 #include "src/modelo/CargadorDeObjetos.h"
 
-Juego* cargarObjetos(string escenarioPath){
+Juego* cargarJuego(string escenarioPath){
     ///////////////Inicializacion del Cargador de Objetos////
     CargadorDeOjbetos cargador_de_objetos;
     cargador_de_objetos.cargarObjetos(escenarioPath);
@@ -11,12 +11,11 @@ Juego* cargarObjetos(string escenarioPath){
     Personaje* jugador = cargador_de_objetos.getPersonaje();
     PersonajeDibujable* personajeDibujable = cargador_de_objetos.getPersonajeDibujable();
 
-    Juego* juego = new Juego(VentanaGrafica::Instance(), escenario, jugador, personajeDibujable);
+    Juego* juego = new Juego(escenario, jugador, personajeDibujable);
     return juego;
 }
 
-void correrJuego(string escenarioPath, bool& recargar){
-    Juego* g_game = cargarObjetos(escenarioPath);
+void correrJuego(Juego* g_game, bool& recargar){
     static const int FPS = 60;
     static const int DELAY_TIME = 1000.0f / FPS;
     Uint32 frameStart, frameTime;
@@ -51,16 +50,15 @@ int main(int argc, char* args[])
 //		{
 //			Test tests;
 //			tests.ejecutar();
+//          return 0;
 //		}
-//		else
-//		{
-		    bool recargar = true;
-		    while (recargar){
-                recargar = false;
-                string escenario_path(argumento);
-                correrJuego(escenario_path, recargar);
-		    }
-//		}
+        bool recargar = true;
+        while (recargar){
+            recargar = false;
+            string escenario_path(argumento);
+            Juego* juego = cargarJuego(argumento);
+            correrJuego(juego, recargar);
+        }
 	}
 
 	return 0;

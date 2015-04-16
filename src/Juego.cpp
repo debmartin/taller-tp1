@@ -14,14 +14,14 @@
 
 #define TEXTO_ERROR_TEXTURA "ERROR AL CREAR TEXTURA"
 
-Juego::Juego(VentanaGrafica* ventana, EscenarioGrafico* escenario, Personaje* personaje, PersonajeDibujable* personajeDib) :
+Juego::Juego(EscenarioGrafico* escenario, Personaje* personaje, PersonajeDibujable* personajeDib) :
     escenarioG(escenario), jugador1(personaje), jugadorDibujable1(personajeDib){
 
 	juegoCorriendo = true;
 
 	//Agrego observadores del Personaje.
 	personaje->agregarObservador(personajeDib);
-	personaje->agregarObservador(ventana);
+	personaje->agregarObservador(VentanaGrafica::Instance());
 
 	this->controladorJuego = new Controlador(this->jugador1);
 }
@@ -49,8 +49,6 @@ void Juego::handleEvents(bool& recargar)
 	{
 		if (evento.type == SDL_QUIT){
 			juegoCorriendo = false;
-		} else if (jugador1->estaSaltando()){
-		    return;
 		} else if (! controladorJuego->manejar_Evento(evento)){
             juegoCorriendo = false;
             recargar = true;

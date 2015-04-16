@@ -85,6 +85,7 @@ public:
 	void notificarObservadores();
 	void update();
 	bool estaSaltando();
+	bool estaAgachado();
 //	friend ostream& operator<<(ostream &o, const Personaje &p);
 
 };
