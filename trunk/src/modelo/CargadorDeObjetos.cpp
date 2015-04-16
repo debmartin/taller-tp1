@@ -94,8 +94,8 @@ void CargadorDeOjbetos::cargarObjetos(string escenario_path){
 
 
             list<Dibujable*>::iterator it_dibujables = capasYPersonajes->begin();
-            int i;
-            for (int i = 0; (it_dibujables != capasYPersonajes->end()) && i < personajeDef->getZindex(); ++it_dibujables){
+            int i = 0;
+            for (; (it_dibujables != capasYPersonajes->end()) && i < personajeDef->getZindex(); ++it_dibujables){
                 i++;
             }
             if (i < personajeDef->getZindex())
@@ -112,6 +112,7 @@ void CargadorDeOjbetos::cargarObjetos(string escenario_path){
 		    escenario->centrar_dibujables();
 		    Vector2f vector_centrado(escenarioDef->getAncho()/2.0, escenarioDef->getYpiso());
 		    jugador->centrar_en(vector_centrado);
+
 		    Logger::getInstance()->info("Carga correcta.");
 		    cout << "carga correcta" << endl;
 //		    delete parser;
@@ -128,3 +129,4 @@ Personaje* CargadorDeOjbetos::getPersonaje(){
 PersonajeDibujable* CargadorDeOjbetos::getPersonajeDibujable(){
 	return personajeDibujable;
 }
+

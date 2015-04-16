@@ -149,3 +149,7 @@ bool Personaje::estaSaltando(){
     return (estado == SALTANDO_OBLICUO_DERECHA || estado == SALTANDO_OBLICUO_IZQUIERDA || estado == SALTANDO_VERTICAL);
 }
 
+bool Personaje::estaAgachado(){
+    return (estado == AGACHADO);
+}
+

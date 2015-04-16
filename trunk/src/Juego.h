@@ -28,7 +28,7 @@ private:
 	EscenarioGrafico* escenarioG;
 
 public:
-	Juego(VentanaGrafica* ventana, EscenarioGrafico* escenario, Personaje* pers, PersonajeDibujable* persDib);
+	Juego(EscenarioGrafico* escenario, Personaje* pers, PersonajeDibujable* persDib);
 	void render();
 	void update();
 	void handleEvents(bool& recargar);

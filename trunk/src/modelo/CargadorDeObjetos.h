@@ -24,6 +24,7 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <string.h>
+#include "../controlador/Controlador.h"
 
 #define TITULO_VENTANA_INICIO "Taller de programacion TP: Mortal Kombat"
 #define INICIAR_FULLSCREEN false
