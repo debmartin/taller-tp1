@@ -42,7 +42,7 @@ bool Renderizador::init(string titulo, Vector2f posicion, Vector2f tamanio, bool
 		if (this->vWindow != NULL)
 		{
 			Logger::getInstance()->debug("Renderizador: ventana creada.");
-			this->vRenderer = SDL_CreateRenderer(vWindow, -1, SDL_RENDERER_SOFTWARE);
+			this->vRenderer = SDL_CreateRenderer(vWindow, -1, SDL_RENDERER_ACCELERATED);
 
 			if (this->vRenderer != NULL)
 			{
