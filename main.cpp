@@ -3,7 +3,6 @@
 #include "src/modelo/CargadorDeObjetos.h"
 
 Juego* cargarJuego(string escenarioPath){
-    ///////////////Inicializacion del Cargador de Objetos////
 	Logger::getInstance()->info("Inicia la carga del juego");
     CargadorDeOjbetos cargador_de_objetos;
     cargador_de_objetos.cargarObjetos(escenarioPath);
@@ -17,6 +16,8 @@ Juego* cargarJuego(string escenarioPath){
 }
 
 void correrJuego(Juego* g_game, bool& recargar){
+	Logger::getInstance()->info("Juego corriendo");
+
     static const int FPS = 60;
     static const int DELAY_TIME = 1000.0f / FPS;
     Uint32 frameStart, frameTime;
@@ -60,6 +61,8 @@ int main(int argc, char* args[])
             Juego* juego = cargarJuego(argumento);
             correrJuego(juego, recargar);
         }
+		Logger::getInstance()->info("Juego finalizado");
+
 	}
 
 	return 0;

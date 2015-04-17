@@ -35,8 +35,12 @@ bool VentanaGrafica::init(string titulo, Vector2f posicion, Vector2f tamanioPixe
 	//Inicializamos el Renderizador.
 	bool exito = Renderizador::Instance()->init(titulo, posicion, tamanioPixels, fullscreen);
 	if(!exito){
+		Logger::getInstance()->error(
+						"Falla al inicializar el Renderizador.");
 		return false;
 	}
+	Logger::getInstance()->debug(
+					"Inicialiazación de Renderizador correcta.");
 	return true;
 }
 
@@ -65,7 +69,7 @@ void VentanaGrafica::actualizar() {
 
 void VentanaGrafica::recibirNotificacion(Observable* unObservable){
 	//Verifico posicion del jugador, si llego al limite de la ventana, scrollar.
-
+	Logger::getInstance()->debug("VentanaGrafica: Recibió notificación.");
 	Personaje* unPersonaje = (Personaje*) unObservable;
 	Vector2f posicionPersonaje = unPersonaje->getPosicion();
 

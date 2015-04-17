@@ -56,7 +56,6 @@ void Juego::handleEvents(bool& recargar)
 	}
 }
 
-// a function to access the private running variable
 bool Juego::running() { return juegoCorriendo; }
 
 Juego::~Juego(){
