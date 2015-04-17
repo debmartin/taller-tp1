@@ -26,11 +26,9 @@ void CargadorDeOjbetos::cargarObjetos(string escenario_path) {
 	EscenarioDef* escenarioDef = parser->getEscenarioDef();
 	PersonajeDef* personajeDef = parser->getPersonajeDef();
 
-	Logger::getInstance()->info(ventanaDef);
-	Logger::getInstance()->info(escenarioDef);
-	Logger::getInstance()->info(personajeDef);
-
 	////Inicializacion de VentanaGrafica////
+	Logger::getInstance()->info(ventanaDef);
+
 	Vector2f tamanioVentanaPx(ventanaDef->getAnchoPx(),
 			ventanaDef->getAltoPx());
 	Vector2f tamanioVentanaLogico(ventanaDef->getAncho(),
@@ -72,10 +70,11 @@ void CargadorDeOjbetos::cargarObjetos(string escenario_path) {
 	Logger::getInstance()->info("Inicialiazación de Capas correcta.");
 
 	////Inicializacion de Personaje////
-	Logger::getInstance()->info("Inicialiazación de Personaje.");
-
+	Logger::getInstance()->info(personajeDef);
 	jugador = new Personaje(personajeDef->getAncho(), personajeDef->getAlto(),
-	POSICION_INICIAL_PERSONAJE, VentanaGrafica::Instance()); ////Inicializacion de PersonajeDibujable////
+	POSICION_INICIAL_PERSONAJE, VentanaGrafica::Instance());
+
+	////Inicializacion de PersonajeDibujable////
 	Vector2f tamanioPx(
 			jugador->getAncho()
 					* VentanaGrafica::Instance()->relacion_de_aspectoX(),
@@ -86,10 +85,10 @@ void CargadorDeOjbetos::cargarObjetos(string escenario_path) {
 	list<SpriteDef*>::iterator it_sprites = spritesDef->begin();
 	SpriteDef* primerSpriteSubQuieto = *it_sprites;
 	Animacion* SubQuieto = new Animacion(primerSpriteSubQuieto->getImagen(),
-			primerSpriteSubQuieto->getCantFotogramas(),
-			primerSpriteSubQuieto->getFps(),
-			primerSpriteSubQuieto->getIdSprite(),
-			Renderizador::Instance()->getRenderer());
+	primerSpriteSubQuieto->getCantFotogramas(),
+	primerSpriteSubQuieto->getFps(),
+	primerSpriteSubQuieto->getIdSprite(),
+	Renderizador::Instance()->getRenderer());
 
 	int direccion_personaje = personajeDef->getDireccion();
 	OrientacionSprite direccion;
@@ -103,14 +102,14 @@ void CargadorDeOjbetos::cargarObjetos(string escenario_path) {
 
 	for (; it_sprites != spritesDef->end(); ++it_sprites) {
 		Animacion* sub_zero = new Animacion((*it_sprites)->getImagen(),
-				(*it_sprites)->getCantFotogramas(), (*it_sprites)->getFps(),
-				(*it_sprites)->getIdSprite(),
-				Renderizador::Instance()->getRenderer());
+		(*it_sprites)->getCantFotogramas(), (*it_sprites)->getFps(),
+		(*it_sprites)->getIdSprite(),
+		Renderizador::Instance()->getRenderer());
 		personajeDibujable->agregarAnimacion(sub_zero);
 	}
 
 	Logger::getInstance()->info(
-			"Inicialización de PersonajeDibujable correcta.");
+			"Inicialización de Personaje correcta.");
 
 	list<Dibujable*>::iterator it_dibujables = capasYPersonajes->begin();
 	int i = 0;
@@ -119,12 +118,16 @@ void CargadorDeOjbetos::cargarObjetos(string escenario_path) {
 					&& i < personajeDef->getZindex(); ++it_dibujables) {
 		i++;
 	}
+
+	//TODO: ¿Esta validacion no deberia ir en parser?
 	if (i < personajeDef->getZindex())
 		Logger::getInstance()->error(
 				"ZIndex del Personaje es mayor al valor posible.");
+
 	capasYPersonajes->insert(it_dibujables, personajeDibujable);
 
 	////Inicializacion de EscenarioGrafico////
+	Logger::getInstance()->info(escenarioDef);
 	escenario = new EscenarioGrafico(escenarioDef->getAncho(),
 			escenarioDef->getAlto(), escenarioDef->getYpiso(), capasYPersonajes,
 			capas);
@@ -136,9 +139,9 @@ void CargadorDeOjbetos::cargarObjetos(string escenario_path) {
 	Vector2f vector_centrado(escenarioDef->getAncho() / 2.0,
 			escenarioDef->getYpiso());
 	jugador->centrar_en(vector_centrado);
+	Logger::getInstance()->info("Centrado de Personaje correcto.");
 
-	Logger::getInstance()->info("Carga correcta.");
-	cout << "carga correcta" << endl;
+	Logger::getInstance()->info("Termina la carga del juego correctamente.");
 //		    delete parser;
 }
 
