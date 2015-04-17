@@ -462,8 +462,8 @@ void Parser::inciarValidacionSemantica() {
 
 		if ( !Util::getInstancia()->existeArchivo(nueva_imagen) )
 		{
-			Logger::getInstance()->info("No existes las imagenes del sprites "+nueva_imagen+". Por defecto se usa sprites_defecto.png");
-			(*it_sprites)->setImagen("sprites_defecto.png");
+			Logger::getInstance()->info("No existen las imagenes del sprites "+nueva_imagen+". Por defecto se usa sprites_defecto.png");
+			(*it_sprites)->setImagen("img/sprites_defecto.png");
 		}
 
 		if ( nuevo_cant_fotograma <= 0 )
@@ -495,7 +495,7 @@ void Parser::inciarValidacionSemantica() {
 		if ( !Util::getInstancia()->existeArchivo(nuevo_fondo) )
 		{
 			Logger::getInstance()->info("No existe la imagen de fondo para la capa "+nuevo_fondo+". Por defecto se usa fondo_capa_defecto.png");
-			nuevo_fondo = "fondo_capa_defecto.png";
+			nuevo_fondo = "img/fondo_capa_defecto.png";
 		}
 
 		//Falta validacion del id_capa//
