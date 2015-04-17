@@ -130,7 +130,7 @@ void Personaje::update(){
 	if (posicionable->esValida(posicionCandidata) && posicionCandidata.Y() >= posicionInicial.Y()) {
         posicion = posicionCandidata;
     } else if (posicionCandidata.Y() >= posicionInicial.Y()) {
-        estado = SALTANDO_VERTICAL;
+        //estado = SALTANDO_VERTICAL;
         cambiarTrayectoria(new MRUV(posicion, VECTOR_VELOCIDAD_NULA, VECTOR_GRAVEDAD));
         posicion = trayectoria->getPosicion(tActual);
     } else if (posicion.Y() != posicionInicial.Y()){
