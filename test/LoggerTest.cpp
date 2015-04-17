@@ -47,6 +47,9 @@ void LoggerTest::ejecutar() {
 	Logger::getInstance()->info(capaDef);
 	Logger::getInstance()->info(personajeDef);
 	Logger::getInstance()->info(spriteDef);
+
+	//ejemplo de logeo de numeros
+
 }
 
 LoggerTest::~LoggerTest() {
