@@ -7,11 +7,16 @@
 
 #include "PersonajeDef.h"
 
+#include <sstream>
+
 #define ANCHO_ESCENARIO 600
 
 PersonajeDef::PersonajeDef() {
 	this->ancho = 0;
 	this->alto = 0;
+	this->z_index = 0;
+	this->spritesDef = new list<SpriteDef*>();
+	this->direccion = 0;
 }
 
 PersonajeDef::PersonajeDef(double ancho, double alto, int zindex, int direccion)
@@ -73,10 +78,10 @@ ostream& operator <<(ostream &o, const PersonajeDef &p) {
 
         o<<"PersonajeDef -> [ancho, alto, zindex, direccion]=[";
         o<<p.ancho<<", "<<p.alto<<", "<<p.z_index<<", "<<p.direccion<<"]"<<endl;
-        o<<"{"<<endl;
+        o<<"sprites: {"<<endl;
     	for (list<SpriteDef*>::iterator it_spritesDef = p.getSpritesDef()->begin() ; it_spritesDef !=  p.getSpritesDef()->end(); it_spritesDef++)
     	{
-    		cout<<**it_spritesDef<<endl;
+    		o<<**it_spritesDef<<endl;
     	}
     	o<<"}";
         return o;
@@ -88,4 +93,10 @@ int PersonajeDef::getDireccion() const {
 
 void PersonajeDef::agregarSpritesDef(SpriteDef* spriteDef) {
 	this->spritesDef->push_back(spriteDef);
+}
+
+string PersonajeDef::toString() {
+    ostringstream stream;
+    stream <<*this;
+	return stream.str();
 }

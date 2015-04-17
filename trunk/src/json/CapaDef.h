@@ -7,13 +7,15 @@
 
 #ifndef SRC_JSON_CAPADEF_H_
 #define SRC_JSON_CAPADEF_H_
+
 #include <iostream>
-#include <string.h>
-#include <exception>
+#include <string>
+
+#include "ObjetoJson.h"
 
 using namespace std;
 
-class CapaDef {
+class CapaDef: public ObjetoJson {
 private:
 	string imagen_fondo;
 	string id_capa;
@@ -27,6 +29,7 @@ public:
 	string getIdCapa() const;
 
 	friend ostream& operator<<(ostream &o, const CapaDef &c);
+	string toString();
 };
 
 #endif /* SRC_JSON_CAPADEF_H_ */

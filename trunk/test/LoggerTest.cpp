@@ -8,6 +8,12 @@
 #include "../src/utils/Logger.h"
 #include "LoggerTest.h"
 
+#include "../src/json/CapaDef.h"
+#include "../src/json/EscenarioDef.h"
+#include "../src/json/PersonajeDef.h"
+#include "../src/json/SpriteDef.h"
+#include "../src/json/VentanaDef.h"
+
 LoggerTest::LoggerTest() {
 
 }
@@ -28,6 +34,19 @@ void LoggerTest::ejecutar() {
 	Logger::getInstance()->debug("mensaje de debug");
 	Logger::getInstance()->info("mensaje de informacion");
 	Logger::getInstance()->error("mensaje de error");
+
+	//ejemplo de logeo de objetos directamente
+	VentanaDef* ventanaDef = new VentanaDef();
+	EscenarioDef* escenarioDef = new EscenarioDef();
+	CapaDef* capaDef = new CapaDef();
+	PersonajeDef* personajeDef = new PersonajeDef();
+	SpriteDef* spriteDef = new SpriteDef();
+
+	Logger::getInstance()->info(ventanaDef);
+	Logger::getInstance()->info(escenarioDef);
+	Logger::getInstance()->info(capaDef);
+	Logger::getInstance()->info(personajeDef);
+	Logger::getInstance()->info(spriteDef);
 }
 
 LoggerTest::~LoggerTest() {

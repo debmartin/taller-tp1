@@ -110,14 +110,26 @@ void Logger::debug(std::string  message){
 	Logger::insert(key,message);
 }
 
+void Logger::debug(ObjetoJson* unObjetoJson) {
+	this->debug(unObjetoJson->toString());
+}
+
 void Logger::info(std::string message){
 	std::string key = "INFO";
 	Logger::insert(key,message);
 }
 
+void Logger::info(ObjetoJson* unObjetoJson) {
+	this->info(unObjetoJson->toString());
+}
+
 void Logger::error(std::string  message){
 	std::string key = "ERROR";
 	Logger::insert(key,message);
+}
+
+void Logger::error(ObjetoJson* unObjetoJson) {
+	this->error(unObjetoJson->toString());
 }
 
 void Logger::insert(std::string& key, std::string& value){

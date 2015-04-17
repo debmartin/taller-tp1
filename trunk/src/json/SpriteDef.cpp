@@ -6,10 +6,15 @@
  */
 
 #include "SpriteDef.h"
-#include "../utils/Util.h"
+
+#include <sstream>
+
 
 SpriteDef::SpriteDef() {
-
+	this->imagen = "no_imagen";
+	this->id_sprite = "no_id";
+	this->cant_fotogramas = 0;
+	this->fps = 0;
 }
 
 SpriteDef::SpriteDef(string imagen, string id, int cant_fotogramas,
@@ -59,4 +64,10 @@ ostream& operator <<(ostream &o, const SpriteDef &p) {
         o<<p.imagen<<", "<<p.id_sprite<<", "<<p.cant_fotogramas<<", "<<p.fps<<"]";
 
         return o;
+}
+
+string SpriteDef::toString() {
+    ostringstream stream;
+    stream <<*this;
+	return stream.str();
 }

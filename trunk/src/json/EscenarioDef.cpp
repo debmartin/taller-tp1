@@ -6,9 +6,16 @@
  */
 
 #include "EscenarioDef.h"
+
+#include <sstream>
+#include <string>
+
 #define ANCHO_DEFAULT 1200
 
 EscenarioDef::EscenarioDef() {
+	this->ancho = 0;
+	this->alto = 0;
+	this->ypiso = 0;
 }
 
 EscenarioDef::EscenarioDef(double ancho, double alto, double ypiso)
@@ -42,3 +49,8 @@ ostream& operator <<(ostream &o, const EscenarioDef &e) {
         return o;
 }
 
+string EscenarioDef::toString() {
+    ostringstream stream;
+    stream <<*this;
+	return stream.str();
+}
