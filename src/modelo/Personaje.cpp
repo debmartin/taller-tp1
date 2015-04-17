@@ -129,12 +129,11 @@ void Personaje::update(){
 	Vector2f posicionCandidata = this->trayectoria->getPosicion(tActual);
 	if (posicionable->esValida(posicionCandidata) && posicionCandidata.Y() >= posicionInicial.Y()) {
         posicion = posicionCandidata;
-    } else if (posicionCandidata.Y() >= posicionInicial.Y()) {
+    } else if (posicionCandidata.Y() > posicionInicial.Y()) {
         //estado = SALTANDO_VERTICAL;
         cambiarTrayectoria(new MRUV(posicion, VECTOR_VELOCIDAD_NULA, VECTOR_GRAVEDAD));
-        posicion = trayectoria->getPosicion(tActual);
-    } else if (posicion.Y() != posicionInicial.Y()){
-        posicion = Vector2f(posicion.X(), posicionInicial.Y());
+//        posicion = trayectoria->getPosicion(tActual);
+    } else if (posicion.Y() == posicionInicial.Y()){
     } else {
         mantenerReposo();
     }
