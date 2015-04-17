@@ -22,7 +22,7 @@ bool Controlador::manejar_Evento(SDL_Event &evento){
 
     if( evento.type == SDL_KEYUP && evento.key.repeat == 0 ){
         if ( evento.key.keysym.sym == SDLK_r){
-            Logger::getInstance()->debug("Se presiona: Tecla R.");
+            Logger::getInstance()->info("Se presiona: Tecla R.");
             return false;
         }
     }

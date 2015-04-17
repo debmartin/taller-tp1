@@ -4,6 +4,7 @@
 
 Juego* cargarJuego(string escenarioPath){
     ///////////////Inicializacion del Cargador de Objetos////
+	Logger::getInstance()->info("Inicia la carga del juego");
     CargadorDeOjbetos cargador_de_objetos;
     cargador_de_objetos.cargarObjetos(escenarioPath);
 
