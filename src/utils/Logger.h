@@ -21,6 +21,8 @@
 #include <time.h>
 #include <unistd.h>
 
+#include "../json/ObjetoJson.h";
+
 #include <jsoncpp/json/json.h>
 using namespace std;
 
@@ -100,17 +102,19 @@ public:
 	 * Escribe un mensaje de debug sobre el log.
 	 */
 	void debug(std::string message);
+	void debug(ObjetoJson* unObjetoJson);
 
 	/**
 	 * Escribe un mensaje de informacion sobre el log.
 	 */
 	void info(std::string message);
+	void info(ObjetoJson* unObjetoJson);
 
 	/**
 	 * Escribe un mensaje de error sobre el log.
 	 */
 	void error(std::string message);
-
+	void error(ObjetoJson* unObjetoJson);
 	/**
 	 * Inserta un mensaje en el archivo de log.
 	 */

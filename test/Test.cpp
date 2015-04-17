@@ -17,11 +17,11 @@ Test::Test() {
 
 void Test::ejecutar() {
 
-	ParserTests parserTests;
-	parserTests.ejecutar();
+	//ParserTests parserTests;
+	//parserTests.ejecutar();
 
-	//LoggerTest loggerTest;
-	//loggerTest.ejecutar();
+	LoggerTest loggerTest;
+	loggerTest.ejecutar();
 
 }
 

@@ -9,9 +9,12 @@
 #define SRC_JSON_VENTANADEF_H_
 
 #include <iostream>
+
+#include "ObjetoJson.h"
+
 using namespace std;
 
-class VentanaDef {
+class VentanaDef: public ObjetoJson {
 private:
 	int ancho_px;
 	int alto_px;
@@ -25,6 +28,7 @@ public:
 	double getAncho() const;
 	int getAnchoPx() const;
 	double getMargenX() const;
+	string toString();
 
 	friend ostream& operator<<(ostream &o, const VentanaDef &v);
 };

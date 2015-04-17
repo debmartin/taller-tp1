@@ -11,10 +11,12 @@
 #include <iostream>
 #include <string>
 
+#include "ObjetoJson.h"
+
 using namespace std;
 
 
-class SpriteDef {
+class SpriteDef: public ObjetoJson {
 private:
 	string imagen;
 	string id_sprite;
@@ -32,6 +34,8 @@ public:
 	const string& getImagen() const;
 	const string& getIdSprite() const;
 	friend ostream& operator<<(ostream &o, const SpriteDef &s);
+
+	string toString();
 };
 
 #endif /* SRC_JSON_SPRITEDEF_H_ */

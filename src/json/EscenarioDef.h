@@ -9,9 +9,13 @@
 #define SRC_JSON_ESCENARIODEF_H_
 
 #include <iostream>
+#include <string>
+
+#include "ObjetoJson.h"
+
 using namespace std;
 
-class EscenarioDef {
+class EscenarioDef: public ObjetoJson {
 private:
 	double ancho;
 	double alto;
@@ -26,6 +30,7 @@ public:
 	double getYpiso() const;
 
 	friend ostream& operator<<(ostream &o, const EscenarioDef &e);
+	string toString();
 };
 
 #endif /* SRC_JSON_ESCENARIODEF_H_ */

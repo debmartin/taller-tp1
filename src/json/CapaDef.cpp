@@ -6,9 +6,14 @@
  */
 
 #include "CapaDef.h"
-#include "../utils/Util.h"
+
+#include <sstream>
+
 
 CapaDef::CapaDef() {
+	this->imagen_fondo = "no_imagen";
+	this->id_capa = "no_id";
+	this->ancho = 0;
 }
 
 double CapaDef::getAncho() const {
@@ -41,4 +46,10 @@ CapaDef::CapaDef(string imagen_fondo, string id, double ancho){
 //        throw exception();
 //    if (ancho <= 0)
 //        throw exception();
+}
+
+string CapaDef::toString() {
+    ostringstream stream;
+    stream <<*this;
+	return stream.str();
 }

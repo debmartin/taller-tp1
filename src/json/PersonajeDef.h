@@ -18,7 +18,7 @@ class SpriteDef;
 
 using namespace std;
 
-class PersonajeDef {
+class PersonajeDef: public ObjetoJson {
 private:
 	double ancho;
 	double alto;
@@ -44,6 +44,8 @@ public:
 	void setDireccion(int nuevaDir);
 
 	friend ostream& operator<<(ostream &o, const PersonajeDef &p);
+
+	string toString();
 };
 
 #endif /* SRC_JSON_PERSONAJEDEF_H_ */

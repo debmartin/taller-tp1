@@ -7,7 +7,14 @@
 
 #include "VentanaDef.h"
 
+#include <sstream>
+#include <string>
+
 VentanaDef::VentanaDef() {
+	this->ancho_px = 0;
+	this->alto_px = 0;
+	this->ancho = 0;
+	this->margen_x = 0;
 }
 
 VentanaDef::VentanaDef(int ancho_px, int alto_px, double ancho, double margen_x)
@@ -47,4 +54,10 @@ ostream& operator <<(ostream &o, const VentanaDef &v) {
         o<<"VentanaDef -> [anchopx, altopx, ancho, margen_x]=["<<v.ancho_px<<", "<<v.alto_px<<", "<<v.ancho<<", "<<v.margen_x<<"]";
 
         return o;
+}
+
+string VentanaDef::toString() {
+    ostringstream stream;
+    stream <<*this;
+	return stream.str();
 }
