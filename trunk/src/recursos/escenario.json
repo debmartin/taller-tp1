@@ -24,7 +24,7 @@
 		{ 
             "imagen_fondo": "img/goro2.png",
             "id_capa": "capa_3", 
-            "ancho": 1200 
+            "ancho": 200 
         } 
     ], 
     "personaje": { 
