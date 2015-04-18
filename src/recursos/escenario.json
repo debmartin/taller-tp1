@@ -24,13 +24,13 @@
 		{ 
             "imagen_fondo": "img/goro2.png",
             "id_capa": "capa_3", 
-            "ancho": 200 
+            "ancho": 1200 
         } 
     ], 
     "personaje": { 
         "ancho": 105, 	
         "alto": 280, 
-        "z­index": 3, 
+        "z­index": 2, 
         "sprites_reposo": { 
 		            "imagen": "img/sub-zero-reposo.png",
 		            "id_sprite": "sub-zero-reposo", 

@@ -112,7 +112,8 @@ void CargadorDeOjbetos::cargarObjetos(string escenario_path) {
 			"Inicialización de Personaje correcta.");
 
 	list<Dibujable*>::iterator it_dibujables = capasYPersonajes->begin();
-	for (int i=0; it_dibujables != capasYPersonajes->end(); ++it_dibujables) {
+	for (int i=0; it_dibujables != capasYPersonajes->end() && i < personajeDef->getZindex(); ++it_dibujables) {
+		i++;
 	}
 
 	capasYPersonajes->insert(it_dibujables, personajeDibujable);
