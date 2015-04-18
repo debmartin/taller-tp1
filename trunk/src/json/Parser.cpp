@@ -146,7 +146,8 @@ bool Parser::parsearDesdeJson() {
                             }
                             else if ( key_nivel2.asString() == "ancho" )
                             {
-                                ancho = (*it)[idx_capas]["ancho"].asDouble();
+                            	if ( (*it)[idx_capas]["ancho"].isNumeric() )
+                            		ancho = (*it)[idx_capas]["ancho"].asDouble();
                             }
                             else
                             {
@@ -173,18 +174,22 @@ bool Parser::parsearDesdeJson() {
                     {
                         if ( key_nivel2.asString() == "altopx" )
                         {
-                            v_alto_px = (*it)["altopx"].asInt();
+                        	if ( (*it)["altopx"].isInt() )
+                        		v_alto_px = (*it)["altopx"].asInt();
                         }
                         else if ( key_nivel2.asString() == "ancho" )
                         {
-                            v_ancho = (*it)["ancho"].asDouble();
+                        	if ( (*it)["ancho"].isNumeric() )
+                        		v_ancho = (*it)["ancho"].asDouble();
                         }
                         else if ( key_nivel2.asString() == "anchopx" )
                         {
-                            v_ancho_px = (*it)["anchopx"].asInt();
+                        	if ( (*it)["anchopx"].isInt() )
+                        		v_ancho_px = (*it)["anchopx"].asInt();
                         }
                         else if ( key_nivel2.asString() == "margen_x" )
                         {
+                        	if ( (*it)["margen_x"].isNumeric() )
                             v_margen_x= (*it)["margen_x"].asDouble();
                         }
                         else
@@ -197,16 +202,19 @@ bool Parser::parsearDesdeJson() {
                     {
                         if ( key_nivel2.asString() == "alto" )
                         {
-                            e_alto = (*it)["alto"].asDouble();
+                        	if ( (*it)["alto"].isNumeric() )
+                        		e_alto = (*it)["alto"].asDouble();
                         }
                         else if ( key_nivel2.asString() == "ancho" )
                         {
-                            e_ancho = (*it)["ancho"].asDouble();
+                        	if ( (*it)["ancho"].isNumeric() )
+                        		e_ancho = (*it)["ancho"].asDouble();
                         }
                         //TODO revisar porque este parametro tiene una longitud mas grande. mide 7 en vez de 5!
                         else if ( key_nivel2.asString().compare("ypiso") >= 0 )
                         {
-                            e_ypiso = (*it)[key_nivel2.asString()].asDouble();
+                        	if ( (*it)[key_nivel2.asString()].isNumeric() )
+                        		e_ypiso = (*it)[key_nivel2.asString()].asDouble();
                         }
                         else
                         {
@@ -217,15 +225,18 @@ bool Parser::parsearDesdeJson() {
                     {
                         if ( key_nivel2.asString() == "alto" )
                         {
-                            p_alto = (*it)["alto"].asDouble();
+                        	if ( (*it)["alto"].isNumeric() )
+                        		p_alto = (*it)["alto"].asDouble();
                         }
                         else if ( key_nivel2.asString().compare("ancho") == 0 )
                         {
-                            p_ancho = (*it)[key_nivel2.asString()].asDouble();
+                        	if ( (*it)[key_nivel2.asString()].isNumeric() )
+                        		p_ancho = (*it)[key_nivel2.asString()].asDouble();
                         }
                         else if ( key_nivel2.asString().compare("zindex") >= 0 )
                         {
-                            p_zindex = (*it)[key_nivel2.asString()].asInt();
+                        	if ( (*it)[key_nivel2.asString()].isInt() )
+                        		p_zindex = (*it)[key_nivel2.asString()].asInt();
                         }
                         else if ( key_nivel2.asString() == "sprites_reposo" )
                         {
@@ -264,7 +275,8 @@ bool Parser::parsearDesdeJson() {
                         }
                         else if ( key_nivel2.asString() == "direccion" )
                         {
-                            p_direccion = (*it)["direccion"].asInt();
+                        	if ( (*it)["direccion"].isInt() )
+                        		p_direccion = (*it)["direccion"].asInt();
                         }
                         else
                         {
@@ -356,13 +368,13 @@ void Parser::inciarValidacionSemantica() {
 	if ( escenario_ancho_nuevo <= 0 )
 	{
 		escenario_ancho_nuevo = 1200;
-		Logger::getInstance()->debug("El ancho del escenario es negativo. Se elije uno nuevo: 1200");
+		Logger::getInstance()->info("El ancho del escenario es negativo. Se elije uno nuevo: 1200");
 	}
 
 	if ( escenario_alto_nuevo <= 0 )
 	{
 		escenario_alto_nuevo = 180;
-		Logger::getInstance()->debug("El alto del escenario es negativo. Se elije uno nuevo: 800");
+		Logger::getInstance()->info("El alto del escenario es negativo. Se elije uno nuevo: 800");
 	}
 
 	//validacion de la altura del personaje
@@ -370,7 +382,7 @@ void Parser::inciarValidacionSemantica() {
 	{
 		//la eligo como la tercera parte de la altura del escenario
 		personaje_alto_nuevo = escenario_alto_nuevo / 3;
-		Logger::getInstance()->debug("El alto del personaje es negativo. Se elije uno nuevo que sea la tercera parte del alto del escenario");
+		Logger::getInstance()->info("El alto del personaje es negativo. Se elije uno nuevo que sea la tercera parte del alto del escenario");
 	}
 
 	if ( escenario_ypiso_nuevo < 0 || (escenario_alto_nuevo - escenario_ypiso_nuevo) < personaje_alto_nuevo)
@@ -378,11 +390,11 @@ void Parser::inciarValidacionSemantica() {
 
 		if ( escenario_ypiso_nuevo < 0 )
 		{
-			Logger::getInstance()->debug("El y del piso del personaje es negativo. Se elije uno nuevo con el valor de cero");
+			Logger::getInstance()->info("El y del piso del personaje es negativo. Se elije uno nuevo con el valor de cero");
 		}
 		if ( (escenario_alto_nuevo - escenario_ypiso_nuevo) < personaje_alto_nuevo )
 		{
-			Logger::getInstance()->debug("El y del piso del personaje sobrepasa al escenario con respecto a su altura. Se elije uno nuevo con el valor de cero");
+			Logger::getInstance()->info("El y del piso del personaje sobrepasa al escenario con respecto a su altura. Se elije uno nuevo con el valor de cero");
 		}
 
 		escenario_ypiso_nuevo = 0;
@@ -396,24 +408,24 @@ void Parser::inciarValidacionSemantica() {
 	if ( ventana_anchopx_nuevo <= 0 )
 	{
 		ventana_anchopx_nuevo = 800;
-		Logger::getInstance()->debug("El ancho en pixeles de la ventana es negativa. Se elije uno nuevo: 800");
+		Logger::getInstance()->info("El ancho en pixeles de la ventana es negativa. Se elije uno nuevo: 800");
 	}
 
 	if ( ventana_altopx_nuevo <= 0 )
 	{
 		ventana_altopx_nuevo = 600;
-		Logger::getInstance()->debug("El alto en pixeles de la ventana es negativa. Se elije uno nuevo: 600");
+		Logger::getInstance()->info("El alto en pixeles de la ventana es negativa. Se elije uno nuevo: 600");
 	}
 
 	if ( ventana_ancho_nuevo <= 0 || ventana_ancho_nuevo > escenario_ancho_nuevo)
 	{
 		if ( ventana_ancho_nuevo <= 0 )
 		{
-			Logger::getInstance()->debug("El ancho de la ventana es menor o igual a cero. Se elije uno nuevo que es la mitad del ancho del escenario");
+			Logger::getInstance()->info("El ancho de la ventana es menor o igual a cero. Se elije uno nuevo que es la mitad del ancho del escenario");
 		}
 		if ( ventana_ancho_nuevo > escenario_ancho_nuevo )
 		{
-			Logger::getInstance()->debug("El ancho de la ventana es mas grande que el ancho del escenario. Se elije uno nuevo que es la mitad del ancho del escenario");
+			Logger::getInstance()->info("El ancho de la ventana es mas grande que el ancho del escenario. Se elije uno nuevo que es la mitad del ancho del escenario");
 		}
 
 		ventana_ancho_nuevo = escenario_ancho_nuevo / 2;
@@ -423,7 +435,7 @@ void Parser::inciarValidacionSemantica() {
 	if ( ventana_margenx_nuevo <= 0 )
 	{
 		ventana_margenx_nuevo = ventana_ancho_nuevo / 100;
-		Logger::getInstance()->debug("El margen en x de la ventana es menor o igual a cero. Se elije uno nuevo que es la centecima del ancho de la ventana");
+		Logger::getInstance()->info("El margen en x de la ventana es menor o igual a cero. Se elije uno nuevo que es la centecima del ancho de la ventana");
 	}
 
 	delete this->ventana;
@@ -434,19 +446,19 @@ void Parser::inciarValidacionSemantica() {
 	if ( personaje_ancho_nuevo <= 0 )
 	{
 		personaje->setAncho(15);
-		Logger::getInstance()->debug("El ancho del personaje es menor o igual a cero. Se elije uno nuevo con el valor de 15");
+		Logger::getInstance()->info("El ancho del personaje es menor o igual a cero. Se elije uno nuevo con el valor de 15");
 	}
 
 	if ( personale_zindex_nuevo < 0 )
 	{
 		personaje->setZIndex(0);
-		Logger::getInstance()->debug("El zindex del personaje es menor a cero. Se elije uno nuevo con el valor de 0");
+		Logger::getInstance()->info("El zindex del personaje es menor a cero. Se elije uno nuevo con el valor de 0");
 	}
 
 	if ( personaje_direccion_nuevo != -1 && personaje_direccion_nuevo != 1 )
 	{
 		personaje->setDireccion(1);
-		Logger::getInstance()->debug("La configuracion de la direccion del personaje no es la correcta. Se lo dirije en direccion derecha");
+		Logger::getInstance()->info("La configuracion de la direccion del personaje no es la correcta. Se lo dirije en direccion derecha");
 	}
 
 	//validar los sprites def del personaje
@@ -469,13 +481,13 @@ void Parser::inciarValidacionSemantica() {
 		if ( nuevo_cant_fotograma <= 0 )
 		{
 			(*it_sprites)->setCantFotogramas(1);
-			Logger::getInstance()->debug("la cant. de fotogramas de la imagen del sprite del personaje es menor o igual a cerop. Se elije uno nuevo con el valor de 1");
+			Logger::getInstance()->info("la cant. de fotogramas de la imagen del sprite del personaje es menor o igual a cerop. Se elije uno nuevo con el valor de 1");
 		}
 
 		if ( nuevo_fps <= 0 )
 		{
 			(*it_sprites)->setFps(10);
-			Logger::getInstance()->debug("el valor de los fps del sprite del personaje es menor o igual a cerop. Se elije uno nuevo con el valor de 10");
+			Logger::getInstance()->info("el valor de los fps del sprite del personaje es menor o igual a cerop. Se elije uno nuevo con el valor de 10");
 		}
 
 //		SpriteDef* spriteDef = new SpriteDef(nueva_imagen, nuevo_id, nuevo_ancho, nuevo_cant_fotograma, nuevo_fps);
@@ -505,11 +517,11 @@ void Parser::inciarValidacionSemantica() {
 
 			if ( nuevo_ancho <= 0 )
 			{
-				Logger::getInstance()->debug("El ancho de la capa es negativo. Se elije un nuevo ancho igual al ancho del escenario");
+				Logger::getInstance()->info("El ancho de la capa es negativo. Se elije un nuevo ancho igual al ancho del escenario");
 			}
 			if ( nuevo_ancho > escenario_ancho_nuevo )
 			{
-				Logger::getInstance()->debug("El ancho de la capa es mayor al ancho del escenario. Se elije un nuevo ancho igual al ancho del escenario");
+				Logger::getInstance()->info("El ancho de la capa es mayor al ancho del escenario. Se elije un nuevo ancho igual al ancho del escenario");
 			}
 
 			nuevo_ancho = escenario_ancho_nuevo;
