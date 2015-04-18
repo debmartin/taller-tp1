@@ -112,17 +112,8 @@ void CargadorDeOjbetos::cargarObjetos(string escenario_path) {
 			"Inicialización de Personaje correcta.");
 
 	list<Dibujable*>::iterator it_dibujables = capasYPersonajes->begin();
-	int i = 0;
-	for (;
-			(it_dibujables != capasYPersonajes->end())
-					&& i < personajeDef->getZindex(); ++it_dibujables) {
-		i++;
+	for (int i=0; it_dibujables != capasYPersonajes->end(); ++it_dibujables) {
 	}
-
-	//TODO: ¿Esta validacion no deberia ir en parser?
-	if (i < personajeDef->getZindex())
-		Logger::getInstance()->error(
-				"ZIndex del Personaje es mayor al valor posible.");
 
 	capasYPersonajes->insert(it_dibujables, personajeDibujable);
 

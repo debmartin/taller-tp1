@@ -442,6 +442,46 @@ void Parser::inciarValidacionSemantica() {
 	this->ventana = NULL;
 	this->ventana = new VentanaDef(ventana_anchopx_nuevo, ventana_altopx_nuevo, ventana_ancho_nuevo, ventana_margenx_nuevo);
 
+	//validar las capas
+
+	list<CapaDef*>* capas_nuevas = new list<CapaDef*>;
+
+	for (list<CapaDef*>::iterator it_capas = this->capas->begin() ; it_capas != this->capas->end(); it_capas++)
+	{
+		string nuevo_fondo = (*it_capas)->getImagenFondo();
+		string nuevo_id = (*it_capas)->getIdCapa();
+		double nuevo_ancho = (*it_capas)->getAncho();
+
+		if ( !Util::getInstancia()->existeArchivo(nuevo_fondo) )
+		{
+			Logger::getInstance()->info("No existe la imagen de fondo para la capa "+nuevo_fondo+". Por defecto se usa fondo_capa_defecto.png");
+			nuevo_fondo = "img/fondo_capa_defecto.png";
+		}
+
+		//Falta validacion del id_capa//
+
+		if ( nuevo_ancho <= 0 || nuevo_ancho > escenario_ancho_nuevo )
+		{
+
+			if ( nuevo_ancho <= 0 )
+			{
+				Logger::getInstance()->info("El ancho de la capa es negativo. Se elije un nuevo ancho igual al ancho del escenario");
+			}
+			if ( nuevo_ancho > escenario_ancho_nuevo )
+			{
+				Logger::getInstance()->info("El ancho de la capa es mayor al ancho del escenario. Se elije un nuevo ancho igual al ancho del escenario");
+			}
+
+			nuevo_ancho = escenario_ancho_nuevo;
+		}
+
+		CapaDef* capa_nueva = new CapaDef(nuevo_fondo, nuevo_id, nuevo_ancho);
+		capas_nuevas->push_back(capa_nueva);
+	}
+
+	this->capas = capas_nuevas;
+
+
 	//validar el personaje
 	if ( personaje_ancho_nuevo <= 0 )
 	{
@@ -449,10 +489,19 @@ void Parser::inciarValidacionSemantica() {
 		Logger::getInstance()->info("El ancho del personaje es menor o igual a cero. Se elije uno nuevo con el valor de 15");
 	}
 
-	if ( personale_zindex_nuevo < 0 )
+	int cant_capas = this->capas->size();
+	if ( personale_zindex_nuevo < 0 || personale_zindex_nuevo > cant_capas)
 	{
-		personaje->setZIndex(0);
-		Logger::getInstance()->info("El zindex del personaje es menor a cero. Se elije uno nuevo con el valor de 0");
+		if ( personale_zindex_nuevo < 0 )
+		{
+			Logger::getInstance()->info("El zindex del personaje es menor a cero. Se elije uno nuevo para que el personaje este adelante de todas las capas");
+		}
+		if ( personale_zindex_nuevo > cant_capas )
+		{
+			Logger::getInstance()->info("El zindex del Personaje es mayor al valor posible. Se elije uno nuevo para que el personaje este adelante de todas las capas");
+		}
+
+		personaje->setZIndex(cant_capas);
 	}
 
 	if ( personaje_direccion_nuevo != -1 && personaje_direccion_nuevo != 1 )
@@ -493,45 +542,6 @@ void Parser::inciarValidacionSemantica() {
 //		SpriteDef* spriteDef = new SpriteDef(nueva_imagen, nuevo_id, nuevo_ancho, nuevo_cant_fotograma, nuevo_fps);
 //		this->personaje->agregarSpritesDef(spriteDef);
 	}
-
-	//validar las capas
-
-	list<CapaDef*>* capas_nuevas = new list<CapaDef*>;
-
-	for (list<CapaDef*>::iterator it_capas = this->capas->begin() ; it_capas != this->capas->end(); it_capas++)
-	{
-		string nuevo_fondo = (*it_capas)->getImagenFondo();
-		string nuevo_id = (*it_capas)->getIdCapa();
-		double nuevo_ancho = (*it_capas)->getAncho();
-
-		if ( !Util::getInstancia()->existeArchivo(nuevo_fondo) )
-		{
-			Logger::getInstance()->info("No existe la imagen de fondo para la capa "+nuevo_fondo+". Por defecto se usa fondo_capa_defecto.png");
-			nuevo_fondo = "img/fondo_capa_defecto.png";
-		}
-
-		//Falta validacion del id_capa//
-
-		if ( nuevo_ancho <= 0 || nuevo_ancho > escenario_ancho_nuevo )
-		{
-
-			if ( nuevo_ancho <= 0 )
-			{
-				Logger::getInstance()->info("El ancho de la capa es negativo. Se elije un nuevo ancho igual al ancho del escenario");
-			}
-			if ( nuevo_ancho > escenario_ancho_nuevo )
-			{
-				Logger::getInstance()->info("El ancho de la capa es mayor al ancho del escenario. Se elije un nuevo ancho igual al ancho del escenario");
-			}
-
-			nuevo_ancho = escenario_ancho_nuevo;
-		}
-
-		CapaDef* capa_nueva = new CapaDef(nuevo_fondo, nuevo_id, nuevo_ancho);
-		capas_nuevas->push_back(capa_nueva);
-	}
-
-	this->capas = capas_nuevas;
 
 }
 
