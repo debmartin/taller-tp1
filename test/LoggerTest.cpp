@@ -20,6 +20,7 @@ LoggerTest::LoggerTest() {
 
 void LoggerTest::ejecutar() {
 
+	Logger::getInstance()->info("##INICIA EL TEST DE LOGGER");
 	/*
 	 * En el archivo src/recursos/configuracion.json se encuentra el parametro "nivel_debug" que define el nivel de logeo.
 	 * Los mensajes de logging se cargan en logger.log que se encuentra en el directorio raiz.
@@ -43,11 +44,11 @@ void LoggerTest::ejecutar() {
 	personajeDef->agregarSpritesDef(new SpriteDef());
 	SpriteDef* spriteDef = new SpriteDef();
 
-	Logger::getInstance()->info(ventanaDef);
-	Logger::getInstance()->info(escenarioDef);
-	Logger::getInstance()->info(capaDef);
-	Logger::getInstance()->info(personajeDef);
-	Logger::getInstance()->info(spriteDef);
+	Logger::getInstance()->debug(ventanaDef);
+	Logger::getInstance()->debug(escenarioDef);
+	Logger::getInstance()->debug(capaDef);
+	Logger::getInstance()->debug(personajeDef);
+	Logger::getInstance()->debug(spriteDef);
 
 	//ejemplo de logeo de numeros
 	Logger::getInstance()->debug("nuevo valor entero", 25); // nuevo valor entero: 25
@@ -58,6 +59,7 @@ void LoggerTest::ejecutar() {
 	Logger::getInstance()->info("nuevo valor decimal", 25.2); //nuevo valor entero: 25.2
 	Logger::getInstance()->error("nuevo valor decimal", 25.2); //nuevo valor entero: 25.2
 
+	Logger::getInstance()->info("##TERMINA EL TEST DE LOGGER");
 }
 
 LoggerTest::~LoggerTest() {

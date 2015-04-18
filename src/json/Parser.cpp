@@ -82,10 +82,11 @@ bool Parser::parsearDesdeJson() {
         double e_ancho = 0;
         double e_ypiso = 0;
 
-        //atributos del personaje
+        //atributos del personaje 1
         double p_alto = 0;
         double p_ancho = 0;
         int p_zindex = 0;
+        int p_direccion = 0;
         string p_id = "";
         // del sprites reposo
         string p_sprites_imagen_1 = "";
@@ -113,7 +114,37 @@ bool Parser::parsearDesdeJson() {
         int p_sprites_cant_fotogramas_5 = 0;
         int p_sprites_fps_5 = 0;
 
-        int p_direccion = 0;
+        //atributos del personaje 2
+        double p2_alto = 0;
+        double p2_ancho = 0;
+        int p2_zindex = 0;
+        int p2_direccion = 0;
+        string p2_id = "";
+        // del sprites reposo
+        string p2_sprites_imagen_1 = "";
+        string p2_sprites_id_1 = "";
+        int p2_sprites_cant_fotogramas_1 = 0;
+        int p2_sprites_fps_1 = 0;
+        // del sprites caminando
+        string p2_sprites_imagen_2 = "";
+        string p2_sprites_id_2 = "";
+        int p2_sprites_cant_fotogramas_2 = 0;
+        int p2_sprites_fps_2 = 0;
+        // del sprites agachado
+        string p2_sprites_imagen_3 = "";
+        string p2_sprites_id_3 = "";
+        int p2_sprites_cant_fotogramas_3 = 0;
+        int p2_sprites_fps_3 = 0;
+        // del sprites salto vertical
+        string p2_sprites_imagen_4 = "";
+        string p2_sprites_id_4 = "";
+        int p2_sprites_cant_fotogramas_4 = 0;
+        int p2_sprites_fps_4 = 0;
+        // del sprites salto oblicuo
+        string p2_sprites_imagen_5 = "";
+        string p2_sprites_id_5 = "";
+        int p2_sprites_cant_fotogramas_5 = 0;
+        int p2_sprites_fps_5 = 0;
 
         for( Json::ValueIterator it = root.begin() ; it != root.end() ; it++ )
         {
@@ -289,6 +320,73 @@ bool Parser::parsearDesdeJson() {
                             Logger::getInstance()->error("Dentro del personaje no se encuentra el parametro "+key_nivel2.asString());
                         }
                     }
+                    else if ( tag_padre == "personaje_2" )
+                    {
+                        if ( key_nivel2.asString() == "alto" )
+                        {
+                        	if ( (*it)["alto"].isNumeric() )
+                        		p2_alto = (*it)["alto"].asDouble();
+                        }
+                        else if ( key_nivel2.asString().compare("ancho") == 0 )
+                        {
+                        	if ( (*it)[key_nivel2.asString()].isNumeric() )
+                        		p2_ancho = (*it)[key_nivel2.asString()].asDouble();
+                        }
+                        else if ( key_nivel2.asString().compare("zindex") >= 0 )
+                        {
+                        	if ( (*it)[key_nivel2.asString()].isInt() )
+                        		p2_zindex = (*it)[key_nivel2.asString()].asInt();
+                        }
+                        else if ( key_nivel2.asString() == "direccion" )
+                        {
+                        	if ( (*it)["direccion"].isInt() )
+                        		p2_direccion = (*it)["direccion"].asInt();
+                        }
+                        else if ( key_nivel2.asString() == "id" )
+                        {
+                        	if ( (*it)["id"].isString() )
+                        		p2_id = (*it)["id"].asString();
+                        }
+                        else if ( key_nivel2.asString() == "sprites_reposo" )
+                        {
+                            p2_sprites_imagen_1 = (*it2)["imagen"].asString();
+                            p2_sprites_id_1 = (*it2)["id_sprite"].asString();
+                            p2_sprites_cant_fotogramas_1 = (*it2)["cant_fotogramas"].asInt();
+                            p2_sprites_fps_1 = (*it2)["fps"].asInt();
+                        }
+                        else if ( key_nivel2.asString() == "sprites_caminando" )
+                        {
+                            p2_sprites_imagen_2 = (*it2)["imagen"].asString();
+                            p2_sprites_id_2 = (*it2)["id_sprite"].asString();
+                            p2_sprites_cant_fotogramas_2 = (*it2)["cant_fotogramas"].asInt();
+                            p2_sprites_fps_2 = (*it2)["fps"].asInt();
+                        }
+                        else if ( key_nivel2.asString() == "sprites_agachado" )
+                        {
+                            p2_sprites_imagen_3 = (*it2)["imagen"].asString();
+                            p2_sprites_id_3 = (*it2)["id_sprite"].asString();
+                            p2_sprites_cant_fotogramas_3 = (*it2)["cant_fotogramas"].asInt();
+                            p2_sprites_fps_3 = (*it2)["fps"].asInt();
+                        }
+                        else if ( key_nivel2.asString() == "sprites_salto_vertical" )
+                        {
+                            p2_sprites_imagen_4 = (*it2)["imagen"].asString();
+                            p2_sprites_id_4 = (*it2)["id_sprite"].asString();
+                            p2_sprites_cant_fotogramas_4 = (*it2)["cant_fotogramas"].asInt();
+                            p2_sprites_fps_4 = (*it2)["fps"].asInt();
+                        }
+                        else if ( key_nivel2.asString() == "sprites_salto_oblicuo" )
+                        {
+                            p2_sprites_imagen_5 = (*it2)["imagen"].asString();
+                            p2_sprites_id_5 = (*it2)["id_sprite"].asString();
+                            p2_sprites_cant_fotogramas_5 = (*it2)["cant_fotogramas"].asInt();
+                            p2_sprites_fps_5 = (*it2)["fps"].asInt();
+                        }
+                        else
+                        {
+                            Logger::getInstance()->error("Dentro del personaje no se encuentra el parametro "+key_nivel2.asString());
+                        }
+                    }
                     else
                     {
                         Logger::getInstance()->error("Se hace la lectura de un tag invalido: "+tag_padre);
@@ -297,32 +395,49 @@ bool Parser::parsearDesdeJson() {
             }
         }
 
-        PersonajeDef* personaje;
+        PersonajeDef* personaje1;
+        PersonajeDef* personaje2;
         try {
             this->ventana = new VentanaDef(v_ancho_px, v_alto_px, v_ancho, v_margen_x);
             this->escenario = new EscenarioDef(e_ancho, e_alto, e_ypiso);
-            personaje = new PersonajeDef(p_ancho, p_alto, p_zindex, p_direccion, p_id);
+            personaje1 = new PersonajeDef(p_ancho, p_alto, p_zindex, p_direccion, p_id);
+            personaje2 = new PersonajeDef(p2_ancho, p2_alto, p2_zindex, p2_direccion, p2_id);
         } catch (exception) {
             return false;
         }
-        //se cargan los sprites del personaje
+
         try {
+        	//se cargan los sprites del personaje1
             SpriteDef* spriteDef_reposo = new SpriteDef(p_sprites_imagen_1, p_sprites_id_1, p_sprites_cant_fotogramas_1, p_sprites_fps_1);
             SpriteDef* spriteDef_caminando = new SpriteDef(p_sprites_imagen_2, p_sprites_id_2, p_sprites_cant_fotogramas_2, p_sprites_fps_2);
             SpriteDef* spriteDef_agachado = new SpriteDef(p_sprites_imagen_3, p_sprites_id_3, p_sprites_cant_fotogramas_3, p_sprites_fps_3);
             SpriteDef* spriteDef_saltando_vert = new SpriteDef(p_sprites_imagen_4, p_sprites_id_4, p_sprites_cant_fotogramas_4, p_sprites_fps_4);
             SpriteDef* spriteDef_saltando_obli = new SpriteDef(p_sprites_imagen_5, p_sprites_id_5, p_sprites_cant_fotogramas_5, p_sprites_fps_5);
 
-            personaje->agregarSpritesDef(spriteDef_reposo);
-            personaje->agregarSpritesDef(spriteDef_caminando);
-            personaje->agregarSpritesDef(spriteDef_agachado);
-            personaje->agregarSpritesDef(spriteDef_saltando_vert);
-            personaje->agregarSpritesDef(spriteDef_saltando_obli);
+            personaje1->agregarSpritesDef(spriteDef_reposo);
+            personaje1->agregarSpritesDef(spriteDef_caminando);
+            personaje1->agregarSpritesDef(spriteDef_agachado);
+            personaje1->agregarSpritesDef(spriteDef_saltando_vert);
+            personaje1->agregarSpritesDef(spriteDef_saltando_obli);
+
+            //se cargan los sprites del personaje2
+            SpriteDef* spriteDef_reposo2 = new SpriteDef(p2_sprites_imagen_1, p2_sprites_id_1, p2_sprites_cant_fotogramas_1, p2_sprites_fps_1);
+            SpriteDef* spriteDef_caminando2 = new SpriteDef(p2_sprites_imagen_2, p2_sprites_id_2, p2_sprites_cant_fotogramas_2, p2_sprites_fps_2);
+            SpriteDef* spriteDef_agachado2 = new SpriteDef(p2_sprites_imagen_3, p2_sprites_id_3, p2_sprites_cant_fotogramas_3, p2_sprites_fps_3);
+            SpriteDef* spriteDef_saltando_vert2 = new SpriteDef(p2_sprites_imagen_4, p2_sprites_id_4, p2_sprites_cant_fotogramas_4, p2_sprites_fps_4);
+            SpriteDef* spriteDef_saltando_obli2 = new SpriteDef(p2_sprites_imagen_5, p2_sprites_id_5, p2_sprites_cant_fotogramas_5, p2_sprites_fps_5);
+
+            personaje2->agregarSpritesDef(spriteDef_reposo2);
+            personaje2->agregarSpritesDef(spriteDef_caminando2);
+            personaje2->agregarSpritesDef(spriteDef_agachado2);
+            personaje2->agregarSpritesDef(spriteDef_saltando_vert2);
+            personaje2->agregarSpritesDef(spriteDef_saltando_obli2);
         } catch (exception) {
             return false;
         }
 
-        this->personajes->push_back(personaje);
+        this->personajes->push_back(personaje1);
+        this->personajes->push_back(personaje2);
     }
 
 	 Logger::getInstance()->info("Inicia la validacion semantica del json");
@@ -380,13 +495,13 @@ void Parser::inciarValidacionSemantica() {
 	double personaje_altoMax = 0;
 	for (list<PersonajeDef*>::iterator it_personajes = personajes->begin() ; it_personajes != personajes->end(); ++it_personajes)
 	{
-		int personaje_alto = (*it_personajes)->getAlto();
+		double personaje_alto = (*it_personajes)->getAlto();
 		if ( personaje_alto <= 0 )
 		{
+			Logger::getInstance()->info("El alto del personaje es negativo. Se elije uno nuevo que sea la tercera parte del alto del escenario");
 			personaje_alto = escenario_alto_nuevo / 3;
 			(*it_personajes)->setAlto(personaje_alto);
 		}
-		Logger::getInstance()->info("El alto del personaje es negativo. Se elije uno nuevo que sea la tercera parte del alto del escenario");
 
 		if ( personaje_alto > personaje_altoMax )
 		{

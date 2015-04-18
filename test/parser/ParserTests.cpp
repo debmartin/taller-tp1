@@ -25,7 +25,9 @@ ParserTests::ParserTests() {
 
 }
 
-bool ParserTests::ejecutar() {
+void ParserTests::ejecutar() {
+
+	Logger::getInstance()->info("##INICIA EL TEST DEL PARSER");
 
 	string nombre_escenario("src/recursos/escenario.json");
 
@@ -34,22 +36,22 @@ bool ParserTests::ejecutar() {
 	parser->parsearDesdeJson();
 
 	VentanaDef* ventana = parser->getVentanaDef();
-	cout<<*ventana<<endl;
+	Logger::getInstance()->debug(ventana);
 
 	EscenarioDef* escenario = parser->getEscenarioDef();
-	cout<<*escenario<<endl;
+	Logger::getInstance()->debug(escenario);
 
 	for (list<CapaDef*>::iterator it_capas = parser->getCapasDef()->begin() ; it_capas != parser->getCapasDef()->end(); it_capas++)
 	{
-		cout<<**it_capas<<endl;
+		Logger::getInstance()->debug(*it_capas);
 	}
 
 	for (list<PersonajeDef*>::iterator it_personajes = parser->getPersonajesDef()->begin() ; it_personajes != parser->getPersonajesDef()->end(); it_personajes++)
 	{
-		cout<<**it_personajes<<endl;
+		Logger::getInstance()->debug(*it_personajes);
 	}
 
-	return true;
+	Logger::getInstance()->info("##TERMINA EL TEST DEL PARSER");
 }
 
 ParserTests::~ParserTests() {
