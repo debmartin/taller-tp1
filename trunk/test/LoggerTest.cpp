@@ -40,6 +40,7 @@ void LoggerTest::ejecutar() {
 	EscenarioDef* escenarioDef = new EscenarioDef();
 	CapaDef* capaDef = new CapaDef();
 	PersonajeDef* personajeDef = new PersonajeDef();
+	personajeDef->agregarSpritesDef(new SpriteDef());
 	SpriteDef* spriteDef = new SpriteDef();
 
 	Logger::getInstance()->info(ventanaDef);
@@ -49,6 +50,13 @@ void LoggerTest::ejecutar() {
 	Logger::getInstance()->info(spriteDef);
 
 	//ejemplo de logeo de numeros
+	Logger::getInstance()->debug("nuevo valor entero", 25); // nuevo valor entero: 25
+	Logger::getInstance()->info("nuevo valor entero", 25); //nuevo valor entero: 25
+	Logger::getInstance()->error("nuevo valor entero", 25); //nuevo valor entero: 25
+
+	Logger::getInstance()->debug("nuevo valor decimal", 25.2); // nuevo valor entero: 25.2
+	Logger::getInstance()->info("nuevo valor decimal", 25.2); //nuevo valor entero: 25.2
+	Logger::getInstance()->error("nuevo valor decimal", 25.2); //nuevo valor entero: 25.2
 
 }
 

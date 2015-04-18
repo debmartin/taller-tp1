@@ -114,6 +114,18 @@ void Logger::debug(ObjetoJson* unObjetoJson) {
 	this->debug(unObjetoJson->toString());
 }
 
+void Logger::debug(string unString, int unEntero) {
+    ostringstream stream;
+    stream <<unString<<": "<<unEntero;
+    this->debug(stream.str());
+}
+
+void Logger::debug(string unString, double unDouble) {
+    ostringstream stream;
+    stream <<unString<<": "<<unDouble;
+    this->debug(stream.str());
+}
+
 void Logger::info(std::string message){
 	std::string key = "INFO";
 	Logger::insert(key,message);
@@ -123,6 +135,18 @@ void Logger::info(ObjetoJson* unObjetoJson) {
 	this->info(unObjetoJson->toString());
 }
 
+void Logger::info(string unString, int unEntero) {
+    ostringstream stream;
+    stream <<unString<<": "<<unEntero;
+    this->info(stream.str());
+}
+
+void Logger::info(string unString, double unDouble) {
+    ostringstream stream;
+    stream <<unString<<": "<<unDouble;
+    this->info(stream.str());
+}
+
 void Logger::error(std::string  message){
 	std::string key = "ERROR";
 	Logger::insert(key,message);
@@ -130,6 +154,18 @@ void Logger::error(std::string  message){
 
 void Logger::error(ObjetoJson* unObjetoJson) {
 	this->error(unObjetoJson->toString());
+}
+
+void Logger::error(string unString, int unEntero) {
+    ostringstream stream;
+    stream <<unString<<": "<<unEntero;
+    this->error(stream.str());
+}
+
+void Logger::error(string unString, double unDouble) {
+    ostringstream stream;
+    stream <<unString<<": "<<unDouble;
+    this->error(stream.str());
 }
 
 void Logger::insert(std::string& key, std::string& value){

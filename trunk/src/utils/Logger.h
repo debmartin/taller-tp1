@@ -103,18 +103,24 @@ public:
 	 */
 	void debug(std::string message);
 	void debug(ObjetoJson* unObjetoJson);
-
+	void debug(string unString, int unEntero);
+	void debug(string unString, double unDouble);
 	/**
 	 * Escribe un mensaje de informacion sobre el log.
 	 */
-	void info(std::string message);
+	void info(std::string mensaje);
 	void info(ObjetoJson* unObjetoJson);
+	void info(string unString, int unEntero);
+	void info(string unString, double unDouble);
 
 	/**
 	 * Escribe un mensaje de error sobre el log.
 	 */
 	void error(std::string message);
 	void error(ObjetoJson* unObjetoJson);
+	void error(string unString, int unEntero);
+	void error(string unString, double unDouble);
+
 	/**
 	 * Inserta un mensaje en el archivo de log.
 	 */
