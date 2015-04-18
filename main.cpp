@@ -48,12 +48,14 @@ int main(int argc, char* args[])
 	{
 		string argumento(args[1]);
 		Logger::getInstance()->info("argumento desde la consola: "+argumento);
-//		if ( argumento == "-test" )
-//		{
-//			Test tests;
-//			tests.ejecutar();
-//          return 0;
-//		}
+		/*
+		if ( argumento == "-test" )
+		{
+			Test tests;
+			tests.ejecutar();
+          return 0;
+		}
+		*/
         bool recargar = true;
         while (recargar){
             recargar = false;
