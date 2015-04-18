@@ -1,0 +1,4 @@
+{
+	// valores posibles: "DEBUG", "INFO" y "ERROR"
+	"nivel_debug": "INFO"
+}
