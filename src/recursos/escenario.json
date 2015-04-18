@@ -31,6 +31,8 @@
         "ancho": 105, 	
         "alto": 280, 
         "z­index": 3, 
+        "direccion": 1,
+        "id": "id_personaje_1",
         "sprites_reposo": { 
 		            "imagen": "img/sub-zero-reposo.png",
 		            "id_sprite": "sub-zero-reposo", 
@@ -60,8 +62,7 @@
 		            "id_sprite": "sub-zero-saltando-diagonal",
         		    "cant_fotogramas": 7,
         		    "fps": 10 
-        			},
-		"direccion": 1
+        			}
     }, 
     
     "personaje_2": { 

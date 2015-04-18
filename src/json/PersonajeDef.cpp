@@ -17,15 +17,17 @@ PersonajeDef::PersonajeDef() {
 	this->z_index = 0;
 	this->spritesDef = new list<SpriteDef*>();
 	this->direccion = 0;
+	this->id = "";
 }
 
-PersonajeDef::PersonajeDef(double ancho, double alto, int zindex, int direccion)
+PersonajeDef::PersonajeDef(double ancho, double alto, int zindex, int direccion, string id)
 {
 	this->ancho = ancho;
 	this->alto = alto;
 	this->z_index = zindex;
-	this->spritesDef = new list<SpriteDef*>();
 	this->direccion = direccion;
+	this->id = id;
+	this->spritesDef = new list<SpriteDef*>();
 //	if (alto <= 0 || ancho <= 0)
 //        throw exception();
 //    if (zindex <= 0)
@@ -44,6 +46,10 @@ double PersonajeDef::getAncho() const {
 
 int PersonajeDef::getZindex() const {
 	return z_index;
+}
+
+string PersonajeDef::getId() const {
+	return id;
 }
 
 void PersonajeDef::setAlto(double nuevoAlto) {
@@ -76,8 +82,8 @@ list<SpriteDef*>* PersonajeDef::getSpritesDef() const {
 
 ostream& operator <<(ostream &o, const PersonajeDef &p) {
 
-        o<<"PersonajeDef -> [ancho, alto, zindex, direccion]=[";
-        o<<p.ancho<<", "<<p.alto<<", "<<p.z_index<<", "<<p.direccion<<"]"<<endl;
+        o<<"PersonajeDef -> [ancho, alto, zindex, direccion,id]=[";
+        o<<p.ancho<<", "<<p.alto<<", "<<p.z_index<<", "<<p.direccion<<", "<<p.id<<"]"<<endl;
         o<<"sprites: {"<<endl;
     	for (list<SpriteDef*>::iterator it_spritesDef = p.getSpritesDef()->begin() ; it_spritesDef !=  p.getSpritesDef()->end(); it_spritesDef++)
     	{
@@ -100,3 +106,4 @@ string PersonajeDef::toString() {
     stream <<*this;
 	return stream.str();
 }
+
