@@ -7,6 +7,7 @@
 
 #include "Test.h"
 
+#include "../src/utils/Logger.h"
 #include "LoggerTest.h"
 #include "parser/ParserTests.h"
 
@@ -17,12 +18,15 @@ Test::Test() {
 
 void Test::ejecutar() {
 
-	//ParserTests parserTests;
-	//parserTests.ejecutar();
+	Logger::getInstance()->info("#### INICIA LOS TEST ####");
+
+	ParserTests parserTests;
+	parserTests.ejecutar();
 
 	LoggerTest loggerTest;
 	loggerTest.ejecutar();
 
+	Logger::getInstance()->info("#### TERMINA LOS TEST ####");
 }
 
 Test::~Test() {
