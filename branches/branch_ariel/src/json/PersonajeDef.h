@@ -25,10 +25,11 @@ private:
 	int z_index;
 	list<SpriteDef*>* spritesDef;
 	int direccion;
+	string id;
 
 public:
 	PersonajeDef();
-	PersonajeDef(double ancho, double alto, int zindex, int direccion);
+	PersonajeDef(double ancho, double alto, int zindex, int direccion, string id);
 	virtual ~PersonajeDef();
 	double getAlto() const;
 	double getAncho() const;
@@ -36,6 +37,7 @@ public:
 	void setAlto(double nuevoAlto);
 	void setAncho(double nuevoAncho);
 	void setZIndex(int z);
+	string getId() const;
 
 	list<SpriteDef*>* getSpritesDef() const;
 	void agregarSpritesDef(SpriteDef* spriteDef);

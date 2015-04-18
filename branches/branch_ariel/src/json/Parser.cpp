@@ -86,6 +86,7 @@ bool Parser::parsearDesdeJson() {
         double p_alto = 0;
         double p_ancho = 0;
         int p_zindex = 0;
+        string p_id = "";
         // del sprites reposo
         string p_sprites_imagen_1 = "";
         string p_sprites_id_1 = "";
@@ -238,6 +239,16 @@ bool Parser::parsearDesdeJson() {
                         	if ( (*it)[key_nivel2.asString()].isInt() )
                         		p_zindex = (*it)[key_nivel2.asString()].asInt();
                         }
+                        else if ( key_nivel2.asString() == "direccion" )
+                        {
+                        	if ( (*it)["direccion"].isInt() )
+                        		p_direccion = (*it)["direccion"].asInt();
+                        }
+                        else if ( key_nivel2.asString() == "id" )
+                        {
+                        	if ( (*it)["id"].isString() )
+                        		p_id = (*it)["id"].asString();
+                        }
                         else if ( key_nivel2.asString() == "sprites_reposo" )
                         {
                             p_sprites_imagen_1 = (*it2)["imagen"].asString();
@@ -273,11 +284,6 @@ bool Parser::parsearDesdeJson() {
                             p_sprites_cant_fotogramas_5 = (*it2)["cant_fotogramas"].asInt();
                             p_sprites_fps_5 = (*it2)["fps"].asInt();
                         }
-                        else if ( key_nivel2.asString() == "direccion" )
-                        {
-                        	if ( (*it)["direccion"].isInt() )
-                        		p_direccion = (*it)["direccion"].asInt();
-                        }
                         else
                         {
                             Logger::getInstance()->error("Dentro del personaje no se encuentra el parametro "+key_nivel2.asString());
@@ -295,7 +301,7 @@ bool Parser::parsearDesdeJson() {
         try {
             this->ventana = new VentanaDef(v_ancho_px, v_alto_px, v_ancho, v_margen_x);
             this->escenario = new EscenarioDef(e_ancho, e_alto, e_ypiso);
-            personaje = new PersonajeDef(p_ancho, p_alto, p_zindex, p_direccion);
+            personaje = new PersonajeDef(p_ancho, p_alto, p_zindex, p_direccion, p_id);
         } catch (exception) {
             return false;
         }
