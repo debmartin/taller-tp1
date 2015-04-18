@@ -24,7 +24,7 @@ void CargadorDeOjbetos::cargarObjetos(string escenario_path) {
 	}
 	VentanaDef* ventanaDef = parser->getVentanaDef();
 	EscenarioDef* escenarioDef = parser->getEscenarioDef();
-	PersonajeDef* personajeDef = parser->getPersonajeDef();
+	PersonajeDef* personajeDef = *parser->getPersonajesDef()->begin();
 
 	////Inicializacion de VentanaGrafica////
 	Logger::getInstance()->info(ventanaDef);

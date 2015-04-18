@@ -24,10 +24,10 @@
 		{ 
             "imagen_fondo": "img/goro2.png",
             "id_capa": "capa_3", 
-            "ancho": 200 
+            "ancho": 1100 
         } 
     ], 
-    "personaje": { 
+    "personaje_1": { 
         "ancho": 105, 	
         "alto": 280, 
         "z­index": 3, 
@@ -62,6 +62,43 @@
         		    "fps": 10 
         			},
 		"direccion": 1
-    } 
+    }, 
+    
+    "personaje_2": { 
+        "ancho": 105, 	
+        "alto": 280, 
+        "z­index": 3, 
+        "sprites_reposo": { 
+		            "imagen": "img/sub-zero-reposo.png",
+		            "id_sprite": "sub-zero-reposo", 
+        		    "cant_fotogramas": 12,
+        		    "fps": 10 
+        			},
+        "sprites_caminando": { 
+		            "imagen": "img/sub-zero-caminando.png",
+		            "id_sprite": "sub-zero-caminando", 
+        		    "cant_fotogramas": 9,
+        		    "fps": 10 
+        			},
+        "sprites_agachado": { 
+		            "imagen": "img/sub-zero-agachado.png",
+		            "id_sprite": "sub-zero-agachado",
+        		    "cant_fotogramas": 1,
+        		    "fps": 1
+        			},
+        "sprites_salto_vertical": { 
+		            "imagen": "img/sub-zero-saltando-vertical.png",
+		            "id_sprite": "sub-zero-saltando-vertical",
+        		    "cant_fotogramas": 3,
+        		    "fps": 3
+        			},
+        "sprites_salto_oblicuo": { 
+		            "imagen": "img/sub-zero-saltando-diagonal.png",
+		            "id_sprite": "sub-zero-saltando-diagonal",
+        		    "cant_fotogramas": 7,
+        		    "fps": 10 
+        			},
+		"direccion": -1 
+	}   
 }
 
