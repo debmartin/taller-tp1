@@ -27,7 +27,7 @@ Parser::Parser(string archivo_json)
 	this->ventana = new VentanaDef();
 	this->escenario = new EscenarioDef();
 	this->capas = new list<CapaDef*>;
-	this->personaje = new PersonajeDef();
+	this->personajes = new list<PersonajeDef*>();
 
 	this->inicializar();
 }
@@ -221,7 +221,7 @@ bool Parser::parsearDesdeJson() {
                             Logger::getInstance()->error("Dentro del escenario no se encuentra el parametro "+key_nivel2.asString());
                         }
                     }
-                    else if ( tag_padre == "personaje" )
+                    else if ( tag_padre == "personaje_1" )
                     {
                         if ( key_nivel2.asString() == "alto" )
                         {
@@ -291,10 +291,11 @@ bool Parser::parsearDesdeJson() {
             }
         }
 
+        PersonajeDef* personaje;
         try {
             this->ventana = new VentanaDef(v_ancho_px, v_alto_px, v_ancho, v_margen_x);
             this->escenario = new EscenarioDef(e_ancho, e_alto, e_ypiso);
-            this->personaje = new PersonajeDef(p_ancho, p_alto, p_zindex, p_direccion);
+            personaje = new PersonajeDef(p_ancho, p_alto, p_zindex, p_direccion);
         } catch (exception) {
             return false;
         }
@@ -306,15 +307,16 @@ bool Parser::parsearDesdeJson() {
             SpriteDef* spriteDef_saltando_vert = new SpriteDef(p_sprites_imagen_4, p_sprites_id_4, p_sprites_cant_fotogramas_4, p_sprites_fps_4);
             SpriteDef* spriteDef_saltando_obli = new SpriteDef(p_sprites_imagen_5, p_sprites_id_5, p_sprites_cant_fotogramas_5, p_sprites_fps_5);
 
-            this->personaje->agregarSpritesDef(spriteDef_reposo);
-            this->personaje->agregarSpritesDef(spriteDef_caminando);
-            this->personaje->agregarSpritesDef(spriteDef_agachado);
-            this->personaje->agregarSpritesDef(spriteDef_saltando_vert);
-            this->personaje->agregarSpritesDef(spriteDef_saltando_obli);
+            personaje->agregarSpritesDef(spriteDef_reposo);
+            personaje->agregarSpritesDef(spriteDef_caminando);
+            personaje->agregarSpritesDef(spriteDef_agachado);
+            personaje->agregarSpritesDef(spriteDef_saltando_vert);
+            personaje->agregarSpritesDef(spriteDef_saltando_obli);
         } catch (exception) {
             return false;
         }
 
+        this->personajes->push_back(personaje);
     }
 
 	 Logger::getInstance()->info("Inicia la validacion semantica del json");
@@ -324,7 +326,8 @@ bool Parser::parsearDesdeJson() {
 }
 
 Parser::~Parser() {
-	delete personaje;
+    for (list<PersonajeDef*>::iterator it_personajes = personajes->begin() ; it_personajes != personajes->end(); ++it_personajes)
+        delete (*it_personajes);
 	delete escenario;
     for (list<CapaDef*>::iterator it_capas = capas->begin() ; it_capas != capas->end(); ++capas)
         delete (*it_capas);
@@ -337,10 +340,6 @@ list<CapaDef*>* Parser::getCapasDef() const {
 
 EscenarioDef* Parser::getEscenarioDef() const {
 	return escenario;
-}
-
-PersonajeDef* Parser::getPersonajeDef() const {
-	return personaje;
 }
 
 VentanaDef* Parser::getVentanaDef() const {
@@ -358,12 +357,6 @@ void Parser::inciarValidacionSemantica() {
 	double ventana_ancho_nuevo = this->ventana->getAncho();
 	double ventana_margenx_nuevo = this->ventana->getMargenX();
 
-	double personaje_ancho_nuevo = this->personaje->getAncho();
-	double personaje_alto_nuevo = this->personaje->getAlto();
-	int personale_zindex_nuevo = this->personaje->getZindex();
-
-	double personaje_direccion_nuevo = this->personaje->getDireccion();
-
 	//validar el escenario
 	if ( escenario_ancho_nuevo <= 0 )
 	{
@@ -373,26 +366,37 @@ void Parser::inciarValidacionSemantica() {
 
 	if ( escenario_alto_nuevo <= 0 )
 	{
-		escenario_alto_nuevo = 180;
+		escenario_alto_nuevo = 800;
 		Logger::getInstance()->info("El alto del escenario es negativo. Se elije uno nuevo: 800");
 	}
 
-	//validacion de la altura del personaje
-	if ( personaje_alto_nuevo <= 0 )
+	//validacion de la altura de los personajes
+	double personaje_altoMax = 0;
+	for (list<PersonajeDef*>::iterator it_personajes = personajes->begin() ; it_personajes != personajes->end(); ++it_personajes)
 	{
-		//la eligo como la tercera parte de la altura del escenario
-		personaje_alto_nuevo = escenario_alto_nuevo / 3;
+		int personaje_alto = (*it_personajes)->getAlto();
+		if ( personaje_alto <= 0 )
+		{
+			personaje_alto = escenario_alto_nuevo / 3;
+			(*it_personajes)->setAlto(personaje_alto);
+		}
 		Logger::getInstance()->info("El alto del personaje es negativo. Se elije uno nuevo que sea la tercera parte del alto del escenario");
+
+		if ( personaje_alto > personaje_altoMax )
+		{
+			personaje_altoMax = personaje_alto;
+		}
+
 	}
 
-	if ( escenario_ypiso_nuevo < 0 || (escenario_alto_nuevo - escenario_ypiso_nuevo) < personaje_alto_nuevo)
+	if ( escenario_ypiso_nuevo < 0 || (escenario_alto_nuevo - escenario_ypiso_nuevo) < personaje_altoMax)
 	{
 
 		if ( escenario_ypiso_nuevo < 0 )
 		{
 			Logger::getInstance()->info("El y del piso del personaje es negativo. Se elije uno nuevo con el valor de cero");
 		}
-		if ( (escenario_alto_nuevo - escenario_ypiso_nuevo) < personaje_alto_nuevo )
+		if ( (escenario_alto_nuevo - escenario_ypiso_nuevo) < personaje_altoMax )
 		{
 			Logger::getInstance()->info("El y del piso del personaje sobrepasa al escenario con respecto a su altura. Se elije uno nuevo con el valor de cero");
 		}
@@ -481,67 +485,75 @@ void Parser::inciarValidacionSemantica() {
 
 	this->capas = capas_nuevas;
 
+	//validar los personajes
 
-	//validar el personaje
-	if ( personaje_ancho_nuevo <= 0 )
+	list<PersonajeDef*>* personajes_validados = new list<PersonajeDef*>;
+
+	for (list<PersonajeDef*>::iterator it_personajes = personajes->begin() ; it_personajes != personajes->end(); ++it_personajes)
 	{
-		personaje->setAncho(15);
-		Logger::getInstance()->info("El ancho del personaje es menor o igual a cero. Se elije uno nuevo con el valor de 15");
-	}
+		double ancho_nuevo 					= (*it_personajes)->getAncho();
+		int zindex_nuevo 					= (*it_personajes)->getZindex();
+		list<SpriteDef*>* sprites_nuevos 	= (*it_personajes)->getSpritesDef();
+		int direccion_nueva 				= (*it_personajes)->getDireccion();
 
-	int cant_capas = this->capas->size();
-	if ( personale_zindex_nuevo < 0 || personale_zindex_nuevo > cant_capas)
-	{
-		if ( personale_zindex_nuevo < 0 )
+		if ( ancho_nuevo <= 0 )
 		{
-			Logger::getInstance()->info("El zindex del personaje es menor a cero. Se elije uno nuevo para que el personaje este adelante de todas las capas");
-		}
-		if ( personale_zindex_nuevo > cant_capas )
-		{
-			Logger::getInstance()->info("El zindex del Personaje es mayor al valor posible. Se elije uno nuevo para que el personaje este adelante de todas las capas");
+			Logger::getInstance()->info("El ancho del personaje es menor o igual a cero. Se elije uno nuevo con el valor de 15");
+			ancho_nuevo = 15;
 		}
 
-		personaje->setZIndex(cant_capas);
-	}
-
-	if ( personaje_direccion_nuevo != -1 && personaje_direccion_nuevo != 1 )
-	{
-		personaje->setDireccion(1);
-		Logger::getInstance()->info("La configuracion de la direccion del personaje no es la correcta. Se lo dirije en direccion derecha");
-	}
-
-	//validar los sprites def del personaje
-
-	list<SpriteDef*>* spritesDef_actual = this->personaje->getSpritesDef();
-
-	for (list<SpriteDef*>::iterator it_sprites = spritesDef_actual->begin() ; it_sprites != spritesDef_actual->end(); ++it_sprites)
-	{
-		string nueva_imagen = (*it_sprites)->getImagen();
-		string nuevo_id = (*it_sprites)->getIdSprite();
-		int nuevo_cant_fotograma = (*it_sprites)->getCantFotogramas();
-		int nuevo_fps = (*it_sprites)->getFps();
-
-		if ( !Util::getInstancia()->existeArchivo(nueva_imagen) )
+		int cant_capas = this->capas->size();
+		if ( zindex_nuevo < 0 || zindex_nuevo > cant_capas)
 		{
-			Logger::getInstance()->info("No existen las imagenes del sprites "+nueva_imagen+". Por defecto se usa sprites_defecto.png");
-			(*it_sprites)->setImagen("img/sprites_defecto.png");
+			if ( zindex_nuevo < 0 )
+			{
+				Logger::getInstance()->info("El zindex del personaje es menor a cero. Se elije uno nuevo para que el personaje este adelante de todas las capas");
+			}
+			if ( zindex_nuevo > cant_capas )
+			{
+				Logger::getInstance()->info("El zindex del Personaje es mayor al valor posible. Se elije uno nuevo para que el personaje este adelante de todas las capas");
+			}
+
+			(*it_personajes)->setZIndex(cant_capas);
 		}
 
-		if ( nuevo_cant_fotograma <= 0 )
+		if ( direccion_nueva != -1 && direccion_nueva != 1 )
 		{
-			(*it_sprites)->setCantFotogramas(1);
-			Logger::getInstance()->info("la cant. de fotogramas de la imagen del sprite del personaje es menor o igual a cerop. Se elije uno nuevo con el valor de 1");
+			(*it_personajes)->setDireccion(1);
+			Logger::getInstance()->info("La configuracion de la direccion del personaje no es la correcta. Se lo dirije en direccion derecha");
 		}
 
-		if ( nuevo_fps <= 0 )
+		for (list<SpriteDef*>::iterator it_sprites = sprites_nuevos->begin() ; it_sprites != sprites_nuevos->end(); ++it_sprites)
 		{
-			(*it_sprites)->setFps(10);
-			Logger::getInstance()->info("el valor de los fps del sprite del personaje es menor o igual a cerop. Se elije uno nuevo con el valor de 10");
+			string nueva_imagen = (*it_sprites)->getImagen();
+			string nuevo_id = (*it_sprites)->getIdSprite();
+			int nuevo_cant_fotograma = (*it_sprites)->getCantFotogramas();
+			int nuevo_fps = (*it_sprites)->getFps();
+
+			if ( !Util::getInstancia()->existeArchivo(nueva_imagen) )
+			{
+				Logger::getInstance()->info("No existen las imagenes del sprites "+nueva_imagen+". Por defecto se usa sprites_defecto.png");
+				(*it_sprites)->setImagen("img/sprites_defecto.png");
+			}
+
+			if ( nuevo_cant_fotograma <= 0 )
+			{
+				(*it_sprites)->setCantFotogramas(1);
+				Logger::getInstance()->info("la cant. de fotogramas de la imagen del sprite del personaje es menor o igual a cerop. Se elije uno nuevo con el valor de 1");
+			}
+
+			if ( nuevo_fps <= 0 )
+			{
+				(*it_sprites)->setFps(10);
+				Logger::getInstance()->info("el valor de los fps del sprite del personaje es menor o igual a cerop. Se elije uno nuevo con el valor de 10");
+			}
+
 		}
 
-//		SpriteDef* spriteDef = new SpriteDef(nueva_imagen, nuevo_id, nuevo_ancho, nuevo_cant_fotograma, nuevo_fps);
-//		this->personaje->agregarSpritesDef(spriteDef);
 	}
 
 }
 
+list<PersonajeDef*>* Parser::getPersonajesDef() const {
+	return this->personajes;
+}
