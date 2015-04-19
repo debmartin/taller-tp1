@@ -32,7 +32,7 @@ public:
 	double getAncho() const;
 	string getImagenFondo() const;
 	string getIdCapa() const;
-    void ajustarAncho(double anchoEscenario);
+    void ajustarAncho(double anchoEscenario, double anchoVentana);
 	friend ostream& operator<<(ostream &o, const CapaDef &c);
 	string toString();
 };

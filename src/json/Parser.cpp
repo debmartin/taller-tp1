@@ -249,6 +249,6 @@ void Parser::inciarValidacionSemantica() {
     escenario->ajustarYPiso(personaje->getAlto());
     ventana->ajustarAncho(escenario->getAncho());
     for (list<CapaDef*>::iterator it_capas = this->capas->begin() ; it_capas != this->capas->end(); it_capas++)
-        (*it_capas)->ajustarAncho(escenario->getAncho());
+        (*it_capas)->ajustarAncho(escenario->getAncho(), ventana->getAncho());
 }
 
