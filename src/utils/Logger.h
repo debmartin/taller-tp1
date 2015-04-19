@@ -20,6 +20,7 @@
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
+#include <cstdarg>
 
 #include "../json/ObjetoJson.h"
 
@@ -105,6 +106,7 @@ public:
 	void debug(ObjetoJson* unObjetoJson);
 	void debug(string unString, int unEntero);
 	void debug(string unString, double unDouble);
+	void debugArgs(const char * format, ... );
 	/**
 	 * Escribe un mensaje de informacion sobre el log.
 	 */
@@ -112,6 +114,7 @@ public:
 	void info(ObjetoJson* unObjetoJson);
 	void info(string unString, int unEntero);
 	void info(string unString, double unDouble);
+	void infoArgs(const char * format, ... );
 
 	/**
 	 * Escribe un mensaje de error sobre el log.
@@ -120,7 +123,7 @@ public:
 	void error(ObjetoJson* unObjetoJson);
 	void error(string unString, int unEntero);
 	void error(string unString, double unDouble);
-
+	void errorArgs(const char * format, ... );
 	/**
 	 * Inserta un mensaje en el archivo de log.
 	 */
