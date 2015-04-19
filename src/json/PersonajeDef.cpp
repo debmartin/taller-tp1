@@ -19,19 +19,39 @@ PersonajeDef::PersonajeDef() {
 	this->direccion = 0;
 }
 
-PersonajeDef::PersonajeDef(double ancho, double alto, int zindex, int direccion)
+PersonajeDef::PersonajeDef(double anchoIn, double altoIn, int zindexIn, int direccionIn)
 {
-	this->ancho = ancho;
-	this->alto = alto;
-	this->z_index = zindex;
+    if (anchoIn <= 0)
+		Logger::getInstance()->info("El ancho del personaje es menor o igual a cero. Se elije uno nuevo con el valor de 15");
+    if (altoIn <= 0)
+		Logger::getInstance()->info("El alto del personaje es menor o igual a cero. Se elije uno nuevo con el valor de 60");
+    if ( zindexIn < 0 )
+        Logger::getInstance()->info("El zindex del personaje es menor a cero. Se elije uno nuevo para que el personaje este adelante de todas las capas");
+   	if (direccionIn != DIRECCION_PERS_DERECHA && direccionIn != DIRECCION_PERS_IZQUIERDA)	{
+		direccionIn = DIRECCION_PERS_DERECHA;
+		Logger::getInstance()->info("La configuracion de la direccion del personaje no es la correcta. Se lo dirije en direccion derecha");
+	}
+
+	this->ancho = (anchoIn > 0) ? anchoIn : ANCHO_PERS_DEFAULT;
+	this->alto = (altoIn > 0) ? altoIn : ALTO_PERS_DEFAULT;
+	this->z_index = (zindexIn >= 0) ? zindexIn : Z_INDEX_PERS_DEFAULT;
 	this->spritesDef = new list<SpriteDef*>();
-	this->direccion = direccion;
-//	if (alto <= 0 || ancho <= 0)
-//        throw exception();
-//    if (zindex <= 0)
-//        throw exception();
-//    if (direccion != 1 && direccion != -1)
-//        throw exception();
+	this->direccion = direccionIn;
+}
+
+void PersonajeDef::ajustarZIndex(){
+    int cantCapas = spritesDef->size();
+    if (z_index > cantCapas)	{
+        z_index = cantCapas;
+        Logger::getInstance()->info("El zindex del Personaje es mayor al valor posible. Se elije uno nuevo para que el personaje este adelante de todas las capas");
+    }
+}
+
+void PersonajeDef::ajustarAlto(double altoEscenario){
+    if (alto <= 0) {
+		alto = altoEscenario/ 3;
+		Logger::getInstance()->info("El alto del personaje es negativo. Se elije uno nuevo que sea la tercera parte del alto del escenario");
+	}
 }
 
 double PersonajeDef::getAlto() const {

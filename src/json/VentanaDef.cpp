@@ -14,19 +14,25 @@ VentanaDef::VentanaDef() {
 	this->ancho_px = 0;
 	this->alto_px = 0;
 	this->ancho = 0;
-	this->margen_x = 0;
 }
 
-VentanaDef::VentanaDef(int ancho_px, int alto_px, double ancho, double margen_x)
+VentanaDef::VentanaDef(int ancho_px_in, int alto_px_in, double ancho_in)
 {
-	this->ancho_px = ancho_px;
-	this->alto_px = alto_px;
-	this->ancho = ancho;
-	this->margen_x = margen_x;
-//	if (ancho_px <= 0 || alto_px <= 0)
-//        throw exception();
-//    if (margen_x <= 0)
-//        throw exception();
+    if ( ancho_px_in <= 0 )
+		Logger::getInstance()->info("El ancho en pixeles de la ventana es negativa. Se elije uno nuevo: 800");
+	if ( alto_px_in <= 0 )
+		Logger::getInstance()->info("El alto en pixeles de la ventana es negativa. Se elije uno nuevo: 600");
+
+	this->ancho_px = (ancho_px_in > 0) ? ancho_px_in : ANCHOPX_VENTANA_DEFAULT;
+	this->alto_px = (alto_px_in > 0) ? alto_px_in : ALTOPX_VENTANA_DEFAULT;
+	this->ancho = (ancho_in > 0) ? ancho_in : ANCHO_VENTANA_DEFAULT;
+}
+
+void VentanaDef::ajustarAncho(double anchoEscenario){
+    if (ancho > anchoEscenario) {
+        ancho = anchoEscenario / 2;
+        Logger::getInstance()->info("El ancho de la ventana es mas grande que el ancho del escenario. Se elije uno nuevo que es la mitad del ancho del escenario");
+    }
 }
 
 int VentanaDef::getAltoPx() const {
@@ -45,13 +51,9 @@ VentanaDef::~VentanaDef() {
 	// TODO Auto-generated destructor stub
 }
 
-double VentanaDef::getMargenX() const {
-	return margen_x;
-}
-
 ostream& operator <<(ostream &o, const VentanaDef &v) {
 
-        o<<"VentanaDef -> [anchopx, altopx, ancho, margen_x]=["<<v.ancho_px<<", "<<v.alto_px<<", "<<v.ancho<<", "<<v.margen_x<<"]";
+        o<<"VentanaDef -> [anchopx, altopx, ancho]=["<<v.ancho_px<<", "<<v.alto_px<<", "<<v.ancho<<"]";
 
         return o;
 }

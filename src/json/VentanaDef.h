@@ -11,6 +11,11 @@
 #include <iostream>
 
 #include "ObjetoJson.h"
+#include "../utils/Logger.h"
+
+#define ALTOPX_VENTANA_DEFAULT 600
+#define ANCHO_VENTANA_DEFAULT 600
+#define ANCHOPX_VENTANA_DEFAULT 800
 
 using namespace std;
 
@@ -19,17 +24,15 @@ private:
 	int ancho_px;
 	int alto_px;
 	double ancho;
-	double margen_x;
 public:
 	VentanaDef();
-	VentanaDef(int ancho_px, int alto_px, double ancho, double margen_x);
+	VentanaDef(int ancho_px, int alto_px, double ancho);
 	virtual ~VentanaDef();
 	int getAltoPx() const;
 	double getAncho() const;
 	int getAnchoPx() const;
-	double getMargenX() const;
 	string toString();
-
+    void ajustarAncho(double anchoEscenario);
 	friend ostream& operator<<(ostream &o, const VentanaDef &v);
 };
 

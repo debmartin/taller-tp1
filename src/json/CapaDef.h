@@ -12,6 +12,11 @@
 #include <string>
 
 #include "ObjetoJson.h"
+#include "../utils/Util.h"
+#include "../utils/Logger.h"
+
+#define IMAGEN_CAPA_DEFAULT "img/fondo_capa_defecto.png"
+#define ANCHO_CAPA_DEFAULT 1200
 
 using namespace std;
 
@@ -27,7 +32,7 @@ public:
 	double getAncho() const;
 	string getImagenFondo() const;
 	string getIdCapa() const;
-
+    void ajustarAncho(double anchoEscenario);
 	friend ostream& operator<<(ostream &o, const CapaDef &c);
 	string toString();
 };

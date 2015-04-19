@@ -13,6 +13,13 @@
 #include <string>
 
 #include "SpriteDef.h"
+#include "../utils/Logger.h"
+
+#define ALTO_PERS_DEFAULT 60
+#define ANCHO_PERS_DEFAULT 15
+#define Z_INDEX_PERS_DEFAULT 3
+#define DIRECCION_PERS_DERECHA 1
+#define DIRECCION_PERS_IZQUIERDA -1
 
 class SpriteDef;
 
@@ -42,7 +49,8 @@ public:
 
 	int getDireccion() const;
 	void setDireccion(int nuevaDir);
-
+    void ajustarZIndex();
+    void ajustarAlto(double altoEscenario);
 	friend ostream& operator<<(ostream &o, const PersonajeDef &p);
 
 	string toString();

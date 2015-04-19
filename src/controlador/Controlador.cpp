@@ -21,7 +21,7 @@ bool Controlador::manejar_Evento(SDL_Event &evento){
     const Uint8* estadoTeclado = SDL_GetKeyboardState(NULL);
 
     if( evento.type == SDL_KEYUP && evento.key.repeat == 0 ){
-        if ( evento.key.keysym.sym == SDLK_r){
+        if (evento.key.keysym.sym == SDLK_r){
             Logger::getInstance()->info("Se presiona: Tecla R. Se recarga el juego.");
             return false;
         }
