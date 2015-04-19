@@ -51,10 +51,13 @@ CapaDef::CapaDef(string imagen_fondo, string id, double ancho_in){
 	this->ancho = (ancho_in > 0) ? ancho_in : ANCHO_CAPA_DEFAULT;
 }
 
-void CapaDef::ajustarAncho(double anchoEscenario){
+void CapaDef::ajustarAncho(double anchoEscenario, double anchoVentana){
     if (ancho > anchoEscenario) {
         ancho = anchoEscenario;
         Logger::getInstance()->info("El ancho de la capa es mayor al ancho del escenario. Se elije un nuevo ancho igual al ancho del escenario");
+    }else if (ancho < anchoVentana) {
+        ancho = anchoVentana;
+        Logger::getInstance()->info("El ancho de la capa es menor al ancho del escenario. Se elije un nuevo ancho igual al ancho de la ventana");
     }
 }
 
