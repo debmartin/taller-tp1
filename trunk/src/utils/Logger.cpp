@@ -126,6 +126,16 @@ void Logger::debug(string unString, double unDouble) {
     this->debug(stream.str());
 }
 
+void Logger::debugArgs(const char * format, ... )
+{
+    char sMessage[256];
+    va_list args;
+    va_start (args, format);
+    vsprintf (sMessage,format, args);
+    va_end (args);
+    this->debug(sMessage);
+}
+
 void Logger::info(std::string message){
 	std::string key = "INFO";
 	Logger::insert(key,message);
@@ -147,6 +157,16 @@ void Logger::info(string unString, double unDouble) {
     this->info(stream.str());
 }
 
+void Logger::infoArgs(const char * format, ... )
+{
+    char sMessage[256];
+    va_list args;
+    va_start (args, format);
+    vsprintf (sMessage,format, args);
+    va_end (args);
+    this->info(sMessage);
+}
+
 void Logger::error(std::string  message){
 	std::string key = "ERROR";
 	Logger::insert(key,message);
@@ -166,6 +186,16 @@ void Logger::error(string unString, double unDouble) {
     ostringstream stream;
     stream <<unString<<": "<<unDouble;
     this->error(stream.str());
+}
+
+void Logger::errorArgs(const char * format, ... )
+{
+    char sMessage[256];
+    va_list args;
+    va_start (args, format);
+    vsprintf (sMessage,format, args);
+    va_end (args);
+    this->error(sMessage);
 }
 
 void Logger::insert(std::string& key, std::string& value){
