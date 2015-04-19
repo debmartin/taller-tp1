@@ -79,17 +79,17 @@ void Parser::parsearCapas(){
         string id_capa;
         double ancho = 0;
         for( Json::ValueIterator it3 = valorCapas[idx_capas].begin() ; it3 != valorCapas[idx_capas].end() ; it3++ ) {
-            const Json::Value key_nivel2 = it3.key();
+            string tag = it3.key().asString();
 
-            if ( key_nivel2.asString() == TAG_CAPAS_IMAGEN ) {
+            if ( tag == TAG_CAPAS_IMAGEN ) {
                 imagen_fondo = valorCapas[idx_capas][TAG_CAPAS_IMAGEN].asString();
-            } else if ( key_nivel2.asString() == TAG_CAPAS_ID ) {
+            } else if ( tag == TAG_CAPAS_ID ) {
                 id_capa = valorCapas[idx_capas][TAG_CAPAS_ID].asString();
-            } else if ( key_nivel2.asString() == TAG_CAPAS_ANCHO ) {
+            } else if ( tag == TAG_CAPAS_ANCHO ) {
                 Json::Value valorAncho = valorCapas[idx_capas][TAG_CAPAS_ANCHO];
                 ancho = (valorAncho.isNumeric()) ? (valorAncho.asDouble()) : ANCHO_CAPA_DEFAULT;
             } else {
-                Logger::getInstance()->error("Dentro de la capa no se encuentra el parametro "+key_nivel2.asString());
+                Logger::getInstance()->error("Dentro de la capa no se encuentra el parametro "+tag);
             }
 
         }
@@ -108,17 +108,17 @@ void Parser::parsearEscenario(){
     double e_ypiso = 0;
 
     for( Json::ValueIterator it2 = valorEsc.begin() ; it2 != valorEsc.end() ; it2++ ) {
-        const Json::Value key_nivel2 = it2.key();
-        Json::Value subvalor = valorEsc[key_nivel2.asString()];
+        string tag = it2.key().asString();
+        Json::Value subvalor = valorEsc[tag];
 
-        if ( key_nivel2.asString() == TAG_ESCENARIO_ALTO ) {
+        if ( tag == TAG_ESCENARIO_ALTO ) {
             e_alto = (subvalor.isNumeric()) ? (subvalor.asDouble()) : ALTO_ESC_DEFAULT;
-        } else if ( key_nivel2.asString() == TAG_ESCENARIO_ANCHO ) {
+        } else if ( tag == TAG_ESCENARIO_ANCHO ) {
             e_ancho = (subvalor.isNumeric()) ? (subvalor.asDouble()) : ANCHO_ESC_DEFAULT;
-        } else if ( key_nivel2.asString() == TAG_ESCENARIO_YPISO) {
+        } else if ( tag == TAG_ESCENARIO_YPISO) {
             e_ypiso = (subvalor.isNumeric()) ? (subvalor.asDouble()) : Y_PISO_ESC_DEFAULT;
         } else {
-            Logger::getInstance()->error("Dentro del escenario no se encuentra el parametro "+key_nivel2.asString());
+            Logger::getInstance()->error("Dentro del escenario no se encuentra el parametro "+tag);
         }
     }
     escenario = new EscenarioDef(e_ancho, e_alto, e_ypiso);
@@ -134,17 +134,17 @@ void Parser::parsearVentana(){
     int v_ancho_px = 0;
 
     for( Json::ValueIterator it2 = valorVentana.begin() ; it2 != valorVentana.end() ; it2++ ) {
-        const Json::Value key_nivel2 = it2.key();
-        Json::Value subvalor = valorVentana[key_nivel2.asString()];
+        string tag = it2.key().asString();
+        Json::Value subvalor = valorVentana[tag];
 
-        if ( key_nivel2.asString() == TAG_VENTANA_ALTOPX ) {
+        if ( tag == TAG_VENTANA_ALTOPX ) {
             v_alto_px = (subvalor.isInt()) ? subvalor.asInt() : ALTOPX_VENTANA_DEFAULT;
-        } else if ( key_nivel2.asString() == TAG_VENTANA_ANCHO ) {
+        } else if ( tag == TAG_VENTANA_ANCHO ) {
             v_ancho = (subvalor.isNumeric()) ? (subvalor.asDouble()) : ANCHO_VENTANA_DEFAULT;
-        } else if ( key_nivel2.asString() == TAG_VENTANA_ANCHOPX ) {
+        } else if ( tag == TAG_VENTANA_ANCHOPX ) {
             v_ancho_px = (subvalor.isInt()) ? (subvalor.asInt()) : ANCHOPX_VENTANA_DEFAULT;
         } else {
-            Logger::getInstance()->error("Dentro de la ventana no se encuentra el parametro "+key_nivel2.asString());
+            Logger::getInstance()->error("Dentro de la ventana no se encuentra el parametro "+tag);
         }
     }
     ventana = new VentanaDef(v_ancho_px, v_alto_px, v_ancho);
@@ -168,19 +168,20 @@ void Parser::parsearPersonaje(){
     list<SpriteDef*> sprites;
 
     for( Json::ValueIterator it2 = valorPersonaje.begin() ; it2 != valorPersonaje.end() ; it2++ ) {
-        const Json::Value key_nivel2 = it2.key();
-        Json::Value subvalor = valorPersonaje[key_nivel2.asString()];
+        string tag = it2.key().asString();
+        Json::Value subvalor = valorPersonaje[tag];
 
-        if ( key_nivel2.asString() == TAG_PERSONAJE_ALTO ) {
+
+        if ( tag == TAG_PERSONAJE_ALTO ) {
             p_alto = (subvalor.isNumeric()) ? (subvalor.asDouble()) : ALTO_PERS_DEFAULT;
-        } else if ( key_nivel2.asString() == TAG_PERSONAJE_ANCHO ) {
+        } else if ( tag == TAG_PERSONAJE_ANCHO ) {
             p_ancho = (subvalor.isNumeric()) ? (subvalor.asDouble()) : ANCHO_PERS_DEFAULT;
-        } else if ( key_nivel2.asString() == TAG_PERSONAJE_ZINDEX) {
+        } else if ( tag == TAG_PERSONAJE_ZINDEX) {
             p_zindex = (subvalor.isInt()) ? (subvalor.asInt()) : Z_INDEX_PERS_DEFAULT;
-        } else if (key_nivel2.asString().find(TAG_PERSONAJE_SPRITES) != std::string::npos) {
+        } else if (tag.find(TAG_PERSONAJE_SPRITES) != std::string::npos) {
             p_sprites_imagen = (*it2)[TAG_PERSONAJE_SPRITES_IMAGEN].asString();
             int indiceId = string(TAG_PERSONAJE_SPRITES).size();
-            p_sprites_id = (key_nivel2.asString()).substr(indiceId);
+            p_sprites_id = (tag).substr(indiceId);
 
             Json::Value valorFotog = (*it2)[TAG_PERSONAJE_SPRITES_CANT_FOTOGRAMAS];
             Json::Value valorFps = (*it2)[TAG_PERSONAJE_SPRITES_FPS];
@@ -190,10 +191,10 @@ void Parser::parsearPersonaje(){
 
             SpriteDef* spriteDefAct = new SpriteDef(p_sprites_imagen, p_sprites_id, p_sprites_cant_fotogramas, p_sprites_fps);
             sprites.push_back(spriteDefAct);
-        } else if ( key_nivel2.asString() == TAG_PERSONAJE_DIRECCION ) {
+        } else if ( tag == TAG_PERSONAJE_DIRECCION ) {
             p_direccion = (subvalor.isInt()) ? (subvalor.asInt()) : DIRECCION_PERS_DERECHA;
         } else {
-            Logger::getInstance()->error("Dentro del personaje no se encuentra el parametro "+key_nivel2.asString());
+            Logger::getInstance()->error("Dentro del personaje no se encuentra el parametro "+tag);
         }
     }
     personaje = new PersonajeDef(p_ancho, p_alto, p_zindex, p_direccion);
