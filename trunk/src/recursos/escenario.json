@@ -2,13 +2,12 @@
     "ventana": { 
         "anchopx": 640, 
         "altopx": 480, 
-        "ancho": 640,
-        "margen_x": 2.5 
+        "ancho": 640
     }, 
     "escenario": { 
         "ancho": 1500, 
         "alto": 600, 
-        "y­piso": 100
+        "y_piso": 100
     }, 
     "capas": [
         { 
@@ -30,34 +29,29 @@
     "personaje": { 
         "ancho": 105, 	
         "alto": 280, 
-        "z­index": 2, 
-        "sprites_reposo": { 
+        "zindex": 3, 
+        "sprites-reposo": { 
 		            "imagen": "img/sub-zero-reposo.png",
-		            "id_sprite": "sub-zero-reposo", 
         		    "cant_fotogramas": 12,
         		    "fps": 10 
         			},
-        "sprites_caminando": { 
+        "sprites-caminando": { 
 		            "imagen": "img/sub-zero-caminando.png",
-		            "id_sprite": "sub-zero-caminando", 
         		    "cant_fotogramas": 9,
         		    "fps": 10 
         			},
-        "sprites_agachado": { 
+        "sprites-agachado": { 
 		            "imagen": "img/sub-zero-agachado.png",
-		            "id_sprite": "sub-zero-agachado",
         		    "cant_fotogramas": 1,
         		    "fps": 1
         			},
-        "sprites_salto_vertical": { 
+        "sprites-saltando-vertical": { 
 		            "imagen": "img/sub-zero-saltando-vertical.png",
-		            "id_sprite": "sub-zero-saltando-vertical",
         		    "cant_fotogramas": 3,
         		    "fps": 3
         			},
-        "sprites_salto_oblicuo": { 
+        "sprites-saltando-diagonal": { 
 		            "imagen": "img/sub-zero-saltando-diagonal.png",
-		            "id_sprite": "sub-zero-saltando-diagonal",
         		    "cant_fotogramas": 7,
         		    "fps": 10 
         			},

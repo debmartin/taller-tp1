@@ -12,6 +12,11 @@
 #include <string>
 
 #include "ObjetoJson.h"
+#include "../utils/Logger.h"
+
+#define ALTO_ESC_DEFAULT 180
+#define ANCHO_ESC_DEFAULT 1200
+#define Y_PISO_ESC_DEFAULT 0
 
 using namespace std;
 
@@ -29,6 +34,7 @@ public:
 	double getAncho() const;
 	double getYpiso() const;
 
+    void ajustarYPiso(double altoPersonaje);
 	friend ostream& operator<<(ostream &o, const EscenarioDef &e);
 	string toString();
 };

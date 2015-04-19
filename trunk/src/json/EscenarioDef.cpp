@@ -18,13 +18,25 @@ EscenarioDef::EscenarioDef() {
 	this->ypiso = 0;
 }
 
-EscenarioDef::EscenarioDef(double ancho, double alto, double ypiso)
+EscenarioDef::EscenarioDef(double anchoIn, double altoIn, double ypisoIn)
 {
-	this->ancho = ancho;
-	this->alto = alto;
-	this->ypiso = ypiso;
-//	if (ancho <= 0 || alto <= 0)
-//        throw exception();    //poner algo mejor
+    if (anchoIn <= 0)
+        Logger::getInstance()->info("El ancho del escenario es negativo. Se elije uno nuevo: 1200");
+    if (altoIn <= 0)
+        Logger::getInstance()->info("El alto del escenario es negativo. Se elije uno nuevo: 800");
+    if (ypisoIn < 0)
+        Logger::getInstance()->info("El y del piso del personaje es negativo. Se elije uno nuevo con el valor de cero");
+
+	this->ancho = (anchoIn > 0) ? anchoIn : ANCHO_ESC_DEFAULT;
+	this->alto = (altoIn > 0) ? altoIn : ALTO_ESC_DEFAULT;
+	this->ypiso = (ypisoIn >= 0) ? ypisoIn : Y_PISO_ESC_DEFAULT;
+}
+
+void EscenarioDef::ajustarYPiso(double altoPersonaje){
+    if ((alto - ypiso) < altoPersonaje) {
+        ypiso = Y_PISO_ESC_DEFAULT;
+        Logger::getInstance()->info("El y del piso del personaje sobrepasa al escenario con respecto a su altura. Se elije uno nuevo con el valor de cero");
+    }
 }
 
 double EscenarioDef::getAlto() const {

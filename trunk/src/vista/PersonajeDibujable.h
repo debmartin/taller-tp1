@@ -21,11 +21,11 @@
 #include "Dibujable.h"
 
 #define ID_FONDO "screen-pit"
-#define ID_ZUBZERO_QUIETO "sub-zero-reposo"
-#define ID_ZUBZERO_CAMINANDO "sub-zero-caminando"
-#define ID_ZUBZERO_AGACHADO "sub-zero-agachado"
-#define ID_ZUBZERO_SALTANDOVERTICAL "sub-zero-saltando-vertical"
-#define ID_ZUBZERO_SALTANDODIAGONAL "sub-zero-saltando-diagonal"
+#define ID_ZUBZERO_QUIETO "reposo"
+#define ID_ZUBZERO_CAMINANDO "caminando"
+#define ID_ZUBZERO_AGACHADO "agachado"
+#define ID_ZUBZERO_SALTANDOVERTICAL "saltando-vertical"
+#define ID_ZUBZERO_SALTANDODIAGONAL "saltando-diagonal"
 
 
 class PersonajeDibujable : public Dibujable, public Observador {

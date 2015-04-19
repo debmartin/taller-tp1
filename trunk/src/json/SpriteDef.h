@@ -12,6 +12,12 @@
 #include <string>
 
 #include "ObjetoJson.h"
+#include "../utils/Util.h"
+#include "../utils/Logger.h"
+
+#define IMAGEN_DEFAULT "img/sprites_defecto.png"
+#define CANT_FOTOGRAMAS_DEFAULT 1
+#define FPS_DEFAULT 10
 
 using namespace std;
 

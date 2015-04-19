@@ -21,7 +21,7 @@
 #include <time.h>
 #include <unistd.h>
 
-#include "../json/ObjetoJson.h";
+#include "../json/ObjetoJson.h"
 
 #include <jsoncpp/json/json.h>
 using namespace std;

@@ -17,13 +17,20 @@ SpriteDef::SpriteDef() {
 	this->fps = 0;
 }
 
-SpriteDef::SpriteDef(string imagen, string id, int cant_fotogramas,
-		int fps) {
+SpriteDef::SpriteDef(string imagen_in, string id, int cant_fotogramas_in, int fps_in) {
+    if ( !Util::getInstancia()->existeArchivo(imagen_in) ) {
+        imagen_in = IMAGEN_DEFAULT;
+        Logger::getInstance()->info("No existen las imagenes del sprites "+imagen_in+". Por defecto se usa sprites_defecto.png");
+    }
+    if ( cant_fotogramas_in <= 0 )
+        Logger::getInstance()->info("la cant. de fotogramas de la imagen del sprite del personaje es menor o igual a cerop. Se elije uno nuevo con el valor de 1");
+    if ( fps_in <= 0 )
+        Logger::getInstance()->info("el valor de los fps del sprite del personaje es menor o igual a cerop. Se elije uno nuevo con el valor de 10");
 
-	this->imagen = imagen;
+	this->imagen = imagen_in;
 	this->id_sprite = id;
-	this->cant_fotogramas = cant_fotogramas;
-	this->fps = fps;
+	this->cant_fotogramas = (cant_fotogramas_in > 0) ? cant_fotogramas_in : CANT_FOTOGRAMAS_DEFAULT;
+	this->fps = (fps_in > 0) ? fps_in : FPS_DEFAULT;
 }
 
 int SpriteDef::getCantFotogramas() const {
