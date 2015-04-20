@@ -17,12 +17,14 @@ using namespace std;
 class Controlador {
 private:
 	Personaje* unPersonaje;
+	SDL_Event eventoGuardado;
 
 public:
 	Controlador(Personaje* pers);
 	virtual ~Controlador();
 	bool manejar_Evento(SDL_Event &evento);
 	void setPersonaje(Personaje* personaje);
+	SDL_Event obtenerUltimoEvento();
 };
 
 #endif /* SRC_CONTROLADOR_CONTROLADOR_H_ */

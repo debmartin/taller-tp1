@@ -1,0 +1,64 @@
+{
+    "ventana": { 
+        "anchopx": 640, 
+        "altopx": 480, 
+        "ancho": 640,
+    }, 
+    "escenario": { 
+        "ancho": 2000, 
+        "alto": 600, 
+        "y­piso": 100
+    }, 
+    "capas": [
+        { 
+            "imagen_fondo": "img_default/fondo-warrior-shrine-01.png",
+            "id_capa": "shrine1", 
+            "ancho": 750 
+        },    
+        { 
+            "imagen_fondo": "img_default/fondo-warrior-shrine-02.png",
+            "id_capa": "shrine2", 
+            "ancho": 1150 
+        },
+        { 
+            "imagen_fondo": "img_default/fondo-warrior-shrine-03.png",
+            "id_capa": "shrine3", 
+            "ancho": 1700
+        } 
+    ], 
+    "personaje": { 
+        "ancho": 105, 	
+        "alto": 280, 
+        "z­index": 3, 
+        "sprites_reposo": { 
+		            "imagen": "img/sub-zero-reposo.png", 
+        		    "cant_fotogramas": 12,
+        		    "fps": 10 
+        			},
+        "sprites_caminando": { 
+		            "imagen": "img/sub-zero-caminando.png",
+		            "id_sprite": "sub-zero-caminando", 
+        		    "cant_fotogramas": 9,
+        		    "fps": 10 
+        			},
+        "sprites_agachado": { 
+		            "imagen": "img/sub-zero-agachado.png",
+		            "id_sprite": "sub-zero-agachado",
+        		    "cant_fotogramas": 1,
+        		    "fps": 10
+        			},
+        "sprites_salto_vertical": { 
+		            "imagen": "img/sub-zero-saltando-vertical.png",
+		            "id_sprite": "sub-zero-saltando-vertical",
+        		    "cant_fotogramas": 3,
+        		    "fps": 10
+        			},
+        "sprites_salto_oblicuo": { 
+		            "imagen": "img/sub-zero-saltando-diagonal.png",
+		            "id_sprite": "sub-zero-saltando-diagonal",
+        		    "cant_fotogramas": 7,
+        		    "fps": 10 
+        			},
+		"direccion": 1 
+    } 
+}
