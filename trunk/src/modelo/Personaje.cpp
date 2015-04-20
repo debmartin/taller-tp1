@@ -92,9 +92,10 @@ void Personaje::saltarOblicuoDerecha(){
 void Personaje::saltarOblicuoIzquierda(){
     setEstado(SALTANDO_OBLICUO_IZQUIERDA);
     cambiarTrayectoria(new MRUV(posicion, Vector2f(-VELOCIDAD_DESP_HORIZONTAL, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD));
-    posicionSalto = posicion;
+    posicionSalto = Vector2f(1,1);
+    /*    posicionSalto = posicion;
 	cout<<"Posicion salto X:"<<posicionSalto.X()<<endl;
-	cout<<"posicion salto Y:"<<posicionSalto.Y()<<endl;
+	cout<<"posicion salto Y:"<<posicionSalto.Y()<<endl;*/
     Logger::getInstance()->debug("Personaje: salto oblicuo izquierda. Se setea trayectoria.");
 }
 
@@ -147,12 +148,14 @@ Personaje::~Personaje(){
 }
 
 bool Personaje::terminoSalto(){
-	cout<<"PosicionSalto.X:"<<posicionSalto.X()<<endl;
+	return posicionSalto.X()==1;
+/*	cout<<"PosicionSalto.X:"<<posicionSalto.X()<<endl;
 	cout<<"posicion.X:"<<posicion.X()<<endl;
 	cout<<"Posicion.Y:"<<posicion.Y()<<endl;
 	cout<<"posicionInicial.Y:"<<posicionInicial.Y()<<endl;
-	return (posicionSalto.X() != posicion.X() && posicion.Y() == posicionInicial.Y());
+	return (posicionSalto.X() != posicion.X() && posicion.Y() == posicionInicial.Y());*/
 }
+
 bool Personaje::estaSaltando(){
     return (estado == SALTANDO_OBLICUO_DERECHA || estado == SALTANDO_OBLICUO_IZQUIERDA || estado == SALTANDO_VERTICAL);
 }
