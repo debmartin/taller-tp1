@@ -148,12 +148,11 @@ Personaje::~Personaje(){
 }
 
 bool Personaje::terminoSalto(){
-	return posicionSalto.X()==1;
-/*	cout<<"PosicionSalto.X:"<<posicionSalto.X()<<endl;
+	cout<<"PosicionSalto.X:"<<posicionSalto.X()<<endl;
 	cout<<"posicion.X:"<<posicion.X()<<endl;
 	cout<<"Posicion.Y:"<<posicion.Y()<<endl;
 	cout<<"posicionInicial.Y:"<<posicionInicial.Y()<<endl;
-	return (posicionSalto.X() != posicion.X() && posicion.Y() == posicionInicial.Y());*/
+	return (posicionSalto.X() != posicion.X() && posicion.Y() == posicionInicial.Y());
 }
 
 bool Personaje::estaSaltando(){

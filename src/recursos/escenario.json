@@ -15,11 +15,6 @@
             "id_capa": "goro1", 
             "ancho": 700 
         },    
-        { 
-            "imagen_fondo": "img/goro2.png",
-            "id_capa": "goro2", 
-            "ancho": 900 
-        },
 		{ 
             "imagen_fondo": "img/goro2.png",
             "id_capa": "capa_3", 
