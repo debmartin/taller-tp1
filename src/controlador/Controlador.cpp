@@ -43,6 +43,7 @@ bool Controlador::manejar_Evento(SDL_Event &evento){
         	Logger::getInstance()->debug("Se presiona: Tecla derecha+Tecla arriba.");
             unPersonaje->saltarOblicuoDerecha();
         }else if (estadoTeclado[SDL_SCANCODE_LEFT] && ! unPersonaje->estaAgachado()){
+        	cout<<"se detecta que tecla izquierda sigue apretada"<<endl;
         	Logger::getInstance()->debug("Se presiona: Tecla izquierda.");
             unPersonaje->caminarIzquierda();
         }else if (estadoTeclado[SDL_SCANCODE_RIGHT] && ! unPersonaje->estaAgachado()){
