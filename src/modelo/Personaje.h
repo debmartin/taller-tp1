@@ -58,6 +58,7 @@ private:
 	estado_personaje estado;
 	Trayectoria* trayectoria;
 	float tCreacion;
+	Vector2f posicionSalto;
 
 public:
 	Personaje();
@@ -86,6 +87,7 @@ public:
 	void update();
 	bool estaSaltando();
 	bool estaAgachado();
+	bool terminoSalto();
 //	friend ostream& operator<<(ostream &o, const Personaje &p);
 
 };

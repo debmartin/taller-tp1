@@ -13,10 +13,16 @@ Controlador::Controlador(Personaje* pers) :
 bool Controlador::manejar_Evento(SDL_Event &evento){
 //    SDL_PumpEvents();
     Logger::getInstance()->debug("Se recibe un evento de teclado.");
-
+    //cout<<"se recibe un evento de teclado"<<endl;
     if (unPersonaje->estaSaltando()) {
-        Logger::getInstance()->debug("Evento invalido.");
-        return true;
+    	if(unPersonaje->terminoSalto()){
+    		cout<<"termino salto"<<endl;
+    		unPersonaje->setEstado(EN_ESPERA);
+    	}else{
+    		cout<<"no termino salto"<<endl;
+    		Logger::getInstance()->debug("Evento invalido.");
+    		return true;
+    	}
     }
     const Uint8* estadoTeclado = SDL_GetKeyboardState(NULL);
 
@@ -30,6 +36,7 @@ bool Controlador::manejar_Evento(SDL_Event &evento){
 	//Si se presiona una tecla
 	if ( evento.key.repeat == 0 ){
         if (estadoTeclado[SDL_SCANCODE_LEFT] && estadoTeclado[SDL_SCANCODE_UP]){
+        	cout<<"Salto oblicuo"<<endl;
         	Logger::getInstance()->debug("Se presiona: Tecla izquierda+Tecla arriba.");
             unPersonaje->saltarOblicuoIzquierda();
         }else if (estadoTeclado[SDL_SCANCODE_RIGHT] && estadoTeclado[SDL_SCANCODE_UP]){
@@ -51,6 +58,9 @@ bool Controlador::manejar_Evento(SDL_Event &evento){
         }else{
             unPersonaje->mantenerReposo();
         }
+/*	}else if (estadoTeclado[SDL_SCANCODE_LEFT]){
+		cout<<"se reconoce izquierda"<<endl;
+		unPersonaje->caminarIzquierda();*/
 	}
 //	//Si se suelta una tecla
 //	if( evento.type == SDL_KEYUP && evento.key.repeat == 0 ){
