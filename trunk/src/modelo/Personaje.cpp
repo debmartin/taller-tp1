@@ -92,6 +92,9 @@ void Personaje::saltarOblicuoDerecha(){
 void Personaje::saltarOblicuoIzquierda(){
     setEstado(SALTANDO_OBLICUO_IZQUIERDA);
     cambiarTrayectoria(new MRUV(posicion, Vector2f(-VELOCIDAD_DESP_HORIZONTAL, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD));
+    posicionSalto = posicion;
+	cout<<"Posicion salto X:"<<posicionSalto.X()<<endl;
+	cout<<"posicion salto Y:"<<posicionSalto.Y()<<endl;
     Logger::getInstance()->debug("Personaje: salto oblicuo izquierda. Se setea trayectoria.");
 }
 
@@ -130,7 +133,6 @@ void Personaje::update(){
 	if (posicionable->esValida(posicionCandidata) && posicionCandidata.Y() >= posicionInicial.Y()) {
         posicion = posicionCandidata;
     } else if (posicionCandidata.Y() > posicionInicial.Y()) {
-        //estado = SALTANDO_VERTICAL;
         cambiarTrayectoria(new MRUV(posicion, VECTOR_VELOCIDAD_NULA, VECTOR_GRAVEDAD));
 //        posicion = trayectoria->getPosicion(tActual);
     } else if (posicion.Y() == posicionInicial.Y()){
@@ -144,6 +146,13 @@ Personaje::~Personaje(){
     delete trayectoria;
 }
 
+bool Personaje::terminoSalto(){
+	cout<<"PosicionSalto.X:"<<posicionSalto.X()<<endl;
+	cout<<"posicion.X:"<<posicion.X()<<endl;
+	cout<<"Posicion.Y:"<<posicion.Y()<<endl;
+	cout<<"posicionInicial.Y:"<<posicionInicial.Y()<<endl;
+	return (posicionSalto.X() != posicion.X() && posicion.Y() == posicionInicial.Y());
+}
 bool Personaje::estaSaltando(){
     return (estado == SALTANDO_OBLICUO_DERECHA || estado == SALTANDO_OBLICUO_IZQUIERDA || estado == SALTANDO_VERTICAL);
 }
