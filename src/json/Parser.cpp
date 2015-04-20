@@ -176,7 +176,7 @@ void Parser::parsearPersonaje(){
             p_alto = (subvalor.isNumeric()) ? (subvalor.asDouble()) : ALTO_PERS_DEFAULT;
         } else if ( tag == TAG_PERSONAJE_ANCHO ) {
             p_ancho = (subvalor.isNumeric()) ? (subvalor.asDouble()) : ANCHO_PERS_DEFAULT;
-        } else if ( tag == TAG_PERSONAJE_ZINDEX) {
+        } else if ( tag.compare(TAG_PERSONAJE_ZINDEX) >= 0) {
             p_zindex = (subvalor.isInt()) ? (subvalor.asInt()) : Z_INDEX_PERS_DEFAULT;
         } else if (tag.find(TAG_PERSONAJE_SPRITES) != std::string::npos) {
             p_sprites_imagen = (*it2)[TAG_PERSONAJE_SPRITES_IMAGEN].asString();
