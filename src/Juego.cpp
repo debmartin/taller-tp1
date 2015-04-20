@@ -53,6 +53,9 @@ void Juego::handleEvents(bool& recargar)
             juegoCorriendo = false;
             recargar = true;
 		}
+	}else{
+		evento = controladorJuego->obtenerUltimoEvento();
+		controladorJuego->manejar_Evento(evento);
 	}
 }
 
