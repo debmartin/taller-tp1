@@ -14,7 +14,7 @@
 #include "ObjetoJson.h"
 #include "../utils/Logger.h"
 
-#define ALTO_ESC_DEFAULT 180
+#define ALTO_ESC_DEFAULT 600
 #define ANCHO_ESC_DEFAULT 1200
 #define Y_PISO_ESC_DEFAULT 0
 
