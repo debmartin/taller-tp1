@@ -39,11 +39,12 @@ PersonajeDef::PersonajeDef(double anchoIn, double altoIn, int zindexIn, int dire
 	this->direccion = direccionIn;
 }
 
-void PersonajeDef::ajustarZIndex(){
-    int cantCapas = spritesDef->size();
-    if (z_index > cantCapas)	{
+void PersonajeDef::ajustarZIndex(int cantCapas)
+{
+    if (z_index > cantCapas)
+    {
         z_index = cantCapas;
-        Logger::getInstance()->info("El zindex del Personaje es mayor al valor posible. Se elije uno nuevo para que el personaje este adelante de todas las capas");
+        Logger::getInstance()->error("El zindex del Personaje es mayor al valor posible. Se elije uno nuevo para que el personaje este adelante de todas las capas. Valor", z_index);
     }
 }
 
