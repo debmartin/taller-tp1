@@ -2,6 +2,10 @@
 #define SRC_MODELO_VECTOR2F_H_
 #include <math.h>
 
+#include <iostream>
+#include <string>
+using namespace std;
+
 class Vector2f{
 private:
 	float x;
@@ -21,6 +25,7 @@ public:
 	Vector2f operator*(float escalar);
 	Vector2f& operator*=(float escalar);
     void setCoordenada(int x, int y);
+    friend ostream& operator<<(ostream &o, const Vector2f &c);
 };
 
 #endif /* SRC_MODELO_VECTOR2F_H_ */
