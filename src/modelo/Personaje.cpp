@@ -168,6 +168,8 @@ void Personaje::update(){
 //        posicion = trayectoria->getPosicion(tActual);
     } else if (posicion.Y() == posicionInicial.Y()){
     } else {
+    	//Ajusto la posicion en Y para los casos de saltos.
+    	posicion.setCoordenada(posicion.X(),posicionInicial.Y());
         mantenerReposo();
     }
 	notificarObservadores();
