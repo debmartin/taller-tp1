@@ -15,16 +15,21 @@
             "id_capa": "goro1", 
             "ancho": 700 
         },    
+        { 
+            "imagen_fondo": "img/goro2.png",
+            "id_capa": "goro2", 
+            "ancho": 900 
+        },            
 		{ 
             "imagen_fondo": "img/goro2.png",
             "id_capa": "capa_3", 
-            "ancho": 1200 
+            "ancho": 1300 
         } 
     ], 
     "personaje": { 
         "ancho": 105, 	
         "alto": 280, 
-        "z­index": 5, 
+        "z­index": 3, 
         "sprites-reposo": { 
 		            "imagen": "img/sub-zero-reposo.png",
         		    "cant_fotogramas": 12,
