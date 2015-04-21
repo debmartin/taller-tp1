@@ -31,7 +31,7 @@
         "alto": 280, 
         "zindex": 3, 
         "sprites-reposo": { 
-		            "imagen": "img_default/sprite_default_p1.png"
+		            "imagen": "img_default/sprite_default_p1.png",
         		    "cant_fotogramas": 12,
         		    "fps": 10 
         			},
