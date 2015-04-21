@@ -90,9 +90,8 @@ void CargadorDeOjbetos::cargarObjetos(string escenario_path) {
 	primerSpriteSubQuieto->getIdSprite(),
 	Renderizador::Instance()->getRenderer());
 
-	int direccion_personaje = personajeDef->getDireccion();
 	OrientacionSprite direccion;
-	if (direccion_personaje == 1) {
+	if (personajeDef->getDireccion() == 1) {
 		direccion = ORIENTACION_DERECHA;
 	} else {
 		direccion = ORIENTACION_IZQUIERDA;
