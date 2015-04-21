@@ -12,9 +12,10 @@ Controlador::Controlador(Personaje* pers) :
 
 bool Controlador::manejar_Evento(SDL_Event &evento){
 //    SDL_PumpEvents();
-	eventoGuardado = evento;
+
+	//cout<<"Tecla:"<<evento.key.keysym.sym<<endl;
     Logger::getInstance()->debug("Se recibe un evento de teclado.");
-    cout<<"se recibe un evento de teclado"<<endl;
+    //cout<<"se recibe un evento de teclado"<<endl;
     if (unPersonaje->estaSaltando()) {
     	/*if(unPersonaje->terminoSalto()){
     		cout<<"termino salto"<<endl;
@@ -25,6 +26,7 @@ bool Controlador::manejar_Evento(SDL_Event &evento){
     		return true;
     	//}
     }
+
     const Uint8* estadoTeclado = SDL_GetKeyboardState(NULL);
 
     if( evento.type == SDL_KEYUP && evento.key.repeat == 0 ){
@@ -34,8 +36,14 @@ bool Controlador::manejar_Evento(SDL_Event &evento){
         }
     }
 
+    if(evento.type != SDL_KEYUP){
+    	if(!estadoTeclado[SDL_SCANCODE_UP]){
+    		eventoGuardado = evento;
+    	}
+    }
 	//Si se presiona una tecla
 	if ( evento.key.repeat == 0 ){
+		cout<<"debug1"<<endl;
         if (estadoTeclado[SDL_SCANCODE_LEFT] && estadoTeclado[SDL_SCANCODE_UP]){
         	cout<<"Salto oblicuo"<<endl;
         	Logger::getInstance()->debug("Se presiona: Tecla izquierda+Tecla arriba.");
@@ -44,7 +52,7 @@ bool Controlador::manejar_Evento(SDL_Event &evento){
         	Logger::getInstance()->debug("Se presiona: Tecla derecha+Tecla arriba.");
             unPersonaje->saltarOblicuoDerecha();
         }else if (estadoTeclado[SDL_SCANCODE_LEFT] && ! unPersonaje->estaAgachado()){
-        	//cout<<"se detecta que tecla izquierda sigue apretada"<<endl;
+        	cout<<"se detecta que tecla izquierda sigue apretada"<<endl;
         	Logger::getInstance()->debug("Se presiona: Tecla izquierda.");
             unPersonaje->caminarIzquierda();
         }else if (estadoTeclado[SDL_SCANCODE_RIGHT] && ! unPersonaje->estaAgachado()){
@@ -58,6 +66,7 @@ bool Controlador::manejar_Evento(SDL_Event &evento){
             unPersonaje->agacharse();
 
         }else{
+        	cout<<"reposo"<<endl;
             unPersonaje->mantenerReposo();
         }
 /*	}else if (estadoTeclado[SDL_SCANCODE_LEFT]){

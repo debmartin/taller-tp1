@@ -47,6 +47,7 @@ void Juego::handleEvents(bool& recargar)
 
 	if (SDL_PollEvent(&evento))
 	{
+		//cout<<"primera forma de llamar a controlador"<<endl;
 		if (evento.type == SDL_QUIT){
 			juegoCorriendo = false;
 		} else if (! controladorJuego->manejar_Evento(evento)){
@@ -54,6 +55,7 @@ void Juego::handleEvents(bool& recargar)
             recargar = true;
 		}
 	}else{
+		//cout<<"segunda forma de llamar a controlador"<<endl;
 		evento = controladorJuego->obtenerUltimoEvento();
 		controladorJuego->manejar_Evento(evento);
 	}
