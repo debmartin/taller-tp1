@@ -4,9 +4,9 @@
         "altopx": 480, 
         "ancho": 640
     }, 
-    "escenario": { 
-        "ancho": 1500, 
-        "alto": 600, 
+  "escenario": {
+        "ancho": 1500,
+        "alto": 600,
         "y_piso": 100
     }, 
     "capas": [
