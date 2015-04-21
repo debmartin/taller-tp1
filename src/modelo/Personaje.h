@@ -24,6 +24,7 @@
 #include "Vector2f.h"
 
 #define DELTA_PASO 1
+#define DELTA_X 10
 
 typedef enum Movimiento
 {
@@ -73,12 +74,18 @@ public:
 	void setVida(int cantidad);
 	int getVida();
 	Vector2f obtenerPosicionEnVentana();
+	bool llegoAlLimiteIzquierdo();
+	bool llegoAlLimiteDerecho();
 	void centrar_en(Vector2f& v);
     void caminarDerecha();
     void caminarIzquierda();
+    void caminarDerechaEnLimite();
+    void caminarIzquierdaEnLimite();
     void saltarVertical();
     void saltarOblicuoDerecha();
     void saltarOblicuoIzquierda();
+    void saltarOblicuoDerechaEnLimite();
+    void saltarOblicuoIzquierdaEnLimite();
     void mantenerReposo();
     void agacharse();
 	void cambiarTrayectoria(Trayectoria* t);

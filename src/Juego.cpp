@@ -54,10 +54,10 @@ void Juego::handleEvents(bool& recargar)
             juegoCorriendo = false;
             recargar = true;
 		}
-	}else{
+	/*}else{
 		//cout<<"segunda forma de llamar a controlador"<<endl;
 		evento = controladorJuego->obtenerUltimoEvento();
-		controladorJuego->manejar_Evento(evento);
+		controladorJuego->manejar_Evento(evento);*/
 	}
 }
 
