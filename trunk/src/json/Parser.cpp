@@ -214,7 +214,8 @@ void Parser::parsearPersonaje(){
             Logger::getInstance()->error("Dentro del personaje no se encuentra el parametro "+tag);
         }
     }
-    personaje = new PersonajeDef(p_ancho, p_alto, p_zindex, p_direccion);
+    Vector2f p_posInicial(escenario->getAncho()/2.0,escenario->getYpiso());
+    personaje = new PersonajeDef(p_ancho, p_alto, p_zindex, p_direccion, p_posInicial);
     for (list<SpriteDef*>::iterator it = sprites.begin(); it != sprites.end(); ++it){
         personaje->agregarSpritesDef(*it);
     }

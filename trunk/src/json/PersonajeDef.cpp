@@ -19,7 +19,7 @@ PersonajeDef::PersonajeDef() {
 	this->direccion = 0;
 }
 
-PersonajeDef::PersonajeDef(double anchoIn, double altoIn, int zindexIn, int direccionIn)
+PersonajeDef::PersonajeDef(double anchoIn, double altoIn, int zindexIn, int direccionIn, Vector2f posInicial)
 {
     if (anchoIn <= 0)
 		Logger::getInstance()->info("El ancho del personaje es menor o igual a cero. Se elije uno nuevo con el valor de 15");
@@ -37,6 +37,7 @@ PersonajeDef::PersonajeDef(double anchoIn, double altoIn, int zindexIn, int dire
 	this->z_index = (zindexIn >= 0) ? zindexIn : Z_INDEX_PERS_DEFAULT;
 	this->spritesDef = new list<SpriteDef*>();
 	this->direccion = direccionIn;
+	this->posicionInicial = posInicial;
 }
 
 void PersonajeDef::ajustarZIndex(int cantCapas)
@@ -89,6 +90,9 @@ void PersonajeDef::setDireccion(int nuevaDireccion) {
 	direccion = nuevaDireccion;
 }
 
+Vector2f PersonajeDef::getPosicionInicial(){
+	return posicionInicial;
+}
 
 PersonajeDef::~PersonajeDef(){
 	for (list<SpriteDef*>::iterator it_spritesDef = spritesDef->begin() ; it_spritesDef !=  spritesDef->end(); it_spritesDef++){
