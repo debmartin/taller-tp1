@@ -72,6 +72,7 @@ void Personaje::caminarDerecha(){
 }
 
 void Personaje::caminarIzquierda(){
+	cout<<"camina izquierda"<<endl;
     setEstado(CAMINANDO_IZQUIERDA);
     cambiarTrayectoria(new MRU(posicion, Vector2f(-VELOCIDAD_DESP_HORIZONTAL, VELOCIDAD_NULA)));
     Logger::getInstance()->debug("Personaje: caminando izquierda. Se setea trayectoria.");
@@ -92,7 +93,6 @@ void Personaje::saltarOblicuoDerecha(){
 void Personaje::saltarOblicuoIzquierda(){
     setEstado(SALTANDO_OBLICUO_IZQUIERDA);
     cambiarTrayectoria(new MRUV(posicion, Vector2f(-VELOCIDAD_DESP_HORIZONTAL, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD));
-    posicionSalto = Vector2f(1,1);
     /*    posicionSalto = posicion;
 	cout<<"Posicion salto X:"<<posicionSalto.X()<<endl;
 	cout<<"posicion salto Y:"<<posicionSalto.Y()<<endl;*/
