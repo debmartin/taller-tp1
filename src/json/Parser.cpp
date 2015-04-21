@@ -70,32 +70,49 @@ void Parser::cargarJsonPorDefecto(){
 }
 
 void Parser::parsearCapas(){
-    Json::Value valorCapas;
-    valorCapas = root.get(TAG_CAPAS, &valorCapas);
 
-    for (unsigned int idx_capas = 0; idx_capas < valorCapas.size(); ++idx_capas) {
-        CapaDef* capa;
-        string imagen_fondo;
-        string id_capa;
-        double ancho = 0;
-        for( Json::ValueIterator it3 = valorCapas[idx_capas].begin() ; it3 != valorCapas[idx_capas].end() ; it3++ ) {
-            string tag = it3.key().asString();
+	if ( root.isMember(TAG_CAPAS) )
+	{
+		Json::Value valorCapas;
+		valorCapas = root.get(TAG_CAPAS, &valorCapas);
 
-            if ( tag == TAG_CAPAS_IMAGEN ) {
-                imagen_fondo = valorCapas[idx_capas][TAG_CAPAS_IMAGEN].asString();
-            } else if ( tag == TAG_CAPAS_ID ) {
-                id_capa = valorCapas[idx_capas][TAG_CAPAS_ID].asString();
-            } else if ( tag == TAG_CAPAS_ANCHO ) {
-                Json::Value valorAncho = valorCapas[idx_capas][TAG_CAPAS_ANCHO];
-                ancho = (valorAncho.isNumeric()) ? (valorAncho.asDouble()) : ANCHO_CAPA_DEFAULT;
-            } else {
-                Logger::getInstance()->error("Dentro de la capa no se encuentra el parametro "+tag);
-            }
+		for (unsigned int idx_capas = 0; idx_capas < valorCapas.size(); ++idx_capas) {
+			CapaDef* capa;
+			string imagen_fondo;
+			string id_capa;
+			double ancho = 0;
+			for( Json::ValueIterator it3 = valorCapas[idx_capas].begin() ; it3 != valorCapas[idx_capas].end() ; it3++ ) {
+				string tag = it3.key().asString();
 
-        }
-        capa = new CapaDef(imagen_fondo, id_capa, ancho);
-        capas->push_back(capa);
-    }
+				if ( tag == TAG_CAPAS_IMAGEN ) {
+					imagen_fondo = valorCapas[idx_capas][TAG_CAPAS_IMAGEN].asString();
+				} else if ( tag == TAG_CAPAS_ID ) {
+					id_capa = valorCapas[idx_capas][TAG_CAPAS_ID].asString();
+				} else if ( tag == TAG_CAPAS_ANCHO ) {
+					Json::Value valorAncho = valorCapas[idx_capas][TAG_CAPAS_ANCHO];
+					ancho = (valorAncho.isNumeric()) ? (valorAncho.asDouble()) : ANCHO_CAPA_DEFAULT;
+				} else {
+					Logger::getInstance()->error("Dentro de la capa no se encuentra el parametro "+tag);
+				}
+
+			}
+			capa = new CapaDef(imagen_fondo, id_capa, ancho);
+			capas->push_back(capa);
+		}
+	}
+	else
+	{
+		//se cargan capas por defecto porque no existe el tag "capas"
+		CapaDef* capa_1 = new CapaDef("img_default/fondo-warrior-shrine-01.png", "id_capa_1", 700);
+		CapaDef* capa_2 = new CapaDef("img_default/fondo-warrior-shrine-02.png", "id_capa_2", 1200);
+		capas->push_back(capa_1);
+		capas->push_back(capa_2);
+
+    	Logger::getInstance()->error("No existe el tag "+(string)TAG_CAPAS+". Se van a cargar por defecto la siguientes 2 capas");
+    	Logger::getInstance()->error(capa_1);
+    	Logger::getInstance()->error(capa_2);
+	}
+
 }
 
 void Parser::parsearEscenario(){
