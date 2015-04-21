@@ -14,6 +14,7 @@
 
 #include "SpriteDef.h"
 #include "../utils/Logger.h"
+#include "../modelo/Vector2f.h"
 
 #define ALTO_PERS_DEFAULT 150
 #define ANCHO_PERS_DEFAULT 50
@@ -32,10 +33,11 @@ private:
 	int z_index;
 	list<SpriteDef*>* spritesDef;
 	int direccion;
+	Vector2f posicionInicial;
 
 public:
 	PersonajeDef();
-	PersonajeDef(double ancho, double alto, int zindex, int direccion);
+	PersonajeDef(double ancho, double alto, int zindex, int direccion, Vector2f posInicial);
 	virtual ~PersonajeDef();
 	double getAlto() const;
 	double getAncho() const;
@@ -43,6 +45,7 @@ public:
 	void setAlto(double nuevoAlto);
 	void setAncho(double nuevoAncho);
 	void setZIndex(int z);
+	Vector2f getPosicionInicial();
 
 	list<SpriteDef*>* getSpritesDef() const;
 	void agregarSpritesDef(SpriteDef* spriteDef);

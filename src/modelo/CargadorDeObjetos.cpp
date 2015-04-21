@@ -72,7 +72,7 @@ void CargadorDeOjbetos::cargarObjetos(string escenario_path) {
 	////Inicializacion de Personaje////
 	Logger::getInstance()->info(personajeDef);
 	jugador = new Personaje(personajeDef->getAncho(), personajeDef->getAlto(),
-	POSICION_INICIAL_PERSONAJE, VentanaGrafica::Instance());
+	personajeDef->getPosicionInicial(), VentanaGrafica::Instance());
 
 	////Inicializacion de PersonajeDibujable////
 	Vector2f tamanioPx(
@@ -98,7 +98,7 @@ void CargadorDeOjbetos::cargarObjetos(string escenario_path) {
 		direccion = ORIENTACION_IZQUIERDA;
 	}
 	personajeDibujable = new PersonajeDibujable(SubQuieto,
-	POSICION_INICIAL_PERSONAJE, tamanioPx, direccion);
+	personajeDef->getPosicionInicial(), tamanioPx, direccion);
 
 	for (; it_sprites != spritesDef->end(); ++it_sprites) {
 		Animacion* sub_zero = new Animacion((*it_sprites)->getImagen(),
@@ -128,10 +128,6 @@ void CargadorDeOjbetos::cargarObjetos(string escenario_path) {
 	VentanaGrafica::Instance()->agregarEscenario(escenario);
 	VentanaGrafica::Instance()->centrar_ventana();
 	escenario->centrar_dibujables();
-	Vector2f vector_centrado(escenarioDef->getAncho() / 2.0,
-			escenarioDef->getYpiso());
-	jugador->centrar_en(vector_centrado);
-	Logger::getInstance()->info("Centrado de Personaje correcto.");
 
 	Logger::getInstance()->info("Termina la carga del juego correctamente.");
 //		    delete parser;
