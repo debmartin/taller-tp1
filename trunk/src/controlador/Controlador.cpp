@@ -47,17 +47,33 @@ bool Controlador::manejar_Evento(SDL_Event &evento){
         if (estadoTeclado[SDL_SCANCODE_LEFT] && estadoTeclado[SDL_SCANCODE_UP]){
         	cout<<"Salto oblicuo"<<endl;
         	Logger::getInstance()->debug("Se presiona: Tecla izquierda+Tecla arriba.");
-            unPersonaje->saltarOblicuoIzquierda();
+        	if(unPersonaje->llegoAlLimiteIzquierdo()){
+        		unPersonaje->saltarOblicuoIzquierdaEnLimite();
+        	}else{
+        		unPersonaje->saltarOblicuoIzquierda();
+        	}
         }else if (estadoTeclado[SDL_SCANCODE_RIGHT] && estadoTeclado[SDL_SCANCODE_UP]){
         	Logger::getInstance()->debug("Se presiona: Tecla derecha+Tecla arriba.");
-            unPersonaje->saltarOblicuoDerecha();
+        	if(unPersonaje->llegoAlLimiteIzquierdo()){
+        		unPersonaje->saltarOblicuoDerechaEnLimite();
+        	}else{
+        	    unPersonaje->saltarOblicuoDerecha();
+        	}
         }else if (estadoTeclado[SDL_SCANCODE_LEFT] && ! unPersonaje->estaAgachado()){
         	cout<<"se detecta que tecla izquierda sigue apretada"<<endl;
         	Logger::getInstance()->debug("Se presiona: Tecla izquierda.");
-            unPersonaje->caminarIzquierda();
+        	if(unPersonaje->llegoAlLimiteDerecho()){
+        		unPersonaje->caminarIzquierdaEnLimite();
+        	}else{
+        		unPersonaje->caminarIzquierda();
+        	}
         }else if (estadoTeclado[SDL_SCANCODE_RIGHT] && ! unPersonaje->estaAgachado()){
         	Logger::getInstance()->debug("Se presiona: Tecla derecha.");
-            unPersonaje->caminarDerecha();
+        	if(unPersonaje->llegoAlLimiteDerecho()){
+        	    unPersonaje->caminarDerechaEnLimite();
+        	}else{
+        		unPersonaje->caminarDerecha();
+        	}
         }else if (estadoTeclado[SDL_SCANCODE_UP]){
         	Logger::getInstance()->debug("Se presiona: Tecla arriba.");
             unPersonaje->saltarVertical();

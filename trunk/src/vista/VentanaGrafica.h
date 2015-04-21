@@ -35,6 +35,8 @@ public:
 	float getLimiteLogicoDerecho();
 	float getAnchoLogico();
 	float getAnchoPx();
+	bool llegoAlLimiteDerecho(Vector2f posicion);
+	bool llegoAlLimiteIzquierdo(Vector2f posicion);
 	bool esPosicionValida(Vector2f posicion);
 	void recibirNotificacion(Observable* unObservable);
 	float relacion_de_aspectoX();

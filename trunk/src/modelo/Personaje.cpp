@@ -61,6 +61,14 @@ Vector2f Personaje::obtenerPosicionEnVentana(){
 	return VentanaGrafica::Instance()->calcularPosicionEnVentana(P1);
 }
 
+bool Personaje::llegoAlLimiteIzquierdo(){
+	return VentanaGrafica::Instance()->llegoAlLimiteIzquierdo(this->posicion);
+}
+
+bool Personaje::llegoAlLimiteDerecho(){
+	return VentanaGrafica::Instance()->llegoAlLimiteDerecho(this->posicion);
+}
+
 void Personaje::centrar_en(Vector2f& v){
 	this->posicion = v;
 }
@@ -75,6 +83,18 @@ void Personaje::caminarIzquierda(){
 	cout<<"camina izquierda"<<endl;
     setEstado(CAMINANDO_IZQUIERDA);
     cambiarTrayectoria(new MRU(posicion, Vector2f(-VELOCIDAD_DESP_HORIZONTAL, VELOCIDAD_NULA)));
+    Logger::getInstance()->debug("Personaje: caminando izquierda. Se setea trayectoria.");
+}
+
+void Personaje::caminarDerechaEnLimite(){
+	setEstado(CAMINANDO_DERECHA);
+    cambiarTrayectoria(new Reposo(posicion));
+    Logger::getInstance()->debug("Personaje: caminando izquierda. Se setea trayectoria.");
+}
+
+void Personaje::caminarIzquierdaEnLimite(){
+	setEstado(CAMINANDO_IZQUIERDA);
+	cambiarTrayectoria(new Reposo(posicion));
     Logger::getInstance()->debug("Personaje: caminando izquierda. Se setea trayectoria.");
 }
 
@@ -97,6 +117,16 @@ void Personaje::saltarOblicuoIzquierda(){
 	cout<<"Posicion salto X:"<<posicionSalto.X()<<endl;
 	cout<<"posicion salto Y:"<<posicionSalto.Y()<<endl;*/
     Logger::getInstance()->debug("Personaje: salto oblicuo izquierda. Se setea trayectoria.");
+}
+
+void Personaje::saltarOblicuoIzquierdaEnLimite(){
+	setEstado(SALTANDO_OBLICUO_IZQUIERDA);
+	cambiarTrayectoria(new MRUV(posicion, Vector2f(VELOCIDAD_NULA, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD));
+}
+
+void Personaje::saltarOblicuoDerechaEnLimite(){
+	setEstado(SALTANDO_OBLICUO_DERECHA);
+	cambiarTrayectoria(new MRUV(posicion, Vector2f(VELOCIDAD_NULA, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD));
 }
 
 void Personaje::agacharse(){

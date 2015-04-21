@@ -104,6 +104,18 @@ float VentanaGrafica::getAnchoPx(){
 	return this->ancho_ventanaPx;
 }
 
+bool VentanaGrafica::llegoAlLimiteIzquierdo(Vector2f posicion){
+	if(posicion.X() <= DELTA_X){
+		return true;
+	}return false;
+}
+
+bool VentanaGrafica::llegoAlLimiteDerecho(Vector2f posicion){
+	if(posicion.X() >= (escenario->getAnchoLogico() - DELTA_X)){
+		return true;
+	}return false;
+}
+
 float VentanaGrafica::relacion_de_aspectoX(){
 	float res = this->ancho_ventanaPx / ((this->limite_logico_izquierdo + this->ancho_logico_ventana) - this->limite_logico_izquierdo);
 	return res;
