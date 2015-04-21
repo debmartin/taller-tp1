@@ -49,7 +49,7 @@ public:
 
 	int getDireccion() const;
 	void setDireccion(int nuevaDir);
-    void ajustarZIndex();
+    void ajustarZIndex(int cantCapas);
     void ajustarAlto(double altoEscenario, double ypiso);
 	friend ostream& operator<<(ostream &o, const PersonajeDef &p);
 

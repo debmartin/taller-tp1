@@ -4,11 +4,11 @@
         "altopx": 480, 
         "ancho": 640
     }, 
-  "escenario": {
+	"escenario": {
         "ancho": 1500,
         "alto": 600,
         "y_piso": 100
-    }, 
+    },
     "capas": [
         { 
             "imagen_fondo": "img/goro1.png",
@@ -24,7 +24,7 @@
     "personaje": { 
         "ancho": 105, 	
         "alto": 280, 
-        "z­index": 3, 
+        "z­index": 5, 
         "sprites-reposo": { 
 		            "imagen": "img/sub-zero-reposo.png",
         		    "cant_fotogramas": 12,
