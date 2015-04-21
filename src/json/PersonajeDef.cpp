@@ -47,11 +47,17 @@ void PersonajeDef::ajustarZIndex(){
     }
 }
 
-void PersonajeDef::ajustarAlto(double altoEscenario){
+void PersonajeDef::ajustarAlto(double altoEscenario, double ypiso){
     if (alto <= 0) {
-		alto = altoEscenario/ 3;
-		Logger::getInstance()->info("El alto del personaje es negativo. Se elije uno nuevo que sea la tercera parte del alto del escenario");
+    	alto = altoEscenario / 3;
+		Logger::getInstance()->info("El alto del personaje es negativo. Se elije uno nuevo",alto);
 	}
+
+    if ( alto >  ( altoEscenario - ypiso ) )
+    {
+    	alto = altoEscenario / 3;
+    	Logger::getInstance()->info("El alto del personaje sobrepasa la altura del escenario. Se elije uno nuevo",alto);
+    }
 }
 
 double PersonajeDef::getAlto() const {

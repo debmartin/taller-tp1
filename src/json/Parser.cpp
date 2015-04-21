@@ -262,7 +262,7 @@ VentanaDef* Parser::getVentanaDef() const {
 
 void Parser::inciarValidacionSemantica() {
     personaje->ajustarZIndex();
-    personaje->ajustarAlto(escenario->getAlto());
+    personaje->ajustarAlto(escenario->getAlto(), escenario->getYpiso());
     escenario->ajustarYPiso(personaje->getAlto());
     ventana->ajustarAncho(escenario->getAncho());
     for (list<CapaDef*>::iterator it_capas = this->capas->begin() ; it_capas != this->capas->end(); it_capas++)

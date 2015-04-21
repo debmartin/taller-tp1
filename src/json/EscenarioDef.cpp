@@ -35,7 +35,7 @@ EscenarioDef::EscenarioDef(double anchoIn, double altoIn, double ypisoIn)
 void EscenarioDef::ajustarYPiso(double altoPersonaje){
     if ((alto - ypiso) < altoPersonaje) {
         ypiso = Y_PISO_ESC_DEFAULT;
-        Logger::getInstance()->info("El y del piso del personaje sobrepasa al escenario con respecto a su altura. Se elije uno nuevo con el valor de cero");
+        Logger::getInstance()->error("El y del piso del personaje sobrepasa al escenario con respecto a su altura. Se elije uno nuevo con el valor de",ypiso);
     }
 }
 
