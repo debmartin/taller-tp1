@@ -90,7 +90,12 @@ void Parser::parsearCapas(){
 					id_capa = valorCapas[idx_capas][TAG_CAPAS_ID].asString();
 				} else if ( tag == TAG_CAPAS_ANCHO ) {
 					Json::Value valorAncho = valorCapas[idx_capas][TAG_CAPAS_ANCHO];
-					ancho = (valorAncho.isNumeric()) ? (valorAncho.asDouble()) : ANCHO_CAPA_DEFAULT;
+					if (valorAncho.isNumeric()) {
+						ancho = (valorAncho.asDouble());
+					} else {
+						ancho = ANCHO_CAPA_DEFAULT;
+						Logger::getInstance()->error("El valor de ancho de la capa no es un numero");
+					}
 				} else {
 					Logger::getInstance()->error("Dentro de la capa no se encuentra el parametro "+tag);
 				}
