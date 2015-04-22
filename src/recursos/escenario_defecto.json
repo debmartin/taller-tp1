@@ -31,28 +31,28 @@
         "alto": 280, 
         "zindex": 3, 
         "sprites-reposo": { 
-		            "imagen": "img_default/sprite_default_p1.png",
-        		    "cant_fotogramas": 12,
+		            "imagen": "img_default/sonia-reposo.png",
+        		    "cant_fotogramas": 7,
         		    "fps": 10 
         			},
         "sprites-caminando": { 
-		            "imagen": "img_default/sprite_default_p1.png",
-        		    "cant_fotogramas": 12,
+		            "imagen": "img_default/sonia-caminando.png",
+        		    "cant_fotogramas": 6,
         		    "fps": 10 
         			},
         "sprites-agachado": { 
-		            "imagen": "img_default/sprite_default_p1.png",
-        		    "cant_fotogramas": 12,
-        		    "fps": 10
+		            "imagen": "img_default/sonia-agachada.png",
+        		    "cant_fotogramas": 1,
+        		    "fps": 1
         			},
         "sprites-saltando-vertical": { 
-		            "imagen": "img_default/sprite_default_p1.png",
-        		    "cant_fotogramas": 12,
-        		    "fps": 10
+		            "imagen": "img_default/sonia-saltando-vertical.png",
+        		    "cant_fotogramas": 3,
+        		    "fps": 3
         			},
         "sprites-saltando-diagonal": { 
-		            "imagen": "img_default/sprite_default_p1.png",
-        		    "cant_fotogramas": 12,
+		            "imagen": "img_default/sonia-saltando-diagonal.png",
+        		    "cant_fotogramas": 7,
         		    "fps": 10 
         			},
 		"direccion": 1 
