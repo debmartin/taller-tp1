@@ -13,7 +13,9 @@ public:
 	Vector2f getPosicion(float tActual) {
 		return this->posInicial;
 	};
-
+	virtual Vector2f getVelocidad(float tActual) {
+		return Vector2f(0.0f, 0.0f);
+	}
 	~Reposo() {}
 };
 

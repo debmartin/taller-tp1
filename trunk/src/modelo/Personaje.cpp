@@ -170,7 +170,8 @@ void Personaje::update(){
         posicion = Vector2f(posicionCandidata.X(), posicionInicial.Y());
         mantenerReposo();
     } else if (posicionCandidata.Y() > posicionInicial.Y()) {
-        cambiarTrayectoria(new MRUV(posicion, VECTOR_VELOCIDAD_NULA, VECTOR_GRAVEDAD));
+    	Vector2f velocActual = this->trayectoria->getVelocidad(tActual);
+        cambiarTrayectoria(new MRUV(posicion, Vector2f(0.0f, velocActual.Y()), VECTOR_GRAVEDAD));
     } else {
         mantenerReposo();
     }
