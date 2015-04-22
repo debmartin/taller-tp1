@@ -18,6 +18,7 @@ class Controlador {
 private:
 	Personaje* unPersonaje;
 	SDL_Event eventoGuardado;
+    void identificarOrden();
 
 public:
 	Controlador(Personaje* pers);
