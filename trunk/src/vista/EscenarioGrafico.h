@@ -35,7 +35,7 @@ public:
 	void centrar_en(Vector2f posicion, float limiteLogicoIzquierdoVentana, float relacion_de_aspectoX);
 	void centrar_dibujables();
 	void scrollear_capas();
-	bool esValida(Vector2f posicion);
+	bool esValida(Vector2f posicion, double ancho_personaje);
 };
 
 #include "VentanaGrafica.h"

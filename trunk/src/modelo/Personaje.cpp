@@ -127,6 +127,7 @@ void Personaje::saltarOblicuoIzquierdaEnLimite(){
 void Personaje::saltarOblicuoDerechaEnLimite(){
 	setEstado(SALTANDO_OBLICUO_DERECHA);
 	cambiarTrayectoria(new MRUV(posicion, Vector2f(VELOCIDAD_NULA, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD));
+	posicionSalto = posicion;
 }
 
 void Personaje::agacharse(){
@@ -161,7 +162,7 @@ void Personaje::update(){
 	// RECALCULA LA POSICION EN BASE AL OBJETO TRAYECTORIA
 	float tActual = ((float)(SDL_GetTicks())/1000.0f) - tCreacion;
 	Vector2f posicionCandidata = this->trayectoria->getPosicion(tActual);
-	if (posicionable->esValida(posicionCandidata) && posicionCandidata.Y() >= posicionInicial.Y()) {
+	if (posicionable->esValida(posicionCandidata, ancho) && posicionCandidata.Y() >= posicionInicial.Y()) {
         posicion = posicionCandidata;
     } else if (posicionCandidata.Y() > posicionInicial.Y()) {
         cambiarTrayectoria(new MRUV(posicion, VECTOR_VELOCIDAD_NULA, VECTOR_GRAVEDAD));
@@ -170,6 +171,7 @@ void Personaje::update(){
     } else {
     	//Ajusto la posicion en Y para los casos de saltos.
     	posicion.setCoordenada(posicion.X(),posicionInicial.Y());
+    	cout<<posicion.X()<<"---"<<posicion.Y()<<endl;
         mantenerReposo();
     }
 	notificarObservadores();
@@ -184,7 +186,7 @@ bool Personaje::terminoSalto(){
 	cout<<"posicion.X:"<<posicion.X()<<endl;
 	cout<<"Posicion.Y:"<<posicion.Y()<<endl;
 	cout<<"posicionInicial.Y:"<<posicionInicial.Y()<<endl;
-	return (posicionSalto.X() != posicion.X() && posicion.Y() == posicionInicial.Y());
+	return (posicion.Y() == posicionInicial.Y());
 }
 
 bool Personaje::estaSaltando(){
