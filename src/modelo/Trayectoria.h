@@ -5,6 +5,7 @@
 class Trayectoria {
 public:
 	virtual Vector2f getPosicion(float tActual) = 0;
+	virtual Vector2f getVelocidad(float tActual) = 0;
 	virtual ~Trayectoria() {}
 };
 

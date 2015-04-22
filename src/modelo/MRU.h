@@ -17,7 +17,9 @@ public:
 	virtual Vector2f getPosicion(float tActual) {
 		return posInicial + velInicial*tActual;
 	};
-
+	virtual Vector2f getVelocidad(float tActual) {
+		return velInicial;
+	}
 	~MRU() {}
 };
 
