@@ -7,7 +7,7 @@
     "escenario": { 
         "ancho": 2000, 
         "alto": 600, 
-        "y_piso": 50
+        "y_piso": 95
     }, 
     "capas": [
         { 
