@@ -64,7 +64,7 @@ void EscenarioGrafico::centrar_dibujables(){
 	}
 	//Centro el personaje
 	Vector2f vec2(this->ancho_logico/2.0, getYPisoLogico());
-	this->dibujables->back()->centrar_en(vec, VentanaGrafica::Instance()->getLimiteLogicoIzquierdo(), VentanaGrafica::Instance()->relacion_de_aspectoX());
+	this->dibujables->back()->centrar_en(vec2, VentanaGrafica::Instance()->getLimiteLogicoIzquierdo(), VentanaGrafica::Instance()->relacion_de_aspectoX());
 
 	Logger::getInstance()->info("Centrado de capas correcto.");
 }

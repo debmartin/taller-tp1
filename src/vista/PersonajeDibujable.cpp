@@ -61,7 +61,6 @@ void PersonajeDibujable::agregarAnimacion(Animacion* nuevaAnimacion){
 
 void PersonajeDibujable::centrar_en(Vector2f v, float limiteLogicoIzquierdoVentana, float relacion_de_aspectoX){
 	this->spritePersonaje->setPosicion(v);
-	Logger::getInstance()->error(&v);
 }
 
 void PersonajeDibujable::dibujar(){
@@ -77,6 +76,7 @@ void PersonajeDibujable::recibirNotificacion(Observable* unObservable){
 
 	Personaje* unPersonaje = (Personaje*) unObservable;
 	Vector2f nueva_posicion = unPersonaje->obtenerPosicionEnVentana();
+	// TODO revisar por aca corregir el el bug de que no se dibuja en la posicion y_piso=0
 	Vector2f posicion_final(nueva_posicion.X()*VentanaGrafica::Instance()->relacion_de_aspectoX(), nueva_posicion.Y());
 
 	//Actualizo la posicion del Sprite.
