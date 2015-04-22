@@ -126,7 +126,7 @@ void Personaje::saltarOblicuoIzquierdaEnLimite(){
 
 void Personaje::saltarOblicuoDerechaEnLimite(){
 	setEstado(SALTANDO_OBLICUO_DERECHA);
-	cambiarTrayectoria(new MRUV(posicion, Vector2f(VELOCIDAD_NULA, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD));
+    cambiarTrayectoria(new MRUV(posicion, Vector2f(VELOCIDAD_NULA, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD));
 	posicionSalto = posicion;
 }
 

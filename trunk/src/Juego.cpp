@@ -35,6 +35,7 @@ void Juego::update()
 {
 	// INICIO CODIGO USUARIO
 	this->jugador1->update();
+	//cout<<"Posicion personaje:"<<this->jugador1->getPosicion().X()<<"PosicionPersY"<<jugador1->getPosicion().Y()<<endl;
 	VentanaGrafica::Instance()->actualizar();
 	// FIN CODIGO USUARIO
 }
