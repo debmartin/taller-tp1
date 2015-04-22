@@ -7,11 +7,12 @@
 
 #include "Personaje.h"
 
-#define VELOCIDAD_DESP_HORIZONTAL 180.0f
-#define VELOCIDAD_DESP_VERTICAL 800.0f
+#define VELOCIDAD_DESP_HORIZONTAL_SALTANDO 320.0f
+#define VELOCIDAD_DESP_HORIZONTAL_CAMINANDO 215.0f
+#define VELOCIDAD_DESP_VERTICAL 1000.0f
 #define VELOCIDAD_NULA 0.0f
 #define VECTOR_VELOCIDAD_NULA Vector2f(0, 0)
-#define VECTOR_GRAVEDAD Vector2f(0, -1600.f)
+#define VECTOR_GRAVEDAD Vector2f(0, -2600.f)
 
 Personaje::Personaje() {
 	this->ancho = 0;
@@ -80,7 +81,7 @@ void Personaje::caminarDerecha(){
     if (llegoAlLimiteDerecho()) {
         nuevaTray = new Reposo(posicion);
     } else {
-        nuevaTray = new MRU(posicion, Vector2f(VELOCIDAD_DESP_HORIZONTAL, VELOCIDAD_NULA));
+        nuevaTray = new MRU(posicion, Vector2f(VELOCIDAD_DESP_HORIZONTAL_CAMINANDO, VELOCIDAD_NULA));
     }
 
     setEstado(CAMINANDO_DERECHA);
@@ -93,7 +94,7 @@ void Personaje::caminarIzquierda(){
     if (llegoAlLimiteIzquierdo()) {
         nuevaTray = new Reposo(posicion);
     } else {
-        nuevaTray = new MRU(posicion, Vector2f(-VELOCIDAD_DESP_HORIZONTAL, VELOCIDAD_NULA));
+        nuevaTray = new MRU(posicion, Vector2f(-VELOCIDAD_DESP_HORIZONTAL_CAMINANDO, VELOCIDAD_NULA));
     }
 
     setEstado(CAMINANDO_IZQUIERDA);
@@ -109,13 +110,13 @@ void Personaje::saltarVertical(){
 
 void Personaje::saltarOblicuoDerecha(){
     setEstado(SALTANDO_OBLICUO_DERECHA);
-    cambiarTrayectoria(new MRUV(posicion, Vector2f(VELOCIDAD_DESP_HORIZONTAL, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD));
+    cambiarTrayectoria(new MRUV(posicion, Vector2f(VELOCIDAD_DESP_HORIZONTAL_SALTANDO, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD));
     Logger::getInstance()->debug("Personaje: salto oblicuo derecha. Se setea trayectoria.");
 }
 
 void Personaje::saltarOblicuoIzquierda(){
     setEstado(SALTANDO_OBLICUO_IZQUIERDA);
-    cambiarTrayectoria(new MRUV(posicion, Vector2f(-VELOCIDAD_DESP_HORIZONTAL, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD));
+    cambiarTrayectoria(new MRUV(posicion, Vector2f(-VELOCIDAD_DESP_HORIZONTAL_SALTANDO, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD));
     Logger::getInstance()->debug("Personaje: salto oblicuo izquierda. Se setea trayectoria.");
 }
 
