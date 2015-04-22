@@ -54,6 +54,7 @@ public:
 	void setDireccion(int nuevaDir);
     void ajustarZIndex(int cantCapas);
     void ajustarAlto(double altoEscenario, double ypiso);
+    void ajustarPosicionIncial(double anchoEscenario, double ypiso);
 	friend ostream& operator<<(ostream &o, const PersonajeDef &p);
 
 	string toString();

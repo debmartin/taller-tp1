@@ -70,7 +70,6 @@ void CargadorDeOjbetos::cargarObjetos(string escenario_path) {
 	Logger::getInstance()->info("Inicialiazación de Capas correcta.");
 
 	////Inicializacion de Personaje////
-	Logger::getInstance()->info(personajeDef);
 	jugador = new Personaje(personajeDef->getAncho(), personajeDef->getAlto(),
 	personajeDef->getPosicionInicial(), VentanaGrafica::Instance());
 
