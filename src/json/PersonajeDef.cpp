@@ -27,7 +27,7 @@ PersonajeDef::PersonajeDef(double anchoIn, double altoIn, int zindexIn, int dire
 		Logger::getInstance()->info("El alto del personaje es menor o igual a cero. Se elije uno nuevo con el valor de 60");
     if ( zindexIn < 0 )
         Logger::getInstance()->info("El zindex del personaje es menor a cero. Se elije uno nuevo para que el personaje este adelante de todas las capas");
-   	if (direccionIn != DIRECCION_PERS_DERECHA || direccionIn != DIRECCION_PERS_IZQUIERDA)	{
+   	if (direccionIn != DIRECCION_PERS_DERECHA && direccionIn != DIRECCION_PERS_IZQUIERDA)	{
 		direccionIn = DIRECCION_PERS_DERECHA;
 		Logger::getInstance()->info("La configuracion de la direccion del personaje no es la correcta. Se lo dirije en direccion derecha");
 	}

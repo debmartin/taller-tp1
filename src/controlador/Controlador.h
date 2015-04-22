@@ -23,6 +23,7 @@ public:
 	Controlador(Personaje* pers);
 	virtual ~Controlador();
 	bool manejar_Evento(SDL_Event &evento);
+	void continuarAccionPrevia();
 	void setPersonaje(Personaje* personaje);
 	SDL_Event obtenerUltimoEvento();
 };

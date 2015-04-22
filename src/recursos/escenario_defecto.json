@@ -7,7 +7,7 @@
     "escenario": { 
         "ancho": 2000, 
         "alto": 600, 
-        "y_piso": 100
+        "y_piso": 50
     }, 
     "capas": [
         { 
@@ -32,8 +32,8 @@
         "zindex": 3, 
         "sprites-reposo": { 
 		            "imagen": "img_default/sonia-reposo.png",
-        		    "cant_fotogramas": 7,
-        		    "fps": 10 
+        		    "cant_fotogramas": 12,
+	       		    "fps": 10 
         			},
         "sprites-caminando": { 
 		            "imagen": "img_default/sonia-caminando.png",
@@ -55,7 +55,7 @@
         		    "cant_fotogramas": 7,
         		    "fps": 10 
         			},
-		"direccion": 1 
+	"direccion": 1 
     } 
 }
 

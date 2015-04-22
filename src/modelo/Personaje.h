@@ -79,8 +79,6 @@ public:
 	void centrar_en(Vector2f& v);
     void caminarDerecha();
     void caminarIzquierda();
-    void caminarDerechaEnLimite();
-    void caminarIzquierdaEnLimite();
     void saltarVertical();
     void saltarOblicuoDerecha();
     void saltarOblicuoIzquierda();
@@ -94,9 +92,7 @@ public:
 	void update();
 	bool estaSaltando();
 	bool estaAgachado();
-	bool terminoSalto();
-//	friend ostream& operator<<(ostream &o, const Personaje &p);
-
+	bool estaEnReposo();
 };
 
 #endif /* SRC_MODELO_PERSONAJE_H_ */

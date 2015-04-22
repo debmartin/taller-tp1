@@ -33,7 +33,7 @@ EscenarioDef::EscenarioDef(double anchoIn, double altoIn, double ypisoIn)
 }
 
 void EscenarioDef::ajustarYPiso(double altoPersonaje){
-	double offset_saltoMax = 2;
+	double offset_saltoMax = 1.5;
     if ( ((alto - ypiso) < altoPersonaje) || ((alto - ypiso) < altoPersonaje*offset_saltoMax) ) {
     	if ( ((alto - ypiso) < altoPersonaje) )
     	{

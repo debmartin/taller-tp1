@@ -35,7 +35,6 @@ void Juego::update()
 {
 	// INICIO CODIGO USUARIO
 	this->jugador1->update();
-	//cout<<"Posicion personaje:"<<this->jugador1->getPosicion().X()<<"PosicionPersY"<<jugador1->getPosicion().Y()<<endl;
 	VentanaGrafica::Instance()->actualizar();
 	// FIN CODIGO USUARIO
 }
@@ -43,22 +42,17 @@ void Juego::update()
 void Juego::handleEvents(bool& recargar)
 {
 	SDL_Event evento;
-
 	// INICIO CODIGO USUARIO
-
 	if (SDL_PollEvent(&evento))
 	{
-		//cout<<"primera forma de llamar a controlador"<<endl;
 		if (evento.type == SDL_QUIT){
 			juegoCorriendo = false;
 		} else if (! controladorJuego->manejar_Evento(evento)){
-            juegoCorriendo = false;
-            recargar = true;
+			juegoCorriendo = false;
+			recargar = true;
 		}
-	 /*}else{
-		//cout<<"segunda forma de llamar a controlador"<<endl;
-		evento = controladorJuego->obtenerUltimoEvento();
-		controladorJuego->manejar_Evento(evento);*/
+	} else {
+	        controladorJuego->continuarAccionPrevia();
 	}
 }
 
