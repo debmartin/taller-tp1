@@ -125,7 +125,7 @@ void CargadorDeOjbetos::cargarObjetos(string escenario_path) {
 
 	VentanaGrafica::Instance()->agregarEscenario(escenario);
 	VentanaGrafica::Instance()->centrar_ventana();
-	escenario->centrar_dibujables();
+	escenario->centrar_dibujables(personajeDef->getZindex());
 
 	Logger::getInstance()->info("Termina la carga del juego correctamente.");
 //		    delete parser;
