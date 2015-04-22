@@ -111,7 +111,7 @@ bool VentanaGrafica::llegoAlLimiteIzquierdo(Vector2f posicion){
 }
 
 bool VentanaGrafica::llegoAlLimiteDerecho(Vector2f posicion){
-	if(posicion.X() >= (escenario->getAnchoLogico() - DELTA_X)){
+	if(posicion.X() >= (escenario->getAnchoLogico() - DELTA_X2)){
 		return true;
 	}return false;
 }

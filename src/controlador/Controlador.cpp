@@ -19,7 +19,6 @@ bool Controlador::manejar_Evento(SDL_Event &evento){
     if (unPersonaje->estaSaltando()) {
     	if(unPersonaje->terminoSalto()){
     		cout<<"termino salto"<<endl;
-    		//unPersonaje->setEstado(EN_ESPERA);
     	}else{
     		cout<<"no termino salto"<<endl;
     		Logger::getInstance()->debug("Evento invalido.");
@@ -54,7 +53,8 @@ bool Controlador::manejar_Evento(SDL_Event &evento){
         	}
         }else if (estadoTeclado[SDL_SCANCODE_RIGHT] && estadoTeclado[SDL_SCANCODE_UP]){
         	Logger::getInstance()->debug("Se presiona: Tecla derecha+Tecla arriba.");
-        	if(unPersonaje->llegoAlLimiteIzquierdo()){
+        	if(unPersonaje->llegoAlLimiteDerecho()){
+        		cout<<"LLego al limite derecho";
         		unPersonaje->saltarOblicuoDerechaEnLimite();
         	}else{
         	    unPersonaje->saltarOblicuoDerecha();
@@ -62,7 +62,7 @@ bool Controlador::manejar_Evento(SDL_Event &evento){
         }else if (estadoTeclado[SDL_SCANCODE_LEFT] && ! unPersonaje->estaAgachado()){
         	cout<<"se detecta que tecla izquierda sigue apretada"<<endl;
         	Logger::getInstance()->debug("Se presiona: Tecla izquierda.");
-        	if(unPersonaje->llegoAlLimiteDerecho()){
+        	if(unPersonaje->llegoAlLimiteIzquierdo()){
         		unPersonaje->caminarIzquierdaEnLimite();
         	}else{
         		unPersonaje->caminarIzquierda();
