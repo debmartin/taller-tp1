@@ -69,6 +69,20 @@ void Parser::cargarJsonPorDefecto(){
     reader.parse(archivo_escenario, this->root, false);
 }
 
+double obtenerValorDouble(Json::Value& principal, double alternativo, string msjNoNumerico){
+    if (principal.isNumeric())
+        return principal.asDouble();
+    Logger::getInstance()->error(msjNoNumerico);
+    return alternativo;
+}
+
+int obtenerValorInt(Json::Value& principal, int alternativo, string msjNoNumerico){
+    if (principal.isInt())
+        return principal.asInt();
+    Logger::getInstance()->error(msjNoNumerico);
+    return alternativo;
+}
+
 void Parser::parsearCapas(){
 
 	if ( root.isMember(TAG_CAPAS) )
@@ -90,12 +104,7 @@ void Parser::parsearCapas(){
 					id_capa = valorCapas[idx_capas][TAG_CAPAS_ID].asString();
 				} else if ( tag == TAG_CAPAS_ANCHO ) {
 					Json::Value valorAncho = valorCapas[idx_capas][TAG_CAPAS_ANCHO];
-					if (valorAncho.isNumeric()) {
-						ancho = (valorAncho.asDouble());
-					} else {
-						ancho = ANCHO_CAPA_DEFAULT;
-						Logger::getInstance()->error("El valor de ancho de la capa no es un numero");
-					}
+					ancho = obtenerValorDouble(valorAncho, ANCHO_CAPA_DEFAULT, "El valor de ancho de la capa no es un numero");
 				} else {
 					Logger::getInstance()->error("Dentro de la capa no se encuentra el parametro "+tag);
 				}
@@ -134,11 +143,11 @@ void Parser::parsearEscenario(){
         Json::Value subvalor = valorEsc[tag];
 
         if ( tag == TAG_ESCENARIO_ALTO ) {
-            e_alto = (subvalor.isNumeric()) ? (subvalor.asDouble()) : ALTO_ESC_DEFAULT;
+            e_alto = obtenerValorDouble(subvalor, ALTO_ESC_DEFAULT, "Escenario alto no es valor numerico");
         } else if ( tag == TAG_ESCENARIO_ANCHO ) {
-            e_ancho = (subvalor.isNumeric()) ? (subvalor.asDouble()) : ANCHO_ESC_DEFAULT;
+            e_ancho = obtenerValorDouble(subvalor, ANCHO_ESC_DEFAULT, "Escenario ancho no es valor numerico");
         } else if ( tag == TAG_ESCENARIO_YPISO) {
-            e_ypiso = (subvalor.isNumeric()) ? (subvalor.asDouble()) : Y_PISO_ESC_DEFAULT;
+            e_ypiso = obtenerValorDouble(subvalor, Y_PISO_ESC_DEFAULT, "Escenario y_piso no es valor numerico");
         } else {
             Logger::getInstance()->error("Dentro del escenario no se encuentra el parametro "+tag);
         }
@@ -160,11 +169,11 @@ void Parser::parsearVentana(){
         Json::Value subvalor = valorVentana[tag];
 
         if ( tag == TAG_VENTANA_ALTOPX ) {
-            v_alto_px = (subvalor.isInt()) ? subvalor.asInt() : ALTOPX_VENTANA_DEFAULT;
+            v_alto_px = obtenerValorInt(subvalor, ALTOPX_VENTANA_DEFAULT, "Ventana altopx no es valor entero");
         } else if ( tag == TAG_VENTANA_ANCHO ) {
-            v_ancho = (subvalor.isNumeric()) ? (subvalor.asDouble()) : ANCHO_VENTANA_DEFAULT;
+            v_ancho = obtenerValorDouble(subvalor, ANCHO_VENTANA_DEFAULT, "Ventana ancho no es valor numerico");
         } else if ( tag == TAG_VENTANA_ANCHOPX ) {
-            v_ancho_px = (subvalor.isInt()) ? (subvalor.asInt()) : ANCHOPX_VENTANA_DEFAULT;
+            v_ancho_px = obtenerValorInt(subvalor, ANCHOPX_VENTANA_DEFAULT, "Ventana anchopx no es valor entero");
         } else {
             Logger::getInstance()->error("Dentro de la ventana no se encuentra el parametro "+tag);
         }
@@ -194,11 +203,11 @@ void Parser::parsearPersonaje(){
         Json::Value subvalor = valorPersonaje[tag];
 
         if ( tag == TAG_PERSONAJE_ALTO ) {
-            p_alto = (subvalor.isNumeric()) ? (subvalor.asDouble()) : ALTO_PERS_DEFAULT;
+            p_alto = obtenerValorDouble(subvalor, ALTO_PERS_DEFAULT, "Personaje alto no es valor numerico");
         } else if ( tag == TAG_PERSONAJE_ANCHO ) {
-            p_ancho = (subvalor.isNumeric()) ? (subvalor.asDouble()) : ANCHO_PERS_DEFAULT;
+            p_ancho = obtenerValorDouble(subvalor, ANCHO_PERS_DEFAULT, "Personaje ancho no es valor numerico");
         } else if ( tag.compare(TAG_PERSONAJE_ZINDEX) >= 0) {
-            p_zindex = (subvalor.isInt()) ? (subvalor.asInt()) : Z_INDEX_PERS_DEFAULT;
+            p_zindex = obtenerValorInt(subvalor, Z_INDEX_PERS_DEFAULT, "Personaje zindex no es valor entero");
         } else if (tag.find(TAG_PERSONAJE_SPRITES) != std::string::npos) {
             p_sprites_imagen = (*it2)[TAG_PERSONAJE_SPRITES_IMAGEN].asString();
             int indiceId = string(TAG_PERSONAJE_SPRITES).size();
@@ -207,13 +216,13 @@ void Parser::parsearPersonaje(){
             Json::Value valorFotog = (*it2)[TAG_PERSONAJE_SPRITES_CANT_FOTOGRAMAS];
             Json::Value valorFps = (*it2)[TAG_PERSONAJE_SPRITES_FPS];
 
-            p_sprites_cant_fotogramas = (valorFotog.isInt()) ? (valorFotog.asInt()) : CANT_FOTOGRAMAS_DEFAULT;
-            p_sprites_fps = (valorFps.isInt()) ? (valorFps.asInt()) : FPS_DEFAULT;
+            p_sprites_cant_fotogramas = obtenerValorInt(valorFotog, CANT_FOTOGRAMAS_DEFAULT, "Personaje sprite cant_fotogramas no es valor entero");
+            p_sprites_fps = obtenerValorInt(valorFps, FPS_DEFAULT, "Personaje sprite fps no es valor entero");
 
             SpriteDef* spriteDefAct = new SpriteDef(p_sprites_imagen, p_sprites_id, p_sprites_cant_fotogramas, p_sprites_fps);
             sprites.push_back(spriteDefAct);
         } else if ( tag == TAG_PERSONAJE_DIRECCION ) {
-            p_direccion = (subvalor.isInt()) ? (subvalor.asInt()) : DIRECCION_PERS_DERECHA;
+            p_direccion = obtenerValorInt(subvalor, DIRECCION_PERS_DERECHA, "Personaje direccion no es valor entero");
         } else {
             Logger::getInstance()->error("Dentro del personaje no se encuentra el parametro "+tag);
         }
