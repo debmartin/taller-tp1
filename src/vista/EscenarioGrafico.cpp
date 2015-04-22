@@ -74,7 +74,7 @@ void EscenarioGrafico::centrar_dibujables(int zindexPersonaje){
 
 		if (z_index_capa == zindexPersonaje) veces_encontrado++;
 
-		if (veces_encontrado == 2) personajeDibujable = (*it);
+		if (veces_encontrado == 2) { personajeDibujable = (*it); break; }
 
 		z_index_capa++;
 	}
