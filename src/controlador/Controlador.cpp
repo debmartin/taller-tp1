@@ -74,6 +74,9 @@ void Controlador::continuarAccionPrevia(){
     }else if (estadoTeclado[SDL_SCANCODE_RIGHT] && ! unPersonaje->estaAgachado()){
         Logger::getInstance()->debug("Continua presionada: Tecla derecha.");
         unPersonaje->caminarDerecha();
+    } else if (estadoTeclado[SDL_SCANCODE_DOWN]){
+        Logger::getInstance()->debug("Se presiona: Tecla abajo.");
+        unPersonaje->agacharse();
     }
 }
 
