@@ -107,8 +107,8 @@ list<SpriteDef*>* PersonajeDef::getSpritesDef() const {
 
 ostream& operator <<(ostream &o, const PersonajeDef &p) {
 
-        o<<"PersonajeDef -> [ancho, alto, zindex, direccion]=[";
-        o<<p.ancho<<", "<<p.alto<<", "<<p.z_index<<", "<<p.direccion<<"]"<<endl;
+        o<<"PersonajeDef -> [ancho, alto, zindex, direccion,pos_inicial]=[";
+        o<<p.ancho<<", "<<p.alto<<", "<<p.z_index<<", "<<p.direccion<<", "<<p.posicionInicial<<"]"<<endl;
         o<<"sprites: {"<<endl;
     	for (list<SpriteDef*>::iterator it_spritesDef = p.getSpritesDef()->begin() ; it_spritesDef !=  p.getSpritesDef()->end(); it_spritesDef++)
     	{

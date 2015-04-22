@@ -25,7 +25,9 @@ public:
 	Vector2f operator*(float escalar);
 	Vector2f& operator*=(float escalar);
     void setCoordenada(int x, int y);
+
     friend ostream& operator<<(ostream &o, const Vector2f &c);
+    string toString();
 };
 
 #endif /* SRC_MODELO_VECTOR2F_H_ */

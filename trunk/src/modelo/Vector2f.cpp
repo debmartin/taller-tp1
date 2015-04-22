@@ -47,3 +47,9 @@ ostream& operator <<(ostream &o, const Vector2f &v) {
         o<<"Vector2f -> [x,y]=["<<v.x<<", "<<v.y<<"]";
         return o;
 }
+
+string Vector2f::toString() {
+    ostringstream stream;
+    stream <<*this;
+	return stream.str();
+}

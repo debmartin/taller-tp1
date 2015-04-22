@@ -136,6 +136,10 @@ void Logger::debugArgs(const char * format, ... )
     this->debug(sMessage);
 }
 
+void Logger::debug(Vector2f* unVector2f) {
+	this->debug(unVector2f->toString());
+}
+
 void Logger::info(std::string message){
 	std::string key = "INFO";
 	Logger::insert(key,message);
@@ -165,6 +169,10 @@ void Logger::infoArgs(const char * format, ... )
     vsprintf (sMessage,format, args);
     va_end (args);
     this->info(sMessage);
+}
+
+void Logger::info(Vector2f* unVector2f) {
+	this->info(unVector2f->toString());
 }
 
 void Logger::error(std::string  message){
@@ -197,6 +205,11 @@ void Logger::errorArgs(const char * format, ... )
     va_end (args);
     this->error(sMessage);
 }
+
+void Logger::error(Vector2f* unVector2f) {
+	this->error(unVector2f->toString());
+}
+
 
 void Logger::insert(std::string& key, std::string& value){
 	if (ioFile.is_open()) {
