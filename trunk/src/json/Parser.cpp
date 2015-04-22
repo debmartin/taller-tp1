@@ -188,7 +188,6 @@ void Parser::parsearPersonaje(){
         string tag = it2.key().asString();
         Json::Value subvalor = valorPersonaje[tag];
 
-
         if ( tag == TAG_PERSONAJE_ALTO ) {
             p_alto = (subvalor.isNumeric()) ? (subvalor.asDouble()) : ALTO_PERS_DEFAULT;
         } else if ( tag == TAG_PERSONAJE_ANCHO ) {

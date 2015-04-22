@@ -19,7 +19,7 @@ Personaje::Personaje() {
 }
 
 Personaje::Personaje(double anchoIn, double altoIn, Vector2f posInicial, Posicionable* posc) :
-    posicionInicial(posInicial), ancho(anchoIn), alto(altoIn), estado(EN_ESPERA), posicionable(posc), posicion(posInicial), tCreacion(0) {
+    posicionInicial(posInicial), ancho(anchoIn), alto(altoIn), estado(EN_ESPERA), posicionable(posc), posicion(posInicial), tCreacion(0){
 	this->trayectoria = new Reposo(this->posicion);
 }
 
@@ -76,27 +76,28 @@ void Personaje::centrar_en(Vector2f& v){
 }
 
 void Personaje::caminarDerecha(){
+    Trayectoria* nuevaTray;
+    if (llegoAlLimiteDerecho()) {
+      nuevaTray = new Reposo(posicion);
+    } else {
+        nuevaTray = new MRU(posicion, Vector2f(VELOCIDAD_DESP_HORIZONTAL, VELOCIDAD_NULA));
+    }
+
     setEstado(CAMINANDO_DERECHA);
-    cambiarTrayectoria(new MRU(posicion, Vector2f(VELOCIDAD_DESP_HORIZONTAL, VELOCIDAD_NULA)));
+    cambiarTrayectoria(nuevaTray);
     Logger::getInstance()->debug("Personaje: caminando derecha. Se setea trayectoria.");
 }
 
 void Personaje::caminarIzquierda(){
-	cout<<"camina izquierda"<<endl;
+    Trayectoria* nuevaTray;
+    if (llegoAlLimiteIzquierdo()) {
+      nuevaTray = new Reposo(posicion);
+    } else {
+        nuevaTray = new MRU(posicion, Vector2f(-VELOCIDAD_DESP_HORIZONTAL, VELOCIDAD_NULA));
+    }
+
     setEstado(CAMINANDO_IZQUIERDA);
-    cambiarTrayectoria(new MRU(posicion, Vector2f(-VELOCIDAD_DESP_HORIZONTAL, VELOCIDAD_NULA)));
-    Logger::getInstance()->debug("Personaje: caminando izquierda. Se setea trayectoria.");
-}
-
-void Personaje::caminarDerechaEnLimite(){
-	setEstado(CAMINANDO_DERECHA);
-    cambiarTrayectoria(new Reposo(posicion));
-    Logger::getInstance()->debug("Personaje: caminando izquierda. Se setea trayectoria.");
-}
-
-void Personaje::caminarIzquierdaEnLimite(){
-	setEstado(CAMINANDO_IZQUIERDA);
-	cambiarTrayectoria(new Reposo(posicion));
+    cambiarTrayectoria(nuevaTray);
     Logger::getInstance()->debug("Personaje: caminando izquierda. Se setea trayectoria.");
 }
 
@@ -115,9 +116,6 @@ void Personaje::saltarOblicuoDerecha(){
 void Personaje::saltarOblicuoIzquierda(){
     setEstado(SALTANDO_OBLICUO_IZQUIERDA);
     cambiarTrayectoria(new MRUV(posicion, Vector2f(-VELOCIDAD_DESP_HORIZONTAL, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD));
-    /*    posicionSalto = posicion;
-	cout<<"Posicion salto X:"<<posicionSalto.X()<<endl;
-	cout<<"posicion salto Y:"<<posicionSalto.Y()<<endl;*/
     Logger::getInstance()->debug("Personaje: salto oblicuo izquierda. Se setea trayectoria.");
 }
 
@@ -166,14 +164,13 @@ void Personaje::update(){
 	Vector2f posicionCandidata = this->trayectoria->getPosicion(tActual);
 	if (posicionable->esValida(posicionCandidata, ancho) && posicionCandidata.Y() >= posicionInicial.Y()) {
         posicion = posicionCandidata;
+	} else if (posicionCandidata.Y() < posicionInicial.Y()) {
+        Logger::getInstance()->debug("entra a igual");
+        posicion = Vector2f(posicionCandidata.X(), posicionInicial.Y());
+        mantenerReposo();
     } else if (posicionCandidata.Y() > posicionInicial.Y()) {
         cambiarTrayectoria(new MRUV(posicion, VECTOR_VELOCIDAD_NULA, VECTOR_GRAVEDAD));
-//        posicion = trayectoria->getPosicion(tActual);
-    } else if (posicion.Y() == posicionInicial.Y()){
     } else {
-    	//Ajusto la posicion en Y para los casos de saltos.
-    	posicion.setCoordenada(posicion.X(),posicionInicial.Y());
-    	cout<<posicion.X()<<"---"<<posicion.Y()<<endl;
         mantenerReposo();
     }
 	notificarObservadores();
@@ -181,14 +178,6 @@ void Personaje::update(){
 
 Personaje::~Personaje(){
     delete trayectoria;
-}
-
-bool Personaje::terminoSalto(){
-	cout<<"PosicionSalto.X:"<<posicionSalto.X()<<endl;
-	cout<<"posicion.X:"<<posicion.X()<<endl;
-	cout<<"Posicion.Y:"<<posicion.Y()<<endl;
-	cout<<"posicionInicial.Y:"<<posicionInicial.Y()<<endl;
-	return (posicion.Y() == posicionInicial.Y());
 }
 
 bool Personaje::estaSaltando(){
@@ -199,3 +188,6 @@ bool Personaje::estaAgachado(){
     return (estado == AGACHADO);
 }
 
+bool Personaje::estaEnReposo(){
+    return (estado == EN_ESPERA);
+}
