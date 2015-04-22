@@ -78,7 +78,7 @@ void Personaje::centrar_en(Vector2f& v){
 void Personaje::caminarDerecha(){
     Trayectoria* nuevaTray;
     if (llegoAlLimiteDerecho()) {
-      nuevaTray = new Reposo(posicion);
+        nuevaTray = new Reposo(posicion);
     } else {
         nuevaTray = new MRU(posicion, Vector2f(VELOCIDAD_DESP_HORIZONTAL, VELOCIDAD_NULA));
     }
@@ -91,7 +91,7 @@ void Personaje::caminarDerecha(){
 void Personaje::caminarIzquierda(){
     Trayectoria* nuevaTray;
     if (llegoAlLimiteIzquierdo()) {
-      nuevaTray = new Reposo(posicion);
+        nuevaTray = new Reposo(posicion);
     } else {
         nuevaTray = new MRU(posicion, Vector2f(-VELOCIDAD_DESP_HORIZONTAL, VELOCIDAD_NULA));
     }
