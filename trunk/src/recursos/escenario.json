@@ -5,7 +5,7 @@
         "ancho": 640
     }, 
 	"escenario": {
-        "ancho": 1500,
+        "ancho": 1600,
         "alto": 600,
         "y_piso": 50
     },
@@ -23,7 +23,12 @@
 	    { 
             "imagen_fondo": "img/goro3.png",
             "id_capa": "capa_3", 
-            "ancho": 1500 
+            "ancho": 1400 
+        },
+        { 
+            "imagen_fondo": "img/goro4.png",
+            "id_capa": "capa_4", 
+            "ancho": 1600 
         }
     ], 
     "personaje": {
