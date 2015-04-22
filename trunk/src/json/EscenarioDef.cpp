@@ -33,10 +33,21 @@ EscenarioDef::EscenarioDef(double anchoIn, double altoIn, double ypisoIn)
 }
 
 void EscenarioDef::ajustarYPiso(double altoPersonaje){
-    if ((alto - ypiso) < altoPersonaje) {
+	double offset_saltoMax = 2;
+    if ( ((alto - ypiso) < altoPersonaje) || ((alto - ypiso) < altoPersonaje*offset_saltoMax) ) {
+    	if ( ((alto - ypiso) < altoPersonaje) )
+    	{
+    		Logger::getInstance()->error("El y del piso del personaje sobrepasa al escenario con respecto a su altura. Se elije uno nuevo con el valor de",(int)Y_PISO_ESC_DEFAULT);
+    	}
+
+        if ((alto - ypiso) < altoPersonaje*offset_saltoMax)
+        {
+            Logger::getInstance()->error("El y del piso del personaje sobrepasa al escenario con respecto a la altura maxima de su salto. Se elije uno nuevo con el valor de",(int)Y_PISO_ESC_DEFAULT);
+        }
+
         ypiso = Y_PISO_ESC_DEFAULT;
-        Logger::getInstance()->error("El y del piso del personaje sobrepasa al escenario con respecto a su altura. Se elije uno nuevo con el valor de",ypiso);
     }
+
 }
 
 double EscenarioDef::getAlto() const {
