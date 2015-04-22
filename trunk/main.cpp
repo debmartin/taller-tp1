@@ -3,7 +3,9 @@
 #include "src/modelo/CargadorDeObjetos.h"
 
 Juego* cargarJuego(string escenarioPath){
-	Logger::getInstance()->info("Inicia la carga del juego");
+	Logger::getInstance()->info("#################################################");
+	Logger::getInstance()->info("############ INICIA LA CARGA DEL JUEGO ##########");
+	Logger::getInstance()->info("#################################################");
     CargadorDeOjbetos cargador_de_objetos;
     cargador_de_objetos.cargarObjetos(escenarioPath);
 
@@ -63,7 +65,10 @@ int main(int argc, char* args[])
             Juego* juego = cargarJuego(argumento);
             correrJuego(juego, recargar);
         }
-		Logger::getInstance()->info("Juego finalizado");
+
+    	Logger::getInstance()->info("#################################################");
+    	Logger::getInstance()->info("################## JUEGO FINALIZADO #############");
+    	Logger::getInstance()->info("#################################################");
 
 	}
 

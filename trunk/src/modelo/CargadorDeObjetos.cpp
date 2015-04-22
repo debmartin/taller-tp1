@@ -80,7 +80,6 @@ void CargadorDeOjbetos::cargarObjetos(string escenario_path) {
 					* VentanaGrafica::Instance()->relacion_de_aspectoX(),
 			jugador->getAlto()
 					* VentanaGrafica::Instance()->relacion_de_aspectoY());
-	Logger::getInstance()->error("relacion_de_aspectoY",VentanaGrafica::Instance()->relacion_de_aspectoY());
 
 	list<SpriteDef*>* spritesDef = personajeDef->getSpritesDef();
 	list<SpriteDef*>::iterator it_sprites = spritesDef->begin();
