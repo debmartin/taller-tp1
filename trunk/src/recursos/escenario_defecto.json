@@ -23,7 +23,7 @@
         { 
             "imagen_fondo": "img_default/fondo-warrior-shrine-03.png",
             "id_capa": "shrine3", 
-            "ancho": 1700
+            "ancho": 1500
         } 
     ], 
     "personaje": { 
