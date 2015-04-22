@@ -43,7 +43,7 @@ public:
 	float relacion_de_aspectoY();
 	Vector2f obtener_relacion_aspectos();
 	static VentanaGrafica* Instance();
-    bool esValida(Vector2f posicion);
+    bool esValida(Vector2f posicion, double ancho);
     Vector2f calcularPosicionEnVentana(Vector2f posicionLogica);
 };
 

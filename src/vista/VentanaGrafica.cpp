@@ -135,6 +135,6 @@ VentanaGrafica::~VentanaGrafica(){
     instancia_unica = NULL;
 }
 
-bool VentanaGrafica::esValida(Vector2f posicion){
-    return escenario->esValida(posicion);
+bool VentanaGrafica::esValida(Vector2f posicion, double ancho){
+    return escenario->esValida(posicion, ancho);
 }

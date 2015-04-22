@@ -15,7 +15,7 @@ class Posicionable
     public:
         Posicionable();
         virtual ~Posicionable();
-        virtual bool esValida(Vector2f posicion) = 0;
+        virtual bool esValida(Vector2f posicion, double ancho) = 0;
 };
 
 
