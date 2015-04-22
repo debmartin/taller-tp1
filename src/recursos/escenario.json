@@ -28,7 +28,7 @@
     ], 
     "personaje": { 
         "ancho": 105, 	
-        "alto": 200, 
+        "alto": 280, 
         "z­index": 3, 
         "sprites-reposo": { 
 		            "imagen": "img/sub-zero-reposo.png",
