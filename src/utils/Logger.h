@@ -23,6 +23,7 @@
 #include <cstdarg>
 
 #include "../json/ObjetoJson.h"
+#include "../modelo/Vector2f.h"
 
 #include <jsoncpp/json/json.h>
 using namespace std;
@@ -107,6 +108,7 @@ public:
 	void debug(string unString, int unEntero);
 	void debug(string unString, double unDouble);
 	void debugArgs(const char * format, ... );
+	void debug(Vector2f* unVector2f);
 	/**
 	 * Escribe un mensaje de informacion sobre el log.
 	 */
@@ -115,6 +117,7 @@ public:
 	void info(string unString, int unEntero);
 	void info(string unString, double unDouble);
 	void infoArgs(const char * format, ... );
+	void info(Vector2f* unVector2f);
 
 	/**
 	 * Escribe un mensaje de error sobre el log.
@@ -124,6 +127,7 @@ public:
 	void error(string unString, int unEntero);
 	void error(string unString, double unDouble);
 	void errorArgs(const char * format, ... );
+	void error(Vector2f* unVector2f);
 	/**
 	 * Inserta un mensaje en el archivo de log.
 	 */
