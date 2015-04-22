@@ -32,7 +32,7 @@
         "zindex": 3, 
         "sprites-reposo": { 
 		            "imagen": "img_default/sonia-reposo.png",
-        		    "cant_fotogramas": 12,
+        		    "cant_fotogramas": 7,
 	       		    "fps": 10 
         			},
         "sprites-caminando": { 
