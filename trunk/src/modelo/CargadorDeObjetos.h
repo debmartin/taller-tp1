@@ -28,8 +28,7 @@
 
 #define TITULO_VENTANA_INICIO "Taller de programacion TP: Mortal Kombat"
 #define INICIAR_FULLSCREEN false
-#define POSICION_INICIAL_PERSONAJE Vector2f(750, 100) // TODO revisar que estos valores no deberian ser constantes
-#define POS_VENTANA_INICIO Vector2f(100, 100) // TODO revisar que estos valores no deberian ser constantes
+#define POS_VENTANA_INICIO Vector2f(100, 100)
 #define POSICION_INICIAL_CAPA Vector2f(0, 0)
 #define CANT_FOTOGRAMAS_FONDO 1
 #define FPS_FONDO 1
