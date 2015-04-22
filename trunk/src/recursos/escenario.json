@@ -26,7 +26,7 @@
             "ancho": 1300 
         } 
     ], 
-    "personaje": { 
+    "personaje": {
         "ancho": 105, 	
         "alto": 280, 
         "z­index": 3, 
@@ -38,7 +38,7 @@
         "sprites-caminando": { 
 		            "imagen": "img/sub-zero-caminando.png",
         		    "cant_fotogramas": 9,
-        		    "fps": 10 
+        		    "fps": 13
         			},
         "sprites-agachado": { 
 		            "imagen": "img/sub-zero-agachado.png",
@@ -47,13 +47,13 @@
         			},
         "sprites-saltando-vertical": { 
 		            "imagen": "img/sub-zero-saltando-vertical.png",
-        		    "cant_fotogramas": 3,
-        		    "fps": 3
+        		    "cant_fotogramas": 1,
+        		    "fps": 1
         			},
         "sprites-saltando-diagonal": { 
 		            "imagen": "img/sub-zero-saltando-diagonal.png",
         		    "cant_fotogramas": 7,
-        		    "fps": 10 
+        		    "fps": 15 
         			},
 		"direccion": 1
     } 
