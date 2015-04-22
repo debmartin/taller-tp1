@@ -54,7 +54,7 @@ void EscenarioGrafico::centrar_en(Vector2f posicion, float limiteLogicoIzquierdo
 
 }
 
-void EscenarioGrafico::centrar_dibujables(){
+void EscenarioGrafico::centrar_dibujables(int zindexPersonaje){
 	//Centro las capas
 	float posicionInicialY = 0.0f;
 
@@ -64,7 +64,23 @@ void EscenarioGrafico::centrar_dibujables(){
 	}
 	//Centro el personaje
 	Vector2f vec2(this->ancho_logico/2.0, getYPisoLogico());
-	this->dibujables->back()->centrar_en(vec2, VentanaGrafica::Instance()->getLimiteLogicoIzquierdo(), VentanaGrafica::Instance()->relacion_de_aspectoX());
+
+	// EMPIEZA EL QUILOMBO
+	int z_index_capa = 1;
+	int veces_encontrado = 0;
+	Dibujable* personajeDibujable;
+
+	for (list<Capa*>::iterator it = capas->begin(); it != capas->end(); ++it) {
+
+		if (z_index_capa == zindexPersonaje) veces_encontrado++;
+
+		if (veces_encontrado == 2) personajeDibujable = (*it);
+
+		z_index_capa++;
+	}
+
+	personajeDibujable->centrar_en(vec2, VentanaGrafica::Instance()->getLimiteLogicoIzquierdo(), VentanaGrafica::Instance()->relacion_de_aspectoX());
+	// FIN DEL QUILOMBO
 
 	Logger::getInstance()->info("Centrado de capas correcto.");
 }

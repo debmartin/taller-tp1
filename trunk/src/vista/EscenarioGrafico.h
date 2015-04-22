@@ -33,7 +33,7 @@ public:
 	void dibujar();
 	void actualizar();
 	void centrar_en(Vector2f posicion, float limiteLogicoIzquierdoVentana, float relacion_de_aspectoX);
-	void centrar_dibujables();
+	void centrar_dibujables(int zindexPersonaje);
 	void scrollear_capas();
 	bool esValida(Vector2f posicion, double ancho_personaje);
 };
