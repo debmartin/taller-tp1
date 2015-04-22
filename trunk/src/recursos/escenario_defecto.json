@@ -38,7 +38,7 @@
         "sprites-caminando": { 
 		            "imagen": "img_default/sonia-caminando.png",
         		    "cant_fotogramas": 6,
-        		    "fps": 10 
+        		    "fps": 12
         			},
         "sprites-agachado": { 
 		            "imagen": "img_default/sonia-agachada.png",
@@ -47,13 +47,13 @@
         			},
         "sprites-saltando-vertical": { 
 		            "imagen": "img_default/sonia-saltando-vertical.png",
-        		    "cant_fotogramas": 3,
-        		    "fps": 3
+        		    "cant_fotogramas": 1,
+        		    "fps": 1
         			},
         "sprites-saltando-diagonal": { 
 		            "imagen": "img_default/sonia-saltando-diagonal.png",
         		    "cant_fotogramas": 7,
-        		    "fps": 10 
+        		    "fps": 15
         			},
 	"direccion": 1 
     } 
