@@ -32,19 +32,13 @@ Vector2f& Vector2f::operator*=(float escalar) {
     return *this;
 }
 
-//operator Vector2() {
-//    return Vector2(lround(x), lround(y));
-//}
-
 void Vector2f::setCoordenada(int x, int y) {
     this->x = x;
     this->y = y;
 }
 
-
 ostream& operator <<(ostream &o, const Vector2f &v) {
-
-        o<<"Vector2f -> [x,y]=["<<v.x<<", "<<v.y<<"]";
+        o<<"["<< v.x <<", "<< v.y <<"]";
         return o;
 }
 
