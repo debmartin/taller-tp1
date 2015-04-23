@@ -10,6 +10,7 @@
 #include "../modelo/Personaje.h"
 
 #define DELTA_X2 110
+#define DELTA_X 10
 using namespace std;
 
 class VentanaGrafica: public Posicionable, public Observador{

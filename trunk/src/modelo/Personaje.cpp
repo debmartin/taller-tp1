@@ -58,11 +58,10 @@ int Personaje::getVida(){
 
 //Devuelve un vector posicion referenciado desde el eje con origen de coordenadas arriba izquierda.
 Vector2f Personaje::obtenerPosicionEnVentana(){
-	//la cuenta que se hizo:
-	//getAlto()-posicion.Y() = altoEscenario - [ y_piso + ( altoEscenario - altoPersonaje) ]
-	Vector2f P1(posicion.X(), this->getAlto()-posicion.Y());
+	Vector2f P1(posicion.X(), posicion.Y() + getAlto());
 	return VentanaGrafica::Instance()->calcularPosicionEnVentana(P1);
 }
+
 
 bool Personaje::llegoAlLimiteIzquierdo(){
 	return VentanaGrafica::Instance()->llegoAlLimiteIzquierdo(this->posicion);

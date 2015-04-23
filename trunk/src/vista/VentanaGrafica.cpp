@@ -56,8 +56,9 @@ void VentanaGrafica::centrar_ventana(){
 }
 
 Vector2f VentanaGrafica::calcularPosicionEnVentana(Vector2f posicionLogica){
-    return Vector2f(posicionLogica.X()-limite_logico_izquierdo, posicionLogica.Y());
+    return Vector2f(posicionLogica.X()-limite_logico_izquierdo, escenario->getAltoLogico() - posicionLogica.Y());
 }
+
 
 void VentanaGrafica::dibujarTodo(){
 	Renderizador::Instance()->dibujar(escenario);
