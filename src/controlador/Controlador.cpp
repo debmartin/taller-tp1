@@ -37,18 +37,10 @@ void Controlador::identificarOrden(){
 
     if (estadoTeclado[SDL_SCANCODE_LEFT] && estadoTeclado[SDL_SCANCODE_UP]){
         Logger::getInstance()->debug("Se presiona: Tecla izquierda+Tecla arriba.");
-        if(unPersonaje->llegoAlLimiteIzquierdo()){
-            unPersonaje->saltarOblicuoIzquierdaEnLimite();
-        }else{
-            unPersonaje->saltarOblicuoIzquierda();
-        }
+        unPersonaje->saltarOblicuoIzquierda();
     } else if (estadoTeclado[SDL_SCANCODE_RIGHT] && estadoTeclado[SDL_SCANCODE_UP]){
         Logger::getInstance()->debug("Se presiona: Tecla derecha+Tecla arriba.");
-        if(unPersonaje->llegoAlLimiteDerecho()){
-            unPersonaje->saltarOblicuoDerechaEnLimite();
-        }else{
-            unPersonaje->saltarOblicuoDerecha();
-        }
+        unPersonaje->saltarOblicuoDerecha();
     }else if (estadoTeclado[SDL_SCANCODE_LEFT] && ! unPersonaje->estaAgachado()){
         Logger::getInstance()->debug("Se presiona: Tecla izquierda.");
         unPersonaje->caminarIzquierda();

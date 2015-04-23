@@ -119,17 +119,6 @@ void Personaje::saltarOblicuoIzquierda(){
     Logger::getInstance()->debug("Personaje: salto oblicuo izquierda. Se setea trayectoria.");
 }
 
-void Personaje::saltarOblicuoIzquierdaEnLimite(){
-	setEstado(SALTANDO_OBLICUO_IZQUIERDA);
-	cambiarTrayectoria(new MRUV(posicion, Vector2f(VELOCIDAD_NULA, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD));
-}
-
-void Personaje::saltarOblicuoDerechaEnLimite(){
-	setEstado(SALTANDO_OBLICUO_DERECHA);
-    cambiarTrayectoria(new MRUV(posicion, Vector2f(VELOCIDAD_NULA, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD));
-	posicionSalto = posicion;
-}
-
 void Personaje::agacharse(){
     setEstado(AGACHADO);
     cambiarTrayectoria(new Reposo(posicion));
