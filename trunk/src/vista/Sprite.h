@@ -57,6 +57,7 @@ public:
 	Vector2f getPosicion();
 	int getAnchoPx();
 	int getAltoPx();
+	Vector2f getDimensionesPx();
 };
 
 #endif /* SRC_VISTA_SPRITE_H_ */
