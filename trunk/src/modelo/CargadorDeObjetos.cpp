@@ -82,7 +82,15 @@ void CargadorDeOjbetos::cargarObjetos(string escenario_path) {
 
 	list<SpriteDef*>* spritesDef = personajeDef->getSpritesDef();
 	list<SpriteDef*>::iterator it_sprites = spritesDef->begin();
-	SpriteDef* primerSpriteSubQuieto = *it_sprites;
+	SpriteDef* primerSpriteSubQuieto;
+
+	for (; it_sprites != spritesDef->end(); ++it_sprites) {
+			if((*it_sprites)->getIdSprite() == ID_ZUBZERO_QUIETO){
+				primerSpriteSubQuieto = *it_sprites;
+			}
+	}
+
+	cout << "*CargadorDeOjbetos::cargarObjetos>getIdSprite:" << primerSpriteSubQuieto->getIdSprite() << endl;
 	Animacion* SubQuieto = new Animacion(primerSpriteSubQuieto->getImagen(),
 	primerSpriteSubQuieto->getCantFotogramas(),
 	primerSpriteSubQuieto->getFps(),
@@ -98,7 +106,9 @@ void CargadorDeOjbetos::cargarObjetos(string escenario_path) {
 	personajeDibujable = new PersonajeDibujable(SubQuieto,
 	personajeDef->getPosicionInicial(), tamanioPx, direccion);
 
+	it_sprites = spritesDef->begin();
 	for (; it_sprites != spritesDef->end(); ++it_sprites) {
+		cout << "FOR-ID:" << (*it_sprites)->getIdSprite() << endl;
 		Animacion* sub_zero = new Animacion((*it_sprites)->getImagen(),
 		(*it_sprites)->getCantFotogramas(), (*it_sprites)->getFps(),
 		(*it_sprites)->getIdSprite(),
