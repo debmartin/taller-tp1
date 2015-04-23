@@ -32,6 +32,10 @@ double Personaje::getAncho() const {
 	return ancho;
 }
 
+Vector2f Personaje::getDimensionesLogicas() const {
+	return Vector2f(this->getAncho(), this->getAlto());
+}
+
 void Personaje::setPosicion(int x, int y) {
 	this->posicion.setCoordenada(x,y);
 }
@@ -59,16 +63,19 @@ int Personaje::getVida(){
 //Devuelve un vector posicion referenciado desde el eje con origen de coordenadas arriba izquierda.
 Vector2f Personaje::obtenerPosicionEnVentana(){
 	Vector2f P1(posicion.X(), posicion.Y() + getAlto());
-	return VentanaGrafica::Instance()->calcularPosicionEnVentana(P1);
+	cout << "Personaje::obtenerPosicionEnVentana>P1:" << P1 << endl;
+	Vector2f P2 = VentanaGrafica::Instance()->calcularPosicionEnVentana(P1);
+	cout << "Personaje::obtenerPosicionEnVentana>P2:" << P2 << endl;
+	return P2;
 }
-
 
 bool Personaje::llegoAlLimiteIzquierdo(){
 	return VentanaGrafica::Instance()->llegoAlLimiteIzquierdo(this->posicion);
 }
 
 bool Personaje::llegoAlLimiteDerecho(){
-	return VentanaGrafica::Instance()->llegoAlLimiteDerecho(this->posicion);
+	//return VentanaGrafica::Instance()->llegoAlLimiteDerecho(Vector2f(this->posicion.X()+this->getAncho(),this->posicion.Y()));
+	return false; //TODO: Esto ya no hace falta por que Debbie se encar de hacerlo en Personaje::update()
 }
 
 void Personaje::centrar_en(Vector2f& v){
@@ -163,6 +170,8 @@ void Personaje::update(){
     } else {
         mantenerReposo();
     }
+	cout << "#Personaje::update>posicionCandidata :" << posicionCandidata << endl;
+	cout << "#Personaje::update>dimensionesLogicas:" << this->getDimensionesLogicas() << endl;
 	notificarObservadores();
 }
 

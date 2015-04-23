@@ -67,6 +67,7 @@ public:
 	virtual ~Personaje();
 	double getAlto() const;
 	double getAncho() const;
+	Vector2f getDimensionesLogicas() const;
 	void setPosicion(int posicion_x, int posicion_y);
 	Vector2f getPosicion();
 	void setEstado(estado_personaje estado);
