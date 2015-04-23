@@ -39,8 +39,8 @@ void Sprite::dibujar() {
 	SDL_Rect destRect;
 	destRect.x = (int) posicion.X();
 	destRect.y = (int) posicion.Y();
-	destRect.w = (int)(anchoFotogramaPx * factorEscalaX);
-	destRect.h = (int)(altoPx * factorEscalaY);
+	destRect.w = (int) getAnchoPx();
+	destRect.h = (int) getAltoPx();
 
 	SDL_RendererFlip flip;
 	if (orientacion == ORIENTACION_DERECHA)
@@ -71,14 +71,18 @@ int Sprite::getAltoPx(){
 	return this->altoPx * factorEscalaY;
 }
 
+Vector2f Sprite::getDimensionesPx() {
+	return Vector2f(this->getAnchoPx(), this-> getAltoPx());
+}
+
 void Sprite::escalarConFactor(Vector2f& factor){
 	this->factorEscalaX = factor.X();
 	this->factorEscalaY = factor.Y();
 }
 
 void Sprite::escalarConTamanio(int anchoNuevoPx, int altoNuevoPx) {
-	this->factorEscalaX = (float) anchoNuevoPx / (float) anchoFotogramaPx;
-	this->factorEscalaY = (float) altoNuevoPx / (float) altoPx;
+	this->factorEscalaX = ((float) anchoNuevoPx) / ((float) anchoFotogramaPx);
+	this->factorEscalaY = ((float) altoNuevoPx) / ((float) altoPx);
 }
 
 void Sprite::setFotogramaActual(int nroFotograma){
@@ -109,6 +113,7 @@ void Sprite::setSentidoReproduccion(SentidoReproduccion sr) {
 
 void Sprite::cambiarAnimacion(Animacion* nuevaAnim) {
 
+	Vector2f tamPx = this->getDimensionesPx();
 	animacionAct = nuevaAnim;
 	this->fps = animacionAct->getFps();
 
@@ -122,6 +127,7 @@ void Sprite::cambiarAnimacion(Animacion* nuevaAnim) {
 	this->anchoFotogramaPx = lround((double)this->anchoPx / cantidadFotogramas);
 
 	this->fotogramaActual = 1;
+	this->escalarConTamanio(tamPx.X(), tamPx.Y());
 	Logger::getInstance()->debug("Sprite::cambiarAnimacion() - La animacion a sido cambiada");
 }
 
