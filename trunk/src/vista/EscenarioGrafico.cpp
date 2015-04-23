@@ -65,7 +65,6 @@ void EscenarioGrafico::centrar_dibujables(int zindexPersonaje){
 	//Centro el personaje
 	Vector2f vec2(this->ancho_logico/2.0, getYPisoLogico());
 
-	// EMPIEZA EL QUILOMBO
 	int z_index_capa = 1;
 	int veces_encontrado = 0;
 	Dibujable* personajeDibujable;
@@ -80,16 +79,17 @@ void EscenarioGrafico::centrar_dibujables(int zindexPersonaje){
 	}
 
 	personajeDibujable->centrar_en(vec2, VentanaGrafica::Instance()->getLimiteLogicoIzquierdo(), VentanaGrafica::Instance()->relacion_de_aspectoX());
-	// FIN DEL QUILOMBO
 
 	Logger::getInstance()->info("Centrado de capas correcto.");
 }
 
 void EscenarioGrafico::scrollear_capas(){
 	size_t poslListaVelocidades = 0;
+	//cout<<"Prueba///"<<endl;
 	for (list<Capa*>::iterator it = capas->begin(); it != capas->end(); ++it){
 		float nuevaPosicionXCapa = this->listaVelocidades[poslListaVelocidades] * VentanaGrafica::Instance()->getLimiteLogicoIzquierdo();
 		(*it)->setPosicionX(nuevaPosicionXCapa);
+		//cout<<"Pos capaX:"<<nuevaPosicionXCapa<<endl;
 		float posicionXRespectoAVentana = nuevaPosicionXCapa - VentanaGrafica::Instance()->getLimiteLogicoIzquierdo();
 		Vector2f posPXSprite(posicionXRespectoAVentana * VentanaGrafica::Instance()->relacion_de_aspectoX(), 0.0f);
 		(*it)->getSprite()->setPosicion(posPXSprite);
@@ -99,7 +99,7 @@ void EscenarioGrafico::scrollear_capas(){
 
 bool EscenarioGrafico::esValida(Vector2f posicion, double ancho_personaje){
 
-    if (posicion.X() < LIMITE_IZQUIERDO || posicion.X() > (ancho_logico - ancho_personaje*VentanaGrafica::Instance()->relacion_de_aspectoX()))
+    if (posicion.X() < LIMITE_IZQUIERDO || posicion.X() > (ancho_logico - ancho_personaje))
         return false;
     if (posicion.Y() < y_piso_logico || posicion.Y() >= alto_logico)
         return false;

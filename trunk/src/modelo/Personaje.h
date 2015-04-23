@@ -82,8 +82,6 @@ public:
     void saltarVertical();
     void saltarOblicuoDerecha();
     void saltarOblicuoIzquierda();
-    void saltarOblicuoDerechaEnLimite();
-    void saltarOblicuoIzquierdaEnLimite();
     void mantenerReposo();
     void agacharse();
 	void cambiarTrayectoria(Trayectoria* t);
