@@ -8,7 +8,11 @@
 #ifndef SRC_MODELO_CARGADORDEOBJETOS_H_
 #define SRC_MODELO_CARGADORDEOBJETOS_H_
 
+#include <list>
 #include <string>
+
+#include "../vista/PersonajeDibujable.h"
+#include "Personaje.h"
 
 class EscenarioGrafico;
 class Parser;
@@ -35,6 +39,11 @@ public:
 	PersonajeDibujable* cargarPersonajeDibujable();
 	// TODO ver como no pasarte este parametros (ariel)
 	EscenarioGrafico* cargarEscenarioGrafico(PersonajeDibujable* personajeDibujable);
+
+	list<Personaje*>* cargarPersonajes();
+	list<PersonajeDibujable*>* cargarPersonajesDibujables();
+	EscenarioGrafico* cargarEscenarioGrafico(list<PersonajeDibujable*>* personajesDibujables);
+
 };
 
 #endif /* SRC_MODELO_CARGADORDEOBJETOS_H_ */

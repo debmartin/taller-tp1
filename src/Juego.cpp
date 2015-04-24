@@ -20,8 +20,8 @@ Juego::Juego(EscenarioGrafico* escenario, Personaje* personaje, PersonajeDibujab
 	juegoCorriendo = true;
 
 	//Agrego observadores del Personaje.
-	personaje->agregarObservador(personajeDib);
-	personaje->agregarObservador(VentanaGrafica::Instance());
+	this->jugador1->agregarObservador(personajeDib);
+	this->jugador1->agregarObservador(VentanaGrafica::Instance());
 
 	this->controladorJuego = new Controlador(this->jugador1);
 }
@@ -66,10 +66,20 @@ Juego::~Juego(){
 //    delete escenarioG;
 }
 
-void Juego::agregarPersonaje(Personaje* personaje) {
-	this->personajes->push_back(personaje);
-}
+void Juego::agregarPersonajes(list<Personaje*>* personajes, list<PersonajeDibujable*>* personajesDibujables) {
 
-void Juego::agregarPersonaje(PersonajeDibujable* personajeDibujable) {
-	this->personajesDibujables->push_back(personajeDibujable);
+	this->personajes = personajes;
+	this->personajesDibujables = personajesDibujables;
+
+	list<Personaje*>::iterator it;
+	for ( it = personajes->begin() ; it != personajes->end(); ++it)
+	{
+		//Agrego observadores del Personaje.
+		(*it)->agregarObservador(*personajesDibujables->begin());
+		(*it)->agregarObservador(VentanaGrafica::Instance());
+	}
+
+	//this->jugador1 = *(personajes->begin());
+	//this->controladorJuego = new Controlador(this->jugador1);
+
 }

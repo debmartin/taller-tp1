@@ -19,7 +19,8 @@
 #define TAG_CAPAS "capas"
 #define TAG_ESCENARIO "escenario"
 #define TAG_VENTANA "ventana"
-#define TAG_PERSONAJE "personaje"
+#define TAG_PERSONAJE_1 "personaje-1"
+#define TAG_PERSONAJE_2 "personaje-2"
 #define TAG_CAPAS_IMAGEN "imagen_fondo"
 #define TAG_CAPAS_ID "id_capa"
 #define TAG_CAPAS_ANCHO "ancho"
@@ -59,6 +60,7 @@ private:
 	list<CapaDef*>* capas;
 	PersonajeDef* personaje;
 
+	list<PersonajeDef*>* personajesDef;
 
 public:
 	Parser();
@@ -67,6 +69,7 @@ public:
 	list<CapaDef*>* getCapasDef() const;
 	EscenarioDef* getEscenarioDef() const;
 	PersonajeDef* getPersonajeDef() const;
+	list<PersonajeDef*>* getPersonajesDef() const;
 	VentanaDef* getVentanaDef() const;
     void cargarJsonPorDefecto();
 	bool parsearDesdeJson();
@@ -84,7 +87,9 @@ private:
     void parsearCapas();
     void parsearVentana();
     void parsearEscenario();
-    void parsearPersonaje();
+    PersonajeDef* parsearPersonaje(string tag_personaje);
+    void parsearPersonajes();
+
 };
 
 #endif /* SRC_JSON_PARSER_H_ */
