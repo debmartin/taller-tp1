@@ -147,7 +147,7 @@ list<PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables() {
 							(*it)->getAlto()  * VentanaGrafica::Instance()->relacion_de_aspectoY()
 						  );
 
-		list<SpriteDef*>* spritesDef = parser->getPersonajeDef()->getSpritesDef();
+		list<SpriteDef*>* spritesDef = (*it)->getSpritesDef();
 		list<SpriteDef*>::iterator it_sprites = spritesDef->begin();
 		SpriteDef* primerSpriteSubQuieto;
 
@@ -165,14 +165,14 @@ list<PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables() {
 		Renderizador::Instance()->getRenderer());
 
 		OrientacionSprite direccion;
-		if (parser->getPersonajeDef()->getDireccion() == 1) {
+		if ((*it)->getDireccion() == 1) {
 			direccion = ORIENTACION_DERECHA;
 		} else {
 			direccion = ORIENTACION_IZQUIERDA;
 		}
 
 		personajeDibujableCargado = new PersonajeDibujable(SubQuieto,
-				parser->getPersonajeDef()->getPosicionInicial(), tamanioPx, direccion);
+				(*it)->getPosicionInicial(), tamanioPx, direccion);
 
 		it_sprites = spritesDef->begin();
 		for (; it_sprites != spritesDef->end(); ++it_sprites) {

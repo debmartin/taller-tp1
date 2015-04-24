@@ -30,6 +30,7 @@ private:
 
 	list<Personaje*>* personajes;
 	list<PersonajeDibujable*>* personajesDibujables;
+	list<Controlador*>* controladoresJuego;
 
 public:
 	Juego(EscenarioGrafico* escenario, Personaje* pers, PersonajeDibujable* persDib);
@@ -42,6 +43,10 @@ public:
 
 	//
 	static Juego* Instance();
+	list<Controlador*>* getControladoresJuego() const;
+
+private:
+	void definirControladores(list<Personaje*>* personajes);
 };
 
 typedef Juego ElJuego;
