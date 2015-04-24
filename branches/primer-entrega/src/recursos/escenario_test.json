@@ -1,34 +1,34 @@
 {
     "ventana": { 
-        "anchopx": 320, 
+        "anchopx": 640, 
         "altopx": 480, 
         "ancho": 640
     }, 
 	"escenario": {
-        "ancho": 1600,
+        "ancho": 1800,
         "alto": 600,
-        "y_piso": 0
+        "y_piso": 28
     },
     "capas": [
         { 
             "imagen_fondo": "img_test/grilla-negra.png",
             "id_capa": "goro1", 
-            "ancho": 700 
+            "ancho": 1000 
         },
         {
             "imagen_fondo": "img_test/grilla-blanca.png",
             "id_capa": "capa_2", 
-            "ancho": 1300 
+            "ancho": 1600 
         },
         { 
             "imagen_fondo": "img_test/grilla-azul.png",
             "id_capa": "capa_3", 
-            "ancho": 1400 
+            "ancho": 1800 
         }
     ], 
     "personaje": {
-        "ancho": 105, 	
-        "alto": 280, 
+        "ancho": 135, 	
+        "alto": 272, 
         "z­index": 2, 
         "sprites-reposo": { 
 		            "imagen": "img_test/test-reposo.png",

@@ -5,30 +5,30 @@
         "ancho": 640
     }, 
 	"escenario": {
-        "ancho": 1600,
+        "ancho": 1800,
         "alto": 600,
-        "y_piso": 50
+        "y_piso": 28
     },
     "capas": [
         { 
             "imagen_fondo": "img/goro1.png",
             "id_capa": "goro1", 
-            "ancho": 700 
+            "ancho": 1000 
         },               
 	    { 
             "imagen_fondo": "img/goro2.png",
             "id_capa": "capa_2", 
-            "ancho": 1300 
+            "ancho": 1600 
         },
 	    { 
             "imagen_fondo": "img/goro3.png",
             "id_capa": "capa_3", 
-            "ancho": 1400 
+            "ancho": 1800 
         }
     ], 
     "personaje": {
-        "ancho": 105, 	
-        "alto": 285, 
+        "ancho": 135, 	
+        "alto": 272, 
         "z­index": 2, 
         "sprites-reposo": { 
 		            "imagen": "img/sub-zero-reposo.png",
