@@ -26,9 +26,9 @@
             "ancho": 1400 
         }
     ], 
-    "personaje-1": {
-        "ancho": 100, 	
-        "alto": 280, 
+    "personaje": {
+        "ancho": 105, 	
+        "alto": 700, 
         "z­index": 2, 
         "sprites-reposo": { 
 		            "imagen": "img/sub-zero-reposo.png",
@@ -56,37 +56,6 @@
         		    "fps": 15 
         			},
 		"direccion": 1
-    }, 
-    "personaje-2": {
-        "ancho": 120, 	
-        "alto": 280, 
-        "z­index": 2, 
-        "sprites-reposo": { 
-		            "imagen": "img/sub-zero-reposo.png",
-        		    "cant_fotogramas": 12,
-        		    "fps": 10 
-        			},
-        "sprites-caminando": { 
-		            "imagen": "img/sub-zero-caminando.png",
-        		    "cant_fotogramas": 9,
-        		    "fps": 13
-        			},
-        "sprites-agachado": { 
-		            "imagen": "img/sub-zero-agachado.png",
-        		    "cant_fotogramas": 1,
-        		    "fps": 1
-        			},
-        "sprites-saltando-vertical": { 
-		            "imagen": "img/sub-zero-saltando-vertical.png",
-        		    "cant_fotogramas": 1,
-        		    "fps": 1
-        			},
-        "sprites-saltando-diagonal": { 
-		            "imagen": "img/sub-zero-saltando-diagonal.png",
-        		    "cant_fotogramas": 7,
-        		    "fps": 15 
-        			},
-		"direccion": 1
-    }    
+    } 
 }
 

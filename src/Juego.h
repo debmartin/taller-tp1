@@ -23,14 +23,9 @@ class Juego {
 private:
 	bool juegoCorriendo;
 	Controlador* controladorJuego;
-	EscenarioGrafico* escenarioG;
-
 	Personaje* jugador1;
 	PersonajeDibujable* jugadorDibujable1;
-
-	list<Personaje*>* personajes;
-	list<PersonajeDibujable*>* personajesDibujables;
-	list<Controlador*>* controladoresJuego;
+	EscenarioGrafico* escenarioG;
 
 public:
 	Juego(EscenarioGrafico* escenario, Personaje* pers, PersonajeDibujable* persDib);
@@ -38,15 +33,10 @@ public:
 	void update();
 	void handleEvents(bool& recargar);
 	bool running();
-	void agregarPersonajes(list<Personaje*>* personajes, list<PersonajeDibujable*>* personajesDibujables);
 	~Juego();
 
 	//
 	static Juego* Instance();
-	list<Controlador*>* getControladoresJuego() const;
-
-private:
-	void definirControladores(list<Personaje*>* personajes);
 };
 
 typedef Juego ElJuego;

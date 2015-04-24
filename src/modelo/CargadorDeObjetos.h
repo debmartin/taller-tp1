@@ -8,16 +8,23 @@
 #ifndef SRC_MODELO_CARGADORDEOBJETOS_H_
 #define SRC_MODELO_CARGADORDEOBJETOS_H_
 
-#include <list>
-#include <string>
-
+#include "../json/Parser.h"
+#include "../utils/Logger.h"
+#include "../json/EscenarioDef.h"
+#include "../json/VentanaDef.h"
+#include "../json/PersonajeDef.h"
+#include "../vista/VentanaGrafica.h"
+#include "../vista/EscenarioGrafico.h"
+#include "../vista/Capa.h"
+#include "../modelo/Personaje.h"
 #include "../vista/PersonajeDibujable.h"
-#include "Personaje.h"
+#include "../vista/Sprite.h"
 
-class EscenarioGrafico;
-class Parser;
-class Personaje;
-class PersonajeDibujable;
+#include <jsoncpp/json/json.h>
+#include <SDL2/SDL.h>
+#include <iostream>
+#include <string.h>
+#include "../controlador/Controlador.h"
 
 #define TITULO_VENTANA_INICIO "Taller de programacion TP: Mortal Kombat"
 #define INICIAR_FULLSCREEN false
@@ -30,20 +37,17 @@ using namespace std;
 
 class CargadorDeOjbetos{
 private:
-	Parser* parser;
+	EscenarioGrafico* escenario;
+	Personaje* jugador;
+	PersonajeDibujable* personajeDibujable;
+
 public:
-	CargadorDeOjbetos(string escenario_path);
+	CargadorDeOjbetos();
 	virtual ~CargadorDeOjbetos();
-
-	Personaje* cargarPersonaje();
-	PersonajeDibujable* cargarPersonajeDibujable();
-	// TODO ver como no pasarte este parametros (ariel)
-	EscenarioGrafico* cargarEscenarioGrafico(PersonajeDibujable* personajeDibujable);
-
-	list<Personaje*>* cargarPersonajes();
-	list<PersonajeDibujable*>* cargarPersonajesDibujables();
-	EscenarioGrafico* cargarEscenarioGrafico(list<PersonajeDibujable*>* personajesDibujables);
-
+	void cargarObjetos(string escenario_path);
+	EscenarioGrafico* getEscenarioGrafico();
+	Personaje* getPersonaje();
+	PersonajeDibujable* getPersonajeDibujable();
 };
 
 #endif /* SRC_MODELO_CARGADORDEOBJETOS_H_ */

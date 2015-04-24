@@ -4,55 +4,9 @@
  *  Created on: 14/4/2015
  *      Author: val
  */
-
 #include "CargadorDeObjetos.h"
 
-#include <SDL2/SDL_render.h>
-#include <iostream>
-#include <list>
-
-#include "../json/CapaDef.h"
-#include "../json/EscenarioDef.h"
-#include "../json/Parser.h"
-#include "../json/PersonajeDef.h"
-#include "../json/SpriteDef.h"
-#include "../json/VentanaDef.h"
-#include "../utils/Logger.h"
-#include "../vista/Animacion.h"
-#include "../vista/Capa.h"
-#include "../vista/EscenarioGrafico.h"
-#include "../vista/PersonajeDibujable.h"
-#include "../vista/Renderizador.h"
-#include "../vista/Sprite.h"
-#include "../vista/VentanaGrafica.h"
-#include "Personaje.h"
-#include "Vector2f.h"
-
-CargadorDeOjbetos::CargadorDeOjbetos(string escenario_path) {
-
-	////Inicialización desde Parser////
-	this->parser = new Parser(escenario_path);
-	if (!parser->parsearDesdeJson()) {
-		parser->cargarJsonPorDefecto();
-		parser->parsearDesdeJson();
-	}
-
-	////Inicializacion de VentanaGrafica////
-
-	Vector2f tamanioVentanaPx(parser->getVentanaDef()->getAnchoPx(),
-							  parser->getVentanaDef()->getAltoPx());
-
-	Vector2f tamanioVentanaLogico(parser->getVentanaDef()->getAncho(),
-								  parser->getEscenarioDef()->getAlto());
-
-	bool exito = VentanaGrafica::Instance()->init(TITULO_VENTANA_INICIO,
-												POS_VENTANA_INICIO, tamanioVentanaPx,
-												tamanioVentanaLogico,
-												INICIAR_FULLSCREEN);
-
-	if (!exito) {
-		Logger::getInstance()->error("Error al inicializar la VentanaGrafica");
-	}
+CargadorDeOjbetos::CargadorDeOjbetos() {
 
 }
 
@@ -60,41 +14,73 @@ CargadorDeOjbetos::~CargadorDeOjbetos() {
 
 }
 
-Personaje* CargadorDeOjbetos::cargarPersonaje() {
-	Personaje* personajeCargado = new Personaje();
+void CargadorDeOjbetos::cargarObjetos(string escenario_path) {
 
-	////Inicializacion de Personaje////
-	personajeCargado = new Personaje(parser->getPersonajeDef()->getAncho(), parser->getPersonajeDef()->getAlto(),
-											parser->getPersonajeDef()->getPosicionInicial(), VentanaGrafica::Instance());
+	////Inicialización desde Parser////
+	Parser* parser = new Parser(escenario_path);
+	if (!parser->parsearDesdeJson()) {
+		parser->cargarJsonPorDefecto();
+		parser->parsearDesdeJson();
+	}
+	VentanaDef* ventanaDef = parser->getVentanaDef();
+	EscenarioDef* escenarioDef = parser->getEscenarioDef();
+	PersonajeDef* personajeDef = parser->getPersonajeDef();
 
-	return personajeCargado;
-}
+	////Inicializacion de VentanaGrafica////
+	Logger::getInstance()->info(ventanaDef);
 
-list<Personaje*>* CargadorDeOjbetos::cargarPersonajes() {
-	list<Personaje*>* personajes = new list<Personaje*>();
+	Vector2f tamanioVentanaPx(ventanaDef->getAnchoPx(),
+			ventanaDef->getAltoPx());
+	Vector2f tamanioVentanaLogico(ventanaDef->getAncho(),
+			escenarioDef->getAlto());
 
-	for (list<PersonajeDef*>::iterator it = parser->getPersonajesDef()->begin() ; it != parser->getPersonajesDef()->end(); ++it)
-	{
-		Logger::getInstance()->error(*it);
-		Personaje* personaje = new Personaje((*it)->getAncho(), (*it)->getAlto(), (*it)->getPosicionInicial(), VentanaGrafica::Instance());
-		personajes->push_back(personaje);
+	bool exito = VentanaGrafica::Instance()->init(TITULO_VENTANA_INICIO,
+	POS_VENTANA_INICIO, tamanioVentanaPx, tamanioVentanaLogico,
+	INICIAR_FULLSCREEN);
+
+	if (!exito) {
+		Logger::getInstance()->error("Error al inicializar la VentanaGrafica");
+	} else {
+		Logger::getInstance()->info(
+				"Inicialiazación de VentanaGrafica correcta.");
 	}
 
+	Vector2f relacionAspectos =
+			VentanaGrafica::Instance()->obtener_relacion_aspectos();
 
-	return personajes;
-}
+	////Inicializacion de capas////
+	list<Capa*>* capas = new list<Capa*>();
+	list<Dibujable*>* capasYPersonajes = new list<Dibujable*>();
+	list<CapaDef*>* capasDef = parser->getCapasDef();
+	for (list<CapaDef*>::iterator it_capas = capasDef->begin();
+			it_capas != capasDef->end(); ++it_capas) {
+		Logger::getInstance()->info(*it_capas);
+		Animacion* fondoAnim = new Animacion((*it_capas)->getImagenFondo(),
+		CANT_FOTOGRAMAS_FONDO, FPS_FONDO, (*it_capas)->getIdCapa(),
+				Renderizador::Instance()->getRenderer());
+		Vector2f tamIniCapa((*it_capas)->getAncho(), escenarioDef->getAlto());
+		Vector2f posInCapa = POSICION_INICIAL_CAPA;
 
-PersonajeDibujable* CargadorDeOjbetos::cargarPersonajeDibujable() {
-	PersonajeDibujable* personajeDibujableCargado = new PersonajeDibujable();
+		Capa* fondoCapa = new Capa(fondoAnim, tamIniCapa, posInCapa,
+				relacionAspectos);
+		capas->push_back(fondoCapa);
+		capasYPersonajes->push_back(fondoCapa);
+
+	}
+	Logger::getInstance()->info("Inicialiazación de Capas correcta.");
+
+	////Inicializacion de Personaje////
+	jugador = new Personaje(personajeDef->getAncho(), personajeDef->getAlto(),
+	personajeDef->getPosicionInicial(), VentanaGrafica::Instance());
 
 	////Inicializacion de PersonajeDibujable////
 	Vector2f tamanioPx(
-			parser->getPersonajeDef()->getAncho()
+			jugador->getAncho()
 					* VentanaGrafica::Instance()->relacion_de_aspectoX(),
-					parser->getPersonajeDef()->getAlto()
+			jugador->getAlto()
 					* VentanaGrafica::Instance()->relacion_de_aspectoY());
 
-	list<SpriteDef*>* spritesDef = parser->getPersonajeDef()->getSpritesDef();
+	list<SpriteDef*>* spritesDef = personajeDef->getSpritesDef();
 	list<SpriteDef*>::iterator it_sprites = spritesDef->begin();
 	SpriteDef* primerSpriteSubQuieto;
 
@@ -112,14 +98,13 @@ PersonajeDibujable* CargadorDeOjbetos::cargarPersonajeDibujable() {
 	Renderizador::Instance()->getRenderer());
 
 	OrientacionSprite direccion;
-	if (parser->getPersonajeDef()->getDireccion() == 1) {
+	if (personajeDef->getDireccion() == 1) {
 		direccion = ORIENTACION_DERECHA;
 	} else {
 		direccion = ORIENTACION_IZQUIERDA;
 	}
-
-	personajeDibujableCargado = new PersonajeDibujable(SubQuieto,
-			parser->getPersonajeDef()->getPosicionInicial(), tamanioPx, direccion);
+	personajeDibujable = new PersonajeDibujable(SubQuieto,
+	personajeDef->getPosicionInicial(), tamanioPx, direccion);
 
 	it_sprites = spritesDef->begin();
 	for (; it_sprites != spritesDef->end(); ++it_sprites) {
@@ -128,125 +113,43 @@ PersonajeDibujable* CargadorDeOjbetos::cargarPersonajeDibujable() {
 		(*it_sprites)->getCantFotogramas(), (*it_sprites)->getFps(),
 		(*it_sprites)->getIdSprite(),
 		Renderizador::Instance()->getRenderer());
-		personajeDibujableCargado->agregarAnimacion(sub_zero);
+		personajeDibujable->agregarAnimacion(sub_zero);
 	}
 
-	return personajeDibujableCargado;
-}
-
-list<PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables() {
-
-	list<PersonajeDibujable*>* personajesDibujables = new list<PersonajeDibujable*>();
-
-	for (list<PersonajeDef*>::iterator it = parser->getPersonajesDef()->begin() ; it != parser->getPersonajesDef()->end(); ++it)
-	{
-		PersonajeDibujable* personajeDibujableCargado = new PersonajeDibujable();
-
-		////Inicializacion de PersonajeDibujable////
-		Vector2f tamanioPx( (*it)->getAncho() * VentanaGrafica::Instance()->relacion_de_aspectoX(),
-							(*it)->getAlto()  * VentanaGrafica::Instance()->relacion_de_aspectoY()
-						  );
-
-		list<SpriteDef*>* spritesDef = (*it)->getSpritesDef();
-		list<SpriteDef*>::iterator it_sprites = spritesDef->begin();
-		SpriteDef* primerSpriteSubQuieto;
-
-		for (; it_sprites != spritesDef->end(); ++it_sprites) {
-				if((*it_sprites)->getIdSprite() == ID_ZUBZERO_QUIETO){
-					primerSpriteSubQuieto = *it_sprites;
-				}
-		}
-
-		cout << "*CargadorDeOjbetos::cargarObjetos>getIdSprite:" << primerSpriteSubQuieto->getIdSprite() << endl;
-		Animacion* SubQuieto = new Animacion(primerSpriteSubQuieto->getImagen(),
-		primerSpriteSubQuieto->getCantFotogramas(),
-		primerSpriteSubQuieto->getFps(),
-		primerSpriteSubQuieto->getIdSprite(),
-		Renderizador::Instance()->getRenderer());
-
-		OrientacionSprite direccion;
-		if ((*it)->getDireccion() == 1) {
-			direccion = ORIENTACION_DERECHA;
-		} else {
-			direccion = ORIENTACION_IZQUIERDA;
-		}
-
-		personajeDibujableCargado = new PersonajeDibujable(SubQuieto,
-				(*it)->getPosicionInicial(), tamanioPx, direccion);
-
-		it_sprites = spritesDef->begin();
-		for (; it_sprites != spritesDef->end(); ++it_sprites) {
-			cout << "FOR-ID:" << (*it_sprites)->getIdSprite() << endl;
-			Animacion* sub_zero = new Animacion((*it_sprites)->getImagen(),
-			(*it_sprites)->getCantFotogramas(), (*it_sprites)->getFps(),
-			(*it_sprites)->getIdSprite(),
-			Renderizador::Instance()->getRenderer());
-			personajeDibujableCargado->agregarAnimacion(sub_zero);
-		}
-	}
-
-	return personajesDibujables;
-}
-
-EscenarioGrafico* CargadorDeOjbetos::cargarEscenarioGrafico(PersonajeDibujable* personajeDibujable) {
-
-	EscenarioGrafico* escenarioGraficoCargado = new EscenarioGrafico();
-
-	Vector2f relacionAspectos =
-			VentanaGrafica::Instance()->obtener_relacion_aspectos();
-
-	////Inicializacion de capas////
-	list<Capa*>* capas = new list<Capa*>();
-	list<Dibujable*>* capasYPersonajes = new list<Dibujable*>();
-	list<CapaDef*>* capasDef = parser->getCapasDef();
-
-	for (list<CapaDef*>::iterator it_capas = capasDef->begin();
-			it_capas != capasDef->end(); ++it_capas) {
-		Logger::getInstance()->info(*it_capas);
-		Animacion* fondoAnim = new Animacion((*it_capas)->getImagenFondo(),
-		CANT_FOTOGRAMAS_FONDO, FPS_FONDO, (*it_capas)->getIdCapa(),
-				Renderizador::Instance()->getRenderer());
-		Vector2f tamIniCapa((*it_capas)->getAncho(), parser->getEscenarioDef()->getAlto());
-		Vector2f posInCapa = POSICION_INICIAL_CAPA;
-
-		Capa* fondoCapa = new Capa(fondoAnim, tamIniCapa, posInCapa,
-				relacionAspectos);
-		capas->push_back(fondoCapa);
-		capasYPersonajes->push_back(fondoCapa);
-
-	}
-	Logger::getInstance()->debug("Inicialiazación de Capas correcta.");
+	Logger::getInstance()->info(
+			"Inicialización de Personaje correcta.");
 
 	list<Dibujable*>::iterator it_dibujables = capasYPersonajes->begin();
-	for (int i=0; it_dibujables != capasYPersonajes->end() && i < parser->getPersonajeDef()->getZindex(); ++it_dibujables) {
+	for (int i=0; it_dibujables != capasYPersonajes->end() && i < personajeDef->getZindex(); ++it_dibujables) {
 		i++;
 	}
 
 	capasYPersonajes->insert(it_dibujables, personajeDibujable);
 
 	////Inicializacion de EscenarioGrafico////
-	Logger::getInstance()->info(parser->getEscenarioDef());
-	escenarioGraficoCargado = new EscenarioGrafico(parser->getEscenarioDef()->getAncho(),
-			parser->getEscenarioDef()->getAlto(), parser->getEscenarioDef()->getYpiso(), capasYPersonajes,
+	Logger::getInstance()->info(escenarioDef);
+	escenario = new EscenarioGrafico(escenarioDef->getAncho(),
+			escenarioDef->getAlto(), escenarioDef->getYpiso(), capasYPersonajes,
 			capas);
+	Logger::getInstance()->info("Inicializacion de EscenarioGrafico correcta.");
 
-	VentanaGrafica::Instance()->agregarEscenario(escenarioGraficoCargado);
+	VentanaGrafica::Instance()->agregarEscenario(escenario);
 	VentanaGrafica::Instance()->centrar_ventana();
-	escenarioGraficoCargado->centrar_dibujables(parser->getPersonajeDef()->getZindex());
+	escenario->centrar_dibujables(personajeDef->getZindex());
 
-	Logger::getInstance()->debug("Termina la carga del juego correctamente.");
-
-	return escenarioGraficoCargado;
-
+	Logger::getInstance()->info("Termina la carga del juego correctamente.");
+//		    delete parser;
 }
 
-
-EscenarioGrafico* CargadorDeOjbetos::cargarEscenarioGrafico(
-		list<PersonajeDibujable*>* personajesDibujables) {
-
-	EscenarioGrafico* escenarioGrafico = new EscenarioGrafico();
-
-
-	return escenarioGrafico;
-
+EscenarioGrafico* CargadorDeOjbetos::getEscenarioGrafico() {
+	return escenario;
 }
+
+Personaje* CargadorDeOjbetos::getPersonaje() {
+	return jugador;
+}
+
+PersonajeDibujable* CargadorDeOjbetos::getPersonajeDibujable() {
+	return personajeDibujable;
+}
+
