@@ -25,6 +25,7 @@ private:
 
 
 public:
+	EscenarioGrafico();
 	EscenarioGrafico(double ancho_logico, double alto_logico, double y_piso_logico, std::list<Dibujable*>* dibujables, std::list<Capa*>*);
 	virtual ~EscenarioGrafico();
 	double getAltoLogico() const;

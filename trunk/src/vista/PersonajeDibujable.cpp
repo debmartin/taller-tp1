@@ -7,6 +7,9 @@
 
 #include "PersonajeDibujable.h"
 
+PersonajeDibujable::PersonajeDibujable() {
+
+}
 
 PersonajeDibujable::PersonajeDibujable(Animacion* animIni, Vector2f posicionIni, Vector2f tamanioPx, OrientacionSprite orientacion){
 	spritePersonaje = new Sprite(animIni, posicionIni, orientacion);
@@ -87,3 +90,4 @@ void PersonajeDibujable::recibirNotificacion(Observable* unObservable){
 
 	seleccionarSprite();
 }
+

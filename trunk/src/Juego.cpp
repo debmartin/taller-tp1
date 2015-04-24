@@ -66,4 +66,10 @@ Juego::~Juego(){
 //    delete escenarioG;
 }
 
+void Juego::agregarPersonaje(Personaje* personaje) {
+	this->personajes->push_back(personaje);
+}
 
+void Juego::agregarPersonaje(PersonajeDibujable* personajeDibujable) {
+	this->personajesDibujables->push_back(personajeDibujable);
+}

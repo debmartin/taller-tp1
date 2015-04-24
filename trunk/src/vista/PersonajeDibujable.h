@@ -35,6 +35,7 @@ private:
 	std::string nombre;
     std::map<std::string, Animacion*> animaciones;
 public:
+    PersonajeDibujable();
 	PersonajeDibujable(Animacion* animIni, Vector2f posicionIni, Vector2f tamanioPx, OrientacionSprite orientacion);
 	virtual ~PersonajeDibujable();
 	void seleccionarSprite();
