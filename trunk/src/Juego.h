@@ -37,8 +37,7 @@ public:
 	void update();
 	void handleEvents(bool& recargar);
 	bool running();
-	void agregarPersonaje(Personaje* personaje);
-	void agregarPersonaje(PersonajeDibujable* personajeDibujable);
+	void agregarPersonajes(list<Personaje*>* personajes, list<PersonajeDibujable*>* personajesDibujables);
 	~Juego();
 
 	//

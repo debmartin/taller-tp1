@@ -14,6 +14,8 @@ Juego* cargarJuego(string escenarioPath){
 
     Juego* juego = new Juego(escenario, jugador, personajeDibujable);
 
+    juego->agregarPersonajes(cargador_de_objetos.cargarPersonajes(), cargador_de_objetos.cargarPersonajesDibujables());
+
     return juego;
 }
 

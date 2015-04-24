@@ -70,6 +70,20 @@ Personaje* CargadorDeOjbetos::cargarPersonaje() {
 	return personajeCargado;
 }
 
+list<Personaje*>* CargadorDeOjbetos::cargarPersonajes() {
+	list<Personaje*>* personajes = new list<Personaje*>();
+
+	for (list<PersonajeDef*>::iterator it = parser->getPersonajesDef()->begin() ; it != parser->getPersonajesDef()->end(); ++it)
+	{
+		Logger::getInstance()->error(*it);
+		Personaje* personaje = new Personaje((*it)->getAncho(), (*it)->getAlto(), (*it)->getPosicionInicial(), VentanaGrafica::Instance());
+		personajes->push_back(personaje);
+	}
+
+
+	return personajes;
+}
+
 PersonajeDibujable* CargadorDeOjbetos::cargarPersonajeDibujable() {
 	PersonajeDibujable* personajeDibujableCargado = new PersonajeDibujable();
 
@@ -118,6 +132,60 @@ PersonajeDibujable* CargadorDeOjbetos::cargarPersonajeDibujable() {
 	}
 
 	return personajeDibujableCargado;
+}
+
+list<PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables() {
+
+	list<PersonajeDibujable*>* personajesDibujables = new list<PersonajeDibujable*>();
+
+	for (list<PersonajeDef*>::iterator it = parser->getPersonajesDef()->begin() ; it != parser->getPersonajesDef()->end(); ++it)
+	{
+		PersonajeDibujable* personajeDibujableCargado = new PersonajeDibujable();
+
+		////Inicializacion de PersonajeDibujable////
+		Vector2f tamanioPx( (*it)->getAncho() * VentanaGrafica::Instance()->relacion_de_aspectoX(),
+							(*it)->getAlto()  * VentanaGrafica::Instance()->relacion_de_aspectoY()
+						  );
+
+		list<SpriteDef*>* spritesDef = parser->getPersonajeDef()->getSpritesDef();
+		list<SpriteDef*>::iterator it_sprites = spritesDef->begin();
+		SpriteDef* primerSpriteSubQuieto;
+
+		for (; it_sprites != spritesDef->end(); ++it_sprites) {
+				if((*it_sprites)->getIdSprite() == ID_ZUBZERO_QUIETO){
+					primerSpriteSubQuieto = *it_sprites;
+				}
+		}
+
+		cout << "*CargadorDeOjbetos::cargarObjetos>getIdSprite:" << primerSpriteSubQuieto->getIdSprite() << endl;
+		Animacion* SubQuieto = new Animacion(primerSpriteSubQuieto->getImagen(),
+		primerSpriteSubQuieto->getCantFotogramas(),
+		primerSpriteSubQuieto->getFps(),
+		primerSpriteSubQuieto->getIdSprite(),
+		Renderizador::Instance()->getRenderer());
+
+		OrientacionSprite direccion;
+		if (parser->getPersonajeDef()->getDireccion() == 1) {
+			direccion = ORIENTACION_DERECHA;
+		} else {
+			direccion = ORIENTACION_IZQUIERDA;
+		}
+
+		personajeDibujableCargado = new PersonajeDibujable(SubQuieto,
+				parser->getPersonajeDef()->getPosicionInicial(), tamanioPx, direccion);
+
+		it_sprites = spritesDef->begin();
+		for (; it_sprites != spritesDef->end(); ++it_sprites) {
+			cout << "FOR-ID:" << (*it_sprites)->getIdSprite() << endl;
+			Animacion* sub_zero = new Animacion((*it_sprites)->getImagen(),
+			(*it_sprites)->getCantFotogramas(), (*it_sprites)->getFps(),
+			(*it_sprites)->getIdSprite(),
+			Renderizador::Instance()->getRenderer());
+			personajeDibujableCargado->agregarAnimacion(sub_zero);
+		}
+	}
+
+	return personajesDibujables;
 }
 
 EscenarioGrafico* CargadorDeOjbetos::cargarEscenarioGrafico(PersonajeDibujable* personajeDibujable) {
@@ -169,5 +237,16 @@ EscenarioGrafico* CargadorDeOjbetos::cargarEscenarioGrafico(PersonajeDibujable* 
 	Logger::getInstance()->debug("Termina la carga del juego correctamente.");
 
 	return escenarioGraficoCargado;
+
+}
+
+
+EscenarioGrafico* CargadorDeOjbetos::cargarEscenarioGrafico(
+		list<PersonajeDibujable*>* personajesDibujables) {
+
+	EscenarioGrafico* escenarioGrafico = new EscenarioGrafico();
+
+
+	return escenarioGrafico;
 
 }

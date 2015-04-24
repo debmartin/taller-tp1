@@ -33,6 +33,8 @@ Parser::Parser(string archivo_json)
 	this->capas = new list<CapaDef*>;
 	this->personaje = new PersonajeDef();
 
+	this->personajesDef = new list<PersonajeDef*>();
+
 	this->inicializar();
 }
 
@@ -181,9 +183,9 @@ void Parser::parsearVentana(){
     ventana = new VentanaDef(v_ancho_px, v_alto_px, v_ancho);
 }
 
-void Parser::parsearPersonaje(){
+PersonajeDef* Parser::parsearPersonaje(string tag_personaje){
     Json::Value valorPersonaje;
-    valorPersonaje = root.get(TAG_PERSONAJE, &valorPersonaje);
+    valorPersonaje = root.get(tag_personaje.c_str(), &valorPersonaje);
 
     //atributos del personaje
     double p_alto = 0;
@@ -228,10 +230,12 @@ void Parser::parsearPersonaje(){
         }
     }
     Vector2f p_posInicial(escenario->getAncho()/2.0,escenario->getYpiso());
-    personaje = new PersonajeDef(p_ancho, p_alto, p_zindex, p_direccion, p_posInicial);
+    PersonajeDef* personajeParseado = new PersonajeDef(p_ancho, p_alto, p_zindex, p_direccion, p_posInicial);
     for (list<SpriteDef*>::iterator it = sprites.begin(); it != sprites.end(); ++it){
-        personaje->agregarSpritesDef(*it);
+    	personajeParseado->agregarSpritesDef(*it);
     }
+
+    return personajeParseado;
 }
 
 bool Parser::parsearDesdeJson() {
@@ -241,7 +245,8 @@ bool Parser::parsearDesdeJson() {
         return false;
     parsearVentana();
     parsearEscenario();
-    parsearPersonaje();
+    personaje = parsearPersonaje(TAG_PERSONAJE_1);
+    parsearPersonajes();
     parsearCapas();
 
     Logger::getInstance()->info("Inicia la validacion semantica del json");
@@ -284,3 +289,20 @@ void Parser::inciarValidacionSemantica() {
         (*it_capas)->ajustarAncho(escenario->getAncho(), ventana->getAncho());
 }
 
+list<PersonajeDef*>* Parser::getPersonajesDef() const {
+	return this->personajesDef;
+}
+
+void Parser::parsearPersonajes() {
+
+	//tomar los tag posibles de personajes
+	list<string>* tags_personajes = new list<string>();
+	tags_personajes->push_back(TAG_PERSONAJE_1);
+	tags_personajes->push_back(TAG_PERSONAJE_2);
+
+	for (list<string>::iterator it = tags_personajes->begin() ; it != tags_personajes->end(); ++it)
+	{
+		this->personajesDef->push_back(this->parsearPersonaje((*it)));
+	}
+
+}
