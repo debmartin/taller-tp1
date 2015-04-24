@@ -4,6 +4,10 @@
 
 using std::list;
 
+EscenarioGrafico::EscenarioGrafico() {
+
+}
+
 EscenarioGrafico::EscenarioGrafico(double ancho, double alto, double y_piso, list<Dibujable*>* dibujables, list<Capa*>* capas) :
     ancho_logico(ancho),
 	alto_logico(alto),
@@ -63,7 +67,7 @@ void EscenarioGrafico::centrar_dibujables(int zindexPersonaje){
 		(*it)->centrar_en(vec, VentanaGrafica::Instance()->getLimiteLogicoIzquierdo(), VentanaGrafica::Instance()->relacion_de_aspectoX());
 	}
 	//Centro el personaje
-	Vector2f vec2(this->ancho_logico/2.0, getYPisoLogico());
+	Vector2f vec2((float)this->ancho_logico/2.0, (float)getYPisoLogico());
 
 	int z_index_capa = 1;
 	int veces_encontrado = 0;
@@ -78,9 +82,10 @@ void EscenarioGrafico::centrar_dibujables(int zindexPersonaje){
 		z_index_capa++;
 	}
 
+	//TODO el miercoles 22 de abril me pincho aca. REVISAR
 	personajeDibujable->centrar_en(vec2, VentanaGrafica::Instance()->getLimiteLogicoIzquierdo(), VentanaGrafica::Instance()->relacion_de_aspectoX());
 
-	Logger::getInstance()->info("Centrado de capas correcto.");
+	Logger::getInstance()->debug("Centrado de capas correcto.");
 }
 
 void EscenarioGrafico::scrollear_capas(){

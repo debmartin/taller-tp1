@@ -6,14 +6,14 @@ Juego* cargarJuego(string escenarioPath){
 	Logger::getInstance()->info("#################################################");
 	Logger::getInstance()->info("############ INICIA LA CARGA DEL JUEGO ##########");
 	Logger::getInstance()->info("#################################################");
-    CargadorDeOjbetos cargador_de_objetos;
-    cargador_de_objetos.cargarObjetos(escenarioPath);
 
-    EscenarioGrafico* escenario = cargador_de_objetos.getEscenarioGrafico();
-    Personaje* jugador = cargador_de_objetos.getPersonaje();
-    PersonajeDibujable* personajeDibujable = cargador_de_objetos.getPersonajeDibujable();
+	CargadorDeOjbetos cargador_de_objetos(escenarioPath);
+    Personaje* jugador = cargador_de_objetos.cargarPersonaje();
+    PersonajeDibujable* personajeDibujable = cargador_de_objetos.cargarPersonajeDibujable();
+    EscenarioGrafico* escenario = cargador_de_objetos.cargarEscenarioGrafico(personajeDibujable);
 
     Juego* juego = new Juego(escenario, jugador, personajeDibujable);
+
     return juego;
 }
 

@@ -8,23 +8,12 @@
 #ifndef SRC_MODELO_CARGADORDEOBJETOS_H_
 #define SRC_MODELO_CARGADORDEOBJETOS_H_
 
-#include "../json/Parser.h"
-#include "../utils/Logger.h"
-#include "../json/EscenarioDef.h"
-#include "../json/VentanaDef.h"
-#include "../json/PersonajeDef.h"
-#include "../vista/VentanaGrafica.h"
-#include "../vista/EscenarioGrafico.h"
-#include "../vista/Capa.h"
-#include "../modelo/Personaje.h"
-#include "../vista/PersonajeDibujable.h"
-#include "../vista/Sprite.h"
+#include <string>
 
-#include <jsoncpp/json/json.h>
-#include <SDL2/SDL.h>
-#include <iostream>
-#include <string.h>
-#include "../controlador/Controlador.h"
+class EscenarioGrafico;
+class Parser;
+class Personaje;
+class PersonajeDibujable;
 
 #define TITULO_VENTANA_INICIO "Taller de programacion TP: Mortal Kombat"
 #define INICIAR_FULLSCREEN false
@@ -37,17 +26,15 @@ using namespace std;
 
 class CargadorDeOjbetos{
 private:
-	EscenarioGrafico* escenario;
-	Personaje* jugador;
-	PersonajeDibujable* personajeDibujable;
-
+	Parser* parser;
 public:
-	CargadorDeOjbetos();
+	CargadorDeOjbetos(string escenario_path);
 	virtual ~CargadorDeOjbetos();
-	void cargarObjetos(string escenario_path);
-	EscenarioGrafico* getEscenarioGrafico();
-	Personaje* getPersonaje();
-	PersonajeDibujable* getPersonajeDibujable();
+
+	Personaje* cargarPersonaje();
+	PersonajeDibujable* cargarPersonajeDibujable();
+	// TODO ver como no pasarte este parametros (ariel)
+	EscenarioGrafico* cargarEscenarioGrafico(PersonajeDibujable* personajeDibujable);
 };
 
 #endif /* SRC_MODELO_CARGADORDEOBJETOS_H_ */

@@ -23,9 +23,13 @@ class Juego {
 private:
 	bool juegoCorriendo;
 	Controlador* controladorJuego;
+	EscenarioGrafico* escenarioG;
+
 	Personaje* jugador1;
 	PersonajeDibujable* jugadorDibujable1;
-	EscenarioGrafico* escenarioG;
+
+	list<Personaje*>* personajes;
+	list<PersonajeDibujable*>* personajesDibujables;
 
 public:
 	Juego(EscenarioGrafico* escenario, Personaje* pers, PersonajeDibujable* persDib);
@@ -33,6 +37,8 @@ public:
 	void update();
 	void handleEvents(bool& recargar);
 	bool running();
+	void agregarPersonaje(Personaje* personaje);
+	void agregarPersonaje(PersonajeDibujable* personajeDibujable);
 	~Juego();
 
 	//
