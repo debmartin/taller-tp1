@@ -7,7 +7,7 @@
     "escenario": { 
         "ancho": 2000, 
         "alto": 600, 
-        "y_piso": 0
+        "y_piso": 28
     }, 
     "capas": [
         { 
@@ -27,8 +27,8 @@
         } 
     ], 
     "personaje": { 
-        "ancho": 105, 	
-        "alto": 280, 
+        "ancho": 117, 	
+        "alto": 272, 
         "zindex": 3, 
         "sprites-reposo": { 
 		            "imagen": "img_default/sonia-reposo.png",
