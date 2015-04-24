@@ -70,12 +70,11 @@ Vector2f Personaje::obtenerPosicionEnVentana(){
 }
 
 bool Personaje::llegoAlLimiteIzquierdo(){
-	return VentanaGrafica::Instance()->llegoAlLimiteIzquierdo(this->posicion);
+	return VentanaGrafica::Instance()->llegoAlLimiteIzquierdo(this->posicion.X()-this->getAncho()*0.05);
 }
 
 bool Personaje::llegoAlLimiteDerecho(){
-	//return VentanaGrafica::Instance()->llegoAlLimiteDerecho(Vector2f(this->posicion.X()+this->getAncho(),this->posicion.Y()));
-	return false; //TODO: Esto ya no hace falta por que Debbie se encar de hacerlo en Personaje::update()
+	return VentanaGrafica::Instance()->llegoAlLimiteDerecho(Vector2f(this->posicion.X()+this->getAncho()*1.05,this->posicion.Y()));
 }
 
 void Personaje::centrar_en(Vector2f& v){

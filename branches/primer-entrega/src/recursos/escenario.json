@@ -7,7 +7,7 @@
 	"escenario": {
         "ancho": 1600,
         "alto": 600,
-        "y_piso": 0
+        "y_piso": 50
     },
     "capas": [
         { 
@@ -28,7 +28,7 @@
     ], 
     "personaje": {
         "ancho": 105, 	
-        "alto": 700, 
+        "alto": 285, 
         "z­index": 2, 
         "sprites-reposo": { 
 		            "imagen": "img/sub-zero-reposo.png",
