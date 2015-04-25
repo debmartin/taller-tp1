@@ -58,7 +58,7 @@ private:
 	VentanaDef* ventana;
 	EscenarioDef * escenario;
 	list<CapaDef*>* capas;
-	PersonajeDef* personaje;
+	//PersonajeDef* personaje;
 
 	list<PersonajeDef*>* personajesDef;
 
@@ -68,7 +68,7 @@ public:
 
 	list<CapaDef*>* getCapasDef() const;
 	EscenarioDef* getEscenarioDef() const;
-	PersonajeDef* getPersonajeDef() const;
+	//PersonajeDef* getPersonajeDef() const;
 	list<PersonajeDef*>* getPersonajesDef() const;
 	VentanaDef* getVentanaDef() const;
     void cargarJsonPorDefecto();
