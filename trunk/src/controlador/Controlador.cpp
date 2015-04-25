@@ -6,6 +6,8 @@
  */
 #include "Controlador.h"
 
+Controlador::Controlador(){}
+
 Controlador::Controlador(Personaje* pers) :
     unPersonaje(pers) {
 }

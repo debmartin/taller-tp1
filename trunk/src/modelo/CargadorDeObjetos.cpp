@@ -60,16 +60,6 @@ CargadorDeOjbetos::~CargadorDeOjbetos() {
 
 }
 
-Personaje* CargadorDeOjbetos::cargarPersonaje() {
-	Personaje* personajeCargado = new Personaje();
-
-	////Inicializacion de Personaje////
-	personajeCargado = new Personaje(parser->getPersonajeDef()->getAncho(), parser->getPersonajeDef()->getAlto(),
-											parser->getPersonajeDef()->getPosicionInicial(), VentanaGrafica::Instance());
-
-	return personajeCargado;
-}
-
 list<Personaje*>* CargadorDeOjbetos::cargarPersonajes() {
 	list<Personaje*>* personajes = new list<Personaje*>();
 
@@ -82,56 +72,6 @@ list<Personaje*>* CargadorDeOjbetos::cargarPersonajes() {
 
 
 	return personajes;
-}
-
-PersonajeDibujable* CargadorDeOjbetos::cargarPersonajeDibujable() {
-	PersonajeDibujable* personajeDibujableCargado = new PersonajeDibujable();
-
-	////Inicializacion de PersonajeDibujable////
-	Vector2f tamanioPx(
-			parser->getPersonajeDef()->getAncho()
-					* VentanaGrafica::Instance()->relacion_de_aspectoX(),
-					parser->getPersonajeDef()->getAlto()
-					* VentanaGrafica::Instance()->relacion_de_aspectoY());
-
-	list<SpriteDef*>* spritesDef = parser->getPersonajeDef()->getSpritesDef();
-	list<SpriteDef*>::iterator it_sprites = spritesDef->begin();
-	SpriteDef* primerSpriteSubQuieto;
-
-	for (; it_sprites != spritesDef->end(); ++it_sprites) {
-			if((*it_sprites)->getIdSprite() == ID_ZUBZERO_QUIETO){
-				primerSpriteSubQuieto = *it_sprites;
-			}
-	}
-
-	cout << "*CargadorDeOjbetos::cargarObjetos>getIdSprite:" << primerSpriteSubQuieto->getIdSprite() << endl;
-	Animacion* SubQuieto = new Animacion(primerSpriteSubQuieto->getImagen(),
-	primerSpriteSubQuieto->getCantFotogramas(),
-	primerSpriteSubQuieto->getFps(),
-	primerSpriteSubQuieto->getIdSprite(),
-	Renderizador::Instance()->getRenderer());
-
-	OrientacionSprite direccion;
-	if (parser->getPersonajeDef()->getDireccion() == 1) {
-		direccion = ORIENTACION_DERECHA;
-	} else {
-		direccion = ORIENTACION_IZQUIERDA;
-	}
-
-	personajeDibujableCargado = new PersonajeDibujable(SubQuieto,
-			parser->getPersonajeDef()->getPosicionInicial(), tamanioPx, direccion);
-
-	it_sprites = spritesDef->begin();
-	for (; it_sprites != spritesDef->end(); ++it_sprites) {
-		cout << "FOR-ID:" << (*it_sprites)->getIdSprite() << endl;
-		Animacion* sub_zero = new Animacion((*it_sprites)->getImagen(),
-		(*it_sprites)->getCantFotogramas(), (*it_sprites)->getFps(),
-		(*it_sprites)->getIdSprite(),
-		Renderizador::Instance()->getRenderer());
-		personajeDibujableCargado->agregarAnimacion(sub_zero);
-	}
-
-	return personajeDibujableCargado;
 }
 
 list<PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables() {
@@ -183,12 +123,14 @@ list<PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables() {
 			Renderizador::Instance()->getRenderer());
 			personajeDibujableCargado->agregarAnimacion(sub_zero);
 		}
+
+		personajesDibujables->push_back(personajeDibujableCargado);
 	}
 
 	return personajesDibujables;
 }
 
-EscenarioGrafico* CargadorDeOjbetos::cargarEscenarioGrafico(PersonajeDibujable* personajeDibujable) {
+void CargadorDeOjbetos::cargarEscenarioGrafico(PersonajeDibujable* personajeDibujable1, PersonajeDibujable* personajeDibujable2) {
 
 	EscenarioGrafico* escenarioGraficoCargado = new EscenarioGrafico();
 
@@ -222,7 +164,9 @@ EscenarioGrafico* CargadorDeOjbetos::cargarEscenarioGrafico(PersonajeDibujable* 
 		i++;
 	}
 
-	capasYPersonajes->insert(it_dibujables, personajeDibujable);
+	capasYPersonajes->insert(it_dibujables, personajeDibujable1);
+	//TODO revisar que no se dibujan en el mismo nivel (ariel)
+	capasYPersonajes->push_back(personajeDibujable2);
 
 	////Inicializacion de EscenarioGrafico////
 	Logger::getInstance()->info(parser->getEscenarioDef());
@@ -236,17 +180,5 @@ EscenarioGrafico* CargadorDeOjbetos::cargarEscenarioGrafico(PersonajeDibujable* 
 
 	Logger::getInstance()->debug("Termina la carga del juego correctamente.");
 
-	return escenarioGraficoCargado;
-
 }
 
-
-EscenarioGrafico* CargadorDeOjbetos::cargarEscenarioGrafico(
-		list<PersonajeDibujable*>* personajesDibujables) {
-
-	EscenarioGrafico* escenarioGrafico = new EscenarioGrafico();
-
-
-	return escenarioGrafico;
-
-}
