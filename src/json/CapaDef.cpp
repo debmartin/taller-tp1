@@ -9,6 +9,9 @@
 
 #include <sstream>
 
+#include "../utils/Logger.h"
+#include "../utils/Util.h"
+
 
 CapaDef::CapaDef() {
 	this->imagen_fondo = "no_imagen";

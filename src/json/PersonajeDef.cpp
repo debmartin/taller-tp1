@@ -9,6 +9,8 @@
 
 #include <sstream>
 
+#include "../utils/Logger.h"
+
 #define ANCHO_ESCENARIO 600
 
 PersonajeDef::PersonajeDef() {

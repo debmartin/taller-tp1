@@ -33,6 +33,7 @@ private:
 	list<Controlador*>* controladoresJuego;
 
 public:
+	Juego();
 	Juego(EscenarioGrafico* escenario, Personaje* pers, PersonajeDibujable* persDib);
 	void render();
 	void update();

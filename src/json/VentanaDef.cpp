@@ -8,7 +8,8 @@
 #include "VentanaDef.h"
 
 #include <sstream>
-#include <string>
+
+#include "../utils/Logger.h"
 
 VentanaDef::VentanaDef() {
 	this->ancho_px = 0;

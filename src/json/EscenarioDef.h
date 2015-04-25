@@ -11,8 +11,7 @@
 #include <iostream>
 #include <string>
 
-#include "ObjetoJson.h"
-#include "../utils/Logger.h"
+#include "../utils/Loggeable.h"
 
 #define ALTO_ESC_DEFAULT 600
 #define ANCHO_ESC_DEFAULT 1200
@@ -20,7 +19,7 @@
 
 using namespace std;
 
-class EscenarioDef: public ObjetoJson {
+class EscenarioDef: public Loggeable {
 private:
 	double ancho;
 	double alto;

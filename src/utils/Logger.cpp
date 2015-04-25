@@ -110,7 +110,7 @@ void Logger::debug(std::string  message){
 	Logger::insert(key,message);
 }
 
-void Logger::debug(ObjetoJson* unObjetoJson) {
+void Logger::debug(Loggeable* unObjetoJson) {
 	this->debug(unObjetoJson->toString());
 }
 
@@ -145,7 +145,7 @@ void Logger::info(std::string message){
 	Logger::insert(key,message);
 }
 
-void Logger::info(ObjetoJson* unObjetoJson) {
+void Logger::info(Loggeable* unObjetoJson) {
 	this->info(unObjetoJson->toString());
 }
 
@@ -180,7 +180,7 @@ void Logger::error(std::string  message){
 	Logger::insert(key,message);
 }
 
-void Logger::error(ObjetoJson* unObjetoJson) {
+void Logger::error(Loggeable* unObjetoJson) {
 	this->error(unObjetoJson->toString());
 }
 

@@ -12,9 +12,9 @@
 #include <list>
 #include <string>
 
-#include "SpriteDef.h"
-#include "../utils/Logger.h"
 #include "../modelo/Vector2f.h"
+#include "../utils/Loggeable.h"
+#include "SpriteDef.h"
 
 #define ALTO_PERS_DEFAULT 150
 #define ANCHO_PERS_DEFAULT 50
@@ -26,7 +26,7 @@ class SpriteDef;
 
 using namespace std;
 
-class PersonajeDef: public ObjetoJson {
+class PersonajeDef: public Loggeable {
 private:
 	double ancho;
 	double alto;

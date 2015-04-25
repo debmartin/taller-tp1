@@ -8,7 +8,8 @@
 #include "EscenarioDef.h"
 
 #include <sstream>
-#include <string>
+
+#include "../utils/Logger.h"
 
 #define ANCHO_DEFAULT 1200
 

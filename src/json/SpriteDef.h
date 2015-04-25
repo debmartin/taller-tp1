@@ -11,9 +11,7 @@
 #include <iostream>
 #include <string>
 
-#include "ObjetoJson.h"
-#include "../utils/Util.h"
-#include "../utils/Logger.h"
+#include "../utils/Loggeable.h"
 
 #define IMAGEN_DEFAULT "img/sprites_defecto.png"
 #define CANT_FOTOGRAMAS_DEFAULT 1
@@ -22,7 +20,7 @@
 using namespace std;
 
 
-class SpriteDef: public ObjetoJson {
+class SpriteDef: public Loggeable {
 private:
 	string imagen;
 	string id_sprite;

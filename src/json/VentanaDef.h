@@ -9,9 +9,9 @@
 #define SRC_JSON_VENTANADEF_H_
 
 #include <iostream>
+#include <string>
 
-#include "ObjetoJson.h"
-#include "../utils/Logger.h"
+#include "../utils/Loggeable.h"
 
 #define ALTOPX_VENTANA_DEFAULT 600
 #define ANCHO_VENTANA_DEFAULT 600
@@ -19,7 +19,7 @@
 
 using namespace std;
 
-class VentanaDef: public ObjetoJson {
+class VentanaDef: public Loggeable {
 private:
 	int ancho_px;
 	int alto_px;
