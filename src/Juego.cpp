@@ -16,22 +16,38 @@
 
 Juego::Juego()
 {
+	juegoCorriendo = true;
+	controladorJuego = new Controlador();
+	jugador1 = new Personaje();
+	jugador2 = new Personaje();
+	jugadorDibujable1 = new PersonajeDibujable();
+	jugadorDibujable2 = new PersonajeDibujable();
 
 }
 
-Juego::Juego(EscenarioGrafico* escenario, Personaje* personaje, PersonajeDibujable* personajeDib){
+void Juego::agregarJugador1(Personaje* unPersonaje,
+		PersonajeDibujable* unPersonajeDibujable) {
 
-	juegoCorriendo = true;
-
-	escenarioG = escenario;
-	jugador1 = personaje;
-	jugadorDibujable1 = personajeDib;
+	this->jugador1 = unPersonaje;
+	this->jugadorDibujable1 = unPersonajeDibujable;
 
 	//Agrego observadores del Personaje.
 	this->jugador1->agregarObservador(jugadorDibujable1);
 	this->jugador1->agregarObservador(VentanaGrafica::Instance());
 
 	this->controladorJuego = new Controlador(this->jugador1);
+}
+
+void Juego::agregarJugador2(Personaje* unPersonaje,
+		PersonajeDibujable* unPersonajeDibujable) {
+
+	this->jugador2 = unPersonaje;
+	this->jugadorDibujable2 = unPersonajeDibujable;
+
+	//Agrego observadores del Personaje.
+	this->jugador2->agregarObservador(jugadorDibujable2);
+	this->jugador2->agregarObservador(VentanaGrafica::Instance());
+
 }
 
 void Juego::render()
@@ -43,11 +59,8 @@ void Juego::update()
 {
 	// INICIO CODIGO USUARIO
 	this->jugador1->update();
+	this->jugador2->update();
 
-	for (list<Personaje*>::iterator it = personajes->begin() ; it != personajes->end(); ++it)
-	{
-		//(*it)->update();
-	}
 	VentanaGrafica::Instance()->actualizar();
 	// FIN CODIGO USUARIO
 }
@@ -71,42 +84,10 @@ void Juego::handleEvents(bool& recargar)
 
 bool Juego::running() { return juegoCorriendo; }
 
-list<Controlador*>* Juego::getControladoresJuego() const {
-	return controladoresJuego;
-}
-
 Juego::~Juego(){
     delete controladorJuego;
 //    delete VentanaGrafica::Instance();
 //    delete jugadorDibujable1;
 //    delete jugador1;
 //    delete escenarioG;
-}
-
-void Juego::agregarPersonajes(list<Personaje*>* personajes, list<PersonajeDibujable*>* personajesDibujables) {
-
-	this->personajes = personajes;
-	this->personajesDibujables = personajesDibujables;
-
-	list<Personaje*>::iterator it;
-	list<PersonajeDibujable*>::iterator it2 = personajesDibujables->begin();
-	for ( it = personajes->begin() ; it != personajes->end() || it2 != personajesDibujables->end(); ++it)
-	{
-		//Agrego observadores del Personaje.
-		(*it)->agregarObservador(*(++it2));
-		(*it)->agregarObservador(VentanaGrafica::Instance());
-	}
-
-	this->definirControladores(personajes);
-
-}
-
-void Juego::definirControladores(list<Personaje*>* personajes) {
-	// TODO ver como lo implementamos ...
-
-	//this->controladorJuego = new Controlador(*personajes->begin());
-	for (list<Personaje*>::iterator it = personajes->begin() ; it != personajes->end(); ++it)
-	{
-		//
-	}
 }

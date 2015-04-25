@@ -7,15 +7,27 @@ Juego* cargarJuego(string escenarioPath){
 	Logger::getInstance()->info("############ INICIA LA CARGA DEL JUEGO ##########");
 	Logger::getInstance()->info("#################################################");
 
-	CargadorDeOjbetos cargador_de_objetos(escenarioPath);
-    Personaje* jugador = cargador_de_objetos.cargarPersonaje();
-    PersonajeDibujable* personajeDibujable = cargador_de_objetos.cargarPersonajeDibujable();
-    EscenarioGrafico* escenario = cargador_de_objetos.cargarEscenarioGrafico(personajeDibujable);
+	CargadorDeOjbetos* cargador_de_objetos = new CargadorDeOjbetos(escenarioPath);
 
-    Juego* juego = new Juego(escenario, jugador, personajeDibujable);
-    //Juego* juego = new Juego(); TODO ver porque me pincha aca en la ejecucion
+    list<Personaje*>* personajes = cargador_de_objetos->cargarPersonajes();
+    list<PersonajeDibujable*>* personajesDibujables = cargador_de_objetos->cargarPersonajesDibujables();
 
-    juego->agregarPersonajes(cargador_de_objetos.cargarPersonajes(), cargador_de_objetos.cargarPersonajesDibujables());
+    //cargo los personajes y personajes dibujables
+	list<Personaje*>::iterator it_personajes = personajes->begin();
+	list<PersonajeDibujable*>::iterator it_personajesDibujables = personajesDibujables->begin();
+
+	Personaje* personaje1 = *it_personajes;
+	Personaje* personaje2 = *(it_personajes++);
+	PersonajeDibujable* personajeDibujable1 = *it_personajesDibujables;
+	PersonajeDibujable* personajeDibujable2 = *(it_personajesDibujables++);
+
+
+	// cargar el escenario grafico
+	cargador_de_objetos->cargarEscenarioGrafico(personajeDibujable1, personajeDibujable2);
+
+	Juego* juego = new Juego();
+    juego->agregarJugador1(personaje1, personajeDibujable1);
+    juego->agregarJugador2(personaje2, personajeDibujable2);
 
     return juego;
 }

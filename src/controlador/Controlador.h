@@ -21,6 +21,7 @@ private:
     void identificarOrden();
 
 public:
+    Controlador();
 	Controlador(Personaje* pers);
 	virtual ~Controlador();
 	bool manejar_Evento(SDL_Event &evento);

@@ -35,14 +35,9 @@ public:
 	CargadorDeOjbetos(string escenario_path);
 	virtual ~CargadorDeOjbetos();
 
-	Personaje* cargarPersonaje();
-	PersonajeDibujable* cargarPersonajeDibujable();
-	// TODO ver como no pasarte este parametros (ariel)
-	EscenarioGrafico* cargarEscenarioGrafico(PersonajeDibujable* personajeDibujable);
-
 	list<Personaje*>* cargarPersonajes();
 	list<PersonajeDibujable*>* cargarPersonajesDibujables();
-	EscenarioGrafico* cargarEscenarioGrafico(list<PersonajeDibujable*>* personajesDibujables);
+	void cargarEscenarioGrafico(PersonajeDibujable* personajeDibujable1, PersonajeDibujable* personajeDibujable2);
 
 };
 

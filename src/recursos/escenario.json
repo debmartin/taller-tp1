@@ -58,7 +58,7 @@
 		"direccion": 1
     }, 
     "personaje-2": {
-        "ancho": 120, 	
+        "ancho": 200, 	
         "alto": 280, 
         "z­index": 2, 
         "sprites-reposo": { 
