@@ -106,13 +106,13 @@ float VentanaGrafica::getAnchoPx(){
 }
 
 bool VentanaGrafica::llegoAlLimiteIzquierdo(Vector2f posicion){
-	if(posicion.X() <= DELTA_X){
+	if(posicion.X() <= 0){
 		return true;
 	}return false;
 }
 
 bool VentanaGrafica::llegoAlLimiteDerecho(Vector2f posicion){
-	if(posicion.X() >= (escenario->getAnchoLogico() - DELTA_X2)){
+	if(posicion.X() >= escenario->getAnchoLogico()){
 		return true;
 	}return false;
 }

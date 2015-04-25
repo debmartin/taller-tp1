@@ -29,6 +29,7 @@ class Renderizador{
 		virtual ~Renderizador();
 		bool init(string titulo, Vector2f posicion, Vector2f tamanio, bool fullscreen);
 		SDL_Renderer* getRenderer();
+		SDL_Window* getWindow();
 		void dibujar(Dibujable* dibujable);
 		static Renderizador* Instance();
 };

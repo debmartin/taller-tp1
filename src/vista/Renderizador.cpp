@@ -74,6 +74,10 @@ SDL_Renderer* Renderizador::getRenderer(){
 	return this->vRenderer;
 }
 
+SDL_Window* Renderizador::getWindow() {
+	return this->vWindow;
+}
+
 void Renderizador::dibujar(Dibujable* dibujable){
 	SDL_RenderClear(this->vRenderer);
     dibujable->dibujar();

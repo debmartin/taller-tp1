@@ -112,7 +112,7 @@ void Sprite::setSentidoReproduccion(SentidoReproduccion sr) {
 }
 
 void Sprite::cambiarAnimacion(Animacion* nuevaAnim) {
-
+	cout << "ANIMACION:" << nuevaAnim->getId() << endl;
 	Vector2f tamPx = this->getDimensionesPx();
 	animacionAct = nuevaAnim;
 	this->fps = animacionAct->getFps();
