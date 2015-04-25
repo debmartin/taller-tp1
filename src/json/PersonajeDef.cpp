@@ -64,8 +64,8 @@ void PersonajeDef::ajustarAlto(double altoEscenario, double ypiso){
     }
 }
 
-void PersonajeDef::ajustarPosicionIncial(double anchoEscenario, double ypiso){
-	Vector2f p_posInicial(anchoEscenario/2.0,ypiso);
+void PersonajeDef::ajustarPosicionIncial(double anchoEscenario, double anchoVentana, double ypiso){
+	Vector2f p_posInicial((anchoEscenario/2.0)-this->direccion*(anchoVentana/4.0),ypiso);
 	this->posicionInicial = p_posInicial;
 }
 

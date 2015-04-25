@@ -65,7 +65,7 @@ list<Personaje*>* CargadorDeOjbetos::cargarPersonajes() {
 
 	for (list<PersonajeDef*>::iterator it = parser->getPersonajesDef()->begin() ; it != parser->getPersonajesDef()->end(); ++it)
 	{
-		Logger::getInstance()->error(*it);
+		//Logger::getInstance()->info(*it);
 		Personaje* personaje = new Personaje((*it)->getAncho(), (*it)->getAlto(), (*it)->getPosicionInicial(), VentanaGrafica::Instance());
 		personajes->push_back(personaje);
 	}
@@ -134,6 +134,13 @@ void CargadorDeOjbetos::cargarEscenarioGrafico(PersonajeDibujable* personajeDibu
 
 	EscenarioGrafico* escenarioGraficoCargado = new EscenarioGrafico();
 
+	// TODO validar que sean los mismo en los 2 jugadores
+	int zindex_jugadores = 0;
+	for (list<PersonajeDef*>::iterator it_personajesDef = parser->getPersonajesDef()->begin() ; it_personajesDef != parser->getPersonajesDef()->end(); it_personajesDef++)
+	{
+		zindex_jugadores = (*it_personajesDef)->getZindex();
+	}
+
 	Vector2f relacionAspectos =
 			VentanaGrafica::Instance()->obtener_relacion_aspectos();
 
@@ -144,7 +151,7 @@ void CargadorDeOjbetos::cargarEscenarioGrafico(PersonajeDibujable* personajeDibu
 
 	for (list<CapaDef*>::iterator it_capas = capasDef->begin();
 			it_capas != capasDef->end(); ++it_capas) {
-		Logger::getInstance()->info(*it_capas);
+		//Logger::getInstance()->info(*it_capas);
 		Animacion* fondoAnim = new Animacion((*it_capas)->getImagenFondo(),
 		CANT_FOTOGRAMAS_FONDO, FPS_FONDO, (*it_capas)->getIdCapa(),
 				Renderizador::Instance()->getRenderer());
@@ -160,13 +167,12 @@ void CargadorDeOjbetos::cargarEscenarioGrafico(PersonajeDibujable* personajeDibu
 	Logger::getInstance()->debug("Inicialiazación de Capas correcta.");
 
 	list<Dibujable*>::iterator it_dibujables = capasYPersonajes->begin();
-	for (int i=0; it_dibujables != capasYPersonajes->end() && i < parser->getPersonajeDef()->getZindex(); ++it_dibujables) {
+	for (int i=0; it_dibujables != capasYPersonajes->end() && i < zindex_jugadores; ++it_dibujables) {
 		i++;
 	}
 
-	capasYPersonajes->insert(it_dibujables, personajeDibujable1);
-	//TODO revisar que no se dibujan en el mismo nivel (ariel)
-	capasYPersonajes->push_back(personajeDibujable2);
+	capasYPersonajes->insert(++it_dibujables, personajeDibujable1);
+	capasYPersonajes->insert(it_dibujables, personajeDibujable2);
 
 	////Inicializacion de EscenarioGrafico////
 	Logger::getInstance()->info(parser->getEscenarioDef());
@@ -176,7 +182,7 @@ void CargadorDeOjbetos::cargarEscenarioGrafico(PersonajeDibujable* personajeDibu
 
 	VentanaGrafica::Instance()->agregarEscenario(escenarioGraficoCargado);
 	VentanaGrafica::Instance()->centrar_ventana();
-	escenarioGraficoCargado->centrar_dibujables(parser->getPersonajeDef()->getZindex());
+	escenarioGraficoCargado->centrar_dibujables(zindex_jugadores);
 
 	Logger::getInstance()->debug("Termina la carga del juego correctamente.");
 

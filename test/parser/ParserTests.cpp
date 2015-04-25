@@ -44,8 +44,10 @@ bool ParserTests::ejecutar() {
 		cout<<**it_capas<<endl;
 	}
 
-	PersonajeDef* personaje = parser->getPersonajeDef();
-	cout<<*personaje<<endl;
+	for (list<PersonajeDef*>::iterator it_personajesDef = parser->getPersonajesDef()->begin() ; it_personajesDef != parser->getPersonajesDef()->end(); it_personajesDef++)
+	{
+		cout<<**it_personajesDef<<endl;
+	}
 
 	return true;
 }

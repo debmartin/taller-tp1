@@ -31,7 +31,6 @@ Parser::Parser(string archivo_json)
 	this->ventana = new VentanaDef();
 	this->escenario = new EscenarioDef();
 	this->capas = new list<CapaDef*>;
-	this->personaje = new PersonajeDef();
 
 	this->personajesDef = new list<PersonajeDef*>();
 
@@ -245,22 +244,23 @@ bool Parser::parsearDesdeJson() {
         return false;
     parsearVentana();
     parsearEscenario();
-    personaje = parsearPersonaje(TAG_PERSONAJE_1);
     parsearPersonajes();
     parsearCapas();
 
     Logger::getInstance()->info("Inicia la validacion semantica del json");
 	this->inciarValidacionSemantica();
 	Logger::getInstance()->info("Termina la validacion semantica del json");
+
+
     return true;
 }
 
 Parser::~Parser() {
-	delete personaje;
 	delete escenario;
     for (list<CapaDef*>::iterator it_capas = capas->begin() ; it_capas != capas->end(); ++capas)
         delete (*it_capas);
     delete ventana;
+    //TODO eliminar los personajes
 }
 
 list<CapaDef*>* Parser::getCapasDef() const {
@@ -271,20 +271,22 @@ EscenarioDef* Parser::getEscenarioDef() const {
 	return escenario;
 }
 
-PersonajeDef* Parser::getPersonajeDef() const {
-	return personaje;
-}
-
 VentanaDef* Parser::getVentanaDef() const {
 	return ventana;
 }
 
 void Parser::inciarValidacionSemantica() {
-    personaje->ajustarZIndex(capas->size());
-    escenario->ajustarYPiso(personaje->getAlto());
-    personaje->ajustarAlto(escenario->getAlto(), escenario->getYpiso());
-    personaje->ajustarPosicionIncial(escenario->getAncho(), escenario->getYpiso());
-    ventana->ajustarAncho(escenario->getAncho());
+
+	for (list<PersonajeDef*>::iterator it = personajesDef->begin() ; it != personajesDef->end(); ++it)
+	{
+	    (*it)->ajustarZIndex(capas->size());
+	    //TODO ver de no ajustar 2 veces repetidas
+	    escenario->ajustarYPiso((*it)->getAlto());
+	    (*it)->ajustarAlto(escenario->getAlto(), escenario->getYpiso());
+	    ventana->ajustarAncho(escenario->getAncho());
+	    (*it)->ajustarPosicionIncial(escenario->getAncho(), ventana->getAncho(), escenario->getYpiso());
+	}
+
     for (list<CapaDef*>::iterator it_capas = this->capas->begin() ; it_capas != this->capas->end(); it_capas++)
         (*it_capas)->ajustarAncho(escenario->getAncho(), ventana->getAncho());
 }
