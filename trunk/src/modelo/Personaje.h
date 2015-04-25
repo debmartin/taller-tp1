@@ -8,20 +8,15 @@
 #ifndef SRC_MODELO_PERSONAJE_H_
 #define SRC_MODELO_PERSONAJE_H_
 
-#include <SDL2/SDL.h>
-#include "../vista/VentanaGrafica.h"
-#include "../vista/Posicionable.h"
-#include "../utils/Logger.h"
-#include "Trayectoria.h"
-#include "Reposo.h"
-#include "MRU.h"
-#include "MRUV.h"
-#include "Observable.h"
 #include <iostream>
-#include <vector>
-#include <string.h>
+#include <string>
 
+#include "../utils/Loggeable.h"
+#include "Observable.h"
 #include "Vector2f.h"
+
+class Posicionable;
+class Trayectoria;
 
 #define DELTA_PASO 1
 #define DELTA_X 10
@@ -47,7 +42,7 @@ typedef enum estado_personaje
 
 using namespace std;
 
-class Personaje: public Observable {
+class Personaje: public Observable, public Loggeable {
 private:
     const Vector2f posicionInicial;
 	double ancho;
@@ -92,6 +87,9 @@ public:
 	bool estaSaltando();
 	bool estaAgachado();
 	bool estaEnReposo();
+
+	friend ostream& operator<<(ostream &o, const Personaje &p);
+	string toString();
 };
 
 #endif /* SRC_MODELO_PERSONAJE_H_ */

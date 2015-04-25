@@ -11,16 +11,14 @@
 #include <iostream>
 #include <string>
 
-#include "ObjetoJson.h"
-#include "../utils/Util.h"
-#include "../utils/Logger.h"
+#include "../utils/Loggeable.h"
 
 #define IMAGEN_CAPA_DEFAULT "img/fondo_capa_defecto.png"
 #define ANCHO_CAPA_DEFAULT 1200
 
 using namespace std;
 
-class CapaDef: public ObjetoJson {
+class CapaDef: public Loggeable {
 private:
 	string imagen_fondo;
 	string id_capa;

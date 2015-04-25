@@ -7,6 +7,15 @@
 
 #include "Personaje.h"
 
+#include <SDL2/SDL_timer.h>
+#include <sstream>
+
+#include "../utils/Logger.h"
+#include "../vista/VentanaGrafica.h"
+#include "MRU.h"
+#include "MRUV.h"
+#include "Reposo.h"
+
 #define VELOCIDAD_DESP_HORIZONTAL_SALTANDO 320.0f
 #define VELOCIDAD_DESP_HORIZONTAL_CAMINANDO 215.0f
 #define VELOCIDAD_DESP_VERTICAL 1000.0f
@@ -189,4 +198,16 @@ bool Personaje::estaAgachado(){
 
 bool Personaje::estaEnReposo(){
     return (estado == EN_ESPERA);
+}
+
+ostream& operator <<(ostream &o, const Personaje &p) {
+
+        o<<"Personaje -> [ancho, alto, posInicial]=["<<p.ancho<<", "<<p.alto<<", "<<p.posicionInicial<<"]";
+        return o;
+}
+
+string Personaje::toString() {
+    ostringstream stream;
+    stream <<*this;
+	return stream.str();
 }

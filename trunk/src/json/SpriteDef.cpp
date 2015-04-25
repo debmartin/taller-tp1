@@ -9,6 +9,9 @@
 
 #include <sstream>
 
+#include "../utils/Logger.h"
+#include "../utils/Util.h"
+
 
 SpriteDef::SpriteDef() {
 	this->imagen = "no_imagen";

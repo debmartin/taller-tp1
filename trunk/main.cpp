@@ -13,8 +13,9 @@ Juego* cargarJuego(string escenarioPath){
     EscenarioGrafico* escenario = cargador_de_objetos.cargarEscenarioGrafico(personajeDibujable);
 
     Juego* juego = new Juego(escenario, jugador, personajeDibujable);
+    //Juego* juego = new Juego(); TODO ver porque me pincha aca en la ejecucion
 
-    //juego->agregarPersonajes(cargador_de_objetos.cargarPersonajes(), cargador_de_objetos.cargarPersonajesDibujables());
+    juego->agregarPersonajes(cargador_de_objetos.cargarPersonajes(), cargador_de_objetos.cargarPersonajesDibujables());
 
     return juego;
 }

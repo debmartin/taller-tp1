@@ -14,10 +14,18 @@
 
 #define TEXTO_ERROR_TEXTURA "ERROR AL CREAR TEXTURA"
 
-Juego::Juego(EscenarioGrafico* escenario, Personaje* personaje, PersonajeDibujable* personajeDib) :
-    escenarioG(escenario), jugador1(personaje), jugadorDibujable1(personajeDib){
+Juego::Juego()
+{
+
+}
+
+Juego::Juego(EscenarioGrafico* escenario, Personaje* personaje, PersonajeDibujable* personajeDib){
 
 	juegoCorriendo = true;
+
+	escenarioG = escenario;
+	jugador1 = personaje;
+	jugadorDibujable1 = personajeDib;
 
 	//Agrego observadores del Personaje.
 	this->jugador1->agregarObservador(jugadorDibujable1);
@@ -35,6 +43,11 @@ void Juego::update()
 {
 	// INICIO CODIGO USUARIO
 	this->jugador1->update();
+
+	for (list<Personaje*>::iterator it = personajes->begin() ; it != personajes->end(); ++it)
+	{
+		//(*it)->update();
+	}
 	VentanaGrafica::Instance()->actualizar();
 	// FIN CODIGO USUARIO
 }
@@ -90,4 +103,10 @@ void Juego::agregarPersonajes(list<Personaje*>* personajes, list<PersonajeDibuja
 
 void Juego::definirControladores(list<Personaje*>* personajes) {
 	// TODO ver como lo implementamos ...
+
+	//this->controladorJuego = new Controlador(*personajes->begin());
+	for (list<Personaje*>::iterator it = personajes->begin() ; it != personajes->end(); ++it)
+	{
+		//
+	}
 }
