@@ -21,9 +21,6 @@ Juego* cargarJuego(string escenarioPath){
 	PersonajeDibujable* personajeDibujable1 = *(it_personajesDibujables++);
 	PersonajeDibujable* personajeDibujable2 = *(it_personajesDibujables);
 
-	Logger::getInstance()->error(personaje1);
-	Logger::getInstance()->error(personaje2);
-
 	// cargar el escenario grafico
 	cargador_de_objetos->cargarEscenarioGrafico(personajeDibujable1, personajeDibujable2);
 

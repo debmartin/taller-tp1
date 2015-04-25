@@ -18,7 +18,7 @@ PersonajeDef::PersonajeDef() {
 	this->alto = 0;
 	this->z_index = 0;
 	this->spritesDef = new list<SpriteDef*>();
-	this->direccion = 0;
+	this->direccion = 1;
 }
 
 PersonajeDef::PersonajeDef(double anchoIn, double altoIn, int zindexIn, int direccionIn, Vector2f posInicial)
