@@ -9,6 +9,11 @@
 #define SRC_VISTA_HSV_H_
 #include <SDL2/SDL.h>
 
+#define GRADOS60 60
+#define GRADOS120 120
+#define GRADOS360 360
+#define GRADOS0 0
+
 class HSV {
 public:
 	HSV(SDL_Texture* s);
@@ -19,11 +24,16 @@ public:
 	virtual ~HSV();
 
 private:
-	float maximo(float R, float G, float V);
-	float minimo(float R, float G, float V);
-	float componenteH();
-	float componenteS();
-	float componenteV();
+	float H;
+	float S;
+	float V;
+	int max;
+	int min;
+	int maximo(int R, int G, int B);
+	int minimo(int R, int G, int B);
+	void setH(int R, int G, int B);
+	void setS(int R, int G, int B);
+	void setV(int R, int G, int B);
 };
 
 #endif /* SRC_VISTA_HSV_H_ */
