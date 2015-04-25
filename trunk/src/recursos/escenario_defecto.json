@@ -4,58 +4,89 @@
         "altopx": 480, 
         "ancho": 640
     }, 
-    "escenario": { 
-        "ancho": 2000, 
-        "alto": 600, 
-        "y_piso": 0
-    }, 
+	"escenario": {
+        "ancho": 2000,
+        "alto": 600,
+        "y_piso": 28
+    },
     "capas": [
         { 
-            "imagen_fondo": "img_default/fondo-warrior-shrine-01.png",
-            "id_capa": "shrine1", 
+            "imagen_fondo": "DEFAULT/fondo-warrior-shrine-01.png",
+            "id_capa": "capa_1", 
             "ancho": 750 
-        },    
-        { 
-            "imagen_fondo": "img_default/fondo-warrior-shrine-02.png",
-            "id_capa": "shrine2", 
+        },               
+	    { 
+            "imagen_fondo": "DEFAULT/fondo-warrior-shrine-02.png",
+            "id_capa": "capa_2", 
             "ancho": 1150 
         },
-        { 
-            "imagen_fondo": "img_default/fondo-warrior-shrine-03.png",
-            "id_capa": "shrine3", 
-            "ancho": 1500
-        } 
+	    { 
+            "imagen_fondo": "DEFAULT/fondo-warrior-shrine-03.png",
+            "id_capa": "capa_3", 
+            "ancho": 1500 
+        }
     ], 
-    "personaje": { 
+    "personaje-1": {
         "ancho": 105, 	
-        "alto": 280, 
-        "zindex": 3, 
+        "alto": 272, 
+        "z­index": 2, 
         "sprites-reposo": { 
-		            "imagen": "img_default/sonia-reposo.png",
+	            "imagen": "DEFAULT/sonia-reposo.png",
         		    "cant_fotogramas": 7,
-	       		    "fps": 10 
+        		    "fps": 10 
         			},
         "sprites-caminando": { 
-		            "imagen": "img_default/sonia-caminando.png",
+		            "imagen": "DEFAULT/sonia-caminando.png",
         		    "cant_fotogramas": 6,
         		    "fps": 12
         			},
         "sprites-agachado": { 
-		            "imagen": "img_default/sonia-agachada.png",
+		            "imagen": "DEFAULT/sonia-agachada.png",
         		    "cant_fotogramas": 1,
         		    "fps": 1
         			},
         "sprites-saltando-vertical": { 
-		            "imagen": "img_default/sonia-saltando-vertical.png",
+		            "imagen": "DEFAULT/sonia-saltando-vertical.png",
         		    "cant_fotogramas": 1,
         		    "fps": 1
         			},
         "sprites-saltando-diagonal": { 
-		            "imagen": "img_default/sonia-saltando-diagonal.png",
+		            "imagen": "DEFAULT/sonia-saltando-diagonal.png",
+        		    "cant_fotogramas": 7,
+        		    "fps": 15 
+        			},
+		"direccion": 1
+    }, 
+    "personaje-2": {
+        "ancho": 105, 	
+        "alto": 272, 
+        "z­index": 2, 
+        "sprites-reposo": { 
+		            "imagen": "DEFAULT/sonia-reposo.png",
+        		    "cant_fotogramas": 7,
+	       		    "fps": 10 
+        			},
+        "sprites-caminando": { 
+		            "imagen": "DEFAULT/sonia-caminando.png",
+        		    "cant_fotogramas": 6,
+        		    "fps": 12
+        			},
+        "sprites-agachado": { 
+		            "imagen": "DEFAULT/sonia-agachada.png",
+        		    "cant_fotogramas": 1,
+        		    "fps": 1
+        			},
+        "sprites-saltando-vertical": { 
+		            "imagen": "DEFAULT/sonia-saltando-vertical.png",
+        		    "cant_fotogramas": 1,
+        		    "fps": 1
+        			},
+        "sprites-saltando-diagonal": { 
+		            "imagen": "DEFAULT/sonia-saltando-diagonal.png",
         		    "cant_fotogramas": 7,
         		    "fps": 15
         			},
-	"direccion": 1 
-    } 
+		"direccion": -1
+    }    
 }
 
