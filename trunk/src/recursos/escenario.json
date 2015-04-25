@@ -27,8 +27,8 @@
         }
     ], 
     "personaje-1": {
-        "ancho": 110, 	
-        "alto": 280, 
+        "ancho": 135, 	
+        "alto": 272, 
         "z­index": 2, 
         "sprites-reposo": { 
 		            "imagen": "img/sub-zero-reposo.png",
@@ -58,8 +58,8 @@
 		"direccion": 1
     }, 
     "personaje-2": {
-        "ancho": 117, 	
-        "alto": 272, 
+        "ancho": 105, 	
+        "alto": 280, 
         "z­index": 2, 
         "sprites-reposo": { 
 		            "imagen": "img/sonia-reposo.png",
