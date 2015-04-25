@@ -31,27 +31,27 @@
         "alto": 272, 
         "z­index": 2, 
         "sprites-reposo": { 
-		            "imagen": "img/sub-zero-reposo.png",
+	            "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-reposo.png",
         		    "cant_fotogramas": 12,
         		    "fps": 10 
         			},
         "sprites-caminando": { 
-		            "imagen": "img/sub-zero-caminando.png",
+		            "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-caminando.png",
         		    "cant_fotogramas": 9,
         		    "fps": 13
         			},
         "sprites-agachado": { 
-		            "imagen": "img/sub-zero-agachado.png",
+		            "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-agachado.png",
         		    "cant_fotogramas": 1,
         		    "fps": 1
         			},
         "sprites-saltando-vertical": { 
-		            "imagen": "img/sub-zero-saltando-vertical.png",
+		            "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-saltando-vertical.png",
         		    "cant_fotogramas": 1,
         		    "fps": 1
         			},
         "sprites-saltando-diagonal": { 
-		            "imagen": "img/sub-zero-saltando-diagonal.png",
+		            "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-saltando-diagonal.png",
         		    "cant_fotogramas": 7,
         		    "fps": 15 
         			},
@@ -59,30 +59,30 @@
     }, 
     "personaje-2": {
         "ancho": 105, 	
-        "alto": 280, 
+        "alto": 272, 
         "z­index": 2, 
         "sprites-reposo": { 
-		            "imagen": "img/sonia-reposo.png",
+		            "imagen": "RECURSOS/PERSONAJES/SONIA/sonia-reposo.png",
         		    "cant_fotogramas": 7,
 	       		    "fps": 10 
         			},
         "sprites-caminando": { 
-		            "imagen": "img/sonia-caminando.png",
+		            "imagen": "RECURSOS/PERSONAJES/SONIA/sonia-caminando.png",
         		    "cant_fotogramas": 6,
         		    "fps": 12
         			},
         "sprites-agachado": { 
-		            "imagen": "img/sonia-agachada.png",
+		            "imagen": "RECURSOS/PERSONAJES/SONIA/sonia-agachada.png",
         		    "cant_fotogramas": 1,
         		    "fps": 1
         			},
         "sprites-saltando-vertical": { 
-		            "imagen": "img/sonia-saltando-vertical.png",
+		            "imagen": "RECURSOS/PERSONAJES/SONIA/sonia-saltando-vertical.png",
         		    "cant_fotogramas": 1,
         		    "fps": 1
         			},
         "sprites-saltando-diagonal": { 
-		            "imagen": "img/sonia-saltando-diagonal.png",
+		            "imagen": "RECURSOS/PERSONAJES/SONIA/sonia-saltando-diagonal.png",
         		    "cant_fotogramas": 7,
         		    "fps": 15
         			},
