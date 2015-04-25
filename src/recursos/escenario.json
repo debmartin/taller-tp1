@@ -62,27 +62,27 @@
         "alto": 280, 
         "z­index": 2, 
         "sprites-reposo": { 
-		            "imagen": "img/sonia-reposo.png",
+		            "imagen": "img_default/sonia-reposo.png",
         		    "cant_fotogramas": 7,
 	       		    "fps": 10 
         			},
         "sprites-caminando": { 
-		            "imagen": "img/sonia-caminando.png",
+		            "imagen": "img_default/sonia-caminando.png",
         		    "cant_fotogramas": 6,
         		    "fps": 12
         			},
         "sprites-agachado": { 
-		            "imagen": "img/sonia-agachada.png",
+		            "imagen": "img_default/sonia-agachada.png",
         		    "cant_fotogramas": 1,
         		    "fps": 1
         			},
         "sprites-saltando-vertical": { 
-		            "imagen": "img/sonia-saltando-vertical.png",
+		            "imagen": "img_default/sonia-saltando-vertical.png",
         		    "cant_fotogramas": 1,
         		    "fps": 1
         			},
         "sprites-saltando-diagonal": { 
-		            "imagen": "img/sonia-saltando-diagonal.png",
+		            "imagen": "img_default/sonia-saltando-diagonal.png",
         		    "cant_fotogramas": 7,
         		    "fps": 15
         			},
