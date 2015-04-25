@@ -35,7 +35,7 @@ void Juego::agregarJugador1(Personaje* unPersonaje,
 	this->jugador1->agregarObservador(jugadorDibujable1);
 	this->jugador1->agregarObservador(VentanaGrafica::Instance());
 
-	this->controladorJuego = new Controlador(this->jugador1);
+	//this->controladorJuego = new Controlador(this->jugador1);
 }
 
 void Juego::agregarJugador2(Personaje* unPersonaje,
@@ -48,6 +48,7 @@ void Juego::agregarJugador2(Personaje* unPersonaje,
 	this->jugador2->agregarObservador(jugadorDibujable2);
 	this->jugador2->agregarObservador(VentanaGrafica::Instance());
 
+	this->controladorJuego = new Controlador(this->jugador2);
 }
 
 void Juego::render()

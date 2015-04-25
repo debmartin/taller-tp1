@@ -31,7 +31,6 @@ private:
 
 public:
 	Juego();
-	Juego(Personaje* pers, PersonajeDibujable* persDib);
 	void render();
 	void update();
 	void handleEvents(bool& recargar);
