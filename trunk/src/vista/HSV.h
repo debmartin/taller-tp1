@@ -17,6 +17,13 @@ public:
 	void desplazarH(float hInicial, float hFinal, float desplazamiento);
 	SDL_Texture* toTexture();
 	virtual ~HSV();
+
+private:
+	float maximo(float R, float G, float V);
+	float minimo(float R, float G, float V);
+	float componenteH();
+	float componenteS();
+	float componenteV();
 };
 
 #endif /* SRC_VISTA_HSV_H_ */
