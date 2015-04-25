@@ -18,7 +18,7 @@
 
 #define VELOCIDAD_DESP_HORIZONTAL_SALTANDO 320.0f
 #define VELOCIDAD_DESP_HORIZONTAL_CAMINANDO 215.0f
-#define VELOCIDAD_DESP_VERTICAL 1000.0f
+#define VELOCIDAD_DESP_VERTICAL 1120.0f
 #define VELOCIDAD_NULA 0.0f
 #define VECTOR_VELOCIDAD_NULA Vector2f(0, 0)
 #define VECTOR_GRAVEDAD Vector2f(0, -2600.f)
@@ -72,19 +72,16 @@ int Personaje::getVida(){
 //Devuelve un vector posicion referenciado desde el eje con origen de coordenadas arriba izquierda.
 Vector2f Personaje::obtenerPosicionEnVentana(){
 	Vector2f P1(posicion.X(), posicion.Y() + getAlto());
-	cout << "Personaje::obtenerPosicionEnVentana>P1:" << P1 << endl;
 	Vector2f P2 = VentanaGrafica::Instance()->calcularPosicionEnVentana(P1);
-	cout << "Personaje::obtenerPosicionEnVentana>P2:" << P2 << endl;
 	return P2;
 }
 
 bool Personaje::llegoAlLimiteIzquierdo(){
-	return VentanaGrafica::Instance()->llegoAlLimiteIzquierdo(this->posicion);
+	return VentanaGrafica::Instance()->llegoAlLimiteIzquierdo(this->posicion.X()-this->getAncho()*0.05);
 }
 
 bool Personaje::llegoAlLimiteDerecho(){
-	//return VentanaGrafica::Instance()->llegoAlLimiteDerecho(Vector2f(this->posicion.X()+this->getAncho(),this->posicion.Y()));
-	return false; //TODO: Esto ya no hace falta por que Debbie se encar de hacerlo en Personaje::update()
+	return VentanaGrafica::Instance()->llegoAlLimiteDerecho(Vector2f(this->posicion.X()+this->getAncho()*1.05,this->posicion.Y()));
 }
 
 void Personaje::centrar_en(Vector2f& v){
@@ -179,8 +176,6 @@ void Personaje::update(){
     } else {
         mantenerReposo();
     }
-	cout << "#Personaje::update>posicionCandidata :" << posicionCandidata << endl;
-	cout << "#Personaje::update>dimensionesLogicas:" << this->getDimensionesLogicas() << endl;
 	notificarObservadores();
 }
 
