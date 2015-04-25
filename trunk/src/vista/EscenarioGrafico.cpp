@@ -91,11 +91,9 @@ void EscenarioGrafico::centrar_dibujables(int zindexPersonaje){
 
 void EscenarioGrafico::scrollear_capas(){
 	size_t poslListaVelocidades = 0;
-	//cout<<"Prueba///"<<endl;
 	for (list<Capa*>::iterator it = capas->begin(); it != capas->end(); ++it){
 		float nuevaPosicionXCapa = this->listaVelocidades[poslListaVelocidades] * VentanaGrafica::Instance()->getLimiteLogicoIzquierdo();
 		(*it)->setPosicionX(nuevaPosicionXCapa);
-		//cout<<"Pos capaX:"<<nuevaPosicionXCapa<<endl;
 		float posicionXRespectoAVentana = nuevaPosicionXCapa - VentanaGrafica::Instance()->getLimiteLogicoIzquierdo();
 		Vector2f posPXSprite(posicionXRespectoAVentana * VentanaGrafica::Instance()->relacion_de_aspectoX(), 0.0f);
 		(*it)->getSprite()->setPosicion(posPXSprite);
