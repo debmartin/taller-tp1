@@ -1,61 +1,92 @@
 {
     "ventana": { 
-        "anchopx": 320, 
+        "anchopx": 640, 
         "altopx": 480, 
         "ancho": 640
     }, 
 	"escenario": {
-        "ancho": 1600,
+        "ancho": 1800,
         "alto": 600,
-        "y_piso": 0
+        "y_piso": 28
     },
     "capas": [
         { 
-            "imagen_fondo": "img_test/grilla-negra.png",
-            "id_capa": "goro1", 
-            "ancho": 700 
+            "imagen_fondo": "RECURSOS/ESCENARIOS/TEST/grilla-negra.png",
+            "id_capa": "capa_1", 
+            "ancho": 1000 
         },
         {
-            "imagen_fondo": "img_test/grilla-blanca.png",
+            "imagen_fondo": "RECURSOS/ESCENARIOS/TEST/grilla-blanca.png",
             "id_capa": "capa_2", 
-            "ancho": 1300 
+            "ancho": 1600 
         },
         { 
-            "imagen_fondo": "img_test/grilla-azul.png",
+            "imagen_fondo": "RECURSOS/ESCENARIOS/TEST/grilla-azul.png",
             "id_capa": "capa_3", 
-            "ancho": 1400 
+            "ancho": 1800 
         }
     ], 
-    "personaje": {
-        "ancho": 105, 	
-        "alto": 280, 
+    "personaje-1": {
+        "ancho": 135, 	
+        "alto": 272, 
         "z­index": 2, 
         "sprites-reposo": { 
-		            "imagen": "img_test/test-reposo.png",
+		            "imagen": "RECURSOS/PERSONAJES/TEST/test-reposo.png",
         		    "cant_fotogramas": 12,
         		    "fps": 10 
         			},
         "sprites-caminando": { 
-		            "imagen": "img_test/test-caminando.png",
+		            "imagen": "RECURSOS/PERSONAJES/TEST/test-caminando.png",
         		    "cant_fotogramas": 9,
         		    "fps": 13
         			},
         "sprites-agachado": { 
-		            "imagen": "img_test/test-agachado.png",
+		            "imagen": "RECURSOS/PERSONAJES/TEST/test-agachado.png",
         		    "cant_fotogramas": 1,
         		    "fps": 1
         			},
         "sprites-saltando-vertical": { 
-		            "imagen": "img_test/test-saltando-vertical.png",
+		            "imagen": "RECURSOS/PERSONAJES/TEST/test-saltando-vertical.png",
         		    "cant_fotogramas": 1,
         		    "fps": 1
         			},
         "sprites-saltando-diagonal": { 
-		            "imagen": "img_test/test-saltando-diagonal.png",
+		            "imagen": "RECURSOS/PERSONAJES/TEST/test-saltando-diagonal.png",
         		    "cant_fotogramas": 7,
         		    "fps": 15 
         			},
 		"direccion": 1
-    } 
+    },
+    "personaje-2": {
+        "ancho": 135, 	
+        "alto": 272, 
+        "z­index": 2, 
+        "sprites-reposo": { 
+                    "imagen": "RECURSOS/PERSONAJES/TEST/test-reposo.png",
+                    "cant_fotogramas": 12,
+                    "fps": 10 
+                    },
+        "sprites-caminando": { 
+		            "imagen": "RECURSOS/PERSONAJES/TEST/test-caminando.png",
+        		    "cant_fotogramas": 9,
+        		    "fps": 13
+        			},
+        "sprites-agachado": { 
+		            "imagen": "RECURSOS/PERSONAJES/TEST/test-agachado.png",
+        		    "cant_fotogramas": 1,
+        		    "fps": 1
+        			},
+        "sprites-saltando-vertical": { 
+		            "imagen": "RECURSOS/PERSONAJES/TEST/test-saltando-vertical.png",
+        		    "cant_fotogramas": 1,
+        		    "fps": 1
+        			},
+        "sprites-saltando-diagonal": { 
+		            "imagen": "RECURSOS/PERSONAJES/TEST/test-saltando-diagonal.png",
+        		    "cant_fotogramas": 7,
+        		    "fps": 15 
+        			},
+		"direccion": 1
+    }
 }
 
