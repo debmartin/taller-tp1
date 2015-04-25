@@ -63,9 +63,9 @@ int Personaje::getVida(){
 //Devuelve un vector posicion referenciado desde el eje con origen de coordenadas arriba izquierda.
 Vector2f Personaje::obtenerPosicionEnVentana(){
 	Vector2f P1(posicion.X(), posicion.Y() + getAlto());
-	cout << "Personaje::obtenerPosicionEnVentana>P1:" << P1 << endl;
+	//cout << "Personaje::obtenerPosicionEnVentana>P1:" << P1 << endl;
 	Vector2f P2 = VentanaGrafica::Instance()->calcularPosicionEnVentana(P1);
-	cout << "Personaje::obtenerPosicionEnVentana>P2:" << P2 << endl;
+	//cout << "Personaje::obtenerPosicionEnVentana>P2:" << P2 << endl;
 	return P2;
 }
 
@@ -170,7 +170,7 @@ void Personaje::update(){
         mantenerReposo();
     }
 	cout << "#Personaje::update>posicionCandidata :" << posicionCandidata << endl;
-	cout << "#Personaje::update>dimensionesLogicas:" << this->getDimensionesLogicas() << endl;
+	//cout << "#Personaje::update>dimensionesLogicas:" << this->getDimensionesLogicas() << endl;
 	notificarObservadores();
 }
 
