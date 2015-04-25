@@ -66,24 +66,24 @@ void EscenarioGrafico::centrar_dibujables(int zindexPersonaje){
 	for (list<Capa*>::iterator it = capas->begin(); it != capas->end(); ++it){
 		(*it)->centrar_en(vec, VentanaGrafica::Instance()->getLimiteLogicoIzquierdo(), VentanaGrafica::Instance()->relacion_de_aspectoX());
 	}
-	//Centro el personaje
-	Vector2f vec2((float)this->ancho_logico/2.0, (float)getYPisoLogico());
 
+	//Centro el personaje
 	int z_index_capa = 1;
 	int veces_encontrado = 0;
-	Dibujable* personajeDibujable;
 
 	for (list<Capa*>::iterator it = capas->begin(); it != capas->end(); ++it) {
 
 		if (z_index_capa == zindexPersonaje) veces_encontrado++;
 
-		if (veces_encontrado == 2) { personajeDibujable = (*it); break; }
+		if (veces_encontrado == 2)
+		{
+			Vector2f vec2((float)this->ancho_logico/2.0, (float)getYPisoLogico());
+			(*it)->centrar_en(vec2, VentanaGrafica::Instance()->getLimiteLogicoIzquierdo(), VentanaGrafica::Instance()->relacion_de_aspectoX());
+			break;
+		}
 
 		z_index_capa++;
 	}
-
-	//TODO el miercoles 22 de abril me pincho aca. REVISAR
-	personajeDibujable->centrar_en(vec2, VentanaGrafica::Instance()->getLimiteLogicoIzquierdo(), VentanaGrafica::Instance()->relacion_de_aspectoX());
 
 	Logger::getInstance()->debug("Centrado de capas correcto.");
 }
