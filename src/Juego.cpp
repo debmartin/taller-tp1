@@ -6,22 +6,26 @@
  */
 
 #include "Juego.h"
-#include <cstddef>
-#include <SDL2/SDL.h> //TODO: Solo para tests
 
+#include <SDL2/SDL_events.h>
+#include <SDL2/SDL_keycode.h>
+
+#include "controlador/ControladorPersonaje.h"
+#include "modelo/Personaje.h"
+#include "utils/Logger.h"
+#include "vista/PersonajeDibujable.h"
 #include "vista/VentanaGrafica.h"
-#include "vista/Sprite.h"
 
 #define TEXTO_ERROR_TEXTURA "ERROR AL CREAR TEXTURA"
 
 Juego::Juego()
 {
 	juegoCorriendo = true;
-	controladorJuego = new Controlador();
 	jugador1 = new Personaje();
 	jugador2 = new Personaje();
 	jugadorDibujable1 = new PersonajeDibujable();
 	jugadorDibujable2 = new PersonajeDibujable();
+	controladorPersonaje = new ControladorPersonaje();
 
 }
 
@@ -35,7 +39,7 @@ void Juego::agregarJugador1(Personaje* unPersonaje,
 	this->jugador1->agregarObservador(jugadorDibujable1);
 	this->jugador1->agregarObservador(VentanaGrafica::Instance());
 
-	//this->controladorJuego = new Controlador(this->jugador1);
+	controladorPersonaje->agregarPersonaje1(this->jugador1);
 }
 
 void Juego::agregarJugador2(Personaje* unPersonaje,
@@ -48,7 +52,7 @@ void Juego::agregarJugador2(Personaje* unPersonaje,
 	this->jugador2->agregarObservador(jugadorDibujable2);
 	this->jugador2->agregarObservador(VentanaGrafica::Instance());
 
-	this->controladorJuego = new Controlador(this->jugador2);
+	controladorPersonaje->agregarPersonaje2(this->jugador2);
 }
 
 void Juego::render()
@@ -72,21 +76,35 @@ void Juego::handleEvents(bool& recargar)
 	// INICIO CODIGO USUARIO
 	if (SDL_PollEvent(&evento))
 	{
+		//para salir del juego con la tecla ESC
+	    if( evento.type == SDL_KEYUP && evento.key.repeat == 0 ){
+	        if (evento.key.keysym.sym == SDLK_ESCAPE){
+	            juegoCorriendo = false;;
+	        }
+	    }
+
+	    //la tecla r para recargar el juego inicial
+	    if( evento.type == SDL_KEYUP && evento.key.repeat == 0 ){
+	        if (evento.key.keysym.sym == SDLK_r){
+	            Logger::getInstance()->info("Se presiona: Tecla R. Se recarga el juego.");
+	            juegoCorriendo = false;
+	            recargar = true;
+	        }
+	    }
+
 		if (evento.type == SDL_QUIT){
 			juegoCorriendo = false;
-		} else if (! controladorJuego->manejar_Evento(evento)){
+		} else if (! controladorPersonaje->manejar_Evento(evento)){
 			juegoCorriendo = false;
-			recargar = true;
 		}
 	} else {
-	        controladorJuego->continuarAccionPrevia();
+	        controladorPersonaje->continuarAccionPrevia();
 	}
 }
 
 bool Juego::running() { return juegoCorriendo; }
 
 Juego::~Juego(){
-    delete controladorJuego;
 //    delete VentanaGrafica::Instance();
 //    delete jugadorDibujable1;
 //    delete jugador1;
