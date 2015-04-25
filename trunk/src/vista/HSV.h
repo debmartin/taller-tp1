@@ -27,13 +27,17 @@ private:
 	float H;
 	float S;
 	float V;
-	int max;
-	int min;
+	int maxRGB;
+	int minRGB;
+	int Rfinal;
+	int Gfinal;
+	int Bfinal;
 	int maximo(int R, int G, int B);
 	int minimo(int R, int G, int B);
 	void setH(int R, int G, int B);
 	void setS(int R, int G, int B);
 	void setV(int R, int G, int B);
+	void transformar_HSV_a_RGB();
 };
 
 #endif /* SRC_VISTA_HSV_H_ */
