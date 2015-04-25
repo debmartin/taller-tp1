@@ -77,7 +77,7 @@ void EscenarioGrafico::centrar_dibujables(int zindexPersonaje){
 
 		if (veces_encontrado == 2)
 		{
-			Vector2f vec2((float)this->ancho_logico/2.0, (float)getYPisoLogico());
+			Vector2f vec2((float)this->ancho_logico/4.0, (float)getYPisoLogico());
 			(*it)->centrar_en(vec2, VentanaGrafica::Instance()->getLimiteLogicoIzquierdo(), VentanaGrafica::Instance()->relacion_de_aspectoX());
 			break;
 		}
