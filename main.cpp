@@ -16,11 +16,13 @@ Juego* cargarJuego(string escenarioPath){
 	list<Personaje*>::iterator it_personajes = personajes->begin();
 	list<PersonajeDibujable*>::iterator it_personajesDibujables = personajesDibujables->begin();
 
-	Personaje* personaje1 = *it_personajes;
-	Personaje* personaje2 = *(it_personajes++);
-	PersonajeDibujable* personajeDibujable1 = *it_personajesDibujables;
-	PersonajeDibujable* personajeDibujable2 = *(it_personajesDibujables++);
+	Personaje* personaje1 = *(it_personajes++);
+	Personaje* personaje2 = *(it_personajes);
+	PersonajeDibujable* personajeDibujable1 = *(it_personajesDibujables++);
+	PersonajeDibujable* personajeDibujable2 = *(it_personajesDibujables);
 
+	Logger::getInstance()->error(personaje1);
+	Logger::getInstance()->error(personaje2);
 
 	// cargar el escenario grafico
 	cargador_de_objetos->cargarEscenarioGrafico(personajeDibujable1, personajeDibujable2);
