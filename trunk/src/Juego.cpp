@@ -79,7 +79,7 @@ void Juego::handleEvents(bool& recargar)
 		//para salir del juego con la tecla ESC
 	    if( evento.type == SDL_KEYUP && evento.key.repeat == 0 ){
 	        if (evento.key.keysym.sym == SDLK_ESCAPE){
-	            juegoCorriendo = false;;
+	            juegoCorriendo = false;
 	        }
 	    }
 

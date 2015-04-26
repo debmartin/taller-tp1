@@ -201,6 +201,11 @@ ostream& operator <<(ostream &o, const Personaje &p) {
         return o;
 }
 
+void Personaje::cambiarOrientacion() {
+	//TODO ver como me conecto con el personaje dibujable
+	//personajeDibujable->cambiarOrientacion();
+}
+
 string Personaje::toString() {
     ostringstream stream;
     stream <<*this;

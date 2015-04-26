@@ -136,3 +136,15 @@ Vector2f Sprite::getPosicion() {
 
 Sprite::~Sprite() {
 }
+
+void Sprite::cambiarOrientacion() {
+
+	if (orientacion == ORIENTACION_DERECHA){
+		orientacion = ORIENTACION_IZQUIERDA;
+	}else if (orientacion == ORIENTACION_IZQUIERDA)
+	{
+		orientacion = ORIENTACION_DERECHA;
+	}
+
+	//TODO ver el atributo sentidoReproduccion
+}

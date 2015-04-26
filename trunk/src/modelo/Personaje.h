@@ -87,6 +87,7 @@ public:
 	bool estaSaltando();
 	bool estaAgachado();
 	bool estaEnReposo();
+	void cambiarOrientacion();
 
 	friend ostream& operator<<(ostream &o, const Personaje &p);
 	string toString();
