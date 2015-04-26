@@ -11,6 +11,7 @@
 
 #define GRADOS60 60
 #define GRADOS120 120
+#define GRADOS240 240
 #define GRADOS360 360
 #define GRADOS0 0
 
@@ -24,9 +25,9 @@ public:
 	virtual ~HSV();
 
 private:
-	float H;
-	float S;
-	float V;
+	int H;
+	int S;
+	int V;
 	int maxRGB;
 	int minRGB;
 	int Rfinal;
