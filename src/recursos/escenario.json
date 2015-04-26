@@ -55,7 +55,7 @@
         		    "cant_fotogramas": 7,
         		    "fps": 15 
         			},
-		"direccion": 1
+		"direccion": -1
     }, 
     "personaje-2": {
         "ancho": 105, 	
@@ -86,7 +86,7 @@
         		    "cant_fotogramas": 7,
         		    "fps": 15
         			},
-		"direccion": -1
+		"direccion": 1
     }    
 }
 

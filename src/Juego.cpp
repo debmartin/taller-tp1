@@ -97,8 +97,10 @@ void Juego::handleEvents(bool& recargar)
 		} else if (! controladorPersonaje->manejar_Evento(evento)){
 			juegoCorriendo = false;
 		}
+
 	} else {
-	        controladorPersonaje->continuarAccionPrevia();
+	        controladorPersonaje->continuarAccionPreviaPersonaje1();
+	        controladorPersonaje->continuarAccionPreviaPersonaje2();
 	}
 }
 
