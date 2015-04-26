@@ -13,20 +13,21 @@
 class Personaje;
 
 class ControladorPersonaje {
+private:
 	Personaje* personaje1;
 	Personaje* personaje2;
 	SDL_Event eventoGuardado;
-    void identificarOrden();
 public:
 	ControladorPersonaje();
-	ControladorPersonaje(Personaje* pers);
 	virtual ~ControladorPersonaje();
 	bool manejar_Evento(SDL_Event &evento);
-	void continuarAccionPrevia();
-	SDL_Event obtenerUltimoEvento();
-
+	void continuarAccionPreviaPersonaje1();
+	void continuarAccionPreviaPersonaje2();
 	void agregarPersonaje1(Personaje* personaje1);
 	void agregarPersonaje2(Personaje* personaje2);
+private:
+	void identificarOrdenPersonaje1();
+	void identificarOrdenPersonaje2();
 };
 
 #endif /* SRC_CONTROLADOR_CONTROLADORPERSONAJE_H_ */

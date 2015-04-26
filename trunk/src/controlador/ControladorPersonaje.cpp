@@ -23,19 +23,20 @@ ControladorPersonaje::ControladorPersonaje() {
 bool ControladorPersonaje::manejar_Evento(SDL_Event &evento){
     Logger::getInstance()->debug("Se recibe un evento de teclado.");
 
-    if (personaje1->estaSaltando()) {
-        Logger::getInstance()->debug("Evento invalido.");
+    if (personaje1->estaSaltando() || personaje2->estaSaltando()) {
+        Logger::getInstance()->error("Evento invalido.");
     	return true;
     }
 
 	//Si se presiona una tecla
 	if ( evento.key.repeat == 0 ){
-        identificarOrden();
+		identificarOrdenPersonaje1();
+		identificarOrdenPersonaje2();
 	}
     return true;
 }
 
-void ControladorPersonaje::identificarOrden(){
+void ControladorPersonaje::identificarOrdenPersonaje1(){
     const Uint8* estadoTeclado = SDL_GetKeyboardState(NULL);
 
     if (estadoTeclado[SDL_SCANCODE_LEFT] && estadoTeclado[SDL_SCANCODE_UP]){
@@ -59,12 +60,46 @@ void ControladorPersonaje::identificarOrden(){
     }else{
         personaje1->mantenerReposo();
     }
+
 }
 
-void ControladorPersonaje::continuarAccionPrevia(){
+void ControladorPersonaje::identificarOrdenPersonaje2(){
+    const Uint8* estadoTeclado = SDL_GetKeyboardState(NULL);
+
+    if (estadoTeclado[SDL_SCANCODE_A] && estadoTeclado[SDL_SCANCODE_W]){
+        Logger::getInstance()->debug("Se presiona: Tecla izquierda+Tecla arriba.");
+        personaje2->saltarOblicuoIzquierda();
+    } else if (estadoTeclado[SDL_SCANCODE_D] && estadoTeclado[SDL_SCANCODE_W]){
+        Logger::getInstance()->debug("Se presiona: Tecla derecha+Tecla arriba.");
+        personaje2->saltarOblicuoDerecha();
+    }else if (estadoTeclado[SDL_SCANCODE_A] && ! personaje2->estaAgachado()){
+        Logger::getInstance()->debug("Se presiona: Tecla izquierda.");
+        personaje2->caminarIzquierda();
+    }else if (estadoTeclado[SDL_SCANCODE_D] && ! personaje2->estaAgachado()){
+        Logger::getInstance()->debug("Se presiona: Tecla derecha.");
+        personaje2->caminarDerecha();
+    }else if (estadoTeclado[SDL_SCANCODE_W]){
+        Logger::getInstance()->debug("Se presiona: Tecla arriba.");
+        personaje2->saltarVertical();
+    }else if (estadoTeclado[SDL_SCANCODE_S]){
+        Logger::getInstance()->debug("Se presiona: Tecla abajo.");
+        personaje2->agacharse();
+    }else{
+        personaje2->mantenerReposo();
+    }
+
+}
+
+void ControladorPersonaje::continuarAccionPreviaPersonaje1(){
     if (! personaje1->estaEnReposo())
         return;
-    identificarOrden();
+    identificarOrdenPersonaje1();
+}
+
+void ControladorPersonaje::continuarAccionPreviaPersonaje2(){
+    if (! personaje2->estaEnReposo())
+        return;
+    identificarOrdenPersonaje2();
 }
 
 ControladorPersonaje::~ControladorPersonaje() {
