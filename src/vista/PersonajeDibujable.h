@@ -46,6 +46,7 @@ public:
 	void actualizar();
 	void recibirNotificacion(Observable* unObservable);
 	Sprite* _getSprite() { return spritePersonaje; }
+	void cambiarOrientacion();
 };
 
 #endif /* SRC_VISTA_PERSONAJEDIBUJABLE_H_ */
