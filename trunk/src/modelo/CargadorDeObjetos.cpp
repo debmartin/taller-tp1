@@ -97,7 +97,7 @@ list<PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables() {
 				}
 		}
 
-		cout << "*CargadorDeOjbetos::cargarObjetos>getIdSprite:" << primerSpriteSubQuieto->getIdSprite() << endl;
+		//cout << "*CargadorDeOjbetos::cargarObjetos>getIdSprite:" << primerSpriteSubQuieto->getIdSprite() << endl;
 		Animacion* SubQuieto = new Animacion(primerSpriteSubQuieto->getImagen(),
 		primerSpriteSubQuieto->getCantFotogramas(),
 		primerSpriteSubQuieto->getFps(),
@@ -116,14 +116,18 @@ list<PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables() {
 
 		it_sprites = spritesDef->begin();
 		for (; it_sprites != spritesDef->end(); ++it_sprites) {
-			cout << "FOR-ID:" << (*it_sprites)->getIdSprite() << endl;
-			Animacion* sub_zero = new Animacion((*it_sprites)->getImagen(),
-			(*it_sprites)->getCantFotogramas(), (*it_sprites)->getFps(),
-			(*it_sprites)->getIdSprite(),
-			Renderizador::Instance()->getRenderer());
+			//cout << "FOR-ID:" << (*it_sprites)->getIdSprite() << endl;
+			Animacion* sub_zero = new Animacion(
+										(*it_sprites)->getImagen(),
+										(*it_sprites)->getCantFotogramas(),
+										(*it_sprites)->getFps(),
+										(*it_sprites)->getIdSprite(),
+										Renderizador::Instance()->getRenderer(),
+										53,
+										220,
+										173);
 			personajeDibujableCargado->agregarAnimacion(sub_zero);
 		}
-
 		personajesDibujables->push_back(personajeDibujableCargado);
 	}
 

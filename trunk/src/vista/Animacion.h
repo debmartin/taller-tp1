@@ -3,6 +3,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <string>
+#include "Desplazar.h"
 
 class Animacion {
 
@@ -13,6 +14,13 @@ class Animacion {
         std::string id;
     public:
         Animacion(std::string pathImagen, int cantFotogramas, int fps, std::string id, SDL_Renderer* pRenderer);
+        Animacion(
+        		std::string pathImagen,
+				int cantFotogramas,
+				int fps,
+				std::string id,
+				SDL_Renderer* pRenderer,
+				Uint16 Hinicial, Uint16 Hfinal, Uint16 desplazamiento);
         SDL_Texture* getTextura();
         int getCantidadFotogramas();
         int getFps();

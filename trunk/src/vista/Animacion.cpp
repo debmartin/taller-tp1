@@ -19,6 +19,33 @@ Animacion::Animacion(string pathImagen, int cantFotogramas, int fpsIn, string id
 
 }
 
+Animacion::Animacion(
+        		std::string pathImagen,
+				int cantFotogramas,
+				int fpsIn,
+				std::string idIn,
+				SDL_Renderer* pRenderer,
+				Uint16 Hinicial, Uint16 Hfinal, Uint16 desplazamiento):
+					cantidadFotogramas(cantFotogramas),
+					fps(fpsIn),
+					id(idIn)
+{
+    SDL_Surface* pTempSurface = IMG_Load(pathImagen.c_str());
+	if (!pTempSurface) {
+		return;//agregar error
+	}
+
+	Desplazar::H(pTempSurface, Hinicial, Hfinal, desplazamiento);
+
+	textura = SDL_CreateTextureFromSurface(pRenderer, pTempSurface);
+
+	SDL_FreeSurface(pTempSurface);
+
+	if (!textura)
+		cout << "ERROR";//agregar error
+}
+
+
 SDL_Texture* Animacion::getTextura() {
 	return this->textura;
 }
