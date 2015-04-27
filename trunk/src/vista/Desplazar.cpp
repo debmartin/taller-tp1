@@ -1,5 +1,4 @@
 #include "Desplazar.h"
-#include "Desplazar.h"
 
 void Desplazar::H(SDL_Surface* sOriginal, Uint16 Hinicial, Uint16 Hfinal, Uint16 desplazamiento) {
 

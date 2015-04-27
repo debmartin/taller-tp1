@@ -39,7 +39,7 @@ Uint16 PixelColor::RGBtoH(Uint8 R, Uint8 G, Uint8 B) {
 		H = GRADOS60 * (r - g)/(maxRGB - minRGB) + GRADOS240;
 	}
 
-	H = round(H); //EL REDONDEO ELIMINA LA PARTE DECIMAL, CAUSANDO EL ERROR DE 1, ESTA ES LA SOLUCION
+	H = round(H);
 
 	return (H == 360.0) ? 0 : (Uint16)H;
 }

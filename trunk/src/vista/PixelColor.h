@@ -2,8 +2,6 @@
 #define SRC_VISTA_PIXELCOLOR_H_
 #include <SDL2/SDL.h>
 #include <cmath>
-#include <iostream> //TODO: BORRAR
-using namespace std; //TODO: BORRAR
 
 #define GRADOS60 60.0f
 #define GRADOS120 120.0f
