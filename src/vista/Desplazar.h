@@ -1,10 +1,7 @@
 #ifndef DESPLAZAR_H_
 #define DESPLAZAR_H_
-#include <iostream>
 #include <SDL2/SDL.h>
 #include "PixelColor.h"
-
-using namespace std;
 
 class Desplazar{
 	private:
