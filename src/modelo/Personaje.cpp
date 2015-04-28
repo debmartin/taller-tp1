@@ -62,10 +62,6 @@ estado_personaje Personaje::getEstado(){
 	return this->estado;
 }
 
-void Personaje::setVida(int cantidad){
-	this->vida += cantidad;
-}
-
 int Personaje::getVida(){
 	return this->vida;
 }
@@ -213,19 +209,24 @@ bool Personaje::llegoAlLimite(){
 	return this->estaEnLimite;
 }
 
-ostream& operator <<(ostream &o, const Personaje &p) {
-
-        o<<"Personaje -> [ancho, alto, posInicial]=["<<p.ancho<<", "<<p.alto<<", "<<p.posicionInicial<<"]";
-        return o;
-}
-
 void Personaje::cambiarOrientacion() {
 	//TODO ver como me conecto con el personaje dibujable
 	//personajeDibujable->cambiarOrientacion();
 }
 
-void Personaje::agregarOponente(Personaje* unOponente){
-	oponente = unOponente;
+
+void Personaje::ejecutarPoder(Poder poder, Objeto objeto){
+	poder.ejecutar(objeto);
+}
+
+void Personaje::recibirDanio(int danio){
+	this->vida -= danio;
+}
+
+ostream& operator <<(ostream &o, const Personaje &p) {
+
+        o<<"Personaje -> [ancho, alto, posInicial]=["<<p.ancho<<", "<<p.alto<<", "<<p.posicionInicial<<"]";
+        return o;
 }
 
 string Personaje::toString() {
