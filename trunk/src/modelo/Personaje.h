@@ -55,6 +55,8 @@ private:
 	Trayectoria* trayectoria;
 	float tCreacion;
 	Vector2f posicionSalto;
+	Personaje* oponente;
+	bool estaEnLimite;
 
 public:
 	Personaje();
@@ -88,7 +90,8 @@ public:
 	bool estaAgachado();
 	bool estaEnReposo();
 	void cambiarOrientacion();
-
+	void agregarOponente(Personaje* oponente);
+	bool llegoAlLimite();
 	friend ostream& operator<<(ostream &o, const Personaje &p);
 	string toString();
 };

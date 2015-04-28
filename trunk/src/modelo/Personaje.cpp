@@ -31,6 +31,7 @@ Personaje::Personaje() {
 Personaje::Personaje(double anchoIn, double altoIn, Vector2f posInicial, Posicionable* posc) :
     posicionInicial(posInicial), ancho(anchoIn), alto(altoIn), estado(EN_ESPERA), posicionable(posc), posicion(posInicial), tCreacion(0){
 	this->trayectoria = new Reposo(this->posicion);
+	this->estaEnLimite = false;
 }
 
 double Personaje::getAlto() const {
@@ -161,13 +162,19 @@ void Personaje::notificarObservadores(){
 void Personaje::update(){
 	Logger::getInstance()->debug("Personaje: update.");
 
+	//float miPosicionX =this->posicion.X();
+
 	// RECALCULA LA POSICION EN BASE AL OBJETO TRAYECTORIA
 	float tActual = ((float)(SDL_GetTicks())/1000.0f) - tCreacion;
 	Vector2f posicionCandidata = this->trayectoria->getPosicion(tActual);
 	if (posicionable->esValida(posicionCandidata, ancho) && posicionCandidata.Y() >= posicionInicial.Y()) {
-        posicion = posicionCandidata;
+		/*
+		//Validar si el oponente está en el limite para moverse o no
+		if(oponente->llegoAlLimite()){
+			posicion = Vector2f(miPosicionX, posicionCandidata.Y());
+		}*/
+		posicion = posicionCandidata;
 	} else if (posicionCandidata.Y() < posicionInicial.Y()) {
-        Logger::getInstance()->debug("entra a igual");
         posicion = Vector2f(posicionCandidata.X(), posicionInicial.Y());
         mantenerReposo();
     } else if (posicionCandidata.Y() > posicionInicial.Y()) {
@@ -176,6 +183,13 @@ void Personaje::update(){
     } else {
         mantenerReposo();
     }
+	/*
+	if(llegoAlLimiteIzquierdo() || llegoAlLimiteDerecho()){
+		this->estaEnLimite = true;
+	}else{
+		this->estaEnLimite = false;
+	}*/
+
 	notificarObservadores();
 }
 
@@ -195,6 +209,10 @@ bool Personaje::estaEnReposo(){
     return (estado == EN_ESPERA);
 }
 
+bool Personaje::llegoAlLimite(){
+	return this->estaEnLimite;
+}
+
 ostream& operator <<(ostream &o, const Personaje &p) {
 
         o<<"Personaje -> [ancho, alto, posInicial]=["<<p.ancho<<", "<<p.alto<<", "<<p.posicionInicial<<"]";
@@ -204,6 +222,10 @@ ostream& operator <<(ostream &o, const Personaje &p) {
 void Personaje::cambiarOrientacion() {
 	//TODO ver como me conecto con el personaje dibujable
 	//personajeDibujable->cambiarOrientacion();
+}
+
+void Personaje::agregarOponente(Personaje* unOponente){
+	oponente = unOponente;
 }
 
 string Personaje::toString() {
