@@ -11,6 +11,7 @@
 
 #define DELTA_X2 110
 #define DELTA_X 10
+#define DELTA 20
 using namespace std;
 
 class VentanaGrafica: public Posicionable, public Observador{
