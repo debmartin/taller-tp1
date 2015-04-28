@@ -114,6 +114,7 @@ list<PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables() {
 		personajeDibujableCargado = new PersonajeDibujable(SubQuieto,
 				(*it)->getPosicionInicial(), tamanioPx, direccion);
 
+		//TODO: Val. Separar la carga de los personajes para poder setearles el color.
 		it_sprites = spritesDef->begin();
 		for (; it_sprites != spritesDef->end(); ++it_sprites) {
 			//cout << "FOR-ID:" << (*it_sprites)->getIdSprite() << endl;
@@ -125,7 +126,7 @@ list<PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables() {
 										Renderizador::Instance()->getRenderer(),
 										53,
 										220,
-										173);
+										65);
 			personajeDibujableCargado->agregarAnimacion(sub_zero);
 		}
 		personajesDibujables->push_back(personajeDibujableCargado);

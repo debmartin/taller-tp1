@@ -53,6 +53,8 @@ void Juego::agregarJugador2(Personaje* unPersonaje,
 	this->jugador2->agregarObservador(VentanaGrafica::Instance());
 
 	controladorPersonaje->agregarPersonaje2(this->jugador2);
+	this->jugador1->agregarOponente(this->jugador2);
+	this->jugador2->agregarOponente(this->jugador1);
 }
 
 void Juego::render()
