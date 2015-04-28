@@ -14,6 +14,8 @@
 #include "../utils/Loggeable.h"
 #include "Observable.h"
 #include "Vector2f.h"
+#include "Poder.h"
+#include "Objeto.h"
 
 class Posicionable;
 class Trayectoria;
@@ -69,19 +71,11 @@ public:
 	Vector2f getPosicion();
 	void setEstado(estado_personaje estado);
 	estado_personaje getEstado();
-	void setVida(int cantidad);
 	int getVida();
 	Vector2f obtenerPosicionEnVentana();
 	bool llegoAlLimiteIzquierdo();
 	bool llegoAlLimiteDerecho();
 	void centrar_en(Vector2f& v);
-    void caminarDerecha();
-    void caminarIzquierda();
-    void saltarVertical();
-    void saltarOblicuoDerecha();
-    void saltarOblicuoIzquierda();
-    void mantenerReposo();
-    void agacharse();
 	void cambiarTrayectoria(Trayectoria* t);
 	void agregarObservador(Observador* unObservador);
 	void notificarObservadores();
@@ -90,8 +84,24 @@ public:
 	bool estaAgachado();
 	bool estaEnReposo();
 	void cambiarOrientacion();
-	void agregarOponente(Personaje* oponente);
 	bool llegoAlLimite();
+	void recibirDanio(int danio);
+
+	//Movimientos y poderes
+	void caminarDerecha();
+	void caminarIzquierda();
+	void saltarVertical();
+	void saltarOblicuoDerecha();
+	void saltarOblicuoIzquierda();
+	void mantenerReposo();
+	void agacharse();
+	void golpeAlto();
+	void golpeBajo();
+	void patadaAlta();
+	void patadaBaja();
+	void defensa();
+	void ejecutarPoder(Poder poder, Objeto objeto);
+
 	friend ostream& operator<<(ostream &o, const Personaje &p);
 	string toString();
 };
