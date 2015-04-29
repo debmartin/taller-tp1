@@ -10,9 +10,9 @@
 
 #include "Objeto.h"
 
-#define DAÑO_BOLA_DE_HIELO 50
-#define DAÑO_BOLA_DE_FUEGO 50
-#define DAÑO_CUCHILLO 20
+#define DANIO_BOLA_DE_HIELO 50
+#define DANIO_BOLA_DE_FUEGO 50
+#define DANIO_CUCHILLO 20
 
 class Poder {
 public:
