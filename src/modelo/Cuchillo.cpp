@@ -7,14 +7,24 @@
 
 #include "Cuchillo.h"
 
-Cuchillo::Cuchillo(Vector2f posicion) {
+Cuchillo::Cuchillo() {
 	// TODO Auto-generated constructor stub
-	this->trayectoria = new MRU(posicion, VELOCIDAD_OBJETO);
+	this->posicion = POS_INICIAL_OBJETO;
+	this->trayectoria = new MRU(POS_INICIAL_OBJETO, VELOCIDAD_OBJETO);
 	this->damage = DANIO_CUCHILLO;
 }
 
 int Cuchillo::quitarEnergia(){
 	return this->damage;
+}
+
+void Cuchillo::posicionar(Vector2f pos){
+	posicion = pos;
+}
+
+void Cuchillo::update(){
+	float tActual = ((float)(SDL_GetTicks())/1000.0f) - tCreacion;
+	posicion = this->trayectoria->getPosicion(tActual);
 }
 
 Cuchillo::~Cuchillo() {

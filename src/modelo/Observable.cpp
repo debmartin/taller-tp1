@@ -27,8 +27,6 @@ void Observable::notificarObservadores(){
 
 }
 
-
-
 Observable::~Observable(){
     delete observadores;
 }

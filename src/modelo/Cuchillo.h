@@ -21,9 +21,11 @@ private:
 	float tCreacion;
 
 public:
-	Cuchillo(Vector2f posicion);
+	Cuchillo();
 	virtual ~Cuchillo();
 	int quitarEnergia();
+	void posicionar(Vector2f);
+	void update();
 };
 
 #endif /* SRC_MODELO_CUCHILLO_H_ */

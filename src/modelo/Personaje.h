@@ -100,7 +100,7 @@ public:
 	void patadaAlta();
 	void patadaBaja();
 	void defensa();
-	void ejecutarPoder(Poder poder, Objeto objeto);
+	void ejecutarPoder(Poder* poder, Objeto* objeto);
 
 	friend ostream& operator<<(ostream &o, const Personaje &p);
 	string toString();

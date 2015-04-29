@@ -12,8 +12,8 @@ Poder::Poder() {
 
 }
 
-void Poder::ejecutar(Objeto objeto){
-
+void Poder::ejecutar(Objeto* objeto){
+	objeto->update();
 }
 
 Poder::~Poder() {

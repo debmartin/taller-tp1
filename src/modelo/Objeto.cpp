@@ -6,7 +6,7 @@
  */
 
 #include "Objeto.h"
-#include "Reposo.h"
+
 
 Objeto::Objeto() {
 	// TODO Auto-generated constructor stub
