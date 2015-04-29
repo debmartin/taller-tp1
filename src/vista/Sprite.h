@@ -58,7 +58,8 @@ public:
 	int getAnchoPx();
 	int getAltoPx();
 	Vector2f getDimensionesPx();
-	void cambiarOrientacion();
+	void cambiarOrientacionHaciaDerecha();
+	void cambiarOrientacionHaciaIzquierda();
 };
 
 #endif /* SRC_VISTA_SPRITE_H_ */

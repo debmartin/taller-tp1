@@ -26,7 +26,6 @@ Juego::Juego()
 	jugadorDibujable1 = new PersonajeDibujable();
 	jugadorDibujable2 = new PersonajeDibujable();
 	controladorPersonaje = new ControladorPersonaje();
-
 }
 
 void Juego::agregarJugador1(Personaje* unPersonaje,
@@ -65,6 +64,7 @@ void Juego::update()
 	// INICIO CODIGO USUARIO
 	this->jugador1->update();
 	this->jugador2->update();
+	this->actualizarOrientacionJugadores();
 
 	VentanaGrafica::Instance()->actualizar();
 	// FIN CODIGO USUARIO
@@ -105,6 +105,20 @@ void Juego::handleEvents(bool& recargar)
 }
 
 bool Juego::running() { return juegoCorriendo; }
+
+void Juego::actualizarOrientacionJugadores() {
+
+	if ( jugadorDibujable1->getPosicionX() > jugadorDibujable2->getPosicionX() )
+	{
+		jugadorDibujable1->cambiarOrientacionHaciaIzquierda();
+		jugadorDibujable2->cambiarOrientacionHaciaDerecha();
+	}
+	else
+	{
+		jugadorDibujable1->cambiarOrientacionHaciaDerecha();
+		jugadorDibujable2->cambiarOrientacionHaciaIzquierda();
+	}
+}
 
 Juego::~Juego(){
 //    delete VentanaGrafica::Instance();

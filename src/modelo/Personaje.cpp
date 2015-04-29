@@ -209,12 +209,6 @@ bool Personaje::llegoAlLimite(){
 	return this->estaEnLimite;
 }
 
-void Personaje::cambiarOrientacion() {
-	//TODO ver como me conecto con el personaje dibujable
-	//personajeDibujable->cambiarOrientacion();
-}
-
-
 void Personaje::ejecutarPoder(Poder* poder, Objeto* objeto){
 	//Posiciono el poder respecto a la posicion del personaje
 	Vector2f posicionObjeto(posicion.X()+ancho,alto);

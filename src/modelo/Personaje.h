@@ -57,7 +57,6 @@ private:
 	Trayectoria* trayectoria;
 	float tCreacion;
 	Vector2f posicionSalto;
-	Personaje* oponente;
 	bool estaEnLimite;
 
 public:
@@ -83,7 +82,6 @@ public:
 	bool estaSaltando();
 	bool estaAgachado();
 	bool estaEnReposo();
-	void cambiarOrientacion();
 	bool llegoAlLimite();
 	void recibirDanio(int danio);
 

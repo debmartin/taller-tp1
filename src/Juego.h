@@ -34,9 +34,11 @@ public:
 	void agregarJugador1(Personaje* unPersonaje, PersonajeDibujable* unPersonajeDibujable);
 	void agregarJugador2(Personaje* unPersonaje, PersonajeDibujable* unPersonajeDibujable);
 	~Juego();
-
 	//
 	static Juego* Instance();
+
+private:
+	void actualizarOrientacionJugadores();
 
 };
 
