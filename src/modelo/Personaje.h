@@ -104,6 +104,8 @@ public:
 
 	friend ostream& operator<<(ostream &o, const Personaje &p);
 	string toString();
+
+	void agregarOponente( Personaje* p) {}
 };
 
 #endif /* SRC_MODELO_PERSONAJE_H_ */
