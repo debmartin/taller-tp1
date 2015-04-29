@@ -18,7 +18,7 @@ class Poder {
 public:
 	Poder();
 	virtual ~Poder();
-	void ejecutar(Objeto objeto);
+	void ejecutar(Objeto* objeto);
 };
 
 #endif /* SRC_MODELO_PODER_H_ */

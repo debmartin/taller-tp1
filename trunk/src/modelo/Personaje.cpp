@@ -215,8 +215,11 @@ void Personaje::cambiarOrientacion() {
 }
 
 
-void Personaje::ejecutarPoder(Poder poder, Objeto objeto){
-	poder.ejecutar(objeto);
+void Personaje::ejecutarPoder(Poder* poder, Objeto* objeto){
+	//Posiciono el poder respecto a la posicion del personaje
+	Vector2f posicionObjeto(posicion.X()+ancho,alto);
+	objeto->posicionar(posicionObjeto);
+	poder->ejecutar(objeto);
 }
 
 void Personaje::recibirDanio(int danio){
