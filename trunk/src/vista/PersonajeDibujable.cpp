@@ -91,6 +91,14 @@ void PersonajeDibujable::recibirNotificacion(Observable* unObservable){
 	seleccionarSprite();
 }
 
-void PersonajeDibujable::cambiarOrientacion() {
-	this->spritePersonaje->cambiarOrientacion();
+void PersonajeDibujable::cambiarOrientacionHaciaDerecha() {
+	this->spritePersonaje->cambiarOrientacionHaciaDerecha();
+}
+
+void PersonajeDibujable::cambiarOrientacionHaciaIzquierda() {
+	this->spritePersonaje->cambiarOrientacionHaciaIzquierda();
+}
+
+float PersonajeDibujable::getPosicionX() {
+	return this->_getSprite()->getPosicion().X();
 }
