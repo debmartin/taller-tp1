@@ -8,7 +8,7 @@
 #ifndef SRC_MODELO_OBJETO_H_
 #define SRC_MODELO_OBJETO_H_
 
-#include <SDL2/SDL_timer.h>
+
 #include "Trayectoria.h"
 
 #define POS_INICIAL_OBJETO Vector2f(0,0)
@@ -21,7 +21,7 @@ public:
 	virtual ~Objeto();
 	virtual void posicionar(Vector2f posicion) = 0;
 	virtual int quitarEnergia() = 0;
-	virtual void update();
+	virtual void update() = 0;
 };
 
 #endif /* SRC_MODELO_OBJETO_H_ */
