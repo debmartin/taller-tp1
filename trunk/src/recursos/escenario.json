@@ -55,7 +55,12 @@
         		    "cant_fotogramas": 7,
         		    "fps": 15 
         			},
-		"direccion": -1
+		"direccion": -1,
+		"color-alternativo": {
+					"h-inicial": 53,
+					"h-final": 44,
+					"desplazamiento": 202
+					}
     }, 
     "personaje-2": {
         "ancho": 135, 	
@@ -86,7 +91,12 @@
         		    "cant_fotogramas": 7,
         		    "fps": 15
         			},
-		"direccion": 1
+		"direccion": 1,
+		"color-alternativo": {
+					"h-inicial": 53,
+					"h-final": 44,
+					"desplazamiento": 300
+					}		
     }    
 }
 

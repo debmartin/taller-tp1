@@ -19,9 +19,10 @@ PersonajeDef::PersonajeDef() {
 	this->z_index = 0;
 	this->spritesDef = new list<SpriteDef*>();
 	this->direccion = 1;
+	this->colorAlternativoDef = new ColorAlternativoDef();
 }
 
-PersonajeDef::PersonajeDef(double anchoIn, double altoIn, int zindexIn, int direccionIn, Vector2f posInicial)
+PersonajeDef::PersonajeDef(double anchoIn, double altoIn, int zindexIn, int direccionIn, Vector2f posInicial, ColorAlternativoDef* colorAlter)
 {
     if (anchoIn <= 0)
 		Logger::getInstance()->info("El ancho del personaje es menor o igual a cero. Se elije uno nuevo con el valor de 15");
@@ -40,6 +41,7 @@ PersonajeDef::PersonajeDef(double anchoIn, double altoIn, int zindexIn, int dire
 	this->spritesDef = new list<SpriteDef*>();
 	this->direccion = direccionIn;
 	this->posicionInicial = posInicial;
+	this->colorAlternativoDef = colorAlter;
 }
 
 void PersonajeDef::ajustarZIndex(int cantCapas)
@@ -65,10 +67,14 @@ void PersonajeDef::ajustarAlto(double altoEscenario, double ypiso){
 }
 
 void PersonajeDef::ajustarPosicionIncial(double anchoEscenario, double anchoVentana, double ypiso){
-	Vector2f p_posInicial((anchoEscenario/2.0)-this->direccion*(anchoVentana/4.0),ypiso);
+	Vector2f p_posInicial((anchoEscenario/2.0) - this->direccion*(anchoVentana/3.0),ypiso);
 	this->posicionInicial = p_posInicial;
+	Logger::getInstance()->error(&p_posInicial);
 }
 
+void PersonajeDef::ajustarColorAlternativo() {
+	// TODO falta validacion
+}
 
 double PersonajeDef::getAlto() const {
 	return alto;
@@ -123,6 +129,7 @@ ostream& operator <<(ostream &o, const PersonajeDef &p) {
     		o<<**it_spritesDef<<endl;
     	}
     	o<<"}";
+    	o<<*p.getColorAlternativoDef();
         return o;
 }
 
@@ -138,4 +145,12 @@ string PersonajeDef::toString() {
     ostringstream stream;
     stream <<*this;
 	return stream.str();
+}
+
+ColorAlternativoDef* PersonajeDef::getColorAlternativoDef() const {
+	return colorAlternativoDef;
+}
+
+void PersonajeDef::setColorAlternativoDef(ColorAlternativoDef* colorAlternativoDef) {
+	this->colorAlternativoDef = colorAlternativoDef;
 }

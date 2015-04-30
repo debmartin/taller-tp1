@@ -195,6 +195,9 @@ PersonajeDef* Parser::parsearPersonaje(string tag_personaje){
     string p_sprites_id;
     int p_sprites_cant_fotogramas = 0;
     int p_sprites_fps = 0;
+	double color_alternativo_hinicial;
+	double color_alternativo_hfinal;
+	double color_alternativo_desplazamiento;
 
     int p_direccion = 0;
     list<SpriteDef*> sprites;
@@ -224,12 +227,23 @@ PersonajeDef* Parser::parsearPersonaje(string tag_personaje){
             sprites.push_back(spriteDefAct);
         } else if ( tag == TAG_PERSONAJE_DIRECCION ) {
             p_direccion = obtenerValorInt(subvalor, DIRECCION_PERS_DERECHA, "Personaje direccion no es valor entero");
-        } else {
+        } else if ( tag == TAG_COLOR_ALTERNATIVO ) {
+
+            Json::Value valorColorAlternativo_hincial = (*it2)[TAG_COLOR_ALTERNATIVO_HINICIAL];
+            Json::Value valorColorAlternativo_hfinal = (*it2)[TAG_COLOR_ALTERNATIVO_HFINAL];
+            Json::Value valorColorAlternativo_desplazamiento = (*it2)[TAG_COLOR_ALTERNATIVO_DESPLAZAMIENTO];
+
+            color_alternativo_hinicial = obtenerValorDouble(valorColorAlternativo_hincial, COLOR_ALTERNATIVO_HINICIAL_PERS_DEFAULT, "el h_inicial del color alternativo no es un valor numerico");
+            color_alternativo_hfinal = obtenerValorDouble(valorColorAlternativo_hfinal, COLOR_ALTERNATIVO_HFINAL_PERS_DEFAULT, "el h_final del color alternativo no es un valor numerico");
+            color_alternativo_desplazamiento = obtenerValorDouble(valorColorAlternativo_desplazamiento, COLOR_ALTERNATIVO_DESPLAZAMIENTO_PERS_DEFAULT, "el desplazamiento del color alternativo no es un valor numerico");
+
+        }else {
             Logger::getInstance()->error("Dentro del personaje no se encuentra el parametro "+tag);
         }
     }
     Vector2f p_posInicial(escenario->getAncho()/2.0,escenario->getYpiso());
-    PersonajeDef* personajeParseado = new PersonajeDef(p_ancho, p_alto, p_zindex, p_direccion, p_posInicial);
+    ColorAlternativoDef* colorAlternativoDef = new ColorAlternativoDef(color_alternativo_hinicial, color_alternativo_hfinal, color_alternativo_desplazamiento);
+    PersonajeDef* personajeParseado = new PersonajeDef(p_ancho, p_alto, p_zindex, p_direccion, p_posInicial, colorAlternativoDef);
     for (list<SpriteDef*>::iterator it = sprites.begin(); it != sprites.end(); ++it){
     	personajeParseado->agregarSpritesDef(*it);
     }
@@ -285,6 +299,7 @@ void Parser::inciarValidacionSemantica() {
 	    (*it)->ajustarAlto(escenario->getAlto(), escenario->getYpiso());
 	    ventana->ajustarAncho(escenario->getAncho());
 	    (*it)->ajustarPosicionIncial(escenario->getAncho(), ventana->getAncho(), escenario->getYpiso());
+	    (*it)->ajustarColorAlternativo();
 	}
 
     for (list<CapaDef*>::iterator it_capas = this->capas->begin() ; it_capas != this->capas->end(); it_capas++)
