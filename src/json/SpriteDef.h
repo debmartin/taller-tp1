@@ -38,7 +38,6 @@ public:
 	const string& getImagen() const;
 	const string& getIdSprite() const;
 	friend ostream& operator<<(ostream &o, const SpriteDef &s);
-
 	string toString();
 };
 

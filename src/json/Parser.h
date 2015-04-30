@@ -38,6 +38,10 @@
 #define TAG_PERSONAJE_SPRITES_FPS "fps"
 #define TAG_PERSONAJE_SPRITES_IMAGEN "imagen"
 #define TAG_PERSONAJE_DIRECCION "direccion"
+#define TAG_COLOR_ALTERNATIVO "color-alternativo"
+#define TAG_COLOR_ALTERNATIVO_HINICIAL "h-inicial"
+#define TAG_COLOR_ALTERNATIVO_HFINAL "h-final"
+#define TAG_COLOR_ALTERNATIVO_DESPLAZAMIENTO "desplazamiento"
 
 
 
