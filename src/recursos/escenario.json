@@ -57,8 +57,8 @@
         			},
 		"direccion": -1,
 		"color-alternativo": {
-					"h-inicial": 53,
-					"h-final": 44,
+					"h-inicial": 44,
+					"h-final": 53,
 					"desplazamiento": 202
 					}
     }, 
@@ -93,8 +93,8 @@
         			},
 		"direccion": 1,
 		"color-alternativo": {
-					"h-inicial": 53,
-					"h-final": 44,
+					"h-inicial": 44,
+					"h-final": 53,
 					"desplazamiento": 300
 					}		
     }    
