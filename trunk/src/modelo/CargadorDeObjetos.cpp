@@ -65,7 +65,7 @@ list<Personaje*>* CargadorDeOjbetos::cargarPersonajes() {
 
 	for (list<PersonajeDef*>::iterator it = parser->getPersonajesDef()->begin() ; it != parser->getPersonajesDef()->end(); ++it)
 	{
-		Logger::getInstance()->info(*it);
+		//Logger::getInstance()->info(*it);
 		Personaje* personaje = new Personaje((*it)->getAncho(), (*it)->getAlto(), (*it)->getPosicionInicial(), VentanaGrafica::Instance());
 		personajes->push_back(personaje);
 	}
@@ -124,9 +124,9 @@ list<PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables() {
 										(*it_sprites)->getFps(),
 										(*it_sprites)->getIdSprite(),
 										Renderizador::Instance()->getRenderer(),
-										(*it)->getColorAlternativoDef()->getHinicial(),
-										(*it)->getColorAlternativoDef()->getHfinal(),
-										(*it)->getColorAlternativoDef()->getDesplazamiento());
+										(Uint16)(*it)->getColorAlternativoDef()->getHinicial(),
+										(Uint16)(*it)->getColorAlternativoDef()->getHfinal(),
+										(Uint16)(*it)->getColorAlternativoDef()->getDesplazamiento());
 			personajeDibujableCargado->agregarAnimacion(sub_zero);
 		}
 		personajesDibujables->push_back(personajeDibujableCargado);
