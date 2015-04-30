@@ -28,8 +28,8 @@ Parser::Parser() {
 Parser::Parser(string archivo_json)
 {
 	this->entrada = archivo_json;
-	this->ventana = new VentanaDef();
-	this->escenario = new EscenarioDef();
+	this->ventana = NULL;
+	this->escenario = NULL;
 	this->capas = new list<CapaDef*>;
 
 	this->personajesDef = new list<PersonajeDef*>();
@@ -298,11 +298,11 @@ list<PersonajeDef*>* Parser::getPersonajesDef() const {
 void Parser::parsearPersonajes() {
 
 	//tomar los tag posibles de personajes
-	list<string>* tags_personajes = new list<string>();
-	tags_personajes->push_back(TAG_PERSONAJE_1);
-	tags_personajes->push_back(TAG_PERSONAJE_2);
+	list<string> tags_personajes;
+	tags_personajes.push_back(TAG_PERSONAJE_1);
+	tags_personajes.push_back(TAG_PERSONAJE_2);
 
-	for (list<string>::iterator it = tags_personajes->begin() ; it != tags_personajes->end(); ++it)
+	for (list<string>::iterator it = tags_personajes.begin() ; it != tags_personajes.end(); ++it)
 	{
 		this->personajesDef->push_back(this->parsearPersonaje((*it)));
 	}

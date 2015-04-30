@@ -18,13 +18,11 @@ private:
 	Personaje* personaje2;
 	SDL_Event eventoGuardado;
 public:
-	ControladorPersonaje();
+	ControladorPersonaje(Personaje* personaje1, Personaje* personaje2);
 	virtual ~ControladorPersonaje();
 	bool manejar_Evento(SDL_Event &evento);
 	void continuarAccionPreviaPersonaje1();
 	void continuarAccionPreviaPersonaje2();
-	void agregarPersonaje1(Personaje* personaje1);
-	void agregarPersonaje2(Personaje* personaje2);
 private:
 	void identificarOrdenPersonaje1();
 	void identificarOrdenPersonaje2();
