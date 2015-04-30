@@ -14,9 +14,8 @@
 #include "../modelo/Personaje.h"
 #include "../utils/Logger.h"
 
-ControladorPersonaje::ControladorPersonaje() {
-	Personaje* personaje1 = new Personaje();
-	Personaje* personaje2 = new Personaje();
+ControladorPersonaje::ControladorPersonaje(Personaje* jugador1, Personaje* jugador2) :
+    personaje1(jugador1), personaje2(jugador2) {
 }
 
 
@@ -104,12 +103,4 @@ void ControladorPersonaje::continuarAccionPreviaPersonaje2(){
 
 ControladorPersonaje::~ControladorPersonaje() {
 	// TODO Auto-generated destructor stub
-}
-
-void ControladorPersonaje::agregarPersonaje1(Personaje* personaje1) {
-	this->personaje1 = personaje1;
-}
-
-void ControladorPersonaje::agregarPersonaje2(Personaje* personaje2) {
-	this->personaje2 = personaje2;
 }

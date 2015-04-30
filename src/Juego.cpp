@@ -18,40 +18,23 @@
 
 #define TEXTO_ERROR_TEXTURA "ERROR AL CREAR TEXTURA"
 
-Juego::Juego()
-{
+using std::pair;
+
+Juego::Juego(pair<Personaje*, PersonajeDibujable*>& personaje1, pair<Personaje*, PersonajeDibujable*>& personaje2) :
+    jugador1(personaje1.first), jugador2(personaje2.first), jugadorDibujable1(personaje1.second), jugadorDibujable2(personaje2.second){
 	juegoCorriendo = true;
-	jugador1 = new Personaje();
-	jugador2 = new Personaje();
-	jugadorDibujable1 = new PersonajeDibujable();
-	jugadorDibujable2 = new PersonajeDibujable();
-	controladorPersonaje = new ControladorPersonaje();
+
+	agregarObservadoresJugador(jugador1, jugadorDibujable1);
+	agregarObservadoresJugador(jugador2, jugadorDibujable2);
+
+	controladorPersonaje = new ControladorPersonaje(jugador1, jugador2);
 }
 
-void Juego::agregarJugador1(Personaje* unPersonaje,
+void Juego::agregarObservadoresJugador(Personaje* unPersonaje,
 		PersonajeDibujable* unPersonajeDibujable) {
-
-	this->jugador1 = unPersonaje;
-	this->jugadorDibujable1 = unPersonajeDibujable;
-
 	//Agrego observadores del Personaje.
-	this->jugador1->agregarObservador(jugadorDibujable1);
-	this->jugador1->agregarObservador(VentanaGrafica::Instance());
-
-	controladorPersonaje->agregarPersonaje1(this->jugador1);
-}
-
-void Juego::agregarJugador2(Personaje* unPersonaje,
-		PersonajeDibujable* unPersonajeDibujable) {
-
-	this->jugador2 = unPersonaje;
-	this->jugadorDibujable2 = unPersonajeDibujable;
-
-	//Agrego observadores del Personaje.
-	this->jugador2->agregarObservador(jugadorDibujable2);
-	this->jugador2->agregarObservador(VentanaGrafica::Instance());
-
-	controladorPersonaje->agregarPersonaje2(this->jugador2);
+	unPersonaje->agregarObservador(unPersonajeDibujable);
+	unPersonaje->agregarObservador(VentanaGrafica::Instance());
 }
 
 void Juego::render()

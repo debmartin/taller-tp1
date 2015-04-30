@@ -8,6 +8,8 @@
 #ifndef SRC_JUEGO_H_
 #define SRC_JUEGO_H_
 
+#include <utility>
+
 class ControladorPersonaje;
 class Personaje;
 class PersonajeDibujable;
@@ -25,14 +27,14 @@ private:
 
 	ControladorPersonaje* controladorPersonaje;
 
+    void agregarObservadoresJugador(Personaje* unPersonaje, PersonajeDibujable* unPersonajeDibujable);
+
 public:
-	Juego();
+	Juego(std::pair<Personaje*, PersonajeDibujable*>& personaje1, std::pair<Personaje*, PersonajeDibujable*>& personaje2);
 	void render();
 	void update();
 	void handleEvents(bool& recargar);
 	bool running();
-	void agregarJugador1(Personaje* unPersonaje, PersonajeDibujable* unPersonajeDibujable);
-	void agregarJugador2(Personaje* unPersonaje, PersonajeDibujable* unPersonajeDibujable);
 	~Juego();
 	//
 	static Juego* Instance();
