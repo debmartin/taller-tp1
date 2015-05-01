@@ -28,6 +28,12 @@
 #include <jsoncpp/json/json.h>
 using namespace std;
 
+#define NIVEL_LOG_DEBUG "debug"
+#define NIVEL_LOG_INFO "info"
+#define NIVEL_LOG_ERROR "error"
+#define PISAR_LOGS_SI "si"
+#define PISAR_LOGS_NO "no"
+
 /**
  * Definición
  */

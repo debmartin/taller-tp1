@@ -19,13 +19,15 @@ private:
 	static Configuracion* configuracion;
 	Configuracion();
 	string nivel_logger;
-	void cargar();
+	string pisar_logs;
 public:
 	static Configuracion* getInstance();
-
 	virtual ~Configuracion();
-
 	string getNivelLogger();
+	string getPisarLogs();
+
+private:
+	void cargar();
 };
 
 #endif /* SRC_CONFIGURACION_H_ */

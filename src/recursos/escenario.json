@@ -57,9 +57,9 @@
         			},
 		"direccion": -1,
 		"color-alternativo": {
-					"h-inicial": 44,
-					"h-final": 53,
-					"desplazamiento": 202
+					"h-inicial": 53,
+					"h-final": 220,
+					"desplazamiento": 50
 					}
     }, 
     "personaje-2": {
@@ -85,7 +85,7 @@
 		            "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-saltando-vertical.png",
         		    "cant_fotogramas": 1,
         		    "fps": 1
-        			},
+        			},	
         "sprites-saltando-diagonal": { 
 		            "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-saltando-diagonal.png",
         		    "cant_fotogramas": 7,
@@ -93,10 +93,16 @@
         			},
 		"direccion": 1,
 		"color-alternativo": {
-					"h-inicial": 44,
-					"h-final": 53,
-					"desplazamiento": 300
+					"h-inicial": 53,
+					"h-final": 220,
+					"desplazamiento": 100
 					}		
-    }    
+    },
+	"juagdor-1": {
+        "personaje": "personaje-1"
+	},
+	"juagdor-2": {
+        "personaje": "personaje-2" 
+	}        
 }
 

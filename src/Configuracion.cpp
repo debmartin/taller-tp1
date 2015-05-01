@@ -40,6 +40,7 @@ void Configuracion::cargar() {
 		if( root.size() > 0 ) {
 
 			string nivel_debug = "";
+			string pisar_logs = "";
 
 			for( Json::ValueIterator it = root.begin() ; it != root.end() ; it++ )
 			{
@@ -48,9 +49,14 @@ void Configuracion::cargar() {
 				{
 					nivel_debug = root[clave.asString()].asString();
 				}
+				else if ( clave.asString() == "pisar_logs" )
+				{
+					pisar_logs = root[clave.asString()].asString();
+				}
 			}
 
 			this->nivel_logger = nivel_debug;
+			this->pisar_logs = pisar_logs;
 		}
 	}
 }
@@ -59,6 +65,11 @@ string Configuracion::getNivelLogger()
 {
 	return this->nivel_logger;
 }
+
+string Configuracion::getPisarLogs() {
+	return pisar_logs;
+}
+
 
 Configuracion::~Configuracion() {
 }
