@@ -75,14 +75,11 @@ list<Personaje*>* CargadorDeOjbetos::cargarPersonajes() {
 
 list<PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables() {
 
-
 	//para test de elegir el color alternativo al personaje cuando corresponda
-	/*
 	for (list<JugadorDef*>::iterator it = parser->getJugadoresDef()->begin() ; it != parser->getJugadoresDef()->end(); ++it)
 	{
 		Logger::getInstance()->error(*it);
 	}
-	 */
 
 	list<PersonajeDibujable*>* personajesDibujables = new list<PersonajeDibujable*>();
 

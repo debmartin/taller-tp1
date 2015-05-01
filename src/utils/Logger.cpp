@@ -242,7 +242,7 @@ void Logger::insert(std::string& key, std::string& value){
 		}
 		else if ( this->nivel_log == NIVEL_LOG_INFO )
 		{
-			if ( key == "ERROR" || key == NIVEL_LOG_INFO )
+			if ( key == NIVEL_LOG_ERROR || key == NIVEL_LOG_INFO )
 				{
 					ioFile << Logger::getTime() << key << " : " << value << std::endl;
 					ioFile.flush();

@@ -32,6 +32,7 @@ Parser::Parser(string archivo_json)
 	this->capas = new list<CapaDef*>;
 
 	this->personajesDef = new list<PersonajeDef*>();
+	this->jugadoresDef = new list<JugadorDef*>();
 
 	this->inicializar();
 }
@@ -335,21 +336,17 @@ JugadorDef* Parser::parsearJugador(string tag_jugador) {
     string personaje = "";
 
     for( Json::ValueIterator it2 = valorJugador.begin() ; it2 != valorJugador.end() ; it2++ ) {
-    	cout<<"paso_1"<<endl;
         string tag = it2.key().asString();
         Json::Value subvalor = valorJugador[tag];
 
         if ( tag == TAG_JUGADOR_PERSONAJE ) {
-        	cout<<"paso_3"<<endl;
         	personaje = subvalor.asString();
-        	cout<<"paso_4"<<endl;
         } else {
             Logger::getInstance()->error("Dentro del jugador no se encuentra el parametro "+tag);
         }
     }
 
     JugadorDef* jugadorParseado = new JugadorDef(personaje);
-    cout<<"paso_5"<<endl;
     return jugadorParseado;
 }
 
@@ -360,13 +357,9 @@ void Parser::parsearJugadores() {
 	tags_jugadores.push_back(TAG_JUGADOR_1);
 	tags_jugadores.push_back(TAG_JUGADOR_2);
 
-	// TODO ver porque no se quiere cargar en la lista
-	/*
 	for (list<string>::iterator it = tags_jugadores.begin() ; it != tags_jugadores.end(); ++it)
 	{
-		JugadorDef* j = this->parsearJugador(*it);
-		this->jugadoresDef->push_back(j);
+		this->jugadoresDef->push_back(this->parsearJugador(*it));
 	}
-	*/
 
 }
