@@ -1,4 +1,5 @@
 {
-	// valores posibles: "DEBUG", "INFO" y "ERROR"
-	"nivel_debug": "INFO"
+	"nivel_debug": "info", 	// valores posibles: "debug", "info" y "error"
+	"pisar_logs": "no"		// valores posibles: "si" y "no"
 }
+

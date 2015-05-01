@@ -114,6 +114,10 @@ list<PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables() {
 		personajeDibujableCargado = new PersonajeDibujable(SubQuieto,
 				(*it)->getPosicionInicial(), tamanioPx, direccion);
 
+		Uint16 color_alternativo_hinicial = (*it)->getColorAlternativoDef()->getHinicial();
+		Uint16 color_alternativo_hfinal = (*it)->getColorAlternativoDef()->getHfinal();
+		Uint16 color_alternativo_desplazamiento = (*it)->getColorAlternativoDef()->getDesplazamiento();
+
 		//TODO: Val. Separar la carga de los personajes para poder setearles el color.
 		it_sprites = spritesDef->begin();
 		for (; it_sprites != spritesDef->end(); ++it_sprites) {
@@ -124,11 +128,12 @@ list<PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables() {
 										(*it_sprites)->getFps(),
 										(*it_sprites)->getIdSprite(),
 										Renderizador::Instance()->getRenderer(),
-										(Uint16)(*it)->getColorAlternativoDef()->getHinicial(),
-										(Uint16)(*it)->getColorAlternativoDef()->getHfinal(),
-										(Uint16)(*it)->getColorAlternativoDef()->getDesplazamiento());
+										color_alternativo_hinicial,
+										color_alternativo_hfinal,
+										color_alternativo_desplazamiento);
 			personajeDibujableCargado->agregarAnimacion(sub_zero);
 		}
+
 		personajesDibujables->push_back(personajeDibujableCargado);
 	}
 
