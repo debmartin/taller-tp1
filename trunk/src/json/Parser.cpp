@@ -7,16 +7,15 @@
 
 #include "Parser.h"
 
-#include <cstdlib>
 #include <iostream>
 
-#include "../json/EscenarioDef.h"
-#include "../json/PersonajeDef.h"
-#include "../json/VentanaDef.h"
+#include "../modelo/Vector2f.h"
 #include "../utils/Logger.h"
 #include "../utils/Util.h"
-
-
+#include "ColorAlternativoDef.h"
+#include "EscenarioDef.h"
+#include "SpriteDef.h"
+#include "VentanaDef.h"
 
 
 using std::string;
@@ -260,6 +259,7 @@ bool Parser::parsearDesdeJson() {
     parsearEscenario();
     parsearPersonajes();
     parsearCapas();
+    parsearJugadores();
 
     Logger::getInstance()->info("Inicia la validacion semantica del json");
 	this->inciarValidacionSemantica();
@@ -319,7 +319,54 @@ void Parser::parsearPersonajes() {
 
 	for (list<string>::iterator it = tags_personajes.begin() ; it != tags_personajes.end(); ++it)
 	{
-		this->personajesDef->push_back(this->parsearPersonaje((*it)));
+		this->personajesDef->push_back(this->parsearPersonaje(*it));
 	}
+
+}
+
+list<JugadorDef*>* Parser::getJugadoresDef() const {
+	return jugadoresDef;
+}
+
+JugadorDef* Parser::parsearJugador(string tag_jugador) {
+    Json::Value valorJugador;
+    valorJugador = root.get(tag_jugador.c_str(), &valorJugador);
+
+    string personaje = "";
+
+    for( Json::ValueIterator it2 = valorJugador.begin() ; it2 != valorJugador.end() ; it2++ ) {
+    	cout<<"paso_1"<<endl;
+        string tag = it2.key().asString();
+        Json::Value subvalor = valorJugador[tag];
+
+        if ( tag == TAG_JUGADOR_PERSONAJE ) {
+        	cout<<"paso_3"<<endl;
+        	personaje = subvalor.asString();
+        	cout<<"paso_4"<<endl;
+        } else {
+            Logger::getInstance()->error("Dentro del jugador no se encuentra el parametro "+tag);
+        }
+    }
+
+    JugadorDef* jugadorParseado = new JugadorDef(personaje);
+    cout<<"paso_5"<<endl;
+    return jugadorParseado;
+}
+
+void Parser::parsearJugadores() {
+
+	//tomar los tag posibles de personajes
+	list<string> tags_jugadores;
+	tags_jugadores.push_back(TAG_JUGADOR_1);
+	tags_jugadores.push_back(TAG_JUGADOR_2);
+
+	// TODO ver porque no se quiere cargar en la lista
+	/*
+	for (list<string>::iterator it = tags_jugadores.begin() ; it != tags_jugadores.end(); ++it)
+	{
+		JugadorDef* j = this->parsearJugador(*it);
+		this->jugadoresDef->push_back(j);
+	}
+	*/
 
 }

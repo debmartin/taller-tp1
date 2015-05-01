@@ -8,11 +8,12 @@
 #include "CargadorDeObjetos.h"
 
 #include <SDL2/SDL_render.h>
-#include <iostream>
-#include <list>
+#include <SDL2/SDL_stdinc.h>
 
 #include "../json/CapaDef.h"
+#include "../json/ColorAlternativoDef.h"
 #include "../json/EscenarioDef.h"
+#include "../json/JugadorDef.h"
 #include "../json/Parser.h"
 #include "../json/PersonajeDef.h"
 #include "../json/SpriteDef.h"
@@ -21,11 +22,9 @@
 #include "../vista/Animacion.h"
 #include "../vista/Capa.h"
 #include "../vista/EscenarioGrafico.h"
-#include "../vista/PersonajeDibujable.h"
 #include "../vista/Renderizador.h"
 #include "../vista/Sprite.h"
 #include "../vista/VentanaGrafica.h"
-#include "Personaje.h"
 #include "Vector2f.h"
 
 CargadorDeOjbetos::CargadorDeOjbetos(string escenario_path) {
@@ -75,6 +74,15 @@ list<Personaje*>* CargadorDeOjbetos::cargarPersonajes() {
 }
 
 list<PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables() {
+
+
+	//para test de elegir el color alternativo al personaje cuando corresponda
+	/*
+	for (list<JugadorDef*>::iterator it = parser->getJugadoresDef()->begin() ; it != parser->getJugadoresDef()->end(); ++it)
+	{
+		Logger::getInstance()->error(*it);
+	}
+	 */
 
 	list<PersonajeDibujable*>* personajesDibujables = new list<PersonajeDibujable*>();
 

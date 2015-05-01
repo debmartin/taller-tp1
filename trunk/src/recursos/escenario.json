@@ -98,10 +98,10 @@
 					"desplazamiento": 100
 					}		
     },
-	"juagdor-1": {
+	"jugador-1": {
         "personaje": "personaje-1"
 	},
-	"juagdor-2": {
+	"jugador-2": {
         "personaje": "personaje-2" 
 	}        
 }

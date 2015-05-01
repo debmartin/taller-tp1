@@ -13,7 +13,9 @@
 #include <list>
 #include <string>
 
-#include "../json/CapaDef.h"
+#include "CapaDef.h"
+#include "JugadorDef.h"
+#include "PersonajeDef.h"
 
 #define JSON_POR_DEFECTO "src/recursos/escenario_defecto.json"
 #define TAG_CAPAS "capas"
@@ -42,13 +44,15 @@
 #define TAG_COLOR_ALTERNATIVO_HINICIAL "h-inicial"
 #define TAG_COLOR_ALTERNATIVO_HFINAL "h-final"
 #define TAG_COLOR_ALTERNATIVO_DESPLAZAMIENTO "desplazamiento"
-
-
+#define TAG_JUGADOR_1 "jugador-1"
+#define TAG_JUGADOR_2 "jugador-2"
+#define TAG_JUGADOR_PERSONAJE "personaje"
 
 
 class EscenarioDef;
 class PersonajeDef;
 class VentanaDef;
+class JugadorDef;
 
 using namespace std;
 
@@ -62,9 +66,8 @@ private:
 	VentanaDef* ventana;
 	EscenarioDef * escenario;
 	list<CapaDef*>* capas;
-	//PersonajeDef* personaje;
-
 	list<PersonajeDef*>* personajesDef;
+	list<JugadorDef*>* jugadoresDef;
 
 public:
 	Parser();
@@ -83,6 +86,7 @@ public:
 	const Json::Value& getRoot() const;
 	double getPersonajeDefSpritesAncho() const;
 	void setPersonajeDefSpritesAncho(double personajeSpritesAncho);
+	list<JugadorDef*>* getJugadoresDef() const;
 
 private:
 	void inicializar();
@@ -92,7 +96,9 @@ private:
     void parsearVentana();
     void parsearEscenario();
     PersonajeDef* parsearPersonaje(string tag_personaje);
+    JugadorDef* parsearJugador(string tag_jugador);
     void parsearPersonajes();
+    void parsearJugadores();
 
 };
 
