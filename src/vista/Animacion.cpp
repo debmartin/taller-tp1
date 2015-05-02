@@ -5,52 +5,35 @@
 #include <SDL2/SDL_surface.h>
 #include <iostream>
 
+#include "../json/ColorAlternativoDef.h"
+#include "../utils/Logger.h"
 #include "Desplazar.h"
+#include "Renderizador.h"
 
 using std::string;
 using std::cout;
 
-Animacion::Animacion(string pathImagen, int cantFotogramas, int fpsIn, string idIn, SDL_Renderer* pRenderer):
-	cantidadFotogramas(cantFotogramas), fps(fpsIn), id(idIn) {
-    SDL_Surface* pTempSurface = IMG_Load(pathImagen.c_str());
-	if (!pTempSurface) {
-		return;//agregar error
-	}
-	textura = SDL_CreateTextureFromSurface(pRenderer, pTempSurface);
-
-	SDL_FreeSurface(pTempSurface);
-
-	if (!textura)
-		cout << "ERROR";//agregar error
-
-}
-
-Animacion::Animacion(
-        		std::string pathImagen,
-				int cantFotogramas,
-				int fpsIn,
-				std::string idIn,
-				SDL_Renderer* pRenderer,
-				Uint16 Hinicial, Uint16 Hfinal, Uint16 desplazamiento):
-					cantidadFotogramas(cantFotogramas),
-					fps(fpsIn),
-					id(idIn)
+Animacion::Animacion(string pathImg, int cantFotogramas, int fpsIn, string idIn, SDL_Renderer* pRenderer)
 {
-    SDL_Surface* pTempSurface = IMG_Load(pathImagen.c_str());
-	if (!pTempSurface) {
-		return;//agregar error
-	}
+	pathImagen = pathImg;
+	cantidadFotogramas = cantFotogramas;
+	fps = fpsIn;
+	id = idIn;
 
-	Desplazar::H(pTempSurface, Hinicial, Hfinal, desplazamiento);
+    SDL_Surface* pTempSurface = IMG_Load(pathImagen.c_str());
+    if (!pTempSurface) {
+		Logger::getInstance()->error("No se pudo cargar la imagen "+pathImagen);
+		return;
+	}
 
 	textura = SDL_CreateTextureFromSurface(pRenderer, pTempSurface);
 
 	SDL_FreeSurface(pTempSurface);
 
 	if (!textura)
-		cout << "ERROR";//agregar error
-}
+		Logger::getInstance()->error("No se pudo crear la textura SDL para "+pathImagen);
 
+}
 
 SDL_Texture* Animacion::getTextura() {
 	return this->textura;
@@ -72,6 +55,9 @@ string Animacion::getId(){
     return id;
 }
 
-void Animacion::cambiarColor(ColorAlternativoDef* colorAlternativoDef) {
-	// TODO aplicarle este color a la textura;
+void Animacion::cambiarColor(ColorAlternativoDef* color)
+{
+	SDL_Surface* pTempSurface = IMG_Load(pathImagen.c_str());
+	Desplazar::H(pTempSurface, color->getHinicial(), color->getHfinal(), color->getDesplazamiento());
+	textura = SDL_CreateTextureFromSurface(Renderizador::Instance()->getRenderer(), pTempSurface);
 }
