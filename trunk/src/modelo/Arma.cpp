@@ -1,33 +1,33 @@
 /*
- * Cuchillo.cpp
+ * Arma.cpp
  *
- *  Created on: 28/4/2015
+ *  Created on: 2/5/2015
  *      Author: val
  */
 
-#include "Cuchillo.h"
+#include "Arma.h"
 
-Cuchillo::Cuchillo() {
+Arma::Arma() {
 	// TODO Auto-generated constructor stub
 	this->posicion = POS_INICIAL_OBJETO;
 	this->trayectoria = new MRU(POS_INICIAL_OBJETO, VELOCIDAD_OBJETO);
-	this->damage = DANIO_CUCHILLO;
+	this->damage = DANIO_ARMA;
 }
 
-int Cuchillo::quitarEnergia(){
+int Arma::quitarEnergia(){
 	return this->damage;
 }
 
-void Cuchillo::posicionar(Vector2f pos){
+void Arma::posicionar(Vector2f pos){
 	posicion = pos;
 }
 
-void Cuchillo::update(){
+void Arma::update(){
 	float tActual = ((float)(SDL_GetTicks())/1000.0f) - tCreacion;
 	posicion = this->trayectoria->getPosicion(tActual);
 }
 
-Cuchillo::~Cuchillo() {
+Arma::~Arma() {
 	// TODO Auto-generated destructor stub
 }
 

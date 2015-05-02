@@ -1,5 +1,5 @@
 /*
- * armaDibujable.h
+ * ArmaDibujable.h
  *
  *  Created on: 2/5/2015
  *      Author: val
@@ -8,10 +8,15 @@
 #ifndef SRC_VISTA_ARMADIBUJABLE_H_
 #define SRC_VISTA_ARMADIBUJABLE_H_
 
-class armaDibujable {
+#include "Sprite.h"
+
+class ArmaDibujable {
+private:
+	Sprite* armaDibujable;
 public:
-	armaDibujable();
-	virtual ~armaDibujable();
+	ArmaDibujable();
+	ArmaDibujable(Sprite* armaDib);
+	virtual ~ArmaDibujable();
 };
 
 #endif /* SRC_VISTA_ARMADIBUJABLE_H_ */
