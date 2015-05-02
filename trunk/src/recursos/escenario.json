@@ -63,31 +63,31 @@
 					}
     }, 
     "personaje-2": {
-        "ancho": 135, 	
+        "ancho": 105, 	
         "alto": 272, 
         "z­index": 2, 
         "sprites-reposo": { 
-		            "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-reposo.png",
-        		    "cant_fotogramas": 12,
+		            "imagen": "RECURSOS/PERSONAJES/SONIA/sonia-reposo.png",
+        		    "cant_fotogramas": 7,
 	       		    "fps": 10 
         			},
         "sprites-caminando": { 
-		            "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-caminando.png",
-        		    "cant_fotogramas": 9,
-        		    "fps": 13
+		            "imagen": "RECURSOS/PERSONAJES/SONIA/sonia-caminando.png",
+        		    "cant_fotogramas": 6,
+        		    "fps": 12
         			},
         "sprites-agachado": { 
-		            "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-agachado.png",
+		            "imagen": "RECURSOS/PERSONAJES/SONIA/sonia-agachada.png",
         		    "cant_fotogramas": 1,
         		    "fps": 1
         			},
         "sprites-saltando-vertical": { 
-		            "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-saltando-vertical.png",
+		            "imagen": "RECURSOS/PERSONAJES/SONIA/sonia-saltando-vertical.png",
         		    "cant_fotogramas": 1,
         		    "fps": 1
-        			},	
+        			},
         "sprites-saltando-diagonal": { 
-		            "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-saltando-diagonal.png",
+		            "imagen": "RECURSOS/PERSONAJES/SONIA/sonia-saltando-diagonal.png",
         		    "cant_fotogramas": 7,
         		    "fps": 15
         			},
@@ -95,7 +95,7 @@
 		"color-alternativo": {
 					"h-inicial": 53,
 					"h-final": 220,
-					"desplazamiento": 100
+					"desplazamiento": 200
 					}		
     },
 	"jugador-1": {
