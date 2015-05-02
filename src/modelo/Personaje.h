@@ -16,9 +16,11 @@
 #include "Vector2f.h"
 #include "Poder.h"
 #include "Objeto.h"
+#include "Colisionable.h"
+#include "../vista/Posicionable.h"
 
-class Posicionable;
-class Trayectoria;
+//class Posicionable;
+//class Trayectoria;
 
 #define DELTA_PASO 1
 #define DELTA_X 10
@@ -56,8 +58,6 @@ private:
 	estado_personaje estado;
 	Trayectoria* trayectoria;
 	float tCreacion;
-	Vector2f posicionSalto;
-	bool estaEnLimite;
 
 public:
 	Personaje();
@@ -78,11 +78,10 @@ public:
 	void cambiarTrayectoria(Trayectoria* t);
 	void agregarObservador(Observador* unObservador);
 	void notificarObservadores();
-	void update();
+	void update(Vector2f posicionObjetivo);
 	bool estaSaltando();
 	bool estaAgachado();
 	bool estaEnReposo();
-	bool llegoAlLimite();
 	void recibirDanio(int danio);
 
 	//Movimientos y poderes

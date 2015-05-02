@@ -16,6 +16,7 @@ class Posicionable
         Posicionable();
         virtual ~Posicionable();
         virtual bool esValida(Vector2f posicion, double ancho) = 0;
+        virtual bool enExtremos(float distanciaEntreElementos, double ancho1) = 0;
 };
 
 
