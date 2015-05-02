@@ -23,10 +23,10 @@
 #define VECTOR_VELOCIDAD_NULA Vector2f(0, 0)
 #define VECTOR_GRAVEDAD Vector2f(0, -2600.f)
 
-//Personaje::Personaje() {
-//	this->ancho = 0;
-//	this->alto = 0;
-//}
+Personaje::Personaje() {
+	this->ancho = 0;
+	this->alto = 0;
+}
 
 Personaje::Personaje(double anchoIn, double altoIn, Vector2f posInicial, Posicionable* posc) :
     posicionInicial(posInicial), ancho(anchoIn), alto(altoIn), estado(EN_ESPERA), posicionable(posc), posicion(posInicial), tCreacion(0){
