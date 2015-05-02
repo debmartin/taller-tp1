@@ -61,7 +61,8 @@ private:
 	Vector2f posicion;
 	Posicionable* posicionable;
 	int z_index;
-	int vida;
+	int energia;
+	Objeto* arma;
 	estado_personaje estado;
 	Trayectoria* trayectoria;
 	float tCreacion;
@@ -77,7 +78,7 @@ public:
 	Vector2f getPosicion();
 	void setEstado(estado_personaje estado);
 	estado_personaje getEstado();
-	int getVida();
+	int getEnergia();
 	Vector2f obtenerPosicionEnVentana();
 	bool llegoAlLimiteIzquierdo();
 	bool llegoAlLimiteDerecho();
