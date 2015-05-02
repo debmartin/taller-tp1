@@ -17,14 +17,14 @@ using namespace std;
 
 class JugadorDef: public Loggeable {
 private:
-	string personaje; // id del personaje al cual va a estar asociado
+	string idPersonaje; // id del personaje al cual va a estar asociado
 public:
 	JugadorDef();
 	JugadorDef(string personaje);
 	virtual ~JugadorDef();
 	friend ostream& operator<<(ostream &o, const JugadorDef &j);
 	string toString();
-	string getPersonaje() const;
+	string getIdPersonaje() const;
 };
 
 #endif /* SRC_JSON_JUGADORDEF_H_ */

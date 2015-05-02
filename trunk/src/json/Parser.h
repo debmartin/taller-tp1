@@ -52,7 +52,6 @@
 class EscenarioDef;
 class PersonajeDef;
 class VentanaDef;
-class JugadorDef;
 
 using namespace std;
 

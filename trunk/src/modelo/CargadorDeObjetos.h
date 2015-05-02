@@ -14,6 +14,8 @@
 #include "../vista/PersonajeDibujable.h"
 #include "Personaje.h"
 
+class JugadorDef;
+
 class EscenarioGrafico;
 class Parser;
 class Personaje;
@@ -38,6 +40,8 @@ public:
 	list<Personaje*>* cargarPersonajes();
 	list<PersonajeDibujable*>* cargarPersonajesDibujables();
 	void cargarEscenarioGrafico(PersonajeDibujable* personajeDibujable1, PersonajeDibujable* personajeDibujable2);
+	JugadorDef* cargarJugador1();
+	JugadorDef* cargarJugador2();
 
 };
 

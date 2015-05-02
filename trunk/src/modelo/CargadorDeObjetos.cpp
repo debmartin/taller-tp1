@@ -7,7 +7,6 @@
 
 #include "CargadorDeObjetos.h"
 
-#include <SDL2/SDL_render.h>
 #include <SDL2/SDL_stdinc.h>
 
 #include "../json/CapaDef.h"
@@ -75,12 +74,6 @@ list<Personaje*>* CargadorDeOjbetos::cargarPersonajes() {
 
 list<PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables() {
 
-	//para test de elegir el color alternativo al personaje cuando corresponda
-	for (list<JugadorDef*>::iterator it = parser->getJugadoresDef()->begin() ; it != parser->getJugadoresDef()->end(); ++it)
-	{
-		Logger::getInstance()->error(*it);
-	}
-
 	list<PersonajeDibujable*>* personajesDibujables = new list<PersonajeDibujable*>();
 
 	for (list<PersonajeDef*>::iterator it = parser->getPersonajesDef()->begin() ; it != parser->getPersonajesDef()->end(); ++it)
@@ -117,7 +110,7 @@ list<PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables() {
 		}
 
 		personajeDibujableCargado = new PersonajeDibujable(SubQuieto,
-				(*it)->getPosicionInicial(), tamanioPx, direccion);
+				(*it)->getPosicionInicial(), tamanioPx, direccion, (*it)->getColorAlternativoDef());
 
 		Uint16 color_alternativo_hinicial = (*it)->getColorAlternativoDef()->getHinicial();
 		Uint16 color_alternativo_hfinal = (*it)->getColorAlternativoDef()->getHfinal();
@@ -203,3 +196,14 @@ void CargadorDeOjbetos::cargarEscenarioGrafico(PersonajeDibujable* personajeDibu
 
 }
 
+JugadorDef* CargadorDeOjbetos::cargarJugador1() {
+
+	list<JugadorDef*>::iterator it = parser->getJugadoresDef()->begin();
+	return *it;
+}
+
+JugadorDef* CargadorDeOjbetos::cargarJugador2() {
+
+	list<JugadorDef*>::iterator it = parser->getJugadoresDef()->begin();
+	return *it++;
+}
