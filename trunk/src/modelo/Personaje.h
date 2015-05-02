@@ -41,7 +41,13 @@ typedef enum estado_personaje
 	CAMINANDO_IZQUIERDA,
 	SALTANDO_VERTICAL,
     SALTANDO_OBLICUO_DERECHA,
-    SALTANDO_OBLICUO_IZQUIERDA
+    SALTANDO_OBLICUO_IZQUIERDA,
+	GOLPEANDO_ALTO,
+	GOLPEANDO_BAJO,
+	PATEANDO_ALTO,
+	PATEANDO_BAJO,
+	DEFENDIENDO,
+	DEFENDIENDO_AGACHADO
 } estado_personaje;
 
 using namespace std;
@@ -92,11 +98,13 @@ public:
 	void saltarOblicuoIzquierda();
 	void mantenerReposo();
 	void agacharse();
+	void patada();
 	void golpeAlto();
 	void golpeBajo();
 	void patadaAlta();
 	void patadaBaja();
-	void defensa();
+	void defender();
+	void defender_agachado();
 	void ejecutarPoder(Poder* poder, Objeto* objeto);
 
 	friend ostream& operator<<(ostream &o, const Personaje &p);

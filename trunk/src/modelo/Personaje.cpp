@@ -134,6 +134,48 @@ void Personaje::agacharse(){
     Logger::getInstance()->debug("Personaje: agachado.");
 }
 
+void Personaje::golpeAlto(){
+	setEstado(GOLPEANDO_ALTO);
+	cambiarTrayectoria(new Reposo(posicion));
+	Logger::getInstance()->debug("Personaje: golpe alto.");
+}
+
+void Personaje::golpeBajo(){
+	setEstado(GOLPEANDO_BAJO);
+	cambiarTrayectoria(new Reposo(posicion));
+	Logger::getInstance()->debug("Personaje: golpe bajo.");
+}
+
+void Personaje::patada(){
+	setEstado(PATEANDO);
+	cambiarTrayectoria(new Reposo(posicion));
+	Logger::getInstance()->debug("Personaje: patada.");
+}
+
+/*Patada alta ocurre cuando el personaje está saltando*/
+void Personaje::patadaAlta(){
+	setEstado(PATEANDO_ALTO);
+	Logger::getInstance()->debug("Personaje: patada alta.");
+}
+
+void Personaje::patadaBaja(){
+	setEstado(PATEANDO_BAJO);
+	cambiarTrayectoria(new Reposo(posicion));
+	Logger::getInstance()->debug("Personaje: patada baja.");
+}
+
+void Personaje::defender(){
+	setEstado(DEFENDIENDO);
+	cambiarTrayectoria(new Reposo(posicion));
+	Logger::getInstance()->debug("Personaje: defensa.");
+}
+
+void Personaje::defender_agachado(){
+	setEstado(DEFENDIENDO_AGACHADO);
+	cambiarTrayectoria(new Reposo(posicion));
+	Logger::getInstance()->debug("Personaje: defensa.");
+}
+
 void Personaje::mantenerReposo(){
     setEstado(EN_ESPERA);
     cambiarTrayectoria(new Reposo(posicion));
