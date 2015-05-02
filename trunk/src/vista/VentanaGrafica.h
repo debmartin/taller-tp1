@@ -48,6 +48,7 @@ public:
 	static VentanaGrafica* Instance();
     bool esValida(Vector2f posicion, double ancho);
     Vector2f calcularPosicionEnVentana(Vector2f posicionLogica);
+    bool enExtremos(float distanciaEntreElementos, double ancho);
 };
 
 #endif /* SRC_VISTA_VENTANAGRAFICA_H_ */

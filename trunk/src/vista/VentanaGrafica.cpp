@@ -106,15 +106,11 @@ float VentanaGrafica::getAnchoPx(){
 }
 
 bool VentanaGrafica::llegoAlLimiteIzquierdo(Vector2f posicion){
-	if(posicion.X() <= 0){
-		return true;
-	}return false;
+	return (posicion.X() <= 0);
 }
 
 bool VentanaGrafica::llegoAlLimiteDerecho(Vector2f posicion){
-	if(posicion.X() >= escenario->getAnchoLogico()){
-		return true;
-	}return false;
+	return (posicion.X() >= escenario->getAnchoLogico());
 }
 
 float VentanaGrafica::relacion_de_aspectoX(){
@@ -138,4 +134,9 @@ VentanaGrafica::~VentanaGrafica(){
 
 bool VentanaGrafica::esValida(Vector2f posicion, double ancho){
     return escenario->esValida(posicion, ancho);
+}
+
+bool VentanaGrafica::enExtremos(float distancia, double ancho){
+    float ancho_restante = ancho_logico_ventana - ancho;
+    return (distancia >= ancho_restante);
 }

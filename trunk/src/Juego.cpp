@@ -45,8 +45,8 @@ void Juego::render()
 void Juego::update()
 {
 	// INICIO CODIGO USUARIO
-	this->jugador1->update();
-	this->jugador2->update();
+	this->jugador1->update(jugador2->getPosicion());
+	this->jugador2->update(jugador1->getPosicion());
 	this->actualizarOrientacionJugadores();
 
 	VentanaGrafica::Instance()->actualizar();

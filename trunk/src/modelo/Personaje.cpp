@@ -23,15 +23,14 @@
 #define VECTOR_VELOCIDAD_NULA Vector2f(0, 0)
 #define VECTOR_GRAVEDAD Vector2f(0, -2600.f)
 
-Personaje::Personaje() {
-	this->ancho = 0;
-	this->alto = 0;
-}
+//Personaje::Personaje() {
+//	this->ancho = 0;
+//	this->alto = 0;
+//}
 
 Personaje::Personaje(double anchoIn, double altoIn, Vector2f posInicial, Posicionable* posc) :
     posicionInicial(posInicial), ancho(anchoIn), alto(altoIn), estado(EN_ESPERA), posicionable(posc), posicion(posInicial), tCreacion(0){
 	this->trayectoria = new Reposo(this->posicion);
-	this->estaEnLimite = false;
 }
 
 double Personaje::getAlto() const {
@@ -155,7 +154,7 @@ void Personaje::notificarObservadores(){
 	Observable::notificarObservadores();
 }
 
-void Personaje::update(){
+void Personaje::update(Vector2f posicionObjetivo){
 	Logger::getInstance()->debug("Personaje: update.");
 
 	//float miPosicionX =this->posicion.X();
@@ -163,13 +162,13 @@ void Personaje::update(){
 	// RECALCULA LA POSICION EN BASE AL OBJETO TRAYECTORIA
 	float tActual = ((float)(SDL_GetTicks())/1000.0f) - tCreacion;
 	Vector2f posicionCandidata = this->trayectoria->getPosicion(tActual);
+
+	float distanciaAObjetivo = posicionCandidata.X() - posicionObjetivo.X();
+	if (distanciaAObjetivo < 0) distanciaAObjetivo = -distanciaAObjetivo;
+
 	if (posicionable->esValida(posicionCandidata, ancho) && posicionCandidata.Y() >= posicionInicial.Y()) {
-		/*
-		//Validar si el oponente está en el limite para moverse o no
-		if(oponente->llegoAlLimite()){
-			posicion = Vector2f(miPosicionX, posicionCandidata.Y());
-		}*/
-		posicion = posicionCandidata;
+		if (! posicionable->enExtremos(distanciaAObjetivo, ancho))
+            posicion = posicionCandidata;
 	} else if (posicionCandidata.Y() < posicionInicial.Y()) {
         posicion = Vector2f(posicionCandidata.X(), posicionInicial.Y());
         mantenerReposo();
@@ -203,10 +202,6 @@ bool Personaje::estaAgachado(){
 
 bool Personaje::estaEnReposo(){
     return (estado == EN_ESPERA);
-}
-
-bool Personaje::llegoAlLimite(){
-	return this->estaEnLimite;
 }
 
 void Personaje::ejecutarPoder(Poder* poder, Objeto* objeto){
