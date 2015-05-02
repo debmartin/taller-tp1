@@ -16,7 +16,7 @@
 #include "Vector2f.h"
 #include "Poder.h"
 #include "Objeto.h"
-#include "Colisionable.h"
+//#include "Colisionable.h"
 #include "../vista/Posicionable.h"
 
 //class Posicionable;
@@ -44,6 +44,7 @@ typedef enum estado_personaje
     SALTANDO_OBLICUO_IZQUIERDA,
 	GOLPEANDO_ALTO,
 	GOLPEANDO_BAJO,
+	PATEANDO,
 	PATEANDO_ALTO,
 	PATEANDO_BAJO,
 	DEFENDIENDO,
