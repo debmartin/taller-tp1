@@ -31,6 +31,7 @@ Personaje::Personaje() {
 Personaje::Personaje(double anchoIn, double altoIn, Vector2f posInicial, Posicionable* posc) :
     posicionInicial(posInicial), ancho(anchoIn), alto(altoIn), estado(EN_ESPERA), posicionable(posc), posicion(posInicial), tCreacion(0){
 	this->trayectoria = new Reposo(this->posicion);
+	//this->arma = armaArrojable;
 }
 
 double Personaje::getAlto() const {
@@ -61,8 +62,8 @@ estado_personaje Personaje::getEstado(){
 	return this->estado;
 }
 
-int Personaje::getVida(){
-	return this->vida;
+int Personaje::getEnergia(){
+	return this->energia;
 }
 
 //Devuelve un vector posicion referenciado desde el eje con origen de coordenadas arriba izquierda.
@@ -254,7 +255,7 @@ void Personaje::ejecutarPoder(Poder* poder, Objeto* objeto){
 }
 
 void Personaje::recibirDanio(int danio){
-	this->vida -= danio;
+	this->energia -= danio;
 }
 
 ostream& operator <<(ostream &o, const Personaje &p) {

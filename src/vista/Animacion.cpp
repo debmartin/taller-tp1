@@ -60,4 +60,6 @@ void Animacion::cambiarColor(ColorAlternativoDef* color)
 	SDL_Surface* pTempSurface = IMG_Load(pathImagen.c_str());
 	Desplazar::H(pTempSurface, color->getHinicial(), color->getHfinal(), color->getDesplazamiento());
 	textura = SDL_CreateTextureFromSurface(Renderizador::Instance()->getRenderer(), pTempSurface);
+	//¿no falta liberar la surface?
+	//SDL_FreeSurface(pTempSurface);
 }
