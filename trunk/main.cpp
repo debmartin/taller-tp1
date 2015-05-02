@@ -36,7 +36,9 @@ Juego* cargarJuego(string escenarioPath){
 	string id_personaje1 = cargador_de_objetos.cargarJugador1()->getIdPersonaje();
 	string id_personaje2 = cargador_de_objetos.cargarJugador2()->getIdPersonaje();
 	if (id_personaje1 == id_personaje2)
+	{
 		personajeDibujable2->cambiarColor(personajeDibujable1->getColorAlternativo());
+	}
 
 	// cargar el escenario grafico
 	cargador_de_objetos.cargarEscenarioGrafico(personajeDibujable1, personajeDibujable2);

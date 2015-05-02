@@ -59,7 +59,7 @@
 		"color-alternativo": {
 					"h-inicial": 53,
 					"h-final": 220,
-					"desplazamiento": 50
+					"desplazamiento": 120
 					}
     }, 
     "personaje-2": {
@@ -102,7 +102,7 @@
         "personaje": "personaje-1"
 	},
 	"jugador-2": {
-        "personaje": "personaje-2" 
+        "personaje": "personaje-1" 
 	}        
 }
 

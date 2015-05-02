@@ -112,10 +112,6 @@ list<PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables() {
 		personajeDibujableCargado = new PersonajeDibujable(SubQuieto,
 				(*it)->getPosicionInicial(), tamanioPx, direccion, (*it)->getColorAlternativoDef());
 
-		Uint16 color_alternativo_hinicial = (*it)->getColorAlternativoDef()->getHinicial();
-		Uint16 color_alternativo_hfinal = (*it)->getColorAlternativoDef()->getHfinal();
-		Uint16 color_alternativo_desplazamiento = (*it)->getColorAlternativoDef()->getDesplazamiento();
-
 		//TODO: Val. Separar la carga de los personajes para poder setearles el color.
 		it_sprites = spritesDef->begin();
 		for (; it_sprites != spritesDef->end(); ++it_sprites) {
@@ -125,10 +121,7 @@ list<PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables() {
 										(*it_sprites)->getCantFotogramas(),
 										(*it_sprites)->getFps(),
 										(*it_sprites)->getIdSprite(),
-										Renderizador::Instance()->getRenderer(),
-										color_alternativo_hinicial,
-										color_alternativo_hfinal,
-										color_alternativo_desplazamiento);
+										Renderizador::Instance()->getRenderer());
 			personajeDibujableCargado->agregarAnimacion(sub_zero);
 		}
 
@@ -199,11 +192,13 @@ void CargadorDeOjbetos::cargarEscenarioGrafico(PersonajeDibujable* personajeDibu
 JugadorDef* CargadorDeOjbetos::cargarJugador1() {
 
 	list<JugadorDef*>::iterator it = parser->getJugadoresDef()->begin();
-	return *it;
+	JugadorDef* jugador1 = *it;
+	return jugador1;
 }
 
 JugadorDef* CargadorDeOjbetos::cargarJugador2() {
 
 	list<JugadorDef*>::iterator it = parser->getJugadoresDef()->begin();
-	return *it++;
+	JugadorDef* jugador2 = *++it;
+	return jugador2;
 }
