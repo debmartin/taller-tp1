@@ -38,6 +38,7 @@ Juego* cargarJuego(string escenarioPath){
 	if (id_personaje1 == id_personaje2)
 	{
 		personajeDibujable2->cambiarColor(personajeDibujable1->getColorAlternativo());
+		//personaje1 = personaje2;
 	}
 
 	// cargar el escenario grafico
