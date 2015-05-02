@@ -1,6 +1,17 @@
+#include <SDL2/SDL_stdinc.h>
+#include <SDL2/SDL_timer.h>
+#include <list>
+#include <string>
+#include <utility>
+
+#include "src/json/ColorAlternativoDef.h"
+#include "src/json/JugadorDef.h"
 #include "src/Juego.h"
-#include "test/Test.h"
 #include "src/modelo/CargadorDeObjetos.h"
+#include "src/modelo/Personaje.h"
+#include "src/utils/Logger.h"
+#include "src/vista/PersonajeDibujable.h"
+#include "src/vista/VentanaGrafica.h"
 
 Juego* cargarJuego(string escenarioPath){
 	Logger::getInstance()->info("#################################################");
@@ -20,6 +31,12 @@ Juego* cargarJuego(string escenarioPath){
 	Personaje* personaje2 = *(it_personajes);
 	PersonajeDibujable* personajeDibujable1 = *(it_personajesDibujables++);
 	PersonajeDibujable* personajeDibujable2 = *(it_personajesDibujables);
+
+	//ver si usar el color alternativo en el personaje 2
+	string id_personaje1 = cargador_de_objetos.cargarJugador1()->getIdPersonaje();
+	string id_personaje2 = cargador_de_objetos.cargarJugador2()->getIdPersonaje();
+	if (id_personaje1 == id_personaje2)
+		personajeDibujable2->cambiarColor(personajeDibujable1->getColorAlternativo());
 
 	// cargar el escenario grafico
 	cargador_de_objetos.cargarEscenarioGrafico(personajeDibujable1, personajeDibujable2);

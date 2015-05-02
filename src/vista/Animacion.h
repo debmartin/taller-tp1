@@ -1,9 +1,12 @@
 #ifndef SRC_VISTA_ANIMACION_H_
 #define SRC_VISTA_ANIMACION_H_
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
+
+#include <SDL2/SDL_stdinc.h>
 #include <string>
-#include "Desplazar.h"
+
+class ColorAlternativoDef;
+struct SDL_Renderer;
+struct SDL_Texture;
 
 class Animacion {
 
@@ -26,6 +29,7 @@ class Animacion {
         int getFps();
         std::string getId();
         virtual ~Animacion();
+        void cambiarColor(ColorAlternativoDef* colorAlternativoDef);
 };
 
 #endif /* SRC_VISTA_ANIMACION_H_ */

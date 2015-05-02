@@ -7,14 +7,21 @@
 
 #include "PersonajeDibujable.h"
 
+#include <utility>
+
+#include "../utils/Logger.h"
+#include "VentanaGrafica.h"
+
 PersonajeDibujable::PersonajeDibujable() {
 
 }
 
-PersonajeDibujable::PersonajeDibujable(Animacion* animIni, Vector2f posicionIni, Vector2f tamanioPx, OrientacionSprite orientacion){
+PersonajeDibujable::PersonajeDibujable(Animacion* animIni, Vector2f posicionIni, Vector2f tamanioPx, OrientacionSprite orientacion,
+										ColorAlternativoDef* unColorAlternativo){
 	spritePersonaje = new Sprite(animIni, posicionIni, orientacion);
     spritePersonaje->escalarConTamanio(tamanioPx.X(), tamanioPx.Y());
     animaciones[animIni->getId()] = animIni;
+    colorAlternativo = unColorAlternativo;
 }
 
 void PersonajeDibujable::setEstado(estado_personaje unEstado){
@@ -101,4 +108,17 @@ void PersonajeDibujable::cambiarOrientacionHaciaIzquierda() {
 
 float PersonajeDibujable::getPosicionX() {
 	return this->_getSprite()->getPosicion().X();
+}
+
+ColorAlternativoDef* PersonajeDibujable::getColorAlternativo() const {
+	return colorAlternativo;
+}
+
+void PersonajeDibujable::cambiarColor(ColorAlternativoDef* colorAlternativoDef) {
+
+	for (std::map<std::string, Animacion*>::iterator it = this->animaciones.begin() ; it != this->animaciones.end(); ++it)
+	{
+		it->second->cambiarColor(colorAlternativoDef);
+	}
+
 }

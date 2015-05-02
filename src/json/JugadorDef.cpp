@@ -15,7 +15,7 @@ JugadorDef::JugadorDef() {
 }
 
 JugadorDef::JugadorDef(string personaje) {
-	this->personaje = personaje;
+	this->idPersonaje = personaje;
 }
 
 string JugadorDef::toString() {
@@ -24,8 +24,8 @@ string JugadorDef::toString() {
 	return stream.str();
 }
 
-string JugadorDef::getPersonaje() const {
-	return personaje;
+string JugadorDef::getIdPersonaje() const {
+	return idPersonaje;
 }
 
 JugadorDef::~JugadorDef() {
@@ -34,6 +34,6 @@ JugadorDef::~JugadorDef() {
 
 ostream& operator <<(ostream &o, const JugadorDef &j) {
 
-	o<<"JugadorDef -> [personaje]=["<<j.personaje<<"]";
+	o<<"JugadorDef -> [personaje]=["<<j.idPersonaje<<"]";
 	return o;
 }

@@ -1,5 +1,11 @@
 #include "Animacion.h"
+
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_render.h>
+#include <SDL2/SDL_surface.h>
 #include <iostream>
+
+#include "Desplazar.h"
 
 using std::string;
 using std::cout;
@@ -64,4 +70,8 @@ Animacion::~Animacion() {
 
 string Animacion::getId(){
     return id;
+}
+
+void Animacion::cambiarColor(ColorAlternativoDef* colorAlternativoDef) {
+	// TODO aplicarle este color a la textura;
 }
