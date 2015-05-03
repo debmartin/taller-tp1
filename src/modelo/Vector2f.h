@@ -23,6 +23,7 @@ public:
 	Vector2f& operator-=(const Vector2f& v2);
 	Vector2f operator*(float escalar);
 	Vector2f& operator*=(float escalar);
+	Vector2f& operator=(const Vector2f& v2);
     void setCoordenada(int x, int y);
     friend ostream& operator<<(ostream &o, const Vector2f &c);
     string toString();

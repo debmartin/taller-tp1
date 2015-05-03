@@ -264,6 +264,22 @@ ostream& operator <<(ostream &o, const Personaje &p) {
         return o;
 }
 
+Personaje& Personaje::operator=(const Personaje& p) {
+
+	posicionInicial = p.posicionInicial;
+	ancho = p.ancho;
+	alto = p.alto;
+	posicion = p.posicion;
+	posicionable = p.posicionable; // TODO ver de no copiar la referencia
+	z_index = p.z_index;
+	energia = p.energia;
+	arma = p.arma; // TODO ver de no copiar la referencia
+	estado = p.estado;
+	trayectoria = p.trayectoria; // TODO ver de no copiar la referencia
+	tCreacion = p.tCreacion;
+
+}
+
 string Personaje::toString() {
     ostringstream stream;
     stream <<*this;
