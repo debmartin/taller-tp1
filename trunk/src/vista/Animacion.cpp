@@ -57,9 +57,22 @@ string Animacion::getId(){
 
 void Animacion::cambiarColor(ColorAlternativoDef* color)
 {
-	SDL_Surface* pTempSurface = IMG_Load(pathImagen.c_str());
-	Desplazar::H(pTempSurface, color->getHinicial(), color->getHfinal(), color->getDesplazamiento());
-	textura = SDL_CreateTextureFromSurface(Renderizador::Instance()->getRenderer(), pTempSurface);
-	//¿no falta liberar la surface?
-	//SDL_FreeSurface(pTempSurface);
+	SDL_Surface* superficie_tempotal = IMG_Load(pathImagen.c_str());
+    if ( superficie_tempotal )
+    {
+    	// se realiza el cambio de color
+    	Desplazar::H(superficie_tempotal, color->getHinicial(), color->getHfinal(), color->getDesplazamiento());
+
+    	textura = SDL_CreateTextureFromSurface(Renderizador::Instance()->getRenderer(), superficie_tempotal);
+
+    	//se libera la superficie temporal recien utilizada.
+    	SDL_FreeSurface(superficie_tempotal);
+
+    	if ( !textura )
+    		Logger::getInstance()->error("No se pudo crear la textura SDL para la imagen "+pathImagen+" ene su cambio de color.");
+	}
+    else
+    {
+    	Logger::getInstance()->error("No se pudo cargar la imagen "+pathImagen+ " para el cambio de color.");
+    }
 }
