@@ -243,7 +243,7 @@ PersonajeDef* Parser::parsearPersonaje(string tag_personaje){
     }
     Vector2f p_posInicial(escenario->getAncho()/2.0,escenario->getYpiso());
     ColorAlternativoDef* colorAlternativoDef = new ColorAlternativoDef(color_alternativo_hinicial, color_alternativo_hfinal, color_alternativo_desplazamiento);
-    PersonajeDef* personajeParseado = new PersonajeDef(p_ancho, p_alto, p_zindex, p_direccion, p_posInicial, colorAlternativoDef);
+    PersonajeDef* personajeParseado = new PersonajeDef(tag_personaje, p_ancho, p_alto, p_zindex, p_direccion, p_posInicial, colorAlternativoDef);
     for (list<SpriteDef*>::iterator it = sprites.begin(); it != sprites.end(); ++it){
     	personajeParseado->agregarSpritesDef(*it);
     }

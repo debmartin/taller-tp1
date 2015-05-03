@@ -19,11 +19,14 @@ PersonajeDef::PersonajeDef() {
 	this->z_index = 0;
 	this->spritesDef = new list<SpriteDef*>();
 	this->direccion = 1;
+	this->id = "";
 	this->colorAlternativoDef = new ColorAlternativoDef();
 }
 
-PersonajeDef::PersonajeDef(double anchoIn, double altoIn, int zindexIn, int direccionIn, Vector2f posInicial, ColorAlternativoDef* colorAlter)
+PersonajeDef::PersonajeDef(string id, double anchoIn, double altoIn, int zindexIn, int direccionIn, Vector2f posInicial, ColorAlternativoDef* colorAlter)
 {
+	this->id = id;
+
     if (anchoIn <= 0)
 		Logger::getInstance()->info("El ancho del personaje es menor o igual a cero. Se elije uno nuevo con el valor de 15");
     if (altoIn <= 0)
@@ -120,8 +123,8 @@ list<SpriteDef*>* PersonajeDef::getSpritesDef() const {
 
 ostream& operator <<(ostream &o, const PersonajeDef &p) {
 
-        o<<"PersonajeDef -> [ancho, alto, zindex, direccion,pos_inicial]=[";
-        o<<p.ancho<<", "<<p.alto<<", "<<p.z_index<<", "<<p.direccion<<", "<<p.posicionInicial<<"]"<<endl;
+        o<<"PersonajeDef -> [id, ancho, alto, zindex, direccion,pos_inicial]=[";
+        o<<p.id<<", "<<p.ancho<<", "<<p.alto<<", "<<p.z_index<<", "<<p.direccion<<", "<<p.posicionInicial<<"]"<<endl;
         o<<"sprites: {"<<endl;
     	for (list<SpriteDef*>::iterator it_spritesDef = p.getSpritesDef()->begin() ; it_spritesDef !=  p.getSpritesDef()->end(); it_spritesDef++)
     	{
@@ -152,4 +155,12 @@ ColorAlternativoDef* PersonajeDef::getColorAlternativoDef() const {
 
 void PersonajeDef::setColorAlternativoDef(ColorAlternativoDef* colorAlternativoDef) {
 	this->colorAlternativoDef = colorAlternativoDef;
+}
+
+string PersonajeDef::getId() const {
+	return id;
+}
+
+void PersonajeDef::setId(string id) {
+	this->id = id;
 }

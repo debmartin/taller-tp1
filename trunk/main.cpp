@@ -1,10 +1,11 @@
 #include <SDL2/SDL_stdinc.h>
 #include <SDL2/SDL_timer.h>
+#include <iostream>
 #include <list>
+#include <map>
 #include <string>
 #include <utility>
 
-#include "src/json/ColorAlternativoDef.h"
 #include "src/json/JugadorDef.h"
 #include "src/Juego.h"
 #include "src/modelo/CargadorDeObjetos.h"
@@ -20,22 +21,22 @@ Juego* cargarJuego(string escenarioPath){
 
 	CargadorDeOjbetos cargador_de_objetos(escenarioPath);
 
-    list<Personaje*>* personajes = cargador_de_objetos.cargarPersonajes();
-    list<PersonajeDibujable*>* personajesDibujables = cargador_de_objetos.cargarPersonajesDibujables();
-
-    //cargo los personajes y personajes dibujables
-	list<Personaje*>::iterator it_personajes = personajes->begin();
-	list<PersonajeDibujable*>::iterator it_personajesDibujables = personajesDibujables->begin();
-
-	Personaje* personaje1 = *(it_personajes++);
-	Personaje* personaje2 = *(it_personajes);
-	PersonajeDibujable* personajeDibujable1 = *(it_personajesDibujables++);
-	PersonajeDibujable* personajeDibujable2 = *(it_personajesDibujables);
-
-	//ver si usar el color alternativo en el personaje 2
+	/*
+	 * cargo los personajes y personajes dibujables para  los jugadores
+	 */
 	string id_personaje1 = cargador_de_objetos.cargarJugador1()->getIdPersonaje();
 	string id_personaje2 = cargador_de_objetos.cargarJugador2()->getIdPersonaje();
 
+    map<string, Personaje*>* personajes = cargador_de_objetos.cargarPersonajes();
+    map<string, PersonajeDibujable*>* personajesDibujables = cargador_de_objetos.cargarPersonajesDibujables();
+	Personaje* personaje1 = personajes->find(id_personaje1)->second;
+	Personaje* personaje2 = personajes->find(id_personaje2)->second;
+	PersonajeDibujable* personajeDibujable1 = personajesDibujables->find(id_personaje1)->second;
+	PersonajeDibujable* personajeDibujable2 = personajesDibujables->find(id_personaje2)->second;
+
+	/*
+	 * verifico si los jugadores usan el mismo personaje
+	 */
 	if (id_personaje1 == id_personaje2)
 	{
 		//TODO terminar la implementacion del operador= para Personaje Y PersonajeDibujable
@@ -57,8 +58,8 @@ Juego* cargarJuego(string escenarioPath){
 	// cargar el escenario grafico
 	cargador_de_objetos.cargarEscenarioGrafico(personajeDibujable1, personajeDibujable2);
 
-    std::pair<Personaje*, PersonajeDibujable*> jugador1(personaje1, personajeDibujable1);
-    std::pair<Personaje*, PersonajeDibujable*> jugador2(personaje2, personajeDibujable2);
+    pair<Personaje*, PersonajeDibujable*> jugador1(personaje1, personajeDibujable1);
+    pair<Personaje*, PersonajeDibujable*> jugador2(personaje2, personajeDibujable2);
 	Juego* juego = new Juego(jugador1, jugador2);
 
     return juego;

@@ -7,10 +7,9 @@
 
 #include "CargadorDeObjetos.h"
 
-#include <SDL2/SDL_stdinc.h>
+#include <utility>
 
 #include "../json/CapaDef.h"
-#include "../json/ColorAlternativoDef.h"
 #include "../json/EscenarioDef.h"
 #include "../json/JugadorDef.h"
 #include "../json/Parser.h"
@@ -58,23 +57,22 @@ CargadorDeOjbetos::~CargadorDeOjbetos() {
 
 }
 
-list<Personaje*>* CargadorDeOjbetos::cargarPersonajes() {
-	list<Personaje*>* personajes = new list<Personaje*>();
+map<string, Personaje*>* CargadorDeOjbetos::cargarPersonajes() {
+
+	map<string, Personaje*>* personajes = new map<string, Personaje*>();
 
 	for (list<PersonajeDef*>::iterator it = parser->getPersonajesDef()->begin() ; it != parser->getPersonajesDef()->end(); ++it)
 	{
-		//Logger::getInstance()->info(*it);
 		Personaje* personaje = new Personaje((*it)->getAncho(), (*it)->getAlto(), (*it)->getPosicionInicial(), VentanaGrafica::Instance());
-		personajes->push_back(personaje);
+		personajes->insert( pair<string,Personaje*>((*it)->getId(),personaje) );
 	}
-
 
 	return personajes;
 }
 
-list<PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables() {
+map<string, PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables() {
 
-	list<PersonajeDibujable*>* personajesDibujables = new list<PersonajeDibujable*>();
+	map<string, PersonajeDibujable*>* personajesDibujables = new map<string, PersonajeDibujable*>();
 
 	for (list<PersonajeDef*>::iterator it = parser->getPersonajesDef()->begin() ; it != parser->getPersonajesDef()->end(); ++it)
 	{
@@ -125,11 +123,12 @@ list<PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables() {
 			personajeDibujableCargado->agregarAnimacion(sub_zero);
 		}
 
-		personajesDibujables->push_back(personajeDibujableCargado);
+		personajesDibujables->insert( pair<string,PersonajeDibujable*>((*it)->getId(),personajeDibujableCargado) );
 	}
 
 	return personajesDibujables;
 }
+
 
 void CargadorDeOjbetos::cargarEscenarioGrafico(PersonajeDibujable* personajeDibujable1, PersonajeDibujable* personajeDibujable2) {
 
