@@ -1,7 +1,5 @@
 #include <SDL2/SDL_stdinc.h>
 #include <SDL2/SDL_timer.h>
-#include <iostream>
-#include <list>
 #include <map>
 #include <string>
 #include <utility>
@@ -13,6 +11,7 @@
 #include "src/utils/Logger.h"
 #include "src/vista/PersonajeDibujable.h"
 #include "src/vista/VentanaGrafica.h"
+#include "test/Test.h"
 
 Juego* cargarJuego(string escenarioPath){
 	Logger::getInstance()->info("#################################################");
@@ -42,13 +41,15 @@ Juego* cargarJuego(string escenarioPath){
 		//TODO terminar la implementacion del operador= para Personaje Y PersonajeDibujable
 		if ( id_personaje1 == "personaje-1" )
 		{
-			//personaje2 = personaje1; // TODO ver de no copiar referencias
-			//personajeDibujable2 = personajeDibujable1;
+			//personaje2 = personaje1;
+			// TODO verificar la direccion nueva
+			personajeDibujable2 = personajeDibujable1->clonar();
 		}
 		else if ( id_personaje1 == "personaje-2" )
 		{
 			//personaje1 = personaje2;
-			//personajeDibujable1 = personajeDibujable2;
+			// TODO verificar la direccion nueva
+			personajeDibujable1 = personajeDibujable2->clonar();
 		}
 
 		personajeDibujable2->cambiarColor(personajeDibujable1->getColorAlternativo());
@@ -98,26 +99,25 @@ int main(int argc, char* args[])
 	{
 		string argumento(args[1]);
 		Logger::getInstance()->info("argumento desde la consola: "+argumento);
-		/*
 		if ( argumento == "-test" )
 		{
 			Test tests;
 			tests.ejecutar();
-          return 0;
 		}
-		*/
-        bool recargar = true;
-        while (recargar){
-            recargar = false;
-            string escenario_path(argumento);
-            Juego* juego = cargarJuego(argumento);
-            correrJuego(juego, recargar);
-        }
+		else
+		{
+			bool recargar = true;
+			while (recargar){
+				recargar = false;
+				string escenario_path(argumento);
+				Juego* juego = cargarJuego(argumento);
+				correrJuego(juego, recargar);
+			}
 
-    	Logger::getInstance()->info("#################################################");
-    	Logger::getInstance()->info("################## JUEGO FINALIZADO #############");
-    	Logger::getInstance()->info("#################################################");
-
+			Logger::getInstance()->info("#################################################");
+			Logger::getInstance()->info("################## JUEGO FINALIZADO #############");
+			Logger::getInstance()->info("#################################################");
+		}
 	}
 
 	return 0;

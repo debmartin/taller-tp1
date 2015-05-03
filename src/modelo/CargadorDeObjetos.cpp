@@ -7,6 +7,7 @@
 
 #include "CargadorDeObjetos.h"
 
+#include <list>
 #include <utility>
 
 #include "../json/CapaDef.h"

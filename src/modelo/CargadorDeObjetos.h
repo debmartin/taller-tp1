@@ -8,7 +8,6 @@
 #ifndef SRC_MODELO_CARGADORDEOBJETOS_H_
 #define SRC_MODELO_CARGADORDEOBJETOS_H_
 
-#include <list>
 #include <map>
 #include <string>
 

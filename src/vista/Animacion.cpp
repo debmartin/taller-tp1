@@ -3,7 +3,7 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_surface.h>
-#include <iostream>
+#include <sstream>
 
 #include "../json/ColorAlternativoDef.h"
 #include "../utils/Logger.h"
@@ -12,6 +12,9 @@
 
 using std::string;
 using std::cout;
+
+Animacion::Animacion() {
+}
 
 Animacion::Animacion(string pathImg, int cantFotogramas, int fpsIn, string idIn, SDL_Renderer* pRenderer)
 {
@@ -75,4 +78,30 @@ void Animacion::cambiarColor(ColorAlternativoDef* color)
     {
     	Logger::getInstance()->error("No se pudo cargar la imagen "+pathImagen+ " para el cambio de color.");
     }
+}
+
+Animacion* Animacion::clonar()
+{
+	Animacion* animacion_clon = new Animacion();
+	animacion_clon->textura = textura;
+	animacion_clon->cantidadFotogramas = cantidadFotogramas;
+	animacion_clon->fps = fps;
+	animacion_clon->id = id;
+	animacion_clon->pathImagen = pathImagen;
+
+	return animacion_clon;
+}
+
+ostream& operator <<(ostream &o, const Animacion &a)
+{
+	o<<"Animacion -> [cantFotog, fps, id, pathImagen]=[";
+	o<<a.cantidadFotogramas<<", "<<a.fps<<", "<<a.id<<", "<<a.pathImagen<<"]";
+	return o;
+}
+
+string Animacion::toString()
+{
+    ostringstream stream;
+    stream <<*this;
+	return stream.str();
 }

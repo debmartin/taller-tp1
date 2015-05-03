@@ -34,19 +34,19 @@ bool ParserTests::ejecutar() {
 	parser->parsearDesdeJson();
 
 	VentanaDef* ventana = parser->getVentanaDef();
-	cout<<*ventana<<endl;
+	Logger::getInstance()->info(ventana);
 
 	EscenarioDef* escenario = parser->getEscenarioDef();
-	cout<<*escenario<<endl;
+	Logger::getInstance()->info(escenario);
 
 	for (list<CapaDef*>::iterator it_capas = parser->getCapasDef()->begin() ; it_capas != parser->getCapasDef()->end(); it_capas++)
 	{
-		cout<<**it_capas<<endl;
+		Logger::getInstance()->info(*it_capas);
 	}
 
 	for (list<PersonajeDef*>::iterator it_personajesDef = parser->getPersonajesDef()->begin() ; it_personajesDef != parser->getPersonajesDef()->end(); it_personajesDef++)
 	{
-		cout<<**it_personajesDef<<endl;
+		Logger::getInstance()->info(*it_personajesDef);
 	}
 
 	return true;

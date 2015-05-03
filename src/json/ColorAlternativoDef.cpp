@@ -64,3 +64,12 @@ string ColorAlternativoDef::toString() {
 	return stream.str();
 }
 
+ColorAlternativoDef* ColorAlternativoDef::clonar()
+{
+	ColorAlternativoDef* colorAlternativoDef_clon = new ColorAlternativoDef();
+	colorAlternativoDef_clon->hinicial = hinicial;
+	colorAlternativoDef_clon->hfinal = hfinal;
+	colorAlternativoDef_clon->desplazamiento = desplazamiento;
+
+	return colorAlternativoDef_clon;
+}

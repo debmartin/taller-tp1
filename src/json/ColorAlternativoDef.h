@@ -30,6 +30,7 @@ public:
 	virtual ~ColorAlternativoDef();
 	friend ostream& operator<<(ostream &o, const ColorAlternativoDef &c);
 	string toString();
+	ColorAlternativoDef* clonar();
 };
 
 #endif /* SRC_JSON_COLORALTERNATIVODEF_H_ */
