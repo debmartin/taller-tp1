@@ -41,20 +41,16 @@ Juego* cargarJuego(string escenarioPath){
 		//TODO terminar la implementacion del operador= para Personaje Y PersonajeDibujable
 		if ( id_personaje1 == "personaje-1" )
 		{
-			/*
-			personaje2 = personaje1;
-			personajeDibujable2 = personajeDibujable1;
-			*/
-			personajeDibujable2->cambiarColor(personajeDibujable1->getColorAlternativo());
+			//personaje2 = personaje1; // TODO ver de no copiar referencias
+			//personajeDibujable2 = personajeDibujable1;
 		}
 		else if ( id_personaje1 == "personaje-2" )
 		{
-			/*
-			personaje1 = personaje2;
-			personajeDibujable1 = personajeDibujable2;
-			*/
-			personajeDibujable1->cambiarColor(personajeDibujable2->getColorAlternativo());
+			//personaje1 = personaje2;
+			//personajeDibujable1 = personajeDibujable2;
 		}
+
+		personajeDibujable2->cambiarColor(personajeDibujable1->getColorAlternativo());
 
 	}
 
