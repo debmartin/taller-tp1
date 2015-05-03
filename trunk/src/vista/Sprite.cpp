@@ -1,9 +1,21 @@
 #include "Sprite.h"
-#include "VentanaGrafica.h"
+
+#include <SDL2/SDL_rect.h>
+#include <SDL2/SDL_render.h>
+#include <SDL2/SDL_timer.h>
+#include <cmath>
+#include <sstream>
+
+#include "../utils/Logger.h"
+#include "Animacion.h"
+#include "Renderizador.h"
 
 #define FACTOR_ESCALA_INICIAL_X 1.0f
 #define FACTOR_ESCALA_INICIAL_Y 1.0f
 #define FOTOGRAMA_INICIAL 1
+
+Sprite::Sprite() {
+}
 
 Sprite::Sprite(Animacion* animacion, Vector2f& posicionIni, OrientacionSprite orientacion) :
     animacionAct(animacion),
@@ -151,4 +163,37 @@ void Sprite::cambiarOrientacionHaciaIzquierda() {
 	{
 		orientacion = ORIENTACION_IZQUIERDA;
 	}
+}
+
+Sprite* Sprite::clonar() {
+
+	Sprite* sprite_clon = new Sprite();
+	sprite_clon->animacionAct = animacionAct->clonar();
+	sprite_clon->posicion.setCoordenada(posicion.X(), posicion.Y());
+	sprite_clon->anchoPx = anchoPx;
+	sprite_clon->altoPx = altoPx;
+	sprite_clon->factorEscalaX = factorEscalaX;
+	sprite_clon->factorEscalaY = factorEscalaY;
+	sprite_clon->anchoFotogramaPx = anchoFotogramaPx;
+	sprite_clon->fotogramaActual = fotogramaActual;
+	sprite_clon->fps = fps;
+	sprite_clon->orientacion = orientacion;
+	sprite_clon->sentidoReproduccion = sentidoReproduccion;
+
+	return sprite_clon;
+}
+
+ostream& operator <<(ostream &o, const Sprite &s)
+{
+	//TODO terminar de implementar ...
+	o<<"Sprite -> [animacion, posicion, anchoPx, altoPx]=[";
+	o<<*s.animacionAct<<", "<<s.posicion<<", "<<s.anchoPx<<", "<<s.altoPx<<"]";
+
+	return o;
+}
+
+string Sprite::toString() {
+    ostringstream stream;
+    stream <<*this;
+	return stream.str();
 }

@@ -3,9 +3,12 @@
 
 #include <iostream>
 #include <string>
+
+#include "../utils/Loggeable.h"
+
 using namespace std;
 
-class Vector2f{
+class Vector2f: public Loggeable{
 private:
 	float x;
 	float y;
@@ -23,7 +26,6 @@ public:
 	Vector2f& operator-=(const Vector2f& v2);
 	Vector2f operator*(float escalar);
 	Vector2f& operator*=(float escalar);
-	Vector2f& operator=(const Vector2f& v2);
     void setCoordenada(int x, int y);
     friend ostream& operator<<(ostream &o, const Vector2f &c);
     string toString();

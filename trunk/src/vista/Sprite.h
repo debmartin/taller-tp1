@@ -1,15 +1,13 @@
 
 #ifndef SRC_VISTA_SPRITE_H_
 #define SRC_VISTA_SPRITE_H_
-#include <SDL2/SDL.h>
+
 #include <iostream>
 #include <string>
-#include <math.h>
-#include "../utils/Logger.h"
+
 #include "../modelo/Vector2f.h"
-#include "../modelo/Trayectoria.h"
-#include "../modelo/Reposo.h"
-#include "Animacion.h"
+
+class Animacion;
 
 typedef enum SentidoReproduccion
 {
@@ -23,7 +21,7 @@ typedef enum OrientacionSprite
 	ORIENTACION_IZQUIERDA
 } OrientacionSprite;
 
-class Sprite {
+class Sprite: public Loggeable {
 
 public:
 
@@ -41,6 +39,7 @@ private:
 	SentidoReproduccion sentidoReproduccion;
 
 public:
+	Sprite();
 	Sprite(Animacion* animInicial, Vector2f& posicion, OrientacionSprite orientacion);
 	virtual ~Sprite();
 
@@ -60,6 +59,10 @@ public:
 	Vector2f getDimensionesPx();
 	void cambiarOrientacionHaciaDerecha();
 	void cambiarOrientacionHaciaIzquierda();
+	Sprite* clonar();
+
+	friend ostream& operator<<(ostream &o, const Sprite &s);
+	string toString();
 };
 
 #endif /* SRC_VISTA_SPRITE_H_ */
