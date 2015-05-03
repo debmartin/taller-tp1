@@ -278,6 +278,7 @@ Personaje& Personaje::operator=(const Personaje& p) {
 	trayectoria = p.trayectoria; // TODO ver de no copiar la referencia
 	tCreacion = p.tCreacion;
 
+	return *this;
 }
 
 string Personaje::toString() {
