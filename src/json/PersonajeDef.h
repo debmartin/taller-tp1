@@ -39,10 +39,11 @@ private:
 	int direccion;
 	Vector2f posicionInicial;
 	ColorAlternativoDef* colorAlternativoDef;
+	string id;
 
 public:
 	PersonajeDef();
-	PersonajeDef(double ancho, double alto, int zindex, int direccion, Vector2f posInicial, ColorAlternativoDef* colorAlter);
+	PersonajeDef(string id, double ancho, double alto, int zindex, int direccion, Vector2f posInicial, ColorAlternativoDef* colorAlter);
 	virtual ~PersonajeDef();
 	double getAlto() const;
 	double getAncho() const;
@@ -66,7 +67,8 @@ public:
 	friend ostream& operator<<(ostream &o, const PersonajeDef &p);
 
 	string toString();
-
+	string getId() const;
+	void setId(string id);
 };
 
 #endif /* SRC_JSON_PERSONAJEDEF_H_ */

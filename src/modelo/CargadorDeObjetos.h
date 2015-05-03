@@ -9,6 +9,7 @@
 #define SRC_MODELO_CARGADORDEOBJETOS_H_
 
 #include <list>
+#include <map>
 #include <string>
 
 #include "../vista/PersonajeDibujable.h"
@@ -37,8 +38,8 @@ public:
 	CargadorDeOjbetos(string escenario_path);
 	virtual ~CargadorDeOjbetos();
 
-	list<Personaje*>* cargarPersonajes();
-	list<PersonajeDibujable*>* cargarPersonajesDibujables();
+	map<string, Personaje*>* cargarPersonajes();
+	map<string, PersonajeDibujable*>* cargarPersonajesDibujables();
 	void cargarEscenarioGrafico(PersonajeDibujable* personajeDibujable1, PersonajeDibujable* personajeDibujable2);
 	JugadorDef* cargarJugador1();
 	JugadorDef* cargarJugador2();
