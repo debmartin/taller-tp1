@@ -35,29 +35,27 @@ Juego* cargarJuego(string escenarioPath){
 	//ver si usar el color alternativo en el personaje 2
 	string id_personaje1 = cargador_de_objetos.cargarJugador1()->getIdPersonaje();
 	string id_personaje2 = cargador_de_objetos.cargarJugador2()->getIdPersonaje();
+
 	if (id_personaje1 == id_personaje2)
 	{
-		// TODO ariel. ver porque pincha
-		/*if ( id_personaje1 == "personaje-1" )
+		//TODO terminar la implementacion del operador= para Personaje Y PersonajeDibujable
+		if ( id_personaje1 == "personaje-1" )
 		{
-			delete personaje2;
-			delete personajeDibujable2;
-			personaje2 = NULL;
-			personajeDibujable2 = NULL;
-
-			Personaje* personaje2 = new Personaje();
-			PersonajeDibujable* personajeDibujable2 = new PersonajeDibujable();
+			/*
 			personaje2 = personaje1;
 			personajeDibujable2 = personajeDibujable1;
+			*/
 			personajeDibujable2->cambiarColor(personajeDibujable1->getColorAlternativo());
-
 		}
 		else if ( id_personaje1 == "personaje-2" )
 		{
-
+			/*
+			personaje1 = personaje2;
+			personajeDibujable1 = personajeDibujable2;
+			*/
+			personajeDibujable1->cambiarColor(personajeDibujable2->getColorAlternativo());
 		}
-		*/
-		personajeDibujable2->cambiarColor(personajeDibujable1->getColorAlternativo());
+
 	}
 
 	// cargar el escenario grafico

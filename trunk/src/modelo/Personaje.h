@@ -55,7 +55,7 @@ using namespace std;
 
 class Personaje: public Observable, public Loggeable {
 private:
-    const Vector2f posicionInicial;
+    Vector2f posicionInicial;
 	double ancho;
 	double alto;
 	Vector2f posicion;
@@ -70,6 +70,7 @@ private:
 public:
 	Personaje();
 	Personaje(double ancho, double alto, Vector2f posInicial, Posicionable* posc);
+	Personaje& operator=(const Personaje& v2);
 	virtual ~Personaje();
 	double getAlto() const;
 	double getAncho() const;

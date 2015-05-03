@@ -47,3 +47,9 @@ string Vector2f::toString() {
     stream <<*this;
 	return stream.str();
 }
+
+Vector2f& Vector2f::operator =(const Vector2f& v2) {
+    x = v2.x;
+    y = v2.y;
+    return *this;
+}
