@@ -111,6 +111,20 @@ map<string, PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables(
 		personajeDibujableCargado = new PersonajeDibujable(SubQuieto,
 				(*it)->getPosicionInicial(), tamanioPx, direccion, (*it)->getColorAlternativoDef());
 
+		//Agrego armaDibujable
+		SpriteDef* spriteDefArma = (*it)->getSpriteDefArmaDibujable();
+		//cout<<"pathimagen:"<<spriteDefArma->getImagen()<<endl;
+		/*Animacion* animacionArma = new Animacion(spriteDefArma->getImagen(),
+		spriteDefArma->getCantFotogramas(),
+		spriteDefArma->getFps(),
+		spriteDefArma->getIdSprite(),
+		Renderizador::Instance()->getRenderer());;*/
+		/*Vector2f posicionInicialArma(0,0);
+
+		Sprite* spriteArmaDibujable = new Sprite(animacionArma, posicionInicialArma, direccion);
+		ArmaDibujable* armaDibujable = new ArmaDibujable(spriteArmaDibujable);
+		personajeDibujableCargado->agregarArma(armaDibujable);*/
+
 		//TODO: Val. Separar la carga de los personajes para poder setearles el color.
 		it_sprites = spritesDef->begin();
 		for (; it_sprites != spritesDef->end(); ++it_sprites) {
