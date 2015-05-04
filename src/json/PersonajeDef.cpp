@@ -143,6 +143,14 @@ void PersonajeDef::agregarSpritesDef(SpriteDef* spriteDef) {
 	this->spritesDef->push_back(spriteDef);
 }
 
+void PersonajeDef::agregarSpriteDefArmaDibujable(SpriteDef* arma){
+	this->armaArrojable = arma;
+}
+
+SpriteDef* PersonajeDef::getSpriteDefArmaDibujable(){
+	return armaArrojable;
+}
+
 string PersonajeDef::toString() {
     ostringstream stream;
     stream <<*this;

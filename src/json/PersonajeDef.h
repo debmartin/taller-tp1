@@ -36,6 +36,7 @@ private:
 	double alto;
 	int z_index;
 	list<SpriteDef*>* spritesDef;
+	SpriteDef* armaArrojable;
 	int direccion;
 	Vector2f posicionInicial;
 	ColorAlternativoDef* colorAlternativoDef;
@@ -57,7 +58,8 @@ public:
 
 	list<SpriteDef*>* getSpritesDef() const;
 	void agregarSpritesDef(SpriteDef* spriteDef);
-
+	void agregarSpriteDefArmaDibujable(SpriteDef* arma);
+	SpriteDef* getSpriteDefArmaDibujable();
 	int getDireccion() const;
 	void setDireccion(int nuevaDir);
     void ajustarZIndex(int cantCapas);
