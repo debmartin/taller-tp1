@@ -34,7 +34,6 @@ Personaje::Personaje(string idIn, double anchoIn, double altoIn, Vector2f posIni
 	posicion(posInicial), tCreacion(0), numeroJugador(numJugador){
 	this->trayectoria = new Reposo(this->posicion);
 	this->energia = ENERGIA_INICIAL;
-	//this->arma = armaArrojable;
 }
 
 double Personaje::getAlto() const {
@@ -71,6 +70,10 @@ estado_personaje Personaje::getEstado(){
 
 int Personaje::getEnergia(){
 	return this->energia;
+}
+
+void Personaje::agregarArma(Objeto* unArma){
+	this->arma = unArma;
 }
 
 //Devuelve un vector posicion referenciado desde el eje con origen de coordenadas arriba izquierda.
@@ -255,11 +258,11 @@ bool Personaje::estaEnReposo(){
     return (estado == EN_ESPERA);
 }
 
-void Personaje::ejecutarPoder(Poder* poder, Objeto* objeto){
+void Personaje::arrojarArma(){
 	//Posiciono el poder respecto a la posicion del personaje
 	Vector2f posicionObjeto(posicion.X()+ancho,alto);
-	objeto->posicionar(posicionObjeto);
-	poder->ejecutar(objeto);
+	arma->posicionar(posicionObjeto);
+	arma->cambiarEstado(VISIBLE);
 }
 
 void Personaje::recibirDanio(int danio){

@@ -14,6 +14,12 @@
 #define POS_INICIAL_OBJETO Vector2f(0,0)
 #define VELOCIDAD_OBJETO Vector2f(10,10)
 
+typedef enum estado_objeto
+{
+	VISIBLE,
+	NO_VISIBLE,
+} estado_objeto;
+
 class Objeto {
 public:
 	Objeto();
@@ -22,6 +28,7 @@ public:
 	virtual void posicionar(Vector2f posicion) = 0;
 	virtual int quitarEnergia() = 0;
 	virtual void update() = 0;
+	virtual void cambiarEstado(estado_objeto unEstado) = 0;
 };
 
 #endif /* SRC_MODELO_OBJETO_H_ */
