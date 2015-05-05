@@ -55,6 +55,7 @@ using namespace std;
 
 class Personaje: public Observable, public Loggeable {
 private:
+	string id;
 	string nombre;
     Vector2f posicionInicial;
 	double ancho;
@@ -71,7 +72,7 @@ private:
 
 public:
 	Personaje();
-	Personaje(double ancho, double alto, Vector2f posInicial, Posicionable* posc, int numJugador);
+	Personaje(string id, double ancho, double alto, Vector2f posInicial, Posicionable* posc, int numJugador);
 	Personaje& operator=(const Personaje& v2);
 	virtual ~Personaje();
 	double getAlto() const;
@@ -115,6 +116,7 @@ public:
 
 	friend ostream& operator<<(ostream &o, const Personaje &p);
 	string toString();
+	string getId() const;
 };
 
 #endif /* SRC_MODELO_PERSONAJE_H_ */

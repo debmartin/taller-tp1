@@ -29,8 +29,9 @@ Personaje::Personaje() {
 	this->energia = ENERGIA_INICIAL;
 }
 
-Personaje::Personaje(double anchoIn, double altoIn, Vector2f posInicial, Posicionable* posc, int numJugador) :
-    posicionInicial(posInicial), ancho(anchoIn), alto(altoIn), estado(EN_ESPERA), posicionable(posc), posicion(posInicial), tCreacion(0), numeroJugador(numJugador){
+Personaje::Personaje(string idIn, double anchoIn, double altoIn, Vector2f posInicial, Posicionable* posc, int numJugador) :
+    id(idIn), posicionInicial(posInicial), ancho(anchoIn), alto(altoIn), estado(EN_ESPERA), posicionable(posc),
+	posicion(posInicial), tCreacion(0), numeroJugador(numJugador){
 	this->trayectoria = new Reposo(this->posicion);
 	this->energia = ENERGIA_INICIAL;
 	//this->arma = armaArrojable;
@@ -286,6 +287,10 @@ Personaje& Personaje::operator=(const Personaje& p) {
 	tCreacion = p.tCreacion;
 
 	return *this;
+}
+
+string Personaje::getId() const {
+	return id;
 }
 
 string Personaje::toString() {

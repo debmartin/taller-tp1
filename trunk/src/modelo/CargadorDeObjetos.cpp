@@ -24,6 +24,7 @@
 #include "../vista/Renderizador.h"
 #include "../vista/Sprite.h"
 #include "../vista/VentanaGrafica.h"
+#include "Jugador.h"
 #include "Vector2f.h"
 
 CargadorDeOjbetos::CargadorDeOjbetos(string escenario_path) {
@@ -64,7 +65,7 @@ map<string, Personaje*>* CargadorDeOjbetos::cargarPersonajes() {
 
 	for (list<PersonajeDef*>::iterator it = parser->getPersonajesDef()->begin() ; it != parser->getPersonajesDef()->end(); ++it)
 	{
-		Personaje* personaje = new Personaje((*it)->getAncho(), (*it)->getAlto(), (*it)->getPosicionInicial(), VentanaGrafica::Instance(), 1);
+		Personaje* personaje = new Personaje((*it)->getId(), (*it)->getAncho(), (*it)->getAlto(), (*it)->getPosicionInicial(), VentanaGrafica::Instance(), 1);
 		personajes->insert( pair<string,Personaje*>((*it)->getId(),personaje) );
 	}
 
@@ -196,16 +197,31 @@ void CargadorDeOjbetos::cargarEscenarioGrafico(PersonajeDibujable* personajeDibu
 
 }
 
-JugadorDef* CargadorDeOjbetos::cargarJugador1() {
+Jugador* CargadorDeOjbetos::cargarJugador(JugadorDef* jugadorDef)
+{
 
-	list<JugadorDef*>::iterator it = parser->getJugadoresDef()->begin();
-	JugadorDef* jugador1 = *it;
-	return jugador1;
+	string idPersonaje = jugadorDef->getIdPersonaje();
+	int direccion = jugadorDef->getDireccion();
+
+	Personaje* personaje = this->cargarPersonajes()->find(idPersonaje)->second;
+	PersonajeDibujable* personajeDibujable = this->cargarPersonajesDibujables()->find(idPersonaje)->second;
+
+	Jugador* jugador = new Jugador(personaje, personajeDibujable, direccion);
+
+	return jugador;
+
 }
 
-JugadorDef* CargadorDeOjbetos::cargarJugador2() {
+Jugador* CargadorDeOjbetos::cargarJugador1() {
 
 	list<JugadorDef*>::iterator it = parser->getJugadoresDef()->begin();
-	JugadorDef* jugador2 = *++it;
-	return jugador2;
+	Jugador* jugador = cargarJugador(*it);
+	return jugador;
+}
+
+Jugador* CargadorDeOjbetos::cargarJugador2() {
+
+	list<JugadorDef*>::iterator it = parser->getJugadoresDef()->begin();
+	Jugador* jugador = cargarJugador(*++it);
+	return jugador;
 }

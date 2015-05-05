@@ -16,6 +16,8 @@
 
 class JugadorDef;
 
+class Jugador;
+
 class EscenarioGrafico;
 class Parser;
 class Personaje;
@@ -40,8 +42,10 @@ public:
 	map<string, Personaje*>* cargarPersonajes();
 	map<string, PersonajeDibujable*>* cargarPersonajesDibujables();
 	void cargarEscenarioGrafico(PersonajeDibujable* personajeDibujable1, PersonajeDibujable* personajeDibujable2);
-	JugadorDef* cargarJugador1();
-	JugadorDef* cargarJugador2();
+	Jugador* cargarJugador1();
+	Jugador* cargarJugador2();
+private:
+	Jugador* cargarJugador(JugadorDef* jugadorDef);
 
 };
 

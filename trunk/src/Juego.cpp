@@ -9,37 +9,42 @@
 
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_keycode.h>
+#include <SDL2/SDL_render.h>
+#include <utility>
 
 #include "controlador/ControladorPersonaje.h"
+#include "modelo/Jugador.h"
 #include "modelo/Personaje.h"
 #include "utils/Logger.h"
+#include "vista/hud/HUD.h"
 #include "vista/PersonajeDibujable.h"
+#include "vista/Renderizador.h"
 #include "vista/VentanaGrafica.h"
 
 #define TEXTO_ERROR_TEXTURA "ERROR AL CREAR TEXTURA"
 
 using std::pair;
 
-Juego::Juego(pair<Personaje*, PersonajeDibujable*>& personaje1, pair<Personaje*, PersonajeDibujable*>& personaje2) :
-    jugador1(personaje1.first), jugador2(personaje2.first), jugadorDibujable1(personaje1.second), jugadorDibujable2(personaje2.second){
+Juego::Juego(Jugador* jugador1, Jugador* jugador2){
 	juegoCorriendo = true;
+	this->jugador1 = jugador1;
+	this->jugador2 = jugador2;
 
-	agregarObservadoresJugador(jugador1, jugadorDibujable1);
-	agregarObservadoresJugador(jugador2, jugadorDibujable2);
+	agregarObservadoresJugador(jugador1);
+	agregarObservadoresJugador(jugador2);
 
-	controladorPersonaje = new ControladorPersonaje(jugador1, jugador2);
-	hud = new HUD(Renderizador::Instance()->getWindow(), "Sonia", "Sub-zero");
+	controladorPersonaje = new ControladorPersonaje(jugador1->getPersonaje(), jugador2->getPersonaje());
+	hud = new HUD(Renderizador::Instance()->getWindow(), jugador1->getPersonaje()->getId(), jugador2->getPersonaje()->getId());
 	//hud->disminuirEnergia1(23);
 	//hud->disminuirEnergia2(130);
-	jugador1->agregarObservador(hud);
-	jugador2->agregarObservador(hud);
+	jugador1->getPersonaje()->agregarObservador(hud);
+	jugador2->getPersonaje()->agregarObservador(hud);
 }
 
-void Juego::agregarObservadoresJugador(Personaje* unPersonaje,
-		PersonajeDibujable* unPersonajeDibujable) {
+void Juego::agregarObservadoresJugador(Jugador* unJugador) {
 	//Agrego observadores del Personaje.
-	unPersonaje->agregarObservador(unPersonajeDibujable);
-	unPersonaje->agregarObservador(VentanaGrafica::Instance());
+	unJugador->getPersonaje()->agregarObservador(unJugador->getPersonajeDibujable());
+	unJugador->getPersonaje()->agregarObservador(VentanaGrafica::Instance());
 }
 
 void Juego::render()
@@ -54,8 +59,8 @@ void Juego::render()
 void Juego::update()
 {
 	// INICIO CODIGO USUARIO
-	this->jugador1->update(jugador2->getPosicion());
-	this->jugador2->update(jugador1->getPosicion());
+	this->jugador1->getPersonaje()->update(jugador2->getPersonaje()->getPosicion());
+	this->jugador2->getPersonaje()->update(jugador1->getPersonaje()->getPosicion());
 	this->actualizarOrientacionJugadores();
 
 	VentanaGrafica::Instance()->actualizar();
@@ -100,15 +105,15 @@ bool Juego::running() { return juegoCorriendo; }
 
 void Juego::actualizarOrientacionJugadores() {
 
-	if ( jugadorDibujable1->getPosicionX() > jugadorDibujable2->getPosicionX() )
+	if ( jugador1->getPersonajeDibujable()->getPosicionX() > jugador2->getPersonajeDibujable()->getPosicionX() )
 	{
-		jugadorDibujable1->cambiarOrientacionHaciaIzquierda();
-		jugadorDibujable2->cambiarOrientacionHaciaDerecha();
+		jugador1->getPersonajeDibujable()->cambiarOrientacionHaciaIzquierda();
+		jugador2->getPersonajeDibujable()->cambiarOrientacionHaciaDerecha();
 	}
 	else
 	{
-		jugadorDibujable1->cambiarOrientacionHaciaDerecha();
-		jugadorDibujable2->cambiarOrientacionHaciaIzquierda();
+		jugador1->getPersonajeDibujable()->cambiarOrientacionHaciaDerecha();
+		jugador2->getPersonajeDibujable()->cambiarOrientacionHaciaIzquierda();
 	}
 }
 
