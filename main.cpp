@@ -23,44 +23,40 @@ Juego* cargarJuego(string escenarioPath){
 	/*
 	 * cargo los personajes y personajes dibujables para  los jugadores
 	 */
-	string id_personaje1 = cargador_de_objetos.cargarJugador1()->getIdPersonaje();
-	string id_personaje2 = cargador_de_objetos.cargarJugador2()->getIdPersonaje();
+	string nombrePersonaje_delJugador1 = cargador_de_objetos.cargarJugador1()->getIdPersonaje();
+	string nombrePersonaje_delJugador2 = cargador_de_objetos.cargarJugador2()->getIdPersonaje();
 
     map<string, Personaje*>* personajes = cargador_de_objetos.cargarPersonajes();
     map<string, PersonajeDibujable*>* personajesDibujables = cargador_de_objetos.cargarPersonajesDibujables();
-	Personaje* personaje1 = personajes->find(id_personaje1)->second;
-	Personaje* personaje2 = personajes->find(id_personaje2)->second;
-	PersonajeDibujable* personajeDibujable1 = personajesDibujables->find(id_personaje1)->second;
-	PersonajeDibujable* personajeDibujable2 = personajesDibujables->find(id_personaje2)->second;
 
-	/*
-	 * verifico si los jugadores usan el mismo personaje
-	 */
-	if (id_personaje1 == id_personaje2)
+	Personaje* personaje_delJugador1;
+	Personaje* personaje_delJugador2;
+	PersonajeDibujable* personajeDibujable_delJugador1;
+	PersonajeDibujable* personajeDibujable_delJugador2;
+
+	if (nombrePersonaje_delJugador1 == nombrePersonaje_delJugador2)
 	{
-		//TODO terminar la implementacion del operador= para Personaje Y PersonajeDibujable
-		if ( id_personaje1 == "personaje-1" )
-		{
-			//personaje2 = personaje1;
-			// TODO verificar la direccion nueva
-			personajeDibujable2 = personajeDibujable1->clonar();
-		}
-		else if ( id_personaje1 == "personaje-2" )
-		{
-			//personaje1 = personaje2;
-			// TODO verificar la direccion nueva
-			personajeDibujable1 = personajeDibujable2->clonar();
-		}
 
-		personajeDibujable2->cambiarColor(personajeDibujable1->getColorAlternativo());
+		personaje_delJugador1 			= personajes->find(nombrePersonaje_delJugador1)->second;
+		personaje_delJugador2 			= personajes->find(nombrePersonaje_delJugador1)->second;
+		personajeDibujable_delJugador1 	= personajesDibujables->find(nombrePersonaje_delJugador1)->second;
+		personajeDibujable_delJugador2 	= personajesDibujables->find(nombrePersonaje_delJugador1)->second;
 
+		personajeDibujable_delJugador2->cambiarColor(personajeDibujable_delJugador1->getColorAlternativo());
+	}
+	else
+	{
+		personaje_delJugador1 			= personajes->find(nombrePersonaje_delJugador1)->second;
+		personaje_delJugador2 			= personajes->find(nombrePersonaje_delJugador2)->second;
+		personajeDibujable_delJugador1  = personajesDibujables->find(nombrePersonaje_delJugador1)->second;
+		personajeDibujable_delJugador2  = personajesDibujables->find(nombrePersonaje_delJugador2)->second;
 	}
 
 	// cargar el escenario grafico
-	cargador_de_objetos.cargarEscenarioGrafico(personajeDibujable1, personajeDibujable2);
+	cargador_de_objetos.cargarEscenarioGrafico(personajeDibujable_delJugador1, personajeDibujable_delJugador2);
 
-    pair<Personaje*, PersonajeDibujable*> jugador1(personaje1, personajeDibujable1);
-    pair<Personaje*, PersonajeDibujable*> jugador2(personaje2, personajeDibujable2);
+    pair<Personaje*, PersonajeDibujable*> jugador1(personaje_delJugador1, personajeDibujable_delJugador1);
+    pair<Personaje*, PersonajeDibujable*> jugador2(personaje_delJugador2, personajeDibujable_delJugador2);
 	Juego* juego = new Juego(jugador1, jugador2);
 
     return juego;

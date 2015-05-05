@@ -9,7 +9,6 @@
 
 #include <utility>
 
-#include "../json/ColorAlternativoDef.h"
 #include "../utils/Logger.h"
 #include "VentanaGrafica.h"
 
@@ -122,20 +121,4 @@ void PersonajeDibujable::cambiarColor(ColorAlternativoDef* colorAlternativoDef) 
 		it->second->cambiarColor(colorAlternativoDef);
 	}
 
-}
-
-PersonajeDibujable* PersonajeDibujable::clonar()
-{
-	PersonajeDibujable* personajeDibujable_clon = new PersonajeDibujable();
-	personajeDibujable_clon->spritePersonaje = spritePersonaje->clonar();
-	personajeDibujable_clon->estado = estado;
-	personajeDibujable_clon->nombre = nombre;
-	for (std::map<std::string, Animacion*>::iterator it = this->animaciones.begin() ; it != this->animaciones.end(); ++it)
-	{
-		personajeDibujable_clon->agregarAnimacion(it->second);
-	}
-
-	personajeDibujable_clon->colorAlternativo = colorAlternativo->clonar();
-
-	return personajeDibujable_clon;
 }

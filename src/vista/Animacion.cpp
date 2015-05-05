@@ -13,9 +13,6 @@
 using std::string;
 using std::cout;
 
-Animacion::Animacion() {
-}
-
 Animacion::Animacion(string pathImg, int cantFotogramas, int fpsIn, string idIn, SDL_Renderer* pRenderer)
 {
 	pathImagen = pathImg;
@@ -78,18 +75,6 @@ void Animacion::cambiarColor(ColorAlternativoDef* color)
     {
     	Logger::getInstance()->error("No se pudo cargar la imagen "+pathImagen+ " para el cambio de color.");
     }
-}
-
-Animacion* Animacion::clonar()
-{
-	Animacion* animacion_clon = new Animacion();
-	animacion_clon->textura = textura;
-	animacion_clon->cantidadFotogramas = cantidadFotogramas;
-	animacion_clon->fps = fps;
-	animacion_clon->id = id;
-	animacion_clon->pathImagen = pathImagen;
-
-	return animacion_clon;
 }
 
 ostream& operator <<(ostream &o, const Animacion &a)

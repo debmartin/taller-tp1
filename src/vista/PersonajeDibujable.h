@@ -51,7 +51,6 @@ public:
 	float getPosicionX();
 	void cambiarColor(ColorAlternativoDef* colorAlternativo);
 	ColorAlternativoDef* getColorAlternativo() const;
-	PersonajeDibujable* clonar();
 };
 
 #endif /* SRC_VISTA_PERSONAJEDIBUJABLE_H_ */

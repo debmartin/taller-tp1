@@ -39,7 +39,6 @@ private:
 	SentidoReproduccion sentidoReproduccion;
 
 public:
-	Sprite();
 	Sprite(Animacion* animInicial, Vector2f& posicion, OrientacionSprite orientacion);
 	virtual ~Sprite();
 
@@ -59,7 +58,6 @@ public:
 	Vector2f getDimensionesPx();
 	void cambiarOrientacionHaciaDerecha();
 	void cambiarOrientacionHaciaIzquierda();
-	Sprite* clonar();
 
 	friend ostream& operator<<(ostream &o, const Sprite &s);
 	string toString();
