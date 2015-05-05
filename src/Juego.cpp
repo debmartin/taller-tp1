@@ -28,6 +28,11 @@ Juego::Juego(pair<Personaje*, PersonajeDibujable*>& personaje1, pair<Personaje*,
 	agregarObservadoresJugador(jugador2, jugadorDibujable2);
 
 	controladorPersonaje = new ControladorPersonaje(jugador1, jugador2);
+	hud = new HUD(Renderizador::Instance()->getWindow(), "Sonia", "Sub-zero");
+	//hud->disminuirEnergia1(23);
+	//hud->disminuirEnergia2(130);
+	jugador1->agregarObservador(hud);
+	jugador2->agregarObservador(hud);
 }
 
 void Juego::agregarObservadoresJugador(Personaje* unPersonaje,
@@ -39,7 +44,11 @@ void Juego::agregarObservadoresJugador(Personaje* unPersonaje,
 
 void Juego::render()
 {
+
 	VentanaGrafica::Instance()->dibujarTodo();
+	hud->dibujar();
+	SDL_RenderPresent(Renderizador::Instance()->getRenderer());
+
 }
 
 void Juego::update()

@@ -26,11 +26,13 @@
 Personaje::Personaje() {
 	this->ancho = 0;
 	this->alto = 0;
+	this->energia = ENERGIA_INICIAL;
 }
 
-Personaje::Personaje(double anchoIn, double altoIn, Vector2f posInicial, Posicionable* posc) :
-    posicionInicial(posInicial), ancho(anchoIn), alto(altoIn), estado(EN_ESPERA), posicionable(posc), posicion(posInicial), tCreacion(0){
+Personaje::Personaje(double anchoIn, double altoIn, Vector2f posInicial, Posicionable* posc, int numJugador) :
+    posicionInicial(posInicial), ancho(anchoIn), alto(altoIn), estado(EN_ESPERA), posicionable(posc), posicion(posInicial), tCreacion(0), numeroJugador(numJugador){
 	this->trayectoria = new Reposo(this->posicion);
+	this->energia = ENERGIA_INICIAL;
 	//this->arma = armaArrojable;
 }
 
@@ -40,6 +42,10 @@ double Personaje::getAlto() const {
 
 double Personaje::getAncho() const {
 	return ancho;
+}
+
+int Personaje::getNumeroJugador(){
+	return numeroJugador;
 }
 
 Vector2f Personaje::getDimensionesLogicas() const {
@@ -132,6 +138,7 @@ void Personaje::saltarOblicuoIzquierda(){
 void Personaje::agacharse(){
     setEstado(AGACHADO);
     cambiarTrayectoria(new Reposo(posicion));
+    recibirDanio(10);
     Logger::getInstance()->debug("Personaje: agachado.");
 }
 

@@ -9,6 +9,7 @@
 #define SRC_JUEGO_H_
 
 #include <utility>
+#include "vista/hud/HUD.h"
 
 class ControladorPersonaje;
 class Personaje;
@@ -26,6 +27,7 @@ private:
 	PersonajeDibujable* jugadorDibujable2;
 
 	ControladorPersonaje* controladorPersonaje;
+	HUD* hud;
 
     void agregarObservadoresJugador(Personaje* unPersonaje, PersonajeDibujable* unPersonajeDibujable);
 

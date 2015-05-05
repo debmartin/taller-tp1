@@ -233,13 +233,16 @@ PersonajeDef* Parser::parsearPersonaje(string tag_personaje){
             sprites.push_back(spriteDefAct);
         }else if ( tag == TAG_PERSONAJE_ARMA ){
                 	p_arma_imagen = (*it2)[TAG_PERSONAJE_SPRITES_IMAGEN].asString();
-
+                	//int indiceId = string(TAG_PERSONAJE_ARMA).size();
+                	//cout<<"indiceId:"<<indiceId<<endl;
+                	//p_sprites_id = (tag).substr(indiceId);
+                	//cout<<"p_sprites_id:"<<p_sprites_id<<endl;
                 	Json::Value valorFotog = (*it2)[TAG_PERSONAJE_SPRITES_CANT_FOTOGRAMAS];
                 	Json::Value valorFps = (*it2)[TAG_PERSONAJE_SPRITES_FPS];
 
                 	p_arma_cant_fotogramas = obtenerValorInt(valorFotog, CANT_FOTOGRAMAS_DEFAULT, "Personaje sprite arma cant_fotogramas no es valor entero");
                 	p_arma_fps = obtenerValorInt(valorFps, FPS_DEFAULT, "Personaje sprite arma fps no es valor entero");
-                    SpriteDef* spriteDefArma = new SpriteDef(p_arma_imagen, p_sprites_id, p_arma_cant_fotogramas, p_arma_fps);
+                    spriteDefArma = new SpriteDef(p_arma_imagen, TAG_PERSONAJE_ARMA, p_arma_cant_fotogramas, p_arma_fps);
         } else if ( tag == TAG_PERSONAJE_DIRECCION ) {
             p_direccion = obtenerValorInt(subvalor, DIRECCION_PERS_DERECHA, "Personaje direccion no es valor entero");
         } else if ( tag == TAG_COLOR_ALTERNATIVO ) {
@@ -262,6 +265,7 @@ PersonajeDef* Parser::parsearPersonaje(string tag_personaje){
     for (list<SpriteDef*>::iterator it = sprites.begin(); it != sprites.end(); ++it){
     	personajeParseado->agregarSpritesDef(*it);
     }
+
     personajeParseado->agregarSpriteDefArmaDibujable(spriteDefArma);
     return personajeParseado;
 }
