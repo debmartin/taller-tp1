@@ -10,6 +10,7 @@
 #include <sstream>
 
 #include "../utils/Logger.h"
+#include "ColorAlternativoDef.h"
 
 #define ANCHO_ESCENARIO 600
 
@@ -18,12 +19,11 @@ PersonajeDef::PersonajeDef() {
 	this->alto = 0;
 	this->z_index = 0;
 	this->spritesDef = new list<SpriteDef*>();
-	this->direccion = 1;
 	this->id = "";
 	this->colorAlternativoDef = new ColorAlternativoDef();
 }
 
-PersonajeDef::PersonajeDef(string id, double anchoIn, double altoIn, int zindexIn, int direccionIn, Vector2f posInicial, ColorAlternativoDef* colorAlter)
+PersonajeDef::PersonajeDef(string id, double anchoIn, double altoIn, int zindexIn, Vector2f posInicial, ColorAlternativoDef* colorAlter)
 {
 	this->id = id;
 
@@ -33,16 +33,18 @@ PersonajeDef::PersonajeDef(string id, double anchoIn, double altoIn, int zindexI
 		Logger::getInstance()->info("El alto del personaje es menor o igual a cero. Se elije uno nuevo con el valor de 60");
     if ( zindexIn < 0 )
         Logger::getInstance()->info("El zindex del personaje es menor a cero. Se elije uno nuevo para que el personaje este adelante de todas las capas");
+
+    /* TODO pasar a jugador ...
    	if (direccionIn != DIRECCION_PERS_DERECHA && direccionIn != DIRECCION_PERS_IZQUIERDA)	{
 		direccionIn = DIRECCION_PERS_DERECHA;
 		Logger::getInstance()->info("La configuracion de la direccion del personaje no es la correcta. Se lo dirije en direccion derecha");
 	}
+	*/
 
 	this->ancho = (anchoIn > 0) ? anchoIn : ANCHO_PERS_DEFAULT;
 	this->alto = (altoIn > 0) ? altoIn : ALTO_PERS_DEFAULT;
 	this->z_index = (zindexIn >= 0) ? zindexIn : Z_INDEX_PERS_DEFAULT;
 	this->spritesDef = new list<SpriteDef*>();
-	this->direccion = direccionIn;
 	this->posicionInicial = posInicial;
 	this->colorAlternativoDef = colorAlter;
 }
@@ -70,7 +72,8 @@ void PersonajeDef::ajustarAlto(double altoEscenario, double ypiso){
 }
 
 void PersonajeDef::ajustarPosicionIncial(double anchoEscenario, double anchoVentana, double ypiso){
-	Vector2f p_posInicial((anchoEscenario/2.0) - this->direccion*(anchoVentana/3.0),ypiso);
+	// TODO recalcular ....
+	Vector2f p_posInicial((anchoEscenario/2.0) - (anchoVentana/3.0),ypiso);
 	this->posicionInicial = p_posInicial;
 }
 
@@ -102,10 +105,6 @@ void PersonajeDef::setZIndex(int nuevoZIndex) {
 	z_index = nuevoZIndex;
 }
 
-void PersonajeDef::setDireccion(int nuevaDireccion) {
-	direccion = nuevaDireccion;
-}
-
 Vector2f PersonajeDef::getPosicionInicial(){
 	return posicionInicial;
 }
@@ -123,8 +122,8 @@ list<SpriteDef*>* PersonajeDef::getSpritesDef() const {
 
 ostream& operator <<(ostream &o, const PersonajeDef &p) {
 
-        o<<"PersonajeDef -> [id, ancho, alto, zindex, direccion,pos_inicial]=[";
-        o<<p.id<<", "<<p.ancho<<", "<<p.alto<<", "<<p.z_index<<", "<<p.direccion<<", "<<p.posicionInicial<<"]"<<endl;
+        o<<"PersonajeDef -> [id, ancho, alto, zindex, pos_inicial]=[";
+        o<<p.id<<", "<<p.ancho<<", "<<p.alto<<", "<<p.z_index<<", "<<p.posicionInicial<<"]"<<endl;
         o<<"sprites: {"<<endl;
     	for (list<SpriteDef*>::iterator it_spritesDef = p.getSpritesDef()->begin() ; it_spritesDef !=  p.getSpritesDef()->end(); it_spritesDef++)
     	{
@@ -133,10 +132,6 @@ ostream& operator <<(ostream &o, const PersonajeDef &p) {
     	o<<"}";
     	o<<*p.getColorAlternativoDef();
         return o;
-}
-
-int PersonajeDef::getDireccion() const {
-	return direccion;
 }
 
 void PersonajeDef::agregarSpritesDef(SpriteDef* spriteDef) {

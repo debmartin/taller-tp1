@@ -14,14 +14,23 @@ JugadorDef::JugadorDef() {
 
 }
 
-JugadorDef::JugadorDef(string personaje) {
+JugadorDef::JugadorDef(string personaje, int direccion) {
 	this->idPersonaje = personaje;
+	this->direccion = direccion;
 }
 
 string JugadorDef::toString() {
     ostringstream stream;
     stream <<*this;
 	return stream.str();
+}
+
+int JugadorDef::getDireccion() const {
+	return direccion;
+}
+
+void JugadorDef::setDireccion(int direccion) {
+	this->direccion = direccion;
 }
 
 string JugadorDef::getIdPersonaje() const {
