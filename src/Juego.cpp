@@ -39,6 +39,8 @@ Juego::Juego(Jugador* jugador1, Jugador* jugador2){
 	//hud->disminuirEnergia2(130);
 	jugador1->getPersonaje()->agregarObservador(hud);
 	jugador2->getPersonaje()->agregarObservador(hud);
+
+	this->posicionarPersonajes();
 }
 
 void Juego::agregarObservadoresJugador(Jugador* unJugador) {
@@ -122,4 +124,9 @@ Juego::~Juego(){
 //    delete jugadorDibujable1;
 //    delete jugador1;
 //    delete escenarioG;
+}
+
+void Juego::posicionarPersonajes()
+{
+	// TODO ...
 }
