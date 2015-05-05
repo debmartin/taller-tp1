@@ -1,15 +1,11 @@
 #include <SDL2/SDL_stdinc.h>
 #include <SDL2/SDL_timer.h>
-#include <map>
 #include <string>
-#include <utility>
 
-#include "src/json/JugadorDef.h"
 #include "src/Juego.h"
 #include "src/modelo/CargadorDeObjetos.h"
-#include "src/modelo/Personaje.h"
+#include "src/modelo/Jugador.h"
 #include "src/utils/Logger.h"
-#include "src/vista/PersonajeDibujable.h"
 #include "src/vista/VentanaGrafica.h"
 #include "test/Test.h"
 
@@ -20,43 +16,16 @@ Juego* cargarJuego(string escenarioPath){
 
 	CargadorDeOjbetos cargador_de_objetos(escenarioPath);
 
-	/*
-	 * cargo los personajes y personajes dibujables para  los jugadores
-	 */
-	string nombrePersonaje_delJugador1 = cargador_de_objetos.cargarJugador1()->getIdPersonaje();
-	string nombrePersonaje_delJugador2 = cargador_de_objetos.cargarJugador2()->getIdPersonaje();
+	Jugador* jugador1 = cargador_de_objetos.cargarJugador1();
+	Jugador* jugador2 = cargador_de_objetos.cargarJugador2();
 
-    map<string, Personaje*>* personajes = cargador_de_objetos.cargarPersonajes();
-    map<string, PersonajeDibujable*>* personajesDibujables = cargador_de_objetos.cargarPersonajesDibujables();
-
-	Personaje* personaje_delJugador1;
-	Personaje* personaje_delJugador2;
-	PersonajeDibujable* personajeDibujable_delJugador1;
-	PersonajeDibujable* personajeDibujable_delJugador2;
-
-	if (nombrePersonaje_delJugador1 == nombrePersonaje_delJugador2)
+	if ( jugador1->getPersonaje()->getId() == jugador2->getPersonaje()->getId())
 	{
-
-		personaje_delJugador1 			= personajes->find(nombrePersonaje_delJugador1)->second;
-		personaje_delJugador2 			= personajes->find(nombrePersonaje_delJugador1)->second;
-		personajeDibujable_delJugador1 	= personajesDibujables->find(nombrePersonaje_delJugador1)->second;
-		personajeDibujable_delJugador2 	= personajesDibujables->find(nombrePersonaje_delJugador1)->second;
-
-		personajeDibujable_delJugador2->cambiarColor(personajeDibujable_delJugador1->getColorAlternativo());
-	}
-	else
-	{
-		personaje_delJugador1 			= personajes->find(nombrePersonaje_delJugador1)->second;
-		personaje_delJugador2 			= personajes->find(nombrePersonaje_delJugador2)->second;
-		personajeDibujable_delJugador1  = personajesDibujables->find(nombrePersonaje_delJugador1)->second;
-		personajeDibujable_delJugador2  = personajesDibujables->find(nombrePersonaje_delJugador2)->second;
+		jugador2->getPersonajeDibujable()->cambiarColor(jugador1->getPersonajeDibujable()->getColorAlternativo());
 	}
 
-	// cargar el escenario grafico
-	cargador_de_objetos.cargarEscenarioGrafico(personajeDibujable_delJugador1, personajeDibujable_delJugador2);
+	cargador_de_objetos.cargarEscenarioGrafico(jugador1->getPersonajeDibujable(), jugador2->getPersonajeDibujable());
 
-    pair<Personaje*, PersonajeDibujable*> jugador1(personaje_delJugador1, personajeDibujable_delJugador1);
-    pair<Personaje*, PersonajeDibujable*> jugador2(personaje_delJugador2, personajeDibujable_delJugador2);
 	Juego* juego = new Juego(jugador1, jugador2);
 
     return juego;
