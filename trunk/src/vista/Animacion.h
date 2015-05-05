@@ -20,7 +20,6 @@ class Animacion: public Loggeable{
         std::string id;
         std::string pathImagen;
     public:
-        Animacion();
         Animacion(std::string pathImagen, int cantFotogramas, int fps, std::string id, SDL_Renderer* pRenderer);
         SDL_Texture* getTextura();
         int getCantidadFotogramas();
@@ -28,7 +27,6 @@ class Animacion: public Loggeable{
         std::string getId();
         virtual ~Animacion();
         void cambiarColor(ColorAlternativoDef* colorAlternativoDef);
-        Animacion* clonar();
 
     	friend ostream& operator<<(ostream &o, const Animacion &a);
     	string toString();

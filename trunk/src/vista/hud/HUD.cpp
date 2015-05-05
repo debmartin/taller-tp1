@@ -7,7 +7,6 @@ HUD::HUD(SDL_Window* gWindow, string nombre_personaje1, string nombre_personaje2
 	this->gRenderer       = SDL_GetRenderer(gWindow);
 
 	this->barraDeEnergia1 = new BarraEnergia(gWindow, nombre_personaje1, BARRA_IZQUIERDA);
-	cout << "xxx" << endl;
 	this->barraDeEnergia2 = new BarraEnergia(gWindow, nombre_personaje2, BARRA_DERECHA);
 	this->tHUD = crearTexturaTransparente(640, 480);
 
@@ -73,7 +72,6 @@ HUD::~HUD() {
 
 void HUD::dibujar(){
 	this->tHUD = updateTexture();
-	cout << "ash" << endl;
 	SDL_RenderCopy(this->gRenderer, this->tHUD, NULL, NULL);
 
 }

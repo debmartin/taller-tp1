@@ -14,9 +14,6 @@
 #define FACTOR_ESCALA_INICIAL_Y 1.0f
 #define FOTOGRAMA_INICIAL 1
 
-Sprite::Sprite() {
-}
-
 Sprite::Sprite(Animacion* animacion, Vector2f& posicionIni, OrientacionSprite orientacion) :
     animacionAct(animacion),
 	posicion(posicionIni),
@@ -163,24 +160,6 @@ void Sprite::cambiarOrientacionHaciaIzquierda() {
 	{
 		orientacion = ORIENTACION_IZQUIERDA;
 	}
-}
-
-Sprite* Sprite::clonar() {
-
-	Sprite* sprite_clon = new Sprite();
-	sprite_clon->animacionAct = animacionAct->clonar();
-	sprite_clon->posicion.setCoordenada(posicion.X(), posicion.Y());
-	sprite_clon->anchoPx = anchoPx;
-	sprite_clon->altoPx = altoPx;
-	sprite_clon->factorEscalaX = factorEscalaX;
-	sprite_clon->factorEscalaY = factorEscalaY;
-	sprite_clon->anchoFotogramaPx = anchoFotogramaPx;
-	sprite_clon->fotogramaActual = fotogramaActual;
-	sprite_clon->fps = fps;
-	sprite_clon->orientacion = orientacion;
-	sprite_clon->sentidoReproduccion = sentidoReproduccion;
-
-	return sprite_clon;
 }
 
 ostream& operator <<(ostream &o, const Sprite &s)
