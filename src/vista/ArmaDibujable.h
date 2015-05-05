@@ -9,14 +9,22 @@
 #define SRC_VISTA_ARMADIBUJABLE_H_
 
 #include "Sprite.h"
+#include "Dibujable.h"
+#include "../modelo/Arma.h"
+#include "../modelo/Observable.h"
+#include "VentanaGrafica.h"
 
-class ArmaDibujable {
+class ArmaDibujable: public Dibujable, public Observador {
 private:
 	Sprite* armaDibujable;
+	estado_objeto estado;
 public:
 	ArmaDibujable();
 	ArmaDibujable(Sprite* armaDib);
 	virtual ~ArmaDibujable();
+	void dibujar();
+	void cambiarEstado(estado_objeto estado);
+	void recibirNotificacion(Observable* unObservable);
 };
 
 #endif /* SRC_VISTA_ARMADIBUJABLE_H_ */

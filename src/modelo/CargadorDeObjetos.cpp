@@ -66,6 +66,8 @@ map<string, Personaje*>* CargadorDeOjbetos::cargarPersonajes() {
 	for (list<PersonajeDef*>::iterator it = parser->getPersonajesDef()->begin() ; it != parser->getPersonajesDef()->end(); ++it)
 	{
 		Personaje* personaje = new Personaje((*it)->getId(), (*it)->getAncho(), (*it)->getAlto(), (*it)->getPosicionInicial(), VentanaGrafica::Instance(), 1);
+		Arma* arma = new Arma();
+		personaje->agregarArma(arma);
 		personajes->insert( pair<string,Personaje*>((*it)->getId(),personaje) );
 	}
 

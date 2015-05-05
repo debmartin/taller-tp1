@@ -84,6 +84,7 @@ public:
 	void setEstado(estado_personaje estado);
 	estado_personaje getEstado();
 	int getEnergia();
+	void agregarArma(Objeto* unArma);
 	Vector2f obtenerPosicionEnVentana();
 	bool llegoAlLimiteIzquierdo();
 	bool llegoAlLimiteDerecho();
@@ -113,6 +114,7 @@ public:
 	void defender();
 	void defender_agachado();
 	void ejecutarPoder(Poder* poder, Objeto* objeto);
+	void arrojarArma();
 
 	friend ostream& operator<<(ostream &o, const Personaje &p);
 	string toString();
