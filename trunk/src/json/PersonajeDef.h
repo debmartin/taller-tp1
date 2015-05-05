@@ -14,14 +14,13 @@
 
 #include "../modelo/Vector2f.h"
 #include "SpriteDef.h"
-#include "ColorAlternativoDef.h"
+
+class ColorAlternativoDef;
 
 
 #define ALTO_PERS_DEFAULT 150
 #define ANCHO_PERS_DEFAULT 50
 #define Z_INDEX_PERS_DEFAULT 3
-#define DIRECCION_PERS_DERECHA 1
-#define DIRECCION_PERS_IZQUIERDA -1
 #define COLOR_ALTERNATIVO_HINICIAL_PERS_DEFAULT 40
 #define COLOR_ALTERNATIVO_HFINAL_PERS_DEFAULT 45
 #define COLOR_ALTERNATIVO_DESPLAZAMIENTO_PERS_DEFAULT 30
@@ -37,14 +36,13 @@ private:
 	int z_index;
 	list<SpriteDef*>* spritesDef;
 	SpriteDef* armaArrojable;
-	int direccion;
 	Vector2f posicionInicial;
 	ColorAlternativoDef* colorAlternativoDef;
 	string id;
 
 public:
 	PersonajeDef();
-	PersonajeDef(string id, double ancho, double alto, int zindex, int direccion, Vector2f posInicial, ColorAlternativoDef* colorAlter);
+	PersonajeDef(string id, double ancho, double alto, int zindex, Vector2f posInicial, ColorAlternativoDef* colorAlter);
 	virtual ~PersonajeDef();
 	double getAlto() const;
 	double getAncho() const;
@@ -60,8 +58,6 @@ public:
 	void agregarSpritesDef(SpriteDef* spriteDef);
 	void agregarSpriteDefArmaDibujable(SpriteDef* arma);
 	SpriteDef* getSpriteDefArmaDibujable();
-	int getDireccion() const;
-	void setDireccion(int nuevaDir);
     void ajustarZIndex(int cantCapas);
     void ajustarAlto(double altoEscenario, double ypiso);
     void ajustarPosicionIncial(double anchoEscenario, double anchoVentana, double ypiso);

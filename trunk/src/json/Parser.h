@@ -40,7 +40,6 @@
 #define TAG_PERSONAJE_SPRITES_FPS "fps"
 #define TAG_PERSONAJE_SPRITES_IMAGEN "imagen"
 #define TAG_PERSONAJE_ARMA "arma"
-#define TAG_PERSONAJE_DIRECCION "direccion"
 #define TAG_COLOR_ALTERNATIVO "color-alternativo"
 #define TAG_COLOR_ALTERNATIVO_HINICIAL "h-inicial"
 #define TAG_COLOR_ALTERNATIVO_HFINAL "h-final"
@@ -48,7 +47,7 @@
 #define TAG_JUGADOR_1 "jugador-1"
 #define TAG_JUGADOR_2 "jugador-2"
 #define TAG_JUGADOR_PERSONAJE "personaje"
-
+#define TAG_JUGADOR_DIRECCION "direccion"
 
 class EscenarioDef;
 class PersonajeDef;

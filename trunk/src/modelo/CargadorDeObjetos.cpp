@@ -103,15 +103,8 @@ map<string, PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables(
 		primerSpriteSubQuieto->getIdSprite(),
 		Renderizador::Instance()->getRenderer());
 
-		OrientacionSprite direccion;
-		if ((*it)->getDireccion() == 1) {
-			direccion = ORIENTACION_DERECHA;
-		} else {
-			direccion = ORIENTACION_IZQUIERDA;
-		}
-
 		personajeDibujableCargado = new PersonajeDibujable(SubQuieto,
-				(*it)->getPosicionInicial(), tamanioPx, direccion, (*it)->getColorAlternativoDef());
+				(*it)->getPosicionInicial(), tamanioPx, ORIENTACION_IZQUIERDA, (*it)->getColorAlternativoDef());
 
 		//Agrego armaDibujable
 		Animacion* animacionArma = new Animacion(spriteDefArma->getImagen(),
@@ -121,7 +114,7 @@ map<string, PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables(
 		Renderizador::Instance()->getRenderer());;
 		Vector2f posicionInicialArma(0,0);
 
-		Sprite* spriteArmaDibujable = new Sprite(animacionArma, posicionInicialArma, direccion);
+		Sprite* spriteArmaDibujable = new Sprite(animacionArma, posicionInicialArma, ORIENTACION_IZQUIERDA);
 		/*ArmaDibujable* armaDibujable = new ArmaDibujable(spriteArmaDibujable);
 		personajeDibujableCargado->agregarArma(armaDibujable);
 */

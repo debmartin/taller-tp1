@@ -60,7 +60,6 @@
         			"cant_fotogramas": 1,
         		    "fps": 15 
         			},
-		"direccion": -1,
 		"color-alternativo": {
 					"h-inicial": 53,
 					"h-final": 220,
@@ -101,7 +100,6 @@
         			"cant_fotogramas": 1,
         		    "fps": 15 
         			},
-		"direccion": 1,
 		"color-alternativo": {
 					"h-inicial": 53,
 					"h-final": 220,
@@ -109,10 +107,12 @@
 					}		
     },
 	"jugador-1": {
-        "personaje": "personaje-1"
+        "personaje": "personaje-1",
+        "direccion": -1
 	},
 	"jugador-2": {
-        "personaje": "personaje-2" 
+        "personaje": "personaje-2",
+        "direccion": 1        
 	}        
 }
 

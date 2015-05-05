@@ -243,8 +243,6 @@ PersonajeDef* Parser::parsearPersonaje(string tag_personaje){
                 	p_arma_cant_fotogramas = obtenerValorInt(valorFotog, CANT_FOTOGRAMAS_DEFAULT, "Personaje sprite arma cant_fotogramas no es valor entero");
                 	p_arma_fps = obtenerValorInt(valorFps, FPS_DEFAULT, "Personaje sprite arma fps no es valor entero");
                     spriteDefArma = new SpriteDef(p_arma_imagen, TAG_PERSONAJE_ARMA, p_arma_cant_fotogramas, p_arma_fps);
-        } else if ( tag == TAG_PERSONAJE_DIRECCION ) {
-            p_direccion = obtenerValorInt(subvalor, DIRECCION_PERS_DERECHA, "Personaje direccion no es valor entero");
         } else if ( tag == TAG_COLOR_ALTERNATIVO ) {
 
             Json::Value valorColorAlternativo_hincial = (*it2)[TAG_COLOR_ALTERNATIVO_HINICIAL];
@@ -261,7 +259,7 @@ PersonajeDef* Parser::parsearPersonaje(string tag_personaje){
     }
     Vector2f p_posInicial(escenario->getAncho()/2.0,escenario->getYpiso());
     ColorAlternativoDef* colorAlternativoDef = new ColorAlternativoDef(color_alternativo_hinicial, color_alternativo_hfinal, color_alternativo_desplazamiento);
-    PersonajeDef* personajeParseado = new PersonajeDef(tag_personaje, p_ancho, p_alto, p_zindex, p_direccion, p_posInicial, colorAlternativoDef);
+    PersonajeDef* personajeParseado = new PersonajeDef(tag_personaje, p_ancho, p_alto, p_zindex, p_posInicial, colorAlternativoDef);
     for (list<SpriteDef*>::iterator it = sprites.begin(); it != sprites.end(); ++it){
     	personajeParseado->agregarSpritesDef(*it);
     }
@@ -353,6 +351,7 @@ JugadorDef* Parser::parsearJugador(string tag_jugador) {
     valorJugador = root.get(tag_jugador.c_str(), &valorJugador);
 
     string personaje = "";
+    int direccion = 1;
 
     for( Json::ValueIterator it2 = valorJugador.begin() ; it2 != valorJugador.end() ; it2++ ) {
         string tag = it2.key().asString();
@@ -360,12 +359,14 @@ JugadorDef* Parser::parsearJugador(string tag_jugador) {
 
         if ( tag == TAG_JUGADOR_PERSONAJE ) {
         	personaje = subvalor.asString();
+        } else if ( tag == TAG_JUGADOR_DIRECCION ) {
+            direccion = obtenerValorInt(subvalor, DIRECCION_JUGADOR_DERECHA, "Jugador direccion no es valor entero");
         } else {
             Logger::getInstance()->error("Dentro del jugador no se encuentra el parametro "+tag);
         }
     }
 
-    JugadorDef* jugadorParseado = new JugadorDef(personaje);
+    JugadorDef* jugadorParseado = new JugadorDef(personaje, direccion);
     return jugadorParseado;
 }
 
