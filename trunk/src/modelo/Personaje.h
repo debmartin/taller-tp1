@@ -23,7 +23,7 @@
 //class Trayectoria;
 
 #define DELTA_PASO 1
-#define DELTA_X 10
+#define ENERGIA_INICIAL 100
 
 typedef enum Movimiento
 {
@@ -55,6 +55,7 @@ using namespace std;
 
 class Personaje: public Observable, public Loggeable {
 private:
+	string nombre;
     Vector2f posicionInicial;
 	double ancho;
 	double alto;
@@ -66,14 +67,16 @@ private:
 	estado_personaje estado;
 	Trayectoria* trayectoria;
 	float tCreacion;
+	int numeroJugador;
 
 public:
 	Personaje();
-	Personaje(double ancho, double alto, Vector2f posInicial, Posicionable* posc);
+	Personaje(double ancho, double alto, Vector2f posInicial, Posicionable* posc, int numJugador);
 	Personaje& operator=(const Personaje& v2);
 	virtual ~Personaje();
 	double getAlto() const;
 	double getAncho() const;
+	int getNumeroJugador();
 	Vector2f getDimensionesLogicas() const;
 	void setPosicion(int posicion_x, int posicion_y);
 	Vector2f getPosicion();

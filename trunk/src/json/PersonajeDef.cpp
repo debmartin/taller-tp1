@@ -145,6 +145,10 @@ void PersonajeDef::agregarSpritesDef(SpriteDef* spriteDef) {
 
 void PersonajeDef::agregarSpriteDefArmaDibujable(SpriteDef* arma){
 	this->armaArrojable = arma;
+	if(arma == NULL){
+		cout<<"Es null"<<endl;
+	}
+	//cout<<*armaArrojable<<endl;
 }
 
 SpriteDef* PersonajeDef::getSpriteDefArmaDibujable(){

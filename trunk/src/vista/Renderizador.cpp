@@ -42,7 +42,7 @@ bool Renderizador::init(string titulo, Vector2f posicion, Vector2f tamanio, bool
 		if (this->vWindow != NULL)
 		{
 			Logger::getInstance()->debug("Renderizador: ventana creada.");
-			this->vRenderer = SDL_CreateRenderer(vWindow, -1, SDL_RENDERER_ACCELERATED);
+			this->vRenderer = SDL_CreateRenderer(vWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE);
 
 			if (this->vRenderer != NULL)
 			{
@@ -66,6 +66,10 @@ bool Renderizador::init(string titulo, Vector2f posicion, Vector2f tamanio, bool
 		Logger::getInstance()->debug("Renderizador: falla en SDL init.");
 		return false;
 	}
+	if (TTF_Init() != 0){
+			std::cout << "ERROR: TTF_Init" << endl;
+	}
+
 	Logger::getInstance()->debug("Renderizador: inicializacion finalizada.");
 	return true;
 }
@@ -81,7 +85,7 @@ SDL_Window* Renderizador::getWindow() {
 void Renderizador::dibujar(Dibujable* dibujable){
 	SDL_RenderClear(this->vRenderer);
     dibujable->dibujar();
-	SDL_RenderPresent(this->vRenderer);
+
 }
 
 Renderizador::~Renderizador(){

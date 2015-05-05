@@ -64,7 +64,7 @@ map<string, Personaje*>* CargadorDeOjbetos::cargarPersonajes() {
 
 	for (list<PersonajeDef*>::iterator it = parser->getPersonajesDef()->begin() ; it != parser->getPersonajesDef()->end(); ++it)
 	{
-		Personaje* personaje = new Personaje((*it)->getAncho(), (*it)->getAlto(), (*it)->getPosicionInicial(), VentanaGrafica::Instance());
+		Personaje* personaje = new Personaje((*it)->getAncho(), (*it)->getAlto(), (*it)->getPosicionInicial(), VentanaGrafica::Instance(), 1);
 		personajes->insert( pair<string,Personaje*>((*it)->getId(),personaje) );
 	}
 
@@ -87,7 +87,9 @@ map<string, PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables(
 		list<SpriteDef*>* spritesDef = (*it)->getSpritesDef();
 		list<SpriteDef*>::iterator it_sprites = spritesDef->begin();
 		SpriteDef* primerSpriteSubQuieto;
-
+		SpriteDef* spriteDefArma;
+		spriteDefArma = (*it)->getSpriteDefArmaDibujable();
+		//cout<<"imagen"<<spriteDefArma->getImagen()<<endl;
 		for (; it_sprites != spritesDef->end(); ++it_sprites) {
 				if((*it_sprites)->getIdSprite() == ID_ZUBZERO_QUIETO){
 					primerSpriteSubQuieto = *it_sprites;
@@ -112,19 +114,17 @@ map<string, PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables(
 				(*it)->getPosicionInicial(), tamanioPx, direccion, (*it)->getColorAlternativoDef());
 
 		//Agrego armaDibujable
-		SpriteDef* spriteDefArma = (*it)->getSpriteDefArmaDibujable();
-		//cout<<"pathimagen:"<<spriteDefArma->getImagen()<<endl;
-		/*Animacion* animacionArma = new Animacion(spriteDefArma->getImagen(),
+		Animacion* animacionArma = new Animacion(spriteDefArma->getImagen(),
 		spriteDefArma->getCantFotogramas(),
 		spriteDefArma->getFps(),
 		spriteDefArma->getIdSprite(),
-		Renderizador::Instance()->getRenderer());;*/
-		/*Vector2f posicionInicialArma(0,0);
+		Renderizador::Instance()->getRenderer());;
+		Vector2f posicionInicialArma(0,0);
 
 		Sprite* spriteArmaDibujable = new Sprite(animacionArma, posicionInicialArma, direccion);
-		ArmaDibujable* armaDibujable = new ArmaDibujable(spriteArmaDibujable);
-		personajeDibujableCargado->agregarArma(armaDibujable);*/
-
+		/*ArmaDibujable* armaDibujable = new ArmaDibujable(spriteArmaDibujable);
+		personajeDibujableCargado->agregarArma(armaDibujable);
+*/
 		//TODO: Val. Separar la carga de los personajes para poder setearles el color.
 		it_sprites = spritesDef->begin();
 		for (; it_sprites != spritesDef->end(); ++it_sprites) {
