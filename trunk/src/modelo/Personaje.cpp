@@ -74,6 +74,8 @@ int Personaje::getEnergia(){
 
 void Personaje::agregarArma(Objeto* unArma){
 	this->arma = unArma;
+	Vector2f posicionObjeto(posicion.X()+ancho,alto);
+	arma->posicionar(posicionObjeto);
 }
 
 Objeto* Personaje::getArma(){
@@ -263,7 +265,7 @@ void Personaje::arrojarArma(){
 	//Posiciono el poder respecto a la posicion del personaje
 	Vector2f posicionObjeto(posicion.X()+ancho,alto);
 	arma->posicionar(posicionObjeto);
-	arma->cambiarEstado(VISIBLE);
+	arma->arrojar();
 }
 
 void Personaje::recibirDanio(int danio){

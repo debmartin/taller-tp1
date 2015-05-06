@@ -28,7 +28,9 @@ public:
 	virtual void posicionar(Vector2f posicion) = 0;
 	virtual int quitarEnergia() = 0;
 	virtual void update() = 0;
+	virtual void arrojar() = 0;
 	virtual void cambiarEstado(estado_objeto unEstado) = 0;
+	virtual void cambiarTrayectoria(Trayectoria* trayectoria) = 0;
 };
 
 #endif /* SRC_MODELO_OBJETO_H_ */

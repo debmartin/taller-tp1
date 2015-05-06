@@ -15,6 +15,8 @@
 #include <SDL2/SDL_timer.h>
 
 #define DANIO_ARMA	10
+#define VELOCIDAD_DESP_HORIZONTAL_ARMA 215.0f
+#define VELOCIDAD_ARMA_NULA 0.0f
 
 class Arma: public Objeto, public Observable {
 private:
@@ -33,6 +35,8 @@ public:
 	void agregarObservador(Observador* unObservador);
 	void notificarObservadores();
 	void cambiarEstado(estado_objeto estado);
+	void cambiarTrayectoria(Trayectoria* unaTrayectoria);
+	void arrojar();
 	estado_objeto getEstado();
 };
 
