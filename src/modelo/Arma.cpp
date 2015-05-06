@@ -11,6 +11,7 @@ Arma::Arma() {
 	// TODO Auto-generated constructor stub
 	this->posicion = POS_INICIAL_OBJETO;
 	this->trayectoria = new MRU(POS_INICIAL_OBJETO, VELOCIDAD_OBJETO);
+	this->tCreacion = 0;
 	this->damage = DANIO_ARMA;
 	this->estado = NO_VISIBLE;
 }
@@ -20,6 +21,7 @@ int Arma::quitarEnergia(){
 }
 
 void Arma::posicionar(Vector2f pos){
+	//posicion = (posicion.X(), pos.Y());
 	posicion = pos;
 }
 
@@ -31,11 +33,25 @@ estado_objeto Arma::getEstado(){
 	return this->estado;
 }
 
+void Arma::cambiarTrayectoria(Trayectoria* unaTrayectoria){
+	this->trayectoria = unaTrayectoria;
+}
+
+void Arma::arrojar(){
+	cambiarTrayectoria(new MRU(posicion, Vector2f(VELOCIDAD_DESP_HORIZONTAL_ARMA, VELOCIDAD_ARMA_NULA)));
+	cambiarEstado(VISIBLE);
+}
+
 void Arma::update(){
+	notificarObservadores();
 	if(estado == VISIBLE){
+		//cambiarTrayectoria(new MRU(posicion, Vector2f(VELOCIDAD_DESP_HORIZONTAL_ARMA, VELOCIDAD_ARMA_NULA)));
 		float tActual = ((float)(SDL_GetTicks())/1000.0f) - tCreacion;
 		posicion = this->trayectoria->getPosicion(tActual);
+		//Vector2f p(posicion.X()+10, posicion.Y());
+		//posicion = p;
 	}
+	//notificarObservadores();
 }
 
 void Arma::agregarObservador(Observador* unObservador){
