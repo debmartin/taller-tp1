@@ -14,7 +14,7 @@
 #include "../modelo/Observable.h"
 #include "VentanaGrafica.h"
 
-class ArmaDibujable: public Dibujable, public Observador {
+class ArmaDibujable: public Observador {
 private:
 	Sprite* armaDibujable;
 	estado_objeto estado;

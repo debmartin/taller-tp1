@@ -19,7 +19,9 @@ ArmaDibujable::ArmaDibujable(Sprite* armaDib) {
 }
 
 void ArmaDibujable::dibujar(){
-	armaDibujable->dibujar();
+	if(estado == VISIBLE){
+		armaDibujable->dibujar();
+	}
 }
 
 void ArmaDibujable::cambiarEstado(estado_objeto unEstado){

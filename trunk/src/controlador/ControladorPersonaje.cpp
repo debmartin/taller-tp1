@@ -56,6 +56,8 @@ void ControladorPersonaje::identificarOrdenPersonaje1(){
     }else if (estadoTeclado[SDL_SCANCODE_DOWN]){
         Logger::getInstance()->debug("Se presiona: Tecla abajo.");
         personaje1->agacharse();
+    }else if(estadoTeclado[SDL_SCANCODE_F]){
+    	personaje1->arrojarArma();
     }else{
         personaje1->mantenerReposo();
     }
@@ -83,6 +85,8 @@ void ControladorPersonaje::identificarOrdenPersonaje2(){
     }else if (estadoTeclado[SDL_SCANCODE_S]){
         Logger::getInstance()->debug("Se presiona: Tecla abajo.");
         personaje2->agacharse();
+    }else if(estadoTeclado[SDL_SCANCODE_C]){
+      	personaje2->arrojarArma();
     }else{
         personaje2->mantenerReposo();
     }

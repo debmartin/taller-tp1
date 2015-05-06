@@ -17,6 +17,7 @@
 #include "Animacion.h"
 #include "Dibujable.h"
 #include "Sprite.h"
+#include "ArmaDibujable.h"
 
 #define ID_FONDO "screen-pit"
 #define ID_ZUBZERO_QUIETO "reposo"
@@ -33,6 +34,8 @@ private:
 	std::string nombre;
     std::map<std::string, Animacion*> animaciones;
     ColorAlternativoDef* colorAlternativo;
+    ArmaDibujable* armaDibujable;
+
 public:
     PersonajeDibujable();
 	PersonajeDibujable(Animacion* animIni, Vector2f posicionIni, Vector2f tamanioPx, OrientacionSprite orientacion,
@@ -41,6 +44,8 @@ public:
 	void seleccionarSprite();
 	void setEstado(estado_personaje unEstado);
 	void agregarAnimacion(Animacion* nuevaAnimacion);
+	void agregarArma(ArmaDibujable* unArma);
+	ArmaDibujable* getArma();
 	void centrar_en(Vector2f v, float limiteLogicoIzquierdoVentana, float relacion_de_aspectoX);
 	void dibujar();
 	void actualizar();

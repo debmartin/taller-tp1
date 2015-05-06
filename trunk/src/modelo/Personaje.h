@@ -85,6 +85,7 @@ public:
 	estado_personaje getEstado();
 	int getEnergia();
 	void agregarArma(Objeto* unArma);
+	Objeto* getArma();
 	Vector2f obtenerPosicionEnVentana();
 	bool llegoAlLimiteIzquierdo();
 	bool llegoAlLimiteDerecho();
