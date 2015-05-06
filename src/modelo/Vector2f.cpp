@@ -32,7 +32,7 @@ Vector2f& Vector2f::operator*=(float escalar) {
     return *this;
 }
 
-void Vector2f::setCoordenada(int x, int y) {
+void Vector2f::setCoordenada(double x, double y) {
     this->x = x;
     this->y = y;
 }

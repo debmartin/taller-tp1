@@ -9,7 +9,6 @@
 
 #include <iostream>
 
-#include "../modelo/Vector2f.h"
 #include "../utils/Logger.h"
 #include "../utils/Util.h"
 #include "ColorAlternativoDef.h"
@@ -257,9 +256,9 @@ PersonajeDef* Parser::parsearPersonaje(string tag_personaje){
             Logger::getInstance()->error("Dentro del personaje no se encuentra el parametro "+tag);
         }
     }
-    Vector2f p_posInicial(escenario->getAncho()/2.0,escenario->getYpiso());
+
     ColorAlternativoDef* colorAlternativoDef = new ColorAlternativoDef(color_alternativo_hinicial, color_alternativo_hfinal, color_alternativo_desplazamiento);
-    PersonajeDef* personajeParseado = new PersonajeDef(tag_personaje, p_ancho, p_alto, p_zindex, p_posInicial, colorAlternativoDef);
+    PersonajeDef* personajeParseado = new PersonajeDef(tag_personaje, p_ancho, p_alto, p_zindex, colorAlternativoDef);
     for (list<SpriteDef*>::iterator it = sprites.begin(); it != sprites.end(); ++it){
     	personajeParseado->agregarSpritesDef(*it);
     }
@@ -316,7 +315,6 @@ void Parser::inciarValidacionSemantica() {
 	    escenario->ajustarYPiso((*it)->getAlto());
 	    (*it)->ajustarAlto(escenario->getAlto(), escenario->getYpiso());
 	    ventana->ajustarAncho(escenario->getAncho());
-	    (*it)->ajustarPosicionIncial(escenario->getAncho(), ventana->getAncho(), escenario->getYpiso());
 	    (*it)->ajustarColorAlternativo();
 	}
 

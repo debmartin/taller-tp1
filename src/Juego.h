@@ -35,7 +35,7 @@ public:
 private:
 	void actualizarOrientacionJugadores();
 	void agregarObservadoresJugador(Jugador* unJugador);
-	void posicionarPersonajes();
+	void posicionarPersonajes_enEjeX();
 
 };
 

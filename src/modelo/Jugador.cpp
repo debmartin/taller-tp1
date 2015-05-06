@@ -7,6 +7,8 @@
 
 #include "Jugador.h"
 
+#include "Personaje.h"
+
 Jugador::Jugador() {
 }
 
@@ -44,3 +46,6 @@ Jugador::~Jugador() {
 	// TODO Auto-generated destructor stub
 }
 
+void Jugador::posicionarPersonaje_enEjeX(double x) {
+	this->personaje->definirPosicionIncial_enX(x);
+}

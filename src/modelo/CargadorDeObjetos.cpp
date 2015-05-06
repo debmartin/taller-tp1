@@ -19,11 +19,13 @@
 #include "../json/VentanaDef.h"
 #include "../utils/Logger.h"
 #include "../vista/Animacion.h"
+#include "../vista/ArmaDibujable.h"
 #include "../vista/Capa.h"
 #include "../vista/EscenarioGrafico.h"
 #include "../vista/Renderizador.h"
 #include "../vista/Sprite.h"
 #include "../vista/VentanaGrafica.h"
+#include "Arma.h"
 #include "Jugador.h"
 #include "Vector2f.h"
 
@@ -62,10 +64,11 @@ CargadorDeOjbetos::~CargadorDeOjbetos() {
 map<string, Personaje*>* CargadorDeOjbetos::cargarPersonajes() {
 
 	map<string, Personaje*>* personajes = new map<string, Personaje*>();
+	Vector2f posicionTemporalPersonaje(parser->getEscenarioDef()->getAncho()/2, parser->getEscenarioDef()->getYpiso());
 
 	for (list<PersonajeDef*>::iterator it = parser->getPersonajesDef()->begin() ; it != parser->getPersonajesDef()->end(); ++it)
 	{
-		Personaje* personaje = new Personaje((*it)->getId(), (*it)->getAncho(), (*it)->getAlto(), (*it)->getPosicionInicial(), VentanaGrafica::Instance(), 1);
+		Personaje* personaje = new Personaje((*it)->getId(), (*it)->getAncho(), (*it)->getAlto(), posicionTemporalPersonaje, VentanaGrafica::Instance(), 1);
 		Arma* arma = new Arma();
 		personaje->agregarArma(arma);
 		personajes->insert( pair<string,Personaje*>((*it)->getId(),personaje) );
@@ -77,6 +80,7 @@ map<string, Personaje*>* CargadorDeOjbetos::cargarPersonajes() {
 map<string, PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables() {
 
 	map<string, PersonajeDibujable*>* personajesDibujables = new map<string, PersonajeDibujable*>();
+	Vector2f posicionTemporalPersonaje(parser->getEscenarioDef()->getAncho()/2, parser->getEscenarioDef()->getYpiso());
 
 	for (list<PersonajeDef*>::iterator it = parser->getPersonajesDef()->begin() ; it != parser->getPersonajesDef()->end(); ++it)
 	{
@@ -106,8 +110,8 @@ map<string, PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables(
 		primerSpriteSubQuieto->getIdSprite(),
 		Renderizador::Instance()->getRenderer());
 
-		personajeDibujableCargado = new PersonajeDibujable(SubQuieto,
-				(*it)->getPosicionInicial(), tamanioPx, ORIENTACION_IZQUIERDA, (*it)->getColorAlternativoDef());
+		personajeDibujableCargado = new PersonajeDibujable(SubQuieto,posicionTemporalPersonaje, tamanioPx,
+												ORIENTACION_IZQUIERDA, (*it)->getColorAlternativoDef());
 
 		//Agrego armaDibujable
 		Animacion* animacionArma = new Animacion(spriteDefArma->getImagen(),

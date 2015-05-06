@@ -23,7 +23,7 @@ PersonajeDef::PersonajeDef() {
 	this->colorAlternativoDef = new ColorAlternativoDef();
 }
 
-PersonajeDef::PersonajeDef(string id, double anchoIn, double altoIn, int zindexIn, Vector2f posInicial, ColorAlternativoDef* colorAlter)
+PersonajeDef::PersonajeDef(string id, double anchoIn, double altoIn, int zindexIn, ColorAlternativoDef* colorAlter)
 {
 	this->id = id;
 
@@ -45,7 +45,6 @@ PersonajeDef::PersonajeDef(string id, double anchoIn, double altoIn, int zindexI
 	this->alto = (altoIn > 0) ? altoIn : ALTO_PERS_DEFAULT;
 	this->z_index = (zindexIn >= 0) ? zindexIn : Z_INDEX_PERS_DEFAULT;
 	this->spritesDef = new list<SpriteDef*>();
-	this->posicionInicial = posInicial;
 	this->colorAlternativoDef = colorAlter;
 }
 
@@ -69,12 +68,6 @@ void PersonajeDef::ajustarAlto(double altoEscenario, double ypiso){
     	alto = altoEscenario / 3;
     	Logger::getInstance()->info("El alto del personaje sobrepasa la altura del escenario. Se elije uno nuevo",alto);
     }
-}
-
-void PersonajeDef::ajustarPosicionIncial(double anchoEscenario, double anchoVentana, double ypiso){
-	// TODO recalcular ....
-	Vector2f p_posInicial((anchoEscenario/2.0) - (anchoVentana/3.0),ypiso);
-	this->posicionInicial = p_posInicial;
 }
 
 void PersonajeDef::ajustarColorAlternativo() {
@@ -105,10 +98,6 @@ void PersonajeDef::setZIndex(int nuevoZIndex) {
 	z_index = nuevoZIndex;
 }
 
-Vector2f PersonajeDef::getPosicionInicial(){
-	return posicionInicial;
-}
-
 PersonajeDef::~PersonajeDef(){
 	for (list<SpriteDef*>::iterator it_spritesDef = spritesDef->begin() ; it_spritesDef !=  spritesDef->end(); it_spritesDef++){
             delete *it_spritesDef;
@@ -122,8 +111,8 @@ list<SpriteDef*>* PersonajeDef::getSpritesDef() const {
 
 ostream& operator <<(ostream &o, const PersonajeDef &p) {
 
-        o<<"PersonajeDef -> [id, ancho, alto, zindex, pos_inicial]=[";
-        o<<p.id<<", "<<p.ancho<<", "<<p.alto<<", "<<p.z_index<<", "<<p.posicionInicial<<"]"<<endl;
+        o<<"PersonajeDef -> [id, ancho, alto, zindex]=[";
+        o<<p.id<<", "<<p.ancho<<", "<<p.alto<<", "<<p.z_index<<"]"<<endl;
         o<<"sprites: {"<<endl;
     	for (list<SpriteDef*>::iterator it_spritesDef = p.getSpritesDef()->begin() ; it_spritesDef !=  p.getSpritesDef()->end(); it_spritesDef++)
     	{

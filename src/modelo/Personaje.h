@@ -73,13 +73,12 @@ private:
 public:
 	Personaje();
 	Personaje(string id, double ancho, double alto, Vector2f posInicial, Posicionable* posc, int numJugador);
-	Personaje& operator=(const Personaje& v2);
 	virtual ~Personaje();
 	double getAlto() const;
 	double getAncho() const;
 	int getNumeroJugador();
 	Vector2f getDimensionesLogicas() const;
-	void setPosicion(int posicion_x, int posicion_y);
+	void setPosicion(double x, double y);
 	Vector2f getPosicion();
 	void setEstado(estado_personaje estado);
 	estado_personaje getEstado();
@@ -89,7 +88,6 @@ public:
 	Vector2f obtenerPosicionEnVentana();
 	bool llegoAlLimiteIzquierdo();
 	bool llegoAlLimiteDerecho();
-	void centrar_en(Vector2f& v);
 	void cambiarTrayectoria(Trayectoria* t);
 	void agregarObservador(Observador* unObservador);
 	void notificarObservadores();
@@ -120,6 +118,7 @@ public:
 	friend ostream& operator<<(ostream &o, const Personaje &p);
 	string toString();
 	string getId() const;
+	void definirPosicionIncial_enX(double x);
 };
 
 #endif /* SRC_MODELO_PERSONAJE_H_ */

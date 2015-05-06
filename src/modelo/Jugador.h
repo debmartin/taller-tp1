@@ -8,8 +8,6 @@
 #ifndef SRC_MODELO_JUGADOR_H_
 #define SRC_MODELO_JUGADOR_H_
 
-#include <iostream>
-#include <string>
 using namespace std;
 
 class Personaje;
@@ -30,6 +28,7 @@ public:
 	void setPersonaje(Personaje* personaje);
 	PersonajeDibujable* getPersonajeDibujable() const;
 	void setPersonajeDibujable(PersonajeDibujable* personajeDibujable);
+	void posicionarPersonaje_enEjeX(double x);
 };
 
 #endif /* SRC_MODELO_JUGADOR_H_ */
