@@ -12,18 +12,9 @@
 Jugador::Jugador() {
 }
 
-Jugador::Jugador(Personaje* personaje, PersonajeDibujable* personajeDibujable, int direccion) {
+Jugador::Jugador(Personaje* personaje, PersonajeDibujable* personajeDibujable) {
 	this->personaje = personaje;
 	this->personajeDibujable = personajeDibujable;
-	this->direccion = direccion;
-}
-
-int Jugador::getDireccion() const {
-	return direccion;
-}
-
-void Jugador::setDireccion(int direccion) {
-	this->direccion = direccion;
 }
 
 Personaje* Jugador::getPersonaje() const {

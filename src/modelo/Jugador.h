@@ -17,13 +17,10 @@ class Jugador {
 private:
 	Personaje* personaje;
 	PersonajeDibujable* personajeDibujable;
-	int direccion;
 public:
 	Jugador();
-	Jugador(Personaje* personaje, PersonajeDibujable* personajeDibujable, int direccion);
+	Jugador(Personaje* personaje, PersonajeDibujable* personajeDibujable);
 	virtual ~Jugador();
-	int getDireccion() const;
-	void setDireccion(int direccion);
 	Personaje* getPersonaje() const;
 	void setPersonaje(Personaje* personaje);
 	PersonajeDibujable* getPersonajeDibujable() const;
