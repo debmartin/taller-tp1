@@ -11,9 +11,6 @@
 #include <iostream>
 #include <string>
 
-#define DIRECCION_JUGADOR_DERECHA 1
-#define DIRECCION_JUGADOR_IZQUIERDA -1
-
 #include "../utils/Loggeable.h"
 
 using namespace std;
@@ -21,17 +18,14 @@ using namespace std;
 class JugadorDef: public Loggeable {
 private:
 	string idPersonaje; // id del personaje al cual va a estar asociado
-	int direccion;
 
 public:
 	JugadorDef();
-	JugadorDef(string personaje, int direccion);
+	JugadorDef(string personaje);
 	virtual ~JugadorDef();
 	friend ostream& operator<<(ostream &o, const JugadorDef &j);
 	string toString();
 	string getIdPersonaje() const;
-	int getDireccion() const;
-	void setDireccion(int direccion);
 };
 
 #endif /* SRC_JSON_JUGADORDEF_H_ */

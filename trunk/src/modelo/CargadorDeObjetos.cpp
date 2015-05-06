@@ -205,16 +205,14 @@ void CargadorDeOjbetos::cargarEscenarioGrafico(PersonajeDibujable* personajeDibu
 
 Jugador* CargadorDeOjbetos::cargarJugador(JugadorDef* jugadorDef)
 {
-
 	string idPersonaje = jugadorDef->getIdPersonaje();
-	int direccion = jugadorDef->getDireccion();
 
 	Personaje* personaje = this->cargarPersonajes()->find(idPersonaje)->second;
 	PersonajeDibujable* personajeDibujable = this->cargarPersonajesDibujables()->find(idPersonaje)->second;
 
 	((Arma*)personaje->getArma())->agregarObservador(personajeDibujable->getArma());
 
-	Jugador* jugador = new Jugador(personaje, personajeDibujable, direccion);
+	Jugador* jugador = new Jugador(personaje, personajeDibujable);
 
 	return jugador;
 

@@ -204,7 +204,6 @@ PersonajeDef* Parser::parsearPersonaje(string tag_personaje){
 	int p_arma_fps = 0;
 	SpriteDef* spriteDefArma;
 
-	int p_direccion = 0;
     list<SpriteDef*> sprites;
 
     for( Json::ValueIterator it2 = valorPersonaje.begin() ; it2 != valorPersonaje.end() ; it2++ ) {
@@ -349,7 +348,6 @@ JugadorDef* Parser::parsearJugador(string tag_jugador) {
     valorJugador = root.get(tag_jugador.c_str(), &valorJugador);
 
     string personaje = "";
-    int direccion = 1;
 
     for( Json::ValueIterator it2 = valorJugador.begin() ; it2 != valorJugador.end() ; it2++ ) {
         string tag = it2.key().asString();
@@ -357,14 +355,12 @@ JugadorDef* Parser::parsearJugador(string tag_jugador) {
 
         if ( tag == TAG_JUGADOR_PERSONAJE ) {
         	personaje = subvalor.asString();
-        } else if ( tag == TAG_JUGADOR_DIRECCION ) {
-            direccion = obtenerValorInt(subvalor, DIRECCION_JUGADOR_DERECHA, "Jugador direccion no es valor entero");
         } else {
             Logger::getInstance()->error("Dentro del jugador no se encuentra el parametro "+tag);
         }
     }
 
-    JugadorDef* jugadorParseado = new JugadorDef(personaje, direccion);
+    JugadorDef* jugadorParseado = new JugadorDef(personaje);
     return jugadorParseado;
 }
 
