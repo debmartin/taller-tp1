@@ -10,6 +10,7 @@
 #include <utility>
 
 #include "../utils/Logger.h"
+#include "ArmaDibujable.h"
 #include "VentanaGrafica.h"
 
 PersonajeDibujable::PersonajeDibujable() {
@@ -77,10 +78,6 @@ void PersonajeDibujable::agregarAnimacion(Animacion* nuevaAnimacion){
     animaciones[nuevaAnimacion->getId()] = nuevaAnimacion;
 }
 
-void PersonajeDibujable::centrar_en(Vector2f v, float limiteLogicoIzquierdoVentana, float relacion_de_aspectoX){
-	this->spritePersonaje->setPosicion(v);
-}
-
 void PersonajeDibujable::dibujar(){
 	spritePersonaje->dibujar();
 	armaDibujable->dibujar();
@@ -113,10 +110,6 @@ void PersonajeDibujable::cambiarOrientacionHaciaDerecha() {
 
 void PersonajeDibujable::cambiarOrientacionHaciaIzquierda() {
 	this->spritePersonaje->cambiarOrientacionHaciaIzquierda();
-}
-
-float PersonajeDibujable::getPosicionX() {
-	return this->_getSprite()->getPosicion().X();
 }
 
 ColorAlternativoDef* PersonajeDibujable::getColorAlternativo() const {

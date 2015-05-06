@@ -12,7 +12,6 @@
 #include <list>
 #include <string>
 
-#include "../modelo/Vector2f.h"
 #include "SpriteDef.h"
 
 class ColorAlternativoDef;
@@ -36,13 +35,12 @@ private:
 	int z_index;
 	list<SpriteDef*>* spritesDef;
 	SpriteDef* armaArrojable;
-	Vector2f posicionInicial;
 	ColorAlternativoDef* colorAlternativoDef;
 	string id;
 
 public:
 	PersonajeDef();
-	PersonajeDef(string id, double ancho, double alto, int zindex, Vector2f posInicial, ColorAlternativoDef* colorAlter);
+	PersonajeDef(string id, double ancho, double alto, int zindex, ColorAlternativoDef* colorAlter);
 	virtual ~PersonajeDef();
 	double getAlto() const;
 	double getAncho() const;
@@ -50,7 +48,6 @@ public:
 	void setAlto(double nuevoAlto);
 	void setAncho(double nuevoAncho);
 	void setZIndex(int z);
-	Vector2f getPosicionInicial();
 	ColorAlternativoDef* getColorAlternativoDef() const;
 	void setColorAlternativoDef(ColorAlternativoDef* colorAlternativoDef);
 
@@ -60,7 +57,6 @@ public:
 	SpriteDef* getSpriteDefArmaDibujable();
     void ajustarZIndex(int cantCapas);
     void ajustarAlto(double altoEscenario, double ypiso);
-    void ajustarPosicionIncial(double anchoEscenario, double anchoVentana, double ypiso);
     void ajustarColorAlternativo();
 	friend ostream& operator<<(ostream &o, const PersonajeDef &p);
 

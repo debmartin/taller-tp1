@@ -49,6 +49,7 @@ public:
     bool esValida(Vector2f posicion, double ancho);
     Vector2f calcularPosicionEnVentana(Vector2f posicionLogica);
     bool enExtremos(float distanciaEntreElementos, double ancho);
+	EscenarioGrafico* getEscenario() const;
 };
 
 #endif /* SRC_VISTA_VENTANAGRAFICA_H_ */

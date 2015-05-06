@@ -13,8 +13,6 @@
 
 #include "../vista/PersonajeDibujable.h"
 #include "Personaje.h"
-#include "Arma.h"
-#include "../vista/ArmaDibujable.h"
 
 class JugadorDef;
 

@@ -140,3 +140,7 @@ bool VentanaGrafica::enExtremos(float distancia, double ancho){
     float ancho_restante = ancho_logico_ventana - ancho;
     return (distancia >= ancho_restante);
 }
+
+EscenarioGrafico* VentanaGrafica::getEscenario() const {
+	return escenario;
+}

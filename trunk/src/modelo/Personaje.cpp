@@ -52,7 +52,7 @@ Vector2f Personaje::getDimensionesLogicas() const {
 	return Vector2f(this->getAncho(), this->getAlto());
 }
 
-void Personaje::setPosicion(int x, int y) {
+void Personaje::setPosicion(double x, double y) {
 	this->posicion.setCoordenada(x,y);
 }
 
@@ -93,10 +93,6 @@ bool Personaje::llegoAlLimiteIzquierdo(){
 
 bool Personaje::llegoAlLimiteDerecho(){
 	return VentanaGrafica::Instance()->llegoAlLimiteDerecho(Vector2f(this->posicion.X()+this->getAncho()*1.05,this->posicion.Y()));
-}
-
-void Personaje::centrar_en(Vector2f& v){
-	this->posicion = v;
 }
 
 void Personaje::caminarDerecha(){
@@ -280,23 +276,6 @@ ostream& operator <<(ostream &o, const Personaje &p) {
         return o;
 }
 
-Personaje& Personaje::operator=(const Personaje& p) {
-
-	posicionInicial = p.posicionInicial;
-	ancho = p.ancho;
-	alto = p.alto;
-	posicion = p.posicion;
-	posicionable = p.posicionable; // TODO ver de no copiar la referencia
-	z_index = p.z_index;
-	energia = p.energia;
-	arma = p.arma; // TODO ver de no copiar la referencia
-	estado = p.estado;
-	trayectoria = p.trayectoria; // TODO ver de no copiar la referencia
-	tCreacion = p.tCreacion;
-
-	return *this;
-}
-
 string Personaje::getId() const {
 	return id;
 }
@@ -305,4 +284,13 @@ string Personaje::toString() {
     ostringstream stream;
     stream <<*this;
 	return stream.str();
+}
+
+void Personaje::definirPosicionIncial_enX(double x)
+{
+	double y = this->posicion.Y();
+	Vector2f posicionIncial(x,y);
+	this->posicion = posicionIncial;
+	this->posicionInicial = posicionIncial;
+	this->trayectoria = new Reposo(this->posicion);
 }

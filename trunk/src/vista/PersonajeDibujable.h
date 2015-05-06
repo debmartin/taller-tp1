@@ -17,7 +17,8 @@
 #include "Animacion.h"
 #include "Dibujable.h"
 #include "Sprite.h"
-#include "ArmaDibujable.h"
+
+class ArmaDibujable;
 
 #define ID_FONDO "screen-pit"
 #define ID_ZUBZERO_QUIETO "reposo"
@@ -46,14 +47,13 @@ public:
 	void agregarAnimacion(Animacion* nuevaAnimacion);
 	void agregarArma(ArmaDibujable* unArma);
 	ArmaDibujable* getArma();
-	void centrar_en(Vector2f v, float limiteLogicoIzquierdoVentana, float relacion_de_aspectoX);
+	void centrar_en(Vector2f v, float limiteLogicoIzquierdoVentana, float relacion_de_aspectoX) { }
 	void dibujar();
 	void actualizar();
 	void recibirNotificacion(Observable* unObservable);
 	Sprite* _getSprite() { return spritePersonaje; }
 	void cambiarOrientacionHaciaDerecha();
 	void cambiarOrientacionHaciaIzquierda();
-	float getPosicionX();
 	void cambiarColor(ColorAlternativoDef* colorAlternativo);
 	ColorAlternativoDef* getColorAlternativo() const;
 };

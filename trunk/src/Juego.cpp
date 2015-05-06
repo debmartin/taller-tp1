@@ -34,13 +34,13 @@ Juego::Juego(Jugador* jugador1, Jugador* jugador2){
 	agregarObservadoresJugador(jugador2);
 
 	controladorPersonaje = new ControladorPersonaje(jugador1->getPersonaje(), jugador2->getPersonaje());
-	hud = new HUD(Renderizador::Instance()->getWindow(), jugador1->getPersonaje()->getId(), jugador2->getPersonaje()->getId());
+	hud = new HUD(Renderizador::Instance()->getWindow(), jugador2->getPersonaje()->getId(), jugador1->getPersonaje()->getId());
 	//hud->disminuirEnergia1(23);
 	//hud->disminuirEnergia2(130);
 	jugador1->getPersonaje()->agregarObservador(hud);
 	jugador2->getPersonaje()->agregarObservador(hud);
 
-	this->posicionarPersonajes();
+	this->posicionarPersonajes_enEjeX();
 }
 
 void Juego::agregarObservadoresJugador(Jugador* unJugador) {
@@ -107,7 +107,7 @@ bool Juego::running() { return juegoCorriendo; }
 
 void Juego::actualizarOrientacionJugadores() {
 
-	if ( jugador1->getPersonajeDibujable()->getPosicionX() > jugador2->getPersonajeDibujable()->getPosicionX() )
+	if ( jugador1->getPersonaje()->getPosicion().X() > jugador2->getPersonaje()->getPosicion().X() )
 	{
 		jugador1->getPersonajeDibujable()->cambiarOrientacionHaciaIzquierda();
 		jugador2->getPersonajeDibujable()->cambiarOrientacionHaciaDerecha();
@@ -126,7 +126,11 @@ Juego::~Juego(){
 //    delete escenarioG;
 }
 
-void Juego::posicionarPersonajes()
+void Juego::posicionarPersonajes_enEjeX()
 {
-	// TODO ...
+	double anchoEscenario = VentanaGrafica::Instance()->getEscenario()->getAnchoLogico();
+	double anchoVentana = VentanaGrafica::Instance()->getAnchoLogico();
+
+	jugador1->posicionarPersonaje_enEjeX(anchoEscenario/2+anchoVentana/3);
+	jugador2->posicionarPersonaje_enEjeX(anchoEscenario/2-anchoVentana/3);
 }
