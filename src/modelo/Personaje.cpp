@@ -76,6 +76,10 @@ void Personaje::agregarArma(Objeto* unArma){
 	this->arma = unArma;
 }
 
+Objeto* Personaje::getArma(){
+	return arma;
+}
+
 //Devuelve un vector posicion referenciado desde el eje con origen de coordenadas arriba izquierda.
 Vector2f Personaje::obtenerPosicionEnVentana(){
 	Vector2f P1(posicion.X(), posicion.Y() + getAlto());
@@ -211,6 +215,7 @@ void Personaje::notificarObservadores(){
 void Personaje::update(Vector2f posicionObjetivo){
 	Logger::getInstance()->debug("Personaje: update.");
 
+	arma->update();
 	//float miPosicionX =this->posicion.X();
 
 	// RECALCULA LA POSICION EN BASE AL OBJETO TRAYECTORIA

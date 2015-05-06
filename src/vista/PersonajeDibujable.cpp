@@ -28,6 +28,14 @@ void PersonajeDibujable::setEstado(estado_personaje unEstado){
 	this->estado = unEstado;
 }
 
+void PersonajeDibujable::agregarArma(ArmaDibujable* unArma){
+	this->armaDibujable = unArma;
+}
+
+ArmaDibujable* PersonajeDibujable::getArma(){
+	return armaDibujable;
+}
+
 void PersonajeDibujable::seleccionarSprite(){
 
 	switch(this->estado){
@@ -75,6 +83,7 @@ void PersonajeDibujable::centrar_en(Vector2f v, float limiteLogicoIzquierdoVenta
 
 void PersonajeDibujable::dibujar(){
 	spritePersonaje->dibujar();
+	armaDibujable->dibujar();
 }
 
 void PersonajeDibujable::actualizar(){

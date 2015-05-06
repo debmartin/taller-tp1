@@ -118,9 +118,9 @@ map<string, PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables(
 		Vector2f posicionInicialArma(0,0);
 
 		Sprite* spriteArmaDibujable = new Sprite(animacionArma, posicionInicialArma, ORIENTACION_IZQUIERDA);
-		/*ArmaDibujable* armaDibujable = new ArmaDibujable(spriteArmaDibujable);
+		ArmaDibujable* armaDibujable = new ArmaDibujable(spriteArmaDibujable);
 		personajeDibujableCargado->agregarArma(armaDibujable);
-*/
+
 		//TODO: Val. Separar la carga de los personajes para poder setearles el color.
 		it_sprites = spritesDef->begin();
 		for (; it_sprites != spritesDef->end(); ++it_sprites) {
@@ -207,6 +207,8 @@ Jugador* CargadorDeOjbetos::cargarJugador(JugadorDef* jugadorDef)
 
 	Personaje* personaje = this->cargarPersonajes()->find(idPersonaje)->second;
 	PersonajeDibujable* personajeDibujable = this->cargarPersonajesDibujables()->find(idPersonaje)->second;
+
+	((Arma*)personaje->getArma())->agregarObservador(personajeDibujable->getArma());
 
 	Jugador* jugador = new Jugador(personaje, personajeDibujable, direccion);
 

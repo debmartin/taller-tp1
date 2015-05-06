@@ -32,8 +32,10 @@ estado_objeto Arma::getEstado(){
 }
 
 void Arma::update(){
-	float tActual = ((float)(SDL_GetTicks())/1000.0f) - tCreacion;
-	posicion = this->trayectoria->getPosicion(tActual);
+	if(estado == VISIBLE){
+		float tActual = ((float)(SDL_GetTicks())/1000.0f) - tCreacion;
+		posicion = this->trayectoria->getPosicion(tActual);
+	}
 }
 
 void Arma::agregarObservador(Observador* unObservador){
