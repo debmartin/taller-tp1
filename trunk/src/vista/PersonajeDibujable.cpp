@@ -70,9 +70,9 @@ void PersonajeDibujable::seleccionarSprite(){
         case GOLPEANDO_ALTO:
             spritePersonaje->cambiarAnimacion(animaciones[ID_ZUBZERO_GOLPEANDO_ALTO]);
             spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
-     /*   case PATEANDO_ALTO:
+        case PATEANDO_ALTO:
             spritePersonaje->cambiarAnimacion(animaciones[ID_ZUBZERO_PATEANDO_ALTO]);
-            spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);*/
+            spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
 	}
 }
 
