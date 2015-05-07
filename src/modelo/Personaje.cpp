@@ -169,6 +169,7 @@ void Personaje::patada(){
 /*Patada alta ocurre cuando el personaje está saltando*/
 void Personaje::patadaAlta(){
 	setEstado(PATEANDO_ALTO);
+	cambiarTrayectoria(new Reposo(posicion));
 	Logger::getInstance()->debug("Personaje: patada alta.");
 }
 
