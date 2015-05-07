@@ -15,13 +15,19 @@ ArmaDibujable::ArmaDibujable() {
 ArmaDibujable::ArmaDibujable(Sprite* armaDib) {
 	// TODO Auto-generated constructor stub
 	armaDibujable = armaDib;
-	estado = NO_VISIBLE;
+	//estado = NO_VISIBLE;
+	estado = VISIBLE;
+
 }
 
 void ArmaDibujable::dibujar(){
 	if(estado == VISIBLE){
 		armaDibujable->dibujar();
 	}
+}
+
+void ArmaDibujable::actualizar(){
+	armaDibujable->update();
 }
 
 void ArmaDibujable::cambiarEstado(estado_objeto unEstado){

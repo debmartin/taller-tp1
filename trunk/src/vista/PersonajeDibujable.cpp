@@ -67,6 +67,12 @@ void PersonajeDibujable::seleccionarSprite(){
         case AGACHADO:
             spritePersonaje->cambiarAnimacion(animaciones[ID_ZUBZERO_AGACHADO]);
             spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
+        case GOLPEANDO_ALTO:
+            spritePersonaje->cambiarAnimacion(animaciones[ID_ZUBZERO_GOLPEANDO_ALTO]);
+            spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
+        case PATEANDO_ALTO:
+            spritePersonaje->cambiarAnimacion(animaciones[ID_ZUBZERO_PATEANDO_ALTO]);
+            spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
 	}
 }
 
@@ -85,6 +91,7 @@ void PersonajeDibujable::dibujar(){
 
 void PersonajeDibujable::actualizar(){
 	spritePersonaje->update();
+	armaDibujable->actualizar();
 }
 
 void PersonajeDibujable::recibirNotificacion(Observable* unObservable){

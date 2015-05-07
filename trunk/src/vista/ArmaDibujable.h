@@ -23,6 +23,7 @@ public:
 	ArmaDibujable(Sprite* armaDib);
 	virtual ~ArmaDibujable();
 	void dibujar();
+	void actualizar();
 	void cambiarEstado(estado_objeto estado);
 	void recibirNotificacion(Observable* unObservable);
 };
