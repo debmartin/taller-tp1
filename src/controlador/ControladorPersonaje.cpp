@@ -93,8 +93,8 @@ void ControladorPersonaje::identificarOrdenPersonaje2(){
       	personaje2->arrojarArma();
     }else if(estadoTeclado[SDL_SCANCODE_V]){
         personaje2->golpeAlto();
-  /*  }else if(estadoTeclado[SDL_SCANCODE_B]){
-        personaje2->patadaAlta();*/
+    }else if(estadoTeclado[SDL_SCANCODE_B]){
+        personaje2->patadaAlta();
     }else{
         personaje2->mantenerReposo();
     }

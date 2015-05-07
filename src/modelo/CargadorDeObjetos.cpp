@@ -96,14 +96,13 @@ map<string, PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables(
 		SpriteDef* primerSpriteSubQuieto;
 		SpriteDef* spriteDefArma;
 		spriteDefArma = (*it)->getSpriteDefArmaDibujable();
-		//cout<<"imagen"<<spriteDefArma->getImagen()<<endl;
+
 		for (; it_sprites != spritesDef->end(); ++it_sprites) {
 				if((*it_sprites)->getIdSprite() == ID_ZUBZERO_QUIETO){
 					primerSpriteSubQuieto = *it_sprites;
 				}
 		}
 
-		//cout << "*CargadorDeOjbetos::cargarObjetos>getIdSprite:" << primerSpriteSubQuieto->getIdSprite() << endl;
 		Animacion* SubQuieto = new Animacion(primerSpriteSubQuieto->getImagen(),
 		primerSpriteSubQuieto->getCantFotogramas(),
 		primerSpriteSubQuieto->getFps(),
@@ -125,10 +124,9 @@ map<string, PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables(
 		ArmaDibujable* armaDibujable = new ArmaDibujable(spriteArmaDibujable);
 		personajeDibujableCargado->agregarArma(armaDibujable);
 
-		//TODO: Val. Separar la carga de los personajes para poder setearles el color.
 		it_sprites = spritesDef->begin();
 		for (; it_sprites != spritesDef->end(); ++it_sprites) {
-			//cout << "FOR-ID:" << (*it_sprites)->getIdSprite() << endl;
+			cout << "FOR-ID:" << (*it_sprites)->getIdSprite() << endl;
 			Animacion* sub_zero = new Animacion(
 										(*it_sprites)->getImagen(),
 										(*it_sprites)->getCantFotogramas(),
