@@ -27,6 +27,7 @@ Personaje::Personaje() {
 	this->ancho = 0;
 	this->alto = 0;
 	this->energia = ENERGIA_INICIAL;
+	this->tiempoBloqueo = 0;
 }
 
 Personaje::Personaje(string idIn, double anchoIn, double altoIn, Vector2f posInicial, Posicionable* posc, int numJugador) :
@@ -34,6 +35,7 @@ Personaje::Personaje(string idIn, double anchoIn, double altoIn, Vector2f posIni
 	posicion(posInicial), tCreacion(0), numeroJugador(numJugador){
 	this->trayectoria = new Reposo(this->posicion);
 	this->energia = ENERGIA_INICIAL;
+	this->tiempoBloqueo = 0;
 }
 
 double Personaje::getAlto() const {
@@ -214,8 +216,16 @@ void Personaje::notificarObservadores(){
 void Personaje::update(Vector2f posicionObjetivo){
 	Logger::getInstance()->debug("Personaje: update.");
 
+	if(estaBloqueado()){
+		if(tiempoBloqueo <= 0){
+		   setEstado(EN_ESPERA);
+		}
+		tiempoBloqueo -= 1.0;
+		cout<<"Tiempo bloqueo:"<<tiempoBloqueo<<endl;
+		return;
+	}
+
 	arma->update();
-	//float miPosicionX =this->posicion.X();
 
 	// RECALCULA LA POSICION EN BASE AL OBJETO TRAYECTORIA
 	float tActual = ((float)(SDL_GetTicks())/1000.0f) - tCreacion;
@@ -254,12 +264,20 @@ bool Personaje::estaSaltando(){
     return (estado == SALTANDO_OBLICUO_DERECHA || estado == SALTANDO_OBLICUO_IZQUIERDA || estado == SALTANDO_VERTICAL);
 }
 
+bool Personaje::ejecutandoMovimientoEspecial(){
+	return (estado == GOLPEANDO_ALTO || estado == PATEANDO_ALTO);
+}
+
 bool Personaje::estaAgachado(){
     return (estado == AGACHADO);
 }
 
 bool Personaje::estaEnReposo(){
     return (estado == EN_ESPERA);
+}
+
+bool Personaje::estaBloqueado(){
+	return (estado == BLOQUEADO);
 }
 
 void Personaje::arrojarArma(){
@@ -271,6 +289,11 @@ void Personaje::arrojarArma(){
 
 void Personaje::recibirDanio(int danio){
 	this->energia -= danio;
+}
+
+void Personaje::bloquearPersonaje(float segundos){
+	setEstado(BLOQUEADO);
+	this->tiempoBloqueo = segundos;
 }
 
 ostream& operator <<(ostream &o, const Personaje &p) {

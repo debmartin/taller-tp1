@@ -22,7 +22,7 @@ ControladorPersonaje::ControladorPersonaje(Personaje* jugador1, Personaje* jugad
 bool ControladorPersonaje::manejar_Evento(SDL_Event &evento){
     Logger::getInstance()->debug("Se recibe un evento de teclado.");
 
-    if (personaje1->estaSaltando() || personaje2->estaSaltando()) {
+    if (personaje1->estaSaltando() || personaje2->estaSaltando() || personaje1->estaBloqueado() || personaje2->estaBloqueado()) {
         Logger::getInstance()->error("Evento invalido.");
     	return true;
     }
@@ -62,6 +62,8 @@ void ControladorPersonaje::identificarOrdenPersonaje1(){
         personaje1->golpeAlto();
     }else if(estadoTeclado[SDL_SCANCODE_H]){
         personaje1->patadaAlta();
+    }else if(estadoTeclado[SDL_SCANCODE_N]){
+    	personaje1->bloquearPersonaje(10);
     }else{
         personaje1->mantenerReposo();
     }
@@ -95,6 +97,8 @@ void ControladorPersonaje::identificarOrdenPersonaje2(){
         personaje2->golpeAlto();
     }else if(estadoTeclado[SDL_SCANCODE_B]){
         personaje2->patadaAlta();
+    }else if(estadoTeclado[SDL_SCANCODE_M]){
+        personaje2->bloquearPersonaje(1000);
     }else{
         personaje2->mantenerReposo();
     }
