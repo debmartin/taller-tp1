@@ -12,10 +12,13 @@
 #include <string>
 
 #include "../utils/Loggeable.h"
+#include "CajaDef.h"
+#include <list>
 
 #define IMAGEN_DEFAULT "img/sprites_defecto.png"
 #define CANT_FOTOGRAMAS_DEFAULT 1
 #define FPS_DEFAULT 10
+#define VELOCIDAD_ARMA_DEFAULT 50
 
 using namespace std;
 
@@ -26,6 +29,7 @@ private:
 	string id_sprite;
 	int cant_fotogramas;
 	int fps;
+	list<CajaDef*> cajas;
 public:
 	SpriteDef();
 	SpriteDef(string imagen, string id, int cant_fotogramas, int fps);

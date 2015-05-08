@@ -203,6 +203,7 @@ PersonajeDef* Parser::parsearPersonaje(string tag_personaje){
 	int p_arma_cant_fotogramas = 0;
 	int p_arma_fps = 0;
 	SpriteDef* spriteDefArma;
+	int velocidad_arma = 0;
 
     list<SpriteDef*> sprites;
 
@@ -237,9 +238,11 @@ PersonajeDef* Parser::parsearPersonaje(string tag_personaje){
                 	//cout<<"p_sprites_id:"<<p_sprites_id<<endl;
                 	Json::Value valorFotog = (*it2)[TAG_PERSONAJE_SPRITES_CANT_FOTOGRAMAS];
                 	Json::Value valorFps = (*it2)[TAG_PERSONAJE_SPRITES_FPS];
+                    Json::Value valor_velocidad_arma = (*it2)[TAG_PERSONAJE_VELOCIDAD_ARMA];
 
                 	p_arma_cant_fotogramas = obtenerValorInt(valorFotog, CANT_FOTOGRAMAS_DEFAULT, "Personaje sprite arma cant_fotogramas no es valor entero");
                 	p_arma_fps = obtenerValorInt(valorFps, FPS_DEFAULT, "Personaje sprite arma fps no es valor entero");
+                	velocidad_arma = obtenerValorInt(valor_velocidad_arma, VELOCIDAD_ARMA_DEFAULT, "Personaje velocidad arma no es valor entero");
                     spriteDefArma = new SpriteDef(p_arma_imagen, TAG_PERSONAJE_ARMA, p_arma_cant_fotogramas, p_arma_fps);
         } else if ( tag == TAG_COLOR_ALTERNATIVO ) {
 

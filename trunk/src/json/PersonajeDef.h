@@ -35,6 +35,7 @@ private:
 	int z_index;
 	list<SpriteDef*>* spritesDef;
 	SpriteDef* armaArrojable;
+	float velocidadArma;
 	ColorAlternativoDef* colorAlternativoDef;
 	string id;
 
