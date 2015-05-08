@@ -19,6 +19,8 @@ public:
 
 	float X() const { return x; };
 	float Y() const { return y; };
+    void X(float x) { this->x = x; };
+    void Y(float y) { this->y = y; };
 
 	Vector2f operator+(const Vector2f& v2) const;
 	Vector2f& operator+=(const Vector2f& v2);
@@ -27,6 +29,7 @@ public:
 	Vector2f operator*(float escalar);
 	Vector2f& operator*=(float escalar);
     void setCoordenada(double x, double y);
+
     friend ostream& operator<<(ostream &o, const Vector2f &c);
     string toString();
 };
