@@ -36,8 +36,8 @@
         		    "fps": 10 
         			},
         "sprites-caminando": { 
-		            "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-caminando.png",
-        		    "cant_fotogramas": 9,
+		            "imagen": "RECURSOS/PERSONAJES/TEST/cadillac-caminando.png",
+        		    "cant_fotogramas": 12,
         		    "fps": 13
         			},
         "sprites-agachado": { 
