@@ -18,6 +18,8 @@ class ArmaDibujable: public Observador {
 private:
 	Sprite* armaDibujable;
 	estado_objeto estado;
+	OrientacionSprite sentido;
+
 public:
 	ArmaDibujable();
 	ArmaDibujable(Sprite* armaDib);
@@ -25,6 +27,7 @@ public:
 	void dibujar();
 	void actualizar();
 	void cambiarEstado(estado_objeto estado);
+	Sprite* getSprite();
 	void recibirNotificacion(Observable* unObservable);
 };
 
