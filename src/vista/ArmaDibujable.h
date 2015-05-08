@@ -18,7 +18,6 @@ class ArmaDibujable: public Observador {
 private:
 	Sprite* armaDibujable;
 	estado_objeto estado;
-	OrientacionSprite sentido;
 
 public:
 	ArmaDibujable();
