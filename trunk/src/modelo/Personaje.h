@@ -48,7 +48,8 @@ typedef enum estado_personaje
 	PATEANDO_ALTO,
 	PATEANDO_BAJO,
 	DEFENDIENDO,
-	DEFENDIENDO_AGACHADO
+	DEFENDIENDO_AGACHADO,
+	BLOQUEADO
 } estado_personaje;
 
 using namespace std;
@@ -69,6 +70,7 @@ private:
 	Trayectoria* trayectoria;
 	float tCreacion;
 	int numeroJugador;
+	float tiempoBloqueo;
 
 public:
 	Personaje();
@@ -95,7 +97,10 @@ public:
 	bool estaSaltando();
 	bool estaAgachado();
 	bool estaEnReposo();
+	bool estaBloqueado();
+	bool ejecutandoMovimientoEspecial();
 	void recibirDanio(int danio);
+	void bloquearPersonaje(float segundos);
 
 	//Movimientos y poderes
 	void caminarDerecha();
