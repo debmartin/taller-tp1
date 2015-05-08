@@ -21,7 +21,6 @@ int Arma::quitarEnergia(){
 }
 
 void Arma::posicionar(Vector2f pos){
-	//posicion = (posicion.X(), pos.Y());
 	posicion = pos;
 }
 
@@ -49,7 +48,7 @@ void Arma::update(){
 		//cambiarTrayectoria(new MRU(posicion, Vector2f(VELOCIDAD_DESP_HORIZONTAL_ARMA, VELOCIDAD_ARMA_NULA)));
 		float tActual = ((float)(SDL_GetTicks())/1000.0f) - tCreacion;
 		posicion = this->trayectoria->getPosicion(tActual);
-		cout<<"Posicion arma:"<<posicion.X()<<"||"<<posicion.Y()<<endl;
+	//	cout<<"Posicion arma:"<<posicion.X()<<"||"<<posicion.Y()<<endl;
 	}
 	//notificarObservadores();
 }

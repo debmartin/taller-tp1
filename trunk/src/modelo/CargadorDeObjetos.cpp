@@ -126,7 +126,6 @@ map<string, PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables(
 
 		it_sprites = spritesDef->begin();
 		for (; it_sprites != spritesDef->end(); ++it_sprites) {
-			cout << "FOR-ID:" << (*it_sprites)->getIdSprite() << endl;
 			Animacion* sub_zero = new Animacion(
 										(*it_sprites)->getImagen(),
 										(*it_sprites)->getCantFotogramas(),

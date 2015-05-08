@@ -15,8 +15,7 @@ ArmaDibujable::ArmaDibujable() {
 ArmaDibujable::ArmaDibujable(Sprite* armaDib) {
 	// TODO Auto-generated constructor stub
 	armaDibujable = armaDib;
-	//estado = NO_VISIBLE;
-	estado = VISIBLE;
+	estado = NO_VISIBLE;
 
 }
 
@@ -32,6 +31,10 @@ void ArmaDibujable::actualizar(){
 
 void ArmaDibujable::cambiarEstado(estado_objeto unEstado){
 	this->estado = unEstado;
+}
+
+Sprite* ArmaDibujable::getSprite(){
+	return armaDibujable;
 }
 
 void ArmaDibujable::recibirNotificacion(Observable* unObservable){

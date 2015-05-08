@@ -115,10 +115,12 @@ void PersonajeDibujable::recibirNotificacion(Observable* unObservable){
 
 void PersonajeDibujable::cambiarOrientacionHaciaDerecha() {
 	this->spritePersonaje->cambiarOrientacionHaciaDerecha();
+	this->armaDibujable->getSprite()->cambiarOrientacionHaciaDerecha();
 }
 
 void PersonajeDibujable::cambiarOrientacionHaciaIzquierda() {
 	this->spritePersonaje->cambiarOrientacionHaciaIzquierda();
+	this->armaDibujable->getSprite()->cambiarOrientacionHaciaIzquierda();
 }
 
 ColorAlternativoDef* PersonajeDibujable::getColorAlternativo() const {
