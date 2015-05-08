@@ -22,15 +22,19 @@ ControladorPersonaje::ControladorPersonaje(Personaje* jugador1, Personaje* jugad
 bool ControladorPersonaje::manejar_Evento(SDL_Event &evento){
     Logger::getInstance()->debug("Se recibe un evento de teclado.");
 
-    if (personaje1->estaSaltando() || personaje2->estaSaltando() || personaje1->estaBloqueado() || personaje2->estaBloqueado()) {
+    if (personaje1->estaSaltando() || personaje2->estaSaltando()) {
         Logger::getInstance()->error("Evento invalido.");
     	return true;
     }
 
 	//Si se presiona una tecla
 	if ( evento.key.repeat == 0 ){
-		identificarOrdenPersonaje1();
-		identificarOrdenPersonaje2();
+		if(!personaje1->estaBloqueado()){
+			identificarOrdenPersonaje1();
+		}
+		if(!personaje2->estaBloqueado()){
+			identificarOrdenPersonaje2();
+		}
 	}
     return true;
 }
@@ -63,7 +67,7 @@ void ControladorPersonaje::identificarOrdenPersonaje1(){
     }else if(estadoTeclado[SDL_SCANCODE_H]){
         personaje1->patadaAlta();
     }else if(estadoTeclado[SDL_SCANCODE_N]){
-    	personaje1->bloquearPersonaje(10);
+    	personaje1->bloquearPersonaje(200);
     }else{
         personaje1->mantenerReposo();
     }
@@ -98,7 +102,7 @@ void ControladorPersonaje::identificarOrdenPersonaje2(){
     }else if(estadoTeclado[SDL_SCANCODE_B]){
         personaje2->patadaAlta();
     }else if(estadoTeclado[SDL_SCANCODE_M]){
-        personaje2->bloquearPersonaje(1000);
+        personaje2->bloquearPersonaje(200);
     }else{
         personaje2->mantenerReposo();
     }
