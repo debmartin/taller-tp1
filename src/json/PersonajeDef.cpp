@@ -129,15 +129,11 @@ void PersonajeDef::agregarSpritesDef(SpriteDef* spriteDef) {
 	this->spritesDef->push_back(spriteDef);
 }
 
-void PersonajeDef::agregarSpriteDefArmaDibujable(SpriteDef* arma){
+void PersonajeDef::agregarArmaDef(ArmaDef* arma){
 	this->armaArrojable = arma;
-	if(arma == NULL){
-		cout<<"Es null"<<endl;
-	}
-	//cout<<*armaArrojable<<endl;
 }
 
-SpriteDef* PersonajeDef::getSpriteDefArmaDibujable(){
+ArmaDef* PersonajeDef::getArmaDef(){
 	return armaArrojable;
 }
 
