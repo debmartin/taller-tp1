@@ -68,7 +68,8 @@
 		"arma": {
         			"imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-arma.png",
         			"cant_fotogramas": 1,
-        		    "fps": 15 
+        		    "fps": 15,
+        		    "velocidad": 50        		     
         			},
 		"color-alternativo": {
 					"h-inicial": 53,
