@@ -26,7 +26,11 @@ void AABB::desplazarAABB(Vector2f v) {
     puntoSupDer.setCoordenada(puntoSupDer.X() + v.X(), puntoSupDer.Y() + v.Y());
 }
 
-void AABB::espejarAABB(float posicionX){
+void AABB::espejarAABB(float posMedia){
+    float dif = posMedia - puntoInfIzq.X();
+    puntoInfIzq.setCoordenada(posMedia + dif, puntoInfIzq.Y());
+    dif = puntoSupDer.X() - posMedia;
+    puntoSupDer.setCoordenada(posMedia - dif, puntoSupDer.Y());
 }
 
 float AABB::getLimiteInferior(){

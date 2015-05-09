@@ -45,5 +45,9 @@ void BVH::desplazarBVH(Vector2f v){
 }
 /*Espeja respecto al centro de la caja limitadora*/
 void BVH::espejarBVH(){
-
+    float ancho = cajaLimitadora->getLimiteDerecho() - cajaLimitadora->getLimiteIzquierdo();
+    float posMedia = cajaLimitadora->getLimiteIzquierdo() + ancho/2;
+    for (int i = 0; i < cajasAABB->size(); i++){
+        (*cajasAABB)[i]->espejarAABB(posMedia);
+    }
 }
