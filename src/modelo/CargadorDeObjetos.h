@@ -13,6 +13,7 @@
 
 #include "../vista/PersonajeDibujable.h"
 #include "Personaje.h"
+#include "fisica/BVH.h"
 
 class JugadorDef;
 
@@ -44,6 +45,7 @@ public:
 	void cargarEscenarioGrafico(PersonajeDibujable* personajeDibujable1, PersonajeDibujable* personajeDibujable2);
 	Jugador* cargarJugador1();
 	Jugador* cargarJugador2();
+	map<estado_personaje, BVH*>* cargarCajasColision();
 private:
 	Jugador* cargarJugador(JugadorDef* jugadorDef);
 
