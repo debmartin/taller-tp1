@@ -15,6 +15,22 @@
 #include "MRU.h"
 #include "MRUV.h"
 #include "Reposo.h"
+#include "estado/EnEspera.h"
+#include "estado/CaminandoDerecha.h"
+#include "estado/CaminandoIzquierda.h"
+#include "estado/Agachado.h"
+#include "estado/SaltandoVertical.h"
+#include "estado/SaltandoOblicuoDerecha.h"
+#include "estado/SaltandoOblicuoIzquierda.h"
+#include "estado/GolpeandoAlto.h"
+#include "estado/GolpeandoBajo.h"
+#include "estado/Pateando.h"
+#include "estado/PateandoAlto.h"
+#include "estado/PateandoBajo.h"
+#include "estado/Defendiendo.h"
+#include "estado/DefendiendoAgachado.h"
+#include "estado/Cayendo.h"
+#include "estado/Bloqueado.h"
 
 #define VELOCIDAD_DESP_HORIZONTAL_SALTANDO 320.0f
 #define VELOCIDAD_DESP_HORIZONTAL_CAMINANDO 215.0f
@@ -23,17 +39,9 @@
 #define VECTOR_VELOCIDAD_NULA Vector2f(0, 0)
 #define VECTOR_GRAVEDAD Vector2f(0, -2600.f)
 
-Personaje::Personaje() {
-	this->ancho = 0;
-	this->alto = 0;
-	this->energia = ENERGIA_INICIAL;
-	this->tiempoBloqueo = 0;
-}
-
-Personaje::Personaje(string idIn, double anchoIn, double altoIn, Vector2f posInicial, Posicionable* posc, int numJugador) :
-    id(idIn), posicionInicial(posInicial), ancho(anchoIn), alto(altoIn), estado(EN_ESPERA), posicionable(posc),
-	posicion(posInicial), tCreacion(0), numeroJugador(numJugador){
-	this->trayectoria = new Reposo(this->posicion);
+Personaje::Personaje(string idIn, double anchoIn, double altoIn, Vector2f posInicial, Posicionable* posc, int numJugador, map<estado_personaje, BVH*>* cajas) :
+    Colisionable(posInicial), id(idIn), posicionInicial(posInicial), ancho(anchoIn), alto(altoIn),
+	estado(new EnEspera(posInicial, (*cajas)[EN_ESPERA])), posicionable(posc), numeroJugador(numJugador), cajasPorEstado(cajas){
 	this->energia = ENERGIA_INICIAL;
 	this->tiempoBloqueo = 0;
 }
@@ -62,12 +70,12 @@ Vector2f Personaje::getPosicion(){
 	return this->posicion;
 }
 
-void Personaje::setEstado(estado_personaje unEstado){
-	this->estado = unEstado;
-}
+//void Personaje::setEstado(estado_personaje unEstado){
+//	this->estado = unEstado;
+//}
 
 estado_personaje Personaje::getEstado(){
-	return this->estado;
+	return ((estado_personaje) estado->Id());
 }
 
 int Personaje::getEnergia(){
@@ -100,109 +108,80 @@ bool Personaje::llegoAlLimiteDerecho(){
 }
 
 void Personaje::caminarDerecha(){
-    Trayectoria* nuevaTray;
-    if (llegoAlLimiteDerecho()) {
-        nuevaTray = new Reposo(posicion);
-    } else {
-        nuevaTray = new MRU(posicion, Vector2f(VELOCIDAD_DESP_HORIZONTAL_CAMINANDO, VELOCIDAD_NULA));
-    }
-
-    setEstado(CAMINANDO_DERECHA);
-    cambiarTrayectoria(nuevaTray);
+    cambiarEstado(new CaminandoDerecha(posicion, llegoAlLimiteDerecho(), (*cajasPorEstado)[CAMINANDO_DERECHA]));
     Logger::getInstance()->debug("Personaje: caminando derecha. Se setea trayectoria.");
 }
 
 void Personaje::caminarIzquierda(){
-    Trayectoria* nuevaTray;
-    if (llegoAlLimiteIzquierdo()) {
-        nuevaTray = new Reposo(posicion);
-    } else {
-        nuevaTray = new MRU(posicion, Vector2f(-VELOCIDAD_DESP_HORIZONTAL_CAMINANDO, VELOCIDAD_NULA));
-    }
-
-    setEstado(CAMINANDO_IZQUIERDA);
-    cambiarTrayectoria(nuevaTray);
+    cambiarEstado(new CaminandoIzquierda(posicion, llegoAlLimiteIzquierdo(), (*cajasPorEstado)[CAMINANDO_IZQUIERDA]));
     Logger::getInstance()->debug("Personaje: caminando izquierda. Se setea trayectoria.");
 }
 
 void Personaje::saltarVertical(){
-    setEstado(SALTANDO_VERTICAL);
-    cambiarTrayectoria(new MRUV(posicion, Vector2f(VELOCIDAD_NULA, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD));
+    cambiarEstado(new SaltandoVertical(posicion, (*cajasPorEstado)[SALTANDO_VERTICAL]));
     Logger::getInstance()->debug("Personaje: salto vertical. Se setea trayectoria.");
 }
 
 void Personaje::saltarOblicuoDerecha(){
-    setEstado(SALTANDO_OBLICUO_DERECHA);
-    cambiarTrayectoria(new MRUV(posicion, Vector2f(VELOCIDAD_DESP_HORIZONTAL_SALTANDO, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD));
+    cambiarEstado(new SaltandoOblicuoDerecha(posicion, (*cajasPorEstado)[SALTANDO_OBLICUO_DERECHA]));
     Logger::getInstance()->debug("Personaje: salto oblicuo derecha. Se setea trayectoria.");
 }
 
 void Personaje::saltarOblicuoIzquierda(){
-    setEstado(SALTANDO_OBLICUO_IZQUIERDA);
-    cambiarTrayectoria(new MRUV(posicion, Vector2f(-VELOCIDAD_DESP_HORIZONTAL_SALTANDO, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD));
+    cambiarEstado(new SaltandoOblicuoIzquierda(posicion, (*cajasPorEstado)[SALTANDO_OBLICUO_IZQUIERDA]));
     Logger::getInstance()->debug("Personaje: salto oblicuo izquierda. Se setea trayectoria.");
 }
 
 void Personaje::agacharse(){
-    setEstado(AGACHADO);
-    cambiarTrayectoria(new Reposo(posicion));
-    recibirDanio(10);
+    cambiarEstado(new Agachado(posicion, (*cajasPorEstado)[AGACHADO]));
     Logger::getInstance()->debug("Personaje: agachado.");
 }
 
 void Personaje::golpeAlto(){
-	setEstado(GOLPEANDO_ALTO);
-	cambiarTrayectoria(new Reposo(posicion));
+    cambiarEstado(new GolpeandoAlto(posicion, (*cajasPorEstado)[GOLPEANDO_ALTO]));
 	Logger::getInstance()->debug("Personaje: golpe alto.");
 }
 
 void Personaje::golpeBajo(){
-	setEstado(GOLPEANDO_BAJO);
-	cambiarTrayectoria(new Reposo(posicion));
+    cambiarEstado(new GolpeandoBajo(posicion, (*cajasPorEstado)[GOLPEANDO_BAJO]));
 	Logger::getInstance()->debug("Personaje: golpe bajo.");
 }
 
 void Personaje::patada(){
-	setEstado(PATEANDO);
-	cambiarTrayectoria(new Reposo(posicion));
+    cambiarEstado(new Pateando(posicion, (*cajasPorEstado)[PATEANDO]));
 	Logger::getInstance()->debug("Personaje: patada.");
 }
 
 /*Patada alta ocurre cuando el personaje está saltando*/
 void Personaje::patadaAlta(){
-	setEstado(PATEANDO_ALTO);
-	cambiarTrayectoria(new Reposo(posicion));
+    if (! estaSaltando()) return;
+    cambiarEstado(new PateandoAlto(posicion, (*cajasPorEstado)[PATEANDO_ALTO]));
 	Logger::getInstance()->debug("Personaje: patada alta.");
 }
 
 void Personaje::patadaBaja(){
-	setEstado(PATEANDO_BAJO);
-	cambiarTrayectoria(new Reposo(posicion));
+    cambiarEstado(new PateandoBajo(posicion, (*cajasPorEstado)[PATEANDO_BAJO]));
 	Logger::getInstance()->debug("Personaje: patada baja.");
 }
 
 void Personaje::defender(){
-	setEstado(DEFENDIENDO);
-	cambiarTrayectoria(new Reposo(posicion));
+    cambiarEstado(new Defendiendo(posicion, (*cajasPorEstado)[DEFENDIENDO]));
 	Logger::getInstance()->debug("Personaje: defensa.");
 }
 
 void Personaje::defender_agachado(){
-	setEstado(DEFENDIENDO_AGACHADO);
-	cambiarTrayectoria(new Reposo(posicion));
+    cambiarEstado(new DefendiendoAgachado(posicion, (*cajasPorEstado)[DEFENDIENDO_AGACHADO]));
 	Logger::getInstance()->debug("Personaje: defensa.");
 }
 
 void Personaje::mantenerReposo(){
-    setEstado(EN_ESPERA);
-    cambiarTrayectoria(new Reposo(posicion));
+    cambiarEstado(new EnEspera(posicion, (*cajasPorEstado)[EN_ESPERA]));
     Logger::getInstance()->debug("Personaje: en reposo.");
 }
 
-void Personaje::cambiarTrayectoria(Trayectoria* t) {
-    delete trayectoria;
-	this->trayectoria = t;
-	this->tCreacion = ((float)(SDL_GetTicks()))/1000.0f;
+void Personaje::cambiarEstado(Estado* nuevo) {
+    delete estado;
+    estado = nuevo;
 }
 
 void Personaje::agregarObservador(Observador* unObservador){
@@ -213,71 +192,106 @@ void Personaje::notificarObservadores(){
 	Observable::notificarObservadores();
 }
 
-void Personaje::update(Vector2f posicionObjetivo){
-	Logger::getInstance()->debug("Personaje: update.");
+bool Personaje::estaAtacando(){
+    return (estado->estaAtacando());
+}
 
-	if(estaBloqueado()){
-		if(tiempoBloqueo <= 0){
-		   setEstado(EN_ESPERA);
-		}
-		tiempoBloqueo -= 1.0;
-		cout<<"Tiempo bloqueo:"<<tiempoBloqueo<<endl;
-		return;
-	}
 
-	arma->update();
+bool Personaje::estaDefendiendo(){
+    return (estado->estaDefendiendo());
+}
 
-	// RECALCULA LA POSICION EN BASE AL OBJETO TRAYECTORIA
-	float tActual = ((float)(SDL_GetTicks())/1000.0f) - tCreacion;
-	Vector2f posicionCandidata = this->trayectoria->getPosicion(tActual);
 
-	float distanciaAObjetivo = posicionCandidata.X() - posicionObjetivo.X();
+void Personaje::colisionar(Colisionable* otro){
+    if (estaAtacando())
+        ataqueActual = estado->obtenerAtaque();
+    else if (estaDefendiendo())
+        recibirDanio(otro->obtenerAtaque()->obtenerDanio() / 2);
+    else
+        recibirDanio(otro->obtenerAtaque()->obtenerDanio());
+    Colisionable::colisionar(otro);
+}
+
+void Personaje::corregirPorColision(Colisionable* enemigo){
+    if (! vaAColisionar(enemigo)) return;
+
+    if (!estaAtacando()){
+        mantenerReposo();
+    } else {
+        colisionar(enemigo);
+    }
+}
+
+bool Personaje::vaAColisionar(Colisionable* enemigo){
+    estado->haySuperposicion(enemigo->obtenerCajaColision());
+}
+
+void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
+    posicionCandidata = estado->obtenerProximaPosicion();
+	float distanciaAObjetivo = posicionCandidata.X() - enemigo->getPosicion().X();
 	if (distanciaAObjetivo < 0) distanciaAObjetivo = -distanciaAObjetivo;
 
 	if (posicionable->esValida(posicionCandidata, ancho) && posicionCandidata.Y() >= posicionInicial.Y()) {
 		if (! posicionable->enExtremos(distanciaAObjetivo, ancho))
             posicion = posicionCandidata;
+        else
+            posicion = Vector2f(posicion.X(), posicionCandidata.Y());
 	} else if (posicionCandidata.Y() < posicionInicial.Y()) {
-        posicion = Vector2f(posicionCandidata.X(), posicionInicial.Y());
-        mantenerReposo();
+	    if (! posicionable->enExtremos(distanciaAObjetivo, ancho)) {
+            posicion = Vector2f(posicionCandidata.X(), posicionInicial.Y());
+	    } else {
+            posicion = Vector2f(posicion.X(), posicionInicial.Y());
+	    }
+	    mantenerReposo();
     } else if (posicionCandidata.Y() > posicionInicial.Y()) {
-    	Vector2f velocActual = this->trayectoria->getVelocidad(tActual);
-        cambiarTrayectoria(new MRUV(posicion, Vector2f(0.0f, velocActual.Y()), VECTOR_GRAVEDAD));
+        Vector2f velocActual = estado->obtenerVelocidad();
+        estado_personaje id = estado->Id();
+        cambiarEstado(new Cayendo(posicion, Vector2f(0.0f, velocActual.Y()), id, (*cajasPorEstado)[id]));
     } else {
         mantenerReposo();
     }
-	/*
-	if(llegoAlLimiteIzquierdo() || llegoAlLimiteDerecho()){
-		this->estaEnLimite = true;
-	}else{
-		this->estaEnLimite = false;
-	}*/
+}
 
+void Personaje::update(Colisionable* enemigo){
+	Logger::getInstance()->debug("Personaje: update.");
+
+    if(estaBloqueado()){
+        if(tiempoBloqueo <= 0){
+           mantenerReposo();
+        }
+        tiempoBloqueo -= 1.0;
+        cout<<"Tiempo bloqueo:"<<tiempoBloqueo<<endl;
+        return;
+    }
+
+    arma->update();
+    calcularNuevaPosicion(enemigo);
+    corregirPorColision(enemigo);
 	notificarObservadores();
 }
 
 Personaje::~Personaje(){
-    delete trayectoria;
+//    delete trayectoria;
 }
 
 bool Personaje::estaSaltando(){
-    return (estado == SALTANDO_OBLICUO_DERECHA || estado == SALTANDO_OBLICUO_IZQUIERDA || estado == SALTANDO_VERTICAL);
+    return (estado->estaSaltando());
 }
 
 bool Personaje::ejecutandoMovimientoEspecial(){
-	return (estado == GOLPEANDO_ALTO || estado == PATEANDO_ALTO);
+	return estado->ejecutandoMovimientoEspecial();
 }
 
 bool Personaje::estaAgachado(){
-    return (estado == AGACHADO);
+    return (estado->estaAgachado());
 }
 
 bool Personaje::estaEnReposo(){
-    return (estado == EN_ESPERA);
+    return (estado->estaEsperando());
 }
 
 bool Personaje::estaBloqueado(){
-	return (estado == BLOQUEADO);
+	return (estado->estaBloqueado());
 }
 
 void Personaje::arrojarArma(){
@@ -291,10 +305,17 @@ void Personaje::recibirDanio(int danio){
 	this->energia -= danio;
 }
 
+
+BVH* Personaje::obtenerCajaColision(){
+    return estado->obtenerCajaColision();
+}
+
+
 void Personaje::bloquearPersonaje(float segundos){
-	setEstado(BLOQUEADO);
+	cambiarEstado(new Bloqueado(estado->getTrayectoria(), estado->obtenerCajaColision()));
 	this->tiempoBloqueo = segundos;
 }
+
 
 ostream& operator <<(ostream &o, const Personaje &p) {
 
@@ -318,5 +339,9 @@ void Personaje::definirPosicionIncial_enX(double x)
 	Vector2f posicionIncial(x,y);
 	this->posicion = posicionIncial;
 	this->posicionInicial = posicionIncial;
-	this->trayectoria = new Reposo(this->posicion);
+//	this->trayectoria = new Reposo(this->posicion);
 }
+
+//void Personaje::agregarCajasColisiones(BVH* caja, estado_personaje estadoCaja){
+//    cajasPorEstado[estadoCaja] = caja;
+//}

@@ -11,8 +11,11 @@
 #include <iostream>
 #include <list>
 #include <string>
+#include <map>
 
 #include "SpriteDef.h"
+#include "../modelo/estado/Estado.h"
+#include "../modelo/fisica/BVH.h"
 
 class ColorAlternativoDef;
 
@@ -38,6 +41,7 @@ private:
 	float velocidadArma;
 	ColorAlternativoDef* colorAlternativoDef;
 	string id;
+	map<estado_personaje, BVH*>* cajasColisiones;
 
 public:
 	PersonajeDef();
@@ -60,6 +64,8 @@ public:
     void ajustarAlto(double altoEscenario, double ypiso);
     void ajustarColorAlternativo();
 	friend ostream& operator<<(ostream &o, const PersonajeDef &p);
+
+    std::map<estado_personaje, BVH*>* getCajasCol();
 
 	string toString();
 	string getId() const;

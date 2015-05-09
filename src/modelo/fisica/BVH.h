@@ -14,16 +14,16 @@ using namespace std;
 
 class BVH {
 private:
-	AABB cajaLimitadora;
-	vector <AABB>* cajasAABB;
+	AABB* cajaLimitadora;
+	vector<AABB*>* cajasAABB;
 	Vector2f desplazamiento;
 
 	void efectuarDesplazamiento();
 
 public:
-	BVH(vector <AABB>* aabb);
+	BVH(vector<AABB*>* aabb);
 	virtual ~BVH();
-	bool interseccion(BVH bvh);
+	bool interseccion(BVH* bvh);
 	void desplazarBVH(Vector2f v);
 	/*Espeja respecto al centro de la caja limitadora*/
 	void espejarBVH();
