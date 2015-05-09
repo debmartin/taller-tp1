@@ -30,11 +30,20 @@ BVH::BVH(vector<AABB*>* aabb) :
 
 BVH::~BVH() {
 	delete cajaLimitadora;
-//	delete cajasAABB;
+	for (int i = 0; i < cajasAABB->size(); i++)
+        delete (*cajasAABB)[i];
+	delete cajasAABB;
 }
 
 bool BVH::interseccion(BVH* bvh){
-    return cajaLimitadora->interseccion(bvh->cajaLimitadora);
+    if (! cajaLimitadora->interseccion(bvh->cajaLimitadora));
+        return false;
+    for (int i = 0; i < cajasAABB->size(); i++){
+        for (int j = 0; j < bvh->cajasAABB->size(); j++){
+            if ((*cajasAABB)[i]->interseccion((*bvh->cajasAABB)[j]))
+                return true;
+        }
+    }
 }
 
 void BVH::desplazarBVH(Vector2f v){
