@@ -229,3 +229,10 @@ Jugador* CargadorDeOjbetos::cargarJugador2() {
 	Jugador* jugador = cargarJugador(*++it);
 	return jugador;
 }
+
+map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColision(){
+	vector<AABB*>* aabb;
+	BVH* bvh = new BVH(aabb);
+
+	//TODO: Val. Falta completar.
+}
