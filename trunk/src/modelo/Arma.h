@@ -15,18 +15,19 @@
 #include <SDL2/SDL_timer.h>
 
 #define DANIO_ARMA	10
-#define VELOCIDAD_DESP_HORIZONTAL_ARMA 50.0f
 #define VELOCIDAD_ARMA_NULA 0.0f
 
 class Arma: public Objeto, public Observable {
 private:
 	int damage;
 	Vector2f posicion;
+	int velocidad_arma;
 	estado_objeto estado;
 	Trayectoria* trayectoria;
 	float tCreacion;
 public:
 	Arma();
+	Arma(int velocidad);
 	virtual ~Arma();
 	int quitarEnergia();
 	void posicionar(Vector2f);

@@ -69,7 +69,8 @@ map<string, Personaje*>* CargadorDeOjbetos::cargarPersonajes() {
 	for (list<PersonajeDef*>::iterator it = parser->getPersonajesDef()->begin() ; it != parser->getPersonajesDef()->end(); ++it)
 	{
 		Personaje* personaje = new Personaje((*it)->getId(), (*it)->getAncho(), (*it)->getAlto(), posicionTemporalPersonaje, VentanaGrafica::Instance(), 1, (*it)->getCajasCol());
-		Arma* arma = new Arma();
+		Arma* arma = new Arma((*it)->getArmaDef()->getVelocidad());
+		cout<<(*it)->getArmaDef()->getVelocidad()<<endl;
 		personaje->agregarArma(arma);
 		personajes->insert( pair<string,Personaje*>((*it)->getId(),personaje) );
 	}
@@ -95,7 +96,7 @@ map<string, PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables(
 		list<SpriteDef*>::iterator it_sprites = spritesDef->begin();
 		SpriteDef* primerSpriteSubQuieto;
 		SpriteDef* spriteDefArma;
-		spriteDefArma = (*it)->getSpriteDefArmaDibujable();
+		spriteDefArma = (*it)->getArmaDef()->getSpriteDefArma();
 
 		for (; it_sprites != spritesDef->end(); ++it_sprites) {
 				if((*it_sprites)->getIdSprite() == ID_ZUBZERO_QUIETO){

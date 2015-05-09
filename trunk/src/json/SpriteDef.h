@@ -29,7 +29,7 @@ private:
 	string id_sprite;
 	int cant_fotogramas;
 	int fps;
-	list<CajaDef*> cajas;
+
 public:
 	SpriteDef();
 	SpriteDef(string imagen, string id, int cant_fotogramas, int fps);

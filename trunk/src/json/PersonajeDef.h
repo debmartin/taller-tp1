@@ -14,6 +14,8 @@
 #include <map>
 
 #include "SpriteDef.h"
+
+#include "ArmaDef.h"
 #include "../modelo/estado/Estado.h"
 #include "../modelo/fisica/BVH.h"
 
@@ -37,7 +39,7 @@ private:
 	double alto;
 	int z_index;
 	list<SpriteDef*>* spritesDef;
-	SpriteDef* armaArrojable;
+	ArmaDef* armaArrojable;
 	float velocidadArma;
 	ColorAlternativoDef* colorAlternativoDef;
 	string id;
@@ -58,8 +60,8 @@ public:
 
 	list<SpriteDef*>* getSpritesDef() const;
 	void agregarSpritesDef(SpriteDef* spriteDef);
-	void agregarSpriteDefArmaDibujable(SpriteDef* arma);
-	SpriteDef* getSpriteDefArmaDibujable();
+	void agregarArmaDef(ArmaDef* arma);
+	ArmaDef* getArmaDef();
     void ajustarZIndex(int cantCapas);
     void ajustarAlto(double altoEscenario, double ypiso);
     void ajustarColorAlternativo();

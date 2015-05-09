@@ -9,6 +9,10 @@
 
 Arma::Arma() {
 	// TODO Auto-generated constructor stub
+}
+
+Arma::Arma(int velocidad) {
+	this->velocidad_arma = velocidad;
 	this->posicion = POS_INICIAL_OBJETO;
 	this->trayectoria = new MRU(POS_INICIAL_OBJETO, VELOCIDAD_OBJETO);
 	this->tCreacion = 0;
@@ -37,8 +41,8 @@ void Arma::cambiarTrayectoria(Trayectoria* unaTrayectoria){
 }
 
 void Arma::arrojar(){
-	cout<<"Arrojo arma"<<endl;
-	cambiarTrayectoria(new MRU(posicion, Vector2f(VELOCIDAD_DESP_HORIZONTAL_ARMA, VELOCIDAD_ARMA_NULA)));
+	//cout<<"Arrojo arma"<<endl;
+	cambiarTrayectoria(new MRU(posicion, Vector2f(velocidad_arma, VELOCIDAD_ARMA_NULA)));
 	cambiarEstado(VISIBLE);
 }
 
@@ -48,7 +52,7 @@ void Arma::update(){
 		//cambiarTrayectoria(new MRU(posicion, Vector2f(VELOCIDAD_DESP_HORIZONTAL_ARMA, VELOCIDAD_ARMA_NULA)));
 		float tActual = ((float)(SDL_GetTicks())/1000.0f) - tCreacion;
 		posicion = this->trayectoria->getPosicion(tActual);
-	//	cout<<"Posicion arma:"<<posicion.X()<<"||"<<posicion.Y()<<endl;
+		cout<<"Posicion arma:"<<posicion.X()<<"||"<<posicion.Y()<<endl;
 	}
 	//notificarObservadores();
 }
