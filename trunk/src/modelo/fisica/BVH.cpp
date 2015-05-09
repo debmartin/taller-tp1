@@ -7,14 +7,43 @@
 
 #include "BVH.h"
 
-BVH::BVH(vector <AABB>* aabb) {
-	// TODO Auto-generated constructor stub
+BVH::BVH(vector<AABB*>* aabb) :
+    cajasAABB(aabb){
+    float limiteInferior = (*cajasAABB)[0]->getLimiteInferior();
+    float limiteSuperior = (*cajasAABB)[0]->getLimiteSuperior();
+    float limiteDerecho = (*cajasAABB)[0]->getLimiteDerecho();
+    float limiteIzquierdo = (*cajasAABB)[0]->getLimiteIzquierdo();
+    float aux;
 
-	//Crear la cajaLimitadora que envuelva todos los AABB dados.
-
+    for (int i = 1; i < cajasAABB->size(); i++){
+        aux = (*cajasAABB)[i]->getLimiteInferior();
+        limiteInferior = (aux < limiteInferior) ? aux : limiteInferior;
+        aux = (*cajasAABB)[i]->getLimiteSuperior();
+        limiteSuperior = (aux > limiteSuperior) ? aux : limiteSuperior;
+        aux = (*cajasAABB)[i]->getLimiteDerecho();
+        limiteDerecho = (aux > limiteDerecho) ? aux : limiteDerecho;
+        aux = (*cajasAABB)[i]->getLimiteIzquierdo();
+        limiteIzquierdo = (aux < limiteIzquierdo) ? aux : limiteIzquierdo;
+    }
+    cajaLimitadora = new AABB(Vector2f(limiteIzquierdo, limiteInferior), Vector2f(limiteDerecho, limiteSuperior));
 }
 
 BVH::~BVH() {
-	// TODO Auto-generated destructor stub
+	delete cajaLimitadora;
+//	delete cajasAABB;
 }
 
+bool BVH::interseccion(BVH* bvh){
+    return cajaLimitadora->interseccion(bvh->cajaLimitadora);
+}
+
+void BVH::desplazarBVH(Vector2f v){
+    cajaLimitadora->desplazarAABB(v);
+    for (int i = 0; i < cajasAABB->size(); i++){
+        (*cajasAABB)[i]->desplazarAABB(v);
+    }
+}
+/*Espeja respecto al centro de la caja limitadora*/
+void BVH::espejarBVH(){
+
+}

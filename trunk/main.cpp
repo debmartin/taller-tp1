@@ -66,8 +66,8 @@ int main(int argc, char* args[])
 		Logger::getInstance()->info("argumento desde la consola: "+argumento);
 		if ( argumento == "-test" )
 		{
-			Test tests;
-			tests.ejecutar();
+//			Test tests;
+//			tests.ejecutar();
 		}
 		else
 		{

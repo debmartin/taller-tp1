@@ -21,6 +21,7 @@ PersonajeDef::PersonajeDef() {
 	this->spritesDef = new list<SpriteDef*>();
 	this->id = "";
 	this->colorAlternativoDef = new ColorAlternativoDef();
+	cajasColisiones = NULL;
 }
 
 PersonajeDef::PersonajeDef(string id, double anchoIn, double altoIn, int zindexIn, ColorAlternativoDef* colorAlter)
@@ -46,6 +47,7 @@ PersonajeDef::PersonajeDef(string id, double anchoIn, double altoIn, int zindexI
 	this->z_index = (zindexIn >= 0) ? zindexIn : Z_INDEX_PERS_DEFAULT;
 	this->spritesDef = new list<SpriteDef*>();
 	this->colorAlternativoDef = colorAlter;
+	cajasColisiones = NULL;
 }
 
 void PersonajeDef::ajustarZIndex(int cantCapas)
@@ -159,4 +161,8 @@ string PersonajeDef::getId() const {
 
 void PersonajeDef::setId(string id) {
 	this->id = id;
+}
+
+map<estado_personaje, BVH*>* PersonajeDef::getCajasCol(){
+    return cajasColisiones;
 }

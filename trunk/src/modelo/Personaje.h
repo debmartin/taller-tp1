@@ -16,65 +16,32 @@
 #include "Vector2f.h"
 #include "Poder.h"
 #include "Objeto.h"
-//#include "Colisionable.h"
+#include "Colisionable.h"
 #include "../vista/Posicionable.h"
-
-//class Posicionable;
-//class Trayectoria;
+#include "estado/Estado.h"
 
 #define DELTA_PASO 1
 #define ENERGIA_INICIAL 100
 
-typedef enum Movimiento
-{
-	REPOSO,
-    CAMINAR_DERECHA,
-    CAMINAR_IZQUIERDA,
-	SALTAR_VERTICAL
-} Movimiento;
-
-typedef enum estado_personaje
-{
-	EN_ESPERA,
-	AGACHADO,
-	CAMINANDO_DERECHA,
-	CAMINANDO_IZQUIERDA,
-	SALTANDO_VERTICAL,
-    SALTANDO_OBLICUO_DERECHA,
-    SALTANDO_OBLICUO_IZQUIERDA,
-	GOLPEANDO_ALTO,
-	GOLPEANDO_BAJO,
-	PATEANDO,
-	PATEANDO_ALTO,
-	PATEANDO_BAJO,
-	DEFENDIENDO,
-	DEFENDIENDO_AGACHADO,
-	BLOQUEADO
-} estado_personaje;
-
 using namespace std;
 
-class Personaje: public Observable, public Loggeable {
+class Personaje: public Observable, public Loggeable, public Colisionable {
 private:
 	string id;
 	string nombre;
     Vector2f posicionInicial;
 	double ancho;
 	double alto;
-	Vector2f posicion;
 	Posicionable* posicionable;
-	int z_index;
 	int energia;
 	Objeto* arma;
-	estado_personaje estado;
-	Trayectoria* trayectoria;
-	float tCreacion;
+	Estado* estado;
+    map<estado_personaje, BVH*>* cajasPorEstado;
 	int numeroJugador;
 	float tiempoBloqueo;
 
 public:
-	Personaje();
-	Personaje(string id, double ancho, double alto, Vector2f posInicial, Posicionable* posc, int numJugador);
+	Personaje(string id, double ancho, double alto, Vector2f posInicial, Posicionable* posc, int numJugador, map<estado_personaje, BVH*>* cajas);
 	virtual ~Personaje();
 	double getAlto() const;
 	double getAncho() const;
@@ -82,7 +49,7 @@ public:
 	Vector2f getDimensionesLogicas() const;
 	void setPosicion(double x, double y);
 	Vector2f getPosicion();
-	void setEstado(estado_personaje estado);
+//	void setEstado(estado_personaje estado);
 	estado_personaje getEstado();
 	int getEnergia();
 	void agregarArma(Objeto* unArma);
@@ -93,14 +60,17 @@ public:
 	void cambiarTrayectoria(Trayectoria* t);
 	void agregarObservador(Observador* unObservador);
 	void notificarObservadores();
-	void update(Vector2f posicionObjetivo);
+	void update(Colisionable* enemigo);
 	bool estaSaltando();
 	bool estaAgachado();
 	bool estaEnReposo();
+	bool estaAtacando();
+	bool estaDefendiendo();
 	bool estaBloqueado();
 	bool ejecutandoMovimientoEspecial();
 	void recibirDanio(int danio);
 	void bloquearPersonaje(float segundos);
+	void calcularNuevaPosicion(Colisionable* enemigo);
 
 	//Movimientos y poderes
 	void caminarDerecha();
@@ -119,6 +89,12 @@ public:
 	void defender_agachado();
 	void ejecutarPoder(Poder* poder, Objeto* objeto);
 	void arrojarArma();
+
+	virtual void colisionar(Colisionable* otro);
+	void cambiarEstado(Estado* nuevo);
+	void corregirPorColision(Colisionable* enemigo);
+    BVH* obtenerCajaColision();
+    bool vaAColisionar(Colisionable* enemigo);
 
 	friend ostream& operator<<(ostream &o, const Personaje &p);
 	string toString();
