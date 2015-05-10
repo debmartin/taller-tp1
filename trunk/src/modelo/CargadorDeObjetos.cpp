@@ -231,8 +231,24 @@ Jugador* CargadorDeOjbetos::cargarJugador2() {
 }
 
 map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColision(){
-	vector<AABB*>* aabb;
-	BVH* bvh = new BVH(aabb);
+	vector<AABB*>* cajasAABB;
+
+	//REPOSO//
+	Vector2f reposo_caja1_PuntoMin(REPOSO_CAJA1_X1_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, REPOSO_CAJA1_Y1_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+	Vector2f reposo_caja1_PuntoMax(REPOSO_CAJA1_X2_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, REPOSO_CAJA1_Y2_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+	AABB* reposo_caja1 = new AABB(reposo_caja1_PuntoMin, reposo_caja1_PuntoMax);
+
+	//PATADA ALTA//
+	Vector2f patada_alta_caja1_PuntoMin(PATADA_ALTA_CAJA1_X1_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PATADA_ALTA_CAJA1_Y1_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+	Vector2f patada_alta_caja1_PuntoMax(PATADA_ALTA_CAJA1_X2_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PATADA_ALTA_CAJA1_Y2_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+
+	Vector2f patada_alta_caja2_PuntoMin(PATADA_ALTA_CAJA2_X1_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PATADA_ALTA_CAJA2_Y1_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+	Vector2f patada_alta_caja2_PuntoMax(PATADA_ALTA_CAJA2_X2_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PATADA_ALTA_CAJA2_Y2_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+
+	AABB* patada_alta_caja1 = new AABB(patada_alta_caja1_PuntoMin, patada_alta_caja1_PuntoMax);
+	AABB* patada_alta_caja2 = new AABB(patada_alta_caja2_PuntoMax, patada_alta_caja2_PuntoMax);
+
+	//BVH* bvh = new BVH(cajasAABB);
 
 	//TODO: Val. Falta completar.
 }

@@ -12,6 +12,7 @@
 #include <string>
 
 #include "../vista/PersonajeDibujable.h"
+#include "CajasColision.h"
 #include "Personaje.h"
 #include "fisica/BVH.h"
 
