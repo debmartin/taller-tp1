@@ -27,6 +27,7 @@ public:
 	void continuarAccionPreviaPersonaje2();
 private:
 	void identificarOrdenPersonaje(Personaje* personaje);
+	void identificarOrdenPersonaje1();
 	void identificarOrdenPersonaje2();
 };
 
