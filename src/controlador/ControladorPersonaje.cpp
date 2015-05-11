@@ -51,6 +51,7 @@ bool ControladorPersonaje::manejar_Evento(SDL_Event &evento){
 void ControladorPersonaje::identificarOrdenPersonaje(Personaje* personaje){
 
     SDL_Joystick* joyAct = joysticks[personaje];
+
     if (SDL_JoystickGetButton(joyAct, SDLK_LEFT) && SDL_JoystickGetButton(joyAct, SDLK_UP)){
         Logger::getInstance()->debug("Se presiona: Tecla izquierda+Tecla arriba.");
         personaje->saltarOblicuoIzquierda();

@@ -25,111 +25,116 @@
             "id_capa": "capa_3", 
             "ancho": 1800 
         }
-    ], 
-    "personaje-1": {
-        "ancho": 135, 	
-        "alto": 272, 
-        "z­index": 2, 
-        "sprites-reposo": { 
-	            "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-reposo.png",
-        		    "cant_fotogramas": 12,
-        		    "fps": 10 
-        			},
-        "sprites-caminando": { 
-		            "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-caminando.png",
-        		    "cant_fotogramas": 9,
-        		    "fps": 13
-        			},
-        "sprites-agachado": { 
-		            "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-agachado.png",
-        		    "cant_fotogramas": 1,
-        		    "fps": 1
-        			},
-        "sprites-saltando-vertical": { 
-		            "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-saltando-vertical.png",
-        		    "cant_fotogramas": 1,
-        		    "fps": 1
-        			},
-        "sprites-saltando-diagonal": { 
-		            "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-saltando-diagonal.png",
-        		    "cant_fotogramas": 7,
-        		    "fps": 15 
-        			},
-        "sprites-pinia-alta": { 
-		            "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-pinia-alta.png",
-        		    "cant_fotogramas": 3,
-        		    "fps": 10 
-        			},
-        "sprites-patada-alta": { 
-		            "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-patada-alta.png",
-        		    "cant_fotogramas": 10,
-        		    "fps": 10
-        			},
-		"arma": {
-        			"imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-arma.png",
-        			"cant_fotogramas": 1,
-        		    "fps": 15,
-        		    "velocidad": 50        		     
-        			},
-		"color-alternativo": {
-					"h-inicial": 53,
-					"h-final": 220,
-					"desplazamiento": 120
-					}
-    }, 
-    "personaje-2": {
-        "ancho": 105, 	
-        "alto": 272, 
-        "z­index": 2, 
-        "sprites-reposo": { 
-		            "imagen": "RECURSOS/PERSONAJES/SONIA/sonia-reposo.png",
-        		    "cant_fotogramas": 7,
-	       		    "fps": 10 
-        			},
-        "sprites-caminando": { 
-		            "imagen": "RECURSOS/PERSONAJES/SONIA/sonia-caminando.png",
-        		    "cant_fotogramas": 6,
-        		    "fps": 12
-        			},
-        "sprites-agachado": { 
-		            "imagen": "RECURSOS/PERSONAJES/SONIA/sonia-agachada.png",
-        		    "cant_fotogramas": 1,
-        		    "fps": 1
-        			},
-        "sprites-saltando-vertical": { 
-		            "imagen": "RECURSOS/PERSONAJES/SONIA/sonia-saltando-vertical.png",
-        		    "cant_fotogramas": 1,
-        		    "fps": 1
-        			},
-        "sprites-saltando-diagonal": { 
-		            "imagen": "RECURSOS/PERSONAJES/SONIA/sonia-saltando-diagonal.png",
-        		    "cant_fotogramas": 7,
-        		    "fps": 15
-        			},
-        "sprites-pinia-alta": { 
-		            "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-pinia-alta.png",
-        		    "cant_fotogramas": 3,
-        		    "fps": 10 
-        			},
-        "sprites-patada-alta": { 
-		            "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-patada-alta.png",
-        		    "cant_fotogramas": 10,
-        		    "fps": 10
-        			},
-		"arma": {
-        			"imagen": "RECURSOS/PERSONAJES/SONIA/sonia-arma.png",
-        			"cant_fotogramas": 1,
-        		    "fps": 15,
-        		    "velocidad": 50
-        			},
-		"color-alternativo": {
-					"h-inicial": 53,
-					"h-final": 220,
-					"desplazamiento": 200
-					}		
-    },
+    ],
+    "personajes": [
+        {
+		    "id_personaje": "sub-zero", 
+		    "ancho": 135, 	
+		    "alto": 272, 
+		    "z­index": 2, 
+		    "sprites-reposo": { 
+			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-reposo.png",
+		    		    "cant_fotogramas": 12,
+		    		    "fps": 10 
+		    			},
+		    "sprites-caminando": { 
+				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-caminando.png",
+		    		    "cant_fotogramas": 9,
+		    		    "fps": 13
+		    			},
+		    "sprites-agachado": { 
+				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-agachado.png",
+		    		    "cant_fotogramas": 1,
+		    		    "fps": 1
+		    			},
+		    "sprites-saltando-vertical": { 
+				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-saltando-vertical.png",
+		    		    "cant_fotogramas": 1,
+		    		    "fps": 1
+		    			},
+		    "sprites-saltando-diagonal": { 
+				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-saltando-diagonal.png",
+		    		    "cant_fotogramas": 7,
+		    		    "fps": 15 
+		    			},
+		    "sprites-pinia-alta": { 
+				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-pinia-alta.png",
+		    		    "cant_fotogramas": 3,
+		    		    "fps": 10 
+		    			},
+		    "sprites-patada-alta": { 
+				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-patada-alta.png",
+		    		    "cant_fotogramas": 10,
+		    		    "fps": 10
+		    			},
+			"arma": {
+		    			"imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-arma.png",
+		    			"cant_fotogramas": 1,
+		    		    "fps": 15,
+		    		    "velocidad": 50        		     
+		    			},
+			"color-alternativo": {
+						"h-inicial": 53,
+						"h-final": 220,
+						"desplazamiento": 120
+						} 
+        },
+	    {
+		    "id_personaje": "sonia", 	     
+		    "ancho": 105, 	
+		    "alto": 272, 
+		    "z­index": 2, 
+		    "sprites-reposo": { 
+				        "imagen": "RECURSOS/PERSONAJES/SONIA/sonia-reposo.png",
+		    		    "cant_fotogramas": 7,
+			   		    "fps": 10 
+		    			},
+		    "sprites-caminando": { 
+				        "imagen": "RECURSOS/PERSONAJES/SONIA/sonia-caminando.png",
+		    		    "cant_fotogramas": 6,
+		    		    "fps": 12
+		    			},
+		    "sprites-agachado": { 
+				        "imagen": "RECURSOS/PERSONAJES/SONIA/sonia-agachada.png",
+		    		    "cant_fotogramas": 1,
+		    		    "fps": 1
+		    			},
+		    "sprites-saltando-vertical": { 
+				        "imagen": "RECURSOS/PERSONAJES/SONIA/sonia-saltando-vertical.png",
+		    		    "cant_fotogramas": 1,
+		    		    "fps": 1
+		    			},
+		    "sprites-saltando-diagonal": { 
+				        "imagen": "RECURSOS/PERSONAJES/SONIA/sonia-saltando-diagonal.png",
+		    		    "cant_fotogramas": 7,
+		    		    "fps": 15
+		    			},
+		    "sprites-pinia-alta": { 
+				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-pinia-alta.png",
+		    		    "cant_fotogramas": 3,
+		    		    "fps": 10 
+		    			},
+		    "sprites-patada-alta": { 
+				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-patada-alta.png",
+		    		    "cant_fotogramas": 10,
+		    		    "fps": 10
+		    			},
+			"arma": {
+		    			"imagen": "RECURSOS/PERSONAJES/SONIA/sonia-arma.png",
+		    			"cant_fotogramas": 1,
+		    		    "fps": 15,
+		    		    "velocidad": 50
+		    			},
+			"color-alternativo": {
+						"h-inicial": 53,
+						"h-final": 220,
+						"desplazamiento": 200
+						}
+        }
+    ],
+    
 	"jugador-1": {
-        "personaje": "personaje-1",
+        "personaje": "sub-zero",
         "control-joystick":{
         			"id": "joystick-1",
         			"izquierda": "izquierda",
@@ -143,7 +148,7 @@
         }
 	},
 	"jugador-2": {
-        "personaje": "personaje-2",
+        "personaje": "sonia",
         "control-joystick":{
         			"id": "joystick-2",
         			"izquierda": "izquierda",
