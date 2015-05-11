@@ -7,30 +7,28 @@
 
 #include "Personaje.h"
 
-#include <SDL2/SDL_timer.h>
 #include <sstream>
 
 #include "../utils/Logger.h"
 #include "../vista/VentanaGrafica.h"
-#include "MRU.h"
-#include "MRUV.h"
-#include "Reposo.h"
-#include "estado/EnEspera.h"
+#include "Ataque.h"
+#include "estado/Agachado.h"
+#include "estado/Bloqueado.h"
 #include "estado/CaminandoDerecha.h"
 #include "estado/CaminandoIzquierda.h"
-#include "estado/Agachado.h"
-#include "estado/SaltandoVertical.h"
-#include "estado/SaltandoOblicuoDerecha.h"
-#include "estado/SaltandoOblicuoIzquierda.h"
+#include "estado/Cayendo.h"
+#include "estado/Defendiendo.h"
+#include "estado/DefendiendoAgachado.h"
+#include "estado/EnEspera.h"
 #include "estado/GolpeandoAlto.h"
 #include "estado/GolpeandoBajo.h"
 #include "estado/Pateando.h"
 #include "estado/PateandoAlto.h"
 #include "estado/PateandoBajo.h"
-#include "estado/Defendiendo.h"
-#include "estado/DefendiendoAgachado.h"
-#include "estado/Cayendo.h"
-#include "estado/Bloqueado.h"
+#include "estado/SaltandoOblicuoDerecha.h"
+#include "estado/SaltandoOblicuoIzquierda.h"
+#include "estado/SaltandoVertical.h"
+#include "Objeto.h"
 
 #define VELOCIDAD_DESP_HORIZONTAL_SALTANDO 320.0f
 #define VELOCIDAD_DESP_HORIZONTAL_CAMINANDO 215.0f

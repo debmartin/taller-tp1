@@ -14,14 +14,19 @@ JugadorDef::JugadorDef() {
 
 }
 
-JugadorDef::JugadorDef(string personaje) {
+JugadorDef::JugadorDef(string personaje, ControlJoystickDef* controlJoystick) {
 	this->idPersonaje = personaje;
+	this->controlJoystick = controlJoystick;
 }
 
 string JugadorDef::toString() {
     ostringstream stream;
     stream <<*this;
 	return stream.str();
+}
+
+ControlJoystickDef* JugadorDef::getControlJoystick() const {
+	return controlJoystick;
 }
 
 string JugadorDef::getIdPersonaje() const {

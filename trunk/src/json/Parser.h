@@ -48,7 +48,16 @@
 #define TAG_JUGADOR_1 "jugador-1"
 #define TAG_JUGADOR_2 "jugador-2"
 #define TAG_JUGADOR_PERSONAJE "personaje"
-#define TAG_JUGADOR_DIRECCION "direccion"
+#define TAG_JUGADOR_CONTROLJOYSTICK "control-joystick"
+#define TAG_JUGADOR_CONTROLJOYSTICK_ID "id"
+#define TAG_JUGADOR_CONTROLJOYSTICK_IZQ "izquierda"
+#define TAG_JUGADOR_CONTROLJOYSTICK_DER "derecha"
+#define TAG_JUGADOR_CONTROLJOYSTICK_ARRIBA "arriba"
+#define TAG_JUGADOR_CONTROLJOYSTICK_ABAJO "abajo"
+#define TAG_JUGADOR_CONTROLJOYSTICK_ARROJAR_ARMA "arrojar-arma"
+#define TAG_JUGADOR_CONTROLJOYSTICK_GOLPE_ALTO "golpe-alto"
+#define TAG_JUGADOR_CONTROLJOYSTICK_PATADA_ALTA "patada-alta"
+#define TAG_JUGADOR_CONTROLJOYSTICK_BLOQUEAR "bloquear"
 
 class EscenarioDef;
 class PersonajeDef;

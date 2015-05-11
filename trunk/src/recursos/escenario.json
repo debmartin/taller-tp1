@@ -129,10 +129,32 @@
 					}		
     },
 	"jugador-1": {
-        "personaje": "personaje-1"
+        "personaje": "personaje-1",
+        "control-joystick":{
+        			"id": "joystick-1",
+        			"izquierda": "izquierda",
+        			"derecha": "derecha",
+        			"arriba": "arriba",        			        			
+        			"abajo": "abajo",
+        			"arrojar-arma": "circulo",
+        			"golpe-alto": "triangulo",
+        			"patada-alta": "cruz",
+        			"bloquear": "cuadrado"
+        }
 	},
 	"jugador-2": {
-        "personaje": "personaje-1"
+        "personaje": "personaje-1",
+        "control-joystick":{
+        			"id": "joystick-2",
+        			"izquierda": "izquierda",
+        			"derecha": "derecha",
+        			"arriba": "arriba",        			        			
+        			"abajo": "abajo",
+        			"arrojar-arma": "circulo",
+        			"golpe-alto": "triangulo",
+        			"patada-alta": "cruz",
+        			"bloquear": "cuadrado"    			        			        			        			        			
+        }
 	}        
 }
 
