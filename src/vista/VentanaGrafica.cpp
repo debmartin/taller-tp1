@@ -22,18 +22,16 @@ VentanaGrafica* VentanaGrafica::Instance()
 	return instancia_unica;
 }
 
-VentanaGrafica::VentanaGrafica() :
-    escenario(NULL), limite_logico_izquierdo(0), ancho_logico_ventana(0), ancho_ventanaPx(0) { }
+VentanaGrafica::VentanaGrafica() {} // TODO: GASTON: INICIALIZAR CORRECTAMENTE
+    //escenario(NULL), limite_logico_izquierdo(0), ancho_logico_ventana(0), ancho_ventanaPx(0) { }
 
-bool VentanaGrafica::init(string titulo, Vector2f posicion, Vector2f tamanioPixels, Vector2f tamanioLogico, bool fullscreen){
+bool VentanaGrafica::init(string titulo, Vector2f posicionVentanaPrograma, Vector2f tamanioPixels, Vector2f tamanioLogico, bool fullscreen){
 
-	this->ancho_ventanaPx = tamanioPixels.X();
-	this->alto_ventanaPx = tamanioPixels.Y();
-	this->ancho_logico_ventana = tamanioLogico.X();
-	this->alto_logico_ventana = tamanioLogico.Y();
-
+	this->tamPixels = tamanioPixels;
+	this->tamLogico = Vector2f(tamanioLogico.X(), tamanioLogico.Y() * PORCENTAJE_TAMANIO_VENTANA);
+	this->vibracion = Vibracion(PORCENTAJE_ESPACIO_INFERIOR_VENTANA * tamanioLogico.X());
 	//Inicializamos el Renderizador.
-	bool exito = Renderizador::Instance()->init(titulo, posicion, tamanioPixels, fullscreen);
+	bool exito = Renderizador::Instance()->init(titulo, posicionVentanaPrograma, tamanioPixels, fullscreen);
 	if(!exito){
 		Logger::getInstance()->error(
 						"Falla al inicializar el Renderizador.");
@@ -46,21 +44,33 @@ bool VentanaGrafica::init(string titulo, Vector2f posicion, Vector2f tamanioPixe
 
 void VentanaGrafica::agregarEscenario(EscenarioGrafico* esc) {
     escenario = esc;
-
-    //Seteo los limites logicos de la ventana en base al escenario dado.
-    limite_logico_izquierdo = (escenario->getAnchoLogico()/2.0) - (ancho_logico_ventana/2.0);
+    centrar_ventana();
 }
 
-void VentanaGrafica::centrar_ventana(){
-	this->limite_logico_izquierdo = (this->escenario->getAnchoLogico()/2.0) - (this->ancho_logico_ventana/2.0);
+void VentanaGrafica::centrar_ventana() {
+	this->posLogico.X((this->escenario->getAnchoLogico()/2.0) - (this->tamLogico.X()/2.0));
+	this->posLogico.Y(this->escenario->getAltoLogico() * PORCENTAJE_ESPACIO_INFERIOR_VENTANA);
 }
 
-Vector2f VentanaGrafica::calcularPosicionEnVentana(Vector2f posicionLogica){
-    return Vector2f(posicionLogica.X()-limite_logico_izquierdo, escenario->getAltoLogico() - posicionLogica.Y());
+Vector2f VentanaGrafica::calcularPosicionEnVentana(Vector2f posicionLogica) {
+	Vector2f V1 = getPosLogico() + Vector2f(0, this->tamLogico.Y());
+	Vector2f vNuevo = posicionLogica - V1;
+	vNuevo.Y(-vNuevo.Y());
+	return vNuevo;
 }
 
+void VentanaGrafica::vibrar() {
+	if (this->vibracion.estaVibrando())
+		return;
+	this->vibracion.iniciar();
+}
 
-void VentanaGrafica::dibujarTodo(){
+Vector2f VentanaGrafica::getPosLogico() {
+	// VIBRACION PARA MOVER PERSONAJES
+	return Vector2f(this->posLogico + vibracion.getOffset());
+}
+
+void VentanaGrafica::dibujarTodo() {
 	Renderizador::Instance()->dibujar(escenario);
 }
 
@@ -76,33 +86,41 @@ void VentanaGrafica::recibirNotificacion(Observable* unObservable){
 
 	//Personaje en el margen izquierdo.
 	float posicion = posicionPersonaje.X();
-	if( posicion <= this->limite_logico_izquierdo){
-		this->limite_logico_izquierdo = posicionPersonaje.X();
+	if( posicion <= getPosLogico().X()){
+		//this->limite_logico_izquierdo = posicionPersonaje.X();
+		this->posLogico = Vector2f(posicionPersonaje.X(), posLogico.Y());
 		this->escenario->scrollear_capas();
 	}
 	//Personaje en el margen derecho
 	posicion = posicionPersonaje.X()+ unPersonaje->getAncho();
 	if( posicion >= getLimiteLogicoDerecho()){
 		//Muevo los limites de la ventana.
-		this->limite_logico_izquierdo = posicion - this->ancho_logico_ventana;
+		//this->limite_logico_izquierdo = posicion - this->tamLogico.X();
+		this->posLogico = Vector2f(posicion - this->tamLogico.X(), posLogico.Y());
 		this->escenario->scrollear_capas();
 	}
 }
 
 float VentanaGrafica::getLimiteLogicoIzquierdo(){
-	return this->limite_logico_izquierdo;
+	return getPosLogico().X();
+}
+
+float VentanaGrafica::getLimiteLogicoSuperior(){
+	// VIBRACION PARA MOVER CAPAS
+	return this->vibracion.getOffset().Y();
 }
 
 float VentanaGrafica::getLimiteLogicoDerecho(){
-	return limite_logico_izquierdo + ancho_logico_ventana;
+	return getPosLogico().X() + this->tamLogico.X();
 }
 
 float VentanaGrafica::getAnchoLogico() {
-	return ancho_logico_ventana;
+	return this->tamLogico.X();
 }
 
 float VentanaGrafica::getAnchoPx(){
-	return this->ancho_ventanaPx;
+	//return this->ancho_ventanaPx;
+	return this->tamPixels.X();
 }
 
 bool VentanaGrafica::llegoAlLimiteIzquierdo(Vector2f posicion){
@@ -114,12 +132,14 @@ bool VentanaGrafica::llegoAlLimiteDerecho(Vector2f posicion){
 }
 
 float VentanaGrafica::relacion_de_aspectoX(){
-	float res = this->ancho_ventanaPx / ((this->limite_logico_izquierdo + this->ancho_logico_ventana) - this->limite_logico_izquierdo);
+	//float res = this->ancho_ventanaPx / ((this->limite_logico_izquierdo + this->ancho_logico_ventana) - this->limite_logico_izquierdo);
+	float res = this->tamPixels.X() / ((getPosLogico().X() + this->tamLogico.X()) - getPosLogico().X());
 	return res;
 }
 
 float VentanaGrafica::relacion_de_aspectoY(){
-	return this->alto_ventanaPx / (this->alto_logico_ventana);
+	//return this->alto_ventanaPx / (this->alto_logico_ventana);
+	return this->tamPixels.Y() / (this->tamLogico.Y());
 }
 
 Vector2f VentanaGrafica::obtener_relacion_aspectos(){
@@ -137,7 +157,7 @@ bool VentanaGrafica::esValida(Vector2f posicion, double ancho){
 }
 
 bool VentanaGrafica::enExtremos(float distancia, double ancho){
-    float ancho_restante = ancho_logico_ventana - ancho;
+    float ancho_restante = this->tamLogico.X() - ancho;
     return (distancia >= ancho_restante);
 }
 
