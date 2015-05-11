@@ -49,6 +49,40 @@ bool ControladorPersonaje::manejar_Evento(SDL_Event &evento){
 }
 
 void ControladorPersonaje::identificarOrdenPersonaje(Personaje* personaje){
+
+    SDL_Joystick* joyAct = joysticks[personaje];
+    if (SDL_JoystickGetButton(joyAct, SDLK_LEFT) && SDL_JoystickGetButton(joyAct, SDLK_UP)){
+        Logger::getInstance()->debug("Se presiona: Tecla izquierda+Tecla arriba.");
+        personaje->saltarOblicuoIzquierda();
+    } else if (SDL_JoystickGetButton(joyAct, SDLK_RIGHT) && SDL_JoystickGetButton(joyAct, SDLK_UP)){
+        Logger::getInstance()->debug("Se presiona: Tecla derecha+Tecla arriba.");
+        personaje->saltarOblicuoDerecha();
+    }else if (SDL_JoystickGetButton(joyAct, SDLK_LEFT) && ! personaje1->estaAgachado()){
+        Logger::getInstance()->debug("Se presiona: Tecla izquierda.");
+        personaje->caminarIzquierda();
+    }else if (SDL_JoystickGetButton(joyAct, SDLK_RIGHT) && ! personaje1->estaAgachado()){
+        Logger::getInstance()->debug("Se presiona: Tecla derecha.");
+        personaje->caminarDerecha();
+    }else if (SDL_JoystickGetButton(joyAct, SDLK_UP)){
+        Logger::getInstance()->debug("Se presiona: Tecla arriba.");
+        personaje->saltarVertical();
+    }else if (SDL_JoystickGetButton(joyAct, SDLK_DOWN)){
+        Logger::getInstance()->debug("Se presiona: Tecla abajo.");
+        personaje->agacharse();
+    }else if(SDL_JoystickGetButton(joyAct, BOTON_ARROJAR_ARMA)){
+    	personaje->arrojarArma();
+    }else if(SDL_JoystickGetButton(joyAct, BOTON_GOLPE_ALTO)){
+        personaje->golpeAlto();
+    }else if(SDL_JoystickGetButton(joyAct, BOTON_PATADA_ALTA)){
+        personaje->patadaAlta();
+    }else if(SDL_JoystickGetButton(joyAct, BOTON_BLOQUEAR)){
+    	personaje->bloquearPersonaje(TIEMPO_BLOQUEADO);
+    }else{
+        personaje->mantenerReposo();
+    }
+}
+
+void ControladorPersonaje::identificarOrdenPersonaje1(){
     const Uint8* estadoTeclado = SDL_GetKeyboardState(NULL);
 
     /**
@@ -93,37 +127,6 @@ void ControladorPersonaje::identificarOrdenPersonaje(Personaje* personaje){
     }else{
         personaje1->mantenerReposo();
     }
-
- /*   SDL_Joystick* joyAct = joysticks[personaje];
-    if (SDL_JoystickGetButton(joyAct, SDLK_LEFT) && SDL_JoystickGetButton(joyAct, SDLK_UP)){
-        Logger::getInstance()->debug("Se presiona: Tecla izquierda+Tecla arriba.");
-        personaje->saltarOblicuoIzquierda();
-    } else if (SDL_JoystickGetButton(joyAct, SDLK_RIGHT) && SDL_JoystickGetButton(joyAct, SDLK_UP)){
-        Logger::getInstance()->debug("Se presiona: Tecla derecha+Tecla arriba.");
-        personaje->saltarOblicuoDerecha();
-    }else if (SDL_JoystickGetButton(joyAct, SDLK_LEFT) && ! personaje1->estaAgachado()){
-        Logger::getInstance()->debug("Se presiona: Tecla izquierda.");
-        personaje->caminarIzquierda();
-    }else if (SDL_JoystickGetButton(joyAct, SDLK_RIGHT) && ! personaje1->estaAgachado()){
-        Logger::getInstance()->debug("Se presiona: Tecla derecha.");
-        personaje->caminarDerecha();
-    }else if (SDL_JoystickGetButton(joyAct, SDLK_UP)){
-        Logger::getInstance()->debug("Se presiona: Tecla arriba.");
-        personaje->saltarVertical();
-    }else if (SDL_JoystickGetButton(joyAct, SDLK_DOWN)){
-        Logger::getInstance()->debug("Se presiona: Tecla abajo.");
-        personaje->agacharse();
-    }else if(SDL_JoystickGetButton(joyAct, BOTON_ARROJAR_ARMA)){
-    	personaje->arrojarArma();
-    }else if(SDL_JoystickGetButton(joyAct, BOTON_GOLPE_ALTO)){
-        personaje->golpeAlto();
-    }else if(SDL_JoystickGetButton(joyAct, BOTON_PATADA_ALTA)){
-        personaje->patadaAlta();
-    }else if(SDL_JoystickGetButton(joyAct, BOTON_BLOQUEAR)){
-    	personaje->bloquearPersonaje(TIEMPO_BLOQUEADO);
-    }else{
-        personaje->mantenerReposo();
-    }*/
 }
 
 void ControladorPersonaje::identificarOrdenPersonaje2(){
@@ -177,13 +180,15 @@ void ControladorPersonaje::identificarOrdenPersonaje2(){
 void ControladorPersonaje::continuarAccionPreviaPersonaje1(){
     if (! personaje1->estaEnReposo())
         return;
-    identificarOrdenPersonaje(personaje1);
+    //identificarOrdenPersonaje(personaje1);
+    identificarOrdenPersonaje1();
 }
 
 void ControladorPersonaje::continuarAccionPreviaPersonaje2(){
     if (! personaje2->estaEnReposo())
         return;
-    identificarOrdenPersonaje(personaje2);
+    //identificarOrdenPersonaje(personaje2);
+    identificarOrdenPersonaje2();
 }
 
 ControladorPersonaje::~ControladorPersonaje() {

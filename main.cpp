@@ -21,8 +21,6 @@ Juego* cargarJuego(string escenarioPath){
 
 	Jugador* jugador1 = cargador_de_objetos.cargarJugador1();
 	Jugador* jugador2 = cargador_de_objetos.cargarJugador2();
-	cout<<*jugador1->getControlJoystick()<<endl;
-	cout<<*jugador2->getControlJoystick()<<endl;
 
 	if ( jugador1->getPersonaje()->getId() == jugador2->getPersonaje()->getId())
 	{
