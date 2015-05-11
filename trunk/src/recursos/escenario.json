@@ -36,8 +36,8 @@
         		    "fps": 10 
         			},
         "sprites-caminando": { 
-		            "imagen": "RECURSOS/PERSONAJES/TEST/cadillac-caminando.png",
-        		    "cant_fotogramas": 12,
+		            "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-caminando.png",
+        		    "cant_fotogramas": 9,
         		    "fps": 13
         			},
         "sprites-agachado": { 
@@ -143,7 +143,7 @@
         }
 	},
 	"jugador-2": {
-        "personaje": "personaje-1",
+        "personaje": "personaje-2",
         "control-joystick":{
         			"id": "joystick-2",
         			"izquierda": "izquierda",
