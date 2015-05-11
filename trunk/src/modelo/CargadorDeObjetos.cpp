@@ -251,16 +251,27 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColision(){
 	//REPOSO//
 	Vector2f reposo_caja1_PuntoMin(REPOSO_CAJA1_X1_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, REPOSO_CAJA1_Y1_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
 	Vector2f reposo_caja1_PuntoMax(REPOSO_CAJA1_X2_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, REPOSO_CAJA1_Y2_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+
+	//Vector2f reposo_caja2_PuntoMin(REPOSO_CAJA2_X1_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, REPOSO_CAJA2_Y1_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+	//Vector2f reposo_caja2_PuntoMax(REPOSO_CAJA2_X2_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, REPOSO_CAJA2_Y2_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+
 	AABB* reposo_caja1 = new AABB(reposo_caja1_PuntoMin, reposo_caja1_PuntoMax);
+	//AABB* reposo_caja2 = new AABB(reposo_caja2_PuntoMin, reposo_caja2_PuntoMax);
 	cajasAABB_reposo->push_back(reposo_caja1);
+	//cajasAABB_reposo->push_back(reposo_caja2);
 
 	//CAMINANDO//
 	Vector2f caminando_caja1_PuntoMin(CAMINANDO_CAJA1_X1_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, CAMINANDO_CAJA1_Y1_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
 	Vector2f caminando_caja1_PuntoMax(CAMINANDO_CAJA1_X2_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, CAMINANDO_CAJA1_Y2_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
 
+	//Vector2f caminando_caja2_PuntoMin(CAMINANDO_CAJA2_X1_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, CAMINANDO_CAJA2_Y1_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+	//Vector2f caminando_caja2_PuntoMax(CAMINANDO_CAJA2_X2_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, CAMINANDO_CAJA2_Y2_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+
 	AABB* caminando_caja1 = new AABB(caminando_caja1_PuntoMin, caminando_caja1_PuntoMax);
+	//AABB* caminando_caja2 = new AABB(caminando_caja2_PuntoMin, caminando_caja2_PuntoMax);
 
 	cajasAABB_caminando->push_back(caminando_caja1);
+	//cajasAABB_caminando->push_back(caminando_caja2);
 
 	//PATADA ALTA//
 	Vector2f patada_alta_caja1_PuntoMin(PATADA_ALTA_CAJA1_X1_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PATADA_ALTA_CAJA1_Y1_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
