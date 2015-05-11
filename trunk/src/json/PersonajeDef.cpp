@@ -50,7 +50,7 @@ PersonajeDef::PersonajeDef(string id, double anchoIn, double altoIn, int zindexI
 	cajasColisiones = NULL;
 }
 
-void PersonajeDef::setCajasColisiones(map<estado_personaje, BVH*>* cajas){
+void PersonajeDef::agregarCajasDeColisiones(map<estado_personaje, BVH*>* cajas){
 	cajasColisiones = cajas;
 }
 
