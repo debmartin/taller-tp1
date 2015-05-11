@@ -50,6 +50,10 @@ PersonajeDef::PersonajeDef(string id, double anchoIn, double altoIn, int zindexI
 	cajasColisiones = NULL;
 }
 
+void PersonajeDef::setCajasColisiones(map<estado_personaje, BVH*>* cajas){
+	cajasColisiones = cajas;
+}
+
 void PersonajeDef::ajustarZIndex(int cantCapas)
 {
     if (z_index > cantCapas)
@@ -58,6 +62,7 @@ void PersonajeDef::ajustarZIndex(int cantCapas)
         Logger::getInstance()->error("El zindex del Personaje es mayor al valor posible. Se elije uno nuevo para que el personaje este adelante de todas las capas. Valor", z_index);
     }
 }
+
 
 void PersonajeDef::ajustarAlto(double altoEscenario, double ypiso){
     if (alto <= 0) {

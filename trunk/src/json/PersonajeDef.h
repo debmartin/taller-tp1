@@ -68,6 +68,7 @@ public:
 	friend ostream& operator<<(ostream &o, const PersonajeDef &p);
 
     std::map<estado_personaje, BVH*>* getCajasCol();
+    void setCajasColisiones(map<estado_personaje, BVH*>* cajas);
 
 	string toString();
 	string getId() const;
