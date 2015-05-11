@@ -75,7 +75,7 @@ map<string, Personaje*>* CargadorDeOjbetos::cargarPersonajes() {
 		personaje->agregarArma(arma);
 		personajes->insert( pair<string,Personaje*>((*it)->getId(),personaje) );
 	}
-
+	
 	return personajes;
 }
 
@@ -232,13 +232,13 @@ Jugador* CargadorDeOjbetos::cargarJugador2() {
 }
 
 map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColision(){
-	vector<AABB*>* cajasAABB_reposo;
-	vector<AABB*>* cajasAABB_caminando;
-	vector<AABB*>* cajasAABB_patada_alta;
-	vector<AABB*>* cajasAABB_pinia_alta;
-	vector<AABB*>* cajasAABB_agachado;
-	vector<AABB*>* cajasAABB_salto_diagonal;
-	vector<AABB*>* cajasAABB_salto_vertical;
+	vector<AABB*>* cajasAABB_reposo = new vector<AABB*>;
+	vector<AABB*>* cajasAABB_caminando = new vector<AABB*>;
+	vector<AABB*>* cajasAABB_patada_alta = new vector<AABB*>;
+	vector<AABB*>* cajasAABB_pinia_alta = new vector<AABB*>;
+	vector<AABB*>* cajasAABB_agachado = new vector<AABB*>;
+	vector<AABB*>* cajasAABB_salto_diagonal = new vector<AABB*>;
+	vector<AABB*>* cajasAABB_salto_vertical = new vector<AABB*>;
 
 	//REPOSO//
 	Vector2f reposo_caja1_PuntoMin(REPOSO_CAJA1_X1_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, REPOSO_CAJA1_Y1_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
@@ -311,7 +311,7 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColision(){
 	BVH* BVH_salto_diagonal = new BVH(cajasAABB_salto_diagonal);
 	BVH* BVH_salto_vertical = new BVH(cajasAABB_salto_vertical);
 
-	map<estado_personaje, BVH*>* mapa_BVH;
+	map<estado_personaje, BVH*>* mapa_BVH = new map<estado_personaje, BVH*>;
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(EN_ESPERA, BVH_reposo));
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(CAMINANDO_DERECHA, BVH_caminando));
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(CAMINANDO_IZQUIERDA, BVH_caminando));
