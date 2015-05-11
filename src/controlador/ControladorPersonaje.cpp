@@ -51,6 +51,19 @@ bool ControladorPersonaje::manejar_Evento(SDL_Event &evento){
 void ControladorPersonaje::identificarOrdenPersonaje(Personaje* personaje){
     const Uint8* estadoTeclado = SDL_GetKeyboardState(NULL);
 
+    /**
+     * Codigos numericos de las teclas
+    SDL_SCANCODE_RIGHT = 79,
+    SDL_SCANCODE_LEFT = 80,
+    SDL_SCANCODE_DOWN = 81,
+    SDL_SCANCODE_UP = 82,
+    SDL_SCANCODE_F = 9,
+    SDL_SCANCODE_G = 10,
+    SDL_SCANCODE_H = 11,
+    SDL_SCANCODE_N = 17,
+     *
+     */
+
     if (estadoTeclado[SDL_SCANCODE_LEFT] && estadoTeclado[SDL_SCANCODE_UP]){
         Logger::getInstance()->debug("Se presiona: Tecla izquierda+Tecla arriba.");
         personaje1->saltarOblicuoIzquierda();
@@ -115,6 +128,19 @@ void ControladorPersonaje::identificarOrdenPersonaje(Personaje* personaje){
 
 void ControladorPersonaje::identificarOrdenPersonaje2(){
     const Uint8* estadoTeclado = SDL_GetKeyboardState(NULL);
+
+    /**
+     * Codigos numericos de las teclas
+    SDL_SCANCODE_A = 4,
+    SDL_SCANCODE_D = 7,
+    SDL_SCANCODE_W = 26,
+    SDL_SCANCODE_S = 22,
+    SDL_SCANCODE_C = 6,
+    SDL_SCANCODE_V = 25,
+    SDL_SCANCODE_B = 5,
+    SDL_SCANCODE_M = 16,
+     *
+     */
 
     if (estadoTeclado[SDL_SCANCODE_A] && estadoTeclado[SDL_SCANCODE_W]){
         Logger::getInstance()->debug("Se presiona: Tecla izquierda+Tecla arriba.");

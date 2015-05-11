@@ -1,13 +1,16 @@
 #include <SDL2/SDL_stdinc.h>
 #include <SDL2/SDL_timer.h>
+#include <iostream>
 #include <string>
 
+#include "src/json/ControlJoystickDef.h"
 #include "src/Juego.h"
 #include "src/modelo/CargadorDeObjetos.h"
 #include "src/modelo/Jugador.h"
+#include "src/modelo/Personaje.h"
 #include "src/utils/Logger.h"
+#include "src/vista/PersonajeDibujable.h"
 #include "src/vista/VentanaGrafica.h"
-#include "test/Test.h"
 
 Juego* cargarJuego(string escenarioPath){
 	Logger::getInstance()->info("#################################################");
@@ -18,6 +21,8 @@ Juego* cargarJuego(string escenarioPath){
 
 	Jugador* jugador1 = cargador_de_objetos.cargarJugador1();
 	Jugador* jugador2 = cargador_de_objetos.cargarJugador2();
+	cout<<*jugador1->getControlJoystick()<<endl;
+	cout<<*jugador2->getControlJoystick()<<endl;
 
 	if ( jugador1->getPersonaje()->getId() == jugador2->getPersonaje()->getId())
 	{
