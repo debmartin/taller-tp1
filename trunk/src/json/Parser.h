@@ -19,10 +19,9 @@
 
 #define JSON_POR_DEFECTO "src/recursos/escenario_defecto.json"
 #define TAG_CAPAS "capas"
+#define TAG_PERSONAJES "personajes"
 #define TAG_ESCENARIO "escenario"
 #define TAG_VENTANA "ventana"
-#define TAG_PERSONAJE_1 "personaje-1"
-#define TAG_PERSONAJE_2 "personaje-2"
 #define TAG_CAPAS_IMAGEN "imagen_fondo"
 #define TAG_CAPAS_ID "id_capa"
 #define TAG_CAPAS_ANCHO "ancho"
@@ -32,6 +31,7 @@
 #define TAG_VENTANA_ALTOPX "altopx"
 #define TAG_VENTANA_ANCHOPX "anchopx"
 #define TAG_VENTANA_ANCHO "ancho"
+#define TAG_PERSONAJE_ID "id_personaje"
 #define TAG_PERSONAJE_ALTO "alto"
 #define TAG_PERSONAJE_ANCHO "ancho"
 #define TAG_PERSONAJE_ZINDEX "zindex"
@@ -104,9 +104,8 @@ private:
     void parsearCapas();
     void parsearVentana();
     void parsearEscenario();
-    PersonajeDef* parsearPersonaje(string tag_personaje);
-    JugadorDef* parsearJugador(string tag_jugador);
     void parsearPersonajes();
+    JugadorDef* parsearJugador(string tag_jugador);
     void parsearJugadores();
 
 };

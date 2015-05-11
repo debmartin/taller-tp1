@@ -130,6 +130,107 @@ void Parser::parsearCapas(){
 
 }
 
+void Parser::parsearPersonajes()
+{
+
+	Json::Value valorPersonajes;
+	valorPersonajes = root.get(TAG_PERSONAJES, &valorPersonajes);
+
+	for (unsigned int idx_personajes = 0; idx_personajes < valorPersonajes.size(); ++idx_personajes)
+	{
+	    //atributos del personaje
+		string id_personaje = "";
+	    double p_alto = 0;
+	    double p_ancho = 0;
+	    int p_zindex = 0;
+	    // del sprites reposo
+	    string p_sprites_imagen = "";
+	    string p_sprites_id = "";
+	    int p_sprites_cant_fotogramas = 0;
+	    int p_sprites_fps = 0;
+		double color_alternativo_hinicial = 0;
+		double color_alternativo_hfinal =0;
+		double color_alternativo_desplazamiento = 0;
+
+		//Sprite arma
+		string p_arma_imagen;
+		int p_arma_cant_fotogramas = 0;
+		int p_arma_fps = 0;
+		SpriteDef* spriteDefArma;
+		int velocidad_arma = 0;
+		ArmaDef* arma;
+		ColorAlternativoDef* colorAlternativoDef;
+
+	    list<SpriteDef*> sprites;
+
+		for( Json::ValueIterator it = valorPersonajes[idx_personajes].begin() ; it != valorPersonajes[idx_personajes].end() ; it++ )
+		{
+			string tag = it.key().asString();
+			Json::Value subvalor = valorPersonajes[idx_personajes][tag];
+
+			if ( tag == TAG_PERSONAJE_ID ) {
+				id_personaje = subvalor.asString();
+			} else if ( tag == TAG_PERSONAJE_ALTO ) {
+				p_alto = obtenerValorDouble(subvalor, ALTO_PERS_DEFAULT, "Personaje alto no es valor numerico");
+			} else if ( tag == TAG_PERSONAJE_ANCHO ) {
+				p_ancho = obtenerValorDouble(subvalor, ANCHO_PERS_DEFAULT, "Personaje ancho no es valor numerico");
+			} else if ( tag.compare(TAG_PERSONAJE_ZINDEX) >= 0) {
+				p_zindex = obtenerValorInt(subvalor, Z_INDEX_PERS_DEFAULT, "Personaje zindex no es valor entero");
+			} else if (tag.find(TAG_PERSONAJE_SPRITES) != std::string::npos) {
+				p_sprites_imagen = (*it)[TAG_PERSONAJE_SPRITES_IMAGEN].asString();
+				int indiceId = string(TAG_PERSONAJE_SPRITES).size();
+				p_sprites_id = (tag).substr(indiceId);
+
+				Json::Value valorFotog = (*it)[TAG_PERSONAJE_SPRITES_CANT_FOTOGRAMAS];
+				Json::Value valorFps = (*it)[TAG_PERSONAJE_SPRITES_FPS];
+
+				p_sprites_cant_fotogramas = obtenerValorInt(valorFotog, CANT_FOTOGRAMAS_DEFAULT, "Personaje sprite cant_fotogramas no es valor entero");
+				p_sprites_fps = obtenerValorInt(valorFps, FPS_DEFAULT, "Personaje sprite fps no es valor entero");
+
+				SpriteDef* spriteDefAct = new SpriteDef(p_sprites_imagen, p_sprites_id, p_sprites_cant_fotogramas, p_sprites_fps);
+				sprites.push_back(spriteDefAct);
+			}else if ( tag == TAG_PERSONAJE_ARMA ){
+				p_arma_imagen = (*it)[TAG_PERSONAJE_SPRITES_IMAGEN].asString();
+				Json::Value valorFotog = (*it)[TAG_PERSONAJE_SPRITES_CANT_FOTOGRAMAS];
+				Json::Value valorFps = (*it)[TAG_PERSONAJE_SPRITES_FPS];
+				Json::Value valor_velocidad_arma = (*it)[TAG_PERSONAJE_VELOCIDAD_ARMA];
+
+				p_arma_cant_fotogramas = obtenerValorInt(valorFotog, CANT_FOTOGRAMAS_DEFAULT, "Personaje sprite arma cant_fotogramas no es valor entero");
+				p_arma_fps = obtenerValorInt(valorFps, FPS_DEFAULT, "Personaje sprite arma fps no es valor entero");
+				velocidad_arma = obtenerValorInt(valor_velocidad_arma, VELOCIDAD_ARMA_DEFAULT, "Personaje velocidad arma no es valor entero");
+				spriteDefArma = new SpriteDef(p_arma_imagen, TAG_PERSONAJE_ARMA, p_arma_cant_fotogramas, p_arma_fps);
+				arma = new ArmaDef(spriteDefArma, velocidad_arma);
+			} else if ( tag == TAG_COLOR_ALTERNATIVO ) {
+
+				Json::Value valorColorAlternativo_hincial = (*it)[TAG_COLOR_ALTERNATIVO_HINICIAL];
+				Json::Value valorColorAlternativo_hfinal = (*it)[TAG_COLOR_ALTERNATIVO_HFINAL];
+				Json::Value valorColorAlternativo_desplazamiento = (*it)[TAG_COLOR_ALTERNATIVO_DESPLAZAMIENTO];
+
+				color_alternativo_hinicial = obtenerValorDouble(valorColorAlternativo_hincial, COLOR_ALTERNATIVO_HINICIAL_PERS_DEFAULT, "el h_inicial del color alternativo no es un valor numerico");
+				color_alternativo_hfinal = obtenerValorDouble(valorColorAlternativo_hfinal, COLOR_ALTERNATIVO_HFINAL_PERS_DEFAULT, "el h_final del color alternativo no es un valor numerico");
+				color_alternativo_desplazamiento = obtenerValorDouble(valorColorAlternativo_desplazamiento, COLOR_ALTERNATIVO_DESPLAZAMIENTO_PERS_DEFAULT, "el desplazamiento del color alternativo no es un valor numerico");
+
+			    colorAlternativoDef = new ColorAlternativoDef(color_alternativo_hinicial, color_alternativo_hfinal, color_alternativo_desplazamiento);
+
+			}else {
+				Logger::getInstance()->error("Dentro del personaje no se encuentra el parametro "+tag);
+			}
+
+		}
+
+	    PersonajeDef* personaje = new PersonajeDef(id_personaje, p_ancho, p_alto, p_zindex, colorAlternativoDef);
+
+	    for (list<SpriteDef*>::iterator it = sprites.begin(); it != sprites.end(); ++it){
+	    	personaje->agregarSpritesDef(*it);
+	    }
+
+	    personaje->agregarArmaDef(arma);
+	    this->personajesDef->push_back(personaje);
+	}
+
+}
+
+
 void Parser::parsearEscenario(){
     Json::Value valorEsc;
     valorEsc = root.get(TAG_ESCENARIO, &valorEsc);
@@ -180,96 +281,6 @@ void Parser::parsearVentana(){
         }
     }
     ventana = new VentanaDef(v_ancho_px, v_alto_px, v_ancho);
-}
-
-PersonajeDef* Parser::parsearPersonaje(string tag_personaje){
-    Json::Value valorPersonaje;
-    valorPersonaje = root.get(tag_personaje.c_str(), &valorPersonaje);
-
-    //atributos del personaje
-    double p_alto = 0;
-    double p_ancho = 0;
-    int p_zindex = 0;
-    // del sprites reposo
-    string p_sprites_imagen;
-    string p_sprites_id;
-    int p_sprites_cant_fotogramas = 0;
-    int p_sprites_fps = 0;
-	double color_alternativo_hinicial;
-	double color_alternativo_hfinal;
-	double color_alternativo_desplazamiento;
-
-	//Sprite arma
-	string p_arma_imagen;
-	int p_arma_cant_fotogramas = 0;
-	int p_arma_fps = 0;
-	SpriteDef* spriteDefArma;
-	int velocidad_arma = 0;
-	ArmaDef* arma;
-
-    list<SpriteDef*> sprites;
-
-    for( Json::ValueIterator it2 = valorPersonaje.begin() ; it2 != valorPersonaje.end() ; it2++ ) {
-        string tag = it2.key().asString();
-        Json::Value subvalor = valorPersonaje[tag];
-
-        if ( tag == TAG_PERSONAJE_ALTO ) {
-            p_alto = obtenerValorDouble(subvalor, ALTO_PERS_DEFAULT, "Personaje alto no es valor numerico");
-        } else if ( tag == TAG_PERSONAJE_ANCHO ) {
-            p_ancho = obtenerValorDouble(subvalor, ANCHO_PERS_DEFAULT, "Personaje ancho no es valor numerico");
-        } else if ( tag.compare(TAG_PERSONAJE_ZINDEX) >= 0) {
-            p_zindex = obtenerValorInt(subvalor, Z_INDEX_PERS_DEFAULT, "Personaje zindex no es valor entero");
-        } else if (tag.find(TAG_PERSONAJE_SPRITES) != std::string::npos) {
-            p_sprites_imagen = (*it2)[TAG_PERSONAJE_SPRITES_IMAGEN].asString();
-            int indiceId = string(TAG_PERSONAJE_SPRITES).size();
-            p_sprites_id = (tag).substr(indiceId);
-
-            Json::Value valorFotog = (*it2)[TAG_PERSONAJE_SPRITES_CANT_FOTOGRAMAS];
-            Json::Value valorFps = (*it2)[TAG_PERSONAJE_SPRITES_FPS];
-
-            p_sprites_cant_fotogramas = obtenerValorInt(valorFotog, CANT_FOTOGRAMAS_DEFAULT, "Personaje sprite cant_fotogramas no es valor entero");
-            p_sprites_fps = obtenerValorInt(valorFps, FPS_DEFAULT, "Personaje sprite fps no es valor entero");
-
-            SpriteDef* spriteDefAct = new SpriteDef(p_sprites_imagen, p_sprites_id, p_sprites_cant_fotogramas, p_sprites_fps);
-            sprites.push_back(spriteDefAct);
-        }else if ( tag == TAG_PERSONAJE_ARMA ){
-                	p_arma_imagen = (*it2)[TAG_PERSONAJE_SPRITES_IMAGEN].asString();
-                	//int indiceId = string(TAG_PERSONAJE_ARMA).size();
-                	//cout<<"indiceId:"<<indiceId<<endl;
-                	//p_sprites_id = (tag).substr(indiceId);
-                	//cout<<"p_sprites_id:"<<p_sprites_id<<endl;
-                	Json::Value valorFotog = (*it2)[TAG_PERSONAJE_SPRITES_CANT_FOTOGRAMAS];
-                	Json::Value valorFps = (*it2)[TAG_PERSONAJE_SPRITES_FPS];
-                    Json::Value valor_velocidad_arma = (*it2)[TAG_PERSONAJE_VELOCIDAD_ARMA];
-
-                	p_arma_cant_fotogramas = obtenerValorInt(valorFotog, CANT_FOTOGRAMAS_DEFAULT, "Personaje sprite arma cant_fotogramas no es valor entero");
-                	p_arma_fps = obtenerValorInt(valorFps, FPS_DEFAULT, "Personaje sprite arma fps no es valor entero");
-                	velocidad_arma = obtenerValorInt(valor_velocidad_arma, VELOCIDAD_ARMA_DEFAULT, "Personaje velocidad arma no es valor entero");
-                    spriteDefArma = new SpriteDef(p_arma_imagen, TAG_PERSONAJE_ARMA, p_arma_cant_fotogramas, p_arma_fps);
-                    arma = new ArmaDef(spriteDefArma, velocidad_arma);
-        } else if ( tag == TAG_COLOR_ALTERNATIVO ) {
-
-            Json::Value valorColorAlternativo_hincial = (*it2)[TAG_COLOR_ALTERNATIVO_HINICIAL];
-            Json::Value valorColorAlternativo_hfinal = (*it2)[TAG_COLOR_ALTERNATIVO_HFINAL];
-            Json::Value valorColorAlternativo_desplazamiento = (*it2)[TAG_COLOR_ALTERNATIVO_DESPLAZAMIENTO];
-
-            color_alternativo_hinicial = obtenerValorDouble(valorColorAlternativo_hincial, COLOR_ALTERNATIVO_HINICIAL_PERS_DEFAULT, "el h_inicial del color alternativo no es un valor numerico");
-            color_alternativo_hfinal = obtenerValorDouble(valorColorAlternativo_hfinal, COLOR_ALTERNATIVO_HFINAL_PERS_DEFAULT, "el h_final del color alternativo no es un valor numerico");
-            color_alternativo_desplazamiento = obtenerValorDouble(valorColorAlternativo_desplazamiento, COLOR_ALTERNATIVO_DESPLAZAMIENTO_PERS_DEFAULT, "el desplazamiento del color alternativo no es un valor numerico");
-
-        }else {
-            Logger::getInstance()->error("Dentro del personaje no se encuentra el parametro "+tag);
-        }
-    }
-
-    ColorAlternativoDef* colorAlternativoDef = new ColorAlternativoDef(color_alternativo_hinicial, color_alternativo_hfinal, color_alternativo_desplazamiento);
-    PersonajeDef* personajeParseado = new PersonajeDef(tag_personaje, p_ancho, p_alto, p_zindex, colorAlternativoDef);
-    for (list<SpriteDef*>::iterator it = sprites.begin(); it != sprites.end(); ++it){
-    	personajeParseado->agregarSpritesDef(*it);
-    }
-
-    personajeParseado->agregarArmaDef(arma);
-    return personajeParseado;
 }
 
 bool Parser::parsearDesdeJson() {
@@ -329,20 +340,6 @@ void Parser::inciarValidacionSemantica() {
 
 list<PersonajeDef*>* Parser::getPersonajesDef() const {
 	return this->personajesDef;
-}
-
-void Parser::parsearPersonajes() {
-
-	//tomar los tag posibles de personajes
-	list<string> tags_personajes;
-	tags_personajes.push_back(TAG_PERSONAJE_1);
-	tags_personajes.push_back(TAG_PERSONAJE_2);
-
-	for (list<string>::iterator it = tags_personajes.begin() ; it != tags_personajes.end(); ++it)
-	{
-		this->personajesDef->push_back(this->parsearPersonaje(*it));
-	}
-
 }
 
 list<JugadorDef*>* Parser::getJugadoresDef() const {
