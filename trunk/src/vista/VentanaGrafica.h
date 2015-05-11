@@ -8,34 +8,37 @@
 #include "Posicionable.h"
 #include "../modelo/Observador.h"
 #include "../modelo/Personaje.h"
+#include "Vibracion.h"
 
 #define DELTA_X2 110
 #define DELTA_X 10
 #define DELTA 20
+#define PORCENTAJE_TAMANIO_VENTANA 0.98f
+#define PORCENTAJE_ESPACIO_INFERIOR_VENTANA (1.0f - PORCENTAJE_TAMANIO_VENTANA)
 using namespace std;
 
 class VentanaGrafica: public Posicionable, public Observador{
 private:
 	EscenarioGrafico* escenario;
-	double ancho_ventanaPx;
-	double alto_ventanaPx;
-	double ancho_logico_ventana;
-	double alto_logico_ventana;
-	double limite_logico_izquierdo;
+	Vector2f tamPixels;
+	Vector2f tamLogico;
+	Vector2f posLogico;
+	Vibracion vibracion;
 
 	// SINGLETON
 	VentanaGrafica();
 	static VentanaGrafica* instancia_unica;
-
+	
 public:
 	virtual ~VentanaGrafica();
-	bool init(string titulo, Vector2f posicion, Vector2f tamanioPixels, Vector2f tamanioLogico, bool fullscreen);
+	bool init(string titulo, Vector2f posicionVentanaPrograma, Vector2f tamanioPixels, Vector2f tamanioLogico, bool fullscreen);
 	void agregarEscenario(EscenarioGrafico* unEscenario);
 	void dibujarTodo();
 	void actualizar();
 	void centrar_ventana();
 	float getLimiteLogicoIzquierdo();
 	float getLimiteLogicoDerecho();
+	float getLimiteLogicoSuperior();
 	float getAnchoLogico();
 	float getAnchoPx();
 	bool llegoAlLimiteDerecho(Vector2f posicion);
@@ -50,6 +53,8 @@ public:
     Vector2f calcularPosicionEnVentana(Vector2f posicionLogica);
     bool enExtremos(float distanciaEntreElementos, double ancho);
 	EscenarioGrafico* getEscenario() const;
+	void vibrar();
+	Vector2f getPosLogico();
 };
 
 #endif /* SRC_VISTA_VENTANAGRAFICA_H_ */

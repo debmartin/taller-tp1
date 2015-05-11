@@ -52,6 +52,12 @@ void EscenarioGrafico::actualizar(){
     for (list<Dibujable*>::iterator it = dibujables->begin(); it != dibujables->end(); ++it){
         (*it)->actualizar();
     }
+
+	for (list<Capa*>::iterator it = capas->begin(); it != capas->end(); ++it){
+		Vector2f posActual = (*it)->getSprite()->getPosicion();
+		Vector2f posNueva(posActual.X(), VentanaGrafica::Instance()->getLimiteLogicoSuperior() * VentanaGrafica::Instance()->relacion_de_aspectoY());
+		(*it)->getSprite()->setPosicion(posNueva);
+	}
 }
 
 void EscenarioGrafico::centrar_en(Vector2f posicion, float limiteLogicoIzquierdoVentana, float relacion_de_aspectoX){
