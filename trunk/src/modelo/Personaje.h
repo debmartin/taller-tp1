@@ -80,8 +80,10 @@ public:
 	void saltarOblicuoIzquierda();
 	void mantenerReposo();
 	void agacharse();
-	void golpeAlto();
-	void golpeBajo();
+	void piniaAlta();
+	void piniaBaja();
+	void piniaSaltandoDiagonalDerecha();
+	void piniaSaltandoDiagonalIzquierda();
 	void patadaAlta();
 	void patadaBaja();
 	void patadaAltaAgachado();

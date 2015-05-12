@@ -73,7 +73,7 @@ void ControladorPersonaje::identificarOrdenPersonaje(Personaje* personaje){
     }else if(SDL_JoystickGetButton(joyAct, BOTON_ARROJAR_ARMA)){
     	personaje->arrojarArma();
     }else if(SDL_JoystickGetButton(joyAct, BOTON_GOLPE_ALTO)){
-        personaje->golpeAlto();
+        personaje->piniaAlta();
     }else if(SDL_JoystickGetButton(joyAct, BOTON_PATADA_ALTA)){
         personaje->patadaAlta();
     }else if(SDL_JoystickGetButton(joyAct, BOTON_BLOQUEAR)){
@@ -123,7 +123,7 @@ void ControladorPersonaje::identificarOrdenPersonaje1(){
     }else if(estadoTeclado[SDL_SCANCODE_F]){
     	personaje1->arrojarArma();
     }else if(estadoTeclado[SDL_SCANCODE_G]){
-        personaje1->golpeAlto();
+        personaje1->piniaAlta();
     }else if(estadoTeclado[SDL_SCANCODE_H]){
     	personaje1->patadaAlta();
     }else if(estadoTeclado[SDL_SCANCODE_N]){
@@ -173,7 +173,7 @@ void ControladorPersonaje::identificarOrdenPersonaje2(){
     }else if(estadoTeclado[SDL_SCANCODE_C]){
       	personaje2->arrojarArma();
     }else if(estadoTeclado[SDL_SCANCODE_V]){
-        personaje2->golpeAlto();
+        personaje2->piniaAlta();
     }else if(estadoTeclado[SDL_SCANCODE_B]){
         personaje2->patadaAlta();
     }else if(estadoTeclado[SDL_SCANCODE_M]){
