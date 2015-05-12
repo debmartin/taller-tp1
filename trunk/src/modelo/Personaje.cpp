@@ -24,9 +24,11 @@
 #include "estado/GolpeandoBajo.h"
 #include "estado/PateandoAlto.h"
 #include "estado/PateandoBajo.h"
+#include "estado/PateandoAltoAgachado.h"
 #include "estado/PateandoSaltandoVertical.h"
 #include "estado/PateandoSaltandoDiagonalDerecha.h"
 #include "estado/PateandoSaltandoDiagonalIzquierda.h"
+#include "estado/Gancho.h"
 #include "estado/SaltandoOblicuoDerecha.h"
 #include "estado/SaltandoOblicuoIzquierda.h"
 #include "estado/SaltandoVertical.h"
@@ -160,7 +162,8 @@ void Personaje::patadaBaja(){
 }
 
 void Personaje::patadaAltaAgachado(){
-
+	cambiarEstado(new PateandoAltoAgachado(posicion, (*cajasPorEstado)[PATEANDO_ALTO_AGACHADO]));
+	Logger::getInstance()->debug("Personaje: patada alta agachado.");
 }
 
 void Personaje::patadaSaltandoVertical(){
@@ -176,6 +179,12 @@ void Personaje::patadaSaltandoDiagonalDerecha(){
 void Personaje::patadaSaltandoDiagonalIzquierda(){
     cambiarEstado(new PateandoSaltandoDiagonalIzquierda(posicion, (*cajasPorEstado)[PATEANDO_SALTANDO_DIAGONAL_IZQUIERDA]));
 	Logger::getInstance()->debug("Personaje: patada.");
+}
+
+void Personaje::gancho(){
+	cambiarEstado(new Gancho(posicion, (*cajasPorEstado)[GANCHO]));
+    Logger::getInstance()->debug("Personaje: gancho.");
+    VentanaGrafica::Instance()->vibrar();
 }
 
 void Personaje::defender(){
