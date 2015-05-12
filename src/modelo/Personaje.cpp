@@ -137,12 +137,12 @@ void Personaje::saltarOblicuoIzquierda(){
 void Personaje::agacharse(){
     cambiarEstado(new Agachado(posicion, (*cajasPorEstado)[AGACHADO]));
     Logger::getInstance()->debug("Personaje: agachado.");
-    //VentanaGrafica::Instance()->vibrar();
 }
 
 void Personaje::golpeAlto(){
     cambiarEstado(new GolpeandoAlto(posicion, (*cajasPorEstado)[GOLPEANDO_ALTO]));
 	Logger::getInstance()->debug("Personaje: golpe alto.");
+	VentanaGrafica::Instance()->vibrar();
 }
 
 void Personaje::golpeBajo(){
