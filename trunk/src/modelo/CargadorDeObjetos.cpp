@@ -107,7 +107,7 @@ map<string, PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables(
 		spriteDefArma = (*it)->getArmaDef()->getSpriteDefArma();
 
 		for (; it_sprites != spritesDef->end(); ++it_sprites) {
-				if((*it_sprites)->getIdSprite() == ID_ZUBZERO_QUIETO){
+				if((*it_sprites)->getIdSprite() == ID_SUBZERO_REPOSO){
 					primerSpriteSubQuieto = *it_sprites;
 				}
 		}

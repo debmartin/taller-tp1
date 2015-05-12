@@ -120,6 +120,7 @@ void ControladorPersonaje::identificarOrdenPersonaje1(){
     }else if(estadoTeclado[SDL_SCANCODE_F]){
     	personaje1->arrojarArma();
     }else if(personaje1->estaAgachado() && estadoTeclado[SDL_SCANCODE_G]){
+    	cout<<"gancho"<<endl;
       	personaje1->gancho();
     }else if(estadoTeclado[SDL_SCANCODE_G]){
         personaje1->golpeAlto();
