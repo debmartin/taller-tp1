@@ -164,7 +164,7 @@ void ControladorPersonaje::identificarOrdenPersonaje2(){
     }else if (estadoTeclado[SDL_SCANCODE_W]){
         Logger::getInstance()->debug("Se presiona: Tecla arriba.");
         personaje2->saltarVertical();
-    }else if(estadoTeclado[SDL_SCANCODE_G] && personaje1->estaAgachado()){
+    }else if(estadoTeclado[SDL_SCANCODE_G] && personaje2->estaAgachado()){
         cout<<"gancho"<<endl;
         personaje2->gancho();
     }else if (estadoTeclado[SDL_SCANCODE_S]){
