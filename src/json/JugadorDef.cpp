@@ -9,14 +9,16 @@
 
 #include <sstream>
 
+#include "ControlDef.h"
+
 JugadorDef::JugadorDef() {
 	// TODO Auto-generated constructor stub
 
 }
 
-JugadorDef::JugadorDef(string personaje, ControlJoystickDef* controlJoystick) {
+JugadorDef::JugadorDef(string personaje, ControlDef* controlDef) {
 	this->idPersonaje = personaje;
-	this->controlJoystick = controlJoystick;
+	this->controlDef = controlDef;
 }
 
 string JugadorDef::toString() {
@@ -25,8 +27,8 @@ string JugadorDef::toString() {
 	return stream.str();
 }
 
-ControlJoystickDef* JugadorDef::getControlJoystick() const {
-	return controlJoystick;
+ControlDef* JugadorDef::getControlDef() const {
+	return controlDef;
 }
 
 string JugadorDef::getIdPersonaje() const {
@@ -40,5 +42,6 @@ JugadorDef::~JugadorDef() {
 ostream& operator <<(ostream &o, const JugadorDef &j) {
 
 	o<<"JugadorDef -> [personaje]=["<<j.idPersonaje<<"]";
+	o<<"JugadorDef -> [control]=["<<*j.controlDef<<"]";
 	return o;
 }
