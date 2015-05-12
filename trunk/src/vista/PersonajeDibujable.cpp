@@ -77,8 +77,8 @@ void PersonajeDibujable::seleccionarSprite(){
             spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
             break;
         case GANCHO:
-                    spritePersonaje->cambiarAnimacion(animaciones[ID_ZUBZERO_GANCHO]);
-                    spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
+            spritePersonaje->cambiarAnimacion(animaciones[ID_ZUBZERO_GANCHO]);
+            spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
 	}
 }
 
