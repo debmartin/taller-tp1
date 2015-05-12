@@ -114,14 +114,14 @@ void ControladorPersonaje::identificarOrdenPersonaje1(){
     }else if (estadoTeclado[SDL_SCANCODE_UP]){
         Logger::getInstance()->debug("Se presiona: Tecla arriba.");
         personaje1->saltarVertical();
+    }else if(estadoTeclado[SDL_SCANCODE_G] && personaje1->estaAgachado()){
+       	cout<<"gancho"<<endl;
+        personaje1->gancho();
     }else if (estadoTeclado[SDL_SCANCODE_DOWN]){
         Logger::getInstance()->debug("Se presiona: Tecla abajo.");
         personaje1->agacharse();
     }else if(estadoTeclado[SDL_SCANCODE_F]){
     	personaje1->arrojarArma();
-    }else if(personaje1->estaAgachado() && estadoTeclado[SDL_SCANCODE_G]){
-    	cout<<"gancho"<<endl;
-      	personaje1->gancho();
     }else if(estadoTeclado[SDL_SCANCODE_G]){
         personaje1->golpeAlto();
     }else if(estadoTeclado[SDL_SCANCODE_H]){
@@ -164,13 +164,14 @@ void ControladorPersonaje::identificarOrdenPersonaje2(){
     }else if (estadoTeclado[SDL_SCANCODE_W]){
         Logger::getInstance()->debug("Se presiona: Tecla arriba.");
         personaje2->saltarVertical();
+    }else if(estadoTeclado[SDL_SCANCODE_G] && personaje1->estaAgachado()){
+        cout<<"gancho"<<endl;
+        personaje2->gancho();
     }else if (estadoTeclado[SDL_SCANCODE_S]){
         Logger::getInstance()->debug("Se presiona: Tecla abajo.");
         personaje2->agacharse();
     }else if(estadoTeclado[SDL_SCANCODE_C]){
       	personaje2->arrojarArma();
-    }else if(estadoTeclado[SDL_SCANCODE_DOWN] && estadoTeclado[SDL_SCANCODE_V]){
-            personaje2->gancho();
     }else if(estadoTeclado[SDL_SCANCODE_V]){
         personaje2->golpeAlto();
     }else if(estadoTeclado[SDL_SCANCODE_B]){
