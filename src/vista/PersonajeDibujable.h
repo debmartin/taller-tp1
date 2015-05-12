@@ -28,6 +28,7 @@ class ArmaDibujable;
 #define ID_ZUBZERO_SALTANDODIAGONAL "saltando-diagonal"
 #define ID_ZUBZERO_GOLPEANDO_ALTO "pinia-alta"
 #define ID_ZUBZERO_PATEANDO_ALTO "patada-alta"
+#define ID_ZUBZERO_GANCHO "gancho"
 
 
 class PersonajeDibujable : public Dibujable, public Observador {
