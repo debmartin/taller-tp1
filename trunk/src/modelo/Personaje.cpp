@@ -20,8 +20,6 @@
 #include "estado/Defendiendo.h"
 #include "estado/DefendiendoAgachado.h"
 #include "estado/EnEspera.h"
-#include "estado/GolpeandoAlto.h"
-#include "estado/GolpeandoBajo.h"
 #include "estado/PateandoAlto.h"
 #include "estado/PateandoBajo.h"
 #include "estado/PateandoAltoAgachado.h"
@@ -29,6 +27,8 @@
 #include "estado/PateandoSaltandoDiagonalDerecha.h"
 #include "estado/PateandoSaltandoDiagonalIzquierda.h"
 #include "estado/Gancho.h"
+#include "estado/PiniaAlta.h"
+#include "estado/PiniaBaja.h"
 #include "estado/SaltandoOblicuoDerecha.h"
 #include "estado/SaltandoOblicuoIzquierda.h"
 #include "estado/SaltandoVertical.h"
@@ -140,13 +140,13 @@ void Personaje::agacharse(){
 }
 
 void Personaje::golpeAlto(){
-    cambiarEstado(new GolpeandoAlto(posicion, (*cajasPorEstado)[GOLPEANDO_ALTO]));
+    cambiarEstado(new PiniaAlta(posicion, (*cajasPorEstado)[PINIA_ALTA]));
 	Logger::getInstance()->debug("Personaje: golpe alto.");
 	VentanaGrafica::Instance()->vibrar();
 }
 
 void Personaje::golpeBajo(){
-    cambiarEstado(new GolpeandoBajo(posicion, (*cajasPorEstado)[GOLPEANDO_BAJO]));
+    cambiarEstado(new PiniaBaja(posicion, (*cajasPorEstado)[PINIA_BAJA]));
 	Logger::getInstance()->debug("Personaje: golpe bajo.");
 }
 
