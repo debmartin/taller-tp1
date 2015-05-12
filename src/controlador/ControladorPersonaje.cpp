@@ -119,13 +119,12 @@ void ControladorPersonaje::identificarOrdenPersonaje1(){
         personaje1->agacharse();
     }else if(estadoTeclado[SDL_SCANCODE_F]){
     	personaje1->arrojarArma();
-    }else if(estadoTeclado[SDL_SCANCODE_DOWN] && estadoTeclado[SDL_SCANCODE_G]){
+    }else if(personaje1->estaAgachado() && estadoTeclado[SDL_SCANCODE_G]){
       	personaje1->gancho();
     }else if(estadoTeclado[SDL_SCANCODE_G]){
         personaje1->golpeAlto();
     }else if(estadoTeclado[SDL_SCANCODE_H]){
-    	personaje1->gancho();
-        //personaje1->patadaAlta();
+    	personaje1->patadaAlta();
     }else if(estadoTeclado[SDL_SCANCODE_N]){
     	personaje1->bloquearPersonaje(200);
     }else{
