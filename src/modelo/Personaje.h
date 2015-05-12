@@ -88,6 +88,7 @@ public:
 	void patadaSaltandoVertical();
 	void patadaSaltandoDiagonalDerecha();
 	void patadaSaltandoDiagonalIzquierda();
+	void gancho();
 	void defender();
 	void defenderAgachado();
 	void ejecutarPoder(Poder* poder, Objeto* objeto);
