@@ -75,6 +75,10 @@ void PersonajeDibujable::seleccionarSprite(){
         case PATEANDO_ALTO:
             spritePersonaje->cambiarAnimacion(animaciones[ID_ZUBZERO_PATEANDO_ALTO]);
             spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
+            break;
+        case GANCHO:
+                    spritePersonaje->cambiarAnimacion(animaciones[ID_ZUBZERO_GANCHO]);
+                    spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
 	}
 }
 
