@@ -68,17 +68,50 @@ void PersonajeDibujable::seleccionarSprite(){
             spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_AGACHADO]);
             spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
             break;
+        case DEFENDIENDO:
+            spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_DEFENDIENDO]);
+            spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
+            break;
+        case DEFENDIENDO_AGACHADO:
+            spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_DEFENDIENDO_AGACHADO]);
+            spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
+            break;
         case GOLPEANDO_ALTO:
             spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_GOLPEANDO_ALTO]);
+            spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
+            break;
+        case GOLPEANDO_BAJO:
+            spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_GOLPEANDO_BAJO]);
             spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
             break;
         case PATEANDO_ALTO:
             spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_PATEANDO_ALTO]);
             spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
             break;
+        case PATEANDO_BAJO:
+            spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_PATEANDO_BAJO]);
+            spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
+            break;
+        case PATEANDO_SALTANDO_DIAGONAL_DERECHA:
+            spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_PATEANDO_SALTANDO_DIAGONAL]);
+            spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
+            break;
+        case PATEANDO_SALTANDO_DIAGONAL_IZQUIERDA:
+            spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_PATEANDO_SALTANDO_DIAGONAL]);
+            spritePersonaje->setSentidoReproduccion(HACIA_ATRAS); /////VER SENTIDO
+            break;
+        case PATEANDO_SALTANDO_VERTICAL:
+            spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_PATEANDO_SALTANDO_VERTICAL]);
+            spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
+            break;
+        case PATEANDO_ALTO_AGACHADO:
+            spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_PATEANDO_ALTO_AGACHADO]);
+            spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
+            break;
         case GANCHO:
             spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_GANCHO]);
             spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
+            break;
 	}
 }
 
