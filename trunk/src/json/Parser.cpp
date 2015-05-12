@@ -12,7 +12,7 @@
 #include "../utils/Logger.h"
 #include "../utils/Util.h"
 #include "ColorAlternativoDef.h"
-#include "ControlJoystickDef.h"
+#include "ControlDef.h"
 #include "EscenarioDef.h"
 #include "SpriteDef.h"
 #include "VentanaDef.h"
@@ -367,25 +367,25 @@ JugadorDef* Parser::parsearJugador(string tag_jugador) {
 
         if ( tag == TAG_JUGADOR_PERSONAJE ) {
         	personaje = subvalor.asString();
-        } else if ( tag == TAG_JUGADOR_CONTROLJOYSTICK ) {
-			control_id = subvalor[TAG_JUGADOR_CONTROLJOYSTICK_ID].asString();
-			control_izq = subvalor[TAG_JUGADOR_CONTROLJOYSTICK_ARRIBA].asString();
-			control_der = subvalor[TAG_JUGADOR_CONTROLJOYSTICK_ABAJO].asString();
-			control_arriba = subvalor[TAG_JUGADOR_CONTROLJOYSTICK_IZQ].asString();
-			control_abajo = subvalor[TAG_JUGADOR_CONTROLJOYSTICK_DER].asString();
-			control_arrojar_arma = subvalor[TAG_JUGADOR_CONTROLJOYSTICK_ARROJAR_ARMA].asString();
-			control_golpe_alto = subvalor[TAG_JUGADOR_CONTROLJOYSTICK_GOLPE_ALTO].asString();
-			control_patada_alta = subvalor[TAG_JUGADOR_CONTROLJOYSTICK_PATADA_ALTA].asString();
-			control_bloquear = subvalor[TAG_JUGADOR_CONTROLJOYSTICK_BLOQUEAR].asString();
+        } else if ( tag == TAG_JUGADOR_CONTROL ) {
+			control_id = subvalor[TAG_JUGADOR_CONTROL_ID].asString();
+			control_izq = subvalor[TAG_JUGADOR_CONTROL_ARRIBA].asString();
+			control_der = subvalor[TAG_JUGADOR_CONTROL_ABAJO].asString();
+			control_arriba = subvalor[TAG_JUGADOR_CONTROL_IZQ].asString();
+			control_abajo = subvalor[TAG_JUGADOR_CONTROL_DER].asString();
+			control_arrojar_arma = subvalor[TAG_JUGADOR_CONTROL_ARROJAR_ARMA].asString();
+			control_golpe_alto = subvalor[TAG_JUGADOR_CONTROL_GOLPE_ALTO].asString();
+			control_patada_alta = subvalor[TAG_JUGADOR_CONTROL_PATADA_ALTA].asString();
+			control_bloquear = subvalor[TAG_JUGADOR_CONTROL_BLOQUEAR].asString();
 		}else{
             Logger::getInstance()->error("Dentro del jugador no se encuentra el parametro "+tag);
         }
     }
 
-    ControlJoystickDef* controlJoystick = new ControlJoystickDef(control_id, control_izq, control_der, control_arriba,
+    ControlDef* controlDef = new ControlDef(control_id, control_izq, control_der, control_arriba,
     						control_abajo, control_arrojar_arma, control_golpe_alto, control_patada_alta, control_bloquear);
 
-    JugadorDef* jugadorParseado = new JugadorDef(personaje, controlJoystick);
+    JugadorDef* jugadorParseado = new JugadorDef(personaje, controlDef);
     return jugadorParseado;
 }
 

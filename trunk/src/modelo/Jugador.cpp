@@ -12,10 +12,10 @@
 Jugador::Jugador() {
 }
 
-Jugador::Jugador(Personaje* personaje, PersonajeDibujable* personajeDibujable, ControlJoystickDef* controlJoystick) {
+Jugador::Jugador(Personaje* personaje, PersonajeDibujable* personajeDibujable, Control* control) {
 	this->personaje = personaje;
 	this->personajeDibujable = personajeDibujable;
-	this->controlJoystick = controlJoystick;
+	this->control = control;
 }
 
 Personaje* Jugador::getPersonaje() const {
@@ -42,6 +42,6 @@ void Jugador::posicionarPersonaje_enEjeX(double x) {
 	this->personaje->definirPosicionIncial_enX(x);
 }
 
-ControlJoystickDef* Jugador::getControlJoystick() const {
-	return controlJoystick;
+Control* Jugador::getControl() const {
+	return control;
 }

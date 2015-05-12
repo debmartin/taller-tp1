@@ -12,9 +12,10 @@
 #include <utility>
 #include <vector>
 
+#include "../controlador/ControlTeclado.h"
 #include "../json/ArmaDef.h"
 #include "../json/CapaDef.h"
-#include "../json/ControlJoystickDef.h"
+#include "../json/ControlDef.h"
 #include "../json/EscenarioDef.h"
 #include "../json/JugadorDef.h"
 #include "../json/Parser.h"
@@ -30,12 +31,10 @@
 #include "../vista/Sprite.h"
 #include "../vista/VentanaGrafica.h"
 #include "Arma.h"
+#include "CajasColision.h"
 #include "fisica/AABB.h"
 #include "Jugador.h"
 #include "Vector2f.h"
-
-#include "CajasColision.h"
-//#include "CajasColision.h"
 
 CargadorDeOjbetos::CargadorDeOjbetos(string escenario_path) {
 
@@ -219,7 +218,10 @@ Jugador* CargadorDeOjbetos::cargarJugador(JugadorDef* jugadorDef)
 
 	((Arma*)personaje->getArma())->agregarObservador(personajeDibujable->getArma());
 
-	Jugador* jugador = new Jugador(personaje, personajeDibujable, jugadorDef->getControlJoystick());
+	//Control* control = new ControlJoystick(jugadorDef->getControlDef());
+	Control* control = new ControlTeclado(jugadorDef->getControlDef());
+
+	Jugador* jugador = new Jugador(personaje, personajeDibujable, control);
 
 	return jugador;
 

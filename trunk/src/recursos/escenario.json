@@ -135,31 +135,31 @@
     
 	"jugador-1": {
         "personaje": "sub-zero",
-        "control-joystick":{
+        "control":{
         			"id": "joystick-1",
         			"izquierda": "izquierda",
         			"derecha": "derecha",
         			"arriba": "arriba",        			        			
         			"abajo": "abajo",
-        			"arrojar-arma": "circulo",
-        			"golpe-alto": "triangulo",
-        			"patada-alta": "cruz",
-        			"bloquear": "cuadrado"
+        			"arrojar-arma": "f",
+        			"golpe-alto": "g",
+        			"patada-alta": "h",
+        			"bloquear": "n"
         }
 	},
 	"jugador-2": {
         "personaje": "sonia",
-        "control-joystick":{
+        "control":{
         			"id": "joystick-2",
-        			"izquierda": "izquierda",
-        			"derecha": "derecha",
-        			"arriba": "arriba",        			        			
-        			"abajo": "abajo",
-        			"arrojar-arma": "circulo",
-        			"golpe-alto": "triangulo",
-        			"patada-alta": "cruz",
-        			"bloquear": "cuadrado"    			        			        			        			        			
+        			"izquierda": "a",
+        			"derecha": "d",
+        			"arriba": "w",        			        			
+        			"abajo": "s",
+        			"arrojar-arma": "c",
+        			"golpe-alto": "v",
+        			"patada-alta": "b",
+        			"bloquear": "m"    			        			        			        			        			
         }
-	}        
+	}       
 }
 

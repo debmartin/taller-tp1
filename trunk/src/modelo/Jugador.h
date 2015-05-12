@@ -7,7 +7,7 @@
 
 #ifndef SRC_MODELO_JUGADOR_H_
 #define SRC_MODELO_JUGADOR_H_
-class ControlJoystickDef;
+class Control;
 
 using namespace std;
 
@@ -18,17 +18,17 @@ class Jugador {
 private:
 	Personaje* personaje;
 	PersonajeDibujable* personajeDibujable;
-	ControlJoystickDef* controlJoystick;
+	Control* control;
 public:
 	Jugador();
-	Jugador(Personaje* personaje, PersonajeDibujable* personajeDibujable, ControlJoystickDef* controlJoystick);
+	Jugador(Personaje* personaje, PersonajeDibujable* personajeDibujable, Control* control);
 	virtual ~Jugador();
 	Personaje* getPersonaje() const;
 	void setPersonaje(Personaje* personaje);
 	PersonajeDibujable* getPersonajeDibujable() const;
 	void setPersonajeDibujable(PersonajeDibujable* personajeDibujable);
 	void posicionarPersonaje_enEjeX(double x);
-	ControlJoystickDef* getControlJoystick() const;
+	Control* getControl() const;
 };
 
 #endif /* SRC_MODELO_JUGADOR_H_ */
