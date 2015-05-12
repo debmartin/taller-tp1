@@ -76,13 +76,21 @@ void PersonajeDibujable::seleccionarSprite(){
             spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_DEFENDIENDO_AGACHADO]);
             spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
             break;
-        case GOLPEANDO_ALTO:
-            spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_GOLPEANDO_ALTO]);
+        case PINIA_ALTA:
+            spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_PINIA_ALTA]);
             spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
             break;
-        case GOLPEANDO_BAJO:
-            spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_GOLPEANDO_BAJO]);
+        case PINIA_BAJA:
+            spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_PINIA_BAJA]);
             spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
+            break;
+        case PINIA_SALTANDO_DIAGONAL_DERECHA:
+            spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_PINIA_SALTANDO_DIAGONAL]);
+            spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
+            break;
+        case PINIA_SALTANDO_DIAGONAL_IZQUIERDA:
+            spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_PINIA_SALTANDO_DIAGONAL]);
+            spritePersonaje->setSentidoReproduccion(HACIA_ATRAS);
             break;
         case PATEANDO_ALTO:
             spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_PATEANDO_ALTO]);

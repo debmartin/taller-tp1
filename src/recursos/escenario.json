@@ -72,6 +72,11 @@
 		    		    "cant_fotogramas": 3,
 		    		    "fps": 10 
 		    			},
+		    "sprites-pinia-saltando-diagonal": { 
+				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-pinia-baja.png",
+		    		    "cant_fotogramas": 3,
+		    		    "fps": 10 
+		    			},
 		    "sprites-patada-alta": { 
 				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-patada-alta.png",
 		    		    "cant_fotogramas": 10,
@@ -151,6 +156,11 @@
 		    			},
 		    "sprites-pinia-baja": { 
 				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-pinia-alta.png",
+		    		    "cant_fotogramas": 3,
+		    		    "fps": 10 
+		    			},
+		    "sprites-pinia-saltando-diagonal": { 
+				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-pinia-baja.png",
 		    		    "cant_fotogramas": 3,
 		    		    "fps": 10 
 		    			},
