@@ -22,9 +22,11 @@
 #include "estado/EnEspera.h"
 #include "estado/GolpeandoAlto.h"
 #include "estado/GolpeandoBajo.h"
-#include "estado/Pateando.h"
 #include "estado/PateandoAlto.h"
 #include "estado/PateandoBajo.h"
+#include "estado/PateandoSaltandoVertical.h"
+#include "estado/PateandoSaltandoDiagonalDerecha.h"
+#include "estado/PateandoSaltandoDiagonalIzquierda.h"
 #include "estado/SaltandoOblicuoDerecha.h"
 #include "estado/SaltandoOblicuoIzquierda.h"
 #include "estado/SaltandoVertical.h"
@@ -146,12 +148,6 @@ void Personaje::golpeBajo(){
 	Logger::getInstance()->debug("Personaje: golpe bajo.");
 }
 
-void Personaje::patada(){
-    cambiarEstado(new Pateando(posicion, (*cajasPorEstado)[PATEANDO]));
-	Logger::getInstance()->debug("Personaje: patada.");
-}
-
-/*Patada alta ocurre cuando el personaje está saltando*/
 void Personaje::patadaAlta(){
     if (! estaSaltando()) return;
     cambiarEstado(new PateandoAlto(posicion, (*cajasPorEstado)[PATEANDO_ALTO]));
@@ -163,12 +159,31 @@ void Personaje::patadaBaja(){
 	Logger::getInstance()->debug("Personaje: patada baja.");
 }
 
+void Personaje::patadaAltaAgachado(){
+
+}
+
+void Personaje::patadaSaltandoVertical(){
+    cambiarEstado(new PateandoSaltandoVertical(posicion, (*cajasPorEstado)[PATEANDO_SALTANDO_VERTICAL]));
+	Logger::getInstance()->debug("Personaje: patada.");
+}
+
+void Personaje::patadaSaltandoDiagonalDerecha(){
+    cambiarEstado(new PateandoSaltandoDiagonalDerecha(posicion, (*cajasPorEstado)[PATEANDO_SALTANDO_DIAGONAL_DERECHA]));
+	Logger::getInstance()->debug("Personaje: patada.");
+}
+
+void Personaje::patadaSaltandoDiagonalIzquierda(){
+    cambiarEstado(new PateandoSaltandoDiagonalIzquierda(posicion, (*cajasPorEstado)[PATEANDO_SALTANDO_DIAGONAL_IZQUIERDA]));
+	Logger::getInstance()->debug("Personaje: patada.");
+}
+
 void Personaje::defender(){
     cambiarEstado(new Defendiendo(posicion, (*cajasPorEstado)[DEFENDIENDO]));
 	Logger::getInstance()->debug("Personaje: defensa.");
 }
 
-void Personaje::defender_agachado(){
+void Personaje::defenderAgachado(){
     cambiarEstado(new DefendiendoAgachado(posicion, (*cajasPorEstado)[DEFENDIENDO_AGACHADO]));
 	Logger::getInstance()->debug("Personaje: defensa.");
 }

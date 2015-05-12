@@ -1,8 +1,14 @@
-#ifndef PATEANDOALTO_H
-#define PATEANDOALTO_H
+/*
+ * PateandoAlto.h
+ *
+ *  Created on: 12/5/2015
+ *      Author: val
+ */
+
+#ifndef SRC_MODELO_ESTADO_PATEANDOALTO_H_
+#define SRC_MODELO_ESTADO_PATEANDOALTO_H_
 
 #include "Estado.h"
-
 
 class PateandoAlto : public Estado
 {
@@ -10,9 +16,7 @@ class PateandoAlto : public Estado
         PateandoAlto(Vector2f posInicial, BVH* caja);
         virtual ~PateandoAlto();
         bool estaAtacando();
-        bool ejecutandoMovimientoEspecial();
-    protected:
-    private:
+        bool estaDefendiendo();
 };
 
-#endif // PATEANDOALTO_H
+#endif /* SRC_MODELO_ESTADO_PATEANDOALTO_H_ */

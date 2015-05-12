@@ -80,13 +80,16 @@ public:
 	void saltarOblicuoIzquierda();
 	void mantenerReposo();
 	void agacharse();
-	void patada();
 	void golpeAlto();
 	void golpeBajo();
 	void patadaAlta();
 	void patadaBaja();
+	void patadaAltaAgachado();
+	void patadaSaltandoVertical();
+	void patadaSaltandoDiagonalDerecha();
+	void patadaSaltandoDiagonalIzquierda();
 	void defender();
-	void defender_agachado();
+	void defenderAgachado();
 	void ejecutarPoder(Poder* poder, Objeto* objeto);
 	void arrojarArma();
 
