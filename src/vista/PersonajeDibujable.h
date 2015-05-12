@@ -21,14 +21,22 @@
 class ArmaDibujable;
 
 #define ID_FONDO "screen-pit"
-#define ID_ZUBZERO_QUIETO "reposo"
-#define ID_ZUBZERO_CAMINANDO "caminando"
-#define ID_ZUBZERO_AGACHADO "agachado"
-#define ID_ZUBZERO_SALTANDOVERTICAL "saltando-vertical"
-#define ID_ZUBZERO_SALTANDODIAGONAL "saltando-diagonal"
-#define ID_ZUBZERO_GOLPEANDO_ALTO "pinia-alta"
-#define ID_ZUBZERO_PATEANDO_ALTO "patada-alta"
-#define ID_ZUBZERO_GANCHO "gancho"
+#define ID_SUBZERO_REPOSO "reposo"
+#define ID_SUBZERO_CAMINANDO "caminando"
+#define ID_SUBZERO_AGACHADO "agachado"
+#define ID_SUBZERO_SALTANDO_VERTICAL "saltando-vertical"
+#define ID_SUBZERO_SALTANDO_DIAGONAL "saltando-diagonal"
+#define ID_SUBZERO_GOLPEANDO_ALTO "pinia-alta"
+#define ID_SUBZERO_GOLPEANDO_BAJO "pinia-baja"
+#define ID_SUBZERO_GOLPEANDO_BAJO_SALTANDO "salto-pinia"
+#define ID_SUBZERO_PATEANDO_ALTO "patada-alta"
+#define ID_SUBZERO_PATEANDO_BAJO "patada-baja"
+#define ID_SUBZERO_PATEANDO_ALTO_AGACHADO "patada-alta-agachado"
+#define ID_SUBZERO_PATEANDO_SALTANDO_VERTICAL "patada-alta-saltando-vertical"
+#define ID_SUBZERO_PATEANDO_SALTANDO_DIAGONAL "salto-diagonal-patada"
+#define ID_SUBZERO_GANCHO "gancho"
+#define ID_SUBZERO_DEFENDIENDO "defendiendo"
+#define ID_SUBZERO_DEFENDIENDO_AGACHADO "defendiendo_agachado"
 
 
 class PersonajeDibujable : public Dibujable, public Observador {
