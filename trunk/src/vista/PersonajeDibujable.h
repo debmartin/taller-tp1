@@ -32,7 +32,7 @@ class ArmaDibujable;
 #define ID_SUBZERO_PATEANDO_ALTO "patada-alta"
 #define ID_SUBZERO_PATEANDO_BAJO "patada-baja"
 #define ID_SUBZERO_PATEANDO_ALTO_AGACHADO "patada-alta-agachado"
-#define ID_SUBZERO_PATEANDO_SALTANDO_VERTICAL "patada-alta-saltando-vertical"
+#define ID_SUBZERO_PATEANDO_SALTANDO_VERTICAL "patada-saltando-vertical"
 #define ID_SUBZERO_PATEANDO_SALTANDO_DIAGONAL "salto-diagonal-patada"
 #define ID_SUBZERO_GANCHO "gancho"
 #define ID_SUBZERO_DEFENDIENDO "defendiendo"

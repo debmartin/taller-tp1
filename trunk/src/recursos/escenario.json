@@ -58,7 +58,7 @@
 		    		    "fps": 15 
 		    			},
 		    "sprites-saltando-diagonal-patada": { 
-				        "imagen": "RECURSOS/PERSONAJES/SONIA/sonia-saltando-diagonal.png",
+				        "imagen": "RECURSOS/PERSONAJES/SONIA/sub-zero-saltando-diagonal.png",
 		    		    "cant_fotogramas": 7,
 		    		    "fps": 15
 		    			},

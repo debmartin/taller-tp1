@@ -98,7 +98,7 @@ void PersonajeDibujable::seleccionarSprite(){
             break;
         case PATEANDO_SALTANDO_DIAGONAL_IZQUIERDA:
             spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_PATEANDO_SALTANDO_DIAGONAL]);
-            spritePersonaje->setSentidoReproduccion(HACIA_ATRAS); /////VER SENTIDO
+            spritePersonaje->setSentidoReproduccion(HACIA_ATRAS);
             break;
         case PATEANDO_SALTANDO_VERTICAL:
             spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_PATEANDO_SALTANDO_VERTICAL]);
