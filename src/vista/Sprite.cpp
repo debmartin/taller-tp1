@@ -14,14 +14,15 @@
 #define FACTOR_ESCALA_INICIAL_Y 1.0f
 #define FOTOGRAMA_INICIAL 1
 
-Sprite::Sprite(Animacion* animacion, Vector2f& posicionIni, OrientacionSprite orientacion) :
+Sprite::Sprite(Animacion* animacion, Vector2f& posicionIni, OrientacionSprite orientacion, UbicacionPivote ubicacion) :
     animacionAct(animacion),
 	posicion(posicionIni),
 	factorEscalaX(FACTOR_ESCALA_INICIAL_X),
 	factorEscalaY(FACTOR_ESCALA_INICIAL_Y),
 	fps(animacion->getFps()),
 	orientacion(orientacion),
-	sentidoReproduccion(HACIA_ADELANTE){
+	sentidoReproduccion(HACIA_ADELANTE),
+	ubicacionDibujado(ubicacion){
 
 	int w, h;
 	SDL_Texture* textura = animacion->getTextura();
@@ -57,7 +58,22 @@ void Sprite::dibujar() {
 	else
 		flip = SDL_FLIP_HORIZONTAL;
 
-	SDL_RenderCopyEx(Renderizador::Instance()->getRenderer(), animacionAct->getTextura(), &srcRect, &destRect, 0, NULL, flip);
+	if (this->ubicacionDibujado == SPR_ARRIBA_IZQUIERDA)
+		SDL_RenderCopyEx(Renderizador::Instance()->getRenderer(), animacionAct->getTextura(), &srcRect, &destRect, 0, NULL, flip);
+	if (this->ubicacionDibujado == SPR_ARRIBA_CENTRO) {
+		destRect.x -= destRect.w / 2;
+		SDL_RenderCopyEx(Renderizador::Instance()->getRenderer(), animacionAct->getTextura(), &srcRect, &destRect, 0, NULL, flip);
+	}
+	if (this->ubicacionDibujado == SPR_ABAJO_IZQUIERDA) {
+		destRect.y -= destRect.h;
+		SDL_RenderCopyEx(Renderizador::Instance()->getRenderer(), animacionAct->getTextura(), &srcRect, &destRect, 0, NULL, flip);
+	}
+	if (this->ubicacionDibujado == SPR_ABAJO_CENTRO) {
+		destRect.y -= destRect.h;
+		destRect.x -= destRect.w / 2;
+		SDL_RenderCopyEx(Renderizador::Instance()->getRenderer(), animacionAct->getTextura(), &srcRect, &destRect, 0, NULL, flip);
+	}
+
 }
 
 void Sprite::setPosicion(Vector2f& nuevaPosicion) {
