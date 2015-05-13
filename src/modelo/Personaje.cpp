@@ -151,12 +151,12 @@ void Personaje::piniaBaja(){
 }
 /*
 void Personaje::piniaSaltandoDiagonalDerecha(){
-    cambiarEstado(new PiniaSaltandoDiagonalDerecha(posicion, (*cajasPorEstado)[PINIA_BAJA]));
+    cambiarEstado(new PiniaSaltandoDiagonalDerecha(posicion, (*cajasPorEstado)[PINIA_SALTANDO_DIAGONAL_DERECHA]));
 	Logger::getInstance()->debug("Personaje: golpe bajo.");
 }
 
 void Personaje::piniaSaltandoDiagonalIzquierda(){
-    cambiarEstado(new PiniaSaltandoDiagonalIzquierda(posicion, (*cajasPorEstado)[PINIA_BAJA]));
+    cambiarEstado(new PiniaSaltandoDiagonalIzquierda(posicion, (*cajasPorEstado)[PINIA_SALTANDO_DIAGONAL_IZQUIERDA]));
 	Logger::getInstance()->debug("Personaje: golpe bajo.");
 }*/
 

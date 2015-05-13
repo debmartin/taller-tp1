@@ -8,6 +8,7 @@
 #ifndef SRC_CONTROLADOR_CONTROLADORPERSONAJE_H_
 #define SRC_CONTROLADOR_CONTROLADORPERSONAJE_H_
 
+#include "ControladorJoystick.h"
 #include <SDL2/SDL_events.h>
 #include <map>
 
@@ -26,6 +27,8 @@ public:
 	void continuarAccionPreviaPersonaje1();
 	void continuarAccionPreviaPersonaje2();
 private:
+	void identificarOrdenJoystickPersonaje1(Personaje* personaje);
+	void identificarOrdenJoystickPersonaje2(Personaje* personaje);
 	void identificarOrdenPersonaje(Personaje* personaje);
 	void identificarOrdenPersonaje1();
 	void identificarOrdenPersonaje2();
