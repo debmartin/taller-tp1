@@ -9,6 +9,13 @@
 
 class Animacion;
 
+typedef enum UbicacionPivote {
+	SPR_ARRIBA_IZQUIERDA,
+	SPR_ARRIBA_CENTRO,
+	SPR_ABAJO_IZQUIERDA,
+	SPR_ABAJO_CENTRO
+} UbicacionPivote;
+
 typedef enum SentidoReproduccion
 {
     HACIA_ADELANTE,
@@ -37,9 +44,10 @@ private:
 	int fps;
 	OrientacionSprite orientacion;
 	SentidoReproduccion sentidoReproduccion;
+	UbicacionPivote ubicacionDibujado;
 
 public:
-	Sprite(Animacion* animInicial, Vector2f& posicion, OrientacionSprite orientacion);
+	Sprite(Animacion* animInicial, Vector2f& posicion, OrientacionSprite orientacion, UbicacionPivote ubicacion = SPR_ARRIBA_IZQUIERDA);
 	virtual ~Sprite();
 
 	void setPosicion(Vector2f& posicion);
