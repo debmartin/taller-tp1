@@ -71,10 +71,10 @@ void ControladorPersonaje::identificarOrdenJoystickPersonaje1(Personaje* persona
 	    } else if((*estadoJoy1)["JOY_DERECHA"] && (*estadoJoy1)["JOY_ARRIBA"]){
 	        Logger::getInstance()->debug("Se presiona: Tecla derecha+Tecla arriba.");
 	        personaje->saltarOblicuoDerecha();
-	    }else if ((*estadoJoy1)["JOY_IZQUIERDA"] && ! personaje1->estaAgachado()){
+	    }else if ((*estadoJoy1)["JOY_IZQUIERDA"] && ! personaje->estaAgachado()){
 	        Logger::getInstance()->debug("Se presiona: Tecla izquierda.");
 	        personaje->caminarIzquierda();
-	    }else if ((*estadoJoy1)["JOY_DERECHA"] && ! personaje1->estaAgachado()){
+	    }else if ((*estadoJoy1)["JOY_DERECHA"] && ! personaje->estaAgachado()){
 	        Logger::getInstance()->debug("Se presiona: Tecla derecha.");
 	        personaje->caminarDerecha();
 	    }else if ((*estadoJoy1)["JOY_ARRIBA"]){
@@ -95,6 +95,8 @@ void ControladorPersonaje::identificarOrdenJoystickPersonaje1(Personaje* persona
 	        personaje->patadaBaja();
 	    }else if((*estadoJoy1)["JOY_DEFENSA"]){
 	        personaje->defender();
+	    }else if((*estadoJoy1)["JOY_DEFENSA"] && personaje->estaAgachado()){
+	        personaje->defenderAgachado();
 	    }
 	    /*else if(SDL_JoystickGetButton(joyAct, BOTON_BLOQUEAR)){
 	    	personaje->bloquearPersonaje(TIEMPO_BLOQUEADO);
@@ -112,10 +114,10 @@ void ControladorPersonaje::identificarOrdenJoystickPersonaje2(Personaje* persona
 	    } else if((*estadoJoy2)["JOY_DERECHA"] && (*estadoJoy2)["JOY_ARRIBA"]){
 	        Logger::getInstance()->debug("Se presiona: Tecla derecha+Tecla arriba.");
 	        personaje->saltarOblicuoDerecha();
-	    }else if ((*estadoJoy2)["JOY_IZQUIERDA"] && ! personaje1->estaAgachado()){
+	    }else if ((*estadoJoy2)["JOY_IZQUIERDA"] && ! personaje->estaAgachado()){
 	        Logger::getInstance()->debug("Se presiona: Tecla izquierda.");
 	        personaje->caminarIzquierda();
-	    }else if ((*estadoJoy2)["JOY_DERECHA"] && ! personaje1->estaAgachado()){
+	    }else if ((*estadoJoy2)["JOY_DERECHA"] && ! personaje->estaAgachado()){
 	        Logger::getInstance()->debug("Se presiona: Tecla derecha.");
 	        personaje->caminarDerecha();
 	    }else if ((*estadoJoy2)["JOY_ARRIBA"]){
@@ -136,6 +138,8 @@ void ControladorPersonaje::identificarOrdenJoystickPersonaje2(Personaje* persona
 	        personaje->patadaBaja();
 	    }else if((*estadoJoy2)["JOY_DEFENSA"]){
 	        personaje->defender();
+	    }else if((*estadoJoy2)["JOY_DEFENSA"] && personaje->estaAgachado()){
+	        personaje->defenderAgachado();
 	    }
 
 	    /*else if(SDL_JoystickGetButton(joyAct, BOTON_BLOQUEAR)){
