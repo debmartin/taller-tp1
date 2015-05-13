@@ -22,11 +22,6 @@
 
 ControladorPersonaje::ControladorPersonaje(Personaje* jugador1, Personaje* jugador2) :
     personaje1(jugador1), personaje2(jugador2) {
-   /* SDL_JoystickEventState(SDL_ENABLE);
-    joysticks[jugador1] = SDL_JoystickOpen(0);
-    joysticks[jugador2] = SDL_JoystickOpen(1);*/
-
-	//Inicializo los joysticks
 	ControladorJoystick::Instance()->initialiseJoysticks();
 }
 
@@ -85,9 +80,9 @@ void ControladorPersonaje::identificarOrdenJoystickPersonaje1(Personaje* persona
 	    }else if ((*estadoJoy1)["JOY_ARRIBA"]){
 	        Logger::getInstance()->debug("Se presiona: Tecla arriba.");
 	        personaje->saltarVertical();
-	    }else if(((*estadoJoy1)["JOY_PINIA_ALTA"] || (*estadoJoy1)["JOY_PINIA_ALTA"]) && personaje->estaSaltando()){
+	    }/*else if(((*estadoJoy1)["JOY_PINIA_ALTA"] || (*estadoJoy1)["JOY_PINIA_ALTA"]) && personaje->estaSaltando()){
 	    	personaje->piniaSaltandoVertical();
-	    }else if ((*estadoJoy1)["JOY_ABAJO"]){
+	    }*/else if ((*estadoJoy1)["JOY_ABAJO"]){
 	        Logger::getInstance()->debug("Se presiona: Tecla abajo.");
 	        personaje->agacharse();
 	    }else if((*estadoJoy1)["JOY_PODER"]){
@@ -135,9 +130,9 @@ void ControladorPersonaje::identificarOrdenJoystickPersonaje2(Personaje* persona
 	    }else if ((*estadoJoy2)["JOY_ARRIBA"]){
 	        Logger::getInstance()->debug("Se presiona: Tecla arriba.");
 	        personaje->saltarVertical();
-	    }else if(((*estadoJoy2)["JOY_PINIA_ALTA"] || (*estadoJoy2)["JOY_PINIA_ALTA"]) && personaje->estaSaltando()){
+	    }/*else if(((*estadoJoy2)["JOY_PINIA_ALTA"] || (*estadoJoy2)["JOY_PINIA_ALTA"]) && personaje->estaSaltando()){
 	    	personaje->piniaSaltandoVertical();
-	    }else if ((*estadoJoy2)["JOY_ABAJO"]){
+	    }*/else if ((*estadoJoy2)["JOY_ABAJO"]){
 	        Logger::getInstance()->debug("Se presiona: Tecla abajo.");
 	        personaje->agacharse();
 	    }else if((*estadoJoy2)["JOY_PODER"]){
