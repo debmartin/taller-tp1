@@ -42,7 +42,7 @@
 #define VECTOR_GRAVEDAD Vector2f(0, -2600.f)
 
 Personaje::Personaje(string idIn, double anchoIn, double altoIn, Vector2f posInicial, Posicionable* posc, int numJugador, map<estado_personaje, BVH*>* cajas) :
-    Colisionable(posInicial), id(idIn), posicionInicial(posInicial), ancho(anchoIn), alto(altoIn),
+    Colisionable(posInicial, anchoIn, altoIn), id(idIn), posicionInicial(posInicial), ancho(anchoIn), alto(altoIn),
 	estado(new EnEspera(posInicial, (*cajas)[EN_ESPERA])), posicionable(posc), numeroJugador(numJugador), cajasPorEstado(cajas){
 	this->energia = ENERGIA_INICIAL;
 	this->tiempoBloqueo = 0;
@@ -234,38 +234,42 @@ bool Personaje::estaDefendiendo(){
     return (estado->estaDefendiendo());
 }
 
+void Personaje::caer(){
+    Vector2f velocActual = estado->obtenerVelocidad();
+    estado_personaje id = estado->Id();
+    cambiarEstado(new Cayendo(posicion, Vector2f(0.0f, velocActual.Y()), id, (*cajasPorEstado)[id]));
+}
 
 void Personaje::colisionar(Colisionable* otro){
-    if (estaAtacando())
+    if (estaAtacando()) {
         ataqueActual = estado->obtenerAtaque();
-    else if (estaDefendiendo())
+    } else if (estaDefendiendo()) {
         recibirDanio(otro->obtenerAtaque()->obtenerDanio() / 2);
-    else
+    } else {
         recibirDanio(otro->obtenerAtaque()->obtenerDanio());
+    }
     Colisionable::colisionar(otro);
 }
 
-void Personaje::corregirPorColision(Colisionable* enemigo){
-    if (! vaAColisionar(enemigo)) return;
-
-    if (!estaAtacando()){
-        mantenerReposo();
-    } else {
-        colisionar(enemigo);
-    }
-}
+//void Personaje::corregirPorColision(Colisionable* enemigo){
+//    if (! vaAColisionar(enemigo)) return;
+//
+//
+//}
 
 bool Personaje::vaAColisionar(Colisionable* enemigo){
-    estado->haySuperposicion(enemigo->obtenerCajaColision());
+    if (Colisionable::vaAColisionar(enemigo))
+        return true;
+    return estado->haySuperposicion(enemigo->obtenerCajaColision());
 }
 
-void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
-    posicionCandidata = estado->obtenerProximaPosicion();
+void Personaje::calcularPosicionSinColision(Colisionable* enemigo){
 	float distanciaAObjetivo = posicionCandidata.X() - enemigo->getPosicion().X();
 	if (distanciaAObjetivo < 0) distanciaAObjetivo = -distanciaAObjetivo;
 
-	if (posicionable->esValida(posicionCandidata, ancho) && posicionCandidata.Y() >= posicionInicial.Y()) {
-		if (! posicionable->enExtremos(distanciaAObjetivo, ancho))
+
+    if (posicionable->esValida(posicionCandidata, ancho) && posicionCandidata.Y() >= posicionInicial.Y()) {
+        if (! posicionable->enExtremos(distanciaAObjetivo, ancho))
             posicion = posicionCandidata;
         else
             posicion = Vector2f(posicion.X(), posicionCandidata.Y());
@@ -277,12 +281,29 @@ void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
 	    }
 	    mantenerReposo();
     } else if (posicionCandidata.Y() > posicionInicial.Y()) {
-        Vector2f velocActual = estado->obtenerVelocidad();
-        estado_personaje id = estado->Id();
-        cambiarEstado(new Cayendo(posicion, Vector2f(0.0f, velocActual.Y()), id, (*cajasPorEstado)[id]));
+        caer();
     } else {
         mantenerReposo();
     }
+}
+
+void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
+    posicionCandidata = estado->obtenerProximaPosicion();
+
+    if (! vaAColisionar(enemigo)) {
+        cout << "entra";
+        calcularPosicionSinColision(enemigo);
+        return;
+    }
+    if (!estaAtacando() && ! estaSaltando()){
+        cout << "sigue" <<endl;
+        mantenerReposo();
+    } else if (! estaAtacando()) {
+        caer();
+    } else {
+        colisionar(enemigo);
+    }
+
 }
 
 void Personaje::update(Colisionable* enemigo){
@@ -298,8 +319,9 @@ void Personaje::update(Colisionable* enemigo){
     }
 
     arma->update();
+    posicionAnterior = posicion;
     calcularNuevaPosicion(enemigo);
-    corregirPorColision(enemigo);
+//    corregirPorColision(enemigo);
 	notificarObservadores();
 }
 
