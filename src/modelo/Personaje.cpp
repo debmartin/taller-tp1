@@ -29,6 +29,8 @@
 #include "estado/Gancho.h"
 #include "estado/PiniaAlta.h"
 #include "estado/PiniaBaja.h"
+#include "estado/PiniaSaltandoDiagonalDerecha.h"
+#include "estado/PiniaSaltandoDiagonalIzquierda.h"
 #include "estado/SaltandoOblicuoDerecha.h"
 #include "estado/SaltandoOblicuoIzquierda.h"
 #include "estado/SaltandoVertical.h"
@@ -149,16 +151,16 @@ void Personaje::piniaBaja(){
     cambiarEstado(new PiniaBaja(posicion, (*cajasPorEstado)[PINIA_BAJA]));
 	Logger::getInstance()->debug("Personaje: golpe bajo.");
 }
-/*
+
 void Personaje::piniaSaltandoDiagonalDerecha(){
     cambiarEstado(new PiniaSaltandoDiagonalDerecha(posicion, (*cajasPorEstado)[PINIA_SALTANDO_DIAGONAL_DERECHA]));
-	Logger::getInstance()->debug("Personaje: golpe bajo.");
+	Logger::getInstance()->debug("Personaje: piña saltando.");
 }
 
 void Personaje::piniaSaltandoDiagonalIzquierda(){
     cambiarEstado(new PiniaSaltandoDiagonalIzquierda(posicion, (*cajasPorEstado)[PINIA_SALTANDO_DIAGONAL_IZQUIERDA]));
-	Logger::getInstance()->debug("Personaje: golpe bajo.");
-}*/
+	Logger::getInstance()->debug("Personaje: piña saltando.");
+}
 
 void Personaje::patadaAlta(){
     if (! estaSaltando()) return;
@@ -204,7 +206,6 @@ void Personaje::defender(){
 
 void Personaje::defenderAgachado(){
     cambiarEstado(new DefendiendoAgachado(posicion, (*cajasPorEstado)[DEFENDIENDO_AGACHADO]));
-    cout<<"defender agachado"<<endl;
 	Logger::getInstance()->debug("Personaje: defensa.");
 }
 
