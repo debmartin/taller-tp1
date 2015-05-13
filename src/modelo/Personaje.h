@@ -85,6 +85,7 @@ public:
 	void piniaBaja();
 	void piniaSaltandoDiagonalDerecha();
 	void piniaSaltandoDiagonalIzquierda();
+	void piniaSaltandoVertical();
 	void patadaAlta();
 	void patadaBaja();
 	void patadaAltaAgachado();

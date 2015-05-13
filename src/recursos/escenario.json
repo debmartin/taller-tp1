@@ -77,6 +77,11 @@
 		    		    "cant_fotogramas": 3,
 		    		    "fps": 10 
 		    			},
+		    "sprites-salto-pinia": { 
+				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-salto-pinia.png",
+		    		    "cant_fotogramas": 1,
+		    		    "fps": 10 
+		    			},
 		    "sprites-patada-alta": { 
 				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-patada-alta.png",
 		    		    "cant_fotogramas": 10,
@@ -85,6 +90,11 @@
 		   	"sprites-patada-baja": { 
 				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-patada-baja.png",
 		    		    "cant_fotogramas": 10,
+		    		    "fps": 10
+		    			},
+		    "sprites-patada-alta-agachado": { 
+				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-patada-alta-agachado.png",
+		    		    "cant_fotogramas": 1,
 		    		    "fps": 10
 		    			},
 		    "sprites-gancho": { 
@@ -164,6 +174,11 @@
 		    		    "cant_fotogramas": 3,
 		    		    "fps": 10 
 		    			},
+		    "sprites-salto-pinia": { 
+				        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-salto-pinia.png",
+		    		    "cant_fotogramas": 3,
+		    		    "fps": 10 
+		    			},
 		    "sprites-patada-alta": { 
 				        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-patada-alta.png",
 		    		    "cant_fotogramas": 10,
@@ -172,6 +187,11 @@
 			"sprites-patada-baja": { 
 				        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-patada-baja.png",
 		    		    "cant_fotogramas": 5,
+		    		    "fps": 10
+		    			},
+		    "sprites-patada-alta-agachado": { 
+				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-patada-alta-agachado.png",
+		    		    "cant_fotogramas": 1,
 		    		    "fps": 10
 		    			},
 		    "sprites-gancho": { 
