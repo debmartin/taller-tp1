@@ -196,8 +196,7 @@ std::map<string, int>* ControladorJoystick::correspondenciaTeclasPorDefecto() {
 	(*correspondencia)["JOY_PINIA_BAJA"]     = 2;
 	(*correspondencia)["JOY_PATADA_BAJA"]    = 3;
 	(*correspondencia)["JOY_DEFENSA"] 	     = 7;
-	(*correspondencia)["JOY_EJE_HORIZONTAL"] = 0;
-	(*correspondencia)["JOY_EJE_VERTICAL"]   = 1;
+	(*correspondencia)["JOY_PODER"] 	     = 6;
 	return correspondencia;
 }
 
@@ -242,10 +241,13 @@ void ControladorJoystick::refreshJoystickState1() {
 	(*this->estadoJoystick1)["JOY_PINIA_BAJA"]     = this->getButtonState(JOYSTICK1, "JOY_PINIA_BAJA");
 	(*this->estadoJoystick1)["JOY_PATADA_BAJA"]    = this->getButtonState(JOYSTICK1, "JOY_PATADA_BAJA");
 	(*this->estadoJoystick1)["JOY_DEFENSA"] 	   = this->getButtonState(JOYSTICK1, "JOY_DEFENSA");
+	(*this->estadoJoystick1)["JOY_PODER"]		   = this->getButtonState(JOYSTICK1, "JOY_PODER");
+
 	(*this->estadoJoystick1)["JOY_ARRIBA"]		   = this->getAxisState(JOYSTICK1, "JOY_ARRIBA");
 	(*this->estadoJoystick1)["JOY_ABAJO"]		   = this->getAxisState(JOYSTICK1, "JOY_ABAJO");
 	(*this->estadoJoystick1)["JOY_IZQUIERDA"]	   = this->getAxisState(JOYSTICK1, "JOY_IZQUIERDA");
 	(*this->estadoJoystick1)["JOY_DERECHA"]		   = this->getAxisState(JOYSTICK1, "JOY_DERECHA");
+	(*this->estadoJoystick1)["JOY_PODER"]		   = this->getAxisState(JOYSTICK1, "JOY_PODER");
 }
 
 void ControladorJoystick::refreshJoystickState2() {
@@ -254,6 +256,8 @@ void ControladorJoystick::refreshJoystickState2() {
 	(*this->estadoJoystick2)["JOY_PINIA_BAJA"]     = this->getButtonState(JOYSTICK2, "JOY_PINIA_BAJA");
 	(*this->estadoJoystick2)["JOY_PATADA_BAJA"]    = this->getButtonState(JOYSTICK2, "JOY_PATADA_BAJA");
 	(*this->estadoJoystick2)["JOY_DEFENSA"] 	   = this->getButtonState(JOYSTICK2, "JOY_DEFENSA");
+	(*this->estadoJoystick2)["JOY_PODER"]		   = this->getButtonState(JOYSTICK2, "JOY_PODER");
+
 	(*this->estadoJoystick2)["JOY_ARRIBA"]		   = this->getAxisState(JOYSTICK2, "JOY_ARRIBA");
 	(*this->estadoJoystick2)["JOY_ABAJO"]		   = this->getAxisState(JOYSTICK2, "JOY_ABAJO");
 	(*this->estadoJoystick2)["JOY_IZQUIERDA"]	   = this->getAxisState(JOYSTICK2, "JOY_IZQUIERDA");
@@ -261,13 +265,15 @@ void ControladorJoystick::refreshJoystickState2() {
 }
 
 void ControladorJoystick::refreshJoystickStateNulo() {
-	(*this->estadoJoystick2)["JOY_PINIA_ALTA"]     = false;
-	(*this->estadoJoystick2)["JOY_PATADA_ALTA"]    = false;
-	(*this->estadoJoystick2)["JOY_PINIA_BAJA"]     = false;
-	(*this->estadoJoystick2)["JOY_PATADA_BAJA"]    = false;
-	(*this->estadoJoystick2)["JOY_DEFENSA"] 	   = false;
-	(*this->estadoJoystick2)["JOY_ARRIBA"]		   = false;
-	(*this->estadoJoystick2)["JOY_ABAJO"]		   = false;
-	(*this->estadoJoystick2)["JOY_IZQUIERDA"]	   = false;
-	(*this->estadoJoystick2)["JOY_DERECHA"]		   = false;
+	(*this->estadoJoystickNulo)["JOY_PINIA_ALTA"]     = false;
+	(*this->estadoJoystickNulo)["JOY_PATADA_ALTA"]    = false;
+	(*this->estadoJoystickNulo)["JOY_PINIA_BAJA"]     = false;
+	(*this->estadoJoystickNulo)["JOY_PATADA_BAJA"]    = false;
+	(*this->estadoJoystickNulo)["JOY_DEFENSA"] 	  	  = false;
+	(*this->estadoJoystickNulo)["JOY_PODER"]		  = false;
+
+	(*this->estadoJoystickNulo)["JOY_ARRIBA"]		  = false;
+	(*this->estadoJoystickNulo)["JOY_ABAJO"]		  = false;
+	(*this->estadoJoystickNulo)["JOY_IZQUIERDA"]	  = false;
+	(*this->estadoJoystickNulo)["JOY_DERECHA"]		  = false;
 }
