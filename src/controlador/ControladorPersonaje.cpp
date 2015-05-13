@@ -77,6 +77,8 @@ void ControladorPersonaje::identificarOrdenJoystickPersonaje1(Personaje* persona
 	    }else if ((*estadoJoy1)["JOY_DERECHA"] && ! personaje->estaAgachado()){
 	        Logger::getInstance()->debug("Se presiona: Tecla derecha.");
 	        personaje->caminarDerecha();
+	    }else if((*estadoJoy1)["JOY_DEFENSA"] && personaje->estaAgachado()){
+	        personaje->defenderAgachado();
 	    }else if ((*estadoJoy1)["JOY_ARRIBA"]){
 	        Logger::getInstance()->debug("Se presiona: Tecla arriba.");
 	        personaje->saltarVertical();
@@ -88,6 +90,7 @@ void ControladorPersonaje::identificarOrdenJoystickPersonaje1(Personaje* persona
 	    }*/else if((*estadoJoy1)["JOY_PINIA_ALTA"]){
 	        personaje->piniaAlta();
 	    }else if((*estadoJoy1)["JOY_PATADA_ALTA"]){
+	    	cout<<"patada alta"<<endl;
 	        personaje->patadaAlta();
 	    }else if((*estadoJoy1)["JOY_PINIA_BAJA"]){
 	        personaje->piniaBaja();
@@ -95,8 +98,6 @@ void ControladorPersonaje::identificarOrdenJoystickPersonaje1(Personaje* persona
 	        personaje->patadaBaja();
 	    }else if((*estadoJoy1)["JOY_DEFENSA"]){
 	        personaje->defender();
-	    }else if((*estadoJoy1)["JOY_DEFENSA"] && personaje->estaAgachado()){
-	        personaje->defenderAgachado();
 	    }
 	    /*else if(SDL_JoystickGetButton(joyAct, BOTON_BLOQUEAR)){
 	    	personaje->bloquearPersonaje(TIEMPO_BLOQUEADO);
@@ -120,6 +121,8 @@ void ControladorPersonaje::identificarOrdenJoystickPersonaje2(Personaje* persona
 	    }else if ((*estadoJoy2)["JOY_DERECHA"] && ! personaje->estaAgachado()){
 	        Logger::getInstance()->debug("Se presiona: Tecla derecha.");
 	        personaje->caminarDerecha();
+	    }else if((*estadoJoy2)["JOY_DEFENSA"] && personaje->estaAgachado()){
+	        personaje->defenderAgachado();
 	    }else if ((*estadoJoy2)["JOY_ARRIBA"]){
 	        Logger::getInstance()->debug("Se presiona: Tecla arriba.");
 	        personaje->saltarVertical();
@@ -131,6 +134,7 @@ void ControladorPersonaje::identificarOrdenJoystickPersonaje2(Personaje* persona
 	    }*/else if((*estadoJoy2)["JOY_PINIA_ALTA"]){
 	        personaje->piniaAlta();
 	    }else if((*estadoJoy2)["JOY_PATADA_ALTA"]){
+	    	cout<<"patada alta"<<endl;
 	        personaje->patadaAlta();
 	    }else if((*estadoJoy2)["JOY_PINIA_BAJA"]){
 	        personaje->piniaBaja();
@@ -138,10 +142,7 @@ void ControladorPersonaje::identificarOrdenJoystickPersonaje2(Personaje* persona
 	        personaje->patadaBaja();
 	    }else if((*estadoJoy2)["JOY_DEFENSA"]){
 	        personaje->defender();
-	    }else if((*estadoJoy2)["JOY_DEFENSA"] && personaje->estaAgachado()){
-	        personaje->defenderAgachado();
 	    }
-
 	    /*else if(SDL_JoystickGetButton(joyAct, BOTON_BLOQUEAR)){
 	    	personaje->bloquearPersonaje(TIEMPO_BLOQUEADO);
 	    }*/else{

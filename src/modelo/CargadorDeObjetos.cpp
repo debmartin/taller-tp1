@@ -75,7 +75,6 @@ map<string, Personaje*>* CargadorDeOjbetos::cargarPersonajes() {
 
 	for (list<PersonajeDef*>::iterator it = parser->getPersonajesDef()->begin() ; it != parser->getPersonajesDef()->end(); ++it)
 	{
-		cout<<(*it)->getAncho()<<";;"<<(*it)->getAlto()<<endl;
 		(*it)->agregarCajasDeColisiones(cargarCajasColision((*it)->getAncho(), (*it)->getAlto()));
 		Personaje* personaje = new Personaje((*it)->getId(), (*it)->getAncho(), (*it)->getAlto(), posicionTemporalPersonaje, VentanaGrafica::Instance(), 1, (*it)->getCajasCol());
 		Arma* arma = new Arma((*it)->getArmaDef()->getVelocidad());
