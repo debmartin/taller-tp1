@@ -204,6 +204,7 @@ void Personaje::defender(){
 
 void Personaje::defenderAgachado(){
     cambiarEstado(new DefendiendoAgachado(posicion, (*cajasPorEstado)[DEFENDIENDO_AGACHADO]));
+    cout<<"defender agachado"<<endl;
 	Logger::getInstance()->debug("Personaje: defensa.");
 }
 
@@ -291,12 +292,12 @@ void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
     posicionCandidata = estado->obtenerProximaPosicion();
 
     if (! vaAColisionar(enemigo)) {
-        cout << "entra";
+        //cout << "entra";
         calcularPosicionSinColision(enemigo);
         return;
     }
     if (!estaAtacando() && ! estaSaltando()){
-        cout << "sigue" <<endl;
+        //cout << "sigue" <<endl;
         mantenerReposo();
     } else if (! estaAtacando()) {
         caer();
