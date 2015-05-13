@@ -250,12 +250,13 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColision(){
 	vector<AABB*>* cajasAABB_patada_baja = new vector<AABB*>;
 	vector<AABB*>* cajasAABB_patada_alta_agachado = new vector<AABB*>;
 	vector<AABB*>* cajasAABB_patada_saltando_vertical = new vector<AABB*>;
-	vector<AABB*>* cajasAABB_patada_saltando_diagonal = new vector<AABB*>;
+	vector<AABB*>* cajasAABB_patada_saltando_diagonal_derecha = new vector<AABB*>;
+	vector<AABB*>* cajasAABB_patada_saltando_diagonal_izquierda = new vector<AABB*>;
 	vector<AABB*>* cajasAABB_pinia_alta = new vector<AABB*>;
 	vector<AABB*>* cajasAABB_pinia_baja = new vector<AABB*>;
-	vector<AABB*>* cajasAABB_pinia_saltando = new vector<AABB*>;
 	vector<AABB*>* cajasAABB_pinia_saltando_diagonal_derecha = new vector<AABB*>;
 	vector<AABB*>* cajasAABB_pinia_saltando_diagonal_izquierda = new vector<AABB*>;
+	vector<AABB*>* cajasAABB_pinia_saltando_vertical = new vector<AABB*>;
 	vector<AABB*>* cajasAABB_agachado = new vector<AABB*>;
 	vector<AABB*>* cajasAABB_defendiendo = new vector<AABB*>;
 	vector<AABB*>* cajasAABB_defendiendo_agachado = new vector<AABB*>;
@@ -265,26 +266,26 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColision(){
 	Vector2f reposo_caja1_PuntoMin(REPOSO_CAJA1_X1_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, REPOSO_CAJA1_Y1_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
 	Vector2f reposo_caja1_PuntoMax(REPOSO_CAJA1_X2_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, REPOSO_CAJA1_Y2_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
 
-	//Vector2f reposo_caja2_PuntoMin(REPOSO_CAJA2_X1_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, REPOSO_CAJA2_Y1_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
-	//Vector2f reposo_caja2_PuntoMax(REPOSO_CAJA2_X2_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, REPOSO_CAJA2_Y2_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+	Vector2f reposo_caja2_PuntoMin(REPOSO_CAJA2_X1_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, REPOSO_CAJA2_Y1_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+	Vector2f reposo_caja2_PuntoMax(REPOSO_CAJA2_X2_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, REPOSO_CAJA2_Y2_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
 
 	AABB* reposo_caja1 = new AABB(reposo_caja1_PuntoMin, reposo_caja1_PuntoMax);
-	//AABB* reposo_caja2 = new AABB(reposo_caja2_PuntoMin, reposo_caja2_PuntoMax);
+	AABB* reposo_caja2 = new AABB(reposo_caja2_PuntoMin, reposo_caja2_PuntoMax);
 	cajasAABB_reposo->push_back(reposo_caja1);
-	//cajasAABB_reposo->push_back(reposo_caja2);
+	cajasAABB_reposo->push_back(reposo_caja2);
 
 	//CAMINANDO//
 	Vector2f caminando_caja1_PuntoMin(CAMINANDO_CAJA1_X1_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, CAMINANDO_CAJA1_Y1_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
 	Vector2f caminando_caja1_PuntoMax(CAMINANDO_CAJA1_X2_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, CAMINANDO_CAJA1_Y2_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
 
-	//Vector2f caminando_caja2_PuntoMin(CAMINANDO_CAJA2_X1_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, CAMINANDO_CAJA2_Y1_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
-	//Vector2f caminando_caja2_PuntoMax(CAMINANDO_CAJA2_X2_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, CAMINANDO_CAJA2_Y2_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+	Vector2f caminando_caja2_PuntoMin(CAMINANDO_CAJA2_X1_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, CAMINANDO_CAJA2_Y1_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+	Vector2f caminando_caja2_PuntoMax(CAMINANDO_CAJA2_X2_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, CAMINANDO_CAJA2_Y2_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
 
 	AABB* caminando_caja1 = new AABB(caminando_caja1_PuntoMin, caminando_caja1_PuntoMax);
-	//AABB* caminando_caja2 = new AABB(caminando_caja2_PuntoMin, caminando_caja2_PuntoMax);
+	AABB* caminando_caja2 = new AABB(caminando_caja2_PuntoMin, caminando_caja2_PuntoMax);
 
 	cajasAABB_caminando->push_back(caminando_caja1);
-	//cajasAABB_caminando->push_back(caminando_caja2);
+	cajasAABB_caminando->push_back(caminando_caja2);
 
 	//PATADA ALTA//
 	Vector2f patada_alta_caja1_PuntoMin(PATADA_ALTA_CAJA1_X1_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PATADA_ALTA_CAJA1_Y1_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
@@ -342,7 +343,7 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColision(){
 	Vector2f patada_baja_caja2_PuntoMax(PATADA_BAJA_CAJA2_X2_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PATADA_BAJA_CAJA2_Y2_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
 
 	AABB* patada_baja_caja1 = new AABB(patada_baja_caja1_PuntoMin, patada_baja_caja1_PuntoMax);
-	AABB* patada_baja_caja2 = new AABB(patada_baja_caja2_PuntoMax, patada_baja_caja2_PuntoMax);
+	AABB* patada_baja_caja2 = new AABB(patada_baja_caja2_PuntoMin, patada_baja_caja2_PuntoMax);
 
 	cajasAABB_patada_baja->push_back(patada_baja_caja1);
 	cajasAABB_patada_baja->push_back(patada_baja_caja2);
@@ -355,7 +356,7 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColision(){
 	Vector2f patada_alta_agachado_caja2_PuntoMax(PATADA_ALTA_AGACHADO_CAJA2_X2_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PATADA_ALTA_AGACHADO_CAJA2_Y2_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
 
 	AABB* patada_alta_agachado_caja1 = new AABB(patada_alta_agachado_caja1_PuntoMin, patada_alta_agachado_caja1_PuntoMax);
-	AABB* patada_alta_agachado_caja2 = new AABB(patada_alta_agachado_caja2_PuntoMax, patada_alta_agachado_caja2_PuntoMax);
+	AABB* patada_alta_agachado_caja2 = new AABB(patada_alta_agachado_caja2_PuntoMin, patada_alta_agachado_caja2_PuntoMax);
 
 	cajasAABB_patada_alta_agachado->push_back(patada_alta_agachado_caja1);
 	cajasAABB_patada_alta_agachado->push_back(patada_alta_agachado_caja2);
@@ -368,23 +369,36 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColision(){
 	Vector2f patada_saltando_vertical_caja2_PuntoMax(PATADA_SALTANDO_VERTICAL_CAJA2_X2_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PATADA_SALTANDO_VERTICAL_CAJA2_Y2_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
 
 	AABB* patada_saltando_vertical_caja1 = new AABB(patada_saltando_vertical_caja1_PuntoMin, patada_saltando_vertical_caja1_PuntoMax);
-	AABB* patada_saltando_vertical_caja2 = new AABB(patada_saltando_vertical_caja2_PuntoMax, patada_saltando_vertical_caja2_PuntoMax);
+	AABB* patada_saltando_vertical_caja2 = new AABB(patada_saltando_vertical_caja2_PuntoMin, patada_saltando_vertical_caja2_PuntoMax);
 
 	cajasAABB_patada_saltando_vertical->push_back(patada_saltando_vertical_caja1);
 	cajasAABB_patada_saltando_vertical->push_back(patada_saltando_vertical_caja2);
 
-	//PATADA SALTANDO DIAGONAL//
-	Vector2f patada_saltando_diagonal_caja1_PuntoMin(PATADA_SALTANDO_DIAGONAL_CAJA1_X1_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PATADA_SALTANDO_DIAGONAL_CAJA1_Y1_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
-	Vector2f patada_saltando_diagonal_caja1_PuntoMax(PATADA_SALTANDO_DIAGONAL_CAJA1_X2_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PATADA_SALTANDO_DIAGONAL_CAJA1_Y2_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+	//PATADA SALTANDO DIAGONAL DERECHA//
+	Vector2f patada_saltando_diagonal_derecha_caja1_PuntoMin(PATADA_SALTANDO_DIAGONAL_CAJA1_X1_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PATADA_SALTANDO_DIAGONAL_CAJA1_Y1_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+	Vector2f patada_saltando_diagonal_derecha_caja1_PuntoMax(PATADA_SALTANDO_DIAGONAL_CAJA1_X2_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PATADA_SALTANDO_DIAGONAL_CAJA1_Y2_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
 
-	Vector2f patada_saltando_diagonal_caja2_PuntoMin(PATADA_SALTANDO_DIAGONAL_CAJA2_X1_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PATADA_SALTANDO_DIAGONAL_CAJA2_Y1_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
-	Vector2f patada_saltando_diagonal_caja2_PuntoMax(PATADA_SALTANDO_DIAGONAL_CAJA2_X2_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PATADA_SALTANDO_DIAGONAL_CAJA2_Y2_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+	Vector2f patada_saltando_diagonal_derecha_caja2_PuntoMin(PATADA_SALTANDO_DIAGONAL_CAJA2_X1_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PATADA_SALTANDO_DIAGONAL_CAJA2_Y1_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+	Vector2f patada_saltando_diagonal_derecha_caja2_PuntoMax(PATADA_SALTANDO_DIAGONAL_CAJA2_X2_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PATADA_SALTANDO_DIAGONAL_CAJA2_Y2_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
 
-	AABB* patada_saltando_diagonal_caja1 = new AABB(patada_saltando_diagonal_caja1_PuntoMin, patada_saltando_diagonal_caja1_PuntoMax);
-	AABB* patada_saltando_diagonal_caja2 = new AABB(patada_saltando_diagonal_caja2_PuntoMax, patada_saltando_diagonal_caja2_PuntoMax);
+	AABB* patada_saltando_diagonal_derecha_caja1 = new AABB(patada_saltando_diagonal_derecha_caja1_PuntoMin, patada_saltando_diagonal_derecha_caja1_PuntoMax);
+	AABB* patada_saltando_diagonal_derecha_caja2 = new AABB(patada_saltando_diagonal_derecha_caja2_PuntoMin, patada_saltando_diagonal_derecha_caja2_PuntoMax);
 
-	cajasAABB_patada_saltando_diagonal->push_back(patada_saltando_diagonal_caja1);
-	cajasAABB_patada_saltando_diagonal->push_back(patada_saltando_diagonal_caja2);
+	cajasAABB_patada_saltando_diagonal_derecha->push_back(patada_saltando_diagonal_derecha_caja1);
+	cajasAABB_patada_saltando_diagonal_derecha->push_back(patada_saltando_diagonal_derecha_caja2);
+
+	//PATADA SALTANDO DIAGONAL IZQUIERDA//
+	Vector2f patada_saltando_diagonal_izquierda_caja1_PuntoMin(PATADA_SALTANDO_DIAGONAL_CAJA1_X1_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PATADA_SALTANDO_DIAGONAL_CAJA1_Y1_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+	Vector2f patada_saltando_diagonal_izquierda_caja1_PuntoMax(PATADA_SALTANDO_DIAGONAL_CAJA1_X2_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PATADA_SALTANDO_DIAGONAL_CAJA1_Y2_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+
+	Vector2f patada_saltando_diagonal_izquierda_caja2_PuntoMin(PATADA_SALTANDO_DIAGONAL_CAJA2_X1_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PATADA_SALTANDO_DIAGONAL_CAJA2_Y1_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+	Vector2f patada_saltando_diagonal_izquierda_caja2_PuntoMax(PATADA_SALTANDO_DIAGONAL_CAJA2_X2_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PATADA_SALTANDO_DIAGONAL_CAJA2_Y2_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+
+	AABB* patada_saltando_diagonal_izquierda_caja1 = new AABB(patada_saltando_diagonal_izquierda_caja1_PuntoMin, patada_saltando_diagonal_izquierda_caja1_PuntoMax);
+	AABB* patada_saltando_diagonal_izquierda_caja2 = new AABB(patada_saltando_diagonal_izquierda_caja2_PuntoMin, patada_saltando_diagonal_izquierda_caja2_PuntoMax);
+
+	cajasAABB_patada_saltando_diagonal_izquierda->push_back(patada_saltando_diagonal_izquierda_caja1);
+	cajasAABB_patada_saltando_diagonal_izquierda->push_back(patada_saltando_diagonal_izquierda_caja2);
 
 	//PINIA BAJA//
 	Vector2f pinia_baja_caja1_PuntoMin(PINIA_BAJA_CAJA1_X1_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PINIA_BAJA_CAJA1_Y1_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
@@ -399,18 +413,44 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColision(){
 	cajasAABB_pinia_baja->push_back(pinia_baja_caja1);
 	cajasAABB_pinia_baja->push_back(pinia_baja_caja2);
 
-	//PINIA SALTANDO Y DIAGONAL (es la misma)//
-	Vector2f pinia_saltando_caja1_PuntoMin(PINIA_SALTANDO_CAJA1_X1_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PINIA_SALTANDO_CAJA1_Y1_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
-	Vector2f pinia_saltando_caja1_PuntoMax(PINIA_SALTANDO_CAJA1_X2_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PINIA_SALTANDO_CAJA1_Y2_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+	//PINIA SALTANDO DIAGONAL DERECHA(es el mismo sprite que saltando vertical)//
+	Vector2f pinia_saltando_diagonal_derecha_caja1_PuntoMin(PINIA_SALTANDO_CAJA1_X1_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PINIA_SALTANDO_CAJA1_Y1_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+	Vector2f pinia_saltando_diagonal_derecha_caja1_PuntoMax(PINIA_SALTANDO_CAJA1_X2_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PINIA_SALTANDO_CAJA1_Y2_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
 
-	Vector2f pinia_saltando_caja2_PuntoMin(PINIA_SALTANDO_CAJA2_X1_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PINIA_SALTANDO_CAJA2_Y1_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
-	Vector2f pinia_saltando_caja2_PuntoMax(PINIA_SALTANDO_CAJA2_X2_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PINIA_SALTANDO_CAJA2_Y2_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+	Vector2f pinia_saltando_diagonal_derecha_caja2_PuntoMin(PINIA_SALTANDO_CAJA2_X1_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PINIA_SALTANDO_CAJA2_Y1_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+	Vector2f pinia_saltando_diagonal_derecha_caja2_PuntoMax(PINIA_SALTANDO_CAJA2_X2_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PINIA_SALTANDO_CAJA2_Y2_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
 
-	AABB* pinia_saltando_caja1 = new AABB(pinia_saltando_caja1_PuntoMin, pinia_saltando_caja1_PuntoMax);
-	AABB* pinia_saltando_caja2 = new AABB(pinia_saltando_caja2_PuntoMin, pinia_saltando_caja2_PuntoMax);
+	AABB* pinia_saltando_diagonal_derecha_caja1 = new AABB(pinia_saltando_diagonal_derecha_caja1_PuntoMin, pinia_saltando_diagonal_derecha_caja1_PuntoMax);
+	AABB* pinia_saltando_diagonal_derecha_caja2 = new AABB(pinia_saltando_diagonal_derecha_caja2_PuntoMin, pinia_saltando_diagonal_derecha_caja2_PuntoMax);
 
-	cajasAABB_pinia_saltando->push_back(pinia_saltando_caja1);
-	cajasAABB_pinia_saltando->push_back(pinia_saltando_caja2);
+	cajasAABB_pinia_saltando_diagonal_derecha->push_back(pinia_saltando_diagonal_derecha_caja1);
+	cajasAABB_pinia_saltando_diagonal_derecha->push_back(pinia_saltando_diagonal_derecha_caja2);
+
+	//PINIA SALTANDO DIAGONAL IZQUIERDA(es el mismo sprite que saltando vertical)//
+	Vector2f pinia_saltando_diagonal_izquierda_caja1_PuntoMin(PINIA_SALTANDO_CAJA1_X1_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PINIA_SALTANDO_CAJA1_Y1_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+	Vector2f pinia_saltando_diagonal_izquierda_caja1_PuntoMax(PINIA_SALTANDO_CAJA1_X2_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PINIA_SALTANDO_CAJA1_Y2_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+
+	Vector2f pinia_saltando_diagonal_izquierda_caja2_PuntoMin(PINIA_SALTANDO_CAJA2_X1_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PINIA_SALTANDO_CAJA2_Y1_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+	Vector2f pinia_saltando_diagonal_izquierda_caja2_PuntoMax(PINIA_SALTANDO_CAJA2_X2_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PINIA_SALTANDO_CAJA2_Y2_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+
+	AABB* pinia_saltando_diagonal_izquierda_caja1 = new AABB(pinia_saltando_diagonal_izquierda_caja1_PuntoMin, pinia_saltando_diagonal_izquierda_caja1_PuntoMax);
+	AABB* pinia_saltando_diagonal_izquierda_caja2 = new AABB(pinia_saltando_diagonal_izquierda_caja2_PuntoMin, pinia_saltando_diagonal_izquierda_caja2_PuntoMax);
+
+	cajasAABB_pinia_saltando_diagonal_izquierda->push_back(pinia_saltando_diagonal_izquierda_caja1);
+	cajasAABB_pinia_saltando_diagonal_izquierda->push_back(pinia_saltando_diagonal_izquierda_caja2);
+
+	//PINIA SALTANDO VERTICAL//
+	Vector2f pinia_saltando_vertical_caja1_PuntoMin(PINIA_SALTANDO_CAJA1_X1_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PINIA_SALTANDO_CAJA1_Y1_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+	Vector2f pinia_saltando_vertical_caja1_PuntoMax(PINIA_SALTANDO_CAJA1_X2_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PINIA_SALTANDO_CAJA1_Y2_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+
+	Vector2f pinia_saltando_vertical_caja2_PuntoMin(PINIA_SALTANDO_CAJA2_X1_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PINIA_SALTANDO_CAJA2_Y1_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+	Vector2f pinia_saltando_vertical_caja2_PuntoMax(PINIA_SALTANDO_CAJA2_X2_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, PINIA_SALTANDO_CAJA2_Y2_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
+
+	AABB* pinia_saltando_vertical_caja1 = new AABB(pinia_saltando_vertical_caja1_PuntoMin, pinia_saltando_vertical_caja1_PuntoMax);
+	AABB* pinia_saltando_vertical_caja2 = new AABB(pinia_saltando_vertical_caja2_PuntoMin, pinia_saltando_vertical_caja2_PuntoMax);
+
+	cajasAABB_pinia_saltando_vertical->push_back(pinia_saltando_vertical_caja1);
+	cajasAABB_pinia_saltando_vertical->push_back(pinia_saltando_vertical_caja2);
 
 	//DEFENDIENDO//
 	Vector2f defendiendo_caja1_PuntoMin(DEFENDIENDO_CAJA1_X1_PORCENTUAL*ANCHO_LOGICO_PERSONAJE, DEFENDIENDO_CAJA1_Y1_PORCENTUAL*ALTO_LOGICO_PERSONAJE);
@@ -463,10 +503,12 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColision(){
 	BVH* BVH_patada_baja = new BVH(cajasAABB_patada_baja);
 	BVH* BVH_patada_alta_agachado = new BVH(cajasAABB_patada_alta_agachado);
 	BVH* BVH_patada_saltando_vertical = new BVH(cajasAABB_patada_saltando_vertical);
-	BVH* BVH_patada_saltando_diagonal = new BVH(cajasAABB_patada_saltando_diagonal);
+	BVH* BVH_patada_saltando_diagonal_derecha = new BVH(cajasAABB_patada_saltando_diagonal_derecha);
+	BVH* BVH_patada_saltando_diagonal_izquierda = new BVH(cajasAABB_patada_saltando_diagonal_izquierda);
 	BVH* BVH_pinia_baja = new BVH(cajasAABB_pinia_baja);
-//	BVH* BVH_pinia_saltando_diagonal_derecha = new BVH(cajasAABB_pinia_saltando_diagonal_derecha);
-//	BVH* BVH_pinia_saltando_diagonal_izquierda = new BVH(cajasAABB_pinia_saltando_diagonal_izquierda);
+	BVH* BVH_pinia_saltando_diagonal_derecha = new BVH(cajasAABB_pinia_saltando_diagonal_derecha);
+	BVH* BVH_pinia_saltando_diagonal_izquierda = new BVH(cajasAABB_pinia_saltando_diagonal_izquierda);
+	BVH* BVH_pinia_saltando_vertical = new BVH(cajasAABB_pinia_saltando_vertical);
 	BVH* BVH_defendiendo = new BVH(cajasAABB_defendiendo);
 	BVH* BVH_defendiendo_agachado = new BVH(cajasAABB_defendiendo_agachado);
 	BVH* BVH_gancho = new BVH(cajasAABB_gancho);
@@ -481,13 +523,14 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColision(){
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(PATEANDO_ALTO, BVH_patada_alta));
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(PATEANDO_BAJO, BVH_patada_baja));
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(PATEANDO_ALTO_AGACHADO, BVH_patada_alta_agachado));
-//	mapa_BVH->insert(pair<estado_personaje, BVH*>(PATEANDO_SALTANDO_DIAGONAL_DERECHA, BVH_patada_saltando_diagonal));
-//	mapa_BVH->insert(pair<estado_personaje, BVH*>(PATEANDO_SALTANDO_DIAGONAL_IZQUIERDA, BVH_reposo));
+	mapa_BVH->insert(pair<estado_personaje, BVH*>(PATEANDO_SALTANDO_DIAGONAL_DERECHA, BVH_patada_saltando_diagonal_derecha));
+	mapa_BVH->insert(pair<estado_personaje, BVH*>(PATEANDO_SALTANDO_DIAGONAL_IZQUIERDA, BVH_patada_saltando_diagonal_izquierda));
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(PATEANDO_SALTANDO_VERTICAL, BVH_patada_saltando_vertical));
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(PINIA_ALTA, BVH_pinia_alta));
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(PINIA_BAJA, BVH_pinia_baja));
-//	mapa_BVH->insert(pair<estado_personaje, BVH*>(PINIA_SALTANDO_DIAGONAL_DERECHA, BVH_pinia_saltando_diagonal_derecha));
-//	mapa_BVH->insert(pair<estado_personaje, BVH*>(PINIA_SALTANDO_DIAGONAL_IZQUIERDA, BVH_pinia_saltando_diagonal_izquierda));
+	mapa_BVH->insert(pair<estado_personaje, BVH*>(PINIA_SALTANDO_DIAGONAL_DERECHA, BVH_pinia_saltando_diagonal_derecha));
+	mapa_BVH->insert(pair<estado_personaje, BVH*>(PINIA_SALTANDO_DIAGONAL_IZQUIERDA, BVH_pinia_saltando_diagonal_izquierda));
+	mapa_BVH->insert(pair<estado_personaje, BVH*>(PINIA_SALTANDO_VERTICAL, BVH_pinia_saltando_vertical));
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(AGACHADO, BVH_agachado));
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(DEFENDIENDO, BVH_defendiendo));
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(DEFENDIENDO_AGACHADO, BVH_defendiendo_agachado));
