@@ -42,7 +42,6 @@ bool ControladorPersonaje::manejar_Evento(SDL_Event &evento){
     	return true;
     }
 
-
     if(!personaje1->estaBloqueado()){
     	identificarOrdenJoystickPersonaje1(personaje1);
     }
@@ -79,9 +78,15 @@ void ControladorPersonaje::identificarOrdenJoystickPersonaje1(Personaje* persona
 	        personaje->caminarDerecha();
 	    }else if((*estadoJoy1)["JOY_DEFENSA"] && personaje->estaAgachado()){
 	        personaje->defenderAgachado();
+	    }else if(((*estadoJoy1)["JOY_PINIA_ALTA"] || (*estadoJoy1)["JOY_PINIA_BAJA"]) && personaje->estaAgachado()){
+	        personaje->gancho();
+	    }else if(((*estadoJoy1)["JOY_PATADA_ALTA"] || (*estadoJoy1)["JOY_PATADA_BAJA"]) && personaje->estaAgachado()){
+	    	personaje->patadaAltaAgachado();
 	    }else if ((*estadoJoy1)["JOY_ARRIBA"]){
 	        Logger::getInstance()->debug("Se presiona: Tecla arriba.");
 	        personaje->saltarVertical();
+	    }else if(((*estadoJoy1)["JOY_PINIA_ALTA"] || (*estadoJoy1)["JOY_PINIA_ALTA"]) && personaje->estaSaltando()){
+	    	personaje->piniaSaltandoVertical();
 	    }else if ((*estadoJoy1)["JOY_ABAJO"]){
 	        Logger::getInstance()->debug("Se presiona: Tecla abajo.");
 	        personaje->agacharse();
@@ -123,9 +128,15 @@ void ControladorPersonaje::identificarOrdenJoystickPersonaje2(Personaje* persona
 	        personaje->caminarDerecha();
 	    }else if((*estadoJoy2)["JOY_DEFENSA"] && personaje->estaAgachado()){
 	        personaje->defenderAgachado();
+	    }else if(((*estadoJoy2)["JOY_PINIA_ALTA"] || (*estadoJoy2)["JOY_PINIA_BAJA"]) && personaje->estaAgachado()){
+	    	personaje->gancho();
+	    }else if(((*estadoJoy2)["JOY_PATADA_ALTA"] || (*estadoJoy2)["JOY_PATADA_BAJA"]) && personaje->estaAgachado()){
+	    	personaje->patadaAltaAgachado();
 	    }else if ((*estadoJoy2)["JOY_ARRIBA"]){
 	        Logger::getInstance()->debug("Se presiona: Tecla arriba.");
 	        personaje->saltarVertical();
+	    }else if(((*estadoJoy2)["JOY_PINIA_ALTA"] || (*estadoJoy2)["JOY_PINIA_ALTA"]) && personaje->estaSaltando()){
+	    	personaje->piniaSaltandoVertical();
 	    }else if ((*estadoJoy2)["JOY_ABAJO"]){
 	        Logger::getInstance()->debug("Se presiona: Tecla abajo.");
 	        personaje->agacharse();

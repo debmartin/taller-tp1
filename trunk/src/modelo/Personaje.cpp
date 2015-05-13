@@ -31,6 +31,7 @@
 #include "estado/PiniaBaja.h"
 #include "estado/PiniaSaltandoDiagonalDerecha.h"
 #include "estado/PiniaSaltandoDiagonalIzquierda.h"
+#include "estado/PiniaSaltandoVertical.h"
 #include "estado/SaltandoOblicuoDerecha.h"
 #include "estado/SaltandoOblicuoIzquierda.h"
 #include "estado/SaltandoVertical.h"
@@ -150,6 +151,7 @@ void Personaje::piniaAlta(){
 void Personaje::piniaBaja(){
     cambiarEstado(new PiniaBaja(posicion, (*cajasPorEstado)[PINIA_BAJA]));
 	Logger::getInstance()->debug("Personaje: golpe bajo.");
+	VentanaGrafica::Instance()->vibrar();
 }
 
 void Personaje::piniaSaltandoDiagonalDerecha(){
@@ -159,6 +161,11 @@ void Personaje::piniaSaltandoDiagonalDerecha(){
 
 void Personaje::piniaSaltandoDiagonalIzquierda(){
     cambiarEstado(new PiniaSaltandoDiagonalIzquierda(posicion, (*cajasPorEstado)[PINIA_SALTANDO_DIAGONAL_IZQUIERDA]));
+	Logger::getInstance()->debug("Personaje: piña saltando.");
+}
+
+void Personaje::piniaSaltandoVertical(){
+    cambiarEstado(new PiniaSaltandoVertical(posicion, (*cajasPorEstado)[PINIA_SALTANDO_VERTICAL]));
 	Logger::getInstance()->debug("Personaje: piña saltando.");
 }
 

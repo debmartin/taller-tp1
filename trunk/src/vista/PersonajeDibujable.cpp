@@ -92,6 +92,10 @@ void PersonajeDibujable::seleccionarSprite(){
             spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_PINIA_SALTANDO_DIAGONAL]);
             spritePersonaje->setSentidoReproduccion(HACIA_ATRAS);
             break;
+        case PINIA_SALTANDO_VERTICAL:
+            spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_PINIA_SALTANDO_VERTICAL]);
+            spritePersonaje->setSentidoReproduccion(HACIA_ATRAS);
+            break;
         case PATEANDO_ALTO:
             spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_PATEANDO_ALTO]);
             spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
