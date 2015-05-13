@@ -46,7 +46,7 @@ public:
 	void cargarEscenarioGrafico(PersonajeDibujable* personajeDibujable1, PersonajeDibujable* personajeDibujable2);
 	Jugador* cargarJugador1();
 	Jugador* cargarJugador2();
-	map<estado_personaje, BVH*>* cargarCajasColision();
+	map<estado_personaje, BVH*>* cargarCajasColision(float ancho_logico_personaje, float alto_logico_personaje);
 private:
 	Jugador* cargarJugador(JugadorDef* jugadorDef);
 
