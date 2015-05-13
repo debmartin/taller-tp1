@@ -31,16 +31,16 @@ bool ControladorPersonaje::manejar_Evento(SDL_Event &evento){
 
     //Cargo los botones de los joysticks
     TheInputHandler::Instance()->handleEventsJoysticks(evento);
-
+/*
     if (personaje1->estaSaltando() || personaje2->estaSaltando()) {
         Logger::getInstance()->error("Evento invalido.");
     	return true;
-    }
+    }*/
 
-    if(!personaje1->estaBloqueado()){
+    if(!personaje1->estaBloqueado() && !personaje1->estaSaltando()){
     	identificarOrdenJoystickPersonaje1(personaje1);
     }
-    if(!personaje2->estaBloqueado()){
+    if(!personaje2->estaBloqueado() && !personaje2->estaSaltando()){
     	identificarOrdenJoystickPersonaje2(personaje2);
     }
 
