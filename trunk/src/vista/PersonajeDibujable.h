@@ -35,8 +35,8 @@ class ArmaDibujable;
 #define ID_SUBZERO_PATEANDO_SALTANDO_VERTICAL "patada-saltando-vertical"
 #define ID_SUBZERO_PATEANDO_SALTANDO_DIAGONAL "salto-diagonal-patada"
 #define ID_SUBZERO_GANCHO "gancho"
-#define ID_SUBZERO_DEFENDIENDO "defendiendo"
-#define ID_SUBZERO_DEFENDIENDO_AGACHADO "defendiendo_agachado"
+#define ID_SUBZERO_DEFENDIENDO "defensa-parado"
+#define ID_SUBZERO_DEFENDIENDO_AGACHADO "defensa-agachado"
 
 
 class PersonajeDibujable : public Dibujable, public Observador {

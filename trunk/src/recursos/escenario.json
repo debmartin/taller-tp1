@@ -92,12 +92,12 @@
 		    		    "cant_fotogramas": 1,
 		    		    "fps": 10
 		    			},
-		    "sprites-defendiendo": { 
+		    "sprites-defensa-parado": { 
 			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-defensa-parado.png",
 		    		    "cant_fotogramas": 1,
 		    		    "fps": 10 
 		    			},
-		    "sprites-defendiendo-agachado": { 
+		    "sprites-defensa-agachado": { 
 			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-defensa-agachado.png",
 		    		    "cant_fotogramas": 1,
 		    		    "fps": 10 
