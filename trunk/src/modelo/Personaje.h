@@ -30,8 +30,6 @@ private:
 	string id;
 	string nombre;
     Vector2f posicionInicial;
-	double ancho;
-	double alto;
 	Posicionable* posicionable;
 	int energia;
 	Objeto* arma;
@@ -39,6 +37,8 @@ private:
     map<estado_personaje, BVH*>* cajasPorEstado;
 	int numeroJugador;
 	float tiempoBloqueo;
+	double ancho;
+	double alto;
 
 public:
 	Personaje(string id, double ancho, double alto, Vector2f posInicial, Posicionable* posc, int numJugador, map<estado_personaje, BVH*>* cajas);
@@ -71,6 +71,7 @@ public:
 	void recibirDanio(int danio);
 	void bloquearPersonaje(float segundos);
 	void calcularNuevaPosicion(Colisionable* enemigo);
+	void calcularPosicionSinColision(Colisionable* enemigo);
 
 	//Movimientos y poderes
 	void caminarDerecha();
@@ -95,6 +96,7 @@ public:
 	void defenderAgachado();
 	void ejecutarPoder(Poder* poder, Objeto* objeto);
 	void arrojarArma();
+	void caer();
 
 	virtual void colisionar(Colisionable* otro);
 	void cambiarEstado(Estado* nuevo);
