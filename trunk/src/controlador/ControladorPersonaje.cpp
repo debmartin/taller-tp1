@@ -85,9 +85,9 @@ void ControladorPersonaje::identificarOrdenJoystickPersonaje1(Personaje* persona
 	    }else if ((*estadoJoy1)["JOY_ABAJO"]){
 	        Logger::getInstance()->debug("Se presiona: Tecla abajo.");
 	        personaje->agacharse();
-	    }/*else if(SDL_JoystickGetButton(joyAct, BOTON_ARROJAR_ARMA)){
-	    	personaje->arrojarArma();
-	    }*/else if((*estadoJoy1)["JOY_PINIA_ALTA"]){
+	    }else if((*estadoJoy1)["JOY_PODER"]){
+	        personaje->arrojarArma();
+	    }else if((*estadoJoy1)["JOY_PINIA_ALTA"]){
 	        personaje->piniaAlta();
 	    }else if((*estadoJoy1)["JOY_PATADA_ALTA"]){
 	    	cout<<"patada alta"<<endl;
@@ -129,9 +129,9 @@ void ControladorPersonaje::identificarOrdenJoystickPersonaje2(Personaje* persona
 	    }else if ((*estadoJoy2)["JOY_ABAJO"]){
 	        Logger::getInstance()->debug("Se presiona: Tecla abajo.");
 	        personaje->agacharse();
-	    }/*else if(SDL_JoystickGetButton(joyAct, BOTON_ARROJAR_ARMA)){
-	    	personaje->arrojarArma();
-	    }*/else if((*estadoJoy2)["JOY_PINIA_ALTA"]){
+	    }else if((*estadoJoy2)["JOY_PODER"]){
+	        personaje->arrojarArma();
+	    }else if((*estadoJoy2)["JOY_PINIA_ALTA"]){
 	        personaje->piniaAlta();
 	    }else if((*estadoJoy2)["JOY_PATADA_ALTA"]){
 	    	cout<<"patada alta"<<endl;

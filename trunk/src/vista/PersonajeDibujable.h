@@ -28,7 +28,7 @@ class ArmaDibujable;
 #define ID_SUBZERO_SALTANDO_DIAGONAL "saltando-diagonal"
 #define ID_SUBZERO_PINIA_ALTA "pinia-alta"
 #define ID_SUBZERO_PINIA_BAJA "pinia-baja"
-#define ID_SUBZERO_PINIA_SALTANDO_DIAGONAL "salto-diagonal-pinia"
+#define ID_SUBZERO_PINIA_SALTANDO_DIAGONAL "pinia-saltando-diagonal"
 #define ID_SUBZERO_PATEANDO_ALTO "patada-alta"
 #define ID_SUBZERO_PATEANDO_BAJO "patada-baja"
 #define ID_SUBZERO_PATEANDO_ALTO_AGACHADO "patada-alta-agachado"
