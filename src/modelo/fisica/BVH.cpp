@@ -60,3 +60,11 @@ void BVH::espejarBVH(){
         (*cajasAABB)[i]->espejarAABB(posMedia);
     }
 }
+
+double BVH::calcularAncho(){
+	return cajaLimitadora->getLimiteDerecho() - cajaLimitadora->getLimiteIzquierdo();
+}
+
+double BVH::calcularAlto(){
+	return cajaLimitadora->getLimiteSuperior() - cajaLimitadora->getLimiteInferior();
+}

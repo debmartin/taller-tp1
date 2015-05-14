@@ -9,7 +9,7 @@ class Colisionable
 {
     public:
         virtual void colisionar(Colisionable* otro);
-        virtual bool vaAColisionar(Colisionable* otro);
+        virtual bool vaAColisionar(Colisionable* otro, double anchoAct, double altoAct);
         Ataque* obtenerAtaque();
         Vector2f getPosicion();
         virtual BVH* obtenerCajaColision() = 0;
