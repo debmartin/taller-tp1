@@ -7,12 +7,15 @@
 
 #include "ControladorPersonaje.h"
 
-#include <SDL2/begin_code.h>
 #include <SDL2/SDL_keyboard.h>
 #include <SDL2/SDL_scancode.h>
+#include <iostream>
+#include <string>
 
-#include "../modelo/Personaje.h"
+#include "../modelo/Jugador.h"
 #include "../utils/Logger.h"
+#include "Control.h"
+#include "ControladorJoystick.h"
 
 #define BOTON_ARROJAR_ARMA SDLK_0
 #define BOTON_GOLPE_ALTO SDLK_1
@@ -20,9 +23,12 @@
 #define BOTON_BLOQUEAR SDLK_3
 #define TIEMPO_BLOQUEADO 200
 
-ControladorPersonaje::ControladorPersonaje(Personaje* jugador1, Personaje* jugador2) :
-    personaje1(jugador1), personaje2(jugador2) {
-	ControladorJoystick::Instance()->initialiseJoysticks();
+ControladorPersonaje::ControladorPersonaje(Jugador* jugador1, Jugador* jugador2) :
+    personaje1(jugador1->getPersonaje()), personaje2(jugador2->getPersonaje()) {
+	ControladorJoystick::Instance()->initialiseJoysticks(jugador1->getControl()->getCorrespondenciaTeclas(),
+														jugador1->getControl()->getCorrespondenciaEjes(),
+														jugador2->getControl()->getCorrespondenciaTeclas(),
+														jugador2->getControl()->getCorrespondenciaEjes());
 }
 
 

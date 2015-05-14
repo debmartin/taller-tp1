@@ -12,7 +12,7 @@
 #include <utility>
 #include <vector>
 
-#include "../controlador/ControlTeclado.h"
+#include "../controlador/ControlJoystick.h"
 #include "../json/ArmaDef.h"
 #include "../json/CapaDef.h"
 #include "../json/ControlDef.h"
@@ -218,8 +218,8 @@ Jugador* CargadorDeOjbetos::cargarJugador(JugadorDef* jugadorDef)
 
 	((Arma*)personaje->getArma())->agregarObservador(personajeDibujable->getArma());
 
-	//Control* control = new ControlJoystick(jugadorDef->getControlDef());
-	Control* control = new ControlTeclado(jugadorDef->getControlDef());
+	// by ariel: se puede usar tambien ControlTeclado
+	Control* control = new ControlJoystick(jugadorDef->getControlDef());
 
 	Jugador* jugador = new Jugador(personaje, personajeDibujable, control);
 

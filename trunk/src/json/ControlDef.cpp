@@ -14,24 +14,22 @@ ControlDef::ControlDef() {
 
 }
 
-ControlDef::ControlDef(string id, string izq, string der, string arriba, string abajo, string arrojarArma,
-                         string golpeAlto, string patadaAlta, string bloquear) {
-        this->id = id;
-        this->izq = izq;
-        this->der = der;
-        this->arriba = arriba;
-        this->abajo = abajo;
-        this->arrojarArma = arrojarArma;
-        this->golpeAlto = golpeAlto;
-        this->patadaAlta = patadaAlta;
-        this->bloquear = bloquear;
+ControlDef::ControlDef(map<string, int>* correspondenciaTeclas, map<string, int>* correspondenciaEjes) {
+	this->correspondenciaTeclas = correspondenciaTeclas;
+	this->correspondenciaEjes = correspondenciaEjes;
 }
 
 ostream& operator <<(ostream &o, const ControlDef &c) {
 
-        o<<"ControlDef -> [id, izq, der, arriba, abajo, arrojarArma, golpeAlto, patadaAlta, bloquear]=[";
-        o<<c.id<<", "<<c.izq<<", "<<c.der<<", "<<c.arriba<<", "<<c.abajo<<", ";
-        o<<c.arrojarArma<<", "<<c.golpeAlto<<", "<<c.patadaAlta<<", "<<c.bloquear<<"]";
+        o<<"ControlDef -> [NOMBRE CONTROL, valor del control]:";
+        for (map<string, int>::iterator it = c.correspondenciaTeclas->begin() ; it != c.correspondenciaTeclas->end(); ++it)
+        {
+        	o<<"["<<it->first<<"]="<<it->second<<endl;
+        }
+        for (map<string, int>::iterator it = c.correspondenciaEjes->begin() ; it != c.correspondenciaEjes->end(); ++it)
+        {
+        	o<<"["<<it->first<<"]="<<it->second<<endl;
+        }
         return o;
 }
 
@@ -46,3 +44,10 @@ ControlDef::~ControlDef() {
 	// TODO Auto-generated destructor stub
 }
 
+std::map<string, int>* ControlDef::getCorrespondenciaEjes() const {
+	return correspondenciaEjes;
+}
+
+std::map<string, int>* ControlDef::getCorrespondenciaTeclas() const {
+	return correspondenciaTeclas;
+}

@@ -7,12 +7,12 @@
 
 #ifndef SRC_MODELO_JUGADOR_H_
 #define SRC_MODELO_JUGADOR_H_
-class Control;
 
 using namespace std;
 
 class Personaje;
 class PersonajeDibujable;
+class Control;
 
 class Jugador {
 private:

@@ -9,6 +9,7 @@
 #define SRC_JSON_CONTROLDEF_H_
 
 #include <iostream>
+#include <map>
 #include <string>
 
 #include "../utils/Loggeable.h"
@@ -17,23 +18,17 @@ using namespace std;
 
 class ControlDef: public Loggeable {
 private:
-        string id;
-        string izq;
-        string der;
-        string arriba;
-        string abajo;
-        string arrojarArma;
-        string golpeAlto;
-        string patadaAlta;
-        string bloquear;
+        std::map<string, int>* correspondenciaTeclas;
+        std::map<string, int>* correspondenciaEjes;
 
 public:
 	ControlDef();
-	ControlDef(string id, string izq, string der, string arri, string abajo, string arrojarArma, string golpeAlto, string patadaAlta, string bloquear);
+	ControlDef(map<string, int>* correspondenciaTeclas, map<string, int>* correspondenciaEjes);
 	virtual ~ControlDef();
     friend ostream& operator<<(ostream &o, const ControlDef &c);
     string toString();
-
+	std::map<string, int>* getCorrespondenciaEjes() const;
+	std::map<string, int>* getCorrespondenciaTeclas() const;
 };
 
 #endif /* SRC_JSON_CONTROLDEF_H_ */

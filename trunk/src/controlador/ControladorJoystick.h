@@ -47,7 +47,9 @@ private:
 
 public:
 	void handleEventsJoysticks(SDL_Event e);
-	void initialiseJoysticks(std::map<string, int>* correspondenciaTeclas = NULL, std::map<string, int>* correspondenciaEjes = NULL);
+	//TODO falta utilizar las correspondencias respectivas al jugador 2. Estan en los ultimos 2 parametros
+	void initialiseJoysticks(std::map<string, int>* correspondenciaTeclasJ1 = NULL, std::map<string, int>* correspondenciaEjesJ1 = NULL,
+							 std::map<string, int>* correspondenciaTeclasJ2 = NULL, std::map<string, int>* correspondenciaEjesJ2 = NULL);
 	bool joysticksInitialised();
 	static ControladorJoystick* Instance();
 	bool getButtonState(JoyNumber joy, string nombreBoton);
