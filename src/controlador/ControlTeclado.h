@@ -11,6 +11,7 @@
 #include "Control.h"
 
 class ControlDef;
+using namespace std;
 
 class ControlTeclado: public Control {
 public:

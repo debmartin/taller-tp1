@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 
-#include "src/json/ControlDef.h"
+#include "src/controlador/Control.h"
 #include "src/Juego.h"
 #include "src/modelo/CargadorDeObjetos.h"
 #include "src/modelo/Jugador.h"

@@ -18,19 +18,21 @@ bool ControladorJoystick::joysticksInitialised() {
 }
 
 void ControladorJoystick::initialiseJoysticks(
-		std::map<string, int>* correspondenciaTeclas,
-		std::map<string, int>* correspondenciaEjes) {
+		std::map<string, int>* correspondenciaTeclasJ1,
+		std::map<string, int>* correspondenciaEjesJ1,
+		std::map<string, int>* correspondenciaTeclasJ2,
+		std::map<string, int>* correspondenciaEjesJ2) {
 
 	if(SDL_WasInit(SDL_INIT_JOYSTICK) == 0)
 		SDL_InitSubSystem(SDL_INIT_JOYSTICK);
 
-	if (correspondenciaTeclas)
-		this->correspondenciaTeclas = correspondenciaTeclas;
+	if (correspondenciaTeclasJ1)
+		this->correspondenciaTeclas = correspondenciaTeclasJ1;
 	else
 		this->correspondenciaTeclas = correspondenciaTeclasPorDefecto();
 
-	if (correspondenciaEjes)
-		this->correspondenciaEjes = correspondenciaEjes;
+	if (correspondenciaEjesJ1)
+		this->correspondenciaEjes = correspondenciaEjesJ1;
 	else
 		this->correspondenciaEjes = correspondenciaEjesPorDefecto();
 

@@ -12,7 +12,7 @@ ControlJoystick::ControlJoystick() {
 
 }
 
-ControlJoystick::ControlJoystick(ControlDef* controlDef) {
+ControlJoystick::ControlJoystick(ControlDef* controlDef):Control(controlDef) {
 }
 
 ControlJoystick::~ControlJoystick() {

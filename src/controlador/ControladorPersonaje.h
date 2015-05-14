@@ -8,9 +8,13 @@
 #ifndef SRC_CONTROLADOR_CONTROLADORPERSONAJE_H_
 #define SRC_CONTROLADOR_CONTROLADORPERSONAJE_H_
 
-#include "ControladorJoystick.h"
 #include <SDL2/SDL_events.h>
+#include <SDL2/SDL_joystick.h>
 #include <map>
+
+#include "../modelo/Personaje.h"
+
+class Jugador;
 
 class Personaje;
 
@@ -21,7 +25,7 @@ private:
 	SDL_Event eventoGuardado;
 	std::map<Personaje*, SDL_Joystick*> joysticks;
 public:
-	ControladorPersonaje(Personaje* personaje1, Personaje* personaje2);
+	ControladorPersonaje(Jugador* juagador1, Jugador* jugador2);
 	virtual ~ControladorPersonaje();
 	bool manejar_Evento(SDL_Event &evento);
 	void continuarAccionPreviaPersonaje1();

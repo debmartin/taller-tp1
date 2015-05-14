@@ -7,16 +7,12 @@
 
 #include "ControlTeclado.h"
 
-#include "../json/ControlDef.h"
-
 ControlTeclado::ControlTeclado() {
 	// TODO Auto-generated constructor stub
 
 }
 
-ControlTeclado::ControlTeclado(ControlDef* controlDef) {
-
-
+ControlTeclado::ControlTeclado(ControlDef* controlDef):Control(controlDef) {
 }
 
 ControlTeclado::~ControlTeclado() {

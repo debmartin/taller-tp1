@@ -351,15 +351,17 @@ JugadorDef* Parser::parsearJugador(string tag_jugador) {
     valorJugador = root.get(tag_jugador.c_str(), &valorJugador);
 
     string personaje = "";
-    string control_id = "";
-    string control_izq = "";
-    string control_der = "";
-    string control_arriba = "";
-    string control_abajo = "";
-    string control_arrojar_arma = "";
-    string control_golpe_alto = "";
-    string control_patada_alta = "";
-    string control_bloquear = "";
+    int control_pinia_alta = 0;
+    int control_patada_alta = 0;
+    int control_pinia_baja = 0;
+    int control_patada_baja = 0;
+    int control_defenza = 0;
+    int control_poder = 0;
+    int control_eje_horizontal = 0;
+    int control_eje_vertical = 0;
+
+    map<string, int>* correspondenciaTeclas = new map<string, int>;
+    map<string, int>* correspondenciaEjes = new map<string, int>;
 
     for( Json::ValueIterator it2 = valorJugador.begin() ; it2 != valorJugador.end() ; it2++ ) {
         string tag = it2.key().asString();
@@ -368,22 +370,29 @@ JugadorDef* Parser::parsearJugador(string tag_jugador) {
         if ( tag == TAG_JUGADOR_PERSONAJE ) {
         	personaje = subvalor.asString();
         } else if ( tag == TAG_JUGADOR_CONTROL ) {
-			control_id = subvalor[TAG_JUGADOR_CONTROL_ID].asString();
-			control_izq = subvalor[TAG_JUGADOR_CONTROL_ARRIBA].asString();
-			control_der = subvalor[TAG_JUGADOR_CONTROL_ABAJO].asString();
-			control_arriba = subvalor[TAG_JUGADOR_CONTROL_IZQ].asString();
-			control_abajo = subvalor[TAG_JUGADOR_CONTROL_DER].asString();
-			control_arrojar_arma = subvalor[TAG_JUGADOR_CONTROL_ARROJAR_ARMA].asString();
-			control_golpe_alto = subvalor[TAG_JUGADOR_CONTROL_GOLPE_ALTO].asString();
-			control_patada_alta = subvalor[TAG_JUGADOR_CONTROL_PATADA_ALTA].asString();
-			control_bloquear = subvalor[TAG_JUGADOR_CONTROL_BLOQUEAR].asString();
+			control_pinia_alta = subvalor[TAG_JUGADOR_CONTROL_JOY_PINIA_ALTA].asInt();
+			control_patada_alta = subvalor[TAG_JUGADOR_CONTROL_JOY_PATADA_ALTA].asInt();
+			control_pinia_baja = subvalor[TAG_JUGADOR_CONTROL_JOY_PINIA_BAJA].asInt();
+			control_patada_baja = subvalor[TAG_JUGADOR_CONTROL_JOY_PATADA_BAJA].asInt();
+			control_defenza = subvalor[TAG_JUGADOR_CONTROL_JOY_DEFENSA].asInt();
+			control_poder = subvalor[TAG_JUGADOR_CONTROL_JOY_PODER].asInt();
+			control_eje_horizontal = subvalor[TAG_JUGADOR_CONTROL_JOY_EJE_HORIZONTAL].asInt();
+			control_eje_vertical = subvalor[TAG_JUGADOR_CONTROL_JOY_EJE_VERTICAL].asInt();
 		}else{
             Logger::getInstance()->error("Dentro del jugador no se encuentra el parametro "+tag);
         }
     }
 
-    ControlDef* controlDef = new ControlDef(control_id, control_izq, control_der, control_arriba,
-    						control_abajo, control_arrojar_arma, control_golpe_alto, control_patada_alta, control_bloquear);
+    (*correspondenciaTeclas)[TAG_JUGADOR_CONTROL_JOY_PINIA_ALTA]  	= control_pinia_alta;
+    (*correspondenciaTeclas)[TAG_JUGADOR_CONTROL_JOY_PATADA_ALTA]  	= control_patada_alta;
+    (*correspondenciaTeclas)[TAG_JUGADOR_CONTROL_JOY_PINIA_BAJA]  	= control_pinia_baja;
+    (*correspondenciaTeclas)[TAG_JUGADOR_CONTROL_JOY_PATADA_BAJA]  	= control_patada_baja;
+    (*correspondenciaTeclas)[TAG_JUGADOR_CONTROL_JOY_DEFENSA]  		= control_defenza;
+    (*correspondenciaTeclas)[TAG_JUGADOR_CONTROL_JOY_PODER]  		= control_poder;
+    (*correspondenciaEjes)[TAG_JUGADOR_CONTROL_JOY_EJE_HORIZONTAL]  = control_eje_horizontal;
+    (*correspondenciaEjes)[TAG_JUGADOR_CONTROL_JOY_EJE_VERTICAL]  	= control_eje_vertical;
+
+    ControlDef* controlDef = new ControlDef(correspondenciaTeclas,correspondenciaEjes);
 
     JugadorDef* jugadorParseado = new JugadorDef(personaje, controlDef);
     return jugadorParseado;

@@ -226,29 +226,27 @@
 	"jugador-1": {
         "personaje": "sub-zero",
         "control":{
-        			"id": "joystick-1",
-        			"izquierda": "izquierda",
-        			"derecha": "derecha",
-        			"arriba": "arriba",        			        			
-        			"abajo": "abajo",
-        			"arrojar-arma": "f",
-        			"golpe-alto": "g",
-        			"patada-alta": "h",
-        			"bloquear": "n"
+        			"JOY_PINIA_ALTA": 0,
+        			"JOY_PATADA_ALTA": 1,
+        			"JOY_PINIA_BAJA": 2,        			        			
+        			"JOY_PATADA_BAJA": 3,
+        			"JOY_DEFENSA": 7,
+        			"JOY_PODER": 6,
+        			"JOY_EJE_HORIZONTAL": 0,
+        			"JOY_EJE_VERTICAL": 1
         }
 	},
 	"jugador-2": {
         "personaje": "sub-zero",
         "control":{
-        			"id": "joystick-2",
-        			"izquierda": "a",
-        			"derecha": "d",
-        			"arriba": "w",        			        			
-        			"abajo": "s",
-        			"arrojar-arma": "c",
-        			"golpe-alto": "v",
-        			"patada-alta": "b",
-        			"bloquear": "m"    			        			        			        			        			
+        			"JOY_PINIA_ALTA": 0,
+        			"JOY_PATADA_ALTA": 1,
+        			"JOY_PINIA_BAJA": 2,        			        			
+        			"JOY_PATADA_BAJA": 3,
+        			"JOY_DEFENSA": 7,
+        			"JOY_PODER": 6,
+        			"JOY_EJE_HORIZONTAL": 0,
+        			"JOY_EJE_VERTICAL": 1
         }
 	}       
 }
