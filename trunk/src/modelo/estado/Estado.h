@@ -53,6 +53,8 @@ class Estado
         BVH* obtenerCajaColision();
         void agregarCajaColision(BVH* cajaColision);
         Trayectoria* getTrayectoria();
+        double calcularAncho();
+        double calcularAlto();
     protected:
         Ataque* ataqueEstado;
     private:

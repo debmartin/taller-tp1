@@ -45,6 +45,7 @@ bool ControladorPersonaje::manejar_Evento(SDL_Event &evento){
     }
 
 	//Si se presiona una tecla
+    /*
 	if ( evento.key.repeat == 0 ){
 		if(!personaje1->estaBloqueado()){
 			identificarOrdenPersonaje(personaje1);
@@ -52,7 +53,7 @@ bool ControladorPersonaje::manejar_Evento(SDL_Event &evento){
 		if(!personaje2->estaBloqueado()){
 			identificarOrdenPersonaje(personaje2);
 		}
-	}
+	}*/
     return true;
 }
 

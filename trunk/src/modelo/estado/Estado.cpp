@@ -74,3 +74,10 @@ Trayectoria* Estado::getTrayectoria(){
     return trayectoria;
 }
 
+double Estado::calcularAncho(){
+	return cajas->calcularAncho();
+}
+
+double Estado::calcularAlto(){
+	return cajas->calcularAlto();
+}

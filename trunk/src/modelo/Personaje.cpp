@@ -140,6 +140,7 @@ void Personaje::saltarOblicuoIzquierda(){
 void Personaje::agacharse(){
     cambiarEstado(new Agachado(posicion, (*cajasPorEstado)[AGACHADO]));
     Logger::getInstance()->debug("Personaje: agachado.");
+    recibirDanio(10);
 }
 
 void Personaje::piniaAlta(){
@@ -252,10 +253,12 @@ void Personaje::caer(){
 void Personaje::colisionar(Colisionable* otro){
     if (estaAtacando()) {
         ataqueActual = estado->obtenerAtaque();
+        cout << "atacando"<<endl;
     } else if (estaDefendiendo()) {
         recibirDanio(otro->obtenerAtaque()->obtenerDanio() / 2);
     } else {
         recibirDanio(otro->obtenerAtaque()->obtenerDanio());
+        cout << "recibiendo ataque"<<endl;
     }
     Colisionable::colisionar(otro);
 }
@@ -267,7 +270,9 @@ void Personaje::colisionar(Colisionable* otro){
 //}
 
 bool Personaje::vaAColisionar(Colisionable* enemigo){
-    if (Colisionable::vaAColisionar(enemigo))
+	double anchoFict = estado->calcularAncho();
+	double altoFict = estado->calcularAncho();
+    if (Colisionable::vaAColisionar(enemigo, anchoFict, altoFict))
         return true;
     return estado->haySuperposicion(enemigo->obtenerCajaColision());
 }

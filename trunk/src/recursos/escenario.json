@@ -121,7 +121,7 @@
 			"color-alternativo": {
 						"h-inicial": 53,
 						"h-final": 220,
-						"desplazamiento": 120
+						"desplazamiento": 125
 						} 
         },
 	    {
@@ -190,7 +190,7 @@
 		    		    "fps": 10
 		    			},
 		    "sprites-patada-alta-agachado": { 
-				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-patada-alta-agachado.png",
+				        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-patada-alta-agachado.png",
 		    		    "cant_fotogramas": 1,
 		    		    "fps": 10
 		    			},
@@ -238,7 +238,7 @@
         }
 	},
 	"jugador-2": {
-        "personaje": "sonya",
+        "personaje": "sub-zero",
         "control":{
         			"id": "joystick-2",
         			"izquierda": "a",

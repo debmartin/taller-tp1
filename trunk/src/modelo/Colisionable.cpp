@@ -23,9 +23,11 @@ Vector2f Colisionable::getPosicion(){
     return posicion;
 }
 
-bool Colisionable::vaAColisionar(Colisionable* otro){
-    return (((posicionAnterior.X() + ancho/2 < otro->posicion.X() && posicionCandidata.X() + ancho/2 >= otro->posicion.X()) ||
-             (posicionAnterior.X() > otro->posicion.X() + otro->ancho/2 && posicionCandidata.X() <= otro->posicion.X() + otro->ancho/2)) &&
+bool Colisionable::vaAColisionar(Colisionable* otro, double anchoAct, double altoAct){
+	ancho = anchoAct;
+	alto = anchoAct;
+    return (((posicionAnterior.X() + ancho < otro->posicion.X() && posicionCandidata.X() + ancho >= otro->posicion.X()) ||
+             (posicionAnterior.X() > otro->posicion.X() + otro->ancho && posicionCandidata.X() <= otro->posicion.X() + otro->ancho)) &&
              (posicionCandidata.Y() <= otro->posicion.Y() + otro->alto));
 
 
