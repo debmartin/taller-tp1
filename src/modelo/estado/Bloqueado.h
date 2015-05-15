@@ -8,6 +8,7 @@ class Bloqueado : public Estado
 {
     public:
         Bloqueado(Trayectoria* trayActual, BVH* caja);
+        Bloqueado(estado_personaje estadoInicial, Trayectoria* trayActual, BVH* caja);
         virtual ~Bloqueado();
         bool estaBloqueado();
     protected:

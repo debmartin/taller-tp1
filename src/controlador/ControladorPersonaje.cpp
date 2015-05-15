@@ -66,7 +66,9 @@ bool ControladorPersonaje::manejar_Evento(SDL_Event &evento){
 void ControladorPersonaje::identificarOrdenJoystickPersonaje1(Personaje* personaje){
 	std::map<string, bool>* estadoJoy1 = TheInputHandler::Instance()->getJoystickState(JOYSTICK1);
 
+
 	    if ((*estadoJoy1)["JOY_IZQUIERDA"] && (*estadoJoy1)["JOY_ARRIBA"]){
+	    	cout<<"Soy uno"<<endl;
 	        Logger::getInstance()->debug("Se presiona: Tecla izquierda+Tecla arriba.");
 	        personaje->saltarOblicuoIzquierda();
 	    } else if((*estadoJoy1)["JOY_DERECHA"] && (*estadoJoy1)["JOY_ARRIBA"]){
@@ -97,7 +99,6 @@ void ControladorPersonaje::identificarOrdenJoystickPersonaje1(Personaje* persona
 	    }else if((*estadoJoy1)["JOY_PINIA_ALTA"]){
 	        personaje->piniaAlta();
 	    }else if((*estadoJoy1)["JOY_PATADA_ALTA"]){
-	    	cout<<"patada alta"<<endl;
 	        personaje->patadaAlta();
 	    }else if((*estadoJoy1)["JOY_PINIA_BAJA"]){
 	        personaje->piniaBaja();

@@ -6,6 +6,10 @@ Bloqueado::Bloqueado(Trayectoria* trayActual, BVH* caja) :
     Estado(trayActual, BLOQUEADO, caja){
 }
 
+Bloqueado::Bloqueado(estado_personaje estadoInicial,Trayectoria* trayActual, BVH* caja) :
+    Estado(trayActual, estadoInicial, caja){
+}
+
 Bloqueado::~Bloqueado(){
 }
 
