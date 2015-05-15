@@ -17,6 +17,7 @@ class PateandoAlto : public Estado
         virtual ~PateandoAlto();
         bool estaAtacando();
         bool estaDefendiendo();
+        bool estaBloqueado();
 };
 
 #endif /* SRC_MODELO_ESTADO_PATEANDOALTO_H_ */

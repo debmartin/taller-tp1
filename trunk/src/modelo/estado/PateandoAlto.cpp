@@ -28,3 +28,6 @@ bool PateandoAlto::estaDefendiendo(){
     return false;
 }
 
+bool PateandoAlto::estaBloqueado(){
+    return true;
+}

@@ -171,13 +171,14 @@ void Personaje::piniaSaltandoVertical(){
 }
 
 void Personaje::patadaAlta(){
-    if (! estaSaltando()) return;
-    cambiarEstado(new PateandoAlto(posicion, (*cajasPorEstado)[PATEANDO_ALTO]));
+	cambiarEstado(new PateandoAlto(posicion, (*cajasPorEstado)[PATEANDO_ALTO]));
+	bloquearPersonaje(50);
 	Logger::getInstance()->debug("Personaje: patada alta.");
 }
 
 void Personaje::patadaBaja(){
     cambiarEstado(new PateandoBajo(posicion, (*cajasPorEstado)[PATEANDO_BAJO]));
+    bloquearPersonaje(50);
 	Logger::getInstance()->debug("Personaje: patada baja.");
 }
 
@@ -223,7 +224,7 @@ void Personaje::mantenerReposo(){
 }
 
 void Personaje::cambiarEstado(Estado* nuevo) {
-    delete estado;
+    //delete estado;
     estado = nuevo;
 }
 
@@ -329,7 +330,6 @@ void Personaje::update(Colisionable* enemigo){
         }
         tiempoBloqueo -= 1.0;
         cout<<"Tiempo bloqueo:"<<tiempoBloqueo<<endl;
-        return;
     }
 
     arma->update();
@@ -381,7 +381,7 @@ BVH* Personaje::obtenerCajaColision(){
 
 
 void Personaje::bloquearPersonaje(float segundos){
-	cambiarEstado(new Bloqueado(estado->getTrayectoria(), estado->obtenerCajaColision()));
+	cambiarEstado(new Bloqueado(estado->Id(), estado->getTrayectoria(), estado->obtenerCajaColision()));
 	this->tiempoBloqueo = segundos;
 }
 
