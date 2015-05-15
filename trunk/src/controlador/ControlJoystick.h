@@ -14,9 +14,9 @@ class ControlDef;
 
 class ControlJoystick: public Control {
 public:
-	ControlJoystick();
-	ControlJoystick(ControlDef* controlDef);
-	virtual ~ControlJoystick();
+        ControlJoystick();
+        ControlJoystick(ControlDef* controlDef);
+        virtual ~ControlJoystick();
 };
 
 #endif /* SRC_CONTROLADOR_CONTROLJOYSTICK_H_ */
