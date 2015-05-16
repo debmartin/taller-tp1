@@ -43,23 +43,23 @@ bool ControladorPersonaje::manejar_Evento(SDL_Event &evento){
     }*/
 
     if(!personaje1->estaBloqueado() && !personaje1->estaSaltando()){
-    	//identificarOrdenJoystickPersonaje(personaje1, JOYSTICK1);
+    	identificarOrdenJoystickPersonaje(personaje1, JOYSTICK1);
     	identificarOrdenPersonaje1();
     }
     if(!personaje2->estaBloqueado() && !personaje2->estaSaltando()){
-    	//identificarOrdenJoystickPersonaje(personaje2, JOYSTICK2);
+    	identificarOrdenJoystickPersonaje(personaje2, JOYSTICK2);
     	identificarOrdenPersonaje2();
     }
-/*
+
 	//Si se presiona una tecla
 	if ( evento.key.repeat == 0 ){
-		if(!personaje1->estaBloqueado()){
+		if(!personaje1->estaBloqueado() && !personaje1->estaSaltando()){
 			identificarOrdenPersonaje1();
 		}
-		if(!personaje2->estaBloqueado()){
+		if(!personaje2->estaBloqueado() && !personaje2->estaSaltando()){
 			identificarOrdenPersonaje2();
 		}
-	}*/
+	}
     return true;
 }
 
@@ -113,8 +113,6 @@ void ControladorPersonaje::identificarOrdenJoystickPersonaje(Personaje* personaj
 	    }
 }
 
-void ControladorPersonaje::identificarOrdenPersonaje(Personaje* personaje){
-}
 
 void ControladorPersonaje::identificarOrdenPersonaje1(){
     const Uint8* estadoTeclado = SDL_GetKeyboardState(NULL);
@@ -146,7 +144,7 @@ void ControladorPersonaje::identificarOrdenPersonaje1(){
         personaje1->caminarDerecha();
     }else if(estadoTeclado[SDL_SCANCODE_L] && personaje1->estaAgachado()){
 	    personaje1->defenderAgachado();
-    }else if(estadoTeclado[SDL_SCANCODE_G] && personaje1->estaAgachado()){
+    }else if((estadoTeclado[SDL_SCANCODE_G] || estadoTeclado[SDL_SCANCODE_J] ) && personaje1->estaAgachado()){
         personaje1->gancho();
     }else if((estadoTeclado[SDL_SCANCODE_H] || estadoTeclado[SDL_SCANCODE_K]) && personaje1->estaAgachado()){
 	    personaje1->patadaAltaAgachado();
@@ -208,9 +206,9 @@ void ControladorPersonaje::identificarOrdenPersonaje2(){
         personaje2->caminarDerecha();
     }else if(estadoTeclado[SDL_SCANCODE_M] && personaje2->estaAgachado()){
 	    personaje2->defenderAgachado();
-    }else if(estadoTeclado[SDL_SCANCODE_G] && personaje2->estaAgachado()){
+    }else if((estadoTeclado[SDL_SCANCODE_C] || estadoTeclado[SDL_SCANCODE_B] ) && personaje2->estaAgachado()){
         personaje2->gancho();
-    }else if((estadoTeclado[SDL_SCANCODE_H] || estadoTeclado[SDL_SCANCODE_V]) && personaje2->estaAgachado()){
+    }else if((estadoTeclado[SDL_SCANCODE_V] || estadoTeclado[SDL_SCANCODE_N]) && personaje2->estaAgachado()){
 	    personaje2->patadaAltaAgachado();
 	}else if (estadoTeclado[SDL_SCANCODE_W]){
 	    Logger::getInstance()->debug("Se presiona: Tecla arriba.");
