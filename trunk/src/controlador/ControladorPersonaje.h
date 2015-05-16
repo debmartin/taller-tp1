@@ -13,6 +13,7 @@
 #include <map>
 
 #include "../modelo/Personaje.h"
+#include "ControladorJoystick.h"
 
 class Jugador;
 
@@ -31,8 +32,7 @@ public:
 	void continuarAccionPreviaPersonaje1();
 	void continuarAccionPreviaPersonaje2();
 private:
-	void identificarOrdenJoystickPersonaje1(Personaje* personaje);
-	void identificarOrdenJoystickPersonaje2(Personaje* personaje);
+	void identificarOrdenJoystickPersonaje(Personaje* personaje, JoyNumber numeroJoystick);
 	void identificarOrdenPersonaje(Personaje* personaje);
 	void identificarOrdenPersonaje1();
 	void identificarOrdenPersonaje2();
