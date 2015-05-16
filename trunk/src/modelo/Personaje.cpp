@@ -347,6 +347,10 @@ bool Personaje::estaSaltando(){
     return (estado->estaSaltando());
 }
 
+bool Personaje::estaSaltandoVertical(){
+    return (estado->estaSaltandoVertical());
+}
+
 bool Personaje::ejecutandoMovimientoEspecial(){
 	return estado->ejecutandoMovimientoEspecial();
 }

@@ -27,6 +27,10 @@ bool Estado::estaSaltando(){
     return false;
 }
 
+bool Estado::estaSaltandoVertical(){
+    return false;
+}
+
 bool Estado::estaAgachado(){
     return false;
 }

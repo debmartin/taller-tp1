@@ -18,3 +18,7 @@ SaltandoVertical::~SaltandoVertical()
 bool SaltandoVertical::estaSaltando(){
     return true;
 }
+
+bool SaltandoVertical::estaSaltandoVertical(){
+    return true;
+}

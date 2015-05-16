@@ -57,9 +57,9 @@
 		    		    "cant_fotogramas": 7,
 		    		    "fps": 15 
 		    			},
-		    "sprites-saltando-diagonal-patada": { 
-				        "imagen": "RECURSOS/PERSONAJES/SONIA/subzero-salto-diagonal-patada.png",
-		    		    "cant_fotogramas": 7,
+		    "sprites-salto-diagonal-patada": { 
+				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-salto-diagonal-patada.png",
+		    		    "cant_fotogramas": 1,
 		    		    "fps": 15
 		    			},
 		    "sprites-pinia-alta": { 
@@ -154,9 +154,9 @@
 		    		    "cant_fotogramas": 7,
 		    		    "fps": 15
 		    			},
-		    "sprites-saltando-diagonal-patada": { 
-				        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-saltando-diagonal-patada.png",
-		    		    "cant_fotogramas": 7,
+		    "sprites-salto-diagonal-patada": { 
+				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-salto-diagonal-patada.png",
+		    		    "cant_fotogramas": 1,
 		    		    "fps": 15
 		    			},
 		    "sprites-pinia-alta": { 
