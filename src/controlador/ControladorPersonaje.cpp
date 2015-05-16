@@ -43,22 +43,21 @@ bool ControladorPersonaje::manejar_Evento(SDL_Event &evento){
     }*/
 
     if(!personaje1->estaBloqueado() && !personaje1->estaSaltando()){
-    	identificarOrdenJoystickPersonaje(personaje1, JOYSTICK1);
-    	//identificarOrdenJoystickPersonaje1(personaje1);
+    	//identificarOrdenJoystickPersonaje(personaje1, JOYSTICK1);
+    	identificarOrdenPersonaje1();
     }
     if(!personaje2->estaBloqueado() && !personaje2->estaSaltando()){
-    	identificarOrdenJoystickPersonaje(personaje2, JOYSTICK2);
-    	//identificarOrdenJoystickPersonaje2(personaje2);
+    	//identificarOrdenJoystickPersonaje(personaje2, JOYSTICK2);
+    	identificarOrdenPersonaje2();
     }
-
+/*
 	//Si se presiona una tecla
-    /*
 	if ( evento.key.repeat == 0 ){
 		if(!personaje1->estaBloqueado()){
-			identificarOrdenPersonaje(personaje1);
+			identificarOrdenPersonaje1();
 		}
 		if(!personaje2->estaBloqueado()){
-			identificarOrdenPersonaje(personaje2);
+			identificarOrdenPersonaje2();
 		}
 	}*/
     return true;
@@ -145,26 +144,38 @@ void ControladorPersonaje::identificarOrdenPersonaje1(){
     }else if (estadoTeclado[SDL_SCANCODE_RIGHT] && ! personaje1->estaAgachado()){
         Logger::getInstance()->debug("Se presiona: Tecla derecha.");
         personaje1->caminarDerecha();
-    }else if (estadoTeclado[SDL_SCANCODE_UP]){
-        Logger::getInstance()->debug("Se presiona: Tecla arriba.");
-        personaje1->saltarVertical();
+    }else if(estadoTeclado[SDL_SCANCODE_L] && personaje1->estaAgachado()){
+	    personaje1->defenderAgachado();
     }else if(estadoTeclado[SDL_SCANCODE_G] && personaje1->estaAgachado()){
-       	cout<<"gancho"<<endl;
         personaje1->gancho();
-    }else if (estadoTeclado[SDL_SCANCODE_DOWN]){
+    }else if((estadoTeclado[SDL_SCANCODE_H] || estadoTeclado[SDL_SCANCODE_K]) && personaje1->estaAgachado()){
+	    personaje1->patadaAltaAgachado();
+	}else if (estadoTeclado[SDL_SCANCODE_UP]){
+	    Logger::getInstance()->debug("Se presiona: Tecla arriba.");
+	    personaje1->saltarVertical();
+	}/*else if(((*estadoJoy2)["JOY_PINIA_ALTA"] || (*estadoJoy2)["JOY_PINIA_ALTA"]) && personaje->estaSaltando()){
+	    personaje->piniaSaltandoVertical();
+	}*/else if (estadoTeclado[SDL_SCANCODE_DOWN]){
         Logger::getInstance()->debug("Se presiona: Tecla abajo.");
         personaje1->agacharse();
     }else if(estadoTeclado[SDL_SCANCODE_F]){
     	personaje1->arrojarArma();
     }else if(estadoTeclado[SDL_SCANCODE_G]){
-        personaje1->piniaAlta();
+    	personaje1->piniaAlta();
     }else if(estadoTeclado[SDL_SCANCODE_H]){
     	personaje1->patadaAlta();
-    }else if(estadoTeclado[SDL_SCANCODE_N]){
-    	personaje1->bloquearPersonaje(200);
-    }else{
-        personaje1->mantenerReposo();
-    }
+    }else if(estadoTeclado[SDL_SCANCODE_J]){
+	    personaje1->piniaBaja();
+	}else if(estadoTeclado[SDL_SCANCODE_K]){
+	    personaje1->patadaBaja();
+	}else if(estadoTeclado[SDL_SCANCODE_L]){
+	    personaje1->defender();
+	}
+	/*else if(SDL_JoystickGetButton(joyAct, BOTON_BLOQUEAR)){
+	 personaje->bloquearPersonaje(TIEMPO_BLOQUEADO);
+	}*/else{
+	    personaje1->mantenerReposo();
+	}
 }
 
 void ControladorPersonaje::identificarOrdenPersonaje2(){
@@ -195,26 +206,38 @@ void ControladorPersonaje::identificarOrdenPersonaje2(){
     }else if (estadoTeclado[SDL_SCANCODE_D] && ! personaje2->estaAgachado()){
         Logger::getInstance()->debug("Se presiona: Tecla derecha.");
         personaje2->caminarDerecha();
-    }else if (estadoTeclado[SDL_SCANCODE_W]){
-        Logger::getInstance()->debug("Se presiona: Tecla arriba.");
-        personaje2->saltarVertical();
+    }else if(estadoTeclado[SDL_SCANCODE_M] && personaje2->estaAgachado()){
+	    personaje2->defenderAgachado();
     }else if(estadoTeclado[SDL_SCANCODE_G] && personaje2->estaAgachado()){
-        cout<<"gancho"<<endl;
         personaje2->gancho();
-    }else if (estadoTeclado[SDL_SCANCODE_S]){
+    }else if((estadoTeclado[SDL_SCANCODE_H] || estadoTeclado[SDL_SCANCODE_V]) && personaje2->estaAgachado()){
+	    personaje2->patadaAltaAgachado();
+	}else if (estadoTeclado[SDL_SCANCODE_W]){
+	    Logger::getInstance()->debug("Se presiona: Tecla arriba.");
+	    personaje2->saltarVertical();
+	}/*else if(((*estadoJoy2)["JOY_PINIA_ALTA"] || (*estadoJoy2)["JOY_PINIA_ALTA"]) && personaje->estaSaltando()){
+	    personaje->piniaSaltandoVertical();
+	}*/else if (estadoTeclado[SDL_SCANCODE_S]){
         Logger::getInstance()->debug("Se presiona: Tecla abajo.");
         personaje2->agacharse();
+    }else if(estadoTeclado[SDL_SCANCODE_X]){
+    	personaje2->arrojarArma();
     }else if(estadoTeclado[SDL_SCANCODE_C]){
-      	personaje2->arrojarArma();
+    	personaje2->piniaAlta();
     }else if(estadoTeclado[SDL_SCANCODE_V]){
-        personaje2->piniaAlta();
+    	personaje2->patadaAlta();
     }else if(estadoTeclado[SDL_SCANCODE_B]){
-        personaje2->patadaAlta();
-    }else if(estadoTeclado[SDL_SCANCODE_M]){
-        personaje2->bloquearPersonaje(200);
-    }else{
-        personaje2->mantenerReposo();
-    }
+	    personaje2->piniaBaja();
+	}else if(estadoTeclado[SDL_SCANCODE_N]){
+	    personaje2->patadaBaja();
+	}else if(estadoTeclado[SDL_SCANCODE_M]){
+	    personaje2->defender();
+	}
+	/*else if(SDL_JoystickGetButton(joyAct, BOTON_BLOQUEAR)){
+	 personaje->bloquearPersonaje(TIEMPO_BLOQUEADO);
+	}*/else{
+	    personaje2->mantenerReposo();
+	}
 
 }
 
