@@ -15,7 +15,10 @@ class PiniaSaltandoVertical: public Estado
     public:
 		PiniaSaltandoVertical(Vector2f posInicial, BVH* caja);
         virtual ~PiniaSaltandoVertical();
+        bool estaAtacando();
+        bool estaDefendiendo();
         bool estaSaltando();
+        bool estaSaltandoVertical();
 };
 
 #endif /* SRC_MODELO_ESTADO_PINIASALTANDOVERTICAL_H_ */

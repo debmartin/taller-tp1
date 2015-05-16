@@ -31,3 +31,11 @@ bool PateandoSaltandoVertical::estaAtacando(){
 bool PateandoSaltandoVertical::estaDefendiendo(){
 	return false;
 }
+
+bool PateandoSaltandoVertical::estaSaltando(){
+    return true;
+}
+
+bool PateandoSaltandoVertical::estaSaltandoVertical(){
+    return true;
+}

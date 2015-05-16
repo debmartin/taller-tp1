@@ -62,6 +62,7 @@ public:
 	void notificarObservadores();
 	void update(Colisionable* enemigo);
 	bool estaSaltando();
+	bool estaSaltandoVertical();
 	bool estaAgachado();
 	bool estaEnReposo();
 	bool estaAtacando();

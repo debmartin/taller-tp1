@@ -10,6 +10,7 @@ class SaltandoVertical : public Estado
         SaltandoVertical(Vector2f posInicial, BVH* caja);
         virtual ~SaltandoVertical();
         bool estaSaltando();
+        bool estaSaltandoVertical();
     protected:
     private:
 };

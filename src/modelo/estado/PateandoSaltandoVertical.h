@@ -16,6 +16,8 @@ public:
 	virtual ~PateandoSaltandoVertical();
 	bool estaAtacando();
 	bool estaDefendiendo();
+	bool estaSaltando();
+	bool estaSaltandoVertical();
 };
 
 #endif /* SRC_MODELO_ESTADO_PATEANDOSALTANDOVERTICAL_H_ */

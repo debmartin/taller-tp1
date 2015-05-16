@@ -13,7 +13,7 @@
 #define VECTOR_GRAVEDAD Vector2f(0, -2600.f)
 
 PiniaSaltandoVertical::PiniaSaltandoVertical(Vector2f posInicial, BVH* caja) :
-    Estado(new MRUV(posInicial, Vector2f(VELOCIDAD_NULA, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD), SALTANDO_VERTICAL, caja){
+    Estado(new MRUV(posInicial, Vector2f(VELOCIDAD_NULA, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD), PINIA_SALTANDO_VERTICAL, caja){
     //ctor
 }
 
@@ -22,6 +22,18 @@ PiniaSaltandoVertical::~PiniaSaltandoVertical()
     //dtor
 }
 
+bool PiniaSaltandoVertical::estaAtacando(){
+	return true;
+}
+
+bool PiniaSaltandoVertical::estaDefendiendo(){
+	return false;
+}
+
 bool PiniaSaltandoVertical::estaSaltando(){
+    return true;
+}
+
+bool PiniaSaltandoVertical::estaSaltandoVertical(){
     return true;
 }
