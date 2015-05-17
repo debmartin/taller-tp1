@@ -20,6 +20,9 @@ public:
 	virtual Vector2f getVelocidad(float tActual) {
 		return velInicial;
 	}
+	void reducirVelocidad(Vector2f velocidadNueva) {
+        velInicial = velocidadNueva;
+    }
 	~MRU() {}
 };
 

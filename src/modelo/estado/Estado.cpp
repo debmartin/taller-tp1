@@ -43,18 +43,24 @@ bool Estado::estaBloqueado(){
     return false;
 }
 
+bool Estado::estaCaminando(){
+    return false;
+}
+
 bool Estado::ejecutandoMovimientoEspecial(){
     return false;
 }
 
 Vector2f Estado::obtenerProximaPosicion(){
-    float tActual = ((float)(SDL_GetTicks())/1000.0f) - tCreacion;
-    return trayectoria->getPosicion(tActual);
+    return trayectoria->getPosicion(obtenerTiempoActual());
 }
 
 Vector2f Estado::obtenerVelocidad(){
-    float tActual = ((float)(SDL_GetTicks())/1000.0f) - tCreacion;
-    return trayectoria->getVelocidad(tActual);
+    return trayectoria->getVelocidad(obtenerTiempoActual());
+}
+
+float Estado::obtenerTiempoActual(){
+    return ((float)(SDL_GetTicks())/1000.0f) - tCreacion;
 }
 
 estado_personaje Estado::Id(){
@@ -78,10 +84,16 @@ Trayectoria* Estado::getTrayectoria(){
     return trayectoria;
 }
 
-double Estado::calcularAncho(){
-	return cajas->calcularAncho();
+void Estado::reducirVelocidad(){
+    Vector2f velocidadActual = trayectoria->getVelocidad(obtenerTiempoActual());
+    Vector2f velocidadNueva(velocidadActual.X()/2.0, velocidadActual.Y());
+    trayectoria->reducirVelocidad(velocidadNueva);
 }
 
-double Estado::calcularAlto(){
-	return cajas->calcularAlto();
+double Estado::calcularAncho() {
+    return cajas->calcularAncho();
+}
+
+double Estado::calcularAlto() {
+    return cajas->calcularAlto();
 }

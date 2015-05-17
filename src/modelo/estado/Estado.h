@@ -44,6 +44,7 @@ class Estado
         virtual bool estaEsperando();
         virtual bool ejecutandoMovimientoEspecial();
         virtual bool estaBloqueado();
+        virtual bool estaCaminando();
 
         Ataque* obtenerAtaque();
         Vector2f obtenerProximaPosicion();
@@ -54,6 +55,8 @@ class Estado
         BVH* obtenerCajaColision();
         void agregarCajaColision(BVH* cajaColision);
         Trayectoria* getTrayectoria();
+        void reducirVelocidad();
+        float obtenerTiempoActual();
         double calcularAncho();
         double calcularAlto();
     protected:
