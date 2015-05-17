@@ -12,7 +12,7 @@
 
 class PateandoSaltandoDiagonalDerecha: public Estado {
 public:
-	PateandoSaltandoDiagonalDerecha(Trayectoria* trayectoriaActual, BVH* caja);
+	PateandoSaltandoDiagonalDerecha(Trayectoria* trayectoriaActual, float tiempoDeCreacion, BVH* caja);
 	PateandoSaltandoDiagonalDerecha(Vector2f posInicial, BVH* caja);
 	virtual ~PateandoSaltandoDiagonalDerecha();
 	bool estaAtacando();

@@ -43,6 +43,7 @@ class Estado
 {
     public:
         Estado(Trayectoria* trayectoriaInicial, estado_personaje id, BVH* caja);
+        Estado(Trayectoria* trayectoriaInicial, float tiempoCreacion, estado_personaje id, BVH* caja);
         virtual ~Estado();
         virtual bool estaAtacando();
         virtual bool estaDefendiendo();
@@ -67,6 +68,7 @@ class Estado
         Trayectoria* getTrayectoria();
         void reducirVelocidad();
         float obtenerTiempoActual();
+        float obtenerTiempoDeCreacion();
         double calcularAncho();
         double calcularAlto();
     protected:

@@ -14,8 +14,8 @@
 #define VELOCIDAD_DESP_VERTICAL 1120.0f
 #define VECTOR_GRAVEDAD Vector2f(0, -2600.f)
 
-PateandoSaltandoDiagonalDerecha::PateandoSaltandoDiagonalDerecha(Trayectoria* trayectoriaActual, BVH* caja) :
-	Estado(trayectoriaActual, PATEANDO_SALTANDO_DIAGONAL_DERECHA, caja) {
+PateandoSaltandoDiagonalDerecha::PateandoSaltandoDiagonalDerecha(Trayectoria* trayectoriaActual, float tiempoDeCreacion, BVH* caja) :
+	Estado(trayectoriaActual, tiempoDeCreacion, PATEANDO_SALTANDO_DIAGONAL_DERECHA, caja) {
 	ataqueEstado = new Ataque(DANIO_PATADA_SALTANDO);
 }
 
