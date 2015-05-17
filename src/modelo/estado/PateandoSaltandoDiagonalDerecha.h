@@ -12,11 +12,12 @@
 
 class PateandoSaltandoDiagonalDerecha: public Estado {
 public:
+	PateandoSaltandoDiagonalDerecha(Trayectoria* trayectoriaActual, BVH* caja);
 	PateandoSaltandoDiagonalDerecha(Vector2f posInicial, BVH* caja);
 	virtual ~PateandoSaltandoDiagonalDerecha();
 	bool estaAtacando();
 	bool estaSaltando();
-	bool estaSaltandoDiagonal();
+	bool estaSaltandoDiagonalDerecha();
 };
 
 #endif /* SRC_MODELO_ESTADO_PATEANDOSALTANDODIAGONALDERECHA_H_ */

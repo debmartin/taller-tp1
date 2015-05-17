@@ -75,10 +75,6 @@ Vector2f Personaje::getPosicion(){
 	return this->posicion;
 }
 
-//void Personaje::setEstado(estado_personaje unEstado){
-//	this->estado = unEstado;
-//}
-
 estado_personaje Personaje::getEstado(){
 	return ((estado_personaje) estado->Id());
 }
@@ -156,17 +152,17 @@ void Personaje::piniaBaja(){
 }
 
 void Personaje::piniaSaltandoDiagonalDerecha(){
-    cambiarEstado(new PiniaSaltandoDiagonalDerecha(posicion, (*cajasPorEstado)[PINIA_SALTANDO_DIAGONAL_DERECHA]));
+    cambiarEstado(new PiniaSaltandoDiagonalDerecha(estado->getTrayectoria(), (*cajasPorEstado)[PINIA_SALTANDO_DIAGONAL_DERECHA]));
 	Logger::getInstance()->debug("Personaje: piña saltando.");
 }
 
 void Personaje::piniaSaltandoDiagonalIzquierda(){
-    cambiarEstado(new PiniaSaltandoDiagonalIzquierda(posicion, (*cajasPorEstado)[PINIA_SALTANDO_DIAGONAL_IZQUIERDA]));
+    cambiarEstado(new PiniaSaltandoDiagonalIzquierda(estado->getTrayectoria(), (*cajasPorEstado)[PINIA_SALTANDO_DIAGONAL_IZQUIERDA]));
 	Logger::getInstance()->debug("Personaje: piña saltando.");
 }
 
 void Personaje::piniaSaltandoVertical(){
-    cambiarEstado(new PiniaSaltandoVertical(posicion, (*cajasPorEstado)[PINIA_SALTANDO_VERTICAL]));
+    cambiarEstado(new PiniaSaltandoVertical(estado->getTrayectoria(), (*cajasPorEstado)[PINIA_SALTANDO_VERTICAL]));
 	Logger::getInstance()->debug("Personaje: piña saltando.");
 }
 
@@ -188,17 +184,17 @@ void Personaje::patadaAltaAgachado(){
 }
 
 void Personaje::patadaSaltandoVertical(){
-    cambiarEstado(new PateandoSaltandoVertical(posicion, (*cajasPorEstado)[PATEANDO_SALTANDO_VERTICAL]));
+    cambiarEstado(new PateandoSaltandoVertical(estado->getTrayectoria(), (*cajasPorEstado)[PATEANDO_SALTANDO_VERTICAL]));
 	Logger::getInstance()->debug("Personaje: patada.");
 }
 
 void Personaje::patadaSaltandoDiagonalDerecha(){
-    cambiarEstado(new PateandoSaltandoDiagonalDerecha(posicion, (*cajasPorEstado)[PATEANDO_SALTANDO_DIAGONAL_DERECHA]));
+    cambiarEstado(new PateandoSaltandoDiagonalDerecha(estado->getTrayectoria(), (*cajasPorEstado)[PATEANDO_SALTANDO_DIAGONAL_DERECHA]));
 	Logger::getInstance()->debug("Personaje: patada.");
 }
 
 void Personaje::patadaSaltandoDiagonalIzquierda(){
-    cambiarEstado(new PateandoSaltandoDiagonalIzquierda(posicion, (*cajasPorEstado)[PATEANDO_SALTANDO_DIAGONAL_IZQUIERDA]));
+    cambiarEstado(new PateandoSaltandoDiagonalIzquierda(estado->getTrayectoria(), (*cajasPorEstado)[PATEANDO_SALTANDO_DIAGONAL_IZQUIERDA]));
 	Logger::getInstance()->debug("Personaje: patada.");
 }
 
@@ -224,7 +220,7 @@ void Personaje::mantenerReposo(){
 }
 
 void Personaje::cambiarEstado(Estado* nuevo) {
-    delete estado;
+    //delete estado;
     estado = nuevo;
 }
 
@@ -234,15 +230,6 @@ void Personaje::agregarObservador(Observador* unObservador){
 
 void Personaje::notificarObservadores(){
 	Observable::notificarObservadores();
-}
-
-bool Personaje::estaAtacando(){
-    return (estado->estaAtacando());
-}
-
-
-bool Personaje::estaDefendiendo(){
-    return (estado->estaDefendiendo());
 }
 
 void Personaje::caer(){
@@ -350,7 +337,6 @@ void Personaje::update(Colisionable* enemigo){
            mantenerReposo();
         }
         tiempoBloqueo -= 1.0;
-        cout<<"Tiempo bloqueo:"<<tiempoBloqueo<<endl;
     }
 
     arma->update();
@@ -370,6 +356,14 @@ bool Personaje::estaSaltando(){
 
 bool Personaje::estaSaltandoVertical(){
     return (estado->estaSaltandoVertical());
+}
+
+bool Personaje::estaSaltandoDiagonalDerecha(){
+    return (estado->estaSaltandoDiagonalDerecha());
+}
+
+bool Personaje::estaSaltandoDiagonalIzquierda(){
+    return (estado->estaSaltandoDiagonalIzquierda());
 }
 
 bool Personaje::ejecutandoMovimientoEspecial(){
@@ -392,6 +386,13 @@ bool Personaje::estaCaminando(){
 	return (estado->estaCaminando());
 }
 
+bool Personaje::estaAtacando(){
+    return (estado->estaAtacando());
+}
+
+bool Personaje::estaDefendiendo(){
+    return (estado->estaDefendiendo());
+}
 void Personaje::arrojarArma(){
 	//Posiciono el poder respecto a la posicion del personaje
 	Vector2f posicionObjeto(posicion.X()+ancho,alto);

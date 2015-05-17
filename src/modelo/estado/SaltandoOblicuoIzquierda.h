@@ -10,6 +10,7 @@ class SaltandoOblicuoIzquierda : public Estado
         SaltandoOblicuoIzquierda(Vector2f posInicial, BVH* caja);
         virtual ~SaltandoOblicuoIzquierda();
         bool estaSaltando();
+        bool estaSaltandoDiagonalIzquierda();
     protected:
     private:
 };
