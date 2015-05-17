@@ -63,6 +63,8 @@ public:
 	void update(Colisionable* enemigo);
 	bool estaSaltando();
 	bool estaSaltandoVertical();
+	bool estaSaltandoDiagonalDerecha();
+	bool estaSaltandoDiagonalIzquierda();
 	bool estaAgachado();
 	bool estaEnReposo();
 	bool estaAtacando();

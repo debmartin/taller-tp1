@@ -19,3 +19,6 @@ bool SaltandoOblicuoIzquierda::estaSaltando(){
     return true;
 }
 
+bool SaltandoOblicuoIzquierda::estaSaltandoDiagonalIzquierda(){
+    return true;
+}

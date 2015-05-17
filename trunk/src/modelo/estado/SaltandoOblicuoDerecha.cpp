@@ -17,3 +17,7 @@ SaltandoOblicuoDerecha::~SaltandoOblicuoDerecha()
 bool SaltandoOblicuoDerecha::estaSaltando(){
     return true;
 }
+
+bool SaltandoOblicuoDerecha::estaSaltandoDiagonalDerecha(){
+    return true;
+}

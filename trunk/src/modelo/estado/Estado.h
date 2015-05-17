@@ -40,7 +40,8 @@ class Estado
         virtual bool estaDefendiendo();
         virtual bool estaSaltando();
         virtual bool estaSaltandoVertical();
-        virtual bool estaSaltandoDiagonal();
+        virtual bool estaSaltandoDiagonalDerecha();
+        virtual bool estaSaltandoDiagonalIzquierda();
         virtual bool estaAgachado();
         virtual bool estaEsperando();
         virtual bool ejecutandoMovimientoEspecial();

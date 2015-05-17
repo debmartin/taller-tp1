@@ -43,10 +43,10 @@ bool ControladorPersonaje::manejar_Evento(SDL_Event &evento){
     }*/
 
 //    if(!personaje1->estaBloqueado()){
-//    	identificarOrdenJoystickPersonaje1(personaje1);
+//    	identificarOrdenJoystickPersonaje(personaje1, JOYSTICK1);
 //    }
 //    if(!personaje2->estaBloqueado()){
-//    	identificarOrdenJoystickPersonaje2(personaje2);
+//    	identificarOrdenJoystickPersonaje(personaje2, JOYSTICK2);
 //    }
 
 	//Si se presiona una tecla
@@ -70,7 +70,15 @@ void ControladorPersonaje::identificarOrdenJoystickPersonaje(Personaje* personaj
 			personaje->piniaSaltandoVertical();
 		}if(((*estadoJoy)["JOY_PATADA_ALTA"] || (*estadoJoy)["JOY_PATADA_BAJA"]) && personaje->estaSaltandoVertical()){
 			personaje->patadaSaltandoVertical();
-		}
+		}else if(((*estadoJoy)["JOY_PINIA_ALTA"] || (*estadoJoy)["JOY_PINIA_BAJA"]) && personaje->estaSaltandoDiagonalDerecha()){
+    		personaje1->piniaSaltandoDiagonalDerecha();
+    	}else if(((*estadoJoy)["JOY_PATADA_ALTA"] || (*estadoJoy)["JOY_PATADA_BAJA"]) && personaje->estaSaltandoDiagonalDerecha()){
+    		personaje1->patadaSaltandoDiagonalDerecha();
+    	}else if(((*estadoJoy)["JOY_PINIA_ALTA"] || (*estadoJoy)["JOY_PINIA_BAJA"]) && personaje->estaSaltandoDiagonalIzquierda()){
+    		personaje1->piniaSaltandoDiagonalIzquierda();
+    	}else if(((*estadoJoy)["JOY_PATADA_ALTA"] || (*estadoJoy)["JOY_PATADA_BAJA"]) && personaje->estaSaltandoDiagonalIzquierda()){
+    		personaje1->patadaSaltandoDiagonalIzquierda();
+    	}
 	}else{
 	    if ((*estadoJoy)["JOY_IZQUIERDA"] && (*estadoJoy)["JOY_ARRIBA"]){
 	        Logger::getInstance()->debug("Se presiona: Tecla izquierda+Tecla arriba.");
@@ -136,6 +144,16 @@ void ControladorPersonaje::identificarOrdenPersonaje1(){
     		personaje1->piniaSaltandoVertical();
     	}else if((estadoTeclado[SDL_SCANCODE_H] || estadoTeclado[SDL_SCANCODE_K]) && personaje1->estaSaltandoVertical()){
     		personaje1->patadaSaltandoVertical();
+    	}else if((estadoTeclado[SDL_SCANCODE_G] || estadoTeclado[SDL_SCANCODE_J]) && personaje1->estaSaltandoDiagonalDerecha()){
+    		cout<<"Entra piniaSaltandoDiagonalDerecha"<<endl;
+    		personaje1->piniaSaltandoDiagonalDerecha();
+    	}else if((estadoTeclado[SDL_SCANCODE_H] || estadoTeclado[SDL_SCANCODE_K]) && personaje1->estaSaltandoDiagonalDerecha()){
+    		personaje1->patadaSaltandoDiagonalDerecha();
+    	}else if((estadoTeclado[SDL_SCANCODE_G] || estadoTeclado[SDL_SCANCODE_J]) && personaje1->estaSaltandoDiagonalIzquierda()){
+    		cout<<"Entra piniaSaltandoDiagonalIzquierda"<<endl;
+    		personaje1->piniaSaltandoDiagonalIzquierda();
+    	}else if((estadoTeclado[SDL_SCANCODE_H] || estadoTeclado[SDL_SCANCODE_K]) && personaje1->estaSaltandoDiagonalIzquierda()){
+    		personaje1->patadaSaltandoDiagonalIzquierda();
     	}
     }else{
 		if (estadoTeclado[SDL_SCANCODE_LEFT] && estadoTeclado[SDL_SCANCODE_UP]){
@@ -200,6 +218,14 @@ void ControladorPersonaje::identificarOrdenPersonaje2(){
         	personaje2->piniaSaltandoVertical();
        }else if((estadoTeclado[SDL_SCANCODE_V] || estadoTeclado[SDL_SCANCODE_N]) && personaje2->estaSaltandoVertical()){
         	personaje2->patadaSaltandoVertical();
+       }else if((estadoTeclado[SDL_SCANCODE_C] || estadoTeclado[SDL_SCANCODE_B]) && personaje2->estaSaltandoDiagonalDerecha()){
+   			personaje2->piniaSaltandoDiagonalDerecha();
+       }else if((estadoTeclado[SDL_SCANCODE_V] || estadoTeclado[SDL_SCANCODE_N]) && personaje2->estaSaltandoDiagonalDerecha()){
+    	   personaje2->patadaSaltandoDiagonalDerecha();
+       }else if((estadoTeclado[SDL_SCANCODE_C] || estadoTeclado[SDL_SCANCODE_B]) && personaje2->estaSaltandoDiagonalIzquierda()){
+    	   personaje2->piniaSaltandoDiagonalIzquierda();
+       }else if((estadoTeclado[SDL_SCANCODE_V] || estadoTeclado[SDL_SCANCODE_N]) && personaje2->estaSaltandoDiagonalIzquierda()){
+    	   personaje2->patadaSaltandoDiagonalIzquierda();
        }
     }else{
 		if (estadoTeclado[SDL_SCANCODE_A] && estadoTeclado[SDL_SCANCODE_W]){

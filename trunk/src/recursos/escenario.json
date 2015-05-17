@@ -74,7 +74,7 @@
 		    			},
 		    "sprites-pinia-saltando-diagonal": { 
 				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-salto-pinia.png",
-		    		    "cant_fotogramas": 3,
+		    		    "cant_fotogramas": 1,
 		    		    "fps": 10 
 		    			},
 		    "sprites-salto-pinia": { 
@@ -170,8 +170,8 @@
 		    		    "fps": 10 
 		    			},
 		    "sprites-pinia-saltando-diagonal": { 
-				        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-pinia-saltando-diagonal.png",
-		    		    "cant_fotogramas": 3,
+				        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-pinia-salto-pinia.png",
+		    		    "cant_fotogramas": 1,
 		    		    "fps": 10 
 		    			},
 		    "sprites-salto-pinia": { 
