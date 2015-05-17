@@ -16,6 +16,7 @@ public:
 	virtual Vector2f getVelocidad(float tActual) {
 		return Vector2f(0.0f, 0.0f);
 	}
+	void reducirVelocidad(Vector2f velocidadNueva) {}
 	~Reposo() {}
 };
 

@@ -9,8 +9,7 @@ class CaminandoIzquierda : public Estado
     public:
         CaminandoIzquierda(Vector2f posInicial, bool enLimite, BVH* caja);
         virtual ~CaminandoIzquierda();
-        bool estaAtacando();
-        bool estaDefendiendo();
+        bool estaCaminando();
     protected:
     private:
 };

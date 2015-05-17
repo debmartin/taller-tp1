@@ -16,10 +16,7 @@ CaminandoDerecha::~CaminandoDerecha()
     //dtor
 }
 
-bool CaminandoDerecha::estaAtacando(){
-    return false;
+bool CaminandoDerecha::estaCaminando(){
+    return true;
 }
 
-bool CaminandoDerecha::estaDefendiendo(){
-    return false;
-}

@@ -68,6 +68,7 @@ public:
 	bool estaAtacando();
 	bool estaDefendiendo();
 	bool estaBloqueado();
+	bool estaCaminando();
 	bool ejecutandoMovimientoEspecial();
 	void recibirDanio(int danio);
 	void bloquearPersonaje(float segundos);
@@ -99,6 +100,8 @@ public:
 	void ejecutarPoder(Poder* poder, Objeto* objeto);
 	void arrojarArma();
 	void caer();
+	void arrastrar(Colisionable* otro);
+	bool empujar(Direccion direccionEmpuje, Vector2f diferencia);
 
 	virtual void colisionar(Colisionable* otro);
 	void cambiarEstado(Estado* nuevo);

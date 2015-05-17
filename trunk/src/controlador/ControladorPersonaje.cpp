@@ -42,14 +42,12 @@ bool ControladorPersonaje::manejar_Evento(SDL_Event &evento){
     	return true;
     }*/
 
-    if(!personaje1->estaBloqueado()){
-    	identificarOrdenJoystickPersonaje(personaje1, JOYSTICK1);
-    	identificarOrdenPersonaje1();
-    }
-    if(!personaje2->estaBloqueado()){
-    	identificarOrdenJoystickPersonaje(personaje2, JOYSTICK2);
-    	identificarOrdenPersonaje2();
-    }
+//    if(!personaje1->estaBloqueado()){
+//    	identificarOrdenJoystickPersonaje1(personaje1);
+//    }
+//    if(!personaje2->estaBloqueado()){
+//    	identificarOrdenJoystickPersonaje2(personaje2);
+//    }
 
 	//Si se presiona una tecla
 	if ( evento.key.repeat == 0 ){

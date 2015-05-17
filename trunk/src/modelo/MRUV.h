@@ -26,6 +26,9 @@ public:
 		velActual = velInicial + gravedad * tActual;
 		return velActual;
 	};
+	void reducirVelocidad(Vector2f velocidadNueva) {
+        velInicial = velocidadNueva;
+    }
 	~MRUV() {}
 };
 
