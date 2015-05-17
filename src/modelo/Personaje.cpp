@@ -142,13 +142,12 @@ void Personaje::agacharse(){
 void Personaje::piniaAlta(){
     cambiarEstado(new PiniaAlta(posicion, (*cajasPorEstado)[PINIA_ALTA]));
 	Logger::getInstance()->debug("Personaje: golpe alto.");
-	VentanaGrafica::Instance()->vibrar();
+	//VentanaGrafica::Instance()->vibrar();
 }
 
 void Personaje::piniaBaja(){
     cambiarEstado(new PiniaBaja(posicion, (*cajasPorEstado)[PINIA_BAJA]));
 	Logger::getInstance()->debug("Personaje: golpe bajo.");
-	VentanaGrafica::Instance()->vibrar();
 }
 
 void Personaje::piniaSaltandoDiagonalDerecha(){
@@ -201,7 +200,6 @@ void Personaje::patadaSaltandoDiagonalIzquierda(){
 void Personaje::gancho(){
 	cambiarEstado(new Gancho(posicion, (*cajasPorEstado)[GANCHO]));
     Logger::getInstance()->debug("Personaje: gancho.");
-    VentanaGrafica::Instance()->vibrar();
 }
 
 void Personaje::defender(){
