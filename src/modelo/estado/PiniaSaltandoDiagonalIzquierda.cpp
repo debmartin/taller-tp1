@@ -14,12 +14,12 @@
 
 PiniaSaltandoDiagonalIzquierda::PiniaSaltandoDiagonalIzquierda(Trayectoria* trayectoriaActual, BVH* caja) :
     Estado(trayectoriaActual, PINIA_SALTANDO_DIAGONAL_IZQUIERDA, caja){
-    //ctor
+	ataqueEstado = new Ataque(DANIO_PINIA_SALTANDO);
 }
 
 PiniaSaltandoDiagonalIzquierda::PiniaSaltandoDiagonalIzquierda(Vector2f posInicial, BVH* caja) :
     Estado(new MRUV(posInicial, Vector2f(-VELOCIDAD_DESP_HORIZONTAL_SALTANDO, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD), PINIA_SALTANDO_DIAGONAL_IZQUIERDA, caja){
-    //ctor
+	ataqueEstado = new Ataque(DANIO_PINIA_SALTANDO);
 }
 
 PiniaSaltandoDiagonalIzquierda::~PiniaSaltandoDiagonalIzquierda()

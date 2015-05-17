@@ -7,11 +7,9 @@
 
 #include "PateandoAltoAgachado.h"
 
-#define DANIO_PATADA 10
-
 PateandoAltoAgachado::PateandoAltoAgachado(Vector2f posInicial, BVH* caja) :
 	Estado(new Reposo(posInicial), PATEANDO_ALTO_AGACHADO, caja) {
-	ataqueEstado = new Ataque(DANIO_PATADA);
+	ataqueEstado = new Ataque(DANIO_PATADA_SALTANDO);
 }
 
 PateandoAltoAgachado::~PateandoAltoAgachado() {

@@ -5,6 +5,14 @@
 #include "../Ataque.h"
 #include "../fisica/BVH.h"
 
+#define DANIO_GANCHO 30
+#define DANIO_PATADA_ALTA 15
+#define DANIO_PINIA_ALTA 15
+#define DANIO_PATADA_BAJA 10
+#define DANIO_PINIA_BAJA 10
+#define DANIO_PATADA_SALTANDO 20
+#define DANIO_PINIA_SALTANDO 20
+
 typedef enum estado_personaje
 {
 	EN_ESPERA,

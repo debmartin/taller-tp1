@@ -20,8 +20,8 @@
 #include "estado/Defendiendo.h"
 #include "estado/DefendiendoAgachado.h"
 #include "estado/EnEspera.h"
-#include "estado/PateandoAlto.h"
-#include "estado/PateandoBajo.h"
+#include "estado/PatadaAlta.h"
+#include "estado/PatadaBaja.h"
 #include "estado/PateandoAltoAgachado.h"
 #include "estado/PateandoSaltandoVertical.h"
 #include "estado/PateandoSaltandoDiagonalDerecha.h"
@@ -166,13 +166,13 @@ void Personaje::piniaSaltandoVertical(){
 }
 
 void Personaje::patadaAlta(){
-	cambiarEstado(new PateandoAlto(posicion, (*cajasPorEstado)[PATEANDO_ALTO]));
+	cambiarEstado(new PatadaAlta(posicion, (*cajasPorEstado)[PATEANDO_ALTO]));
 	bloquearPersonaje(50);
 	Logger::getInstance()->debug("Personaje: patada alta.");
 }
 
 void Personaje::patadaBaja(){
-    cambiarEstado(new PateandoBajo(posicion, (*cajasPorEstado)[PATEANDO_BAJO]));
+    cambiarEstado(new PatadaBaja(posicion, (*cajasPorEstado)[PATEANDO_BAJO]));
     bloquearPersonaje(50);
 	Logger::getInstance()->debug("Personaje: patada baja.");
 }
