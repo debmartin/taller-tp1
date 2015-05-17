@@ -136,7 +136,7 @@ void Personaje::saltarOblicuoIzquierda(){
 void Personaje::agacharse(){
     cambiarEstado(new Agachado(posicion, (*cajasPorEstado)[AGACHADO]));
     Logger::getInstance()->debug("Personaje: agachado.");
-    recibirDanio(10);
+    //recibirDanio(10);
 }
 
 void Personaje::piniaAlta(){
@@ -151,17 +151,17 @@ void Personaje::piniaBaja(){
 }
 
 void Personaje::piniaSaltandoDiagonalDerecha(){
-    cambiarEstado(new PiniaSaltandoDiagonalDerecha(estado->getTrayectoria(), (*cajasPorEstado)[PINIA_SALTANDO_DIAGONAL_DERECHA]));
+    cambiarEstado(new PiniaSaltandoDiagonalDerecha(estado->getTrayectoria(), estado->obtenerTiempoDeCreacion(), (*cajasPorEstado)[PINIA_SALTANDO_DIAGONAL_DERECHA]));
 	Logger::getInstance()->debug("Personaje: piña saltando.");
 }
 
 void Personaje::piniaSaltandoDiagonalIzquierda(){
-    cambiarEstado(new PiniaSaltandoDiagonalIzquierda(estado->getTrayectoria(), (*cajasPorEstado)[PINIA_SALTANDO_DIAGONAL_IZQUIERDA]));
+    cambiarEstado(new PiniaSaltandoDiagonalIzquierda(estado->getTrayectoria(), estado->obtenerTiempoDeCreacion() , (*cajasPorEstado)[PINIA_SALTANDO_DIAGONAL_IZQUIERDA]));
 	Logger::getInstance()->debug("Personaje: piña saltando.");
 }
 
 void Personaje::piniaSaltandoVertical(){
-    cambiarEstado(new PiniaSaltandoVertical(estado->getTrayectoria(), (*cajasPorEstado)[PINIA_SALTANDO_VERTICAL]));
+    cambiarEstado(new PiniaSaltandoVertical(estado->getTrayectoria(), estado->obtenerTiempoDeCreacion(), (*cajasPorEstado)[PINIA_SALTANDO_VERTICAL]));
 	Logger::getInstance()->debug("Personaje: piña saltando.");
 }
 
@@ -183,17 +183,17 @@ void Personaje::patadaAltaAgachado(){
 }
 
 void Personaje::patadaSaltandoVertical(){
-    cambiarEstado(new PateandoSaltandoVertical(estado->getTrayectoria(), (*cajasPorEstado)[PATEANDO_SALTANDO_VERTICAL]));
+    cambiarEstado(new PateandoSaltandoVertical(estado->getTrayectoria(), estado->obtenerTiempoDeCreacion(), (*cajasPorEstado)[PATEANDO_SALTANDO_VERTICAL]));
 	Logger::getInstance()->debug("Personaje: patada.");
 }
 
 void Personaje::patadaSaltandoDiagonalDerecha(){
-    cambiarEstado(new PateandoSaltandoDiagonalDerecha(estado->getTrayectoria(), (*cajasPorEstado)[PATEANDO_SALTANDO_DIAGONAL_DERECHA]));
+    cambiarEstado(new PateandoSaltandoDiagonalDerecha(estado->getTrayectoria(), estado->obtenerTiempoDeCreacion(), (*cajasPorEstado)[PATEANDO_SALTANDO_DIAGONAL_DERECHA]));
 	Logger::getInstance()->debug("Personaje: patada.");
 }
 
 void Personaje::patadaSaltandoDiagonalIzquierda(){
-    cambiarEstado(new PateandoSaltandoDiagonalIzquierda(estado->getTrayectoria(), (*cajasPorEstado)[PATEANDO_SALTANDO_DIAGONAL_IZQUIERDA]));
+    cambiarEstado(new PateandoSaltandoDiagonalIzquierda(estado->getTrayectoria(), estado->obtenerTiempoDeCreacion(), (*cajasPorEstado)[PATEANDO_SALTANDO_DIAGONAL_IZQUIERDA]));
 	Logger::getInstance()->debug("Personaje: patada.");
 }
 

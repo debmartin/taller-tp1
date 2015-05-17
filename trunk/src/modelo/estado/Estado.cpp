@@ -7,6 +7,12 @@ Estado::Estado(Trayectoria* trayectoriaInicial, estado_personaje id, BVH* caja) 
     //ctor
 }
 
+Estado::Estado(Trayectoria* trayectoriaInicial, float tiempoCreacion, estado_personaje id, BVH* caja) :
+    trayectoria(trayectoriaInicial), ataqueEstado(NULL),
+    tCreacion(tiempoCreacion), id(id), cajas(caja) {
+    //ctor
+}
+
 Estado::~Estado() {
     delete trayectoria;
 }
@@ -69,6 +75,10 @@ Vector2f Estado::obtenerVelocidad(){
 
 float Estado::obtenerTiempoActual(){
     return ((float)(SDL_GetTicks())/1000.0f) - tCreacion;
+}
+
+float Estado::obtenerTiempoDeCreacion(){
+	return tCreacion;
 }
 
 estado_personaje Estado::Id(){

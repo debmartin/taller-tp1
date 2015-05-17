@@ -36,28 +36,25 @@ bool ControladorPersonaje::manejar_Evento(SDL_Event &evento){
 
     //Cargo los botones de los joysticks
     TheInputHandler::Instance()->handleEventsJoysticks(evento);
-/*
-    if (personaje1->estaSaltando() || personaje2->estaSaltando()) {
-        Logger::getInstance()->error("Evento invalido.");
-    	return true;
-    }*/
 
-//    if(!personaje1->estaBloqueado()){
-//    	identificarOrdenJoystickPersonaje(personaje1, JOYSTICK1);
-//    }
-//    if(!personaje2->estaBloqueado()){
-//    	identificarOrdenJoystickPersonaje(personaje2, JOYSTICK2);
-//    }
+/*Descomentar esta parte para usar el joystick:
+    	if(!personaje1->estaBloqueado()){
+    		//identificarOrdenJoystickPersonaje(personaje1, JOYSTICK1);
+    	}
+    	if(!personaje2->estaBloqueado()){
+    		//identificarOrdenJoystickPersonaje(personaje2, JOYSTICK2);
+    	}
+ */
+    //Si se presiona una tecla
+    if ( evento.key.repeat == 0 ){
+    	if(!personaje1->estaBloqueado()){
+    		identificarOrdenPersonaje1();
+    	}
+    	if(!personaje2->estaBloqueado()){
+    		identificarOrdenPersonaje2();
+    	}
+    }
 
-	//Si se presiona una tecla
-	if ( evento.key.repeat == 0 ){
-		if(!personaje1->estaBloqueado()){
-			identificarOrdenPersonaje1();
-		}
-		if(!personaje2->estaBloqueado()){
-			identificarOrdenPersonaje2();
-		}
-	}
     return true;
 }
 
@@ -71,13 +68,13 @@ void ControladorPersonaje::identificarOrdenJoystickPersonaje(Personaje* personaj
 		}if(((*estadoJoy)["JOY_PATADA_ALTA"] || (*estadoJoy)["JOY_PATADA_BAJA"]) && personaje->estaSaltandoVertical()){
 			personaje->patadaSaltandoVertical();
 		}else if(((*estadoJoy)["JOY_PINIA_ALTA"] || (*estadoJoy)["JOY_PINIA_BAJA"]) && personaje->estaSaltandoDiagonalDerecha()){
-    		personaje1->piniaSaltandoDiagonalDerecha();
+    		personaje->piniaSaltandoDiagonalDerecha();
     	}else if(((*estadoJoy)["JOY_PATADA_ALTA"] || (*estadoJoy)["JOY_PATADA_BAJA"]) && personaje->estaSaltandoDiagonalDerecha()){
-    		personaje1->patadaSaltandoDiagonalDerecha();
+    		personaje->patadaSaltandoDiagonalDerecha();
     	}else if(((*estadoJoy)["JOY_PINIA_ALTA"] || (*estadoJoy)["JOY_PINIA_BAJA"]) && personaje->estaSaltandoDiagonalIzquierda()){
-    		personaje1->piniaSaltandoDiagonalIzquierda();
+    		personaje->piniaSaltandoDiagonalIzquierda();
     	}else if(((*estadoJoy)["JOY_PATADA_ALTA"] || (*estadoJoy)["JOY_PATADA_BAJA"]) && personaje->estaSaltandoDiagonalIzquierda()){
-    		personaje1->patadaSaltandoDiagonalIzquierda();
+    		personaje->patadaSaltandoDiagonalIzquierda();
     	}
 	}else{
 	    if ((*estadoJoy)["JOY_IZQUIERDA"] && (*estadoJoy)["JOY_ARRIBA"]){

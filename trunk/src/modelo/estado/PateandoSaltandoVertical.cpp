@@ -12,13 +12,8 @@
 #define VELOCIDAD_NULA 0.0f
 #define VECTOR_GRAVEDAD Vector2f(0, -2600.f)
 
-PateandoSaltandoVertical::PateandoSaltandoVertical(Trayectoria* trayectoriaActual, BVH* caja) :
-	Estado(trayectoriaActual, PATEANDO_SALTANDO_VERTICAL, caja) {
-	ataqueEstado = new Ataque(DANIO_PATADA_SALTANDO);
-}
-
-PateandoSaltandoVertical::PateandoSaltandoVertical(Vector2f posInicial, BVH* caja) :
-	Estado(new MRUV(posInicial, Vector2f(VELOCIDAD_NULA, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD), PATEANDO_SALTANDO_VERTICAL, caja) {
+PateandoSaltandoVertical::PateandoSaltandoVertical(Trayectoria* trayectoriaActual, float tiempoDeCreacion, BVH* caja) :
+	Estado(trayectoriaActual, tiempoDeCreacion, PATEANDO_SALTANDO_VERTICAL, caja) {
 	ataqueEstado = new Ataque(DANIO_PATADA_SALTANDO);
 }
 
