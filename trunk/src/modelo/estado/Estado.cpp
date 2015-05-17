@@ -31,6 +31,10 @@ bool Estado::estaSaltandoVertical(){
     return false;
 }
 
+bool Estado::estaSaltandoDiagonal(){
+    return false;
+}
+
 bool Estado::estaAgachado(){
     return false;
 }

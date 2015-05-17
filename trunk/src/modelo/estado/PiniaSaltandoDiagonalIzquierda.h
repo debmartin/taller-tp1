@@ -15,7 +15,9 @@ class PiniaSaltandoDiagonalIzquierda: public Estado
     public:
 		PiniaSaltandoDiagonalIzquierda(Vector2f posInicial, BVH* caja);
         virtual ~PiniaSaltandoDiagonalIzquierda();
+        bool estaAtacando();
         bool estaSaltando();
+        bool estaSaltandoDiagonal();
 };
 
 #endif /* SRC_MODELO_ESTADO_PINIASALTANDODIAGONALIZQUIERDA_H_ */

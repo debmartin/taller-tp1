@@ -17,6 +17,11 @@ PiniaSaltandoVertical::PiniaSaltandoVertical(Vector2f posInicial, BVH* caja) :
     //ctor
 }
 
+PiniaSaltandoVertical::PiniaSaltandoVertical(Trayectoria* trayectoriaActual, BVH* caja) :
+    Estado(trayectoriaActual, PINIA_SALTANDO_VERTICAL, caja){
+    //ctor
+}
+
 PiniaSaltandoVertical::~PiniaSaltandoVertical()
 {
     //dtor
@@ -24,10 +29,6 @@ PiniaSaltandoVertical::~PiniaSaltandoVertical()
 
 bool PiniaSaltandoVertical::estaAtacando(){
 	return true;
-}
-
-bool PiniaSaltandoVertical::estaDefendiendo(){
-	return false;
 }
 
 bool PiniaSaltandoVertical::estaSaltando(){

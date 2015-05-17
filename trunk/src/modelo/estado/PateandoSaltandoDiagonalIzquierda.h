@@ -15,7 +15,8 @@ public:
 	PateandoSaltandoDiagonalIzquierda(Vector2f posInicial, BVH* caja);
 	virtual ~PateandoSaltandoDiagonalIzquierda();
 	bool estaAtacando();
-	bool estaDefendiendo();
+	bool estaSaltando();
+	bool estaSaltandoDiagonal();
 };
 
 #endif /* SRC_MODELO_ESTADO_PATEANDOSALTANDODIAGONALIZQUIERDA_H_ */

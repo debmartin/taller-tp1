@@ -12,10 +12,10 @@
 
 class PateandoSaltandoVertical: public Estado {
 public:
+	PateandoSaltandoVertical(Trayectoria* trayectoriaActual, BVH* caja);
 	PateandoSaltandoVertical(Vector2f posInicial, BVH* caja);
 	virtual ~PateandoSaltandoVertical();
 	bool estaAtacando();
-	bool estaDefendiendo();
 	bool estaSaltando();
 	bool estaSaltandoVertical();
 };
