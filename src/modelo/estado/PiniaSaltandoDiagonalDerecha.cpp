@@ -21,6 +21,14 @@ PiniaSaltandoDiagonalDerecha::~PiniaSaltandoDiagonalDerecha()
 //dtor
 }
 
+bool PiniaSaltandoDiagonalDerecha::estaAtacando(){
+	return true;
+}
+
 bool PiniaSaltandoDiagonalDerecha::estaSaltando(){
+	return true;
+}
+
+bool PiniaSaltandoDiagonalDerecha::estaSaltandoDiagonal(){
 	return true;
 }

@@ -29,6 +29,10 @@ bool PateandoSaltandoDiagonalDerecha::estaAtacando(){
 	return true;
 }
 
-bool PateandoSaltandoDiagonalDerecha::estaDefendiendo(){
-	return false;
+bool PateandoSaltandoDiagonalDerecha::estaSaltando(){
+    return true;
+}
+
+bool PateandoSaltandoDiagonalDerecha::estaSaltandoDiagonal(){
+    return true;
 }
