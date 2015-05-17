@@ -8,8 +8,6 @@
 #include "Gancho.h"
 #include "../Reposo.h"
 
-#define DANIO_GANCHO 20
-
 Gancho::Gancho(Vector2f posInicial, BVH* caja) :
     Estado(new Reposo(posInicial), GANCHO, caja) {
 	ataqueEstado = new Ataque(DANIO_GANCHO);
