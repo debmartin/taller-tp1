@@ -8,22 +8,35 @@
 #include "AABB.h"
 
 AABB::AABB(Vector2f Vmin, Vector2f Vmax) :
-    puntoInfIzq(Vmin), puntoSupDer(Vmax) {
+    puntoSupDer(Vmax), puntoInfIzq(Vmin) {
 }
 
 AABB::~AABB() {
 }
 
 bool AABB::interseccion(AABB* otro) {
-    return (puntoInfIzq.X() <= otro->puntoSupDer.X() &&
-            otro->puntoInfIzq.X() <= puntoSupDer.X() &&
-            puntoInfIzq.Y() <= otro->puntoSupDer.Y() &&
-            otro->puntoInfIzq.Y() <= puntoSupDer.Y());
+    if (puntoInfIzq.X() > otro->puntoSupDer.X() || otro->puntoInfIzq.X() > puntoSupDer.X())
+        return false;
+    if (puntoInfIzq.X() <= otro->puntoSupDer.X() && puntoInfIzq.X() >= otro->puntoInfIzq.X()) {
+        if (puntoInfIzq.Y() <= otro->puntoSupDer.Y() && puntoInfIzq.Y() >= otro->puntoInfIzq.Y())
+            return true;
+        if (puntoSupDer.Y() <= otro->puntoSupDer.Y() && puntoInfIzq.Y() >= otro->puntoInfIzq.Y())
+            return true;
+        return (puntoInfIzq.Y() <= otro->puntoInfIzq.Y() && puntoSupDer.Y() >= otro->puntoSupDer.Y());
+    }
+    if (puntoSupDer.X() <= otro->puntoSupDer.X() && puntoInfIzq.X() >= otro->puntoInfIzq.X()) {
+        if (puntoSupDer.Y() <= otro->puntoSupDer.Y() && puntoInfIzq.Y() >= otro->puntoInfIzq.Y())
+            return true;
+        if (puntoInfIzq.Y() <= otro->puntoSupDer.Y() && puntoInfIzq.Y() >= otro->puntoInfIzq.Y())
+            return true;
+        return (puntoInfIzq.Y() <= otro->puntoInfIzq.Y() && puntoSupDer.Y() >= otro->puntoSupDer.Y());
+    }
+    return false;
 }
 
 void AABB::desplazarAABB(Vector2f v) {
-    puntoInfIzq.setCoordenada(puntoInfIzq.X() + v.X(), puntoInfIzq.Y() + v.Y());
-    puntoSupDer.setCoordenada(puntoSupDer.X() + v.X(), puntoSupDer.Y() + v.Y());
+    puntoInfIzq = puntoInfIzq + v;
+    puntoSupDer = puntoSupDer + v;
 }
 
 void AABB::espejarAABB(float posMedia){

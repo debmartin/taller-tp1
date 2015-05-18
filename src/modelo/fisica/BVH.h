@@ -29,6 +29,7 @@ public:
 	void espejarBVH();
 	double calcularAncho();
 	double calcularAlto();
+	Vector2f calcularPosicion();
 };
 
 #endif /* SRC_MODELO_FISICA_BVH_H_ */

@@ -4,7 +4,8 @@
 Estado::Estado(Trayectoria* trayectoriaInicial, estado_personaje id, BVH* caja) :
     trayectoria(trayectoriaInicial), ataqueEstado(NULL),
     tCreacion(((float)(SDL_GetTicks()))/1000.0f), id(id), cajas(caja) {
-    //ctor
+    Vector2f posInicial = cajas->calcularPosicion();
+    cajas->desplazarBVH(trayectoria->getPosicion(obtenerTiempoActual()) - posInicial);
 }
 
 Estado::Estado(Trayectoria* trayectoriaInicial, float tiempoCreacion, estado_personaje id, BVH* caja) :
@@ -67,6 +68,11 @@ bool Estado::ejecutandoMovimientoEspecial(){
 
 Vector2f Estado::obtenerProximaPosicion(){
     return trayectoria->getPosicion(obtenerTiempoActual());
+}
+
+void Estado::actualizar(Vector2f nuevaPosicion){
+    Vector2f posInicial = cajas->calcularPosicion();
+    cajas->desplazarBVH(nuevaPosicion - posInicial);
 }
 
 Vector2f Estado::obtenerVelocidad(){

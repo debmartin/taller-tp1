@@ -26,6 +26,7 @@ BVH::BVH(vector<AABB*>* aabb) :
         limiteIzquierdo = (aux < limiteIzquierdo) ? aux : limiteIzquierdo;
     }
     cajaLimitadora = new AABB(Vector2f(limiteIzquierdo, limiteInferior), Vector2f(limiteDerecho, limiteSuperior));
+    cout << "izq: " << limiteIzquierdo << ", der: " << limiteDerecho << ", sup: " << limiteSuperior << ", inf: " << limiteInferior << endl;
 }
 
 BVH::~BVH() {
@@ -36,14 +37,17 @@ BVH::~BVH() {
 }
 
 bool BVH::interseccion(BVH* bvh){
-    if (! cajaLimitadora->interseccion(bvh->cajaLimitadora));
+    if (! cajaLimitadora->interseccion(bvh->cajaLimitadora)) {
+        cout << "entra" <<endl;
         return false;
+    }
     for (int i = 0; i < cajasAABB->size(); i++){
         for (int j = 0; j < bvh->cajasAABB->size(); j++){
             if ((*cajasAABB)[i]->interseccion((*bvh->cajasAABB)[j]))
                 return true;
         }
     }
+    return false;
 }
 
 void BVH::desplazarBVH(Vector2f v){
@@ -67,4 +71,8 @@ double BVH::calcularAncho(){
 
 double BVH::calcularAlto(){
 	return cajaLimitadora->getLimiteSuperior() - cajaLimitadora->getLimiteInferior();
+}
+
+Vector2f BVH::calcularPosicion() {
+    return Vector2f(cajaLimitadora->getLimiteIzquierdo(), cajaLimitadora->getLimiteInferior());
 }
