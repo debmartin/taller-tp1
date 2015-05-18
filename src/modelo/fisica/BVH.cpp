@@ -14,8 +14,8 @@ BVH::BVH(vector<AABB*>* aabb) :
     float limiteDerecho = (*cajasAABB)[0]->getLimiteDerecho();
     float limiteIzquierdo = (*cajasAABB)[0]->getLimiteIzquierdo();
     float aux;
-
-    for (int i = 1; i < cajasAABB->size(); i++){
+    cout << "tam" << cajasAABB->size()<< endl;
+    for (int i = 1; i == cajasAABB->size(); i++){
         aux = (*cajasAABB)[i]->getLimiteInferior();
         limiteInferior = (aux < limiteInferior) ? aux : limiteInferior;
         aux = (*cajasAABB)[i]->getLimiteSuperior();
@@ -24,9 +24,9 @@ BVH::BVH(vector<AABB*>* aabb) :
         limiteDerecho = (aux > limiteDerecho) ? aux : limiteDerecho;
         aux = (*cajasAABB)[i]->getLimiteIzquierdo();
         limiteIzquierdo = (aux < limiteIzquierdo) ? aux : limiteIzquierdo;
+        cout << "itera: "<< i <<endl;
     }
     cajaLimitadora = new AABB(Vector2f(limiteIzquierdo, limiteInferior), Vector2f(limiteDerecho, limiteSuperior));
-    cout << "izq: " << limiteIzquierdo << ", der: " << limiteDerecho << ", sup: " << limiteSuperior << ", inf: " << limiteInferior << endl;
 }
 
 BVH::~BVH() {
@@ -38,12 +38,13 @@ BVH::~BVH() {
 
 bool BVH::interseccion(BVH* bvh){
     if (! cajaLimitadora->interseccion(bvh->cajaLimitadora)) {
-        cout << "entra" <<endl;
+        cout << "no llega" <<endl;
         return false;
     }
+    cout << "llega";
     for (int i = 0; i < cajasAABB->size(); i++){
         for (int j = 0; j < bvh->cajasAABB->size(); j++){
-            if ((*cajasAABB)[i]->interseccion((*bvh->cajasAABB)[j]))
+            if ((*cajasAABB)[i]->interseccion((*(bvh->cajasAABB))[j]))
                 return true;
         }
     }
