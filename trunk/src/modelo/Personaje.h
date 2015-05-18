@@ -49,7 +49,6 @@ public:
 	Vector2f getDimensionesLogicas() const;
 	void setPosicion(double x, double y);
 	Vector2f getPosicion();
-//	void setEstado(estado_personaje estado);
 	estado_personaje getEstado();
 	int getEnergia();
 	void agregarArma(Objeto* unArma);

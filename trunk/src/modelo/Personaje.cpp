@@ -393,7 +393,9 @@ bool Personaje::estaDefendiendo(){
 }
 void Personaje::arrojarArma(){
 	//Posiciono el poder respecto a la posicion del personaje
+	cout<<"Entra a arrojar arma"<<endl;
 	Vector2f posicionObjeto(posicion.X()+ancho,alto);
+	cout<<"Posicion.X personaje:"<<posicion.X()<<endl;
 	arma->posicionar(posicionObjeto);
 	arma->arrojar();
 }

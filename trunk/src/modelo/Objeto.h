@@ -20,6 +20,12 @@ typedef enum estado_objeto
 	NO_VISIBLE,
 } estado_objeto;
 
+typedef enum direccion_objeto
+{
+	DIRECCION_DERECHA,
+	DIRECCION_IZQUIERDA,
+} direccion_objeto;
+
 class Objeto {
 public:
 	Objeto();
@@ -30,6 +36,7 @@ public:
 	virtual void update() = 0;
 	virtual void arrojar() = 0;
 	virtual void cambiarEstado(estado_objeto unEstado) = 0;
+	virtual void cambiarDireccion() = 0;
 	virtual void cambiarTrayectoria(Trayectoria* trayectoria) = 0;
 };
 
