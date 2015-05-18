@@ -21,6 +21,7 @@ class AABB {
         float getLimiteSuperior();
         float getLimiteDerecho();
         float getLimiteIzquierdo();
+        friend ostream& operator<<(ostream &o, const AABB &aabb);
     private:
         Vector2f puntoSupDer;
         Vector2f puntoInfIzq;
