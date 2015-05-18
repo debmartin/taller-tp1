@@ -37,6 +37,14 @@ estado_objeto Arma::getEstado(){
 	return this->estado;
 }
 
+direccion_objeto Arma::getDireccion(){
+	return this->direccionArma;
+}
+
+void Arma::definirDireccionInicial(direccion_objeto dir){
+	direccionArma = dir;
+}
+
 void Arma::cambiarDireccion(){
 	if(direccionArma == DIRECCION_DERECHA){
 		direccionArma = DIRECCION_IZQUIERDA;
@@ -52,8 +60,10 @@ void Arma::cambiarTrayectoria(Trayectoria* unaTrayectoria){
 void Arma::arrojar(){
 	//cout<<"Arrojo arma"<<endl;
 	if(direccionArma == DIRECCION_DERECHA){
+		cout<<"Arrojar hacia derecha"<<endl;
 		cambiarTrayectoria(new MRU(posicion, Vector2f(velocidad_arma, VELOCIDAD_ARMA_NULA)));
 	}else{
+		cout<<"Arrojar hacia izquierda"<<endl;
 		cambiarTrayectoria(new MRU(posicion, Vector2f(-velocidad_arma, VELOCIDAD_ARMA_NULA)));
 	}
 	cambiarEstado(VISIBLE);
@@ -65,7 +75,7 @@ void Arma::update(){
 		//cambiarTrayectoria(new MRU(posicion, Vector2f(VELOCIDAD_DESP_HORIZONTAL_ARMA, VELOCIDAD_ARMA_NULA)));
 		float tActual = ((float)(SDL_GetTicks())/1000.0f) - tCreacion;
 		posicion = this->trayectoria->getPosicion(tActual);
-		cout<<"Posicion arma:"<<posicion.X()<<"||"<<posicion.Y()<<endl;
+		//cout<<"Posicion arma:"<<posicion.X()<<"||"<<posicion.Y()<<endl;
 	}
 	//notificarObservadores();
 }

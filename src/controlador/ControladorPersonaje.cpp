@@ -179,6 +179,7 @@ void ControladorPersonaje::identificarOrdenPersonaje1(){
 			Logger::getInstance()->debug("Se presiona: Tecla abajo.");
 			personaje1->agacharse();
 		}else if(estadoTeclado[SDL_SCANCODE_F]){
+			cout<<"ArrojarArma jugador1"<<endl;
 			personaje1->arrojarArma();
 		}else if(estadoTeclado[SDL_SCANCODE_G]){
 			personaje1->piniaAlta();
@@ -251,6 +252,7 @@ void ControladorPersonaje::identificarOrdenPersonaje2(){
 			Logger::getInstance()->debug("Se presiona: Tecla abajo.");
 			personaje2->agacharse();
 		}else if(estadoTeclado[SDL_SCANCODE_X]){
+			cout<<"ArrojarArma jugador2"<<endl;
 			personaje2->arrojarArma();
 		}else if(estadoTeclado[SDL_SCANCODE_C]){
 			personaje2->piniaAlta();

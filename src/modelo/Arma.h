@@ -37,6 +37,8 @@ public:
 	void update();
 	void agregarObservador(Observador* unObservador);
 	void notificarObservadores();
+	direccion_objeto getDireccion();
+	void definirDireccionInicial(direccion_objeto dir);
 	void cambiarEstado(estado_objeto estado);
 	void cambiarDireccion();
 	void cambiarTrayectoria(Trayectoria* unaTrayectoria);
