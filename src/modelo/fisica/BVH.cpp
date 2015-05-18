@@ -15,7 +15,7 @@ BVH::BVH(vector<AABB*>* aabb) :
     float limiteIzquierdo = (*cajasAABB)[0]->getLimiteIzquierdo();
     float aux;
     cout << "tam" << cajasAABB->size()<< endl;
-    for (int i = 1; i == cajasAABB->size(); i++){
+    for (int i = 1; i < cajasAABB->size(); i++){
         aux = (*cajasAABB)[i]->getLimiteInferior();
         limiteInferior = (aux < limiteInferior) ? aux : limiteInferior;
         aux = (*cajasAABB)[i]->getLimiteSuperior();
