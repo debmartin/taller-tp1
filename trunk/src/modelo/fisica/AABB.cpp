@@ -15,23 +15,30 @@ AABB::~AABB() {
 }
 
 bool AABB::interseccion(AABB* otro) {
+    cout << "primero: " << puntoInfIzq << puntoSupDer << endl;
+    cout << "segundo: " << otro->puntoInfIzq << otro->puntoSupDer << endl;
     if (puntoInfIzq.X() > otro->puntoSupDer.X() || otro->puntoInfIzq.X() > puntoSupDer.X())
         return false;
-    if (puntoInfIzq.X() <= otro->puntoSupDer.X() && puntoInfIzq.X() >= otro->puntoInfIzq.X()) {
-        if (puntoInfIzq.Y() <= otro->puntoSupDer.Y() && puntoInfIzq.Y() >= otro->puntoInfIzq.Y())
-            return true;
-        if (puntoSupDer.Y() <= otro->puntoSupDer.Y() && puntoInfIzq.Y() >= otro->puntoInfIzq.Y())
-            return true;
-        return (puntoInfIzq.Y() <= otro->puntoInfIzq.Y() && puntoSupDer.Y() >= otro->puntoSupDer.Y());
-    }
-    if (puntoSupDer.X() <= otro->puntoSupDer.X() && puntoInfIzq.X() >= otro->puntoInfIzq.X()) {
-        if (puntoSupDer.Y() <= otro->puntoSupDer.Y() && puntoInfIzq.Y() >= otro->puntoInfIzq.Y())
-            return true;
-        if (puntoInfIzq.Y() <= otro->puntoSupDer.Y() && puntoInfIzq.Y() >= otro->puntoInfIzq.Y())
-            return true;
-        return (puntoInfIzq.Y() <= otro->puntoInfIzq.Y() && puntoSupDer.Y() >= otro->puntoSupDer.Y());
-    }
-    return false;
+
+    if (puntoInfIzq.Y() > otro->puntoSupDer.Y() || otro->puntoInfIzq.Y() > puntoSupDer.Y())
+        return false;
+
+    return true;
+//    if (puntoInfIzq.X() <= otro->puntoSupDer.X() && puntoInfIzq.X() >= otro->puntoInfIzq.X()) {
+//        if (puntoInfIzq.Y() <= otro->puntoSupDer.Y() && puntoInfIzq.Y() >= otro->puntoInfIzq.Y())
+//            return true;
+//        if (puntoSupDer.Y() <= otro->puntoSupDer.Y() && puntoInfIzq.Y() >= otro->puntoInfIzq.Y())
+//            return true;
+//        return (puntoInfIzq.Y() <= otro->puntoInfIzq.Y() && puntoSupDer.Y() >= otro->puntoSupDer.Y());
+//    }
+//    if (puntoSupDer.X() <= otro->puntoSupDer.X() && puntoInfIzq.X() >= otro->puntoInfIzq.X()) {
+//        if (puntoSupDer.Y() <= otro->puntoSupDer.Y() && puntoInfIzq.Y() >= otro->puntoInfIzq.Y())
+//            return true;
+//        if (puntoInfIzq.Y() <= otro->puntoSupDer.Y() && puntoInfIzq.Y() >= otro->puntoInfIzq.Y())
+//            return true;
+//        return (puntoInfIzq.Y() <= otro->puntoInfIzq.Y() && puntoSupDer.Y() >= otro->puntoSupDer.Y());
+//    }
+//    return false;
 }
 
 void AABB::desplazarAABB(Vector2f v) {

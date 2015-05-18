@@ -321,7 +321,8 @@ void Personaje::calcularPosicionSinColision(Colisionable* enemigo){
 
 void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
     posicionCandidata = estado->obtenerProximaPosicion();
-
+    cout << (estaAtacando() ? "ATACANDO" : "") << endl;
+    cout << "pos1: " << posicion << " pos2: " << enemigo->getPosicion() << endl;
     if (! vaAColisionar(enemigo)) {
         cout << "sin colision"<<endl;
         calcularPosicionSinColision(enemigo);
@@ -337,9 +338,10 @@ void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
         arrastrar(enemigo);
 //        posicion = estado->obtenerProximaPosicion();
 //        posicion = posicionCandidata;
+    } else if (estaEnReposo()) {
     } else {
         cout << "colisionar" << endl;
-//        colisionar(enemigo);
+        colisionar(enemigo);
     }
 }
 
