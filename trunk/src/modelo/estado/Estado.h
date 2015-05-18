@@ -61,7 +61,7 @@ class Estado
         Vector2f obtenerProximaPosicion();
         Vector2f obtenerVelocidad();
         estado_personaje Id();
-        Vector2f actualizar();
+        void actualizar(Vector2f nuevaPosicion);
         bool haySuperposicion(BVH* otraCaja);
         BVH* obtenerCajaColision();
         void agregarCajaColision(BVH* cajaColision);
