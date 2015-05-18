@@ -39,6 +39,11 @@ BVH::~BVH() {
 }
 
 bool BVH::interseccion(BVH* bvh){
+
+	// IMPRIMO TODAS LAS CAJAS DEL BVH
+    for (size_t i = 0; i < cajasAABB->size(); i++)
+    	cout << "CAJA[" << i << "]:" << *(*cajasAABB)[i] << endl;
+
     if (! cajaLimitadora->interseccion(bvh->cajaLimitadora)) {
         cout << "no llega" <<endl;
         return false;

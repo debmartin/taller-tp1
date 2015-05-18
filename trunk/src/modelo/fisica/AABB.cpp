@@ -68,3 +68,8 @@ float AABB::getLimiteDerecho(){
 float AABB::getLimiteIzquierdo(){
     return puntoInfIzq.X();
 }
+
+ostream& operator <<(ostream &o, const AABB &aabb) {
+    o << "{[INF-IZQ]=" << aabb.puntoInfIzq << "~" << "[SUP-DER]=" << aabb.puntoSupDer << "}";
+    return o;
+}
