@@ -17,11 +17,12 @@ private:
 	AABB* cajaLimitadora;
 	vector<AABB*>* cajasAABB;
 	Vector2f desplazamiento;
+	Vector2f pivote;
 
 	void efectuarDesplazamiento();
 
 public:
-	BVH(vector<AABB*>* aabb);
+	BVH(vector<AABB*>* aabb, Vector2f pivote);
 	virtual ~BVH();
 	bool interseccion(BVH* bvh);
 	void desplazarBVH(Vector2f v);
