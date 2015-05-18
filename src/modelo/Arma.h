@@ -25,6 +25,8 @@ private:
 	estado_objeto estado;
 	Trayectoria* trayectoria;
 	float tCreacion;
+	direccion_objeto direccionArma;
+
 public:
 	Arma();
 	Arma(int velocidad);
@@ -36,6 +38,7 @@ public:
 	void agregarObservador(Observador* unObservador);
 	void notificarObservadores();
 	void cambiarEstado(estado_objeto estado);
+	void cambiarDireccion();
 	void cambiarTrayectoria(Trayectoria* unaTrayectoria);
 	void arrojar();
 	estado_objeto getEstado();

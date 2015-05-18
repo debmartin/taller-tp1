@@ -18,6 +18,7 @@ Arma::Arma(int velocidad) {
 	this->tCreacion = 0;
 	this->damage = DANIO_ARMA;
 	this->estado = NO_VISIBLE;
+	this->direccionArma = DIRECCION_IZQUIERDA;
 }
 
 int Arma::quitarEnergia(){
@@ -36,13 +37,25 @@ estado_objeto Arma::getEstado(){
 	return this->estado;
 }
 
+void Arma::cambiarDireccion(){
+	if(direccionArma == DIRECCION_DERECHA){
+		direccionArma = DIRECCION_IZQUIERDA;
+	}else{
+		direccionArma = DIRECCION_DERECHA;
+	}
+}
+
 void Arma::cambiarTrayectoria(Trayectoria* unaTrayectoria){
 	this->trayectoria = unaTrayectoria;
 }
 
 void Arma::arrojar(){
 	//cout<<"Arrojo arma"<<endl;
-	cambiarTrayectoria(new MRU(posicion, Vector2f(velocidad_arma, VELOCIDAD_ARMA_NULA)));
+	if(direccionArma == DIRECCION_DERECHA){
+		cambiarTrayectoria(new MRU(posicion, Vector2f(velocidad_arma, VELOCIDAD_ARMA_NULA)));
+	}else{
+		cambiarTrayectoria(new MRU(posicion, Vector2f(-velocidad_arma, VELOCIDAD_ARMA_NULA)));
+	}
 	cambiarEstado(VISIBLE);
 }
 
