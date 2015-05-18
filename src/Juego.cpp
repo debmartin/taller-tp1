@@ -35,7 +35,10 @@ Juego::Juego(Jugador* jugador1, Jugador* jugador2){
 	agregarObservadoresJugador(jugador1);
 	agregarObservadoresJugador(jugador2);
 
-	controladorPersonaje = new ControladorPersonaje(jugador1, jugador2);
+	string tipoDeControl = "TECLADO";
+	//string tipoDeControl = "JOYSTICK";
+
+	controladorPersonaje = new ControladorPersonaje(jugador1, jugador2, tipoDeControl);
 	hud = new HUD(Renderizador::Instance()->getWindow(), jugador2->getPersonaje()->getId(), jugador1->getPersonaje()->getId());
 	//hud->disminuirEnergia1(23);
 	//hud->disminuirEnergia2(130);

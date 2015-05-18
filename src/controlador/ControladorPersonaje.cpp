@@ -22,8 +22,9 @@
 #define BOTON_BLOQUEAR SDLK_3
 #define TIEMPO_BLOQUEADO 200
 
-ControladorPersonaje::ControladorPersonaje(Jugador* jugador1, Jugador* jugador2) :
+ControladorPersonaje::ControladorPersonaje(Jugador* jugador1, Jugador* jugador2, string tipoControl) :
     personaje1(jugador1->getPersonaje()), personaje2(jugador2->getPersonaje()) {
+	tipoDeControl = tipoControl;
 	ControladorJoystick::Instance()->initialiseJoysticks(jugador1->getControl()->getCorrespondenciaTeclas(),
 														jugador1->getControl()->getCorrespondenciaEjes(),
 														jugador2->getControl()->getCorrespondenciaTeclas(),
@@ -37,24 +38,24 @@ bool ControladorPersonaje::manejar_Evento(SDL_Event &evento){
     //Cargo los botones de los joysticks
     TheInputHandler::Instance()->handleEventsJoysticks(evento);
 
-/*Descomentar esta parte para usar el joystick:
+    if(tipoDeControl == "JOYSTICK"){
     	if(!personaje1->estaBloqueado()){
-    		//identificarOrdenJoystickPersonaje(personaje1, JOYSTICK1);
+    		identificarOrdenJoystickPersonaje(personaje1, JOYSTICK1);
     	}
     	if(!personaje2->estaBloqueado()){
-    		//identificarOrdenJoystickPersonaje(personaje2, JOYSTICK2);
+    		identificarOrdenJoystickPersonaje(personaje2, JOYSTICK2);
     	}
- */
-    //Si se presiona una tecla
-    if ( evento.key.repeat == 0 ){
-    	if(!personaje1->estaBloqueado()){
-    		identificarOrdenPersonaje1();
-    	}
-    	if(!personaje2->estaBloqueado()){
-    		identificarOrdenPersonaje2();
-    	}
-    }
-
+	}else{
+		//Si se presiona una tecla
+		if ( evento.key.repeat == 0 ){
+			if(!personaje1->estaBloqueado()){
+				identificarOrdenPersonaje1();
+			}
+			if(!personaje2->estaBloqueado()){
+				identificarOrdenPersonaje2();
+			}
+		}
+	}
     return true;
 }
 
@@ -270,15 +271,17 @@ void ControladorPersonaje::identificarOrdenPersonaje2(){
 void ControladorPersonaje::continuarAccionPreviaPersonaje1(){
     if (! personaje1->estaEnReposo())
         return;
-    //identificarOrdenPersonaje(personaje1);
-    identificarOrdenPersonaje1();
+    if(tipoDeControl == "TECLADO"){
+    	identificarOrdenPersonaje1();
+    }
 }
 
 void ControladorPersonaje::continuarAccionPreviaPersonaje2(){
     if (! personaje2->estaEnReposo())
         return;
-    //identificarOrdenPersonaje(personaje2);
-    identificarOrdenPersonaje2();
+    if(tipoDeControl == "TECLADO"){
+    	identificarOrdenPersonaje2();
+    }
 }
 
 ControladorPersonaje::~ControladorPersonaje() {
