@@ -124,8 +124,8 @@ void Juego::actualizarOrientacionJugadores() {
 
 		jugador2->getPersonajeDibujable()->cambiarOrientacionHaciaIzquierda();
 	}
-	jugador1->getPersonaje()->getArma()->cambiarDireccion();
-	jugador2->getPersonaje()->getArma()->cambiarDireccion();
+	//jugador1->getPersonaje()->getArma()->cambiarDireccion();
+	//jugador2->getPersonaje()->getArma()->cambiarDireccion();
 }
 
 Juego::~Juego(){
