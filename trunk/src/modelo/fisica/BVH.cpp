@@ -7,8 +7,10 @@
 
 #include "BVH.h"
 
-BVH::BVH(vector<AABB*>* aabb) :
+BVH::BVH(vector<AABB*>* aabb, Vector2f unPivote) :
     cajasAABB(aabb){
+	pivote = unPivote;
+
     float limiteInferior = (*cajasAABB)[0]->getLimiteInferior();
     float limiteSuperior = (*cajasAABB)[0]->getLimiteSuperior();
     float limiteDerecho = (*cajasAABB)[0]->getLimiteDerecho();

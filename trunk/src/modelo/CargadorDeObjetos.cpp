@@ -493,26 +493,27 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColision(float ancho_
 	cajasAABB_gancho->push_back(gancho_caja1);
 	cajasAABB_gancho->push_back(gancho_caja2);
 
+	Vector2f pivote(ancho_logico_personaje/2, alto_logico_personaje);
 	//Armo los BVH de cada estado
-	BVH* BVH_reposo = new BVH(cajasAABB_reposo);
-	BVH* BVH_caminando = new BVH(cajasAABB_caminando);
-	BVH* BVH_patada_alta = new BVH(cajasAABB_patada_alta);
-	BVH* BVH_pinia_alta = new BVH(cajasAABB_pinia_alta);
-	BVH* BVH_agachado = new BVH(cajasAABB_agachado);
-	BVH* BVH_salto_diagonal = new BVH(cajasAABB_salto_diagonal);
-	BVH* BVH_salto_vertical = new BVH(cajasAABB_salto_vertical);
-	BVH* BVH_patada_baja = new BVH(cajasAABB_patada_baja);
-	BVH* BVH_patada_alta_agachado = new BVH(cajasAABB_patada_alta_agachado);
-	BVH* BVH_patada_saltando_vertical = new BVH(cajasAABB_patada_saltando_vertical);
-	BVH* BVH_patada_saltando_diagonal_derecha = new BVH(cajasAABB_patada_saltando_diagonal_derecha);
-	BVH* BVH_patada_saltando_diagonal_izquierda = new BVH(cajasAABB_patada_saltando_diagonal_izquierda);
-	BVH* BVH_pinia_baja = new BVH(cajasAABB_pinia_baja);
-	BVH* BVH_pinia_saltando_diagonal_derecha = new BVH(cajasAABB_pinia_saltando_diagonal_derecha);
-	BVH* BVH_pinia_saltando_diagonal_izquierda = new BVH(cajasAABB_pinia_saltando_diagonal_izquierda);
-	BVH* BVH_pinia_saltando_vertical = new BVH(cajasAABB_pinia_saltando_vertical);
-	BVH* BVH_defendiendo = new BVH(cajasAABB_defendiendo);
-	BVH* BVH_defendiendo_agachado = new BVH(cajasAABB_defendiendo_agachado);
-	BVH* BVH_gancho = new BVH(cajasAABB_gancho);
+	BVH* BVH_reposo = new BVH(cajasAABB_reposo, pivote);
+	BVH* BVH_caminando = new BVH(cajasAABB_caminando, pivote);
+	BVH* BVH_patada_alta = new BVH(cajasAABB_patada_alta, pivote);
+	BVH* BVH_pinia_alta = new BVH(cajasAABB_pinia_alta, pivote);
+	BVH* BVH_agachado = new BVH(cajasAABB_agachado, pivote);
+	BVH* BVH_salto_diagonal = new BVH(cajasAABB_salto_diagonal, pivote);
+	BVH* BVH_salto_vertical = new BVH(cajasAABB_salto_vertical, pivote);
+	BVH* BVH_patada_baja = new BVH(cajasAABB_patada_baja, pivote);
+	BVH* BVH_patada_alta_agachado = new BVH(cajasAABB_patada_alta_agachado, pivote);
+	BVH* BVH_patada_saltando_vertical = new BVH(cajasAABB_patada_saltando_vertical, pivote);
+	BVH* BVH_patada_saltando_diagonal_derecha = new BVH(cajasAABB_patada_saltando_diagonal_derecha, pivote);
+	BVH* BVH_patada_saltando_diagonal_izquierda = new BVH(cajasAABB_patada_saltando_diagonal_izquierda, pivote);
+	BVH* BVH_pinia_baja = new BVH(cajasAABB_pinia_baja, pivote);
+	BVH* BVH_pinia_saltando_diagonal_derecha = new BVH(cajasAABB_pinia_saltando_diagonal_derecha, pivote);
+	BVH* BVH_pinia_saltando_diagonal_izquierda = new BVH(cajasAABB_pinia_saltando_diagonal_izquierda, pivote);
+	BVH* BVH_pinia_saltando_vertical = new BVH(cajasAABB_pinia_saltando_vertical, pivote);
+	BVH* BVH_defendiendo = new BVH(cajasAABB_defendiendo, pivote);
+	BVH* BVH_defendiendo_agachado = new BVH(cajasAABB_defendiendo_agachado, pivote);
+	BVH* BVH_gancho = new BVH(cajasAABB_gancho, pivote);
 
 	map<estado_personaje, BVH*>* mapa_BVH = new map<estado_personaje, BVH*>;
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(EN_ESPERA, BVH_reposo));
