@@ -42,7 +42,7 @@ public:
 	void notificarObservadores();
 	DireccionObjeto getDireccion();
 	void cambiarEstado(estado_objeto estado);
-	void cambiarDireccion();
+	void orientar(DireccionObjeto dir);
 	void cambiarTrayectoria(Trayectoria* unaTrayectoria);
 	void arrojar();
 	estado_objeto getEstado();
