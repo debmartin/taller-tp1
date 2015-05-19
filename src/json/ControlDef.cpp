@@ -8,6 +8,7 @@
 #include "ControlDef.h"
 
 #include <sstream>
+#include <utility>
 
 ControlDef::ControlDef() {
 	// TODO Auto-generated constructor stub
@@ -51,3 +52,4 @@ std::map<string, int>* ControlDef::getCorrespondenciaEjes() const {
 std::map<string, int>* ControlDef::getCorrespondenciaTeclas() const {
 	return correspondenciaTeclas;
 }
+

@@ -10,6 +10,7 @@
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_keycode.h>
 #include <SDL2/SDL_render.h>
+#include <string>
 #include <utility>
 
 #include "controlador/ControladorPersonaje.h"
@@ -35,10 +36,12 @@ Juego::Juego(Jugador* jugador1, Jugador* jugador2){
 	agregarObservadoresJugador(jugador1);
 	agregarObservadoresJugador(jugador2);
 
-	string tipoDeControl = "TECLADO";
+	// Vale: si queres podes distingir los tipos de controles para cada jugador
+	string tipoDeControl_jugador1 = jugador1->getTipoControl();
+	string tipoDeControl_jugador2 = jugador2->getTipoControl();
 	//string tipoDeControl = "JOYSTICK";
 
-	controladorPersonaje = new ControladorPersonaje(jugador1, jugador2, tipoDeControl);
+	controladorPersonaje = new ControladorPersonaje(jugador1, jugador2, tipoDeControl_jugador1);
 	hud = new HUD(Renderizador::Instance()->getWindow(), jugador2->getPersonaje()->getId(), jugador1->getPersonaje()->getId());
 	//hud->disminuirEnergia1(23);
 	//hud->disminuirEnergia2(130);

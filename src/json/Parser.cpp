@@ -351,6 +351,7 @@ JugadorDef* Parser::parsearJugador(string tag_jugador) {
     valorJugador = root.get(tag_jugador.c_str(), &valorJugador);
 
     string personaje = "";
+    string tipo_control = "";
     int control_pinia_alta = 0;
     int control_patada_alta = 0;
     int control_pinia_baja = 0;
@@ -369,7 +370,10 @@ JugadorDef* Parser::parsearJugador(string tag_jugador) {
 
         if ( tag == TAG_JUGADOR_PERSONAJE ) {
         	personaje = subvalor.asString();
-        } else if ( tag == TAG_JUGADOR_CONTROL ) {
+        } else if ( tag == TAG_JUGADOR_TIPO_CONTROL ) {
+        	tipo_control = subvalor.asString();
+        }
+        else if ( tag == TAG_JUGADOR_CONTROL ) {
 			control_pinia_alta = subvalor[TAG_JUGADOR_CONTROL_JOY_PINIA_ALTA].asInt();
 			control_patada_alta = subvalor[TAG_JUGADOR_CONTROL_JOY_PATADA_ALTA].asInt();
 			control_pinia_baja = subvalor[TAG_JUGADOR_CONTROL_JOY_PINIA_BAJA].asInt();
@@ -394,7 +398,7 @@ JugadorDef* Parser::parsearJugador(string tag_jugador) {
 
     ControlDef* controlDef = new ControlDef(correspondenciaTeclas,correspondenciaEjes);
 
-    JugadorDef* jugadorParseado = new JugadorDef(personaje, controlDef);
+    JugadorDef* jugadorParseado = new JugadorDef(personaje, tipo_control, controlDef);
     return jugadorParseado;
 }
 
