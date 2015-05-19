@@ -329,9 +329,9 @@ void Personaje::espejarBVH() {
 void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
     posicionCandidata = estado->obtenerProximaPosicion();
     cout << (estaAtacando() ? "ATACANDO" : "") << endl;
-    cout << "pos1: " << posicion << " pos2: " << enemigo->getPosicion() << endl;
+    //cout << "pos1: " << posicion << " pos2: " << enemigo->getPosicion() << endl;
     if (! vaAColisionar(enemigo)) {
-        cout << "sin colision"<<endl;
+        //cout << "sin colision"<<endl;
         calcularPosicionSinColision(enemigo);
         return;
     }
@@ -347,7 +347,7 @@ void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
 //        posicion = posicionCandidata;
     } else if (estaEnReposo()) {
     } else {
-        cout << "colisionar" << endl;
+        //cout << "colisionar" << endl;
         colisionar(enemigo);
     }
 }
@@ -420,7 +420,13 @@ bool Personaje::estaDefendiendo(){
 void Personaje::arrojarArma(){
 	//Posiciono el poder respecto a la posicion del personaje
 	cout<<"Entra a arrojar arma"<<endl;
-	Vector2f posicionObjeto(posicion.X()+ancho,alto);
+	Vector2f posicionObjeto;
+	if(this->direccion == DIRECCION_DERECHA){
+		posicionObjeto.setCoordenada(posicion.X(),alto);
+	}else{
+		posicionObjeto.setCoordenada(posicion.X()+ancho,alto);
+	}
+
 	cout<<"Posicion.X personaje:"<<posicion.X()<<endl;
 	arma->posicionar(posicionObjeto);
 	arma->arrojar();
