@@ -314,7 +314,7 @@ bool Personaje::vaAColisionar(Colisionable* enemigo){
         return true;
 
 
-    cout << "{NOMBRE:" << this->id << "," << "NUMERO_JUGADOR:" << this->getNumeroJugador() << "}" << endl;
+    //cout << "{NOMBRE:" << this->id << "," << "NUMERO_JUGADOR:" << this->getNumeroJugador() << "}" << endl;
     return estado->haySuperposicion(enemigo->obtenerCajaColision());
 }
 
@@ -359,7 +359,7 @@ void Personaje::orientar(DireccionObjeto nuevaOrientacion) {
 
 void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
     posicionCandidata = estado->obtenerProximaPosicion();
-    cout << (estaAtacando() ? "ATACANDO" : "") << endl;
+    //cout << (estaAtacando() ? "ATACANDO" : "") << endl;
     //cout << "pos1: " << posicion << " pos2: " << enemigo->getPosicion() << endl;
     if (! vaAColisionar(enemigo)) {
         //cout << "sin colision"<<endl;
@@ -453,9 +453,9 @@ void Personaje::arrojarArma(){
 	cout<<"Entra a arrojar arma"<<endl;
 	Vector2f posicionObjeto;
 	if(this->direccion == DIRECCION_DERECHA){
-		posicionObjeto.setCoordenada(posicion.X(),alto);
+		posicionObjeto.setCoordenada(posicion.X()-ancho/2,alto);
 	}else{
-		posicionObjeto.setCoordenada(posicion.X()+ancho,alto);
+		posicionObjeto.setCoordenada(posicion.X()+ancho/2,alto);
 	}
 
 	cout<<"Posicion.X personaje:"<<posicion.X()<<endl;

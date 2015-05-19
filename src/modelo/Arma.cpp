@@ -64,14 +64,12 @@ void Arma::arrojar(){
 }
 
 void Arma::update(){
-	notificarObservadores();
 	if(estado == VISIBLE){
-		//cambiarTrayectoria(new MRU(posicion, Vector2f(VELOCIDAD_DESP_HORIZONTAL_ARMA, VELOCIDAD_ARMA_NULA)));
 		float tActual = ((float)(SDL_GetTicks())/1000.0f) - tCreacion;
 		posicion = this->trayectoria->getPosicion(tActual);
 		//cout<<"Posicion arma:"<<posicion.X()<<"||"<<posicion.Y()<<endl;
 	}
-	//notificarObservadores();
+	notificarObservadores();
 }
 
 void Arma::agregarObservador(Observador* unObservador){
@@ -84,7 +82,6 @@ void Arma::notificarObservadores(){
 
 Vector2f Arma::obtenerPosicionEnVentana(){
 	Vector2f P1(posicion.X(), posicion.Y());
-	//Vector2f P1(posicion.X(), posicion.Y() + getAlto());
 	Vector2f P2 = VentanaGrafica::Instance()->calcularPosicionEnVentana(P1);
 	return P2;
 }
