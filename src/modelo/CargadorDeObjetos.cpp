@@ -243,6 +243,8 @@ Jugador* CargadorDeOjbetos::cargarJugador1() {
 
 	list<JugadorDef*>::iterator it = parser->getJugadoresDef()->begin();
 	Jugador* jugador = cargarJugador(*it);
+	jugador->getPersonaje()->orientar(DIRECCION_IZQUIERDA);
+	jugador->getPersonaje()->getArma()->cambiarDireccion();
 	return jugador;
 }
 
@@ -250,9 +252,7 @@ Jugador* CargadorDeOjbetos::cargarJugador2() {
 
 	list<JugadorDef*>::iterator it = parser->getJugadoresDef()->begin();
 	Jugador* jugador = cargarJugador(*++it);
-	jugador->getPersonaje()->cambiarDireccion();
 	jugador->getPersonaje()->cambiarNumeroPersonaje();
-	jugador->getPersonaje()->getArma()->cambiarDireccion();
 	return jugador;
 }
 
