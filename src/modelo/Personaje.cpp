@@ -344,18 +344,15 @@ void Personaje::calcularPosicionSinColision(Colisionable* enemigo){
 }
 
 void Personaje::espejarBVH() {
-
-	this->direccion = (this->direccion == DIRECCION_DERECHA) ? DIRECCION_IZQUIERDA : DIRECCION_DERECHA;
-
     for (map<estado_personaje, BVH*>::iterator it = this->cajasPorEstado->begin() ; it != this->cajasPorEstado->end(); ++it)
     	(it)->second->espejarBVH();
-
 }
 
 void Personaje::orientar(DireccionObjeto nuevaOrientacion) {
 	if (this->direccion == nuevaOrientacion)
 		return;
 
+	this->direccion = nuevaOrientacion;
 	espejarBVH();
 }
 
