@@ -11,7 +11,7 @@ Arma::Arma() {
 	// TODO Auto-generated constructor stub
 }
 
-Arma::Arma(int velocidad) {
+Arma::Arma(int velocidad){
 	this->velocidad_arma = velocidad;
 	this->posicion = POS_INICIAL_OBJETO;
 	this->trayectoria = new MRU(POS_INICIAL_OBJETO, VELOCIDAD_OBJETO);
@@ -39,10 +39,6 @@ estado_objeto Arma::getEstado(){
 
 direccion_objeto Arma::getDireccion(){
 	return this->direccionArma;
-}
-
-void Arma::definirDireccionInicial(direccion_objeto dir){
-	direccionArma = dir;
 }
 
 void Arma::cambiarDireccion(){
@@ -93,6 +89,10 @@ Vector2f Arma::obtenerPosicionEnVentana(){
 	//Vector2f P1(posicion.X(), posicion.Y() + getAlto());
 	Vector2f P2 = VentanaGrafica::Instance()->calcularPosicionEnVentana(P1);
 	return P2;
+}
+
+void Arma::colisionar(Colisionable* otro){
+
 }
 
 Arma::~Arma() {

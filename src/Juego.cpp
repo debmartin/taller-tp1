@@ -117,9 +117,11 @@ void Juego::actualizarOrientacionJugadores() {
 		jugador1->getPersonajeDibujable()->cambiarOrientacionHaciaIzquierda();
 		jugador2->getPersonajeDibujable()->cambiarOrientacionHaciaDerecha();
 
+		jugador1->getPersonaje()->cambiarDireccion();
+		jugador2->getPersonaje()->cambiarDireccion();
+
 		// ESPEJAMIENTO DE CAJAS DE COLISION
 		jugador1->getPersonaje()->espejarBVH();
-
 	}
 	else
 	{
