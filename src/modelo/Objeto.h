@@ -20,7 +20,7 @@ typedef enum estado_objeto
 	NO_VISIBLE,
 } estado_objeto;
 
-typedef enum direccion_objeto
+typedef enum DireccionObjeto
 {
 	DIRECCION_DERECHA,
 	DIRECCION_IZQUIERDA,

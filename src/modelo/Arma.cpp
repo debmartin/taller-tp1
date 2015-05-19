@@ -39,7 +39,7 @@ estado_objeto Arma::getEstado(){
 	return this->estado;
 }
 
-direccion_objeto Arma::getDireccion(){
+DireccionObjeto Arma::getDireccion(){
 	return this->direccionArma;
 }
 
