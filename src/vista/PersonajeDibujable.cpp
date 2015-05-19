@@ -19,7 +19,7 @@ PersonajeDibujable::PersonajeDibujable() {
 
 PersonajeDibujable::PersonajeDibujable(Animacion* animIni, Vector2f posicionIni, Vector2f tamanioPx, OrientacionSprite orientacion,
 										ColorAlternativoDef* unColorAlternativo){
-	spritePersonaje = new Sprite(animIni, posicionIni, orientacion);
+	spritePersonaje = new Sprite(animIni, posicionIni, orientacion, SPR_ARRIBA_CENTRO);
     spritePersonaje->escalarConTamanio(tamanioPx.X(), tamanioPx.Y());
     animaciones[animIni->getId()] = animIni;
     colorAlternativo = unColorAlternativo;

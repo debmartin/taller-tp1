@@ -55,6 +55,7 @@ public:
 	EscenarioGrafico* getEscenario() const;
 	void vibrar();
 	Vector2f getPosLogico();
+	friend ostream& operator<<(ostream &o, const VentanaGrafica &c);
 };
 
 #endif /* SRC_VISTA_VENTANAGRAFICA_H_ */

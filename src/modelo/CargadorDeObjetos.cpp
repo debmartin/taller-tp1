@@ -112,14 +112,19 @@ map<string, PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables(
 				}
 		}
 
-		Animacion* SubQuieto = new Animacion(primerSpriteSubQuieto->getImagen(),
-		primerSpriteSubQuieto->getCantFotogramas(),
-		primerSpriteSubQuieto->getFps(),
-		primerSpriteSubQuieto->getIdSprite(),
-		Renderizador::Instance()->getRenderer());
+		Animacion* SubQuieto = new Animacion(
+										primerSpriteSubQuieto->getImagen(),
+										primerSpriteSubQuieto->getCantFotogramas(),
+										primerSpriteSubQuieto->getFps(),
+										primerSpriteSubQuieto->getIdSprite(),
+										Renderizador::Instance()->getRenderer());
 
-		personajeDibujableCargado = new PersonajeDibujable(SubQuieto,posicionTemporalPersonaje, tamanioPx,
-												ORIENTACION_IZQUIERDA, (*it)->getColorAlternativoDef());
+		personajeDibujableCargado = new PersonajeDibujable(
+													SubQuieto,
+													posicionTemporalPersonaje,
+													tamanioPx,
+													ORIENTACION_IZQUIERDA,
+													(*it)->getColorAlternativoDef());
 
 		//Agrego armaDibujable
 		Animacion* animacionArma = new Animacion(spriteDefArma->getImagen(),

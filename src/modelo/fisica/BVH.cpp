@@ -47,7 +47,7 @@ BVH::~BVH() {
 bool BVH::interseccion(BVH* bvh){
 
 	// IMPRIMO TODAS LAS CAJAS DEL BVH
-	//cout << (*this) << endl;
+	cout << (*this) << endl;
 
     if (! cajaLimitadora->interseccion(bvh->cajaLimitadora)) {
         //cout << "no llega" <<endl;
@@ -84,6 +84,7 @@ void BVH::espejarBVH(){
 }
 
 double BVH::calcularAnchoEnvolvente(){
+	//cout << "ANCHO:" <<   cajaLimitadora->getLimiteDerecho() - cajaLimitadora->getLimiteIzquierdo() << endl;
 	return cajaLimitadora->getLimiteDerecho() - cajaLimitadora->getLimiteIzquierdo();
 }
 
@@ -95,8 +96,13 @@ Vector2f BVH::calcularPosicion() {
     return Vector2f(cajaLimitadora->getLimiteIzquierdo(), cajaLimitadora->getLimiteInferior());
 }
 
+Vector2f BVH::getPivote() {
+	return this->pivote;
+}
+
 ostream& operator <<(ostream &o, const BVH &bvh) {
     for (size_t i = 0; i < bvh.cajasAABB->size(); i++)
     	o << "BVH->CAJA[" << i << "]:" << *(*bvh.cajasAABB)[i] << endl;
+    o << "BVH->ENVOLVENTE:" << *(bvh.cajaLimitadora) << endl;
     return o;
 }
