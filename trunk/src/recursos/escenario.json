@@ -113,8 +113,8 @@
 		    		    "fps": 10 
 		    			},
 			"arma": {
-						"alto": 30,
-						"ancho": 50,
+						"alto": 50,
+						"ancho": 150,
 		    			"imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-arma.png",
 		    			"cant_fotogramas": 1,
 		    		    "fps": 15,
@@ -212,8 +212,8 @@
 		    		    "fps": 10 
 		    			},
 			"arma": {
-						"alto": 30,
-						"ancho": 50,
+						"alto": 50,
+						"ancho": 150,
 		    			"imagen": "RECURSOS/PERSONAJES/SONIA/sonia-arma.png",
 		    			"cant_fotogramas": 1,
 		    		    "fps": 15,

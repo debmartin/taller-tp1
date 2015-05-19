@@ -11,7 +11,7 @@
 #include "SpriteDef.h"
 #define VELOCIDAD_ARMA_DEFAULT 50
 #define ALTO_ARMA_DEFAULT 50
-#define ANCHO_ARMA_DEFAULT 50
+#define ANCHO_ARMA_DEFAULT 150
 
 class ArmaDef {
 private:

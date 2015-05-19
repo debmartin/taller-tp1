@@ -21,7 +21,7 @@ private:
 
 public:
 	ArmaDibujable();
-	ArmaDibujable(Sprite* armaDib);
+	ArmaDibujable(Animacion* animIni, Vector2f posicionIni, Vector2f tamanioPx, OrientacionSprite orientacion);
 	virtual ~ArmaDibujable();
 	void dibujar();
 	void actualizar();
