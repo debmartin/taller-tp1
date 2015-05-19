@@ -20,7 +20,7 @@ Arma::Arma(int velocidad, double ancho, double alto){
 	this->tCreacion = 0;
 	this->damage = DANIO_ARMA;
 	this->estado = NO_VISIBLE;
-	this->direccionArma = DIRECCION_IZQUIERDA;
+	this->direccionArma = DIRECCION_DERECHA;
 }
 
 int Arma::quitarEnergia(){
