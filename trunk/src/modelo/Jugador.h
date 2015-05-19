@@ -8,6 +8,8 @@
 #ifndef SRC_MODELO_JUGADOR_H_
 #define SRC_MODELO_JUGADOR_H_
 
+#include <string>
+
 using namespace std;
 
 class Personaje;
@@ -19,9 +21,10 @@ private:
 	Personaje* personaje;
 	PersonajeDibujable* personajeDibujable;
 	Control* control;
+	string tipo_control;
 public:
 	Jugador();
-	Jugador(Personaje* personaje, PersonajeDibujable* personajeDibujable, Control* control);
+	Jugador(Personaje* personaje, PersonajeDibujable* personajeDibujable, Control* control, string tipo_control);
 	virtual ~Jugador();
 	Personaje* getPersonaje() const;
 	void setPersonaje(Personaje* personaje);
@@ -29,6 +32,7 @@ public:
 	void setPersonajeDibujable(PersonajeDibujable* personajeDibujable);
 	void posicionarPersonaje_enEjeX(double x);
 	Control* getControl() const;
+	string getTipoControl() const;
 };
 
 #endif /* SRC_MODELO_JUGADOR_H_ */

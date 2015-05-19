@@ -12,10 +12,11 @@
 Jugador::Jugador() {
 }
 
-Jugador::Jugador(Personaje* personaje, PersonajeDibujable* personajeDibujable, Control* control) {
+Jugador::Jugador(Personaje* personaje, PersonajeDibujable* personajeDibujable, Control* control, string tipo_control) {
 	this->personaje = personaje;
 	this->personajeDibujable = personajeDibujable;
 	this->control = control;
+	this->tipo_control = tipo_control;
 }
 
 Personaje* Jugador::getPersonaje() const {
@@ -44,4 +45,8 @@ void Jugador::posicionarPersonaje_enEjeX(double x) {
 
 Control* Jugador::getControl() const {
 	return control;
+}
+
+string Jugador::getTipoControl() const {
+	return tipo_control;
 }

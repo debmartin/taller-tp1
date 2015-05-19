@@ -20,16 +20,18 @@ using namespace std;
 class JugadorDef: public Loggeable {
 private:
 	string idPersonaje; // id del personaje al cual va a estar asociado
+	string tipo_control;
 	ControlDef* controlDef;
 
 public:
 	JugadorDef();
-	JugadorDef(string personaje, ControlDef* controlDef);
+	JugadorDef(string personaje, string tipo_control, ControlDef* controlDef);
 	virtual ~JugadorDef();
 	friend ostream& operator<<(ostream &o, const JugadorDef &j);
 	string toString();
 	string getIdPersonaje() const;
 	ControlDef* getControlDef() const;
+	string getTipoControl() const;
 };
 
 #endif /* SRC_JSON_JUGADORDEF_H_ */

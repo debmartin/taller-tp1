@@ -16,8 +16,9 @@ JugadorDef::JugadorDef() {
 
 }
 
-JugadorDef::JugadorDef(string personaje, ControlDef* controlDef) {
+JugadorDef::JugadorDef(string personaje, string tipo_control, ControlDef* controlDef) {
 	this->idPersonaje = personaje;
+	this->tipo_control = tipo_control;
 	this->controlDef = controlDef;
 }
 
@@ -25,6 +26,10 @@ string JugadorDef::toString() {
     ostringstream stream;
     stream <<*this;
 	return stream.str();
+}
+
+string JugadorDef::getTipoControl() const {
+	return tipo_control;
 }
 
 ControlDef* JugadorDef::getControlDef() const {
@@ -41,7 +46,7 @@ JugadorDef::~JugadorDef() {
 
 ostream& operator <<(ostream &o, const JugadorDef &j) {
 
-	o<<"JugadorDef -> [personaje]=["<<j.idPersonaje<<"]";
+	o<<"JugadorDef -> [personaje, tipo_control]=["<<j.idPersonaje<<","<<j.idPersonaje<<"]";
 	o<<"JugadorDef -> [control]=["<<*j.controlDef<<"]";
 	return o;
 }
