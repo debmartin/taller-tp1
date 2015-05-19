@@ -15,8 +15,8 @@ AABB::~AABB() {
 }
 
 bool AABB::interseccion(AABB* otro) {
-    cout << "primero: " << puntoInfIzq << puntoSupDer << endl;
-    cout << "segundo: " << otro->puntoInfIzq << otro->puntoSupDer << endl;
+    //cout << "primero: " << puntoInfIzq << puntoSupDer << endl;
+    //cout << "segundo: " << otro->puntoInfIzq << otro->puntoSupDer << endl;
     if (puntoInfIzq.X() > otro->puntoSupDer.X() || otro->puntoInfIzq.X() > puntoSupDer.X())
         return false;
 
@@ -49,8 +49,15 @@ void AABB::desplazarAABB(Vector2f v) {
 void AABB::espejarAABB(float posMedia){
     float dif = posMedia - puntoInfIzq.X();
     puntoInfIzq.setCoordenada(posMedia + dif, puntoInfIzq.Y());
-    dif = puntoSupDer.X() - posMedia;
-    puntoSupDer.setCoordenada(posMedia - dif, puntoSupDer.Y());
+    dif = posMedia - puntoSupDer.X();
+    puntoSupDer.setCoordenada(posMedia + dif, puntoSupDer.Y());
+
+    // REDEFINIR PUNTOS
+    Vector2f puntoInfIzqAux = Vector2f(puntoSupDer.X(), puntoInfIzq.Y());
+    Vector2f puntoSupDerAux = Vector2f(puntoInfIzq.X(), puntoSupDer.Y());
+
+    this->puntoInfIzq = puntoInfIzqAux;
+    this->puntoSupDer = puntoSupDerAux;
 }
 
 float AABB::getLimiteInferior(){

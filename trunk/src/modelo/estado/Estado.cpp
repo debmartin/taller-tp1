@@ -115,9 +115,9 @@ void Estado::reducirVelocidad(){
 }
 
 double Estado::calcularAncho() {
-    return cajas->calcularAncho();
+    return cajas->calcularAnchoEnvolvente();
 }
 
 double Estado::calcularAlto() {
-    return cajas->calcularAlto();
+    return cajas->calcularAltoEnvolvente();
 }
