@@ -199,8 +199,8 @@ void Parser::parsearPersonajes()
 				Json::Value valorFps = (*it)[TAG_PERSONAJE_SPRITES_FPS];
 				Json::Value valor_velocidad_arma = (*it)[TAG_PERSONAJE_VELOCIDAD_ARMA];
 
-				alto_arma = obtenerValorInt(valor_alto_arma, VELOCIDAD_ARMA_DEFAULT, "Personaje alto arma no es valor entero");
-				ancho_arma = obtenerValorInt(valor_ancho_arma, VELOCIDAD_ARMA_DEFAULT, "Personaje ancho arma no es valor entero");
+				alto_arma = obtenerValorInt(valor_alto_arma, ALTO_ARMA_DEFAULT, "Personaje alto arma no es valor entero");
+				ancho_arma = obtenerValorInt(valor_ancho_arma, ANCHO_ARMA_DEFAULT, "Personaje ancho arma no es valor entero");
 				p_arma_cant_fotogramas = obtenerValorInt(valorFotog, CANT_FOTOGRAMAS_DEFAULT, "Personaje sprite arma cant_fotogramas no es valor entero");
 				p_arma_fps = obtenerValorInt(valorFps, FPS_DEFAULT, "Personaje sprite arma fps no es valor entero");
 				velocidad_arma = obtenerValorInt(valor_velocidad_arma, VELOCIDAD_ARMA_DEFAULT, "Personaje velocidad arma no es valor entero");

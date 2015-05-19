@@ -128,9 +128,11 @@ map<string, PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables(
 		spriteDefArma->getIdSprite(),
 		Renderizador::Instance()->getRenderer());;
 		Vector2f posicionInicialArma(0,0);
+		Vector2f tamanioArmaPx( (*it)->getArmaDef()->getAncho() * VentanaGrafica::Instance()->relacion_de_aspectoX(),
+											(*it)->getArmaDef()->getAlto()  * VentanaGrafica::Instance()->relacion_de_aspectoY()
+										  );
 
-		Sprite* spriteArmaDibujable = new Sprite(animacionArma, posicionInicialArma, ORIENTACION_IZQUIERDA);
-		ArmaDibujable* armaDibujable = new ArmaDibujable(spriteArmaDibujable);
+		ArmaDibujable* armaDibujable = new ArmaDibujable(animacionArma, posicionInicialArma, tamanioArmaPx, ORIENTACION_IZQUIERDA);
 		personajeDibujableCargado->agregarArma(armaDibujable);
 
 		it_sprites = spritesDef->begin();

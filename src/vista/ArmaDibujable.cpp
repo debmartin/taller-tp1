@@ -12,9 +12,10 @@ ArmaDibujable::ArmaDibujable() {
 
 }
 
-ArmaDibujable::ArmaDibujable(Sprite* armaDib) {
+ArmaDibujable::ArmaDibujable(Animacion* animIni, Vector2f posicionIni, Vector2f tamanioPx, OrientacionSprite orientacion) {
 	// TODO Auto-generated constructor stub
-	armaDibujable = armaDib;
+	armaDibujable = new Sprite(animIni, posicionIni, orientacion);
+	armaDibujable->escalarConTamanio(tamanioPx.X(), tamanioPx.Y());
 	estado = NO_VISIBLE;
 
 }
