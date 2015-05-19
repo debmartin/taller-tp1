@@ -18,7 +18,6 @@
 #define IMAGEN_DEFAULT "img/sprites_defecto.png"
 #define CANT_FOTOGRAMAS_DEFAULT 1
 #define FPS_DEFAULT 10
-#define VELOCIDAD_ARMA_DEFAULT 50
 
 using namespace std;
 

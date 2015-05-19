@@ -40,6 +40,8 @@
 #define TAG_PERSONAJE_SPRITES_FPS "fps"
 #define TAG_PERSONAJE_SPRITES_IMAGEN "imagen"
 #define TAG_PERSONAJE_ARMA "arma"
+#define TAG_PERSONAJE_ARMA_ALTO "alto"
+#define TAG_PERSONAJE_ARMA_ANCHO "ancho"
 #define TAG_PERSONAJE_VELOCIDAD_ARMA "velocidad"
 #define TAG_COLOR_ALTERNATIVO "color-alternativo"
 #define TAG_COLOR_ALTERNATIVO_HINICIAL "h-inicial"
