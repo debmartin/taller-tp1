@@ -353,6 +353,7 @@ void Personaje::orientar(DireccionObjeto nuevaOrientacion) {
 		return;
 
 	this->direccion = nuevaOrientacion;
+	this->arma->orientar(nuevaOrientacion);
 	espejarBVH();
 }
 
@@ -501,16 +502,6 @@ void Personaje::definirPosicionIncial_enX(double x)
 	this->posicion = posicionIncial;
 	this->posicionInicial = posicionIncial;
 //	this->trayectoria = new Reposo(this->posicion);
-}
-
-void Personaje::cambiarDireccion(){
-	if(this->direccion == DIRECCION_IZQUIERDA){
-		this->direccion = DIRECCION_DERECHA;
-		arma->cambiarDireccion();
-	}else{
-		this->direccion = DIRECCION_IZQUIERDA;
-		arma->cambiarDireccion();
-	}
 }
 
 void Personaje::cambiarNumeroPersonaje(){

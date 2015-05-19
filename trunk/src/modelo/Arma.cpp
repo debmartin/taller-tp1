@@ -43,12 +43,8 @@ DireccionObjeto Arma::getDireccion(){
 	return this->direccionArma;
 }
 
-void Arma::cambiarDireccion(){
-	if(direccionArma == DIRECCION_DERECHA){
-		direccionArma = DIRECCION_IZQUIERDA;
-	}else{
-		direccionArma = DIRECCION_DERECHA;
-	}
+void Arma::orientar(DireccionObjeto dir){
+	direccionArma = dir;
 }
 
 void Arma::cambiarTrayectoria(Trayectoria* unaTrayectoria){
