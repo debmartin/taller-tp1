@@ -32,6 +32,7 @@ public:
 	double calcularAltoEnvolvente();
 	void calcularEnvolvente();
 	Vector2f calcularPosicion();
+	friend ostream& operator<<(ostream &o, const BVH &bvh);
 };
 
 #endif /* SRC_MODELO_FISICA_BVH_H_ */
