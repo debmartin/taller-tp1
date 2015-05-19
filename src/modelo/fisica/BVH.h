@@ -28,8 +28,9 @@ public:
 	void desplazarBVH(Vector2f v);
 	/*Espeja respecto al centro de la caja limitadora*/
 	void espejarBVH();
-	double calcularAncho();
-	double calcularAlto();
+	double calcularAnchoEnvolvente();
+	double calcularAltoEnvolvente();
+	void calcularEnvolvente();
 	Vector2f calcularPosicion();
 };
 

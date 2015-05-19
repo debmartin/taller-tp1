@@ -319,6 +319,12 @@ void Personaje::calcularPosicionSinColision(Colisionable* enemigo){
     }
 }
 
+void Personaje::espejarBVH() {
+
+    for (map<estado_personaje, BVH*>::iterator it = this->cajasPorEstado->begin() ; it != this->cajasPorEstado->end(); ++it)
+    	(it)->second->espejarBVH();
+
+}
 void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
     posicionCandidata = estado->obtenerProximaPosicion();
     cout << (estaAtacando() ? "ATACANDO" : "") << endl;

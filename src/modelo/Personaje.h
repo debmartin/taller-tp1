@@ -104,11 +104,13 @@ public:
 	void arrastrar(Colisionable* otro);
 	bool empujar(Direccion direccionEmpuje, Vector2f diferencia);
 
+	// CAJAS DE COLISION
 	virtual void colisionar(Colisionable* otro);
 	void cambiarEstado(Estado* nuevo);
 	void corregirPorColision(Colisionable* enemigo);
     BVH* obtenerCajaColision();
     bool vaAColisionar(Colisionable* enemigo);
+    void espejarBVH();
 
 	friend ostream& operator<<(ostream &o, const Personaje &p);
 	string toString();

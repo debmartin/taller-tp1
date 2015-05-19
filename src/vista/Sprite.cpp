@@ -165,17 +165,14 @@ Sprite::~Sprite() {
 //TODO ver el atributo sentidoReproduccion ...
 
 void Sprite::cambiarOrientacionHaciaDerecha() {
-	if (orientacion == ORIENTACION_IZQUIERDA)
-	{
+
 		orientacion = ORIENTACION_DERECHA;
-	}
 }
 
 void Sprite::cambiarOrientacionHaciaIzquierda() {
-	if (orientacion == ORIENTACION_DERECHA)
-	{
+
 		orientacion = ORIENTACION_IZQUIERDA;
-	}
+
 }
 
 ostream& operator <<(ostream &o, const Sprite &s)
