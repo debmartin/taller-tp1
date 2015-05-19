@@ -49,6 +49,7 @@ Personaje::Personaje(string idIn, double anchoIn, double altoIn, Vector2f posIni
 	estado(new EnEspera(posInicial, (*cajas)[EN_ESPERA])), posicionable(posc), numeroJugador(numJugador), cajasPorEstado(cajas){
 	this->energia = ENERGIA_INICIAL;
 	this->tiempoBloqueo = 0;
+	this->direccion = DIRECCION_IZQUIERDA;
 }
 
 double Personaje::getAlto() const {
@@ -464,6 +465,16 @@ void Personaje::definirPosicionIncial_enX(double x)
 	this->posicion = posicionIncial;
 	this->posicionInicial = posicionIncial;
 //	this->trayectoria = new Reposo(this->posicion);
+}
+
+void Personaje::cambiarDireccion(){
+	if(this->direccion == DIRECCION_IZQUIERDA){
+		this->direccion = DIRECCION_DERECHA;
+		arma->cambiarDireccion();
+	}else{
+		this->direccion = DIRECCION_IZQUIERDA;
+		arma->cambiarDireccion();
+	}
 }
 
 //void Personaje::agregarCajasColisiones(BVH* caja, estado_personaje estadoCaja){

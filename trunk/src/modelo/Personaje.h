@@ -39,6 +39,7 @@ private:
 	float tiempoBloqueo;
 	double ancho;
 	double alto;
+	direccion_objeto direccion;
 
 public:
 	Personaje(string id, double ancho, double alto, Vector2f posInicial, Posicionable* posc, int numJugador, map<estado_personaje, BVH*>* cajas);
@@ -75,6 +76,7 @@ public:
 	void bloquearPersonaje(float segundos);
 	void calcularNuevaPosicion(Colisionable* enemigo);
 	void calcularPosicionSinColision(Colisionable* enemigo);
+	void cambiarDireccion();
 
 	//Movimientos y poderes
 	void caminarDerecha();

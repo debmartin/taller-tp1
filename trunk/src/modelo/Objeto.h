@@ -36,7 +36,6 @@ public:
 	virtual void update() = 0;
 	virtual void arrojar() = 0;
 	virtual void cambiarEstado(estado_objeto unEstado) = 0;
-	virtual void definirDireccionInicial(direccion_objeto dir) = 0;
 	virtual void cambiarDireccion() = 0;
 	virtual void cambiarTrayectoria(Trayectoria* trayectoria) = 0;
 };

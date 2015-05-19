@@ -12,12 +12,13 @@
 #include "Observable.h"
 #include "MRU.h"
 #include "../vista/VentanaGrafica.h"
+#include "Colisionable.h"
 #include <SDL2/SDL_timer.h>
 
 #define DANIO_ARMA	10
 #define VELOCIDAD_ARMA_NULA 0.0f
 
-class Arma: public Objeto, public Observable {
+class Arma: public Objeto, public Observable{
 private:
 	int damage;
 	Vector2f posicion;
@@ -38,12 +39,16 @@ public:
 	void agregarObservador(Observador* unObservador);
 	void notificarObservadores();
 	direccion_objeto getDireccion();
-	void definirDireccionInicial(direccion_objeto dir);
 	void cambiarEstado(estado_objeto estado);
 	void cambiarDireccion();
 	void cambiarTrayectoria(Trayectoria* unaTrayectoria);
 	void arrojar();
 	estado_objeto getEstado();
+
+	void colisionar(Colisionable* otro);
+    bool vaAColisionar(Colisionable* otro, double anchoAct, double altoAct);
+    BVH* obtenerCajaColision();
+    bool empujar(Direccion direccionEmpuje, Vector2f diferencia);
 };
 
 #endif /* SRC_MODELO_ARMA_H_ */
