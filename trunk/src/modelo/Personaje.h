@@ -41,10 +41,19 @@ private:
 	float tiempoBloqueo;
 	double ancho;
 	double alto;
-	direccion_objeto direccion;
+	DireccionObjeto direccion;
 
 public:
-	Personaje(string id, double ancho, double alto, Vector2f posInicial, Posicionable* posc, int numJugador, map<estado_personaje, BVH*>* cajas);
+	Personaje(
+			string id,
+			double ancho,
+			double alto,
+			Vector2f posInicial,
+			Posicionable* posc,
+			int numJugador,
+			map<estado_personaje, BVH*>* cajas_orientacion_derecha,
+			DireccionObjeto orientacionInicialPersonaje = DIRECCION_DERECHA);
+
 	virtual ~Personaje();
 	double getAlto() const;
 	double getAncho() const;
@@ -116,6 +125,7 @@ public:
     BVH* obtenerCajaColision();
     bool vaAColisionar(Colisionable* enemigo);
     void espejarBVH();
+    void orientar(DireccionObjeto nuevaOrientacion);
 
 	friend ostream& operator<<(ostream &o, const Personaje &p);
 	string toString();

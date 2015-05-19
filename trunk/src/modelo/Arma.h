@@ -28,7 +28,7 @@ private:
 	estado_objeto estado;
 	Trayectoria* trayectoria;
 	float tCreacion;
-	direccion_objeto direccionArma;
+	DireccionObjeto direccionArma;
 
 public:
 	Arma();
@@ -40,7 +40,7 @@ public:
 	void update();
 	void agregarObservador(Observador* unObservador);
 	void notificarObservadores();
-	direccion_objeto getDireccion();
+	DireccionObjeto getDireccion();
 	void cambiarEstado(estado_objeto estado);
 	void cambiarDireccion();
 	void cambiarTrayectoria(Trayectoria* unaTrayectoria);

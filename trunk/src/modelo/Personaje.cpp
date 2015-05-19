@@ -44,12 +44,33 @@
 #define VECTOR_VELOCIDAD_NULA Vector2f(0, 0)
 #define VECTOR_GRAVEDAD Vector2f(0, -2600.f)
 
-Personaje::Personaje(string idIn, double anchoIn, double altoIn, Vector2f posInicial, Posicionable* posc, int numJugador, map<estado_personaje, BVH*>* cajas) :
-    Colisionable(posInicial, anchoIn, altoIn), id(idIn), posicionInicial(posInicial), ancho(anchoIn), alto(altoIn),
-	estado(new EnEspera(posInicial, (*cajas)[EN_ESPERA])), posicionable(posc), numeroJugador(numJugador), cajasPorEstado(cajas){
+Personaje::Personaje(
+		string idIn,
+		double anchoIn,
+		double altoIn,
+		Vector2f posInicial,
+		Posicionable* posc,
+		int numJugador,
+		map<estado_personaje, BVH*>* cajas_orientacion_derecha, // LA ORIENTACION DEL BVH DEBE SER DERECHA EN EL CONSTRUCTOR
+		DireccionObjeto orientacionInicialPersonaje):
+
+    Colisionable(posInicial, anchoIn, altoIn),
+	id(idIn),
+	posicionInicial(posInicial),
+	ancho(anchoIn),
+	alto(altoIn),
+	estado(new EnEspera(posInicial,(*cajas_orientacion_derecha)[EN_ESPERA])),
+	posicionable(posc),
+	numeroJugador(numJugador),
+	cajasPorEstado(cajas_orientacion_derecha)
+
+{
 	this->energia = ENERGIA_INICIAL;
 	this->tiempoBloqueo = 0;
-	this->direccion = DIRECCION_IZQUIERDA;
+
+	// ORIENTACION INICIAL DE BVH - POR DEFECTO LA ORIENTACION ES DERECHA
+	this->direccion = DIRECCION_DERECHA;
+	this->orientar(orientacionInicialPersonaje);
 }
 
 double Personaje::getAlto() const {
@@ -292,6 +313,8 @@ bool Personaje::vaAColisionar(Colisionable* enemigo){
     if (Colisionable::vaAColisionar(enemigo, anchoFict, altoFict))
         return true;
 
+
+    cout << "{NOMBRE:" << this->id << "," << "NUMERO_JUGADOR:" << this->getNumeroJugador() << "}" << endl;
     return estado->haySuperposicion(enemigo->obtenerCajaColision());
 }
 
@@ -322,10 +345,20 @@ void Personaje::calcularPosicionSinColision(Colisionable* enemigo){
 
 void Personaje::espejarBVH() {
 
+	this->direccion = (this->direccion == DIRECCION_DERECHA) ? DIRECCION_IZQUIERDA : DIRECCION_DERECHA;
+
     for (map<estado_personaje, BVH*>::iterator it = this->cajasPorEstado->begin() ; it != this->cajasPorEstado->end(); ++it)
     	(it)->second->espejarBVH();
 
 }
+
+void Personaje::orientar(DireccionObjeto nuevaOrientacion) {
+	if (this->direccion == nuevaOrientacion)
+		return;
+
+	espejarBVH();
+}
+
 void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
     posicionCandidata = estado->obtenerProximaPosicion();
     cout << (estaAtacando() ? "ATACANDO" : "") << endl;
