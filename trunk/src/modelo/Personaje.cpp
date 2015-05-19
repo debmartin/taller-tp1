@@ -477,6 +477,13 @@ void Personaje::cambiarDireccion(){
 	}
 }
 
+void Personaje::cambiarNumeroPersonaje(){
+	if(this->numeroJugador == NUMERO_DE_PERSONAJE_1){
+		this->numeroJugador = NUMERO_DE_PERSONAJE_2;
+	}else{
+		this->numeroJugador = NUMERO_DE_PERSONAJE_1;
+	}
+}
 //void Personaje::agregarCajasColisiones(BVH* caja, estado_personaje estadoCaja){
 //    cajasPorEstado[estadoCaja] = caja;
 //}

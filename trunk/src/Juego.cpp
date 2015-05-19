@@ -36,10 +36,9 @@ Juego::Juego(Jugador* jugador1, Jugador* jugador2){
 	agregarObservadoresJugador(jugador1);
 	agregarObservadoresJugador(jugador2);
 
-	// Vale: si queres podes distingir los tipos de controles para cada jugador
+	//Se pueden distingir los tipos de controles para cada jugador
 	string tipoDeControl_jugador1 = jugador1->getTipoControl();
 	string tipoDeControl_jugador2 = jugador2->getTipoControl();
-	//string tipoDeControl = "JOYSTICK";
 
 	controladorPersonaje = new ControladorPersonaje(jugador1, jugador2, tipoDeControl_jugador1);
 	hud = new HUD(Renderizador::Instance()->getWindow(), jugador2->getPersonaje()->getId(), jugador1->getPersonaje()->getId());
@@ -129,12 +128,9 @@ void Juego::actualizarOrientacionJugadores() {
 	else
 	{
 		jugador1->getPersonajeDibujable()->cambiarOrientacionHaciaDerecha();
-
 		jugador2->getPersonajeDibujable()->cambiarOrientacionHaciaIzquierda();
 		jugador1->getPersonaje()->espejarBVH();
 	}
-	//jugador1->getPersonaje()->getArma()->cambiarDireccion();
-	//jugador2->getPersonaje()->getArma()->cambiarDireccion();
 }
 
 Juego::~Juego(){

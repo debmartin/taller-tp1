@@ -76,7 +76,7 @@ map<string, Personaje*>* CargadorDeOjbetos::cargarPersonajes() {
 	for (list<PersonajeDef*>::iterator it = parser->getPersonajesDef()->begin() ; it != parser->getPersonajesDef()->end(); ++it)
 	{
 		(*it)->agregarCajasDeColisiones(cargarCajasColision((*it)->getAncho(), (*it)->getAlto()));
-		Personaje* personaje = new Personaje((*it)->getId(), (*it)->getAncho(), (*it)->getAlto(), posicionTemporalPersonaje, VentanaGrafica::Instance(), 1, (*it)->getCajasCol());
+		Personaje* personaje = new Personaje((*it)->getId(), (*it)->getAncho(), (*it)->getAlto(), posicionTemporalPersonaje, VentanaGrafica::Instance(), NUMERO_DE_PERSONAJE_1, (*it)->getCajasCol());
 		Arma* arma = new Arma((*it)->getArmaDef()->getVelocidad());
 		cout<<(*it)->getArmaDef()->getVelocidad()<<endl;
 		personaje->agregarArma(arma);
@@ -249,6 +249,7 @@ Jugador* CargadorDeOjbetos::cargarJugador2() {
 	list<JugadorDef*>::iterator it = parser->getJugadoresDef()->begin();
 	Jugador* jugador = cargarJugador(*++it);
 	jugador->getPersonaje()->cambiarDireccion();
+	jugador->getPersonaje()->cambiarNumeroPersonaje();
 	jugador->getPersonaje()->getArma()->cambiarDireccion();
 	return jugador;
 }
@@ -346,7 +347,6 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColision(float ancho_
 	AABB* salto_vertical_caja1 = new AABB(salto_vertical_caja1_PuntoMin, salto_vertical_caja1_PuntoMax);
 	cajasAABB_salto_vertical->push_back(salto_vertical_caja1);
 
-	///////////////////////////////////////////////////////////////////
 	//PATADA BAJA//
 	Vector2f patada_baja_caja1_PuntoMin(PATADA_BAJA_CAJA1_X1_PORCENTUAL*ancho_logico_personaje, PATADA_BAJA_CAJA1_Y1_PORCENTUAL*alto_logico_personaje);
 	Vector2f patada_baja_caja1_PuntoMax(PATADA_BAJA_CAJA1_X2_PORCENTUAL*ancho_logico_personaje, PATADA_BAJA_CAJA1_Y2_PORCENTUAL*alto_logico_personaje);

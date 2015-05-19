@@ -22,6 +22,8 @@
 
 #define DELTA_PASO 1
 #define ENERGIA_INICIAL 100
+#define NUMERO_DE_PERSONAJE_1 1
+#define NUMERO_DE_PERSONAJE_2 2
 
 using namespace std;
 
@@ -77,6 +79,7 @@ public:
 	void calcularNuevaPosicion(Colisionable* enemigo);
 	void calcularPosicionSinColision(Colisionable* enemigo);
 	void cambiarDireccion();
+	void cambiarNumeroPersonaje();
 
 	//Movimientos y poderes
 	void caminarDerecha();
