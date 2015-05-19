@@ -23,6 +23,8 @@ private:
 	int damage;
 	Vector2f posicion;
 	int velocidad_arma;
+	double anchoArma;
+	double altoArma;
 	estado_objeto estado;
 	Trayectoria* trayectoria;
 	float tCreacion;
@@ -30,7 +32,7 @@ private:
 
 public:
 	Arma();
-	Arma(int velocidad);
+	Arma(int velocidad, double ancho, double alto);
 	virtual ~Arma();
 	int quitarEnergia();
 	void posicionar(Vector2f);

@@ -11,8 +11,10 @@ Arma::Arma() {
 	// TODO Auto-generated constructor stub
 }
 
-Arma::Arma(int velocidad){
+Arma::Arma(int velocidad, double ancho, double alto){
 	this->velocidad_arma = velocidad;
+	this->anchoArma = ancho;
+	this->altoArma = alto;
 	this->posicion = POS_INICIAL_OBJETO;
 	this->trayectoria = new MRU(POS_INICIAL_OBJETO, VELOCIDAD_OBJETO);
 	this->tCreacion = 0;

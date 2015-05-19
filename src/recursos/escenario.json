@@ -113,6 +113,8 @@
 		    		    "fps": 10 
 		    			},
 			"arma": {
+						"alto": 30,
+						"ancho": 50,
 		    			"imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-arma.png",
 		    			"cant_fotogramas": 1,
 		    		    "fps": 15,
@@ -121,7 +123,7 @@
 			"color-alternativo": {
 						"h-inicial": 53,
 						"h-final": 220,
-						"desplazamiento": 125
+						"desplazamiento": 250
 						} 
         },
 	    {
@@ -210,6 +212,8 @@
 		    		    "fps": 10 
 		    			},
 			"arma": {
+						"alto": 30,
+						"ancho": 50,
 		    			"imagen": "RECURSOS/PERSONAJES/SONIA/sonia-arma.png",
 		    			"cant_fotogramas": 1,
 		    		    "fps": 15,
@@ -238,7 +242,7 @@
         }
 	},
 	"jugador-2": {
-        "personaje": "sonya",
+        "personaje": "sub-zero",
         "tipo-control": "TECLADO",  // "TECLADO" o "JOYSTICK"
         "control":{
         			"JOY_PINIA_ALTA": 0,

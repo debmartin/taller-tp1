@@ -158,6 +158,8 @@ void Parser::parsearPersonajes()
 		int p_arma_fps = 0;
 		SpriteDef* spriteDefArma;
 		int velocidad_arma = 0;
+		double alto_arma = 0;
+		double ancho_arma = 0;
 		ArmaDef* arma;
 		ColorAlternativoDef* colorAlternativoDef;
 
@@ -190,16 +192,20 @@ void Parser::parsearPersonajes()
 				SpriteDef* spriteDefAct = new SpriteDef(p_sprites_imagen, p_sprites_id, p_sprites_cant_fotogramas, p_sprites_fps);
 				sprites.push_back(spriteDefAct);
 			}else if ( tag == TAG_PERSONAJE_ARMA ){
+				Json::Value valor_alto_arma = (*it)[TAG_PERSONAJE_ARMA_ALTO];
+				Json::Value valor_ancho_arma = (*it)[TAG_PERSONAJE_ARMA_ANCHO];
 				p_arma_imagen = (*it)[TAG_PERSONAJE_SPRITES_IMAGEN].asString();
 				Json::Value valorFotog = (*it)[TAG_PERSONAJE_SPRITES_CANT_FOTOGRAMAS];
 				Json::Value valorFps = (*it)[TAG_PERSONAJE_SPRITES_FPS];
 				Json::Value valor_velocidad_arma = (*it)[TAG_PERSONAJE_VELOCIDAD_ARMA];
 
+				alto_arma = obtenerValorInt(valor_alto_arma, VELOCIDAD_ARMA_DEFAULT, "Personaje alto arma no es valor entero");
+				ancho_arma = obtenerValorInt(valor_ancho_arma, VELOCIDAD_ARMA_DEFAULT, "Personaje ancho arma no es valor entero");
 				p_arma_cant_fotogramas = obtenerValorInt(valorFotog, CANT_FOTOGRAMAS_DEFAULT, "Personaje sprite arma cant_fotogramas no es valor entero");
 				p_arma_fps = obtenerValorInt(valorFps, FPS_DEFAULT, "Personaje sprite arma fps no es valor entero");
 				velocidad_arma = obtenerValorInt(valor_velocidad_arma, VELOCIDAD_ARMA_DEFAULT, "Personaje velocidad arma no es valor entero");
 				spriteDefArma = new SpriteDef(p_arma_imagen, TAG_PERSONAJE_ARMA, p_arma_cant_fotogramas, p_arma_fps);
-				arma = new ArmaDef(spriteDefArma, velocidad_arma);
+				arma = new ArmaDef(spriteDefArma, velocidad_arma, ancho_arma, alto_arma);
 			} else if ( tag == TAG_COLOR_ALTERNATIVO ) {
 
 				Json::Value valorColorAlternativo_hincial = (*it)[TAG_COLOR_ALTERNATIVO_HINICIAL];
