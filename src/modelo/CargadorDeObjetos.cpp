@@ -286,8 +286,13 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColision(float ancho_
 	Vector2f reposo_caja1_PuntoMin(REPOSO_CAJA1_X1_PORCENTUAL*ancho_logico_personaje, REPOSO_CAJA1_Y1_PORCENTUAL*alto_logico_personaje);
 	Vector2f reposo_caja1_PuntoMax(REPOSO_CAJA1_X2_PORCENTUAL*ancho_logico_personaje, REPOSO_CAJA1_Y2_PORCENTUAL*alto_logico_personaje);
 
+	Vector2f reposo_caja2_PuntoMin(REPOSO_CAJA2_X1_PORCENTUAL*ancho_logico_personaje, REPOSO_CAJA2_Y1_PORCENTUAL*alto_logico_personaje);
+	Vector2f reposo_caja2_PuntoMax(REPOSO_CAJA2_X2_PORCENTUAL*ancho_logico_personaje, REPOSO_CAJA2_Y2_PORCENTUAL*alto_logico_personaje);
+
 	AABB* reposo_caja1 = new AABB(reposo_caja1_PuntoMin, reposo_caja1_PuntoMax);
+	AABB* reposo_caja2 = new AABB(reposo_caja2_PuntoMin, reposo_caja2_PuntoMax);
 	cajasAABB_reposo->push_back(reposo_caja1);
+	cajasAABB_reposo->push_back(reposo_caja2);
 
 	//CAMINANDO//
 	Vector2f caminando_caja1_PuntoMin(CAMINANDO_CAJA1_X1_PORCENTUAL*ancho_logico_personaje, CAMINANDO_CAJA1_Y1_PORCENTUAL*alto_logico_personaje);
