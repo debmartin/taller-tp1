@@ -31,7 +31,6 @@ Vector2f Colisionable::getPosicion(){
 bool Colisionable::vaAColisionar(Colisionable* otro, double anchoAct, double altoAct){
 	ancho = anchoAct;
 	alto = anchoAct;
-//    cout << posicion.X() << "," << posicionCandidata.X() << "," << posicionAnterior.X()<<endl;
     int miMitadAncho = ancho/2.0, otroMitadAncho = otro->ancho/2.0;
     return (((posicionAnterior.X() + ancho < otro->posicion.X() && posicionCandidata.X() + ancho >= otro->posicion.X()) ||
              (posicionAnterior.X() > otro->posicion.X() + otro->ancho && posicionCandidata.X() <= otro->posicion.X() + otro->ancho)) &&
