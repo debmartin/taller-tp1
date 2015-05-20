@@ -51,7 +51,7 @@ void Arma::cambiarTrayectoria(Trayectoria* unaTrayectoria){
 }
 
 void Arma::arrojar(){
-	//cout<<"Arrojo arma"<<endl;
+	cout<<"Arrojo arma"<<endl;
 	if(direccionArma == DIRECCION_DERECHA){
 		cout<<"Arrojar hacia derecha"<<endl;
 		cambiarTrayectoria(new MRU(posicion, Vector2f(velocidad_arma, VELOCIDAD_ARMA_NULA)));
@@ -66,7 +66,8 @@ void Arma::update(){
 	if(estado == VISIBLE){
 		float tActual = ((float)(SDL_GetTicks())/1000.0f) - tCreacion;
 		posicion = this->trayectoria->getPosicion(tActual);
-		//cout<<"Posicion arma:"<<posicion.X()<<"||"<<posicion.Y()<<endl;
+		cout<<"Posicion arma:"<<posicion.X()<<"||"<<posicion.Y()<<endl;
+		//notificarObservadores();
 	}
 	notificarObservadores();
 }
