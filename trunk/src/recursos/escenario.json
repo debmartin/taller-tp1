@@ -29,8 +29,8 @@
     "personajes": [
         {
 		    "id_personaje": "sub-zero", 
-		    "ancho": 135, 	
-		    "alto": 272, 
+		    "ancho": 200, 	
+		    "alto": 310, 
 		    "z­index": 2, 
 		    "sprites-reposo": { 
 			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-reposo.png",
@@ -128,8 +128,8 @@
         },
 	    {
 		    "id_personaje": "sonya", 	     
-		    "ancho": 105, 	
-		    "alto": 272, 
+		    "ancho": 200, 	
+		    "alto": 310, 
 		    "z­index": 2, 
 		    "sprites-reposo": { 
 				        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-reposo.png",
@@ -229,7 +229,7 @@
     
 	"jugador-1": {
         "personaje": "sub-zero",
-        "tipo-control": "JOYSTICK",   // "TECLADO" o "JOYSTICK"
+        "tipo-control": "TECLADO",   // "TECLADO" o "JOYSTICK"
         "control":{
         			"JOY_PINIA_ALTA": 0,
         			"JOY_PATADA_ALTA": 1,

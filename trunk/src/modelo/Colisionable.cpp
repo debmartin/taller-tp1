@@ -15,8 +15,9 @@ void Colisionable::colisionar(Colisionable* otro){
     estaColisionando = false;
 }
 
-Ataque* Colisionable::obtenerAtaque(){
-    return ataqueActual;
+int Colisionable::obtenerDanio(){
+    if (! ataqueActual) return 0;
+    return ataqueActual->obtenerDanio();
 }
 
 Vector2f Colisionable::getPosicion(){
@@ -31,8 +32,19 @@ bool Colisionable::vaAColisionar(Colisionable* otro, double anchoAct, double alt
 	ancho = anchoAct;
 	alto = anchoAct;
 //    cout << posicion.X() << "," << posicionCandidata.X() << "," << posicionAnterior.X()<<endl;
+    int miMitadAncho = ancho/2.0, otroMitadAncho = otro->ancho/2.0;
     return (((posicionAnterior.X() + ancho < otro->posicion.X() && posicionCandidata.X() + ancho >= otro->posicion.X()) ||
              (posicionAnterior.X() > otro->posicion.X() + otro->ancho && posicionCandidata.X() <= otro->posicion.X() + otro->ancho)) &&
              (posicionCandidata.Y() <= otro->posicion.Y() + otro->alto));
+//    return (((posicionAnterior.X() < otro->posicion.X() && posicionCandidata.X() >= otro->posicion.X()) ||
+//             (posicionAnterior.X() > otro->posicion.X() && posicionCandidata.X() <= otro->posicion.X())) &&
+//             (posicionCandidata.Y() <= otro->posicion.Y() + otro->alto));
 }
 
+double Colisionable::getAlto(){
+    return alto;
+}
+
+double Colisionable::getAncho(){
+    return ancho;
+}

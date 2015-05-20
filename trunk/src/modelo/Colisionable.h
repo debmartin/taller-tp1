@@ -15,11 +15,14 @@ class Colisionable
     public:
         virtual void colisionar(Colisionable* otro);
         virtual bool vaAColisionar(Colisionable* otro, double anchoAct, double altoAct);
-        Ataque* obtenerAtaque();
+        int obtenerDanio();
         Vector2f getPosicion();
         virtual BVH* obtenerCajaColision() = 0;
         virtual bool empujar(Direccion direccionEmpuje, Vector2f diferencia) = 0;
         //Vector2f getPivote();
+        double getAlto();
+        double getAncho();
+
 
     protected:
         Colisionable(Vector2f posicionIn, double anchoIn, double altoIn);
@@ -31,6 +34,7 @@ class Colisionable
         bool estaColisionando;
         double ancho;
         double alto;
+
 
     private:
 };
