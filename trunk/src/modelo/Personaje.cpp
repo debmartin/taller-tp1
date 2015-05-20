@@ -397,8 +397,10 @@ void Personaje::update(Colisionable* enemigo){
     calcularNuevaPosicion(enemigo);
 //    corregirPorColision(enemigo);
     estado->actualizar(posicion);
-	notificarObservadores();
+
 	arma->update(enemigo);
+
+	notificarObservadores();
 }
 
 Personaje::~Personaje(){
