@@ -11,6 +11,7 @@ class EnEspera : public Estado
         EnEspera(Vector2f posInicial, BVH* caja);
         virtual ~EnEspera();
         bool estaEsperando();
+        bool estaAtacando();
     protected:
     private:
 };

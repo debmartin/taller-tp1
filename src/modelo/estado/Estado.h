@@ -12,6 +12,7 @@
 #define DANIO_PINIA_BAJA 10
 #define DANIO_PATADA_SALTANDO 20
 #define DANIO_PINIA_SALTANDO 20
+#define DANIO_NULO 0
 
 typedef enum estado_personaje
 {

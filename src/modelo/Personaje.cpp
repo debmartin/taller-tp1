@@ -301,7 +301,7 @@ void Personaje::colisionar(Colisionable* otro){
     } else if (estaCaminando()) {
         cout <<"arrastrarNO";
         arrastrar(otro);
-    } else {
+    } else{
         recibirDanio(otro->obtenerAtaque()->obtenerDanio());
         cout << "recibiendo ataque"<<endl;
     }
@@ -312,10 +312,15 @@ bool Personaje::vaAColisionar(Colisionable* enemigo){
 	double anchoFict = estado->calcularAncho();
 	double altoFict = estado->calcularAlto();
 
-    if (Colisionable::vaAColisionar(enemigo, anchoFict, altoFict))
+	//TODO: Ver esta verificación si contempla todos los casos.
+	if(estaAgachado() || estaDefendiendo()){
+		return false;
+	}
+	else if (Colisionable::vaAColisionar(enemigo, anchoFict, altoFict)){
         return true;
-
-    return estado->haySuperposicion(enemigo->obtenerCajaColision());
+	}else{
+		return estado->haySuperposicion(enemigo->obtenerCajaColision());
+	}
 }
 
 void Personaje::calcularPosicionSinColision(Colisionable* enemigo){

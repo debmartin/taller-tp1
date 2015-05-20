@@ -52,6 +52,7 @@ public:
     BVH* obtenerCajaColision();
     bool haySuperposicion(BVH* otraCaja);
     bool empujar(Direccion direccionEmpuje, Vector2f diferencia);
+    bool estaEnReposo();
 };
 
 #endif /* SRC_MODELO_ARMA_H_ */

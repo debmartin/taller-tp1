@@ -10,6 +10,7 @@ class Agachado : public Estado
         Agachado(Vector2f posInicial, BVH* caja);
         virtual ~Agachado();
         bool estaAgachado();
+        bool estaAtacando();
     protected:
     private:
 };
