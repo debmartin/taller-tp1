@@ -47,7 +47,7 @@ BVH::~BVH() {
 bool BVH::interseccion(BVH* bvh){
 
 	// IMPRIMO TODAS LAS CAJAS DEL BVH
-	//cout << (*this) << endl;
+	cout << (*this) << endl;
 
     if (! cajaLimitadora->interseccion(bvh->cajaLimitadora)) {
         //cout << "no llega" <<endl;
