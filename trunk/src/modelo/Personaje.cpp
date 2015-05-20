@@ -457,9 +457,9 @@ void Personaje::arrojarArma(){
 	cout<<"Entra a arrojar arma"<<endl;
 	Vector2f posicionObjeto;
 	if(this->direccion == DIRECCION_DERECHA){
-		posicionObjeto.setCoordenada(posicion.X()-ancho/2,alto);
-	}else{
 		posicionObjeto.setCoordenada(posicion.X()+ancho/2,alto);
+	}else{
+		posicionObjeto.setCoordenada(posicion.X()-ancho/2,alto);
 	}
 
 	cout<<"Posicion.X personaje:"<<posicion.X()<<endl;
