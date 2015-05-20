@@ -79,11 +79,10 @@ map<string, Personaje*>* CargadorDeOjbetos::cargarPersonajes() {
 		(*it)->agregarCajasDeColisiones(cargarCajasColisionPersonaje((*it)->getAncho(), (*it)->getAlto()));
 		Personaje* personaje = new Personaje((*it)->getId(), (*it)->getAncho(), (*it)->getAlto(), posicionTemporalPersonaje, VentanaGrafica::Instance(), NUMERO_DE_PERSONAJE_1, (*it)->getCajasCol());
 		Arma* arma = new Arma((*it)->getArmaDef()->getVelocidad(), (*it)->getArmaDef()->getAncho(), (*it)->getArmaDef()->getAlto(), cargarCajasColisionArmaPersonaje((*it)->getArmaDef()->getAncho(),(*it)->getArmaDef()->getAlto()));
-		cout<<(*it)->getArmaDef()->getVelocidad()<<endl;
 		personaje->agregarArma(arma);
 		personajes->insert( pair<string,Personaje*>((*it)->getId(),personaje) );
 	}
-	
+
 	return personajes;
 }
 

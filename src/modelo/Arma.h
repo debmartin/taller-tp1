@@ -15,7 +15,7 @@
 #include "Colisionable.h"
 #include <SDL2/SDL_timer.h>
 
-#define DANIO_ARMA	100
+#define DANIO_ARMA	10
 #define VELOCIDAD_ARMA_NULA 0.0f
 
 class Arma: public Objeto, public Observable, public Colisionable{

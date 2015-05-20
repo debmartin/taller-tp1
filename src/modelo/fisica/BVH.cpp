@@ -21,7 +21,6 @@ void BVH::calcularEnvolvente() {
 	float limiteDerecho = (*cajasAABB)[0]->getLimiteDerecho();
 	float limiteIzquierdo = (*cajasAABB)[0]->getLimiteIzquierdo();
 	float aux;
-	//cout << "tam" << cajasAABB->size()<< endl;
 	for (size_t i = 1; i < cajasAABB->size(); i++){
 		aux = (*cajasAABB)[i]->getLimiteInferior();
 		limiteInferior = (aux < limiteInferior) ? aux : limiteInferior;
@@ -31,7 +30,6 @@ void BVH::calcularEnvolvente() {
 		limiteDerecho = (aux > limiteDerecho) ? aux : limiteDerecho;
 		aux = (*cajasAABB)[i]->getLimiteIzquierdo();
 		limiteIzquierdo = (aux < limiteIzquierdo) ? aux : limiteIzquierdo;
-		//cout << "itera: "<< i <<endl;
 	}
 	delete(this->cajaLimitadora);
 	this->cajaLimitadora = new AABB(Vector2f(limiteIzquierdo, limiteInferior), Vector2f(limiteDerecho, limiteSuperior));
@@ -47,13 +45,10 @@ BVH::~BVH() {
 bool BVH::interseccion(BVH* bvh){
 
 	// IMPRIMO TODAS LAS CAJAS DEL BVH
-	//cout << (*this) << endl;
 
     if (! cajaLimitadora->interseccion(bvh->cajaLimitadora)) {
-        //cout << "no llega" <<endl;
         return false;
     }
-    //cout << "llega";
     for (int i = 0; i < cajasAABB->size(); i++){
         for (int j = 0; j < bvh->cajasAABB->size(); j++){
             if ((*cajasAABB)[i]->interseccion((*(bvh->cajasAABB))[j]))
@@ -84,7 +79,6 @@ void BVH::espejarBVH(){
 }
 
 double BVH::calcularAnchoEnvolvente(){
-	//cout << "ANCHO:" <<   cajaLimitadora->getLimiteDerecho() - cajaLimitadora->getLimiteIzquierdo() << endl;
 	return cajaLimitadora->getLimiteDerecho() - cajaLimitadora->getLimiteIzquierdo();
 }
 

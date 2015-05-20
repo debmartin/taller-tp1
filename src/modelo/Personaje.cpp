@@ -120,7 +120,6 @@ Vector2f Personaje::obtenerPosicionEnVentana(){
 	//Vector2f P1(getPivote().X(), getPivote().Y());
 	Vector2f P1(posicion.X(), posicion.Y() + getAlto());
 	Vector2f P2 = VentanaGrafica::Instance()->calcularPosicionEnVentana(P1);
-//	cout << "posicion en ventana" << P2 << endl;
 	return P2;
 }
 
@@ -296,17 +295,13 @@ void Personaje::colisionar(Colisionable* otro){
 
     if (estaAtacando()) {
         ataqueActual = estado->obtenerAtaque();
-        cout << "atacando"<<endl;
     } else if (estaDefendiendo()) {
-        cout << "defendiendo"<<endl;
         recibirDanio(otro->obtenerDanio() / 2);
     } else if (estaCaminando()) {
-        cout <<"arrastrarNO";
         arrastrar(otro);
         recibirDanio(otro->obtenerDanio());
     } else{
         recibirDanio(otro->obtenerDanio());
-        cout << "recibiendo ataque"<<endl;
     }
     Colisionable::colisionar(otro);
 }
@@ -369,17 +364,14 @@ void Personaje::orientar(DireccionObjeto nuevaOrientacion) {
 
 void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
     posicionCandidata = estado->obtenerProximaPosicion();
-    cout << (estaAtacando() ? "ATACANDO" : "") << endl;
-    cout << "pos1: " << posicion << " pos2: " << enemigo->getPosicion() << endl;
+
     if (! vaAColisionar(enemigo)) {
-        //cout << "sin colision"<<endl;
         calcularPosicionSinColision(enemigo);
         return;
     }
     if (estaCaminando()){
         arrastrar(enemigo);
     } else if (estaSaltando()) {
-        cout << "cayendo"<<endl;
 //        caer();
         posicionCandidata = estado->obtenerProximaPosicion();
         //arrastrar(enemigo);
@@ -387,16 +379,11 @@ void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
         posicion = posicionCandidata;
     } else if (estaEnReposo() || estaAgachado()) {
     } else {
-        //cout << "colisionar" << endl;
         colisionar(enemigo);
     }
 }
 
 void Personaje::update(Colisionable* enemigo){
-
-	cout << "{NOMBRE:" << this->id << "," << "NUMERO_JUGADOR:" << this->getNumeroJugador() << "}" << endl;
-	cout << *obtenerCajaColision() << endl;
-
 	Logger::getInstance()->debug("Personaje: update.");
 
     if(estaBloqueado()){
@@ -463,7 +450,6 @@ bool Personaje::estaDefendiendo(){
 }
 void Personaje::arrojarArma(){
 	//Posiciono el poder respecto a la posicion del personaje
-	cout<<"Entra a arrojar arma"<<endl;
 	Vector2f posicionObjeto;
 	if(this->direccion == DIRECCION_DERECHA){
 		posicionObjeto.setCoordenada(posicion.X()+ancho/2,alto * 3/4);
@@ -471,7 +457,6 @@ void Personaje::arrojarArma(){
 		posicionObjeto.setCoordenada(posicion.X()-ancho/2,alto *3/4);
 	}
 
-	cout<<"Posicion.X personaje:"<<posicion.X()<<endl;
 	arma->posicionar(posicionObjeto);
 	arma->arrojar();
 }
@@ -527,3 +512,7 @@ void Personaje::cambiarNumeroPersonaje(){
 //void Personaje::agregarCajasColisiones(BVH* caja, estado_personaje estadoCaja){
 //    cajasPorEstado[estadoCaja] = caja;
 //}
+
+bool Personaje::estaMuerto(){
+    return (this->energia <= 0);
+}

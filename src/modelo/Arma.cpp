@@ -55,13 +55,10 @@ void Arma::cambiarTrayectoria(Trayectoria* unaTrayectoria){
 }
 
 void Arma::arrojar(){
-	cout<<"Arrojo arma"<<endl;
 	tCreacion = SDL_GetTicks() / 1000.0f;
 	if(direccionArma == DIRECCION_DERECHA){
-		cout<<"Arrojar hacia derecha"<<endl;
 		cambiarTrayectoria(new MRU(posicion, Vector2f(velocidad_arma, VELOCIDAD_ARMA_NULA)));
 	}else{
-		cout<<"Arrojar hacia izquierda"<<endl;
 		cambiarTrayectoria(new MRU(posicion, Vector2f(-velocidad_arma, VELOCIDAD_ARMA_NULA)));
 	}
 	cambiarEstado(VISIBLE);
@@ -73,7 +70,6 @@ void Arma::update(Colisionable* enemigo){
 	if(estado == VISIBLE){
 		float tActual = ((float)(SDL_GetTicks())/1000.0f) - tCreacion;
 		posicionCandidata = this->trayectoria->getPosicion(tActual);
-		cout<<"Posicion arma:"<<posicion.X()<<"||"<<posicion.Y()<<endl;
 
 		if (vaAColisionar(enemigo)){
             colisionar(enemigo);
@@ -107,7 +103,6 @@ void Arma::colisionar(Colisionable* otro){
 
 bool Arma::vaAColisionar(Colisionable* otro){
 //	if (Colisionable::vaAColisionar(otro, anchoArma, altoArma))
-//    cout << "ant: " << posicionAnterior << "pos:" << posicion <<
     if (((posicionAnterior.X() < otro->getPosicion().X() && posicionCandidata.X() >= otro->getPosicion().X() - otro->getAncho()) ||
              (posicionAnterior.X() > otro->getPosicion().X() + otro->getAncho() && posicionCandidata.X()  <= otro->getPosicion().X() + otro->getAncho())))
 //             (posicionCandidata.Y() - alto/2<= otro->getPosicion().Y() + otro->getAlto()))
