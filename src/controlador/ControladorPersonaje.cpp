@@ -102,8 +102,6 @@ void ControladorPersonaje::identificarOrdenJoystickPersonaje(Personaje* personaj
 	    }else if ((*estadoJoy)["JOY_ABAJO"]){
 	        Logger::getInstance()->debug("Se presiona: Tecla abajo.");
 	        personaje->agacharse();
-	    }else if((*estadoJoy)["JOY_PODER"]){
-	        personaje->arrojarArma();
 	    }else if((*estadoJoy)["JOY_PINIA_ALTA"]){
 	        personaje->piniaAlta();
 	    }else if((*estadoJoy)["JOY_PATADA_ALTA"]){
@@ -117,6 +115,9 @@ void ControladorPersonaje::identificarOrdenJoystickPersonaje(Personaje* personaj
 	    }else{
 	        personaje->mantenerReposo();
 	    }
+	}
+	if((*estadoJoy)["JOY_PODER"]){
+	        personaje->arrojarArma();
 	}
 }
 
@@ -177,9 +178,6 @@ void ControladorPersonaje::identificarOrdenPersonaje1(){
 		}else if (estadoTeclado[SDL_SCANCODE_DOWN]){
 			Logger::getInstance()->debug("Se presiona: Tecla abajo.");
 			personaje1->agacharse();
-		}else if(estadoTeclado[SDL_SCANCODE_F]){
-			cout<<"ArrojarArma jugador1"<<endl;
-			personaje1->arrojarArma();
 		}else if(estadoTeclado[SDL_SCANCODE_G]){
 			personaje1->piniaAlta();
 		}else if(estadoTeclado[SDL_SCANCODE_H]){
@@ -194,6 +192,10 @@ void ControladorPersonaje::identificarOrdenPersonaje1(){
 		}else{
 			personaje1->mantenerReposo();
 		}
+    }
+    if(estadoTeclado[SDL_SCANCODE_F]){
+			cout<<"ArrojarArma jugador1"<<endl;
+			personaje1->arrojarArma();
     }
 }
 
@@ -251,9 +253,6 @@ void ControladorPersonaje::identificarOrdenPersonaje2(){
 		}else if (estadoTeclado[SDL_SCANCODE_S]){
 			Logger::getInstance()->debug("Se presiona: Tecla abajo.");
 			personaje2->agacharse();
-		}else if(estadoTeclado[SDL_SCANCODE_X]){
-			cout<<"ArrojarArma jugador2"<<endl;
-			personaje2->arrojarArma();
 		}else if(estadoTeclado[SDL_SCANCODE_C]){
 			personaje2->piniaAlta();
 		}else if(estadoTeclado[SDL_SCANCODE_V]){
@@ -267,6 +266,10 @@ void ControladorPersonaje::identificarOrdenPersonaje2(){
 		}else{
 			personaje2->mantenerReposo();
 		}
+    }
+    if(estadoTeclado[SDL_SCANCODE_X]){
+		cout<<"ArrojarArma jugador2"<<endl;
+		personaje2->arrojarArma();
     }
 }
 
