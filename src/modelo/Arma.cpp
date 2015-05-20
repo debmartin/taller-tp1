@@ -26,6 +26,10 @@ int Arma::quitarEnergia(){
 	return this->damage;
 }
 
+int Arma::obtenerDanio(){
+	return this->damage;
+}
+
 void Arma::posicionar(Vector2f pos){
 	posicion = pos;
 }
@@ -63,12 +67,20 @@ void Arma::arrojar(){
 	cambiarEstado(VISIBLE);
 }
 
-void Arma::update(){
+void Arma::update(Colisionable* enemigo){
+    posicionAnterior = posicion;
+
 	if(estado == VISIBLE){
 		float tActual = ((float)(SDL_GetTicks())/1000.0f) - tCreacion;
-		posicion = this->trayectoria->getPosicion(tActual);
+		posicionCandidata = this->trayectoria->getPosicion(tActual);
 		cout<<"Posicion arma:"<<posicion.X()<<"||"<<posicion.Y()<<endl;
-		//notificarObservadores();
+
+		if (vaAColisionar(enemigo)){
+            colisionar(enemigo);
+        }else
+            posicion = posicionCandidata;
+	} else {
+        posicion = POS_INICIAL_OBJETO;
 	}
 	notificarObservadores();
 }
@@ -93,10 +105,14 @@ void Arma::colisionar(Colisionable* otro){
 	cambiarEstado(NO_VISIBLE);
 }
 
-bool Arma::vaAColisionar(Colisionable* enemigo){
-	if (Colisionable::vaAColisionar(enemigo, anchoArma, altoArma))
+bool Arma::vaAColisionar(Colisionable* otro){
+//	if (Colisionable::vaAColisionar(otro, anchoArma, altoArma))
+//    cout << "ant: " << posicionAnterior << "pos:" << posicion <<
+    if (((posicionAnterior.X() < otro->getPosicion().X() && posicionCandidata.X() >= otro->getPosicion().X() - otro->getAncho()) ||
+             (posicionAnterior.X() > otro->getPosicion().X() + otro->getAncho() && posicionCandidata.X()  <= otro->getPosicion().X() + otro->getAncho())))
+//             (posicionCandidata.Y() - alto/2<= otro->getPosicion().Y() + otro->getAlto()))
 	        return true;
-	return false;
+	return haySuperposicion(otro->obtenerCajaColision());
 }
 
 bool Arma::haySuperposicion(BVH* otraCaja) {

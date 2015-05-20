@@ -10,6 +10,7 @@
 
 
 #include "Trayectoria.h"
+#include "Colisionable.h"
 
 #define POS_INICIAL_OBJETO Vector2f(0,0)
 #define VELOCIDAD_OBJETO Vector2f(10,10)
@@ -33,7 +34,7 @@ public:
 	virtual ~Objeto();
 	virtual void posicionar(Vector2f posicion) = 0;
 	virtual int quitarEnergia() = 0;
-	virtual void update() = 0;
+	virtual void update(Colisionable* enemigo) = 0;
 	virtual void arrojar() = 0;
 	virtual void cambiarEstado(estado_objeto unEstado) = 0;
 	virtual void orientar(DireccionObjeto dir) = 0;

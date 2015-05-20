@@ -125,11 +125,11 @@ Vector2f Personaje::obtenerPosicionEnVentana(){
 }
 
 bool Personaje::llegoAlLimiteIzquierdo(){
-	return VentanaGrafica::Instance()->llegoAlLimiteIzquierdo(this->posicion.X()-this->getAncho()*0.05);
+	return VentanaGrafica::Instance()->llegoAlLimiteIzquierdo(this->posicion.X()-this->getAncho()/2);
 }
 
 bool Personaje::llegoAlLimiteDerecho(){
-	return VentanaGrafica::Instance()->llegoAlLimiteDerecho(Vector2f(this->posicion.X()+this->getAncho()*1.05,this->posicion.Y()));
+	return VentanaGrafica::Instance()->llegoAlLimiteDerecho(Vector2f(this->posicion.X()+this->getAncho()/2,this->posicion.Y()));
 }
 
 void Personaje::caminarDerecha(){
@@ -292,17 +292,20 @@ bool Personaje::empujar(Direccion direccionEmpuje, Vector2f diferencia) {
 }
 
 void Personaje::colisionar(Colisionable* otro){
+    if (estaAgachado()) return;
+
     if (estaAtacando()) {
         ataqueActual = estado->obtenerAtaque();
         cout << "atacando"<<endl;
     } else if (estaDefendiendo()) {
         cout << "defendiendo"<<endl;
-        recibirDanio(otro->obtenerAtaque()->obtenerDanio() / 2);
+        recibirDanio(otro->obtenerDanio() / 2);
     } else if (estaCaminando()) {
         cout <<"arrastrarNO";
         arrastrar(otro);
+        recibirDanio(otro->obtenerDanio());
     } else{
-        recibirDanio(otro->obtenerAtaque()->obtenerDanio());
+        recibirDanio(otro->obtenerDanio());
         cout << "recibiendo ataque"<<endl;
     }
     Colisionable::colisionar(otro);
@@ -316,26 +319,26 @@ bool Personaje::vaAColisionar(Colisionable* enemigo){
 	if(estaAgachado() || estaDefendiendo()){
 		return false;
 	}
-	else if (Colisionable::vaAColisionar(enemigo, anchoFict, altoFict)){
+	if (Colisionable::vaAColisionar(enemigo, anchoFict, altoFict))
         return true;
-	}else{
-		return estado->haySuperposicion(enemigo->obtenerCajaColision());
-	}
+
+//    return estaAtacando() && estado->haySuperposicion(enemigo->obtenerCajaColision());
+    return estado->haySuperposicion(enemigo->obtenerCajaColision());
 }
 
 void Personaje::calcularPosicionSinColision(Colisionable* enemigo){
-	float distanciaAObjetivo = posicionCandidata.X() - enemigo->getPosicion().X();
+	float distanciaAObjetivo = posicionCandidata.X() - enemigo->getPosicion().X() + estado->calcularAncho();
 	if (distanciaAObjetivo < 0) distanciaAObjetivo = -distanciaAObjetivo;
 
     if (posicionable->esValida(posicionCandidata, estado->calcularAncho()) && posicionCandidata.Y() >= posicionInicial.Y()) {
 
-        if (! posicionable->enExtremos(distanciaAObjetivo, ancho)){
+        if (! posicionable->enExtremos(distanciaAObjetivo, estado->calcularAncho())){
             posicion = posicionCandidata;
         }else{
             posicion = Vector2f(posicion.X(), posicionCandidata.Y());
         }
 	} else if (posicionCandidata.Y() < posicionInicial.Y()) {
-	    if (! posicionable->enExtremos(distanciaAObjetivo, ancho)) {
+	    if (! posicionable->enExtremos(distanciaAObjetivo, estado->calcularAncho())) {
             posicion = Vector2f(posicionCandidata.X(), posicionInicial.Y());
 	    } else {
             posicion = Vector2f(posicion.X(), posicionInicial.Y());
@@ -374,7 +377,6 @@ void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
         return;
     }
     if (estaCaminando()){
-        cout << "arrastrarWA";
         arrastrar(enemigo);
     } else if (estaSaltando()) {
         cout << "cayendo"<<endl;
@@ -383,7 +385,7 @@ void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
         //arrastrar(enemigo);
         posicion = estado->obtenerProximaPosicion();
         posicion = posicionCandidata;
-    } else if (estaEnReposo()) {
+    } else if (estaEnReposo() || estaAgachado()) {
     } else {
         //cout << "colisionar" << endl;
         colisionar(enemigo);
@@ -409,7 +411,7 @@ void Personaje::update(Colisionable* enemigo){
 //    corregirPorColision(enemigo);
     estado->actualizar(posicion);
 	notificarObservadores();
-	arma->update();
+	arma->update(enemigo);
 }
 
 Personaje::~Personaje(){
@@ -464,9 +466,9 @@ void Personaje::arrojarArma(){
 	cout<<"Entra a arrojar arma"<<endl;
 	Vector2f posicionObjeto;
 	if(this->direccion == DIRECCION_DERECHA){
-		posicionObjeto.setCoordenada(posicion.X()+ancho/2,alto);
+		posicionObjeto.setCoordenada(posicion.X()+ancho/2,alto * 3/4);
 	}else{
-		posicionObjeto.setCoordenada(posicion.X()-ancho/2,alto);
+		posicionObjeto.setCoordenada(posicion.X()-ancho/2,alto *3/4);
 	}
 
 	cout<<"Posicion.X personaje:"<<posicion.X()<<endl;

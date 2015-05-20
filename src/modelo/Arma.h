@@ -15,13 +15,12 @@
 #include "Colisionable.h"
 #include <SDL2/SDL_timer.h>
 
-#define DANIO_ARMA	10
+#define DANIO_ARMA	100
 #define VELOCIDAD_ARMA_NULA 0.0f
 
 class Arma: public Objeto, public Observable, public Colisionable{
 private:
 	int damage;
-	Vector2f posicion;
 	int velocidad_arma;
 	double anchoArma;
 	double altoArma;
@@ -35,9 +34,10 @@ public:
 	Arma(int velocidad, double ancho, double alto, BVH* caja);
 	virtual ~Arma();
 	int quitarEnergia();
+	int obtenerDanio();
 	void posicionar(Vector2f);
 	Vector2f obtenerPosicionEnVentana();
-	void update();
+	void update(Colisionable* enemigo);
 	void agregarObservador(Observador* unObservador);
 	void notificarObservadores();
 	DireccionObjeto getDireccion();

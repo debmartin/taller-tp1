@@ -13,7 +13,7 @@ Poder::Poder() {
 }
 
 void Poder::ejecutar(Objeto* objeto){
-	objeto->update();
+//	objeto->update();
 }
 
 Poder::~Poder() {
