@@ -131,6 +131,8 @@ void Juego::actualizarOrientacionJugadores() {
 
 		jugador1->getPersonaje()->orientar(DIRECCION_DERECHA);
 		jugador2->getPersonaje()->orientar(DIRECCION_IZQUIERDA);
+
+		jugador2->getPersonaje()->espejarBVH();
 	}
 }
 
