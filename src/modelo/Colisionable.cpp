@@ -23,9 +23,9 @@ Vector2f Colisionable::getPosicion(){
     return posicion;
 }
 
-Vector2f Colisionable::getPivote(){
-    return this->obtenerCajaColision()->getPivote();
-}
+//Vector2f Colisionable::getPivote(){
+//    return this->obtenerCajaColision()->getPivote();
+//}
 
 bool Colisionable::vaAColisionar(Colisionable* otro, double anchoAct, double altoAct){
 	ancho = anchoAct;

@@ -19,7 +19,7 @@ class Colisionable
         Vector2f getPosicion();
         virtual BVH* obtenerCajaColision() = 0;
         virtual bool empujar(Direccion direccionEmpuje, Vector2f diferencia) = 0;
-        Vector2f getPivote();
+        //Vector2f getPivote();
 
     protected:
         Colisionable(Vector2f posicionIn, double anchoIn, double altoIn);

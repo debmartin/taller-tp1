@@ -145,5 +145,6 @@ void Juego::posicionarPersonajes_enEjeX()
 	double anchoVentana = VentanaGrafica::Instance()->getAnchoLogico();
 
 	jugador1->posicionarPersonaje_enEjeX(anchoEscenario/2+anchoVentana/3);
+	jugador1->posicionarPersonaje_enEjeX(anchoEscenario/2);//+anchoVentana/3);
 	jugador2->posicionarPersonaje_enEjeX(anchoEscenario/2-anchoVentana/3);
 }
