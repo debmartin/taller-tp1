@@ -370,12 +370,12 @@ void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
         cout << "arrastrarWA";
         arrastrar(enemigo);
     } else if (estaSaltando()) {
-//        cout << "cayendo"<<endl;
+        cout << "cayendo"<<endl;
 //        caer();
-//        posicionCandidata = estado->obtenerProximaPosicion();
-        arrastrar(enemigo);
-//        posicion = estado->obtenerProximaPosicion();
-//        posicion = posicionCandidata;
+        posicionCandidata = estado->obtenerProximaPosicion();
+        //arrastrar(enemigo);
+        posicion = estado->obtenerProximaPosicion();
+        posicion = posicionCandidata;
     } else if (estaEnReposo()) {
     } else {
         //cout << "colisionar" << endl;
