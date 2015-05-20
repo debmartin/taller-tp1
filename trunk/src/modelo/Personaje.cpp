@@ -120,7 +120,7 @@ Vector2f Personaje::obtenerPosicionEnVentana(){
 	//Vector2f P1(getPivote().X(), getPivote().Y());
 	Vector2f P1(posicion.X(), posicion.Y() + getAlto());
 	Vector2f P2 = VentanaGrafica::Instance()->calcularPosicionEnVentana(P1);
-	cout << "posicion en ventana" << P2 << endl;
+//	cout << "posicion en ventana" << P2 << endl;
 	return P2;
 }
 
@@ -349,18 +349,20 @@ void Personaje::espejarBVH() {
 }
 
 void Personaje::orientar(DireccionObjeto nuevaOrientacion) {
+	//cout<<"Personaje:"<<id<<endl;
+	//cout<<"Direccion personaje en orientar:"<<nuevaOrientacion<<endl;
 	if (this->direccion == nuevaOrientacion)
 		return;
 
 	this->direccion = nuevaOrientacion;
 	this->arma->orientar(nuevaOrientacion);
-	espejarBVH();
+	//espejarBVH();
 }
 
 void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
     posicionCandidata = estado->obtenerProximaPosicion();
-    //cout << (estaAtacando() ? "ATACANDO" : "") << endl;
-    //cout << "pos1: " << posicion << " pos2: " << enemigo->getPosicion() << endl;
+    cout << (estaAtacando() ? "ATACANDO" : "") << endl;
+    cout << "pos1: " << posicion << " pos2: " << enemigo->getPosicion() << endl;
     if (! vaAColisionar(enemigo)) {
         //cout << "sin colision"<<endl;
         calcularPosicionSinColision(enemigo);

@@ -76,7 +76,7 @@ void VentanaGrafica::dibujarTodo() {
 
 void VentanaGrafica::actualizar() {
     escenario->actualizar();
-    cout << *this << endl;
+    //cout << *this << endl;
 }
 
 void VentanaGrafica::recibirNotificacion(Observable* unObservable){
