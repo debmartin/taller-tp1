@@ -75,8 +75,14 @@ void Juego::update()
 	VentanaGrafica::Instance()->actualizar();
 	// FIN CODIGO USUARIO
 
-	if (jugador1->getPersonaje()->estaMuerto() || jugador2->getPersonaje()->estaMuerto())
+	if (jugador1->getPersonaje()->estaMuerto()) {
         juegoCorriendo = false;
+        Logger::getInstance()->info("GAME OVER JUGADOR 1");
+    }
+	if (jugador2->getPersonaje()->estaMuerto()) {
+        juegoCorriendo = false;
+        Logger::getInstance()->info("GAME OVER JUGADOR 2");
+    }
 }
 
 void Juego::handleEvents(bool& recargar)
