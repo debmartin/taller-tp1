@@ -15,7 +15,7 @@ class Colisionable
     public:
         virtual void colisionar(Colisionable* otro);
         virtual bool vaAColisionar(Colisionable* otro, double anchoAct, double altoAct);
-        int obtenerDanio();
+        virtual int obtenerDanio();
         Vector2f getPosicion();
         virtual BVH* obtenerCajaColision() = 0;
         virtual bool empujar(Direccion direccionEmpuje, Vector2f diferencia) = 0;

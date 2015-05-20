@@ -352,8 +352,6 @@ void Personaje::espejarBVH() {
 }
 
 void Personaje::orientar(DireccionObjeto nuevaOrientacion) {
-	//cout<<"Personaje:"<<id<<endl;
-	//cout<<"Direccion personaje en orientar:"<<nuevaOrientacion<<endl;
 	if (this->direccion == nuevaOrientacion)
 		return;
 
