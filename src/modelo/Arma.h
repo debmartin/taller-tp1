@@ -18,7 +18,7 @@
 #define DANIO_ARMA	10
 #define VELOCIDAD_ARMA_NULA 0.0f
 
-class Arma: public Objeto, public Observable{
+class Arma: public Objeto, public Observable, public Colisionable{
 private:
 	int damage;
 	Vector2f posicion;
@@ -29,10 +29,10 @@ private:
 	Trayectoria* trayectoria;
 	float tCreacion;
 	DireccionObjeto direccionArma;
+	BVH* cajaBVH_arma;
 
 public:
-	Arma();
-	Arma(int velocidad, double ancho, double alto);
+	Arma(int velocidad, double ancho, double alto, BVH* caja);
 	virtual ~Arma();
 	int quitarEnergia();
 	void posicionar(Vector2f);
@@ -48,8 +48,9 @@ public:
 	estado_objeto getEstado();
 
 	void colisionar(Colisionable* otro);
-    bool vaAColisionar(Colisionable* otro, double anchoAct, double altoAct);
+    bool vaAColisionar(Colisionable* otro);
     BVH* obtenerCajaColision();
+    bool haySuperposicion(BVH* otraCaja);
     bool empujar(Direccion direccionEmpuje, Vector2f diferencia);
 };
 

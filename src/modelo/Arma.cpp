@@ -7,14 +7,13 @@
 
 #include "Arma.h"
 
-Arma::Arma() {
-	// TODO Auto-generated constructor stub
-}
-
-Arma::Arma(int velocidad, double ancho, double alto){
-	this->velocidad_arma = velocidad;
-	this->anchoArma = ancho;
-	this->altoArma = alto;
+Arma::Arma(int velocidad, double ancho, double alto, BVH* caja):
+		velocidad_arma(velocidad),
+		anchoArma(ancho),
+		altoArma(alto),
+		cajaBVH_arma(caja),
+		Colisionable(POS_INICIAL_OBJETO, ancho, alto)
+	{
 	this->posicion = POS_INICIAL_OBJETO;
 	this->trayectoria = new MRU(POS_INICIAL_OBJETO, VELOCIDAD_OBJETO);
 	this->tCreacion = 0;
@@ -86,8 +85,29 @@ Vector2f Arma::obtenerPosicionEnVentana(){
 	return P2;
 }
 
+//Colisiones
 void Arma::colisionar(Colisionable* otro){
+	Colisionable::colisionar(otro);
+	cambiarEstado(NO_VISIBLE);
+}
 
+bool Arma::vaAColisionar(Colisionable* enemigo){
+	if (Colisionable::vaAColisionar(enemigo, anchoArma, altoArma))
+	        return true;
+	return false;
+}
+
+bool Arma::haySuperposicion(BVH* otraCaja) {
+    if (!cajaBVH_arma || !otraCaja) return false;
+    return cajaBVH_arma->interseccion(otraCaja);
+}
+
+BVH* Arma::obtenerCajaColision(){
+	return cajaBVH_arma;
+}
+
+bool Arma::empujar(Direccion direccionEmpuje, Vector2f diferencia){
+	return false;
 }
 
 Arma::~Arma() {

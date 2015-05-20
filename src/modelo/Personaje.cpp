@@ -393,12 +393,12 @@ void Personaje::update(Colisionable* enemigo){
         tiempoBloqueo -= 1.0;
     }
 
-    arma->update();
     posicionAnterior = posicion;
     calcularNuevaPosicion(enemigo);
 //    corregirPorColision(enemigo);
     estado->actualizar(posicion);
 	notificarObservadores();
+	arma->update();
 }
 
 Personaje::~Personaje(){
