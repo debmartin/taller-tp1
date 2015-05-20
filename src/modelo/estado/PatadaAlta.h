@@ -17,7 +17,6 @@ class PatadaAlta : public Estado
         virtual ~PatadaAlta();
         bool estaAtacando();
         bool estaDefendiendo();
-        bool estaBloqueado();
 };
 
 #endif /* SRC_MODELO_ESTADO_PATADAALTA_H_ */
