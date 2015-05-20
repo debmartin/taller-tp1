@@ -76,11 +76,11 @@ void Juego::update()
 	// FIN CODIGO USUARIO
 
 	if (jugador1->getPersonaje()->estaMuerto()) {
-        juegoCorriendo = false;
+//        juegoCorriendo = false;
         Logger::getInstance()->info("GAME OVER JUGADOR 1");
     }
 	if (jugador2->getPersonaje()->estaMuerto()) {
-        juegoCorriendo = false;
+//        juegoCorriendo = false;
         Logger::getInstance()->info("GAME OVER JUGADOR 2");
     }
 }
