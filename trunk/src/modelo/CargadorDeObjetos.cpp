@@ -75,9 +75,9 @@ map<string, Personaje*>* CargadorDeOjbetos::cargarPersonajes() {
 
 	for (list<PersonajeDef*>::iterator it = parser->getPersonajesDef()->begin() ; it != parser->getPersonajesDef()->end(); ++it)
 	{
-		(*it)->agregarCajasDeColisiones(cargarCajasColision((*it)->getAncho(), (*it)->getAlto()));
+		(*it)->agregarCajasDeColisiones(cargarCajasColisionPersonaje((*it)->getAncho(), (*it)->getAlto()));
 		Personaje* personaje = new Personaje((*it)->getId(), (*it)->getAncho(), (*it)->getAlto(), posicionTemporalPersonaje, VentanaGrafica::Instance(), NUMERO_DE_PERSONAJE_1, (*it)->getCajasCol());
-		Arma* arma = new Arma((*it)->getArmaDef()->getVelocidad(), (*it)->getArmaDef()->getAncho(), (*it)->getArmaDef()->getAlto());
+		Arma* arma = new Arma((*it)->getArmaDef()->getVelocidad(), (*it)->getArmaDef()->getAncho(), (*it)->getArmaDef()->getAlto(), cargarCajasColisionArmaPersonaje((*it)->getArmaDef()->getAncho(),(*it)->getArmaDef()->getAlto()));
 		cout<<(*it)->getArmaDef()->getVelocidad()<<endl;
 		personaje->agregarArma(arma);
 		personajes->insert( pair<string,Personaje*>((*it)->getId(),personaje) );
@@ -261,7 +261,7 @@ Jugador* CargadorDeOjbetos::cargarJugador2() {
 	return jugador;
 }
 
-map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColision(float ancho_logico_personaje, float alto_logico_personaje){
+map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(float ancho_logico_personaje, float alto_logico_personaje){
 	vector<AABB*>* cajasAABB_reposo = new vector<AABB*>;
 	vector<AABB*>* cajasAABB_caminando = new vector<AABB*>;
 	vector<AABB*>* cajasAABB_salto_diagonal = new vector<AABB*>;
@@ -510,6 +510,7 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColision(float ancho_
 	cajasAABB_gancho->push_back(gancho_caja1);
 	cajasAABB_gancho->push_back(gancho_caja2);
 
+
 	Vector2f pivote(ancho_logico_personaje/2, alto_logico_personaje);
 	//Armo los BVH de cada estado
 	BVH* BVH_reposo = new BVH(cajasAABB_reposo, pivote);
@@ -556,4 +557,21 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColision(float ancho_
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(GANCHO, BVH_gancho));
 
 	return mapa_BVH;
+}
+
+BVH* CargadorDeOjbetos::cargarCajasColisionArmaPersonaje(float ancho_logico_arma, float alto_logico_arma){
+	//ARMA//
+	vector<AABB*>* cajasAABB_arma = new vector<AABB*>;
+
+	Vector2f arma_caja1_PuntoMin(ARMA_CAJA1_X1_PORCENTUAL*ancho_logico_arma, ARMA_CAJA1_Y1_PORCENTUAL*alto_logico_arma);
+	Vector2f arma_caja1_PuntoMax(ARMA_CAJA1_X2_PORCENTUAL*ancho_logico_arma, ARMA_CAJA1_Y2_PORCENTUAL*alto_logico_arma);
+
+	AABB* arma_caja1 = new AABB(arma_caja1_PuntoMin, arma_caja1_PuntoMax);
+	cajasAABB_arma->push_back(arma_caja1);
+
+	Vector2f pivote(ancho_logico_arma/2, alto_logico_arma);
+
+	BVH* BVH_arma = new BVH(cajasAABB_arma, pivote);
+
+	return BVH_arma;
 }
