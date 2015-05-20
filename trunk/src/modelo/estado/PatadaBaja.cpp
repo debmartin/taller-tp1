@@ -9,7 +9,7 @@
 #include "../Reposo.h"
 
 PatadaBaja::PatadaBaja(Vector2f posInicial, BVH* caja) :
-    Estado(new Reposo(posInicial), PATEANDO_ALTO, caja) {
+    Estado(new Reposo(posInicial), PATEANDO_BAJO, caja) {
     ataqueEstado = new Ataque(DANIO_PATADA_BAJA);
 }
 
@@ -26,6 +26,3 @@ bool PatadaBaja::estaDefendiendo(){
     return false;
 }
 
-bool PatadaBaja::estaBloqueado(){
-    return true;
-}

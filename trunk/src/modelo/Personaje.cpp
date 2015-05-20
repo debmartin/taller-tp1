@@ -190,13 +190,13 @@ void Personaje::piniaSaltandoVertical(){
 
 void Personaje::patadaAlta(){
 	cambiarEstado(new PatadaAlta(posicion, (*cajasPorEstado)[PATEANDO_ALTO]));
-	bloquearPersonaje(50);
+	//jbloquearPersonaje(50);
 	Logger::getInstance()->debug("Personaje: patada alta.");
 }
 
 void Personaje::patadaBaja(){
     cambiarEstado(new PatadaBaja(posicion, (*cajasPorEstado)[PATEANDO_BAJO]));
-    bloquearPersonaje(50);
+    //bloquearPersonaje(50);
 	Logger::getInstance()->debug("Personaje: patada baja.");
 }
 

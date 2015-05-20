@@ -26,6 +26,3 @@ bool PatadaAlta::estaDefendiendo(){
     return false;
 }
 
-bool PatadaAlta::estaBloqueado(){
-    return true;
-}

@@ -17,7 +17,6 @@ class PatadaBaja : public Estado
         virtual ~PatadaBaja();
         bool estaAtacando();
         bool estaDefendiendo();
-        bool estaBloqueado();
 };
 
 
