@@ -15,8 +15,6 @@ AABB::~AABB() {
 }
 
 bool AABB::interseccion(AABB* otro) {
-    //cout << "primero: " << puntoInfIzq << puntoSupDer << endl;
-    //cout << "segundo: " << otro->puntoInfIzq << otro->puntoSupDer << endl;
     if (puntoInfIzq.X() > otro->puntoSupDer.X() || otro->puntoInfIzq.X() > puntoSupDer.X())
         return false;
 

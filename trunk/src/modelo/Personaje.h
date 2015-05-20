@@ -82,6 +82,7 @@ public:
 	bool estaDefendiendo();
 	bool estaBloqueado();
 	bool estaCaminando();
+	bool estaMuerto();
 	bool ejecutandoMovimientoEspecial();
 	void recibirDanio(int danio);
 	void bloquearPersonaje(float segundos);

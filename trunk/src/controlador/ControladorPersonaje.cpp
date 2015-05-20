@@ -61,7 +61,6 @@ bool ControladorPersonaje::manejar_Evento(SDL_Event &evento){
 
 void ControladorPersonaje::identificarOrdenJoystickPersonaje(Personaje* personaje, JoyNumber numeroJoystick){
 	std::map<string, bool>* estadoJoy = TheInputHandler::Instance()->getJoystickState(numeroJoystick);
-	//cout<<"Entra a manejar evento joystick"<<endl;
 
 	if (personaje->estaSaltando()){
 		if(((*estadoJoy)["JOY_PINIA_ALTA"] || (*estadoJoy)["JOY_PINIA_BAJA"]) && personaje->estaSaltandoVertical()){
@@ -143,12 +142,10 @@ void ControladorPersonaje::identificarOrdenPersonaje1(){
     	}else if((estadoTeclado[SDL_SCANCODE_H] || estadoTeclado[SDL_SCANCODE_K]) && personaje1->estaSaltandoVertical()){
     		personaje1->patadaSaltandoVertical();
     	}else if((estadoTeclado[SDL_SCANCODE_G] || estadoTeclado[SDL_SCANCODE_J]) && personaje1->estaSaltandoDiagonalDerecha()){
-    		cout<<"Entra piniaSaltandoDiagonalDerecha"<<endl;
     		personaje1->piniaSaltandoDiagonalDerecha();
     	}else if((estadoTeclado[SDL_SCANCODE_H] || estadoTeclado[SDL_SCANCODE_K]) && personaje1->estaSaltandoDiagonalDerecha()){
     		personaje1->patadaSaltandoDiagonalDerecha();
     	}else if((estadoTeclado[SDL_SCANCODE_G] || estadoTeclado[SDL_SCANCODE_J]) && personaje1->estaSaltandoDiagonalIzquierda()){
-    		cout<<"Entra piniaSaltandoDiagonalIzquierda"<<endl;
     		personaje1->piniaSaltandoDiagonalIzquierda();
     	}else if((estadoTeclado[SDL_SCANCODE_H] || estadoTeclado[SDL_SCANCODE_K]) && personaje1->estaSaltandoDiagonalIzquierda()){
     		personaje1->patadaSaltandoDiagonalIzquierda();
@@ -181,7 +178,6 @@ void ControladorPersonaje::identificarOrdenPersonaje1(){
 		}else if(estadoTeclado[SDL_SCANCODE_G]){
 			personaje1->piniaAlta();
 		}else if(estadoTeclado[SDL_SCANCODE_H]){
-			cout<<"patada alta"<<endl;
 			personaje1->patadaAlta();
 		}else if(estadoTeclado[SDL_SCANCODE_J]){
 			personaje1->piniaBaja();
@@ -194,7 +190,6 @@ void ControladorPersonaje::identificarOrdenPersonaje1(){
 		}
     }
     if(estadoTeclado[SDL_SCANCODE_F]){
-			cout<<"ArrojarArma jugador1"<<endl;
 			personaje1->arrojarArma();
     }
 }
@@ -268,7 +263,6 @@ void ControladorPersonaje::identificarOrdenPersonaje2(){
 		}
     }
     if(estadoTeclado[SDL_SCANCODE_X]){
-		cout<<"ArrojarArma jugador2"<<endl;
 		personaje2->arrojarArma();
     }
 }
