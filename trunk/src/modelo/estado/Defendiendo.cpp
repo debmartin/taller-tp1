@@ -3,6 +3,7 @@
 
 Defendiendo::Defendiendo(Vector2f posInicial, BVH* caja) :
     Estado(new Reposo(posInicial), DEFENDIENDO, caja) {
+	ataqueEstado = new Ataque(DANIO_NULO);
     //ctor
 }
 

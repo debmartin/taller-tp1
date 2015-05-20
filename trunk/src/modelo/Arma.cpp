@@ -112,6 +112,10 @@ bool Arma::empujar(Direccion direccionEmpuje, Vector2f diferencia){
 	return false;
 }
 
+bool Arma::estaEnReposo(){
+	return true;
+}
+
 Arma::~Arma() {
 	// TODO Auto-generated destructor stub
 }
