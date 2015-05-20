@@ -183,7 +183,7 @@
 		    			},
 		    "sprites-patada-alta": { 
 				        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-patada-alta.png",
-		    		    "cant_fotogramas": 10,
+		    		    "cant_fotogramas": 6,
 		    		    "fps": 10
 		    			},
 			"sprites-patada-baja": { 
