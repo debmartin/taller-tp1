@@ -117,8 +117,10 @@ Objeto* Personaje::getArma(){
 
 //Devuelve un vector posicion referenciado desde el eje con origen de coordenadas arriba izquierda.
 Vector2f Personaje::obtenerPosicionEnVentana(){
-	Vector2f P1(getPivote().X(), getPivote().Y());
+	//Vector2f P1(getPivote().X(), getPivote().Y());
+	Vector2f P1(posicion.X(), posicion.Y() + getAlto());
 	Vector2f P2 = VentanaGrafica::Instance()->calcularPosicionEnVentana(P1);
+	cout << "posicion en ventana" << P2 << endl;
 	return P2;
 }
 
@@ -313,8 +315,6 @@ bool Personaje::vaAColisionar(Colisionable* enemigo){
     if (Colisionable::vaAColisionar(enemigo, anchoFict, altoFict))
         return true;
 
-
-    cout << "{NOMBRE:" << this->id << "," << "NUMERO_JUGADOR:" << this->getNumeroJugador() << "}" << endl;
     return estado->haySuperposicion(enemigo->obtenerCajaColision());
 }
 
@@ -384,6 +384,10 @@ void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
 }
 
 void Personaje::update(Colisionable* enemigo){
+
+	cout << "{NOMBRE:" << this->id << "," << "NUMERO_JUGADOR:" << this->getNumeroJugador() << "}" << endl;
+	cout << *obtenerCajaColision() << endl;
+
 	Logger::getInstance()->debug("Personaje: update.");
 
     if(estaBloqueado()){
