@@ -70,7 +70,7 @@ Personaje::Personaje(
 
 	// ORIENTACION INICIAL DE BVH - POR DEFECTO LA ORIENTACION ES DERECHA
 	this->direccion = DIRECCION_DERECHA;
-	this->orientar(orientacionInicialPersonaje);
+	//this->orientar(orientacionInicialPersonaje);
 }
 
 double Personaje::getAlto() const {
@@ -118,13 +118,15 @@ Objeto* Personaje::getArma(){
 //Devuelve un vector posicion referenciado desde el eje con origen de coordenadas arriba izquierda.
 Vector2f Personaje::obtenerPosicionEnVentana(){
 	//Vector2f P1(getPivote().X(), getPivote().Y());
-	Vector2f P1(posicion.X(), posicion.Y() + getAlto());
+	//Vector2f P1(posicion.X(), posicion.Y() + getAlto()); // TODO: ESTE ES EL ORIGINAL, EL DE ABAJO USA PIVOTE.
+	Vector2f P1(getPivote().X(), posicion.Y() + getAlto()); // TODO: ESTA MODIFICACION UTILIZA LA COMPONENTE X DEL PIVOTE SOLAMENTE, ESTA INCOMPLETA
 	Vector2f P2 = VentanaGrafica::Instance()->calcularPosicionEnVentana(P1);
 	return P2;
 }
 
 bool Personaje::llegoAlLimiteIzquierdo(){
 	return VentanaGrafica::Instance()->llegoAlLimiteIzquierdo(this->posicion.X()-this->getAnchoEnvolvente()/2);
+	//return VentanaGrafica::Instance()->llegoAlLimiteIzquierdo(this->getPivote().X() - this->getAnchoEnvolvente()/2);
 }
 
 bool Personaje::llegoAlLimiteDerecho(){
@@ -356,17 +358,24 @@ void Personaje::calcularPosicionSinColision(Colisionable* enemigo){
 }
 
 void Personaje::espejarBVH() {
+	int i = 1;
+	//cout << "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" << endl;
     for (map<estado_personaje, BVH*>::iterator it = this->cajasPorEstado->begin() ; it != this->cajasPorEstado->end(); ++it)
+    {
     	(it)->second->espejarBVH();
+    	//cout << ">>>>>>>>>>>>>>>>>>>>>>>>" << i++ << endl;
+    }
 }
 
 void Personaje::orientar(DireccionObjeto nuevaOrientacion) {
+	cout << "?????????????????PIVOTE-INI:" << this->obtenerCajaColision()->getPivote() << endl;
 	if (this->direccion == nuevaOrientacion)
 		return;
 
 	this->direccion = nuevaOrientacion;
 	this->arma->orientar(nuevaOrientacion);
-	//espejarBVH();
+	espejarBVH();
+	cout << "?????????????????PIVOTE-FIN:" << this->obtenerCajaColision()->getPivote() << endl;
 }
 
 void Personaje::calcularNuevaPosicion(Colisionable* enemigo){

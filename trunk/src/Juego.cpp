@@ -131,6 +131,7 @@ bool Juego::running() { return juegoCorriendo; }
 
 void Juego::actualizarOrientacionJugadores() {
 
+
 	if ( jugador1->getPersonaje()->getPosicion().X() > jugador2->getPersonaje()->getPosicion().X() )
 	{
 		jugador1->getPersonajeDibujable()->cambiarOrientacionHaciaIzquierda();
@@ -139,7 +140,6 @@ void Juego::actualizarOrientacionJugadores() {
 		jugador1->getPersonaje()->orientar(DIRECCION_IZQUIERDA);
 		jugador2->getPersonaje()->orientar(DIRECCION_DERECHA);
 
-		jugador1->getPersonaje()->espejarBVH();
 	}
 	else
 	{
@@ -148,8 +148,6 @@ void Juego::actualizarOrientacionJugadores() {
 
 		jugador1->getPersonaje()->orientar(DIRECCION_DERECHA);
 		jugador2->getPersonaje()->orientar(DIRECCION_IZQUIERDA);
-
-		jugador2->getPersonaje()->espejarBVH();
 	}
 }
 
