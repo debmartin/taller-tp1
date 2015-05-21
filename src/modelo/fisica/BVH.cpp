@@ -71,14 +71,12 @@ void BVH::desplazarBVH(Vector2f v){
 }
 /*Espeja respecto al centro de la caja limitadora*/
 void BVH::espejarBVH(){
-	//cout << "?????????????????PIVOTE-INI:" << this->pivote << endl;
     //float ancho = cajaLimitadora->getLimiteDerecho() - cajaLimitadora->getLimiteIzquierdo();
     //float posMedia = cajaLimitadora->getLimiteIzquierdo() + ancho/2;
     for (int i = 0; i < cajasAABB->size(); i++){
     	cout << "BVH::espejarBVH()" << endl;
         (*cajasAABB)[i]->espejarAABB(this->pivote.X());
     }
-    //cout << "?????????????????PIVOTE-FIN:" << this->pivote << endl;
     calcularEnvolvente();
 }
 
