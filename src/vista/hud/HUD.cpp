@@ -79,12 +79,12 @@ void HUD::dibujar(){
 void HUD::recibirNotificacion(Observable* unObservable){
 	Personaje* unPersonaje = (Personaje*) unObservable;
 	if(unPersonaje->getNumeroJugador() == 1){
+		if(barraDeEnergia2->getPorcentajeEnergia() != unPersonaje->getEnergia()){
+			setEnergia2(unPersonaje->getEnergia());
+		}
+	}else{
 		if(barraDeEnergia1->getPorcentajeEnergia() != unPersonaje->getEnergia()){
 			setEnergia1(unPersonaje->getEnergia());
 		}
-	}else{
-		if(barraDeEnergia2->getPorcentajeEnergia() != unPersonaje->getEnergia()){
-					setEnergia2(unPersonaje->getEnergia());
-				}
 	}
 }
