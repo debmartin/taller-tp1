@@ -388,16 +388,18 @@ void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
     if (estaCaminando()){
         arrastrar(enemigo);
     } else if (estaSaltando()) {
-//        caer();
         posicionCandidata = estado->obtenerProximaPosicion();
         //arrastrar(enemigo);
-        posicion = estado->obtenerProximaPosicion();
+      if(posicionable->esValida(posicionCandidata, estado->calcularAncho())){
         posicion = posicionCandidata;
+      }else{
+    	  caer();
+      }
    // } else if (estaEnReposo() || estaAgachado()) {
     } else {
         colisionar(enemigo);
     }
-}
+ }
 
 void Personaje::update(Colisionable* enemigo){
 	Logger::getInstance()->debug("Personaje: update.");
