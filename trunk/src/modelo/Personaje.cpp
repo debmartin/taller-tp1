@@ -368,14 +368,14 @@ void Personaje::espejarBVH() {
 }
 
 void Personaje::orientar(DireccionObjeto nuevaOrientacion) {
-	cout << "?????????????????PIVOTE-INI:" << this->obtenerCajaColision()->getPivote() << endl;
+	//cout << "?????????????????PIVOTE-INI:" << this->obtenerCajaColision()->getPivote() << endl;
 	if (this->direccion == nuevaOrientacion)
 		return;
 
 	this->direccion = nuevaOrientacion;
 	this->arma->orientar(nuevaOrientacion);
 	espejarBVH();
-	cout << "?????????????????PIVOTE-FIN:" << this->obtenerCajaColision()->getPivote() << endl;
+	//cout << "?????????????????PIVOTE-FIN:" << this->obtenerCajaColision()->getPivote() << endl;
 }
 
 void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
