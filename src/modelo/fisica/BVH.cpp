@@ -62,19 +62,23 @@ void BVH::desplazarBVH(Vector2f v){
 	// DESPLAZAMIENTO DE PIVOTE
 	this->pivote += v;
 
-	// DESPLAZAMIENTO DE CAJAS AABB
+	// DESPLAZAMIENTO DE CAJA LIMITADORA
     cajaLimitadora->desplazarAABB(v);
+    // DESPLAZAMIENTO DE CAJAS AABB
     for (int i = 0; i < cajasAABB->size(); i++){
         (*cajasAABB)[i]->desplazarAABB(v);
     }
 }
 /*Espeja respecto al centro de la caja limitadora*/
 void BVH::espejarBVH(){
+	//cout << "?????????????????PIVOTE-INI:" << this->pivote << endl;
     //float ancho = cajaLimitadora->getLimiteDerecho() - cajaLimitadora->getLimiteIzquierdo();
     //float posMedia = cajaLimitadora->getLimiteIzquierdo() + ancho/2;
     for (int i = 0; i < cajasAABB->size(); i++){
+    	cout << "BVH::espejarBVH()" << endl;
         (*cajasAABB)[i]->espejarAABB(this->pivote.X());
     }
+    //cout << "?????????????????PIVOTE-FIN:" << this->pivote << endl;
     calcularEnvolvente();
 }
 
@@ -90,9 +94,9 @@ Vector2f BVH::calcularPosicion() {
     return Vector2f(cajaLimitadora->getLimiteIzquierdo(), cajaLimitadora->getLimiteInferior());
 }
 
-//Vector2f BVH::getPivote() {
-//	return this->pivote;
-//}
+Vector2f BVH::getPivote() {
+	return this->pivote;
+}
 
 ostream& operator <<(ostream &o, const BVH &bvh) {
     for (size_t i = 0; i < bvh.cajasAABB->size(); i++)

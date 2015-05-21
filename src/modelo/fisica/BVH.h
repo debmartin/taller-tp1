@@ -33,7 +33,7 @@ public:
 	void calcularEnvolvente();
 	Vector2f calcularPosicion();
 	friend ostream& operator<<(ostream &o, const BVH &bvh);
-	//Vector2f getPivote();
+	Vector2f getPivote();
 };
 
 #endif /* SRC_MODELO_FISICA_BVH_H_ */

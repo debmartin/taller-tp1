@@ -5,7 +5,7 @@ Estado::Estado(Trayectoria* trayectoriaInicial, estado_personaje id, BVH* caja) 
     trayectoria(trayectoriaInicial), ataqueEstado(NULL),
     tCreacion(((float)(SDL_GetTicks()))/1000.0f), id(id), cajas(caja) {
     Vector2f posInicial = cajas->calcularPosicion();
-    cajas->desplazarBVH(trayectoria->getPosicion(obtenerTiempoActual()) - posInicial);
+    //cajas->desplazarBVH(trayectoria->getPosicion(obtenerTiempoActual()) - posInicial);
 }
 
 Estado::Estado(Trayectoria* trayectoriaInicial, float tiempoCreacion, estado_personaje id, BVH* caja) :
@@ -71,8 +71,10 @@ Vector2f Estado::obtenerProximaPosicion(){
 }
 
 void Estado::actualizar(Vector2f nuevaPosicion){
-    Vector2f posInicial = cajas->calcularPosicion();
-    cajas->desplazarBVH(nuevaPosicion - posInicial);
+    //Vector2f posInicial = cajas->calcularPosicion();
+    //cajas->desplazarBVH(nuevaPosicion - posInicial);
+	Vector2f posInicial = cajas->getPivote();
+	cajas->desplazarBVH(nuevaPosicion - posInicial);
 }
 
 Vector2f Estado::obtenerVelocidad(){
