@@ -25,7 +25,7 @@ private:
 public:
 	Juego(Jugador* jugador1, Jugador* jugador2);
 	void render();
-	void update();
+	void update(bool& recargar);
 	void handleEvents(bool& recargar);
 	bool running();
 	~Juego();

@@ -296,10 +296,11 @@ void Personaje::colisionar(Colisionable* otro){
     if (estaAtacando()) {
         ataqueActual = estado->obtenerAtaque();
     } else if (estaDefendiendo()) {
+
         recibirDanio(otro->obtenerDanio() / 2);
     } else if (estaCaminando()) {
         arrastrar(otro);
-        recibirDanio(otro->obtenerDanio());
+        //recibirDanio(otro->obtenerDanio());
     } else{
         recibirDanio(otro->obtenerDanio());
     }
@@ -314,8 +315,11 @@ bool Personaje::vaAColisionar(Colisionable* enemigo){
 	if(estaAgachado() || estaDefendiendo()){
 		return false;
 	}
-	if (Colisionable::vaAColisionar(enemigo, anchoFict, altoFict))
-        return true;
+	if (Colisionable::vaAColisionar(enemigo, anchoFict, altoFict)){
+		cout<<"vaAColisionar"<<endl;
+		return true;
+	}
+
 
 //    return estaAtacando() && estado->haySuperposicion(enemigo->obtenerCajaColision());
     return estado->haySuperposicion(enemigo->obtenerCajaColision());
@@ -462,6 +466,7 @@ void Personaje::arrojarArma(){
 }
 
 void Personaje::recibirDanio(int danio){
+	cout<<"Recibir daño:"<<danio<<endl;
 	this->energia -= danio;
 }
 

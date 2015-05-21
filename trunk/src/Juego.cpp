@@ -65,7 +65,7 @@ void Juego::render()
 
 }
 
-void Juego::update()
+void Juego::update(bool& recargar)
 {
 	// INICIO CODIGO USUARIO
 	this->jugador1->getPersonaje()->update(jugador2->getPersonaje());
@@ -76,11 +76,15 @@ void Juego::update()
 	// FIN CODIGO USUARIO
 
 	if (jugador1->getPersonaje()->estaMuerto()) {
-//        juegoCorriendo = false;
+        //juegoCorriendo = false;
+        recargar = true;
+
         Logger::getInstance()->info("GAME OVER JUGADOR 1");
+
     }
 	if (jugador2->getPersonaje()->estaMuerto()) {
-//        juegoCorriendo = false;
+        //juegoCorriendo = false;
+        recargar = true;
         Logger::getInstance()->info("GAME OVER JUGADOR 2");
     }
 }
