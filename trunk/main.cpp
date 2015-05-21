@@ -47,7 +47,7 @@ void correrJuego(Juego* g_game, bool& recargar){
 
         g_game->handleEvents(recargar);
 
-        g_game->update();
+        g_game->update(recargar);
 
         g_game->render();
 
