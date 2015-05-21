@@ -4,7 +4,6 @@
 
 Agachado::Agachado(Vector2f posInicial, BVH* caja) :
     Estado(new Reposo(posInicial), AGACHADO, caja) {
-	ataqueEstado = new Ataque(DANIO_NULO);
     //ctor
 }
 
@@ -16,8 +15,4 @@ Agachado::~Agachado()
 
 bool Agachado::estaAgachado(){
     return true;
-}
-
-bool Agachado::estaAtacando(){
-    return false;
 }
