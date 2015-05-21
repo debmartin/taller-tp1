@@ -74,7 +74,7 @@ void Juego::update(bool& recargar)
 
 	VentanaGrafica::Instance()->actualizar();
 	// FIN CODIGO USUARIO
-
+/*
 	if (jugador1->getPersonaje()->estaMuerto()) {
 		jugador1->getPersonaje()->mantenerReposo();
 		jugador2->getPersonaje()->mantenerReposo();
@@ -83,7 +83,7 @@ void Juego::update(bool& recargar)
 
         Logger::getInstance()->info("GAME OVER JUGADOR 1");
 
-    }
+    }*/
 	if (jugador2->getPersonaje()->estaMuerto()) {
 		jugador1->getPersonaje()->mantenerReposo();
 		jugador2->getPersonaje()->mantenerReposo();
