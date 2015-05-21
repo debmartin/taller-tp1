@@ -291,14 +291,19 @@ bool Personaje::empujar(Direccion direccionEmpuje, Vector2f diferencia) {
 }
 
 void Personaje::colisionar(Colisionable* otro){
-    if (estaAgachado()) return;
+    if (estaAgachado()){
+    	cout<<"estaAgachado"<<endl;
+    	return;
+    }
 
     if (estaAtacando()) {
+    	cout<<"estaAtacando"<<endl;
         ataqueActual = estado->obtenerAtaque();
     } else if (estaDefendiendo()) {
-
+    	cout<<"estaDefendiendo"<<endl;
         recibirDanio(otro->obtenerDanio() / 2);
     } else if (estaCaminando()) {
+    	cout<<"estaCaminando"<<endl;
         arrastrar(otro);
         //recibirDanio(otro->obtenerDanio());
     } else{
@@ -312,9 +317,9 @@ bool Personaje::vaAColisionar(Colisionable* enemigo){
 	double altoFict = estado->calcularAlto();
 
 	//TODO: Ver esta verificación si contempla todos los casos.
-	if(estaAgachado() || estaDefendiendo()){
-		return false;
-	}
+//	if(estaAgachado() || estaDefendiendo()){
+	//	return false;
+	//}
 	if (Colisionable::vaAColisionar(enemigo, anchoFict, altoFict)){
 		cout<<"vaAColisionar"<<endl;
 		return true;
@@ -379,7 +384,7 @@ void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
         //arrastrar(enemigo);
         posicion = estado->obtenerProximaPosicion();
         posicion = posicionCandidata;
-    } else if (estaEnReposo() || estaAgachado()) {
+   // } else if (estaEnReposo() || estaAgachado()) {
     } else {
         colisionar(enemigo);
     }

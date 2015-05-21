@@ -9,7 +9,6 @@ class DefendiendoAgachado : public Estado
     public:
         DefendiendoAgachado(Vector2f posInicial, BVH* caja);
         virtual ~DefendiendoAgachado();
-        bool estaAtacando();
         bool estaDefendiendo();
     protected:
     private:
