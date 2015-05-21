@@ -124,11 +124,11 @@ Vector2f Personaje::obtenerPosicionEnVentana(){
 }
 
 bool Personaje::llegoAlLimiteIzquierdo(){
-	return VentanaGrafica::Instance()->llegoAlLimiteIzquierdo(this->posicion.X()-this->getAncho()/2);
+	return VentanaGrafica::Instance()->llegoAlLimiteIzquierdo(this->posicion.X()-this->getAnchoEnvolvente()/2);
 }
 
 bool Personaje::llegoAlLimiteDerecho(){
-	return VentanaGrafica::Instance()->llegoAlLimiteDerecho(Vector2f(this->posicion.X()+this->getAncho()/2,this->posicion.Y()));
+	return VentanaGrafica::Instance()->llegoAlLimiteDerecho(Vector2f(this->posicion.X()+this->getAnchoEnvolvente()/2,this->posicion.Y()));
 }
 
 void Personaje::caminarDerecha(){
@@ -393,6 +393,8 @@ void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
 void Personaje::update(Colisionable* enemigo){
 	Logger::getInstance()->debug("Personaje: update.");
 
+	cout << *this->obtenerCajaColision() << endl;
+
     if(estaBloqueado()){
         if(tiempoBloqueo <= 0){
            mantenerReposo();
@@ -525,4 +527,8 @@ void Personaje::cambiarNumeroPersonaje(){
 
 bool Personaje::estaMuerto(){
     return (this->energia <= 0);
+}
+
+float Personaje::getAnchoEnvolvente() {
+	return this->estado->calcularAncho();
 }

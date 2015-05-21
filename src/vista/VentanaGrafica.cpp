@@ -76,7 +76,7 @@ void VentanaGrafica::dibujarTodo() {
 
 void VentanaGrafica::actualizar() {
     escenario->actualizar();
-    //cout << *this << endl;
+    cout << *this << endl;
 }
 
 void VentanaGrafica::recibirNotificacion(Observable* unObservable){
@@ -93,7 +93,7 @@ void VentanaGrafica::recibirNotificacion(Observable* unObservable){
 		this->escenario->scrollear_capas();
 	}
 	//Personaje en el margen derecho
-	posicion = posicionPersonaje.X()+ unPersonaje->getAncho();
+	posicion = posicionPersonaje.X()+ unPersonaje->getAnchoEnvolvente();
 	if( posicion >= getLimiteLogicoDerecho()){
 		//Muevo los limites de la ventana.
 		//this->limite_logico_izquierdo = posicion - this->tamLogico.X();
@@ -167,9 +167,9 @@ EscenarioGrafico* VentanaGrafica::getEscenario() const {
 }
 
 ostream& operator <<(ostream &o, const VentanaGrafica &v) {
-       	cout << "VENTANA_GRAFICA-TAMANIO_PIXELS:" << v.tamPixels << endl;
-       	cout << "VENTANA_GRAFICA-TAMANIO_LOGICO:" << v.tamLogico << endl;
-       	cout << "VENTANA_GRAFICA-POSICION_LOGICA:" << v.posLogico << endl;
+       	//cout << "VENTANA_GRAFICA-TAMANIO_PIXELS:" << v.tamPixels << endl;
+        //cout << "VENTANA_GRAFICA-TAMANIO_LOGICO:" << v.tamLogico << endl;
+       	//cout << "VENTANA_GRAFICA-POSICION_LOGICA:" << v.posLogico << endl;
        	cout << "VENTANA_GRAFICA-LIMITE_IZQUIERDO:" << v.posLogico.X() << endl;
        	cout << "VENTANA_GRAFICA-LIMITE_DERECHO:" << v.posLogico.X() + v.tamLogico.X() << endl;
         return o;
