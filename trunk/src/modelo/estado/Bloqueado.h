@@ -3,16 +3,16 @@
 
 #include "Estado.h"
 
-
 class Bloqueado : public Estado
 {
     public:
-        Bloqueado(Trayectoria* trayActual, BVH* caja);
-        Bloqueado(estado_personaje estadoInicial, Trayectoria* trayActual, BVH* caja);
+        Bloqueado(Estado* estadoActual);
         virtual ~Bloqueado();
         bool estaBloqueado();
+        bool estaAtacando();
     protected:
     private:
+        bool bandera;
 };
 
 #endif // BLOQUEADO_H

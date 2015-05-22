@@ -190,13 +190,13 @@ void Personaje::piniaSaltandoVertical(){
 
 void Personaje::patadaAlta(){
 	cambiarEstado(new PatadaAlta(posicion, (*cajasPorEstado)[PATEANDO_ALTO]));
-	//bloquearPersonaje(50);
+	bloquearPersonaje(50);
 	Logger::getInstance()->debug("Personaje: patada alta.");
 }
 
 void Personaje::patadaBaja(){
     cambiarEstado(new PatadaBaja(posicion, (*cajasPorEstado)[PATEANDO_BAJO]));
-    //bloquearPersonaje(50);
+    bloquearPersonaje(50);
 	Logger::getInstance()->debug("Personaje: patada baja.");
 }
 
@@ -292,21 +292,15 @@ bool Personaje::empujar(Direccion direccionEmpuje, Vector2f diferencia) {
 }
 
 void Personaje::colisionar(Colisionable* otro){
-
     if (estaAtacando()) {
-    	cout<<"estaAtacando"<<endl;
         ataqueActual = estado->obtenerAtaque();
     }else if (estaDefendiendo()){
-    	cout<<"estaDefendiendo recibe 1/4 de daño"<<endl;
     	recibirDanio(otro->obtenerDanio() / 4);
     }else if (estaAgachado() && (otro->verEstado()->estaAgachado() && otro->verEstado()->estaAtacando())){
-    	cout<<"estaAgachado"<<endl;
         recibirDanio(otro->obtenerDanio());
     }else if (estaAgachado() && (otro->verEstado()->estaSaltando() && otro->verEstado()->estaAtacando())){
-    	cout<<"estaAgachado"<<endl;
         recibirDanio(otro->obtenerDanio());
     }else if (estaCaminando()) {
-    	cout<<"estaCaminando"<<endl;
         arrastrar(otro);
         recibirDanio(otro->obtenerDanio());
     } else{
@@ -396,7 +390,6 @@ void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
       }else{
     	  caer();
       }
-   // } else if (estaEnReposo() || estaAgachado()) {
     } else {
         colisionar(enemigo);
     }
@@ -496,7 +489,7 @@ BVH* Personaje::obtenerCajaColision(){
 
 
 void Personaje::bloquearPersonaje(float segundos){
-	cambiarEstado(new Bloqueado(estado->Id(), estado->getTrayectoria(), estado->obtenerCajaColision()));
+	cambiarEstado(new Bloqueado(estado));
 	this->tiempoBloqueo = segundos;
 }
 
