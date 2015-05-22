@@ -76,7 +76,7 @@ void VentanaGrafica::dibujarTodo() {
 
 void VentanaGrafica::actualizar() {
     escenario->actualizar();
-    cout << *this << endl;
+    //cout << *this << endl;
 }
 
 void VentanaGrafica::recibirNotificacion(Observable* unObservable){
@@ -170,8 +170,8 @@ ostream& operator <<(ostream &o, const VentanaGrafica &v) {
        	//cout << "VENTANA_GRAFICA-TAMANIO_PIXELS:" << v.tamPixels << endl;
         //cout << "VENTANA_GRAFICA-TAMANIO_LOGICO:" << v.tamLogico << endl;
        	//cout << "VENTANA_GRAFICA-POSICION_LOGICA:" << v.posLogico << endl;
-       	cout << "VENTANA_GRAFICA-LIMITE_IZQUIERDO:" << v.posLogico.X() << endl;
-       	cout << "VENTANA_GRAFICA-LIMITE_DERECHO:" << v.posLogico.X() + v.tamLogico.X() << endl;
+       	//cout << "VENTANA_GRAFICA-LIMITE_IZQUIERDO:" << v.posLogico.X() << endl;
+       	//cout << "VENTANA_GRAFICA-LIMITE_DERECHO:" << v.posLogico.X() + v.tamLogico.X() << endl;
         return o;
 }
 

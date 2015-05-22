@@ -9,7 +9,7 @@
 #define SRC_JSON_ARMADEF_H_
 
 #include "SpriteDef.h"
-#define VELOCIDAD_ARMA_DEFAULT 50
+#define VELOCIDAD_ARMA_DEFAULT 600
 #define ALTO_ARMA_DEFAULT 50
 #define ANCHO_ARMA_DEFAULT 150
 

@@ -2,11 +2,16 @@
 
 Ataque::Ataque(int danioAtaque) :
     danio(danioAtaque) {
+	ataqueEjecutado = false;
 }
 
 Ataque::~Ataque(){
 }
 
 int Ataque::obtenerDanio(){
-    return danio;
+	if(!ataqueEjecutado){
+	   ataqueEjecutado = true;
+	   return danio;;
+	}
+	   return 0;
 }

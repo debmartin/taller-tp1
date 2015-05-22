@@ -11,6 +11,7 @@ class Ataque
     protected:
     private:
         int danio;
+        bool ataqueEjecutado;
 };
 
 #endif // ATAQUE_H

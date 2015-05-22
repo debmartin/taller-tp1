@@ -74,7 +74,7 @@ void BVH::espejarBVH(){
     //float ancho = cajaLimitadora->getLimiteDerecho() - cajaLimitadora->getLimiteIzquierdo();
     //float posMedia = cajaLimitadora->getLimiteIzquierdo() + ancho/2;
     for (int i = 0; i < cajasAABB->size(); i++){
-    	cout << "BVH::espejarBVH()" << endl;
+    	//cout << "BVH::espejarBVH()" << endl;
         (*cajasAABB)[i]->espejarAABB(this->pivote.X());
     }
     calcularEnvolvente();
@@ -97,9 +97,9 @@ Vector2f BVH::getPivote() {
 }
 
 ostream& operator <<(ostream &o, const BVH &bvh) {
-    for (size_t i = 0; i < bvh.cajasAABB->size(); i++)
-    	o << "BVH->CAJA[" << i << "]:" << *(*bvh.cajasAABB)[i] << endl;
-    o << "BVH->ENVOLVENTE:" << *(bvh.cajaLimitadora) << endl;
-    o << "BVH->PIVOTE:" << bvh.pivote << endl;
+   for (size_t i = 0; i < bvh.cajasAABB->size(); i++)
+    	//o << "BVH->CAJA[" << i << "]:" << *(*bvh.cajasAABB)[i] << endl;
+    //o << "BVH->ENVOLVENTE:" << *(bvh.cajaLimitadora) << endl;
+    //o << "BVH->PIVOTE:" << bvh.pivote << endl;
     return o;
 }
