@@ -22,6 +22,7 @@ Ataque* Estado::obtenerAtaque(){
 }
 
 bool Estado::estaAtacando(){
+
     return false;
 }
 
