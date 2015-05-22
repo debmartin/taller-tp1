@@ -46,6 +46,7 @@ public:
 	void cambiarTrayectoria(Trayectoria* unaTrayectoria);
 	void arrojar();
 	estado_objeto getEstado();
+	Estado* verEstado();
 
 	void colisionar(Colisionable* otro);
     bool vaAColisionar(Colisionable* otro);

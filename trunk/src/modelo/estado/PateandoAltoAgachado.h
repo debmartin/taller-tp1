@@ -17,7 +17,7 @@ class PateandoAltoAgachado : public Estado
 		PateandoAltoAgachado(Vector2f posInicial, BVH* caja);
 		virtual ~PateandoAltoAgachado();
 		bool estaAtacando();
-		bool estaDefendiendo();
+		bool estaAgachado();
 };
 
 #endif /* SRC_MODELO_ESTADO_PATEANDOALTOAGACHADO_H_ */

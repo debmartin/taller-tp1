@@ -293,24 +293,23 @@ bool Personaje::empujar(Direccion direccionEmpuje, Vector2f diferencia) {
 }
 
 void Personaje::colisionar(Colisionable* otro){
-    if (estaAgachado()){
-    	cout<<"estaAgachado"<<endl;
-    	return;
-    }
-    if (estaAgachado()){
-        	cout<<"estaAgachado"<<endl;
-        	return;
-        }
+
     if (estaAtacando()) {
     	cout<<"estaAtacando"<<endl;
         ataqueActual = estado->obtenerAtaque();
-    } else if (estaDefendiendo()) {
-    	cout<<"estaDefendiendo"<<endl;
-        recibirDanio(otro->obtenerDanio() / 2);
-    } else if (estaCaminando()) {
+    }else if (estaDefendiendo()){
+    	cout<<"estaDefendiendo recibe 1/4 de daño"<<endl;
+    	recibirDanio(otro->obtenerDanio() / 4);
+    }else if (estaAgachado() && (otro->verEstado()->estaAgachado() && otro->verEstado()->estaAtacando())){
+    	cout<<"estaAgachado"<<endl;
+        recibirDanio(otro->obtenerDanio());
+    }else if (estaAgachado() && (otro->verEstado()->estaSaltando() && otro->verEstado()->estaAtacando())){
+    	cout<<"estaAgachado"<<endl;
+        recibirDanio(otro->obtenerDanio());
+    }else if (estaCaminando()) {
     	cout<<"estaCaminando"<<endl;
         arrastrar(otro);
-        //recibirDanio(otro->obtenerDanio());
+        recibirDanio(otro->obtenerDanio());
     } else{
         recibirDanio(otro->obtenerDanio());
     }
@@ -545,4 +544,8 @@ bool Personaje::estaMuerto(){
 
 float Personaje::getAnchoEnvolvente() {
 	return this->estado->calcularAncho();
+}
+
+Estado* Personaje::verEstado(){
+	return estado;
 }
