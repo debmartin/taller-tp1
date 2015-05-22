@@ -70,7 +70,6 @@ Personaje::Personaje(
 
 	// ORIENTACION INICIAL DE BVH - POR DEFECTO LA ORIENTACION ES DERECHA
 	this->direccion = DIRECCION_DERECHA;
-	//this->orientar(orientacionInicialPersonaje);
 }
 
 double Personaje::getAlto() const {
@@ -191,7 +190,7 @@ void Personaje::piniaSaltandoVertical(){
 
 void Personaje::patadaAlta(){
 	cambiarEstado(new PatadaAlta(posicion, (*cajasPorEstado)[PATEANDO_ALTO]));
-	//jbloquearPersonaje(50);
+	//bloquearPersonaje(50);
 	Logger::getInstance()->debug("Personaje: patada alta.");
 }
 
