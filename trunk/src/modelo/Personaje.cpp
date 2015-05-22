@@ -297,7 +297,10 @@ void Personaje::colisionar(Colisionable* otro){
     	cout<<"estaAgachado"<<endl;
     	return;
     }
-
+    if (estaAgachado()){
+        	cout<<"estaAgachado"<<endl;
+        	return;
+        }
     if (estaAtacando()) {
     	cout<<"estaAtacando"<<endl;
         ataqueActual = estado->obtenerAtaque();
@@ -311,7 +314,7 @@ void Personaje::colisionar(Colisionable* otro){
     } else{
         recibirDanio(otro->obtenerDanio());
     }
-    Colisionable::colisionar(otro);
+    //Colisionable::colisionar(otro);
 }
 
 bool Personaje::vaAColisionar(Colisionable* enemigo){
@@ -404,7 +407,7 @@ void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
 void Personaje::update(Colisionable* enemigo){
 	Logger::getInstance()->debug("Personaje: update.");
 
-	cout << *this->obtenerCajaColision() << endl;
+	//cout << *this->obtenerCajaColision() << endl;
 
     if(estaBloqueado()){
         if(tiempoBloqueo <= 0){

@@ -172,7 +172,7 @@
 		    		    "fps": 10 
 		    			},
 		    "sprites-pinia-saltando-diagonal": { 
-				        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-pinia-salto-pinia.png",
+				        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-salto-pinia.png",
 		    		    "cant_fotogramas": 1,
 		    		    "fps": 10 
 		    			},
@@ -213,11 +213,11 @@
 		    			},
 			"arma": {
 						"alto": 50,
-						"ancho": 150,
+						"ancho": 10,
 		    			"imagen": "RECURSOS/PERSONAJES/SONIA/sonia-arma.png",
 		    			"cant_fotogramas": 1,
 		    		    "fps": 15,
-		    		    "velocidad": 50
+		    		    "velocidad": 600	//Velocidad máxima 65535
 		    			},
 			"color-alternativo": {
 						"h-inicial": 53,
