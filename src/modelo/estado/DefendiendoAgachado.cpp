@@ -11,6 +11,10 @@ DefendiendoAgachado::~DefendiendoAgachado()
     //dtor
 }
 
+bool DefendiendoAgachado::estaAgachado(){
+    return true;
+}
+
 bool DefendiendoAgachado::estaDefendiendo(){
     return true;
 }

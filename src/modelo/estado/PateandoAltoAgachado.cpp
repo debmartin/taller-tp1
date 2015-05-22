@@ -20,6 +20,6 @@ bool PateandoAltoAgachado::estaAtacando(){
     return true;
 }
 
-bool PateandoAltoAgachado::estaDefendiendo(){
-    return false;
+bool PateandoAltoAgachado::estaAgachado(){
+    return true;
 }

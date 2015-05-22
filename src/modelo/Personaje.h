@@ -90,6 +90,7 @@ public:
 	void calcularPosicionSinColision(Colisionable* enemigo);
 	void cambiarDireccion();
 	void cambiarNumeroPersonaje();
+	Estado* verEstado();
 
 	//Movimientos y poderes
 	void caminarDerecha();

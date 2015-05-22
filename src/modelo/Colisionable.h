@@ -4,6 +4,7 @@
 #include "Vector2f.h"
 #include "Ataque.h"
 #include "fisica/BVH.h"
+#include "estado/Estado.h"
 
 enum Direccion {
     DIR_DERECHA,
@@ -17,6 +18,7 @@ class Colisionable
         virtual bool vaAColisionar(Colisionable* otro, double anchoAct, double altoAct);
         virtual int obtenerDanio();
         Vector2f getPosicion();
+        virtual Estado* verEstado() = 0;
         virtual BVH* obtenerCajaColision() = 0;
         virtual bool empujar(Direccion direccionEmpuje, Vector2f diferencia) = 0;
         //Vector2f getPivote();

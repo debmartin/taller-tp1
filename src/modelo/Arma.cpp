@@ -127,6 +127,10 @@ bool Arma::estaEnReposo(){
 	return true;
 }
 
+Estado* Arma::verEstado(){
+	return NULL;
+}
+
 Arma::~Arma() {
 	// TODO Auto-generated destructor stub
 }
