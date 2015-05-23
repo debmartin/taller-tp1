@@ -228,7 +228,7 @@
 		    			},
 		    "sprites-caida": { 
 			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-caida.png",
-		    		    "cant_fotogramas": 7j,
+		    		    "cant_fotogramas": 7,
 		    		    "fps": 10 
 		    			},
 			"arma": {
