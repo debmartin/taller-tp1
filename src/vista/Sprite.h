@@ -1,13 +1,22 @@
-
 #ifndef SRC_VISTA_SPRITE_H_
 #define SRC_VISTA_SPRITE_H_
 
+#define FACTOR_ESCALA_INICIAL Vector2f(1.0f, .10f)
+#define FOTOGRAMA_INICIAL 1
+
+#include <SDL2/SDL.h>
 #include <iostream>
-#include <string>
-
+#include <sstream>
+#include <cmath>
 #include "../modelo/Vector2f.h"
+#include "Animacion.h"
 
-class Animacion;
+
+typedef enum LoopMode {
+    LOOP_MOD,
+    LOOP_REPEAT,
+	LOOP_NO_REPEAT
+} LoopMode;
 
 typedef enum UbicacionPivote {
 	SPR_ARRIBA_IZQUIERDA,
@@ -28,33 +37,44 @@ typedef enum OrientacionSprite
 	ORIENTACION_IZQUIERDA
 } OrientacionSprite;
 
-class Sprite: public Loggeable {
+class Sprite {
 
 public:
 
 private:
 	Animacion* animacionAct;
+	SDL_Renderer* pRenderer;
 	Vector2f posicion;
-	int anchoPx;
-	int altoPx;
-	float factorEscalaX;
-	float factorEscalaY;
+	OrientacionSprite orientacion;
+	UbicacionPivote ubicacionDibujado;
+	Vector2f factorEscala;
+
+	// PERTENECIENTE A LA ANIMACION
+	Vector2f dimensionesImagen;
 	int anchoFotogramaPx;
 	int fotogramaActual;
 	int fps;
-	OrientacionSprite orientacion;
 	SentidoReproduccion sentidoReproduccion;
-	UbicacionPivote ubicacionDibujado;
+	// LOOP
+	LoopMode loopMode;
+	float tInicial;
 
 public:
-	Sprite(Animacion* animInicial, Vector2f& posicion, OrientacionSprite orientacion, UbicacionPivote ubicacion = SPR_ARRIBA_IZQUIERDA);
+	Sprite(
+		Animacion* animInicial,
+		SDL_Renderer* pRenderer,
+		Vector2f posicion,
+		OrientacionSprite orientacion,
+		UbicacionPivote ubicacion = SPR_ARRIBA_IZQUIERDA);
+
 	virtual ~Sprite();
 
 	void setPosicion(Vector2f& posicion);
 	void desplazar(Vector2f& posicion);
 	void setOrientacion(OrientacionSprite o);
-	void escalarConFactor(Vector2f& factor);
+	void escalarConFactor(Vector2f factor);
 	void escalarConTamanio(int anchoNuevoPx, int altoNuevoPx);
+	void escalarConTamanio(Vector2f nuevoTamanioPx);
 	void setFotogramaActual(int nroFotograma);
 	void setSentidoReproduccion(SentidoReproduccion sr);
 	void dibujar();
@@ -66,9 +86,11 @@ public:
 	Vector2f getDimensionesPx();
 	void cambiarOrientacionHaciaDerecha();
 	void cambiarOrientacionHaciaIzquierda();
+	void setLoopMode(LoopMode loopMode);
 
 	friend ostream& operator<<(ostream &o, const Sprite &s);
 	string toString();
 };
 
 #endif /* SRC_VISTA_SPRITE_H_ */
+

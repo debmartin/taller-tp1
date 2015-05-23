@@ -14,6 +14,7 @@
 #include "Animacion.h"
 #include "Sprite.h"
 #include "../modelo/Vector2f.h"
+#include "Renderizador.h"
 
 using namespace std;
 
