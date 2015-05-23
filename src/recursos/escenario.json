@@ -118,9 +118,9 @@
 		    		    "fps": 10 
 		    			},
 		    "sprites-caida": { 
-			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-caida.png",
-		    		    "cant_fotogramas": 4,
-		    		    "fps": 10 
+			        	"imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-caida.png",
+		    		    "cant_fotogramas": 5,
+		    		    "fps": 5 
 		    			},
 			"arma": {
 						"alto": 50,
@@ -229,7 +229,7 @@
 		    "sprites-caida": { 
 			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-caida.png",
 		    		    "cant_fotogramas": 7,
-		    		    "fps": 10 
+		    		    "fps": 5 
 		    			},
 			"arma": {
 						"alto": 50,
