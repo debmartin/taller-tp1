@@ -35,6 +35,7 @@
 #include "estado/SaltandoOblicuoDerecha.h"
 #include "estado/SaltandoOblicuoIzquierda.h"
 #include "estado/SaltandoVertical.h"
+#include "estado/Golpeado.h"
 #include "Objeto.h"
 
 #define VELOCIDAD_DESP_HORIZONTAL_SALTANDO 320.0f
@@ -308,11 +309,15 @@ void Personaje::colisionar(Colisionable* otro){
         recibirDanio(otro->obtenerDanio());
     }else if (estaCaminando()) {
         arrastrar(otro);
+        recibirGolpe();
+        recibirDanio(otro->obtenerDanio());
+    }else if ((estaEnReposo() || estaCaminando()) && (otro->verEstado()->estaAtacando())) {
+    	recibirGolpe();
         recibirDanio(otro->obtenerDanio());
     } else{
         recibirDanio(otro->obtenerDanio());
     }
-    //Colisionable::colisionar(otro);
+    Colisionable::colisionar(otro);
 }
 
 bool Personaje::vaAColisionar(Colisionable* enemigo){
@@ -485,6 +490,7 @@ void Personaje::arrojarArma(){
 
 void Personaje::recibirDanio(int danio){
 	cout<<"Recibir daño:"<<danio<<endl;
+	//recibirGolpe();
 	this->energia -= danio;
 }
 
