@@ -42,91 +42,91 @@ void PersonajeDibujable::seleccionarSprite(){
 
 	switch(this->estado){
 		case CAMINANDO_DERECHA:
-			this->spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_CAMINANDO]);
+			this->spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_CAMINANDO]);
 			this->spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
 			break;
 		case CAMINANDO_IZQUIERDA:
-			this->spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_CAMINANDO]);
+			this->spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_CAMINANDO]);
 			this->spritePersonaje->setSentidoReproduccion(HACIA_ATRAS);
 			break;
 		case EN_ESPERA:
-			this->spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_REPOSO]);
+			this->spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_REPOSO]);
 			this->spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
 			break;
 		case SALTANDO_VERTICAL:
-			this->spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_SALTANDO_VERTICAL]);
+			this->spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_SALTANDO_VERTICAL]);
 			this->spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
 			break;
         case SALTANDO_OBLICUO_DERECHA:
-            this->spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_SALTANDO_DIAGONAL]);
+            this->spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_SALTANDO_DIAGONAL]);
             this->spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
             break;
         case SALTANDO_OBLICUO_IZQUIERDA:
-            this->spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_SALTANDO_DIAGONAL]);
+            this->spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_SALTANDO_DIAGONAL]);
             this->spritePersonaje->setSentidoReproduccion(HACIA_ATRAS);
             break;
         case AGACHADO:
-            spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_AGACHADO]);
+            spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_AGACHADO]);
             spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
             break;
         case DEFENDIENDO:
-            spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_DEFENDIENDO]);
+            spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_DEFENDIENDO]);
             spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
             break;
         case DEFENDIENDO_AGACHADO:
-            spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_DEFENDIENDO_AGACHADO]);
+            spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_DEFENDIENDO_AGACHADO]);
             spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
             break;
         case PINIA_ALTA:
-            spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_PINIA_ALTA]);
+            spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_PINIA_ALTA]);
             spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
             break;
         case PINIA_BAJA:
-            spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_PINIA_BAJA]);
+            spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_PINIA_BAJA]);
             spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
             break;
         case PINIA_SALTANDO_DIAGONAL_DERECHA:
-            spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_PINIA_SALTANDO_DIAGONAL]);
+            spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_PINIA_SALTANDO_DIAGONAL]);
             spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
             break;
         case PINIA_SALTANDO_DIAGONAL_IZQUIERDA:
-            spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_PINIA_SALTANDO_DIAGONAL]);
+            spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_PINIA_SALTANDO_DIAGONAL]);
             spritePersonaje->setSentidoReproduccion(HACIA_ATRAS);
             break;
         case PINIA_SALTANDO_VERTICAL:
-            spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_PINIA_SALTANDO_VERTICAL]);
+            spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_PINIA_SALTANDO_VERTICAL]);
             spritePersonaje->setSentidoReproduccion(HACIA_ATRAS);
             break;
         case PATEANDO_ALTO:
-            spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_PATEANDO_ALTO]);
+            spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_PATEANDO_ALTO]);
             spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
             break;
         case PATEANDO_BAJO:
-            spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_PATEANDO_BAJO]);
+            spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_PATEANDO_BAJO]);
             spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
             break;
         case PATEANDO_SALTANDO_DIAGONAL_DERECHA:
-            spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_PATEANDO_SALTANDO_DIAGONAL]);
+            spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_PATEANDO_SALTANDO_DIAGONAL]);
             spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
             break;
         case PATEANDO_SALTANDO_DIAGONAL_IZQUIERDA:
-            spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_PATEANDO_SALTANDO_DIAGONAL]);
+            spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_PATEANDO_SALTANDO_DIAGONAL]);
             spritePersonaje->setSentidoReproduccion(HACIA_ATRAS);
             break;
         case PATEANDO_SALTANDO_VERTICAL:
-            spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_PATEANDO_SALTANDO_VERTICAL]);
+            spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_PATEANDO_SALTANDO_VERTICAL]);
             spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
             break;
         case PATEANDO_ALTO_AGACHADO:
-            spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_PATEANDO_ALTO_AGACHADO]);
+            spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_PATEANDO_ALTO_AGACHADO]);
             spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
             break;
         case GANCHO:
-            spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_GANCHO]);
+            spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_GANCHO]);
             spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
             break;
         case RECIBIENDO_GOLPE:
-            spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_RECIBIENDO_GOLPE]);
+            spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_RECIBIENDO_GOLPE]);
             spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
             break;
 	}
