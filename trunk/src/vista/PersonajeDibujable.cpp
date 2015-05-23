@@ -125,6 +125,10 @@ void PersonajeDibujable::seleccionarSprite(){
             spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_GANCHO]);
             spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
             break;
+        case RECIBIENDO_GOLPE:
+            spritePersonaje->cambiarAnimacion(animaciones[ID_SUBZERO_RECIBIENDO_GOLPE]);
+            spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
+            break;
 	}
 }
 

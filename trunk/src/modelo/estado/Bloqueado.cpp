@@ -16,9 +16,7 @@ bool Bloqueado::estaBloqueado(){
 }
 
 bool Bloqueado::estaAtacando(){
-	cout<<"Entro a chequear Bloqueado::estaAtacando()"<<endl;
 	if (bandera){
-		cout<<"Chequea esta atacando: bandera True"<<endl;
 		return true;
 	}
 	return false;

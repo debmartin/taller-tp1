@@ -36,6 +36,7 @@ typedef enum estado_personaje
 	GANCHO,
 	DEFENDIENDO,
 	DEFENDIENDO_AGACHADO,
+	RECIBIENDO_GOLPE,
 	BLOQUEADO
 } estado_personaje;
 

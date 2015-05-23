@@ -235,6 +235,12 @@ void Personaje::defenderAgachado(){
 	Logger::getInstance()->debug("Personaje: defensa.");
 }
 
+void Personaje::recibirGolpe(){
+    cambiarEstado(new Golpeado(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
+    Logger::getInstance()->debug("Personaje: recibiendo golpe.");
+}
+
+
 void Personaje::mantenerReposo(){
     cambiarEstado(new EnEspera(posicion, (*cajasPorEstado)[EN_ESPERA]));
     Logger::getInstance()->debug("Personaje: en reposo.");
