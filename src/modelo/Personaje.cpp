@@ -134,12 +134,12 @@ bool Personaje::llegoAlLimiteDerecho(){
 }
 
 void Personaje::caminarDerecha(){
-    cambiarEstado(new CaminandoDerecha(posicion, llegoAlLimiteDerecho(), (*cajasPorEstado)[CAMINANDO_DERECHA]));
+    cambiarEstado(new CaminandoDerecha(posicion, llegoAlLimiteDerecho(), (*cajasPorEstado)[CAMINANDO_DERECHA], direccion));
     Logger::getInstance()->debug("Personaje: caminando derecha. Se setea trayectoria.");
 }
 
 void Personaje::caminarIzquierda(){
-    cambiarEstado(new CaminandoIzquierda(posicion, llegoAlLimiteIzquierdo(), (*cajasPorEstado)[CAMINANDO_IZQUIERDA]));
+    cambiarEstado(new CaminandoIzquierda(posicion, llegoAlLimiteIzquierdo(), (*cajasPorEstado)[CAMINANDO_IZQUIERDA], direccion));
     Logger::getInstance()->debug("Personaje: caminando izquierda. Se setea trayectoria.");
 }
 
