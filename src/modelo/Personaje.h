@@ -114,6 +114,7 @@ public:
 	void gancho();
 	void defender();
 	void defenderAgachado();
+	void recibirGolpe();
 	void ejecutarPoder(Poder* poder, Objeto* objeto);
 	void arrojarArma();
 	void caer();

@@ -112,6 +112,11 @@
 		    		    "cant_fotogramas": 1,
 		    		    "fps": 10 
 		    			},
+		    "sprites-recibiendo-golpe": { 
+			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-recibiendo-golpe.png",
+		    		    "cant_fotogramas": 4,
+		    		    "fps": 10 
+		    			},
 			"arma": {
 						"alto": 50,
 						"ancho": 150,
@@ -211,6 +216,11 @@
 		    		    "cant_fotogramas": 1,
 		    		    "fps": 10 
 		    			},
+		    "sprites-recibiendo-golpe": { 
+			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-recibiendo-golpe.png",
+		    		    "cant_fotogramas": 4,
+		    		    "fps": 10 
+		    			},
 			"arma": {
 						"alto": 50,
 						"ancho": 150,
@@ -229,7 +239,7 @@
     
 	"jugador-1": {
         "personaje": "sub-zero",
-        "tipo-control": "JOYSTICK",   // "TECLADO" o "JOYSTICK"
+        "tipo-control": "TECLADO",   // "TECLADO" o "JOYSTICK"
         "control":{
         			"JOY_PINIA_ALTA": 0,
         			"JOY_PATADA_ALTA": 1,

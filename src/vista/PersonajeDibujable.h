@@ -38,7 +38,7 @@ class ArmaDibujable;
 #define ID_SUBZERO_GANCHO "gancho"
 #define ID_SUBZERO_DEFENDIENDO "defensa-parado"
 #define ID_SUBZERO_DEFENDIENDO_AGACHADO "defensa-agachado"
-
+#define ID_SUBZERO_RECIBIENDO_GOLPE "recibiendo-golpe"
 
 class PersonajeDibujable : public Dibujable, public Observador {
 private:
