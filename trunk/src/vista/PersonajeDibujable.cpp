@@ -24,6 +24,7 @@ PersonajeDibujable::PersonajeDibujable(Animacion* animIni, Vector2f posicionIni,
     spritePersonaje->escalarConTamanio(tamanioPx.X(), tamanioPx.Y());
     animaciones[animIni->getId()] = animIni;
     colorAlternativo = unColorAlternativo;
+    this->estadoAnterior = EN_ESPERA;
 }
 
 void PersonajeDibujable::setEstado(estado_personaje unEstado){
@@ -142,9 +143,12 @@ void PersonajeDibujable::seleccionarSprite(){
             spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
             break;
         case GANCHO:
-        	this->spritePersonaje->setLoopMode(LOOP_MOD);
-            spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_GANCHO]);
-            spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
+			if (estadoAnterior != estado) {
+				this->spritePersonaje->setLoopMode(LOOP_NO_REPEAT);
+				spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_GANCHO]);
+				spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
+			}
+			estadoAnterior = estado;
             break;
         case RECIBIENDO_GOLPE:
         	this->spritePersonaje->setLoopMode(LOOP_MOD);
