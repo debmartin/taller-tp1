@@ -307,12 +307,11 @@ void Personaje::colisionar(Colisionable* otro){
         recibirDanio(otro->obtenerDanio());
     }else if (estaAgachado() && (otro->verEstado()->estaSaltando() && otro->verEstado()->estaAtacando())){
         recibirDanio(otro->obtenerDanio());
-    }else if (estaCaminando()) {
-        arrastrar(otro);
-        recibirGolpe();
-        recibirDanio(otro->obtenerDanio());
     }else if ((estaEnReposo() || estaCaminando()) && (otro->verEstado()->estaAtacando())) {
     	recibirGolpe();
+        recibirDanio(otro->obtenerDanio());
+    }else if (estaCaminando()) {
+        arrastrar(otro);
         recibirDanio(otro->obtenerDanio());
     } else{
         recibirDanio(otro->obtenerDanio());
