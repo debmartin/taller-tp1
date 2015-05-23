@@ -49,6 +49,7 @@ private:
     std::map<std::string, Animacion*> animaciones;
     ColorAlternativoDef* colorAlternativo;
     ArmaDibujable* armaDibujable;
+    estado_personaje estadoAnterior;
 
 public:
     PersonajeDibujable();
