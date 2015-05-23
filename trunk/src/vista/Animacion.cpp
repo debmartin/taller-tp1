@@ -1,37 +1,34 @@
 #include "Animacion.h"
 
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_render.h>
-#include <SDL2/SDL_surface.h>
-#include <sstream>
+Animacion::Animacion(
 
-#include "../json/ColorAlternativoDef.h"
-#include "../utils/Logger.h"
-#include "Desplazar.h"
-#include "Renderizador.h"
+		SDL_Renderer* pRenderer,
+		string pathImagen,
+		int cantidadFotogramas,
+		int fps,
+		string id):
 
-using std::string;
-using std::cout;
+		pRenderer(pRenderer),
+		pathImagen(pathImagen),
+		cantidadFotogramas(cantidadFotogramas),
+		fps(fps),
+		id(id)
 
-Animacion::Animacion(string pathImg, int cantFotogramas, int fpsIn, string idIn, SDL_Renderer* pRenderer)
 {
-	pathImagen = pathImg;
-	cantidadFotogramas = cantFotogramas;
-	fps = fpsIn;
-	id = idIn;
 
     SDL_Surface* pTempSurface = IMG_Load(pathImagen.c_str());
+
     if (!pTempSurface) {
-		Logger::getInstance()->error("No se pudo cargar la imagen "+pathImagen);
+		//Logger::getInstance()->error("No se pudo cargar la imagen " + pathImagen);
 		return;
 	}
 
-	textura = SDL_CreateTextureFromSurface(pRenderer, pTempSurface);
+	textura = SDL_CreateTextureFromSurface(this->pRenderer, pTempSurface);
 
 	SDL_FreeSurface(pTempSurface);
 
-	if (!textura)
-		Logger::getInstance()->error("No se pudo crear la textura SDL para "+pathImagen);
+	//if (!textura)
+		//Logger::getInstance()->error("No se pudo crear la textura SDL para " + pathImagen);
 
 }
 
@@ -55,28 +52,38 @@ string Animacion::getId(){
     return id;
 }
 
-void Animacion::cambiarColor(ColorAlternativoDef* color)
+void Animacion::cambiarColor(Uint16 Hinicial, Uint16 Hfinal, Uint16 desplazamiento)
 {
-	SDL_Surface* superficie_tempotal = IMG_Load(pathImagen.c_str());
+	// SE VUELVE A CARGAR LA IMAGEN A UNA SUPERFICIE AUXILIAR
+	SDL_Surface* superficie_tempotal = IMG_Load(this->pathImagen.c_str());
+
     if ( superficie_tempotal )
     {
-    	// se realiza el cambio de color
-    	Desplazar::H(superficie_tempotal, color->getHinicial(), color->getHfinal(), color->getDesplazamiento());
+    	// SE REALIZA EL CAMBIO DE COLOR SOBRE LA SUPERFICIE AUXILIAR
+    	Desplazar::H(superficie_tempotal, Hinicial, Hfinal, desplazamiento);
 
-    	textura = SDL_CreateTextureFromSurface(Renderizador::Instance()->getRenderer(), superficie_tempotal);
+    	// SE CONVIERTE LA SUPERFICIE A UNA TEXTURA AUXILIAR
+    	SDL_Texture* texturaAuxiliar = SDL_CreateTextureFromSurface(this->pRenderer, superficie_tempotal);
 
-    	//se libera la superficie temporal recien utilizada.
+    	// SE LIBERA LA SUPERFICIE AUXILIAR
     	SDL_FreeSurface(superficie_tempotal);
 
-    	if ( !textura )
-    		Logger::getInstance()->error("No se pudo crear la textura SDL para la imagen "+pathImagen+" ene su cambio de color.");
+    	if ( !texturaAuxiliar )
+    		//Logger::getInstance()->error("Animacion::cambiarColor(): No se pudo crear la textura SDL para la imagen " + pathImagen + " en su cambio de color.");
+
+    	// SE SOBRESCRIBE LA TEXTURA LOCAL CON LA AUXILIAR
+    	SDL_DestroyTexture(this->textura);
+    	this->textura = texturaAuxiliar;
 	}
     else
     {
-    	Logger::getInstance()->error("No se pudo cargar la imagen "+pathImagen+ " para el cambio de color.");
+    	//Logger::getInstance()->error("Animacion::cambiarColor(): No se pudo cargar la imagen " + pathImagen + " para el cambio de color.");
     }
 }
 
+void Animacion::cambiarColor(ColorAlternativoDef* colorAlternativoDef) {
+	this->cambiarColor(colorAlternativoDef->getHfinal(), colorAlternativoDef->getHfinal(), colorAlternativoDef->getDesplazamiento());
+}
 ostream& operator <<(ostream &o, const Animacion &a)
 {
 	o<<"Animacion -> [cantFotog, fps, id, pathImagen]=[";

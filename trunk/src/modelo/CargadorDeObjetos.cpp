@@ -113,11 +113,11 @@ map<string, PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables(
 		}
 
 		Animacion* SubQuieto = new Animacion(
+										Renderizador::Instance()->getRenderer(),
 										primerSpriteSubQuieto->getImagen(),
 										primerSpriteSubQuieto->getCantFotogramas(),
 										primerSpriteSubQuieto->getFps(),
-										primerSpriteSubQuieto->getIdSprite(),
-										Renderizador::Instance()->getRenderer());
+										primerSpriteSubQuieto->getIdSprite());
 
 		personajeDibujableCargado = new PersonajeDibujable(
 													SubQuieto,
@@ -127,11 +127,13 @@ map<string, PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables(
 													(*it)->getColorAlternativoDef());
 
 		//Agrego armaDibujable
-		Animacion* animacionArma = new Animacion(spriteDefArma->getImagen(),
-		spriteDefArma->getCantFotogramas(),
-		spriteDefArma->getFps(),
-		spriteDefArma->getIdSprite(),
-		Renderizador::Instance()->getRenderer());;
+		Animacion* animacionArma = new Animacion(
+										Renderizador::Instance()->getRenderer(),
+										spriteDefArma->getImagen(),
+										spriteDefArma->getCantFotogramas(),
+										spriteDefArma->getFps(),
+										spriteDefArma->getIdSprite());
+
 		Vector2f posicionInicialArma(0,0);
 		Vector2f tamanioArmaPx( (*it)->getArmaDef()->getAncho() * VentanaGrafica::Instance()->relacion_de_aspectoX(),
 											(*it)->getArmaDef()->getAlto()  * VentanaGrafica::Instance()->relacion_de_aspectoY()
@@ -143,11 +145,11 @@ map<string, PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables(
 		it_sprites = spritesDef->begin();
 		for (; it_sprites != spritesDef->end(); ++it_sprites) {
 			Animacion* sub_zero = new Animacion(
+										Renderizador::Instance()->getRenderer(),
 										(*it_sprites)->getImagen(),
 										(*it_sprites)->getCantFotogramas(),
 										(*it_sprites)->getFps(),
-										(*it_sprites)->getIdSprite(),
-										Renderizador::Instance()->getRenderer());
+										(*it_sprites)->getIdSprite());
 			personajeDibujableCargado->agregarAnimacion(sub_zero);
 		}
 
@@ -180,9 +182,12 @@ void CargadorDeOjbetos::cargarEscenarioGrafico(PersonajeDibujable* personajeDibu
 	for (list<CapaDef*>::iterator it_capas = capasDef->begin();
 			it_capas != capasDef->end(); ++it_capas) {
 		//Logger::getInstance()->info(*it_capas);
-		Animacion* fondoAnim = new Animacion((*it_capas)->getImagenFondo(),
-		CANT_FOTOGRAMAS_FONDO, FPS_FONDO, (*it_capas)->getIdCapa(),
-				Renderizador::Instance()->getRenderer());
+		Animacion* fondoAnim = new Animacion(
+									Renderizador::Instance()->getRenderer(),
+									(*it_capas)->getImagenFondo(),
+									CANT_FOTOGRAMAS_FONDO,
+									FPS_FONDO,
+									(*it_capas)->getIdCapa());
 		Vector2f tamIniCapa((*it_capas)->getAncho(), parser->getEscenarioDef()->getAlto());
 		Vector2f posInCapa = POSICION_INICIAL_CAPA;
 

@@ -1,41 +1,35 @@
 #include "Sprite.h"
 
-#include <SDL2/SDL_rect.h>
-#include <SDL2/SDL_render.h>
-#include <SDL2/SDL_timer.h>
-#include <cmath>
-#include <sstream>
+Sprite::Sprite(
+		Animacion* animacion,
+		SDL_Renderer* pRenderer,
+		Vector2f posicionIni,
+		OrientacionSprite orientacion,
+		UbicacionPivote ubicacion) :
 
-#include "../utils/Logger.h"
-#include "Animacion.h"
-#include "Renderizador.h"
-
-#define FACTOR_ESCALA_INICIAL_X 1.0f
-#define FACTOR_ESCALA_INICIAL_Y 1.0f
-#define FOTOGRAMA_INICIAL 1
-
-Sprite::Sprite(Animacion* animacion, Vector2f& posicionIni, OrientacionSprite orientacion, UbicacionPivote ubicacion) :
-    animacionAct(animacion),
+	animacionAct(animacion),
+	pRenderer(pRenderer),
 	posicion(posicionIni),
-	factorEscalaX(FACTOR_ESCALA_INICIAL_X),
-	factorEscalaY(FACTOR_ESCALA_INICIAL_Y),
-	fps(animacion->getFps()),
 	orientacion(orientacion),
+	ubicacionDibujado(ubicacion),
+	factorEscala(FACTOR_ESCALA_INICIAL),
+	fps(animacion->getFps()),
 	sentidoReproduccion(HACIA_ADELANTE),
-	ubicacionDibujado(ubicacion){
+	loopMode(LOOP_MOD),
+	tInicial(SDL_GetTicks()){
 
+	// DIMENSIONES DE IMAGEN
 	int w, h;
 	SDL_Texture* textura = animacion->getTextura();
 	SDL_QueryTexture(textura, NULL, NULL, &w, &h);
+	dimensionesImagen = Vector2f(w, h);
 
-	this->anchoPx = w;
-	this->altoPx = h;
-
+	// FOTORGAMAS
 	double cantidadFotogramas = animacion->getCantidadFotogramas();
-	this->anchoFotogramaPx = lround((double) anchoPx / cantidadFotogramas);
+	this->anchoFotogramaPx = lround((double) this->dimensionesImagen.X() / cantidadFotogramas);
 	this->fotogramaActual = FOTOGRAMA_INICIAL;
 
-	Logger::getInstance()->debug("Sprite::Sprite() - Construccion exitosa");
+	//Logger::getInstance()->debug("Sprite::Sprite() - Construccion exitosa");
 }
 
 void Sprite::dibujar() {
@@ -44,7 +38,7 @@ void Sprite::dibujar() {
 	srcRect.x = (fotogramaActual - 1) * this->anchoFotogramaPx;
 	srcRect.y = 0;
 	srcRect.w = anchoFotogramaPx;
-	srcRect.h = altoPx;
+	srcRect.h = this->dimensionesImagen.Y();
 
 	SDL_Rect destRect;
 	destRect.x = (int) posicion.X();
@@ -59,19 +53,19 @@ void Sprite::dibujar() {
 		flip = SDL_FLIP_HORIZONTAL;
 
 	if (this->ubicacionDibujado == SPR_ARRIBA_IZQUIERDA)
-		SDL_RenderCopyEx(Renderizador::Instance()->getRenderer(), animacionAct->getTextura(), &srcRect, &destRect, 0, NULL, flip);
+		SDL_RenderCopyEx(this->pRenderer, animacionAct->getTextura(), &srcRect, &destRect, 0, NULL, flip);
 	if (this->ubicacionDibujado == SPR_ARRIBA_CENTRO) {
 		destRect.x -= destRect.w / 2;
-		SDL_RenderCopyEx(Renderizador::Instance()->getRenderer(), animacionAct->getTextura(), &srcRect, &destRect, 0, NULL, flip);
+		SDL_RenderCopyEx(this->pRenderer, animacionAct->getTextura(), &srcRect, &destRect, 0, NULL, flip);
 	}
 	if (this->ubicacionDibujado == SPR_ABAJO_IZQUIERDA) {
 		destRect.y -= destRect.h;
-		SDL_RenderCopyEx(Renderizador::Instance()->getRenderer(), animacionAct->getTextura(), &srcRect, &destRect, 0, NULL, flip);
+		SDL_RenderCopyEx(this->pRenderer, animacionAct->getTextura(), &srcRect, &destRect, 0, NULL, flip);
 	}
 	if (this->ubicacionDibujado == SPR_ABAJO_CENTRO) {
 		destRect.y -= destRect.h;
 		destRect.x -= destRect.w / 2;
-		SDL_RenderCopyEx(Renderizador::Instance()->getRenderer(), animacionAct->getTextura(), &srcRect, &destRect, 0, NULL, flip);
+		SDL_RenderCopyEx(this->pRenderer, animacionAct->getTextura(), &srcRect, &destRect, 0, NULL, flip);
 	}
 
 }
@@ -88,26 +82,29 @@ void Sprite::setOrientacion(OrientacionSprite o) {
 	this->orientacion = o;
 }
 
-int Sprite::getAnchoPx(){
-	return this->anchoFotogramaPx * factorEscalaX;
+int Sprite::getAnchoPx() {
+	return this->anchoFotogramaPx * factorEscala.X();
 }
 
-int Sprite::getAltoPx(){
-	return this->altoPx * factorEscalaY;
+int Sprite::getAltoPx() {
+	return this->dimensionesImagen.Y() * factorEscala.Y();
 }
 
 Vector2f Sprite::getDimensionesPx() {
 	return Vector2f(this->getAnchoPx(), this-> getAltoPx());
 }
 
-void Sprite::escalarConFactor(Vector2f& factor){
-	this->factorEscalaX = factor.X();
-	this->factorEscalaY = factor.Y();
+void Sprite::escalarConFactor(Vector2f factor){
+	this->factorEscala = factor;
 }
 
 void Sprite::escalarConTamanio(int anchoNuevoPx, int altoNuevoPx) {
-	this->factorEscalaX = ((float) anchoNuevoPx) / ((float) anchoFotogramaPx);
-	this->factorEscalaY = ((float) altoNuevoPx) / ((float) altoPx);
+	this->factorEscala.X(((float) anchoNuevoPx) / ((float) anchoFotogramaPx));
+	this->factorEscala.Y(((float) altoNuevoPx) / ((float) this->dimensionesImagen.Y()));
+}
+
+void Sprite::escalarConTamanio(Vector2f nuevoTamanioPx) {
+	this->escalarConTamanio(nuevoTamanioPx.X(), nuevoTamanioPx.Y());
 }
 
 void Sprite::setFotogramaActual(int nroFotograma){
@@ -115,21 +112,66 @@ void Sprite::setFotogramaActual(int nroFotograma){
 }
 
 void Sprite::update() {
-	int delayTime = 1000.0f / fps;
 
-    int cantidadFotogramas = animacionAct->getCantidadFotogramas();
-	int nuevoFotograma = (int(SDL_GetTicks()/delayTime) % cantidadFotogramas) + 1;
+	if (this->loopMode == LOOP_MOD) {
+		int delayTime = 1000.0f / fps;
 
-	if (this->orientacion == ORIENTACION_DERECHA && this->sentidoReproduccion == HACIA_ADELANTE)
-		this->setFotogramaActual(nuevoFotograma);
-	else if (this->orientacion == ORIENTACION_DERECHA && this->sentidoReproduccion == HACIA_ATRAS)
-		this->setFotogramaActual(cantidadFotogramas + 1 - nuevoFotograma);
-	else if (this->orientacion == ORIENTACION_IZQUIERDA && this->sentidoReproduccion == HACIA_ADELANTE)
-		this->setFotogramaActual(cantidadFotogramas + 1 - nuevoFotograma);
-	else if (this->orientacion == ORIENTACION_IZQUIERDA && this->sentidoReproduccion == HACIA_ATRAS)
-		this->setFotogramaActual(nuevoFotograma);
+		int cantidadFotogramas = animacionAct->getCantidadFotogramas();
+		int nuevoFotograma = (int(SDL_GetTicks()/delayTime) % cantidadFotogramas) + 1;
 
-	Logger::getInstance()->debug("Sprite::update()");
+		if (this->orientacion == ORIENTACION_DERECHA && this->sentidoReproduccion == HACIA_ADELANTE)
+			this->setFotogramaActual(nuevoFotograma);
+		else if (this->orientacion == ORIENTACION_DERECHA && this->sentidoReproduccion == HACIA_ATRAS)
+			this->setFotogramaActual(cantidadFotogramas + 1 - nuevoFotograma);
+		else if (this->orientacion == ORIENTACION_IZQUIERDA && this->sentidoReproduccion == HACIA_ADELANTE)
+			this->setFotogramaActual(cantidadFotogramas + 1 - nuevoFotograma);
+		else if (this->orientacion == ORIENTACION_IZQUIERDA && this->sentidoReproduccion == HACIA_ATRAS)
+			this->setFotogramaActual(nuevoFotograma);
+	}
+
+	if (this->loopMode == LOOP_NO_REPEAT) {
+		if (this->fotogramaActual == this->animacionAct->getCantidadFotogramas())
+			return;
+		else {
+			int delayTime = 1000.0f / fps;
+
+			int tActual = SDL_GetTicks();
+			int tTranscurrido = tActual - this->tInicial;
+
+			int cantidadFotogramas = animacionAct->getCantidadFotogramas();
+			int nuevoFotograma = (int(tTranscurrido/delayTime) % cantidadFotogramas) + 1;
+
+			if (this->orientacion == ORIENTACION_DERECHA && this->sentidoReproduccion == HACIA_ADELANTE)
+				this->setFotogramaActual(nuevoFotograma);
+			else if (this->orientacion == ORIENTACION_DERECHA && this->sentidoReproduccion == HACIA_ATRAS)
+				this->setFotogramaActual(cantidadFotogramas + 1 - nuevoFotograma);
+			else if (this->orientacion == ORIENTACION_IZQUIERDA && this->sentidoReproduccion == HACIA_ADELANTE)
+				this->setFotogramaActual(cantidadFotogramas + 1 - nuevoFotograma);
+			else if (this->orientacion == ORIENTACION_IZQUIERDA && this->sentidoReproduccion == HACIA_ATRAS)
+				this->setFotogramaActual(nuevoFotograma);
+		}
+	}
+
+	if (this->loopMode == LOOP_REPEAT) {
+		int delayTime = 1000.0f / fps;
+
+		int tActual = SDL_GetTicks();
+		int tTranscurrido = tActual - this->tInicial;
+
+		int cantidadFotogramas = animacionAct->getCantidadFotogramas();
+		int nuevoFotograma = (int(tTranscurrido/delayTime) % cantidadFotogramas) + 1;
+
+		if (this->orientacion == ORIENTACION_DERECHA && this->sentidoReproduccion == HACIA_ADELANTE)
+			this->setFotogramaActual(nuevoFotograma);
+		else if (this->orientacion == ORIENTACION_DERECHA && this->sentidoReproduccion == HACIA_ATRAS)
+			this->setFotogramaActual(cantidadFotogramas + 1 - nuevoFotograma);
+		else if (this->orientacion == ORIENTACION_IZQUIERDA && this->sentidoReproduccion == HACIA_ADELANTE)
+			this->setFotogramaActual(cantidadFotogramas + 1 - nuevoFotograma);
+		else if (this->orientacion == ORIENTACION_IZQUIERDA && this->sentidoReproduccion == HACIA_ATRAS)
+			this->setFotogramaActual(nuevoFotograma);
+	}
+
+	//Logger::getInstance()->debug("Sprite::update()");
 }
 
 void Sprite::setSentidoReproduccion(SentidoReproduccion sr) {
@@ -144,15 +186,21 @@ void Sprite::cambiarAnimacion(Animacion* nuevaAnim) {
 	int w, h;
 	SDL_Texture* textura = animacionAct->getTextura();
 	SDL_QueryTexture(textura, NULL, NULL, &w, &h);
-	this->anchoPx = w;
-	this->altoPx = h;
+	dimensionesImagen = Vector2f(w, h);
 
 	double cantidadFotogramas = animacionAct->getCantidadFotogramas();
-	this->anchoFotogramaPx = lround((double)this->anchoPx / cantidadFotogramas);
+	this->anchoFotogramaPx = lround((double)this->dimensionesImagen.X() / cantidadFotogramas);
 
 	this->fotogramaActual = 1;
 	this->escalarConTamanio(tamPx.X(), tamPx.Y());
-	Logger::getInstance()->debug("Sprite::cambiarAnimacion() - La animacion a sido cambiada");
+
+	// LOOP
+	this->tInicial = SDL_GetTicks();
+	//Logger::getInstance()->debug("Sprite::cambiarAnimacion() - La animacion a sido cambiada");
+}
+
+void Sprite::setLoopMode(LoopMode loopMode) {
+	this->loopMode = loopMode;
 }
 
 Vector2f Sprite::getPosicion() {
@@ -161,8 +209,6 @@ Vector2f Sprite::getPosicion() {
 
 Sprite::~Sprite() {
 }
-
-//TODO ver el atributo sentidoReproduccion ...
 
 void Sprite::cambiarOrientacionHaciaDerecha() {
 
@@ -177,9 +223,8 @@ void Sprite::cambiarOrientacionHaciaIzquierda() {
 
 ostream& operator <<(ostream &o, const Sprite &s)
 {
-	//TODO terminar de implementar ...
 	o<<"Sprite -> [animacion, posicion, anchoPx, altoPx]=[";
-	o<<*s.animacionAct<<", "<<s.posicion<<", "<<s.anchoPx<<", "<<s.altoPx<<"]";
+	o<<*s.animacionAct<<", "<<s.posicion<<", "<< s.dimensionesImagen.X() <<", "<<s.dimensionesImagen.Y()<<"]";
 
 	return o;
 }
