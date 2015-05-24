@@ -8,11 +8,11 @@
 #include "Arma.h"
 
 Arma::Arma(int velocidad, double ancho, double alto, BVH* caja):
+		Colisionable(POS_INICIAL_OBJETO, ancho, alto),
 		velocidad_arma(velocidad),
 		anchoArma(ancho),
 		altoArma(alto),
-		cajaBVH_arma(caja),
-		Colisionable(POS_INICIAL_OBJETO, ancho, alto)
+		cajaBVH_arma(caja)
 	{
 	this->posicion = POS_INICIAL_OBJETO;
 	this->trayectoria = new MRU(POS_INICIAL_OBJETO, VELOCIDAD_OBJETO);
@@ -78,6 +78,7 @@ void Arma::update(Colisionable* enemigo){
 	} else {
         posicion = POS_INICIAL_OBJETO;
 	}
+	cajaBVH_arma->desplazarBVH(posicion - posicionAnterior);
 	notificarObservadores();
 }
 
@@ -135,3 +136,6 @@ Arma::~Arma() {
 	// TODO Auto-generated destructor stub
 }
 
+bool Arma::estaAtacando(){
+    return true;
+}

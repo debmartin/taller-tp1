@@ -54,6 +54,7 @@ public:
     bool haySuperposicion(BVH* otraCaja);
     bool empujar(Direccion direccionEmpuje, Vector2f diferencia);
     bool estaEnReposo();
+    bool estaAtacando();
 };
 
 #endif /* SRC_MODELO_ARMA_H_ */

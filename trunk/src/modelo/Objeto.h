@@ -18,13 +18,13 @@
 typedef enum estado_objeto
 {
 	VISIBLE,
-	NO_VISIBLE,
+	NO_VISIBLE
 } estado_objeto;
 
 typedef enum DireccionObjeto
 {
 	DIRECCION_DERECHA,
-	DIRECCION_IZQUIERDA,
+	DIRECCION_IZQUIERDA
 } direccion_objeto;
 
 class Objeto {
