@@ -24,7 +24,6 @@ Animacion::Animacion(
 	}
 
 	textura = SDL_CreateTextureFromSurface(this->pRenderer, pTempSurface);
-
 	SDL_FreeSurface(pTempSurface);
 
 	//if (!textura)

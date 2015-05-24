@@ -25,6 +25,10 @@ PersonajeDibujable::PersonajeDibujable(Animacion* animIni, Vector2f posicionIni,
     animaciones[animIni->getId()] = animIni;
     colorAlternativo = unColorAlternativo;
     this->estadoAnterior = EN_ESPERA;
+
+    // ENVOLVENTE
+    this->animacionEnvolvente = new Animacion(Renderizador::Instance()->getRenderer(), "DEFAULT/ENVOLVENTE.png", 1, 1, "ENVOLVENTE");
+    this->spriteEnvolvente = new Sprite(this->animacionEnvolvente, Renderizador::Instance()->getRenderer(), posicionIni, orientacion, SPR_ABAJO_IZQUIERDA);
 }
 
 void PersonajeDibujable::setEstado(estado_personaje unEstado){
@@ -173,11 +177,13 @@ void PersonajeDibujable::agregarAnimacion(Animacion* nuevaAnimacion){
 void PersonajeDibujable::dibujar(){
 	spritePersonaje->dibujar();
 	armaDibujable->dibujar();
+	spriteEnvolvente->dibujar();
 }
 
 void PersonajeDibujable::actualizar(){
 	spritePersonaje->update();
 	armaDibujable->actualizar();
+	spriteEnvolvente->update();
 }
 
 void PersonajeDibujable::recibirNotificacion(Observable* unObservable){
@@ -195,6 +201,23 @@ void PersonajeDibujable::recibirNotificacion(Observable* unObservable){
 	setEstado(unPersonaje->getEstado());
 
 	seleccionarSprite();
+
+	// ENVOLVENTE
+	float anchoPx = unPersonaje->getAnchoEnvolvente() * VentanaGrafica::Instance()->relacion_de_aspectoX();
+	float altoPx  = unPersonaje->getAltoEnvolvente() * VentanaGrafica::Instance()->relacion_de_aspectoY();
+	this->spriteEnvolvente->escalarConTamanio(anchoPx, altoPx);
+
+	Vector2f posicion_abajo_izquierda_logica_en_escenario =
+			unPersonaje->obtenerCajaColision()->calcularPosicion() + Vector2f(0, 310);
+	cout << "ABAJO_IZQUIERDA:" << posicion_abajo_izquierda_logica_en_escenario << endl;
+	Vector2f posicion_abajo_izquierda_logica_en_ventana =
+			VentanaGrafica::Instance()->calcularPosicionEnVentana(posicion_abajo_izquierda_logica_en_escenario);
+
+	Vector2f posicion_abajo_izquierda_px_en_ventana = Vector2f(
+			posicion_abajo_izquierda_logica_en_ventana.X() * VentanaGrafica::Instance()->relacion_de_aspectoX(),
+			posicion_abajo_izquierda_logica_en_ventana.Y() * VentanaGrafica::Instance()->relacion_de_aspectoY());
+
+	this->spriteEnvolvente->setPosicion(posicion_abajo_izquierda_px_en_ventana);
 }
 
 void PersonajeDibujable::cambiarOrientacionHaciaDerecha() {

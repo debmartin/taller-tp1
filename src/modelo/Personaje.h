@@ -121,6 +121,7 @@ public:
 	void arrastrar(Colisionable* otro);
 	bool empujar(Direccion direccionEmpuje, Vector2f diferencia);
 	float getAnchoEnvolvente();
+	float getAltoEnvolvente();
 
 	// CAJAS DE COLISION
 	virtual void colisionar(Colisionable* otro);
