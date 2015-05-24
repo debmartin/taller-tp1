@@ -131,6 +131,7 @@ public:
     void espejarBVH();
     void orientar(DireccionObjeto nuevaOrientacion);
     Vector2f getPivote() { return this->obtenerCajaColision()->getPivote(); }
+    void volverAlPiso(float distanciaAObjetivo);
 
 	friend ostream& operator<<(ostream &o, const Personaje &p);
 	string toString();

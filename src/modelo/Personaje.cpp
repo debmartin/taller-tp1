@@ -301,17 +301,15 @@ bool Personaje::empujar(Direccion direccionEmpuje, Vector2f diferencia) {
 void Personaje::colisionar(Colisionable* otro){
     if (estaAtacando()) {
         ataqueActual = estado->obtenerAtaque();
-    }else if (estaDefendiendo()){
+        Colisionable::colisionar(otro);
+        return;
+    }
+    if (! otro->estaAtacando()) return;
+
+    if (estaDefendiendo()){
     	recibirDanio(otro->obtenerDanio() / 4);
-    }else if (estaAgachado() && (otro->verEstado()->estaAgachado() && otro->verEstado()->estaAtacando())){
-        recibirDanio(otro->obtenerDanio());
-    }else if (estaAgachado() && (otro->verEstado()->estaSaltando() && otro->verEstado()->estaAtacando())){
-        recibirDanio(otro->obtenerDanio());
-    }else if ((estaEnReposo() || estaCaminando()) && (otro->verEstado()->estaAtacando())) {
+    } else if (estaEnReposo() || estaCaminando()) {
     	recibirGolpe();
-        recibirDanio(otro->obtenerDanio());
-    }else if (estaCaminando()) {
-        arrastrar(otro);
         recibirDanio(otro->obtenerDanio());
     } else{
         recibirDanio(otro->obtenerDanio());
@@ -323,23 +321,31 @@ bool Personaje::vaAColisionar(Colisionable* enemigo){
 	double anchoFict = estado->calcularAncho();
 	double altoFict = estado->calcularAlto();
 
-	//TODO: Ver esta verificación si contempla todos los casos.
-//	if(estaAgachado() || estaDefendiendo()){
-	//	return false;
-	//}
 	if (Colisionable::vaAColisionar(enemigo, anchoFict, altoFict)){
-		cout<<"vaAColisionar"<<endl;
+//		cout<<"vaAColisionar"<<endl;
 		return true;
 	}
-
-
-//    return estaAtacando() && estado->haySuperposicion(enemigo->obtenerCajaColision());
     return estado->haySuperposicion(enemigo->obtenerCajaColision());
 }
 
+void Personaje::volverAlPiso(float distanciaAObjetivo){
+    if (! posicionable->enExtremos(distanciaAObjetivo, estado->calcularAncho())) {
+        posicion = Vector2f(posicionCandidata.X(), posicionInicial.Y());
+    } else {
+        posicion = Vector2f(posicion.X(), posicionInicial.Y());
+    }
+    mantenerReposo();
+}
+
+float calcularDistancia(float pos1, float pos2, float ancho) {
+	float distancia = pos1 - pos2;
+	if (distancia < 0) distancia = -distancia;
+
+    return distancia + ancho;
+}
+
 void Personaje::calcularPosicionSinColision(Colisionable* enemigo){
-	float distanciaAObjetivo = posicionCandidata.X() - enemigo->getPosicion().X() + estado->calcularAncho();
-	if (distanciaAObjetivo < 0) distanciaAObjetivo = -distanciaAObjetivo;
+	float distanciaAObjetivo = calcularDistancia(posicionCandidata.X(), enemigo->getPosicion().X(), estado->calcularAncho());
 
     if (posicionable->esValida(posicionCandidata, estado->calcularAncho()) && posicionCandidata.Y() >= posicionInicial.Y()) {
 
@@ -349,12 +355,7 @@ void Personaje::calcularPosicionSinColision(Colisionable* enemigo){
             posicion = Vector2f(posicion.X(), posicionCandidata.Y());
         }
 	} else if (posicionCandidata.Y() < posicionInicial.Y()) {
-	    if (! posicionable->enExtremos(distanciaAObjetivo, estado->calcularAncho())) {
-            posicion = Vector2f(posicionCandidata.X(), posicionInicial.Y());
-	    } else {
-            posicion = Vector2f(posicion.X(), posicionInicial.Y());
-	    }
-	    mantenerReposo();
+	    volverAlPiso(distanciaAObjetivo);
     } else if (posicionCandidata.Y() > posicionInicial.Y()) {
         caer();
     } else {
@@ -394,11 +395,15 @@ void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
         arrastrar(enemigo);
     } else if (estaSaltando()) {
         posicionCandidata = estado->obtenerProximaPosicion();
+
+        float distanciaAObjetivo = calcularDistancia(posicionCandidata.X(), enemigo->getPosicion().X(), estado->calcularAncho());
+        if (posicionCandidata.Y() <= posicionInicial.Y()) {
+            volverAlPiso(distanciaAObjetivo);
         //arrastrar(enemigo);
-      if(posicionable->esValida(posicionCandidata, estado->calcularAncho())){
-        posicion = posicionCandidata;
-      }else{
-    	  caer();
+        } else if(posicionable->esValida(posicionCandidata, estado->calcularAncho())){
+            posicion = posicionCandidata;
+        } else {
+            caer();
       }
     } else {
         colisionar(enemigo);
@@ -488,7 +493,7 @@ void Personaje::arrojarArma(){
 }
 
 void Personaje::recibirDanio(int danio){
-	cout<<"Recibir daño:"<<danio<<endl;
+//	cout<<"Recibir daño:"<<danio<<endl;
 	//recibirGolpe();
 	this->energia -= danio;
 }
