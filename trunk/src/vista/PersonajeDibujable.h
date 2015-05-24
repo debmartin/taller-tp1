@@ -51,6 +51,9 @@ private:
     ArmaDibujable* armaDibujable;
     estado_personaje estadoAnterior;
 
+    // ENVOLVENTE
+    Animacion* animacionEnvolvente;
+    Sprite* spriteEnvolvente;
 public:
     PersonajeDibujable();
 	PersonajeDibujable(Animacion* animIni, Vector2f posicionIni, Vector2f tamanioPx, OrientacionSprite orientacion,

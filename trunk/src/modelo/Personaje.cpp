@@ -554,6 +554,10 @@ float Personaje::getAnchoEnvolvente() {
 	return this->estado->calcularAncho();
 }
 
+float Personaje::getAltoEnvolvente() {
+	return this->estado->calcularAlto();
+}
+
 Estado* Personaje::verEstado(){
 	return estado;
 }
