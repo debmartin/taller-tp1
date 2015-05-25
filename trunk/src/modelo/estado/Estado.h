@@ -58,6 +58,7 @@ class Estado
         virtual bool ejecutandoMovimientoEspecial();
         virtual bool estaBloqueado();
         virtual bool estaCaminando();
+        virtual bool estaEnCaida();
 
         Ataque* obtenerAtaque();
         Vector2f obtenerProximaPosicion();

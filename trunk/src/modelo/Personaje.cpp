@@ -461,6 +461,11 @@ bool Personaje::estaAtacando(){
 bool Personaje::estaDefendiendo(){
     return (estado->estaDefendiendo());
 }
+
+bool Personaje::estaEnCaida(){
+    return (estado->estaEnCaida());
+}
+
 void Personaje::arrojarArma(){
 	//Posiciono el poder respecto a la posicion del personaje
 	Vector2f posicionObjeto;

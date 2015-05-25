@@ -33,3 +33,7 @@ bool CaidaIzquierda::estaSaltando(){
 bool CaidaIzquierda::estaSaltandoDiagonalIzquierda(){
     return true;
 }
+
+bool CaidaIzquierda::estaEnCaida(){
+    return true;
+}
