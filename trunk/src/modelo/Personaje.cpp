@@ -9,37 +9,6 @@
 
 #include <sstream>
 
-#include "../utils/Logger.h"
-#include "../vista/VentanaGrafica.h"
-#include "Ataque.h"
-#include "estado/Agachado.h"
-#include "estado/Bloqueado.h"
-#include "estado/CaminandoDerecha.h"
-#include "estado/CaminandoIzquierda.h"
-#include "estado/Cayendo.h"
-#include "estado/Defendiendo.h"
-#include "estado/DefendiendoAgachado.h"
-#include "estado/EnEspera.h"
-#include "estado/PatadaAlta.h"
-#include "estado/PatadaBaja.h"
-#include "estado/PateandoAltoAgachado.h"
-#include "estado/PateandoSaltandoVertical.h"
-#include "estado/PateandoSaltandoDiagonalDerecha.h"
-#include "estado/PateandoSaltandoDiagonalIzquierda.h"
-#include "estado/Gancho.h"
-#include "estado/PiniaAlta.h"
-#include "estado/PiniaBaja.h"
-#include "estado/PiniaSaltandoDiagonalDerecha.h"
-#include "estado/PiniaSaltandoDiagonalIzquierda.h"
-#include "estado/PiniaSaltandoVertical.h"
-#include "estado/SaltandoOblicuoDerecha.h"
-#include "estado/SaltandoOblicuoIzquierda.h"
-#include "estado/SaltandoVertical.h"
-#include "estado/Golpeado.h"
-#include "estado/GolpeadoCaidaDerecha.h"
-#include "estado/GolpeadoCaidaIzquierda.h"
-#include "Objeto.h"
-
 #define VELOCIDAD_DESP_HORIZONTAL_SALTANDO 320.0f
 #define VELOCIDAD_DESP_HORIZONTAL_CAMINANDO 215.0f
 #define VELOCIDAD_DESP_VERTICAL 1120.0f
@@ -239,10 +208,12 @@ void Personaje::defenderAgachado(){
 }
 
 void Personaje::recibirGolpe(){
-	if(estaSaltandoDiagonalDerecha()){
-	    cambiarEstado(new GolpeadoCaidaIzquierda(posicion, (*cajasPorEstado)[SALTANDO_OBLICUO_DERECHA]));
-	}else if(estaSaltandoDiagonalIzquierda()){
-	    cambiarEstado(new GolpeadoCaidaDerecha(posicion, (*cajasPorEstado)[SALTANDO_OBLICUO_IZQUIERDA]));
+	if(estaSaltando() && this->direccion == DIRECCION_IZQUIERDA){
+		cout<<"Entra caida oblicua izquierda"<<endl;
+	    cambiarEstado(new CaidaDerecha(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
+	}else if(estaSaltando() && this->direccion == DIRECCION_DERECHA){
+		cout<<"Entra caida oblicua derecha"<<endl;
+	    cambiarEstado(new CaidaIzquierda(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
 	}else{
 	    cambiarEstado(new Golpeado(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
 	}
@@ -319,8 +290,10 @@ void Personaje::colisionar(Colisionable* otro){
     } else if (estaEnReposo() || estaCaminando()) {
     	recibirGolpe();
         recibirDanio(otro->obtenerDanio());
-    } else{
+    } else if (estaSaltando()){
     	recibirGolpe();
+        recibirDanio(otro->obtenerDanio());
+    } else{
         recibirDanio(otro->obtenerDanio());
     }
     Colisionable::colisionar(otro);
@@ -502,8 +475,6 @@ void Personaje::arrojarArma(){
 }
 
 void Personaje::recibirDanio(int danio){
-//	cout<<"Recibir daño:"<<danio<<endl;
-	//recibirGolpe();
 	this->energia -= danio;
 }
 
@@ -541,7 +512,6 @@ void Personaje::definirPosicionIncial_enX(double x)
 	Vector2f posicionIncial(x,y);
 	this->posicion = posicionIncial;
 	this->posicionInicial = posicionIncial;
-//	this->trayectoria = new Reposo(this->posicion);
 }
 
 void Personaje::cambiarNumeroPersonaje(){
