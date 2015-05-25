@@ -3,7 +3,6 @@
 
 #include "Estado.h"
 
-
 class SaltandoOblicuoDerecha : public Estado
 {
     public:

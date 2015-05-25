@@ -10,15 +10,42 @@
 
 #include <iostream>
 #include <string>
-
+#include "../utils/Logger.h"
+#include "../vista/VentanaGrafica.h"
+#include "estado/Agachado.h"
+#include "estado/Bloqueado.h"
+#include "estado/CaminandoDerecha.h"
+#include "estado/CaminandoIzquierda.h"
+#include "estado/Cayendo.h"
+#include "estado/Defendiendo.h"
+#include "estado/DefendiendoAgachado.h"
+#include "estado/EnEspera.h"
+#include "estado/PatadaAlta.h"
+#include "estado/PatadaBaja.h"
+#include "estado/PateandoAltoAgachado.h"
+#include "estado/PateandoSaltandoVertical.h"
+#include "estado/PateandoSaltandoDiagonalDerecha.h"
+#include "estado/PateandoSaltandoDiagonalIzquierda.h"
+#include "estado/Gancho.h"
+#include "estado/PiniaAlta.h"
+#include "estado/PiniaBaja.h"
+#include "estado/PiniaSaltandoDiagonalDerecha.h"
+#include "estado/PiniaSaltandoDiagonalIzquierda.h"
+#include "estado/PiniaSaltandoVertical.h"
+#include "estado/SaltandoOblicuoDerecha.h"
+#include "estado/SaltandoOblicuoIzquierda.h"
+#include "estado/SaltandoVertical.h"
+#include "estado/Golpeado.h"
+#include "estado/CaidaDerecha.h"
+#include "estado/CaidaIzquierda.h"
 #include "../utils/Loggeable.h"
 #include "Observable.h"
 #include "Vector2f.h"
 #include "Poder.h"
+#include "Ataque.h"
 #include "Objeto.h"
 #include "Colisionable.h"
 #include "../vista/Posicionable.h"
-#include "estado/Estado.h"
 
 #define DELTA_PASO 1
 #define ENERGIA_INICIAL 100
@@ -59,19 +86,25 @@ public:
 	double getAncho() const;
 	int getNumeroJugador();
 	Vector2f getDimensionesLogicas() const;
-	void setPosicion(double x, double y);
 	Vector2f getPosicion();
-	estado_personaje getEstado();
+	void setPosicion(double x, double y);
 	int getEnergia();
-	void agregarArma(Objeto* unArma);
 	Objeto* getArma();
-	Vector2f obtenerPosicionEnVentana();
-	bool llegoAlLimiteIzquierdo();
-	bool llegoAlLimiteDerecho();
-	void cambiarTrayectoria(Trayectoria* t);
+
+	void update(Colisionable* enemigo);
 	void agregarObservador(Observador* unObservador);
 	void notificarObservadores();
-	void update(Colisionable* enemigo);
+	Vector2f obtenerPosicionEnVentana();
+	void calcularNuevaPosicion(Colisionable* enemigo);
+	void calcularPosicionSinColision(Colisionable* enemigo);
+	void cambiarDireccion();
+	void cambiarNumeroPersonaje();
+	void cambiarTrayectoria(Trayectoria* t);
+	void agregarArma(Objeto* unArma);
+	bool llegoAlLimiteIzquierdo();
+	bool llegoAlLimiteDerecho();
+
+	//Estados
 	bool estaSaltando();
 	bool estaSaltandoVertical();
 	bool estaSaltandoDiagonalDerecha();
@@ -84,12 +117,8 @@ public:
 	bool estaCaminando();
 	bool estaMuerto();
 	bool ejecutandoMovimientoEspecial();
-	void recibirDanio(int danio);
-	void bloquearPersonaje(float segundos);
-	void calcularNuevaPosicion(Colisionable* enemigo);
-	void calcularPosicionSinColision(Colisionable* enemigo);
-	void cambiarDireccion();
-	void cambiarNumeroPersonaje();
+	void cambiarEstado(Estado* nuevo);
+	estado_personaje getEstado();
 	Estado* verEstado();
 
 	//Movimientos y poderes
@@ -120,21 +149,22 @@ public:
 	void caer();
 	void arrastrar(Colisionable* otro);
 	bool empujar(Direccion direccionEmpuje, Vector2f diferencia);
-	float getAnchoEnvolvente();
-	float getAltoEnvolvente();
+	void recibirDanio(int danio);
+	void bloquearPersonaje(float segundos);
 
 	// CAJAS DE COLISION
 	virtual void colisionar(Colisionable* otro);
-	void cambiarEstado(Estado* nuevo);
 	void corregirPorColision(Colisionable* enemigo);
     BVH* obtenerCajaColision();
     bool vaAColisionar(Colisionable* enemigo);
     void espejarBVH();
     void orientar(DireccionObjeto nuevaOrientacion);
-    Vector2f getPivote() { return this->obtenerCajaColision()->getPivote(); }
     void volverAlPiso(float distanciaAObjetivo);
+    Vector2f getPivote() { return this->obtenerCajaColision()->getPivote(); }
+    float getAnchoEnvolvente();
+    float getAltoEnvolvente();
 
-	friend ostream& operator<<(ostream &o, const Personaje &p);
+    friend ostream& operator<<(ostream &o, const Personaje &p);
 	string toString();
 	string getId() const;
 	void definirPosicionIncial_enX(double x);

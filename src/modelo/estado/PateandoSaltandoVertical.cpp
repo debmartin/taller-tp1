@@ -33,3 +33,8 @@ bool PateandoSaltandoVertical::estaSaltando(){
 bool PateandoSaltandoVertical::estaSaltandoVertical(){
     return true;
 }
+
+bool PateandoSaltandoVertical(){
+	return true;
+}
+
