@@ -1,8 +1,14 @@
-#ifndef SALTANDOOBLICUOIZQUIERDA_H
-#define SALTANDOOBLICUOIZQUIERDA_H
+/*
+ * SaltandoOblicuoIzquierda.h
+ *
+ *  Created on: 24/5/2015
+ *      Author: val
+ */
+
+#ifndef SRC_MODELO_ESTADO_SALTANDOOBLICUOIZQUIERDA_H_
+#define SRC_MODELO_ESTADO_SALTANDOOBLICUOIZQUIERDA_H_
 
 #include "Estado.h"
-
 
 class SaltandoOblicuoIzquierda : public Estado
 {
@@ -15,4 +21,4 @@ class SaltandoOblicuoIzquierda : public Estado
     private:
 };
 
-#endif // SALTANDOOBLICUOIZQUIERDA_H
+#endif /* SRC_MODELO_ESTADO_SALTANDOOBLICUOIZQUIERDA_H_ */
