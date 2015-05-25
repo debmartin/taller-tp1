@@ -12,6 +12,8 @@
 #define DANIO_PINIA_BAJA 10
 #define DANIO_PATADA_SALTANDO 20
 #define DANIO_PINIA_SALTANDO 20
+#define VECTOR_EMPUJE_DERECHA Vector2f(1,0)
+#define VECTOR_EMPUJE_IZQUIERDA Vector2f(-1,0)
 
 typedef enum estado_personaje
 {

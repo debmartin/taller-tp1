@@ -152,7 +152,7 @@ void PersonajeDibujable::seleccionarSprite(){
 				spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
 				break;
 			case RECIBIENDO_GOLPE:
-				this->spritePersonaje->setLoopMode(LOOP_MOD);
+				this->spritePersonaje->setLoopMode(LOOP_NO_REPEAT);
 				spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_RECIBIENDO_GOLPE]);
 				spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
 				break;
