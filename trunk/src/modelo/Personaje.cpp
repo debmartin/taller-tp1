@@ -320,6 +320,7 @@ void Personaje::colisionar(Colisionable* otro){
     	recibirGolpe();
         recibirDanio(otro->obtenerDanio());
     } else{
+    	recibirGolpe();
         recibirDanio(otro->obtenerDanio());
     }
     Colisionable::colisionar(otro);
