@@ -353,11 +353,17 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(flo
 	cajasAABB_salto_diagonal->push_back(salto_diagonal_caja1);
 
 	//SALTANDO VERTICAL//
-	Vector2f salto_vertical_caja1_PuntoMin(SALTANDO_DIAGONAL_CAJA1_X1_PORCENTUAL*ancho_logico_personaje, SALTANDO_DIAGONAL_CAJA1_Y1_PORCENTUAL*alto_logico_personaje);
-	Vector2f salto_vertical_caja1_PuntoMax(SALTANDO_DIAGONAL_CAJA1_X2_PORCENTUAL*ancho_logico_personaje, SALTANDO_DIAGONAL_CAJA1_Y2_PORCENTUAL*alto_logico_personaje);
+	Vector2f salto_vertical_caja1_PuntoMin(SALTANDO_VERTICAL_CAJA1_X1_PORCENTUAL*ancho_logico_personaje, SALTANDO_VERTICAL_CAJA1_Y1_PORCENTUAL*alto_logico_personaje);
+	Vector2f salto_vertical_caja1_PuntoMax(SALTANDO_VERTICAL_CAJA1_X2_PORCENTUAL*ancho_logico_personaje, SALTANDO_VERTICAL_CAJA1_Y2_PORCENTUAL*alto_logico_personaje);
+
+	Vector2f salto_vertical_caja2_PuntoMin(SALTANDO_VERTICAL_CAJA2_X1_PORCENTUAL*ancho_logico_personaje, SALTANDO_VERTICAL_CAJA2_Y1_PORCENTUAL*alto_logico_personaje);
+	Vector2f salto_vertical_caja2_PuntoMax(SALTANDO_VERTICAL_CAJA2_X2_PORCENTUAL*ancho_logico_personaje, SALTANDO_VERTICAL_CAJA2_Y2_PORCENTUAL*alto_logico_personaje);
 
 	AABB* salto_vertical_caja1 = new AABB(salto_vertical_caja1_PuntoMin, salto_vertical_caja1_PuntoMax);
+	AABB* salto_vertical_caja2 = new AABB(salto_vertical_caja2_PuntoMin, salto_vertical_caja2_PuntoMax);
+
 	cajasAABB_salto_vertical->push_back(salto_vertical_caja1);
+	cajasAABB_salto_vertical->push_back(salto_vertical_caja2);
 
 	//PATADA BAJA//
 	Vector2f patada_baja_caja1_PuntoMin(PATADA_BAJA_CAJA1_X1_PORCENTUAL*ancho_logico_personaje, PATADA_BAJA_CAJA1_Y1_PORCENTUAL*alto_logico_personaje);

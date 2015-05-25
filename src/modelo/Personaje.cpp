@@ -136,12 +136,14 @@ void Personaje::agacharse(){
 
 void Personaje::piniaAlta(){
     cambiarEstado(new PiniaAlta(posicion, (*cajasPorEstado)[PINIA_ALTA]));
+    bloquearPersonaje(25);
 	Logger::getInstance()->debug("Personaje: golpe alto.");
 	//VentanaGrafica::Instance()->vibrar();
 }
 
 void Personaje::piniaBaja(){
     cambiarEstado(new PiniaBaja(posicion, (*cajasPorEstado)[PINIA_BAJA]));
+    bloquearPersonaje(25);
 	Logger::getInstance()->debug("Personaje: golpe bajo.");
 }
 
@@ -162,13 +164,13 @@ void Personaje::piniaSaltandoVertical(){
 
 void Personaje::patadaAlta(){
 	cambiarEstado(new PatadaAlta(posicion, (*cajasPorEstado)[PATEANDO_ALTO]));
-	bloquearPersonaje(50);
+	bloquearPersonaje(35);
 	Logger::getInstance()->debug("Personaje: patada alta.");
 }
 
 void Personaje::patadaBaja(){
     cambiarEstado(new PatadaBaja(posicion, (*cajasPorEstado)[PATEANDO_BAJO]));
-    bloquearPersonaje(50);
+    bloquearPersonaje(35);
 	Logger::getInstance()->debug("Personaje: patada baja.");
 }
 
@@ -209,13 +211,16 @@ void Personaje::defenderAgachado(){
 
 void Personaje::recibirGolpe(){
 	if(estaSaltando() && this->direccion == DIRECCION_IZQUIERDA){
-		cout<<"Entra caida oblicua izquierda"<<endl;
 	    cambiarEstado(new CaidaDerecha(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
 	}else if(estaSaltando() && this->direccion == DIRECCION_DERECHA){
-		cout<<"Entra caida oblicua derecha"<<endl;
 	    cambiarEstado(new CaidaIzquierda(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
 	}else{
 	    cambiarEstado(new Golpeado(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
+	    if(direccion == DIRECCION_DERECHA){
+	    	empujar(DIR_DERECHA, VECTOR_EMPUJE_IZQUIERDA);
+	    }else{
+	    	empujar(DIR_IZQUIERDA, VECTOR_EMPUJE_DERECHA);
+	    }
 	}
     Logger::getInstance()->debug("Personaje: recibiendo golpe.");
 }

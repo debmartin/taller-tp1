@@ -70,7 +70,7 @@
 		    "sprites-pinia-baja": { 
 				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-pinia-baja.png",
 		    		    "cant_fotogramas": 7,
-		    		    "fps": 10 
+		    		    "fps": 15 
 		    			},
 		    "sprites-pinia-saltando-diagonal": { 
 				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-salto-pinia.png",
@@ -85,12 +85,12 @@
 		    "sprites-patada-alta": { 
 				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-patada-alta.png",
 		    		    "cant_fotogramas": 10,
-		    		    "fps": 10
+		    		    "fps": 16
 		    			},
 		   	"sprites-patada-baja": { 
 				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-patada-baja.png",
 		    		    "cant_fotogramas": 10,
-		    		    "fps": 10
+		    		    "fps": 16
 		    			},
 		    "sprites-patada-alta-agachado": { 
 				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-patada-alta-agachado.png",
@@ -115,7 +115,7 @@
 		    "sprites-recibiendo-golpe": { 
 			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-recibiendo-golpe.png",
 		    		    "cant_fotogramas": 4,
-		    		    "fps": 10 
+		    		    "fps": 3 
 		    			},
 		    "sprites-caida": { 
 			        	"imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-caida.png",
@@ -194,12 +194,12 @@
 		    "sprites-patada-alta": { 
 				        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-patada-alta.png",
 		    		    "cant_fotogramas": 6,
-		    		    "fps": 5
+		    		    "fps": 10
 		    			},
 			"sprites-patada-baja": { 
 				        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-patada-baja.png",
 		    		    "cant_fotogramas": 5,
-		    		    "fps": 5
+		    		    "fps": 10
 		    			},
 		    "sprites-patada-alta-agachado": { 
 				        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-patada-alta-agachado.png",
@@ -224,7 +224,7 @@
 		    "sprites-recibiendo-golpe": { 
 			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-recibiendo-golpe.png",
 		    		    "cant_fotogramas": 4,
-		    		    "fps": 10 
+		    		    "fps": 3 
 		    			},
 		    "sprites-caida": { 
 			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-caida.png",
