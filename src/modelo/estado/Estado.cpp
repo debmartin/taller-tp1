@@ -62,6 +62,10 @@ bool Estado::estaCaminando(){
     return false;
 }
 
+bool Estado::estaEnCaida(){
+    return false;
+}
+
 bool Estado::ejecutandoMovimientoEspecial(){
     return false;
 }

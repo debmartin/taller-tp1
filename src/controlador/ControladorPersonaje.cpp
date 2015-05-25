@@ -48,10 +48,10 @@ bool ControladorPersonaje::manejar_Evento(SDL_Event &evento){
 	}else{
 		//Si se presiona una tecla
 		if ( evento.key.repeat == 0 ){
-			if(!personaje1->estaBloqueado()){
+			if(!personaje1->estaBloqueado() && !personaje1->estaEnCaida()){
 				identificarOrdenPersonaje1();
 			}
-			if(!personaje2->estaBloqueado()){
+			if(!personaje2->estaBloqueado() && !personaje2->estaEnCaida()){
 				identificarOrdenPersonaje2();
 			}
 		}

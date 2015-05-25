@@ -18,6 +18,7 @@ class CaidaIzquierda : public Estado
         virtual ~CaidaIzquierda();
         bool estaSaltando();
         bool estaSaltandoDiagonalIzquierda();
+        bool estaEnCaida();
     protected:
     private:
 };
