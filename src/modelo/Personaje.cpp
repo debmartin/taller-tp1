@@ -36,6 +36,8 @@
 #include "estado/SaltandoOblicuoIzquierda.h"
 #include "estado/SaltandoVertical.h"
 #include "estado/Golpeado.h"
+#include "estado/GolpeadoCaidaDerecha.h"
+#include "estado/GolpeadoCaidaIzquierda.h"
 #include "Objeto.h"
 
 #define VELOCIDAD_DESP_HORIZONTAL_SALTANDO 320.0f
@@ -237,7 +239,13 @@ void Personaje::defenderAgachado(){
 }
 
 void Personaje::recibirGolpe(){
-    cambiarEstado(new Golpeado(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
+	if(estaSaltandoDiagonalDerecha()){
+	    cambiarEstado(new GolpeadoCaidaIzquierda(posicion, (*cajasPorEstado)[SALTANDO_OBLICUO_DERECHA]));
+	}else if(estaSaltandoDiagonalIzquierda()){
+	    cambiarEstado(new GolpeadoCaidaDerecha(posicion, (*cajasPorEstado)[SALTANDO_OBLICUO_IZQUIERDA]));
+	}else{
+	    cambiarEstado(new Golpeado(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
+	}
     Logger::getInstance()->debug("Personaje: recibiendo golpe.");
 }
 

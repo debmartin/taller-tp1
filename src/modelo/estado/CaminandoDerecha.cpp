@@ -12,7 +12,7 @@ CaminandoDerecha::CaminandoDerecha(Vector2f posInicial, bool enLimite, BVH* caja
     Estado((enLimite) ? ((Trayectoria*) new Reposo(posInicial)) : ((Trayectoria*) new MRU(posInicial, Vector2f(VELOCIDAD_DESP_HORIZONTAL_CAMINANDO, VELOCIDAD_NULA))), CAMINANDO_DERECHA, caja) {
     if(direccion == D_IZQUIERDA)
     	getTrayectoria()->reducirVelocidad(Vector2f(VELOCIDAD_DESP_HORIZONTAL_RETROCEDIENDO, VELOCIDAD_NULA));
-    //ctor
+    	//ctor
 }
 
 CaminandoDerecha::~CaminandoDerecha()
