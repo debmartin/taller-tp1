@@ -581,6 +581,7 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(flo
 	BVH* BVH_golpeado = new BVH(cajasAABB_golpeado, pivote);
 	BVH* BVH_caida_derecha = new BVH(cajasAABB_caida_derecha, pivote);
 	BVH* BVH_caida_izquierda = new BVH(cajasAABB_caida_izquierda, pivote);
+	BVH* BVH_tirando_poder = new BVH(cajasAABB_tirando_poder, pivote);
 
 	map<estado_personaje, BVH*>* mapa_BVH = new map<estado_personaje, BVH*>;
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(EN_ESPERA, BVH_reposo));
@@ -607,6 +608,7 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(flo
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(RECIBIENDO_GOLPE, BVH_golpeado));
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(CAIDA_DERECHA, BVH_caida_derecha));
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(CAIDA_IZQUIERDA, BVH_caida_izquierda));
+	mapa_BVH->insert(pair<estado_personaje, BVH*>(TIRANDO_PODER, BVH_tirando_poder));
 
 	return mapa_BVH;
 }

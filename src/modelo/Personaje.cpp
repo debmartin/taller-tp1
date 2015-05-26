@@ -480,7 +480,7 @@ bool Personaje::estaEnCaida(){
 
 void Personaje::arrojarArma(){
 	//Posiciono el poder respecto a la posicion del personaje
-	cambiarEstado(new EnEspera(posicion, TIRANDO_PODER,(*cajasPorEstado)[EN_ESPERA]));
+	cambiarEstado(new EnEspera(posicion, TIRANDO_PODER,(*cajasPorEstado)[TIRANDO_PODER]));
 	bloquearPersonaje(50);
 
 	cout << "LANZADA" << endl;
