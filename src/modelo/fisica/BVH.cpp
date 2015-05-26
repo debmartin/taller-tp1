@@ -68,6 +68,7 @@ void BVH::desplazarBVH(Vector2f v){
     for (int i = 0; i < cajasAABB->size(); i++){
         (*cajasAABB)[i]->desplazarAABB(v);
     }
+//    cout << "BVH->ENVOLVENTE:" << *(cajaLimitadora) << endl;
 }
 /*Espeja respecto al centro de la caja limitadora*/
 void BVH::espejarBVH(){
@@ -97,9 +98,9 @@ Vector2f BVH::getPivote() {
 }
 
 ostream& operator <<(ostream &o, const BVH &bvh) {
-   for (size_t i = 0; i < bvh.cajasAABB->size(); i++)
-    	//o << "BVH->CAJA[" << i << "]:" << *(*bvh.cajasAABB)[i] << endl;
-    //o << "BVH->ENVOLVENTE:" << *(bvh.cajaLimitadora) << endl;
-    //o << "BVH->PIVOTE:" << bvh.pivote << endl;
+//   for (size_t i = 0; i < bvh.cajasAABB->size(); i++)
+//    	o << "BVH->CAJA[" << i << "]:" << *(*bvh.cajasAABB)[i] << endl;
+    o << "BVH->ENVOLVENTE:" << *(bvh.cajaLimitadora) << endl;
+    o << "BVH->PIVOTE:" << bvh.pivote << endl;
     return o;
 }

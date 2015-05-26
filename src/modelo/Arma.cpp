@@ -120,7 +120,7 @@ BVH* Arma::obtenerCajaColision(){
 	return cajaBVH_arma;
 }
 
-bool Arma::empujar(Direccion direccionEmpuje, Vector2f diferencia){
+bool Arma::empujar(Vector2f& diferencia){
 	return false;
 }
 
