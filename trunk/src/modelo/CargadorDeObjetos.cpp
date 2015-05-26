@@ -288,6 +288,7 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(flo
 	vector<AABB*>* cajasAABB_golpeado = new vector<AABB*>;
 	vector<AABB*>* cajasAABB_caida_derecha = new vector<AABB*>;
 	vector<AABB*>* cajasAABB_caida_izquierda = new vector<AABB*>;
+	vector<AABB*>* cajasAABB_tirando_poder = new vector<AABB*>;
 
 	//REPOSO//
 	Vector2f reposo_caja1_PuntoMin(REPOSO_CAJA1_X1_PORCENTUAL*ancho_logico_personaje, REPOSO_CAJA1_Y1_PORCENTUAL*alto_logico_personaje);
@@ -548,6 +549,13 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(flo
 
 	AABB* caida_izquierda_caja1 = new AABB(caida_izquierda_caja1_PuntoMin, caida_izquierda_caja1_PuntoMax);
 	cajasAABB_caida_izquierda->push_back(caida_izquierda_caja1);
+
+	//TIRANDO PODER//
+	Vector2f tirando_poder_caja1_PuntoMin(TIRANDO_PODER_CAJA1_X1_PORCENTUAL*ancho_logico_personaje, TIRANDO_PODER_CAJA1_Y1_PORCENTUAL*alto_logico_personaje);
+	Vector2f tirando_poder_caja1_PuntoMax(TIRANDO_PODER_CAJA1_X2_PORCENTUAL*ancho_logico_personaje, TIRANDO_PODER_CAJA1_Y2_PORCENTUAL*alto_logico_personaje);
+
+	AABB* tirando_poder_caja1 = new AABB(tirando_poder_caja1_PuntoMin, tirando_poder_caja1_PuntoMax);
+	cajasAABB_tirando_poder->push_back(tirando_poder_caja1);
 
 	Vector2f pivote(ancho_logico_personaje/2, alto_logico_personaje);
 	//Armo los BVH de cada estado

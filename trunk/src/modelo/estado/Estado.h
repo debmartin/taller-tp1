@@ -41,6 +41,7 @@ typedef enum estado_personaje
 	RECIBIENDO_GOLPE,
 	CAIDA_DERECHA,
 	CAIDA_IZQUIERDA,
+	TIRANDO_PODER,
 	BLOQUEADO
 } estado_personaje;
 

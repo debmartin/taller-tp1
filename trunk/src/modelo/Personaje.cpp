@@ -214,9 +214,9 @@ void Personaje::defenderAgachado(){
 
 void Personaje::recibirGolpe(){
 	if(estaSaltando() && this->direccion == DIRECCION_IZQUIERDA){
-	    cambiarEstado(new CaidaDerecha(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
+	    cambiarEstado(new CaidaDerecha(posicion, (*cajasPorEstado)[CAIDA_DERECHA]));
 	}else if(estaSaltando() && this->direccion == DIRECCION_DERECHA){
-	    cambiarEstado(new CaidaIzquierda(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
+	    cambiarEstado(new CaidaIzquierda(posicion, (*cajasPorEstado)[CAIDA_IZQUIERDA]));
 	}else{
 	    cambiarEstado(new Golpeado(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
         Vector2f vectorEmpuje = (direccion == DIRECCION_DERECHA) ? VECTOR_EMPUJE_IZQUIERDA : VECTOR_EMPUJE_DERECHA;
@@ -480,6 +480,9 @@ bool Personaje::estaEnCaida(){
 
 void Personaje::arrojarArma(){
 	//Posiciono el poder respecto a la posicion del personaje
+	cambiarEstado(new EnEspera(posicion, TIRANDO_PODER,(*cajasPorEstado)[EN_ESPERA]));
+	bloquearPersonaje(50);
+
 	cout << "LANZADA" << endl;
 	Vector2f posicionObjeto;
 	if(this->direccion == DIRECCION_DERECHA){

@@ -166,6 +166,11 @@ void PersonajeDibujable::seleccionarSprite(){
 				spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_CAIDA]);
 				spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
 				break;
+			case TIRANDO_PODER:
+				this->spritePersonaje->setLoopMode(LOOP_NO_REPEAT);
+				spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_TIRANDO_PODER]);
+				spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
+				break;
 		}
 	}
 	estadoAnterior = estado;
