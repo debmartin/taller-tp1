@@ -216,11 +216,8 @@ void Personaje::recibirGolpe(){
 	    cambiarEstado(new CaidaIzquierda(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
 	}else{
 	    cambiarEstado(new Golpeado(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
-	    if(direccion == DIRECCION_DERECHA){
-	    	empujar(DIR_DERECHA, VECTOR_EMPUJE_IZQUIERDA);
-	    }else{
-	    	empujar(DIR_IZQUIERDA, VECTOR_EMPUJE_DERECHA);
-	    }
+        Vector2f vectorEmpuje = (direccion == DIRECCION_DERECHA) ? VECTOR_EMPUJE_IZQUIERDA : VECTOR_EMPUJE_DERECHA;
+	    empujar(vectorEmpuje);
 	}
     Logger::getInstance()->debug("Personaje: recibiendo golpe.");
 }
@@ -252,30 +249,37 @@ void Personaje::caer(){
 }
 
 void Personaje::arrastrar(Colisionable* otro){
-//    estado->reducirVelocidad();
+    cout << "arrastra" << endl;
 //    Vector2f diferencia = posicionCandidata - posicionAnterior - Vector2f(estado->calcularAncho(), 0);
     Vector2f diferencia = posicionCandidata - posicionAnterior;
     if (diferencia.Y() != 0)
         diferencia.setCoordenada(diferencia.X(), 0);
-
-    Direccion direccionEmpuje = (estado->Id() == CAMINANDO_DERECHA || estado->Id() == SALTANDO_OBLICUO_IZQUIERDA) ? DIR_DERECHA : DIR_IZQUIERDA;
-
-    if (otro->empujar(direccionEmpuje, diferencia))
+//    cout << "dir " << dir
+    if ((posicion.X() < otro->getPosicion().X() && estado->Id() == CAMINANDO_IZQUIERDA) ||
+        (posicion.X() > otro->getPosicion().X() && estado->Id() == CAMINANDO_DERECHA)) {
         posicion = posicionCandidata;
+        return;
+    }
+
+    if (otro->empujar(diferencia))
+        posicion = posicion + diferencia;
 }
 
-bool Personaje::empujar(Direccion direccionEmpuje, Vector2f diferencia) {
-//    if (estaAtacando())
-//        return false;
+bool Personaje::empujar(Vector2f& diferencia) {
+    if (! (estaEnReposo() || estaAgachado() || estaDefendiendo()))
+        return false;
 
-    estado_personaje proxEstado = (direccionEmpuje == DIR_DERECHA) ? CAMINANDO_DERECHA : CAMINANDO_IZQUIERDA;
+    estado_personaje proxEstado = (diferencia.X() >= 0) ? CAMINANDO_DERECHA : CAMINANDO_IZQUIERDA;
     if (estado->Id() == CAMINANDO_DERECHA && proxEstado == CAMINANDO_IZQUIERDA)
         return false;
     if (estado->Id() == CAMINANDO_IZQUIERDA && proxEstado == CAMINANDO_DERECHA)
         return false;
 
+    if (estaDefendiendo())
+        diferencia.setCoordenada(diferencia.X() / 2.0, diferencia.Y());
+
     posicionCandidata = posicion + diferencia;
-    if (estaEnReposo() && posicionable->esValida(posicionCandidata, estado->calcularAncho())){
+    if (posicionable->esValida(posicionCandidata, estado->calcularAncho())){
         posicion = posicionCandidata;
         return true;
     }
@@ -412,8 +416,8 @@ void Personaje::update(Colisionable* enemigo){
     posicionAnterior = posicion;
     calcularNuevaPosicion(enemigo);
 //    corregirPorColision(enemigo);
+    cout << "personaje" << this->numeroJugador << " ~ " << posicion << endl;
     estado->actualizar(posicion);
-
 	arma->update(enemigo);
 
 	notificarObservadores();
@@ -473,11 +477,12 @@ bool Personaje::estaEnCaida(){
 
 void Personaje::arrojarArma(){
 	//Posiciono el poder respecto a la posicion del personaje
+	cout << "LANZADA" << endl;
 	Vector2f posicionObjeto;
 	if(this->direccion == DIRECCION_DERECHA){
-		posicionObjeto.setCoordenada(posicion.X()+ancho/2,alto * 3/4);
+		posicionObjeto.setCoordenada(posicion.X()+ancho/2, alto * 5/6);
 	}else{
-		posicionObjeto.setCoordenada(posicion.X()-ancho/2,alto *3/4);
+		posicionObjeto.setCoordenada(posicion.X()-ancho/2, alto * 5/6);
 	}
 
 	arma->posicionar(posicionObjeto);

@@ -6,11 +6,6 @@
 #include "fisica/BVH.h"
 #include "estado/Estado.h"
 
-enum Direccion {
-    DIR_DERECHA,
-    DIR_IZQUIERDA
-} typedef Direccion;
-
 class Colisionable
 {
     public:
@@ -20,7 +15,7 @@ class Colisionable
         Vector2f getPosicion();
         virtual Estado* verEstado() = 0;
         virtual BVH* obtenerCajaColision() = 0;
-        virtual bool empujar(Direccion direccionEmpuje, Vector2f diferencia) = 0;
+        virtual bool empujar(Vector2f& diferencia) = 0;
         //Vector2f getPivote();
         double getAlto();
         double getAncho();
@@ -36,8 +31,7 @@ class Colisionable
         bool estaColisionando;
         double ancho;
         double alto;
-
-
+        bool estaArrastrando;
     private:
 };
 

@@ -52,7 +52,7 @@ public:
     bool vaAColisionar(Colisionable* otro);
     BVH* obtenerCajaColision();
     bool haySuperposicion(BVH* otraCaja);
-    bool empujar(Direccion direccionEmpuje, Vector2f diferencia);
+    bool empujar(Vector2f& diferencia);
     bool estaEnReposo();
     bool estaAtacando();
 };

@@ -149,7 +149,7 @@ public:
 	void arrojarArma();
 	void caer();
 	void arrastrar(Colisionable* otro);
-	bool empujar(Direccion direccionEmpuje, Vector2f diferencia);
+	bool empujar(Vector2f& diferencia);
 	void recibirDanio(int danio);
 	void bloquearPersonaje(float segundos);
 

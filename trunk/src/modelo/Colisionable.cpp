@@ -1,7 +1,8 @@
 #include "Colisionable.h"
 
 Colisionable::Colisionable(Vector2f posicionIn, double anchoIn, double altoIn) :
-    posicion(posicionIn), posicionCandidata(posicionIn), ataqueActual(NULL), estaColisionando(false), ancho(anchoIn), alto(anchoIn) {
+    posicion(posicionIn), posicionCandidata(posicionIn), ataqueActual(NULL),
+    estaColisionando(false), ancho(anchoIn), alto(anchoIn), estaArrastrando(false) {
 }
 
 Colisionable::~Colisionable() {
