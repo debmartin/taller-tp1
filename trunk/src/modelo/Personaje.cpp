@@ -16,6 +16,9 @@
 #define VECTOR_VELOCIDAD_NULA Vector2f(0, 0)
 #define VECTOR_GRAVEDAD Vector2f(0, -2600.f)
 
+#define TIEMPO_BLOQUEO_PATADA 35
+#define TIEMPO_BLOQUEO_PINIA 25
+
 Personaje::Personaje(
 		string idIn,
 		double anchoIn,
@@ -136,14 +139,14 @@ void Personaje::agacharse(){
 
 void Personaje::piniaAlta(){
     cambiarEstado(new PiniaAlta(posicion, (*cajasPorEstado)[PINIA_ALTA]));
-    bloquearPersonaje(25);
+    bloquearPersonaje(TIEMPO_BLOQUEO_PINIA);
 	Logger::getInstance()->debug("Personaje: golpe alto.");
 	//VentanaGrafica::Instance()->vibrar();
 }
 
 void Personaje::piniaBaja(){
     cambiarEstado(new PiniaBaja(posicion, (*cajasPorEstado)[PINIA_BAJA]));
-    bloquearPersonaje(25);
+    bloquearPersonaje(TIEMPO_BLOQUEO_PINIA);
 	Logger::getInstance()->debug("Personaje: golpe bajo.");
 }
 
@@ -164,13 +167,13 @@ void Personaje::piniaSaltandoVertical(){
 
 void Personaje::patadaAlta(){
 	cambiarEstado(new PatadaAlta(posicion, (*cajasPorEstado)[PATEANDO_ALTO]));
-	bloquearPersonaje(35);
+	bloquearPersonaje(TIEMPO_BLOQUEO_PATADA);
 	Logger::getInstance()->debug("Personaje: patada alta.");
 }
 
 void Personaje::patadaBaja(){
     cambiarEstado(new PatadaBaja(posicion, (*cajasPorEstado)[PATEANDO_BAJO]));
-    bloquearPersonaje(35);
+    bloquearPersonaje(TIEMPO_BLOQUEO_PATADA);
 	Logger::getInstance()->debug("Personaje: patada baja.");
 }
 

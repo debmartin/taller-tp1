@@ -16,12 +16,6 @@
 #include "../utils/Logger.h"
 #include "Control.h"
 
-#define BOTON_ARROJAR_ARMA SDLK_0
-#define BOTON_GOLPE_ALTO SDLK_1
-#define BOTON_PATADA_ALTA SDLK_2
-#define BOTON_BLOQUEAR SDLK_3
-#define TIEMPO_BLOQUEADO 200
-
 ControladorPersonaje::ControladorPersonaje(Jugador* jugador1, Jugador* jugador2, string tipoControl) :
     personaje1(jugador1->getPersonaje()), personaje2(jugador2->getPersonaje()) {
 	tipoDeControl = tipoControl;
