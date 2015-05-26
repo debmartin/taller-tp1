@@ -14,7 +14,7 @@
 
 
 CaidaDerecha::CaidaDerecha(Vector2f posInicial, BVH* caja) :
-    Estado(new MRUV(posInicial, Vector2f(VELOCIDAD_DESP_HORIZONTAL_SALTANDO, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD), RECIBIENDO_GOLPE_CAIDA, caja){
+    Estado(new MRUV(posInicial, Vector2f(VELOCIDAD_DESP_HORIZONTAL_SALTANDO, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD), CAIDA_DERECHA, caja){
 }
 
 CaidaDerecha::CaidaDerecha(Vector2f posInicial, estado_personaje estado , BVH* caja) :

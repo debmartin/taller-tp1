@@ -39,7 +39,7 @@ class ArmaDibujable;
 #define ID_PERSONAJE_DEFENDIENDO "defensa-parado"
 #define ID_PERSONAJE_DEFENDIENDO_AGACHADO "defensa-agachado"
 #define ID_PERSONAJE_RECIBIENDO_GOLPE "recibiendo-golpe"
-#define ID_PERSONAJE_RECIBIENDO_GOLPE_CAIDA "caida"
+#define ID_PERSONAJE_CAIDA "caida"
 
 class PersonajeDibujable : public Dibujable, public Observador {
 private:
