@@ -9,6 +9,7 @@ class EnEspera : public Estado
 {
     public:
         EnEspera(Vector2f posInicial, BVH* caja);
+        EnEspera(Vector2f posInicial, estado_personaje estado,BVH* caja);
         virtual ~EnEspera();
         bool estaEsperando();
     protected:

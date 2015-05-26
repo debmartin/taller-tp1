@@ -122,6 +122,11 @@
 		    		    "cant_fotogramas": 5,
 		    		    "fps": 5 
 		    			},
+		    "sprites-tirando-poder": { 
+			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-tirando-poder.png",
+		    		    "cant_fotogramas": 3,
+		    		    "fps": 10 
+		    			},
 			"arma": {
 						"alto": 50,
 						"ancho": 150,
@@ -231,10 +236,15 @@
 		    		    "cant_fotogramas": 7,
 		    		    "fps": 5 
 		    			},
+		    "sprites-tirando-poder": { 
+			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-tirando-poder.png",
+		    		    "cant_fotogramas": 3,
+		    		    "fps": 10 
+		    			},
 			"arma": {
 						"alto": 50,
 						"ancho": 150,
-		    			"imagen": "RECURSOS/PERSONAJES/SONIA/sonia-arma.png",
+		    			"imagen": "RECURSOS/PERSONAJES/SONIA/sonya-arma.png",
 		    			"cant_fotogramas": 1,
 		    		    "fps": 15,
 		    		    "velocidad": 600	//Velocidad máxima 65535
