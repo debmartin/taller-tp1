@@ -14,6 +14,7 @@ class CaidaDerecha : public Estado
 {
     public:
 		CaidaDerecha(Vector2f posInicial, BVH* caja);
+		CaidaDerecha(Vector2f posInicial, float velocidadEnY, BVH* caja);
 		CaidaDerecha(Vector2f posInicial, estado_personaje estado , BVH* caja);
         virtual ~CaidaDerecha();
         bool estaSaltando();
