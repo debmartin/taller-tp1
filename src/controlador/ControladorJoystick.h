@@ -57,6 +57,7 @@ public:
 	int xvalue(JoyNumber joy);
 	int yvalue(JoyNumber joy);
 	void update();
+	void resetControladorJoystick();
 	void clean();
 	std::map<string, bool>* getJoystickState(JoyNumber joy);
 	virtual ~ControladorJoystick();

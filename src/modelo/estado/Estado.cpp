@@ -70,6 +70,10 @@ bool Estado::ejecutandoMovimientoEspecial(){
     return false;
 }
 
+bool Estado::efectuandoGancho(){
+    return false;
+}
+
 Vector2f Estado::obtenerProximaPosicion(){
     return trayectoria->getPosicion(obtenerTiempoActual());
 }

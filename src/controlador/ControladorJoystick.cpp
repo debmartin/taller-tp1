@@ -278,3 +278,31 @@ void ControladorJoystick::refreshJoystickStateNulo() {
 	(*this->estadoJoystickNulo)["JOY_IZQUIERDA"]	  = false;
 	(*this->estadoJoystickNulo)["JOY_DERECHA"]		  = false;
 }
+
+void ControladorJoystick::resetControladorJoystick(){
+	//Reset Joystick1
+	(*this->estadoJoystick1)["JOY_PINIA_ALTA"]     = false;
+	(*this->estadoJoystick1)["JOY_PATADA_ALTA"]    = false;
+	(*this->estadoJoystick1)["JOY_PINIA_BAJA"]     = false;
+	(*this->estadoJoystick1)["JOY_PATADA_BAJA"]    = false;
+	(*this->estadoJoystick1)["JOY_DEFENSA"] 	   = false;
+	(*this->estadoJoystick1)["JOY_PODER"]		  = false;
+
+	(*this->estadoJoystick1)["JOY_ARRIBA"]		  = false;
+	(*this->estadoJoystick1)["JOY_ABAJO"]		  = false;
+	(*this->estadoJoystick1)["JOY_IZQUIERDA"]	  = false;
+	(*this->estadoJoystick1)["JOY_DERECHA"]		  = false;
+
+	//Reset Joystick2
+	(*this->estadoJoystick2)["JOY_PINIA_ALTA"]     = false;
+	(*this->estadoJoystick2)["JOY_PATADA_ALTA"]    = false;
+	(*this->estadoJoystick2)["JOY_PINIA_BAJA"]     = false;
+	(*this->estadoJoystick2)["JOY_PATADA_BAJA"]    = false;
+	(*this->estadoJoystick2)["JOY_DEFENSA"] 	   = false;
+	(*this->estadoJoystick2)["JOY_PODER"]		  = false;
+
+	(*this->estadoJoystick2)["JOY_ARRIBA"]		  = false;
+	(*this->estadoJoystick2)["JOY_ABAJO"]		  = false;
+	(*this->estadoJoystick2)["JOY_IZQUIERDA"]	  = false;
+	(*this->estadoJoystick2)["JOY_DERECHA"]		  = false;
+}

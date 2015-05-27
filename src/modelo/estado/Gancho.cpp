@@ -22,6 +22,10 @@ bool Gancho::estaAtacando(){
 	return true;
 }
 
-bool Gancho::estaDefendiendo(){
-	return false;
+bool Gancho::efectuandoGancho(){
+	return true;
+}
+
+bool Gancho::ejecutandoMovimientoEspecial(){
+    return true;
 }

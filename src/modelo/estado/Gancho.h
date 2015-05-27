@@ -16,7 +16,8 @@ class Gancho : public Estado
 		Gancho(Vector2f posInicial, BVH* caja);
         virtual ~Gancho();
         bool estaAtacando();
-        bool estaDefendiendo();
+        bool efectuandoGancho();
+        bool ejecutandoMovimientoEspecial();
 };
 
 #endif /* SRC_MODELO_ESTADO_GANCHO_H_ */
