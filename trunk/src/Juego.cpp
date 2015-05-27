@@ -91,6 +91,7 @@ void Juego::update(bool& recargar)
         recargar = true;
         Logger::getInstance()->info("GAME OVER JUGADOR 2");
     }
+	TheInputHandler::Instance()->resetControladorJoystick();
 }
 
 void Juego::handleEvents(bool& recargar)
