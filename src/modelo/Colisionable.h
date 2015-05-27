@@ -20,6 +20,7 @@ class Colisionable
         double getAlto();
         double getAncho();
         virtual bool estaAtacando() = 0;
+        virtual bool estaInhabilitado();
 
     protected:
         Colisionable(Vector2f posicionIn, double anchoIn, double altoIn);

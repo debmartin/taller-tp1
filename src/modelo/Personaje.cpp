@@ -252,12 +252,10 @@ void Personaje::caer(){
 }
 
 void Personaje::arrastrar(Colisionable* otro){
-    cout << "arrastra" << endl;
 //    Vector2f diferencia = posicionCandidata - posicionAnterior - Vector2f(estado->calcularAncho(), 0);
     Vector2f diferencia = posicionCandidata - posicionAnterior;
     if (diferencia.Y() != 0)
         diferencia.setCoordenada(diferencia.X(), 0);
-//    cout << "dir " << dir
     if ((posicion.X() < otro->getPosicion().X() && estado->Id() == CAMINANDO_IZQUIERDA) ||
         (posicion.X() > otro->getPosicion().X() && estado->Id() == CAMINANDO_DERECHA)) {
         posicion = posicionCandidata;
@@ -299,6 +297,7 @@ void Personaje::colisionar(Colisionable* otro){
 
     if (estaDefendiendo()){
     	recibirDanio(otro->obtenerDanio() / 4);
+    } else if (estaAgachado() && otro->estaInhabilitado()) {
     } else if (estaEnReposo() || estaCaminando()) {
     	recibirGolpe();
         recibirDanio(otro->obtenerDanio());
@@ -316,7 +315,6 @@ bool Personaje::vaAColisionar(Colisionable* enemigo){
 	double altoFict = estado->calcularAlto();
 
 	if (Colisionable::vaAColisionar(enemigo, anchoFict, altoFict)){
-//		cout<<"vaAColisionar"<<endl;
 		return true;
 	}
     return estado->haySuperposicion(enemigo->obtenerCajaColision());
@@ -419,7 +417,6 @@ void Personaje::update(Colisionable* enemigo){
     posicionAnterior = posicion;
     calcularNuevaPosicion(enemigo);
 //    corregirPorColision(enemigo);
-    cout << "personaje" << this->numeroJugador << " ~ " << posicion << endl;
     estado->actualizar(posicion);
 	arma->update(enemigo);
 
@@ -483,7 +480,6 @@ void Personaje::arrojarArma(){
 	cambiarEstado(new EnEspera(posicion, TIRANDO_PODER,(*cajasPorEstado)[TIRANDO_PODER]));
 	bloquearPersonaje(50);
 
-	cout << "LANZADA" << endl;
 	Vector2f posicionObjeto;
 	if(this->direccion == DIRECCION_DERECHA){
 		posicionObjeto.setCoordenada(posicion.X()+ancho/2, alto * 5/6);
@@ -560,4 +556,8 @@ float Personaje::getAltoEnvolvente() {
 
 Estado* Personaje::verEstado(){
 	return estado;
+}
+
+bool Personaje::estaInhabilitado(){
+    return (estado->Id() == PINIA_ALTA) || (estado->Id() == PINIA_BAJA) || (estado->Id() == GANCHO);
 }

@@ -121,6 +121,7 @@ public:
 	void cambiarEstado(Estado* nuevo);
 	estado_personaje getEstado();
 	Estado* verEstado();
+	bool estaInhabilitado();
 
 	//Movimientos y poderes
 	void caminarDerecha();
