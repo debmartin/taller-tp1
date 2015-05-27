@@ -477,12 +477,14 @@ bool Personaje::estaEnCaida(){
 
 void Personaje::arrojarArma(){
 	//Posiciono el poder respecto a la posicion del personaje
-	cambiarEstado(new EnEspera(posicion, TIRANDO_PODER,(*cajasPorEstado)[TIRANDO_PODER]));
-	bloquearPersonaje(50);
+	if(!estaSaltando()){
+		cambiarEstado(new EnEspera(posicion, TIRANDO_PODER,(*cajasPorEstado)[TIRANDO_PODER]));
+		bloquearPersonaje(50);
+	}
 
 	Vector2f posicionObjeto;
 	if(this->direccion == DIRECCION_DERECHA){
-		posicionObjeto.setCoordenada(posicion.X()+ancho/2, alto * 5/6);
+		posicionObjeto.setCoordenada(posicion.X(), alto * 5/6);
 	}else{
 		posicionObjeto.setCoordenada(posicion.X()-ancho/2, alto * 5/6);
 	}
