@@ -213,21 +213,22 @@ void Personaje::defenderAgachado(){
 }
 
 void Personaje::recibirGolpe(Colisionable* otro){
-	if(estaSaltando() && this->direccion == DIRECCION_IZQUIERDA){
-	    cambiarEstado(new CaidaDerecha(posicion, (*cajasPorEstado)[CAIDA_DERECHA]));
-	}else if(estaSaltando() && this->direccion == DIRECCION_DERECHA){
-	    cambiarEstado(new CaidaIzquierda(posicion, (*cajasPorEstado)[CAIDA_IZQUIERDA]));
-	}else if(otro->ejecutandoMovimientoEspecial()){
+	if(otro->ejecutandoMovimientoEspecial()){
 		if(otro->verEstado()->efectuandoGancho()){
 			if(this->direccion == DIRECCION_IZQUIERDA){
 				cambiarEstado(new CaidaDerecha(posicion, (*cajasPorEstado)[CAIDA_DERECHA]));
 			}else if(this->direccion == DIRECCION_DERECHA){
 				cambiarEstado(new CaidaIzquierda(posicion, (*cajasPorEstado)[CAIDA_IZQUIERDA]));
 			}
-		}else{
+		//Si el oponente pega una patada:
+		}else if(!estaSaltando()){
 			cambiarEstado(new Golpeado(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
 			Vector2f vectorEmpuje = (direccion == DIRECCION_DERECHA) ? VECTOR_EMPUJE_IZQUIERDA : VECTOR_EMPUJE_DERECHA;
 			empujar(vectorEmpuje);
+		}else if(estaSaltando() && this->direccion == DIRECCION_IZQUIERDA){
+		    cambiarEstado(new CaidaDerecha(posicion, (*cajasPorEstado)[CAIDA_DERECHA]));
+		}else if(estaSaltando() && this->direccion == DIRECCION_DERECHA){
+		    cambiarEstado(new CaidaIzquierda(posicion, (*cajasPorEstado)[CAIDA_IZQUIERDA]));
 		}
 	}else{
 	    cambiarEstado(new Golpeado(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
