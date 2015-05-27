@@ -22,7 +22,6 @@ bool PatadaBaja::estaAtacando(){
     return true;
 }
 
-bool PatadaBaja::estaDefendiendo(){
-    return false;
+bool PatadaBaja::ejecutandoMovimientoEspecial(){
+    return true;
 }
-

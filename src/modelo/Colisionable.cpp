@@ -52,3 +52,7 @@ double Colisionable::getAncho(){
 bool Colisionable::estaInhabilitado(){
     return false;
 }
+
+bool Colisionable::ejecutandoMovimientoEspecial(){
+    return false;
+}

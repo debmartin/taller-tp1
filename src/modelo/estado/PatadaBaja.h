@@ -13,10 +13,10 @@
 class PatadaBaja : public Estado
 {
     public:
-	PatadaBaja(Vector2f posInicial, BVH* caja);
+		PatadaBaja(Vector2f posInicial, BVH* caja);
         virtual ~PatadaBaja();
         bool estaAtacando();
-        bool estaDefendiendo();
+        bool ejecutandoMovimientoEspecial();
 };
 
 

@@ -10,9 +10,10 @@ class Bloqueado : public Estado
         virtual ~Bloqueado();
         bool estaBloqueado();
         bool estaAtacando();
+        bool ejecutandoMovimientoEspecial();
     protected:
     private:
-        bool bandera;
+        Estado* estadoDeBloqueo;
 };
 
 #endif // BLOQUEADO_H
