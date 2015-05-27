@@ -94,7 +94,7 @@ Objeto* Personaje::getArma(){
 Vector2f Personaje::obtenerPosicionEnVentana(){
 	//Vector2f P1(getPivote().X(), getPivote().Y());
 	//Vector2f P1(posicion.X(), posicion.Y() + getAlto()); // TODO: ESTE ES EL ORIGINAL, EL DE ABAJO USA PIVOTE.
-	Vector2f P1(getPivote().X(), posicion.Y() + getAlto()); // TODO: ESTA MODIFICACION UTILIZA LA COMPONENTE X DEL PIVOTE SOLAMENTE, ESTA INCOMPLETA
+	Vector2f P1(getPivote().X(), posicion.Y() + getAlto());
 	Vector2f P2 = VentanaGrafica::Instance()->calcularPosicionEnVentana(P1);
 	return P2;
 }
