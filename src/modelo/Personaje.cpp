@@ -15,6 +15,7 @@
 #define VELOCIDAD_NULA 0.0f
 #define VECTOR_VELOCIDAD_NULA Vector2f(0, 0)
 #define VECTOR_GRAVEDAD Vector2f(0, -2600.f)
+#define VELOCIDAD_CAIDA_SUAVE 200
 
 #define TIEMPO_BLOQUEO_PATADA 35
 #define TIEMPO_BLOQUEO_PINIA 25
@@ -226,10 +227,16 @@ void Personaje::recibirGolpe(Colisionable* otro){
 			Vector2f vectorEmpuje = (direccion == DIRECCION_DERECHA) ? VECTOR_EMPUJE_IZQUIERDA : VECTOR_EMPUJE_DERECHA;
 			empujar(vectorEmpuje);
 		}else if(estaSaltando() && this->direccion == DIRECCION_IZQUIERDA){
-		    cambiarEstado(new CaidaDerecha(posicion, (*cajasPorEstado)[CAIDA_DERECHA]));
+		    cambiarEstado(new CaidaDerecha(posicion, VELOCIDAD_CAIDA_SUAVE, (*cajasPorEstado)[CAIDA_DERECHA]));
 		}else if(estaSaltando() && this->direccion == DIRECCION_DERECHA){
-		    cambiarEstado(new CaidaIzquierda(posicion, (*cajasPorEstado)[CAIDA_IZQUIERDA]));
+		    cambiarEstado(new CaidaIzquierda(posicion, VELOCIDAD_CAIDA_SUAVE, (*cajasPorEstado)[CAIDA_IZQUIERDA]));
 		}
+	}else if(estaSaltando() && this->direccion == DIRECCION_IZQUIERDA){
+		cout<<"CaidaDerecha suave"<<endl;
+		cambiarEstado(new CaidaDerecha(posicion, VELOCIDAD_CAIDA_SUAVE, (*cajasPorEstado)[CAIDA_DERECHA]));
+	}else if(estaSaltando() && this->direccion == DIRECCION_DERECHA){
+		cout<<"CaidaIzquierda suave"<<endl;
+		cambiarEstado(new CaidaIzquierda(posicion, VELOCIDAD_CAIDA_SUAVE, (*cajasPorEstado)[CAIDA_IZQUIERDA]));
 	}else{
 	    cambiarEstado(new Golpeado(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
 	}
