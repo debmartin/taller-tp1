@@ -249,7 +249,6 @@ void ControladorJoystick::refreshJoystickState1() {
 	(*this->estadoJoystick1)["JOY_ABAJO"]		   = this->getAxisState(JOYSTICK1, "JOY_ABAJO");
 	(*this->estadoJoystick1)["JOY_IZQUIERDA"]	   = this->getAxisState(JOYSTICK1, "JOY_IZQUIERDA");
 	(*this->estadoJoystick1)["JOY_DERECHA"]		   = this->getAxisState(JOYSTICK1, "JOY_DERECHA");
-	(*this->estadoJoystick1)["JOY_PODER"]		   = this->getAxisState(JOYSTICK1, "JOY_PODER");
 }
 
 void ControladorJoystick::refreshJoystickState2() {
