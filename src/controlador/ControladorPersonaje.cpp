@@ -33,19 +33,19 @@ bool ControladorPersonaje::manejar_Evento(SDL_Event &evento){
     TheInputHandler::Instance()->handleEventsJoysticks(evento);
 
     if(tipoDeControl == "JOYSTICK"){
-    	if(!personaje1->estaBloqueado()){
+    	if(!personaje1->estaBloqueado() && !personaje1->estaEnCaida()){
     		identificarOrdenJoystickPersonaje(personaje1, JOYSTICK1);
     	}
-    	if(!personaje2->estaBloqueado()){
+    	if(!personaje2->estaBloqueado() && !personaje2->estaEnCaida()){
     		identificarOrdenJoystickPersonaje(personaje2, JOYSTICK2);
     	}
 	}else{
 		//Si se presiona una tecla
 		if ( evento.key.repeat == 0 ){
-			if(!personaje1->estaBloqueado() && !personaje1->estaEnCaida()){
+			if(!personaje1->estaBloqueado() ){
 				identificarOrdenPersonaje1();
 			}
-			if(!personaje2->estaBloqueado() && !personaje2->estaEnCaida()){
+			if(!personaje2->estaBloqueado()){
 				identificarOrdenPersonaje2();
 			}
 		}

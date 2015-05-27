@@ -22,12 +22,14 @@ private:
 	Jugador* jugador2;
 	ControladorPersonaje* controladorPersonaje;
 	HUD* hud;
+
 public:
 	Juego(Jugador* jugador1, Jugador* jugador2);
 	void render();
 	void update(bool& recargar);
 	void handleEvents(bool& recargar);
 	bool running();
+
 	~Juego();
 	//
 	static Juego* Instance();

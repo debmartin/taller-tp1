@@ -153,6 +153,7 @@ public:
 	bool empujar(Vector2f& diferencia);
 	void recibirDanio(int danio);
 	void bloquearPersonaje(float segundos);
+	void victoria();
 
 	// CAJAS DE COLISION
 	virtual void colisionar(Colisionable* otro);

@@ -127,13 +127,18 @@
 		    		    "cant_fotogramas": 3,
 		    		    "fps": 10 
 		    			},
+		    "sprites-victoria": { 
+			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-victoria.png",
+		    		    "cant_fotogramas": 4,
+		    		    "fps": 10 
+		    			},
 			"arma": {
 						"alto": 50,
 						"ancho": 150,
 		    			"imagen": "RECURSOS/PERSONAJES/SUBZERO/sub-zero-arma.png",
 		    			"cant_fotogramas": 1,
 		    		    "fps": 15,
-		    		    "velocidad": 50        		     
+		    		    "velocidad": 600        		     
 		    			},
 			"color-alternativo": {
 						"h-inicial": 53,
@@ -239,6 +244,11 @@
 		    "sprites-tirando-poder": { 
 			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-tirando-poder.png",
 		    		    "cant_fotogramas": 3,
+		    		    "fps": 10 
+		    			},
+		    "sprites-victoria": { 
+			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-victoria.png",
+		    		    "cant_fotogramas": 8,
 		    		    "fps": 10 
 		    			},
 			"arma": {
