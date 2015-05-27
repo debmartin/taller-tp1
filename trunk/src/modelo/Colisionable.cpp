@@ -48,3 +48,7 @@ double Colisionable::getAlto(){
 double Colisionable::getAncho(){
     return ancho;
 }
+
+bool Colisionable::estaInhabilitado(){
+    return false;
+}
