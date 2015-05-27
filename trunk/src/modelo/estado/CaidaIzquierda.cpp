@@ -9,7 +9,7 @@
 #include "../MRUV.h"
 
 #define VELOCIDAD_DESP_HORIZONTAL_SALTANDO 320.0f
-#define VELOCIDAD_DESP_VERTICAL 700.0f
+#define VELOCIDAD_DESP_VERTICAL 900.0f
 #define VECTOR_GRAVEDAD Vector2f(0, -2600.f)
 
 CaidaIzquierda::CaidaIzquierda(Vector2f posInicial, BVH* caja) :

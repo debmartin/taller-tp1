@@ -216,27 +216,29 @@ void Personaje::defenderAgachado(){
 void Personaje::recibirGolpe(Colisionable* otro){
 	if(otro->ejecutandoMovimientoEspecial()){
 		if(otro->verEstado()->efectuandoGancho()){
-			if(this->direccion == DIRECCION_IZQUIERDA){
+			cout<<"Gancho"<<endl;
+			if(this->direccion == DIRECCION_IZQUIERDA && !llegoAlLimiteDerecho()){
 				cambiarEstado(new CaidaDerecha(posicion, (*cajasPorEstado)[CAIDA_DERECHA]));
 			}else if(this->direccion == DIRECCION_DERECHA){
 				cambiarEstado(new CaidaIzquierda(posicion, (*cajasPorEstado)[CAIDA_IZQUIERDA]));
 			}
+			VentanaGrafica::Instance()->vibrar();
 		//Si el oponente pega una patada:
 		}else if(!estaSaltando()){
 			cambiarEstado(new Golpeado(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
 			Vector2f vectorEmpuje = (direccion == DIRECCION_DERECHA) ? VECTOR_EMPUJE_IZQUIERDA : VECTOR_EMPUJE_DERECHA;
 			empujar(vectorEmpuje);
 		}else if(estaSaltando() && this->direccion == DIRECCION_IZQUIERDA){
-		    cambiarEstado(new CaidaDerecha(posicion, VELOCIDAD_CAIDA_SUAVE, (*cajasPorEstado)[CAIDA_DERECHA]));
+		    cambiarEstado(new CaidaDerecha(posicion,(*cajasPorEstado)[CAIDA_DERECHA]));
 		}else if(estaSaltando() && this->direccion == DIRECCION_DERECHA){
-		    cambiarEstado(new CaidaIzquierda(posicion, VELOCIDAD_CAIDA_SUAVE, (*cajasPorEstado)[CAIDA_IZQUIERDA]));
+		    cambiarEstado(new CaidaIzquierda(posicion,(*cajasPorEstado)[CAIDA_IZQUIERDA]));
 		}
 	}else if(estaSaltando() && this->direccion == DIRECCION_IZQUIERDA){
 		cout<<"CaidaDerecha suave"<<endl;
-		cambiarEstado(new CaidaDerecha(posicion, VELOCIDAD_CAIDA_SUAVE, (*cajasPorEstado)[CAIDA_DERECHA]));
+		cambiarEstado(new CaidaDerecha(posicion, (*cajasPorEstado)[CAIDA_DERECHA]));
 	}else if(estaSaltando() && this->direccion == DIRECCION_DERECHA){
 		cout<<"CaidaIzquierda suave"<<endl;
-		cambiarEstado(new CaidaIzquierda(posicion, VELOCIDAD_CAIDA_SUAVE, (*cajasPorEstado)[CAIDA_IZQUIERDA]));
+		cambiarEstado(new CaidaIzquierda(posicion, (*cajasPorEstado)[CAIDA_IZQUIERDA]));
 	}else{
 	    cambiarEstado(new Golpeado(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
 	}
@@ -307,6 +309,7 @@ bool Personaje::empujar(Vector2f& diferencia) {
 
 void Personaje::colisionar(Colisionable* otro){
     if (estaAtacando()) {
+    	cout<<"EstaAtacando"<<endl;
     	//cout<<"Esta atacando, va a colisionar"<<endl;
         ataqueActual = estado->obtenerAtaque();
         Colisionable::colisionar(otro);
@@ -507,9 +510,9 @@ void Personaje::arrojarArma(){
 
 	Vector2f posicionObjeto;
 	if(this->direccion == DIRECCION_DERECHA){
-		posicionObjeto.setCoordenada(posicion.X(), alto * 5/6);
+		posicionObjeto.setCoordenada(posicion.X(), posicion.Y()+alto * 4/6);
 	}else{
-		posicionObjeto.setCoordenada(posicion.X()-ancho/2, alto * 5/6);
+		posicionObjeto.setCoordenada(posicion.X()-ancho/2, posicion.Y()+alto * 4/6);
 	}
 
 	arma->posicionar(posicionObjeto);
