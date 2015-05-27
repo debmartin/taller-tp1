@@ -124,9 +124,9 @@ void Sprite::update() {
 		else if (this->orientacion == ORIENTACION_DERECHA && this->sentidoReproduccion == HACIA_ATRAS)
 			this->setFotogramaActual(cantidadFotogramas + 1 - nuevoFotograma);
 		else if (this->orientacion == ORIENTACION_IZQUIERDA && this->sentidoReproduccion == HACIA_ADELANTE)
-			this->setFotogramaActual(cantidadFotogramas + 1 - nuevoFotograma);
-		else if (this->orientacion == ORIENTACION_IZQUIERDA && this->sentidoReproduccion == HACIA_ATRAS)
 			this->setFotogramaActual(nuevoFotograma);
+		else if (this->orientacion == ORIENTACION_IZQUIERDA && this->sentidoReproduccion == HACIA_ATRAS)
+			this->setFotogramaActual(cantidadFotogramas + 1 - nuevoFotograma);
 	}
 
 	if (this->loopMode == LOOP_NO_REPEAT) {
@@ -146,9 +146,9 @@ void Sprite::update() {
 			else if (this->orientacion == ORIENTACION_DERECHA && this->sentidoReproduccion == HACIA_ATRAS)
 				this->setFotogramaActual(cantidadFotogramas + 1 - nuevoFotograma);
 			else if (this->orientacion == ORIENTACION_IZQUIERDA && this->sentidoReproduccion == HACIA_ADELANTE)
-				this->setFotogramaActual(cantidadFotogramas + 1 - nuevoFotograma);
-			else if (this->orientacion == ORIENTACION_IZQUIERDA && this->sentidoReproduccion == HACIA_ATRAS)
 				this->setFotogramaActual(nuevoFotograma);
+			else if (this->orientacion == ORIENTACION_IZQUIERDA && this->sentidoReproduccion == HACIA_ATRAS)
+				this->setFotogramaActual(cantidadFotogramas + 1 - nuevoFotograma);
 		}
 	}
 
@@ -166,9 +166,9 @@ void Sprite::update() {
 		else if (this->orientacion == ORIENTACION_DERECHA && this->sentidoReproduccion == HACIA_ATRAS)
 			this->setFotogramaActual(cantidadFotogramas + 1 - nuevoFotograma);
 		else if (this->orientacion == ORIENTACION_IZQUIERDA && this->sentidoReproduccion == HACIA_ADELANTE)
-			this->setFotogramaActual(cantidadFotogramas + 1 - nuevoFotograma);
-		else if (this->orientacion == ORIENTACION_IZQUIERDA && this->sentidoReproduccion == HACIA_ATRAS)
 			this->setFotogramaActual(nuevoFotograma);
+		else if (this->orientacion == ORIENTACION_IZQUIERDA && this->sentidoReproduccion == HACIA_ATRAS)
+			this->setFotogramaActual(cantidadFotogramas + 1 - nuevoFotograma);
 	}
 
 	//Logger::getInstance()->debug("Sprite::update()");
