@@ -389,11 +389,11 @@ void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
         posicionCandidata = estado->obtenerProximaPosicion();
 
         float distanciaAObjetivo = calcularDistancia(posicionCandidata.X(), enemigo->getPosicion().X(), estado->calcularAncho());
-        if (posicionCandidata.Y() <= posicionInicial.Y()) {
+        if (posicionable->esValida(posicionCandidata, estado->calcularAncho())){
+            posicion = posicionCandidata;
+        } else if (posicionCandidata.Y() <= posicionInicial.Y()) {
             volverAlPiso(distanciaAObjetivo);
         //arrastrar(enemigo);
-        } else if(posicionable->esValida(posicionCandidata, estado->calcularAncho())){
-            posicion = posicionCandidata;
         } else {
             caer();
       }
