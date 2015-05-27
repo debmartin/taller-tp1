@@ -23,3 +23,7 @@ bool PateandoAltoAgachado::estaAtacando(){
 bool PateandoAltoAgachado::estaAgachado(){
     return true;
 }
+
+bool PateandoAltoAgachado::ejecutandoMovimientoEspecial(){
+    return true;
+}

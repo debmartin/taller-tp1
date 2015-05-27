@@ -18,6 +18,7 @@ class PateandoAltoAgachado : public Estado
 		virtual ~PateandoAltoAgachado();
 		bool estaAtacando();
 		bool estaAgachado();
+		bool ejecutandoMovimientoEspecial();
 };
 
 #endif /* SRC_MODELO_ESTADO_PATEANDOALTOAGACHADO_H_ */
