@@ -21,6 +21,7 @@ class Colisionable
         double getAncho();
         virtual bool estaAtacando() = 0;
         virtual bool estaInhabilitado();
+        virtual bool ejecutandoMovimientoEspecial();
 
     protected:
         Colisionable(Vector2f posicionIn, double anchoIn, double altoIn);

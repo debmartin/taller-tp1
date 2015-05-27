@@ -212,15 +212,17 @@ void Personaje::defenderAgachado(){
 	Logger::getInstance()->debug("Personaje: defensa.");
 }
 
-void Personaje::recibirGolpe(){
+void Personaje::recibirGolpe(Colisionable* otro){
 	if(estaSaltando() && this->direccion == DIRECCION_IZQUIERDA){
 	    cambiarEstado(new CaidaDerecha(posicion, (*cajasPorEstado)[CAIDA_DERECHA]));
 	}else if(estaSaltando() && this->direccion == DIRECCION_DERECHA){
 	    cambiarEstado(new CaidaIzquierda(posicion, (*cajasPorEstado)[CAIDA_IZQUIERDA]));
-	}else{
+	}else if(otro->ejecutandoMovimientoEspecial()){
 	    cambiarEstado(new Golpeado(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
         Vector2f vectorEmpuje = (direccion == DIRECCION_DERECHA) ? VECTOR_EMPUJE_IZQUIERDA : VECTOR_EMPUJE_DERECHA;
 	    empujar(vectorEmpuje);
+	}else{
+	    cambiarEstado(new Golpeado(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
 	}
     Logger::getInstance()->debug("Personaje: recibiendo golpe.");
 }
@@ -289,6 +291,7 @@ bool Personaje::empujar(Vector2f& diferencia) {
 
 void Personaje::colisionar(Colisionable* otro){
     if (estaAtacando()) {
+    	//cout<<"Esta atacando, va a colisionar"<<endl;
         ataqueActual = estado->obtenerAtaque();
         Colisionable::colisionar(otro);
         return;
@@ -299,10 +302,10 @@ void Personaje::colisionar(Colisionable* otro){
     	recibirDanio(otro->obtenerDanio() / 4);
     } else if (estaAgachado() && otro->estaInhabilitado()) {
     } else if (estaEnReposo() || estaCaminando()) {
-    	recibirGolpe();
+    	recibirGolpe(otro);
         recibirDanio(otro->obtenerDanio());
     } else if (estaSaltando()){
-    	recibirGolpe();
+    	recibirGolpe(otro);
         recibirDanio(otro->obtenerDanio());
     } else{
         recibirDanio(otro->obtenerDanio());
@@ -475,6 +478,10 @@ bool Personaje::estaEnCaida(){
     return (estado->estaEnCaida());
 }
 
+bool Personaje::estaMuerto(){
+    return (this->energia <= 0);
+}
+
 void Personaje::arrojarArma(){
 	//Posiciono el poder respecto a la posicion del personaje
 	if(!estaSaltando()){
@@ -539,13 +546,6 @@ void Personaje::cambiarNumeroPersonaje(){
 	}else{
 		this->numeroJugador = NUMERO_DE_PERSONAJE_1;
 	}
-}
-//void Personaje::agregarCajasColisiones(BVH* caja, estado_personaje estadoCaja){
-//    cajasPorEstado[estadoCaja] = caja;
-//}
-
-bool Personaje::estaMuerto(){
-    return (this->energia <= 0);
 }
 
 float Personaje::getAnchoEnvolvente() {

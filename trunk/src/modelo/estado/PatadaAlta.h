@@ -16,7 +16,7 @@ class PatadaAlta : public Estado
 	PatadaAlta(Vector2f posInicial, BVH* caja);
         virtual ~PatadaAlta();
         bool estaAtacando();
-        bool estaDefendiendo();
+        bool ejecutandoMovimientoEspecial();
 };
 
 #endif /* SRC_MODELO_ESTADO_PATADAALTA_H_ */

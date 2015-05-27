@@ -7,7 +7,7 @@ Bloqueado::Bloqueado(Estado* estadoActual) :
 	if(estadoActual->estaAtacando()){
 		ataqueEstado = new Ataque(estadoActual->obtenerAtaque()->obtenerDanio());
 	}
-	bandera = estadoActual->estaAtacando();
+	estadoDeBloqueo = estadoActual;
 }
 
 Bloqueado::~Bloqueado(){
@@ -18,8 +18,9 @@ bool Bloqueado::estaBloqueado(){
 }
 
 bool Bloqueado::estaAtacando(){
-	if (bandera){
-		return true;
-	}
-	return false;
+	return (estadoDeBloqueo->estaAtacando());
+}
+
+bool Bloqueado::ejecutandoMovimientoEspecial(){
+	return (estadoDeBloqueo->ejecutandoMovimientoEspecial());
 }
