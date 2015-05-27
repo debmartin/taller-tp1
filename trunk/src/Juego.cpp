@@ -58,7 +58,6 @@ void Juego::agregarObservadoresJugador(Jugador* unJugador) {
 
 void Juego::render()
 {
-
 	VentanaGrafica::Instance()->dibujarTodo();
 	hud->dibujar();
 	SDL_RenderPresent(Renderizador::Instance()->getRenderer());
@@ -76,6 +75,7 @@ void Juego::update(bool& recargar)
 	// FIN CODIGO USUARIO
 
 	if (jugador1->getPersonaje()->estaMuerto()) {
+		cout<<"muere jugador1"<<endl;
 		jugador1->getPersonaje()->mantenerReposo();
 		jugador2->getPersonaje()->mantenerReposo();
         juegoCorriendo = false;
@@ -85,13 +85,14 @@ void Juego::update(bool& recargar)
 
     }
 	if (jugador2->getPersonaje()->estaMuerto()) {
+		cout<<"muere jugador2"<<endl;
 		jugador1->getPersonaje()->mantenerReposo();
 		jugador2->getPersonaje()->mantenerReposo();
         juegoCorriendo = false;
         recargar = true;
         Logger::getInstance()->info("GAME OVER JUGADOR 2");
     }
-	TheInputHandler::Instance()->resetControladorJoystick();
+
 }
 
 void Juego::handleEvents(bool& recargar)
