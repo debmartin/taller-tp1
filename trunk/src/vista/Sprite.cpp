@@ -47,6 +47,7 @@ void Sprite::dibujar() {
 	destRect.h = (int) getAltoPx();
 
 	SDL_RendererFlip flip;
+
 	if (orientacion == ORIENTACION_DERECHA)
 		flip = SDL_FLIP_NONE;
 	else
@@ -124,9 +125,9 @@ void Sprite::update() {
 		else if (this->orientacion == ORIENTACION_DERECHA && this->sentidoReproduccion == HACIA_ATRAS)
 			this->setFotogramaActual(cantidadFotogramas + 1 - nuevoFotograma);
 		else if (this->orientacion == ORIENTACION_IZQUIERDA && this->sentidoReproduccion == HACIA_ADELANTE)
-			this->setFotogramaActual(nuevoFotograma);
-		else if (this->orientacion == ORIENTACION_IZQUIERDA && this->sentidoReproduccion == HACIA_ATRAS)
 			this->setFotogramaActual(cantidadFotogramas + 1 - nuevoFotograma);
+		else if (this->orientacion == ORIENTACION_IZQUIERDA && this->sentidoReproduccion == HACIA_ATRAS)
+			this->setFotogramaActual(nuevoFotograma);
 	}
 
 	if (this->loopMode == LOOP_NO_REPEAT) {
