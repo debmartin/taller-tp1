@@ -78,6 +78,7 @@ void Arma::update(Colisionable* enemigo){
 	} else {
         posicion = POS_INICIAL_OBJETO;
 	}
+	cout << "arma " << posicion << endl;
 	cajaBVH_arma->desplazarBVH(posicion - posicionAnterior);
 	notificarObservadores();
 }
@@ -105,8 +106,8 @@ void Arma::colisionar(Colisionable* otro){
 bool Arma::vaAColisionar(Colisionable* otro){
 //	if (Colisionable::vaAColisionar(otro, anchoArma, altoArma))
     if (((posicionAnterior.X() < otro->getPosicion().X() && posicionCandidata.X() >= otro->getPosicion().X() - otro->getAncho()) ||
-             (posicionAnterior.X() > otro->getPosicion().X() + otro->getAncho() && posicionCandidata.X()  <= otro->getPosicion().X() + otro->getAncho())))
-//             (posicionCandidata.Y() - alto/2<= otro->getPosicion().Y() + otro->getAlto()))
+        (posicionAnterior.X() > otro->getPosicion().X() + otro->getAncho() && posicionCandidata.X()  <= otro->getPosicion().X() + otro->getAncho())) &&
+        (posicionCandidata.Y() <= otro->getPosicion().Y() + otro->getAlto() && posicionCandidata.Y() >= otro->getPosicion().Y()))
 	        return true;
 	return haySuperposicion(otro->obtenerCajaColision());
 }
