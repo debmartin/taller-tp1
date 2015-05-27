@@ -99,17 +99,18 @@ Vector2f Arma::obtenerPosicionEnVentana(){
 
 //Colisiones
 void Arma::colisionar(Colisionable* otro){
-	Colisionable::colisionar(otro);
+	if(!(otro->verEstado()->estaAgachado()))
+		Colisionable::colisionar(otro);
 	cambiarEstado(NO_VISIBLE);
 }
 
 bool Arma::vaAColisionar(Colisionable* otro){
-//	if (Colisionable::vaAColisionar(otro, anchoArma, altoArma))
-    if (((posicionAnterior.X() < otro->getPosicion().X() && posicionCandidata.X() >= otro->getPosicion().X() - otro->getAncho()) ||
-        (posicionAnterior.X() > otro->getPosicion().X() + otro->getAncho() && posicionCandidata.X()  <= otro->getPosicion().X() + otro->getAncho())) &&
-        (posicionCandidata.Y() <= otro->getPosicion().Y() + otro->getAlto() && posicionCandidata.Y() >= otro->getPosicion().Y()))
-	        return true;
-	return haySuperposicion(otro->obtenerCajaColision());
+	//	if (Colisionable::vaAColisionar(otro, anchoArma, altoArma))
+	    if (((posicionAnterior.X() < otro->getPosicion().X() && posicionCandidata.X() >= otro->getPosicion().X() - otro->getAncho()) ||
+	             (posicionAnterior.X() > otro->getPosicion().X() + otro->getAncho() && posicionCandidata.X()  <= otro->getPosicion().X() + otro->getAncho())))
+	//             (posicionCandidata.Y() - alto/2<= otro->getPosicion().Y() + otro->getAlto()))
+		        return true;
+		return haySuperposicion(otro->obtenerCajaColision());
 }
 
 bool Arma::haySuperposicion(BVH* otraCaja) {
