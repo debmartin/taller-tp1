@@ -73,26 +73,25 @@ void Juego::update(bool& recargar)
 
 	VentanaGrafica::Instance()->actualizar();
 	// FIN CODIGO USUARIO
-
 	if (jugador1->getPersonaje()->estaMuerto()) {
 		cout<<"muere jugador1"<<endl;
-		jugador1->getPersonaje()->mantenerReposo();
-		jugador2->getPersonaje()->mantenerReposo();
-        juegoCorriendo = false;
-        recargar = true;
+		jugador1->getPersonaje()->morir();
+		jugador2->getPersonaje()->victoria();
+
+		//juegoCorriendo = false;
+        //recargar = true;
 
         Logger::getInstance()->info("GAME OVER JUGADOR 1");
 
     }
 	if (jugador2->getPersonaje()->estaMuerto()) {
 		cout<<"muere jugador2"<<endl;
-		jugador1->getPersonaje()->mantenerReposo();
-		jugador2->getPersonaje()->mantenerReposo();
-        juegoCorriendo = false;
-        recargar = true;
+		jugador1->getPersonaje()->victoria();
+		jugador2->getPersonaje()->morir();
+        //juegoCorriendo = false;
+        //recargar = true;
         Logger::getInstance()->info("GAME OVER JUGADOR 2");
     }
-
 }
 
 void Juego::handleEvents(bool& recargar)

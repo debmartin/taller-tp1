@@ -228,6 +228,12 @@ void Personaje::golpeado(){
 
 void Personaje::victoria(){
 	cambiarEstado(new EnEspera(posicion, VICTORIA, (*cajasPorEstado)[EN_ESPERA]));
+	bloquearPersonaje(50);
+}
+
+void Personaje::morir(){
+	cambiarEstado(new EnEspera(posicion, RECIBIENDO_GOLPE, (*cajasPorEstado)[EN_ESPERA]));
+	bloquearPersonaje(50);
 }
 
 void Personaje::recibirGolpe(Colisionable* otro){
@@ -327,8 +333,6 @@ bool Personaje::empujar(Vector2f& diferencia) {
 
 void Personaje::colisionar(Colisionable* otro){
     if (estaAtacando()) {
-    	cout<<"EstaAtacando"<<endl;
-    	//cout<<"Esta atacando, va a colisionar"<<endl;
         ataqueActual = estado->obtenerAtaque();
         Colisionable::colisionar(otro);
         return;
@@ -433,7 +437,6 @@ void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
             posicion = posicionCandidata;
         } else if (posicionCandidata.Y() <= posicionInicial.Y()) {
             volverAlPiso(distanciaAObjetivo);
-        //arrastrar(enemigo);
         } else {
             caer();
       }
@@ -520,12 +523,12 @@ bool Personaje::estaMuerto(){
 }
 
 void Personaje::arrojarArma(){
-	//Posiciono el poder respecto a la posicion del personaje
 	if(!estaSaltando()){
 		cambiarEstado(new EnEspera(posicion, TIRANDO_PODER,(*cajasPorEstado)[TIRANDO_PODER]));
 		bloquearPersonaje(50);
 	}
 
+	//Posiciono el poder respecto a la posicion del personaje
 	Vector2f posicionObjeto;
 	if(this->direccion == DIRECCION_DERECHA){
 		posicionObjeto.setCoordenada(posicion.X(), posicion.Y()+alto * 4/6);
