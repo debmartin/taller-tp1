@@ -208,44 +208,57 @@ void Personaje::defender(){
 	Logger::getInstance()->debug("Personaje: defensa.");
 }
 
-void Personaje::victoria(){
-	cambiarEstado(new EnEspera(posicion, VICTORIA, (*cajasPorEstado)[EN_ESPERA]));
-}
-
 void Personaje::defenderAgachado(){
     cambiarEstado(new DefendiendoAgachado(posicion, (*cajasPorEstado)[DEFENDIENDO_AGACHADO]));
 	Logger::getInstance()->debug("Personaje: defensa.");
+}
+
+void Personaje::caidaDerecha(){
+	cambiarEstado(new CaidaDerecha(posicion, (*cajasPorEstado)[CAIDA_DERECHA]));
+}
+
+void Personaje::caidaIzquierda(){
+	cambiarEstado(new CaidaIzquierda(posicion, (*cajasPorEstado)[CAIDA_IZQUIERDA]));
+}
+
+void Personaje::golpeado(){
+	cambiarEstado(new Golpeado(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
+	bloquearPersonaje(10);
+}
+
+void Personaje::victoria(){
+	cambiarEstado(new EnEspera(posicion, VICTORIA, (*cajasPorEstado)[EN_ESPERA]));
 }
 
 void Personaje::recibirGolpe(Colisionable* otro){
 	if(otro->ejecutandoMovimientoEspecial()){
 		if(otro->verEstado()->efectuandoGancho()){
 			if(this->direccion == DIRECCION_IZQUIERDA && !llegoAlLimiteDerecho()){
-				cambiarEstado(new CaidaDerecha(posicion, (*cajasPorEstado)[CAIDA_DERECHA]));
+				caidaDerecha();
 			}else if(this->direccion == DIRECCION_DERECHA){
-				cambiarEstado(new CaidaIzquierda(posicion, (*cajasPorEstado)[CAIDA_IZQUIERDA]));
+				caidaIzquierda();
 			}
 			VentanaGrafica::Instance()->vibrar();
 		//Si el oponente pega una patada:
 		}else if(!estaSaltando()){
-			cambiarEstado(new Golpeado(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
+			golpeado();
 			Vector2f vectorEmpuje = (direccion == DIRECCION_DERECHA) ? VECTOR_EMPUJE_IZQUIERDA : VECTOR_EMPUJE_DERECHA;
 			empujar(vectorEmpuje);
 		}else if(estaSaltando() && this->direccion == DIRECCION_IZQUIERDA){
-		    cambiarEstado(new CaidaDerecha(posicion,(*cajasPorEstado)[CAIDA_DERECHA]));
+		    caidaDerecha();
 		    VentanaGrafica::Instance()->vibrar();
 		}else if(estaSaltando() && this->direccion == DIRECCION_DERECHA){
-		    cambiarEstado(new CaidaIzquierda(posicion,(*cajasPorEstado)[CAIDA_IZQUIERDA]));
+		    caidaIzquierda();
 		    VentanaGrafica::Instance()->vibrar();
 		}
 	}else if(estaSaltando() && this->direccion == DIRECCION_IZQUIERDA){
-		cambiarEstado(new CaidaDerecha(posicion, (*cajasPorEstado)[CAIDA_DERECHA]));
+		caidaDerecha();
 		VentanaGrafica::Instance()->vibrar();
 	}else if(estaSaltando() && this->direccion == DIRECCION_DERECHA){
-		cambiarEstado(new CaidaIzquierda(posicion, (*cajasPorEstado)[CAIDA_IZQUIERDA]));
+		caidaIzquierda();
 		VentanaGrafica::Instance()->vibrar();
 	}else{
-	    cambiarEstado(new Golpeado(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
+	    golpeado();
 	}
     Logger::getInstance()->debug("Personaje: recibiendo golpe.");
 }

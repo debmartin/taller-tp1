@@ -153,6 +153,9 @@ public:
 	bool empujar(Vector2f& diferencia);
 	void recibirDanio(int danio);
 	void bloquearPersonaje(float segundos);
+	void caidaDerecha();
+	void caidaIzquierda();
+	void golpeado();
 	void victoria();
 
 	// CAJAS DE COLISION
