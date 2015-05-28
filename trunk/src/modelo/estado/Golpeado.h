@@ -18,6 +18,7 @@ class Golpeado : public Estado
 		Golpeado(Vector2f posInicial, BVH* caja);
         virtual ~Golpeado();
         bool estaEsperando();
+        bool estaGolpeado();
     protected:
     private:
 };

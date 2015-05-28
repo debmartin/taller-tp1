@@ -10,6 +10,7 @@ class Bloqueado : public Estado
         virtual ~Bloqueado();
         bool estaBloqueado();
         bool estaAtacando();
+        bool estaGolpeando();
         bool ejecutandoMovimientoEspecial();
     protected:
     private:

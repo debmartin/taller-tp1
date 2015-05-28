@@ -11,6 +11,7 @@ class PiniaAlta : public Estado
         virtual ~PiniaAlta();
         bool estaAtacando();
         bool estaDefendiendo();
+        bool estaGolpeando();
     protected:
     private:
 };

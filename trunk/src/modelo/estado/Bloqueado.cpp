@@ -24,3 +24,6 @@ bool Bloqueado::estaAtacando(){
 bool Bloqueado::ejecutandoMovimientoEspecial(){
 	return (estadoDeBloqueo->ejecutandoMovimientoEspecial());
 }
+bool Bloqueado::estaGolpeando(){
+	return (estadoDeBloqueo->estaGolpeando());
+}
