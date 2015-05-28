@@ -123,6 +123,7 @@ public:
 	Estado* verEstado();
 	bool estaInhabilitado();
 	bool estaGolpeado();
+
 	//Movimientos y poderes
 	void caminarDerecha();
 	void caminarIzquierda();
@@ -157,6 +158,7 @@ public:
 	void caidaIzquierda();
 	void golpeado();
 	void victoria();
+	void morir();
 
 	// CAJAS DE COLISION
 	virtual void colisionar(Colisionable* otro);
