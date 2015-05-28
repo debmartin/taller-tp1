@@ -176,6 +176,11 @@ void PersonajeDibujable::seleccionarSprite(){
 				spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_VICTORIA]);
 				spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
 				break;
+			case MUERTO:
+				this->spritePersonaje->setLoopMode(LOOP_NO_REPEAT);
+				spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_MUERTO]);
+				spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
+				break;
 		}
 	}
 	estadoAnterior = estado;

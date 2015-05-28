@@ -19,6 +19,7 @@
 
 #define TIEMPO_BLOQUEO_PATADA 35
 #define TIEMPO_BLOQUEO_PINIA 25
+#define TIEMPO_FESTEJO_VICTORIA 300
 
 Personaje::Personaje(
 		string idIn,
@@ -228,12 +229,12 @@ void Personaje::golpeado(){
 
 void Personaje::victoria(){
 	cambiarEstado(new EnEspera(posicion, VICTORIA, (*cajasPorEstado)[EN_ESPERA]));
-	bloquearPersonaje(50);
+	bloquearPersonaje(TIEMPO_FESTEJO_VICTORIA);
 }
 
 void Personaje::morir(){
-	cambiarEstado(new EnEspera(posicion, RECIBIENDO_GOLPE, (*cajasPorEstado)[EN_ESPERA]));
-	bloquearPersonaje(50);
+	cambiarEstado(new EnEspera(posicion, MUERTO, (*cajasPorEstado)[CAIDA_IZQUIERDA]));
+	bloquearPersonaje(TIEMPO_FESTEJO_VICTORIA);
 }
 
 void Personaje::recibirGolpe(Colisionable* otro){

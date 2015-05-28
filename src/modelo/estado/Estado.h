@@ -42,6 +42,7 @@ typedef enum estado_personaje
 	CAIDA_DERECHA,
 	CAIDA_IZQUIERDA,
 	TIRANDO_PODER,
+	MUERTO,
 	VICTORIA,
 	BLOQUEADO
 } estado_personaje;

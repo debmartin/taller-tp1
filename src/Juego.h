@@ -18,6 +18,7 @@ using namespace std;
 class Juego {
 private:
 	bool juegoCorriendo;
+	bool ejecutandoFinal;
 	Jugador* jugador1;
 	Jugador* jugador2;
 	ControladorPersonaje* controladorPersonaje;
@@ -29,6 +30,7 @@ public:
 	void update(bool& recargar);
 	void handleEvents(bool& recargar);
 	bool running();
+	void finalizarRound(bool& recargar);
 
 	~Juego();
 	//
