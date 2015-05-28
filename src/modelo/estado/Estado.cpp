@@ -65,6 +65,12 @@ bool Estado::estaCaminando(){
 bool Estado::estaEnCaida(){
     return false;
 }
+bool Estado::estaGolpeado(){
+    return false;
+}
+bool Estado::estaGolpeando(){
+    return false;
+}
 
 bool Estado::ejecutandoMovimientoEspecial(){
     return false;

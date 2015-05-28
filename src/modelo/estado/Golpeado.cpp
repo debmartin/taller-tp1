@@ -25,3 +25,6 @@ Golpeado::~Golpeado()
 bool Golpeado::estaEsperando(){
     return true;
 }
+bool Golpeado::estaGolpeado(){
+    return true;
+}

@@ -122,7 +122,7 @@ public:
 	estado_personaje getEstado();
 	Estado* verEstado();
 	bool estaInhabilitado();
-
+	bool estaGolpeado();
 	//Movimientos y poderes
 	void caminarDerecha();
 	void caminarIzquierda();

@@ -29,7 +29,7 @@
     "personajes": [
         {
 		    "id_personaje": "sub-zero", 
-		    "ancho": 200, 	
+		    "ancho": 30, 	
 		    "alto": 310, 
 		    "z­index": 2, 
 		    "sprites-reposo": { 
@@ -257,7 +257,7 @@
 		    			"imagen": "RECURSOS/PERSONAJES/SONIA/sonya-arma.png",
 		    			"cant_fotogramas": 1,
 		    		    "fps": 15,
-		    		    "velocidad": 600	//Velocidad máxima 65535
+		    		    "velocidad": 65000	//Velocidad máxima 65535
 		    			},
 			"color-alternativo": {
 						"h-inicial": 53,
