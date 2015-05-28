@@ -30,6 +30,7 @@ using std::pair;
 
 Juego::Juego(Jugador* jugador1, Jugador* jugador2){
 	juegoCorriendo = true;
+	ejecutandoFinal = false;
 	this->jugador1 = jugador1;
 	this->jugador2 = jugador2;
 
@@ -42,8 +43,7 @@ Juego::Juego(Jugador* jugador1, Jugador* jugador2){
 
 	controladorPersonaje = new ControladorPersonaje(jugador1, jugador2, tipoDeControl_jugador1);
 	hud = new HUD(Renderizador::Instance()->getWindow(), jugador2->getPersonaje()->getId(), jugador1->getPersonaje()->getId());
-	//hud->disminuirEnergia1(23);
-	//hud->disminuirEnergia2(130);
+
 	jugador1->getPersonaje()->agregarObservador(hud);
 	jugador2->getPersonaje()->agregarObservador(hud);
 
@@ -66,32 +66,34 @@ void Juego::render()
 
 void Juego::update(bool& recargar)
 {
-	// INICIO CODIGO USUARIO
 	this->jugador1->getPersonaje()->update(jugador2->getPersonaje());
 	this->jugador2->getPersonaje()->update(jugador1->getPersonaje());
 	this->actualizarOrientacionJugadores();
 
 	VentanaGrafica::Instance()->actualizar();
+
+
 	// FIN CODIGO USUARIO
-	if (jugador1->getPersonaje()->estaMuerto()) {
+	if (jugador1->getPersonaje()->estaMuerto() && !ejecutandoFinal) {
 		cout<<"muere jugador1"<<endl;
 		jugador1->getPersonaje()->morir();
 		jugador2->getPersonaje()->victoria();
-
-		//juegoCorriendo = false;
-        //recargar = true;
-
+		finalizarRound(recargar);
         Logger::getInstance()->info("GAME OVER JUGADOR 1");
 
     }
-	if (jugador2->getPersonaje()->estaMuerto()) {
+	if (jugador2->getPersonaje()->estaMuerto() && !ejecutandoFinal) {
 		cout<<"muere jugador2"<<endl;
 		jugador1->getPersonaje()->victoria();
 		jugador2->getPersonaje()->morir();
-        //juegoCorriendo = false;
-        //recargar = true;
+		ejecutandoFinal = true;
         Logger::getInstance()->info("GAME OVER JUGADOR 2");
     }
+	if(!(jugador1->getPersonaje()->estaBloqueado()) && ejecutandoFinal){
+		finalizarRound(recargar);
+	}
+
+	// INICIO CODIGO USUARIO
 }
 
 void Juego::handleEvents(bool& recargar)
@@ -166,4 +168,9 @@ void Juego::posicionarPersonajes_enEjeX()
 
 	jugador1->posicionarPersonaje_enEjeX(anchoEscenario/2+anchoVentana/3);
 	jugador2->posicionarPersonaje_enEjeX(anchoEscenario/2-anchoVentana/3);
+}
+
+void Juego::finalizarRound(bool& recargar){
+	juegoCorriendo = false;
+	recargar = true;
 }
