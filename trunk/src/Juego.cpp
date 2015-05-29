@@ -76,7 +76,7 @@ void Juego::update(bool& recargar)
 	// FIN CODIGO USUARIO
 	if (jugador1->getPersonaje()->estaMuerto() && !ejecutandoFinal) {
 		cout<<"muere jugador1"<<endl;
-		jugador1->getPersonaje()->morir();
+		//jugador1->getPersonaje()->morir();
 		jugador2->getPersonaje()->victoria();
 		finalizarRound(recargar);
         Logger::getInstance()->info("GAME OVER JUGADOR 1");
@@ -85,7 +85,7 @@ void Juego::update(bool& recargar)
 	if (jugador2->getPersonaje()->estaMuerto() && !ejecutandoFinal) {
 		cout<<"muere jugador2"<<endl;
 		jugador1->getPersonaje()->victoria();
-		jugador2->getPersonaje()->morir();
+		//jugador2->getPersonaje()->morir();
 		ejecutandoFinal = true;
         Logger::getInstance()->info("GAME OVER JUGADOR 2");
     }
