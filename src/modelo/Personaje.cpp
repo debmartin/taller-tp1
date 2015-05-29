@@ -233,8 +233,12 @@ void Personaje::victoria(){
 }
 
 void Personaje::morir(){
-	cambiarEstado(new EnEspera(posicion, MUERTO, (*cajasPorEstado)[CAIDA_IZQUIERDA]));
-	bloquearPersonaje(TIEMPO_FESTEJO_VICTORIA);
+	if(estaEnCaida()){
+		bloquearPersonaje(TIEMPO_FESTEJO_VICTORIA-tiempoBloqueo);
+	}else{
+		cambiarEstado(new EnEspera(posicion, MUERTO, (*cajasPorEstado)[CAIDA_IZQUIERDA]));
+		bloquearPersonaje(TIEMPO_FESTEJO_VICTORIA);
+	}
 }
 
 void Personaje::recibirGolpe(Colisionable* otro){
@@ -344,11 +348,11 @@ void Personaje::colisionar(Colisionable* otro){
     	recibirDanio(otro->obtenerDanio() / 4);
     } else if (estaAgachado() && otro->estaInhabilitado()) {
     } else if (estaEnReposo() || estaCaminando()) {
+    	recibirDanio(otro->obtenerDanio());
     	recibirGolpe(otro);
-        recibirDanio(otro->obtenerDanio());
     } else if (estaSaltando()){
+    	recibirDanio(otro->obtenerDanio());
     	recibirGolpe(otro);
-        recibirDanio(otro->obtenerDanio());
     } else{
         recibirDanio(otro->obtenerDanio());
     }
@@ -449,6 +453,9 @@ void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
 void Personaje::update(Colisionable* enemigo){
 	Logger::getInstance()->debug("Personaje: update.");
 
+	if(estaMuerto() && !estaSaltando()){
+		morir();
+	}
 	//cout << *this->obtenerCajaColision() << endl;
 
     if(estaBloqueado()){
