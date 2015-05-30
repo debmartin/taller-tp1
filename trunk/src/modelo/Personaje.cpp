@@ -541,9 +541,9 @@ void Personaje::arrojarArma(){
 	//Posiciono el poder respecto a la posicion del personaje
 	Vector2f posicionObjeto;
 	if(this->direccion == DIRECCION_DERECHA){
-		posicionObjeto.setCoordenada(posicion.X(), posicion.Y()+alto * 4/6);
+		posicionObjeto.setCoordenada(posicion.X(), posicion.Y()+ estado->calcularAlto());
 	}else{
-		posicionObjeto.setCoordenada(posicion.X()-ancho/2, posicion.Y()+alto * 4/6);
+		posicionObjeto.setCoordenada(posicion.X()-ancho/2, posicion.Y() + estado->calcularAlto());
 	}
 
 	arma->posicionar(posicionObjeto);

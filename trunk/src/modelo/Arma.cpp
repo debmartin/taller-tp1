@@ -110,12 +110,9 @@ void Arma::colisionar(Colisionable* otro){
 }
 
 bool Arma::vaAColisionar(Colisionable* otro){
-	//	if (Colisionable::vaAColisionar(otro, anchoArma, altoArma))
-	    if (((posicionAnterior.X() < otro->getPosicion().X() && posicionCandidata.X() >= otro->getPosicion().X() - otro->getAncho()) ||
-	             (posicionAnterior.X() > otro->getPosicion().X() + otro->getAncho() && posicionCandidata.X()  <= otro->getPosicion().X() + otro->getAncho())))
-	//             (posicionCandidata.Y() - alto/2<= otro->getPosicion().Y() + otro->getAlto()))
-		        return true;
-		return haySuperposicion(otro->obtenerCajaColision());
+    if (Colisionable::vaAColisionar(otro, anchoArma, altoArma))
+        return true;
+    return haySuperposicion(otro->obtenerCajaColision());
 }
 
 bool Arma::haySuperposicion(BVH* otraCaja) {
