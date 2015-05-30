@@ -436,16 +436,17 @@ void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
     if (estaCaminando()){
         arrastrar(enemigo);
     } else if (estaSaltando()) {
-        posicionCandidata = estado->obtenerProximaPosicion();
-
         float distanciaAObjetivo = calcularDistancia(posicionCandidata.X(), enemigo->getPosicion().X(), estado->calcularAncho());
+
         if (posicionable->esValida(posicionCandidata, estado->calcularAncho())){
             posicion = posicionCandidata;
         } else if (posicionCandidata.Y() <= posicionInicial.Y()) {
             volverAlPiso(distanciaAObjetivo);
         } else {
             caer();
-      }
+        }
+        if (estaAtacando())
+            colisionar(enemigo);
     } else {
         colisionar(enemigo);
     }
