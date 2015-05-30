@@ -557,7 +557,7 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(flo
 	AABB* tirando_poder_caja1 = new AABB(tirando_poder_caja1_PuntoMin, tirando_poder_caja1_PuntoMax);
 	cajasAABB_tirando_poder->push_back(tirando_poder_caja1);
 
-	Vector2f pivote(ancho_logico_personaje/2, alto_logico_personaje);
+	Vector2f pivote(ancho_logico_personaje/2, 0);
 	//Armo los BVH de cada estado
 	BVH* BVH_reposo = new BVH(cajasAABB_reposo, pivote);
 	BVH* BVH_caminando = new BVH(cajasAABB_caminando, pivote);
@@ -623,7 +623,7 @@ BVH* CargadorDeOjbetos::cargarCajasColisionArmaPersonaje(float ancho_logico_arma
 	AABB* arma_caja1 = new AABB(arma_caja1_PuntoMin, arma_caja1_PuntoMax);
 	cajasAABB_arma->push_back(arma_caja1);
 
-	Vector2f pivote(ancho_logico_arma/2, alto_logico_arma);
+	Vector2f pivote(ancho_logico_arma/2, 0);
 
 	BVH* BVH_arma = new BVH(cajasAABB_arma, pivote);
 

@@ -88,6 +88,13 @@ void Renderizador::dibujar(Dibujable* dibujable){
 
 }
 
+void Renderizador::destruir() {
+    instancia_unica = NULL;
+	SDL_DestroyRenderer(this->vRenderer);
+    SDL_DestroyWindow(this->vWindow);
+	SDL_Quit();
+}
+
 Renderizador::~Renderizador(){
     instancia_unica = NULL;
 	SDL_DestroyRenderer(this->vRenderer);

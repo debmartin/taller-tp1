@@ -228,7 +228,7 @@ void PersonajeDibujable::recibirNotificacion(Observable* unObservable){
 	this->spriteEnvolvente->escalarConTamanio(anchoPx, altoPx);
 
 	Vector2f posicion_abajo_izquierda_logica_en_escenario =
-			unPersonaje->obtenerCajaColision()->calcularPosicion() + Vector2f(0, 310);
+			unPersonaje->obtenerCajaColision()->calcularPosicion() + Vector2f(0, 0);
 	//cout << "ABAJO_IZQUIERDA:" << posicion_abajo_izquierda_logica_en_escenario << endl;
 	Vector2f posicion_abajo_izquierda_logica_en_ventana =
 			VentanaGrafica::Instance()->calcularPosicionEnVentana(posicion_abajo_izquierda_logica_en_escenario);

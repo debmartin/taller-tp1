@@ -4,7 +4,11 @@
 Estado::Estado(Trayectoria* trayectoriaInicial, estado_personaje id, BVH* caja) :
     trayectoria(trayectoriaInicial), ataqueEstado(NULL),
     tCreacion(((float)(SDL_GetTicks()))/1000.0f), id(id), cajas(caja) {
-    Vector2f posInicial = cajas->calcularPosicion();
+    Vector2f posInicial = trayectoria->getPosicion(0);
+    caja->setPosicion(posInicial);
+ //   cout<<"******Cajas********"<<endl;
+ //   cout<<*caja<<endl;
+ //   cout<<"******************"<<endl;
 }
 
 Estado::Estado(Trayectoria* trayectoriaInicial, float tiempoCreacion, estado_personaje id, BVH* caja) :

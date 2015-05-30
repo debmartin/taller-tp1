@@ -133,13 +133,11 @@ bool VentanaGrafica::llegoAlLimiteDerecho(Vector2f posicion){
 }
 
 float VentanaGrafica::relacion_de_aspectoX(){
-	//float res = this->ancho_ventanaPx / ((this->limite_logico_izquierdo + this->ancho_logico_ventana) - this->limite_logico_izquierdo);
 	float res = this->tamPixels.X() / ((getPosLogico().X() + this->tamLogico.X()) - getPosLogico().X());
 	return res;
 }
 
 float VentanaGrafica::relacion_de_aspectoY(){
-	//return this->alto_ventanaPx / (this->alto_logico_ventana);
 	return this->tamPixels.Y() / (this->tamLogico.Y());
 }
 

@@ -33,6 +33,7 @@ class Renderizador{
 		SDL_Window* getWindow();
 		void dibujar(Dibujable* dibujable);
 		static Renderizador* Instance();
+		void destruir();
 };
 
 #endif /* SRC_VISTA_RENDERIZADOR_H_ */

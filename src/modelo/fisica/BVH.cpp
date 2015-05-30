@@ -97,6 +97,11 @@ Vector2f BVH::getPivote() {
 	return this->pivote;
 }
 
+void BVH::setPosicion(Vector2f nuevaPosicion){
+	Vector2f desplazamiento = nuevaPosicion - this->pivote;
+	desplazarBVH(desplazamiento);
+}
+
 ostream& operator <<(ostream &o, const BVH &bvh) {
 //   for (size_t i = 0; i < bvh.cajasAABB->size(); i++)
 //    	o << "BVH->CAJA[" << i << "]:" << *(*bvh.cajasAABB)[i] << endl;
