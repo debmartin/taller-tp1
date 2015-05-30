@@ -338,6 +338,7 @@ bool Personaje::empujar(Vector2f& diferencia) {
 
 void Personaje::colisionar(Colisionable* otro){
     if (estaAtacando()) {
+    	cout<<"estaAtacando"<<endl;
         ataqueActual = estado->obtenerAtaque();
         Colisionable::colisionar(otro);
         return;
@@ -456,7 +457,8 @@ void Personaje::update(Colisionable* enemigo){
 	if(estaMuerto() && !estaSaltando()){
 		morir();
 	}
-	//cout << *this->obtenerCajaColision() << endl;
+	cout<<"Id:"<<this->id<<endl;
+	cout << *this->obtenerCajaColision() << endl;
 
     if(estaBloqueado()){
         if(tiempoBloqueo <= 0){

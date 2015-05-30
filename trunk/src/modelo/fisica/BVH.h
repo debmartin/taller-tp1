@@ -34,6 +34,7 @@ public:
 	Vector2f calcularPosicion();
 	friend ostream& operator<<(ostream &o, const BVH &bvh);
 	Vector2f getPivote();
+	void setPosicion(Vector2f nuevaPosicion);
 };
 
 #endif /* SRC_MODELO_FISICA_BVH_H_ */
