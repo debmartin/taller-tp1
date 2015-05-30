@@ -156,7 +156,9 @@ bool VentanaGrafica::esValida(Vector2f posicion, double ancho){
 }
 
 bool VentanaGrafica::enExtremos(float distancia, double ancho){
-    float ancho_restante = this->tamLogico.X();
+//    cout << "VENTANA: " << posLogico << " ~ " << tamLogico<< endl;
+//    cout << "DISTANCIA: " << distancia;
+    float ancho_restante = this->tamLogico.X() - ancho;
     return (distancia >= ancho_restante);
 }
 

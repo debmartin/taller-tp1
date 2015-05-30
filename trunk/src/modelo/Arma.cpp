@@ -82,8 +82,8 @@ void Arma::update(Colisionable* enemigo){
 	} else {
         posicion = POS_INICIAL_OBJETO;
 	}
-	cout << "arma " << posicion << endl;
-	cout << "Caja Arma: " << *cajaBVH_arma << endl;
+//	cout << "arma " << posicion << endl;
+//	cout << "Caja Arma: " << *cajaBVH_arma << endl;
 	cajaBVH_arma->desplazarBVH(posicion - posicionAnterior);
 	notificarObservadores();
 }
