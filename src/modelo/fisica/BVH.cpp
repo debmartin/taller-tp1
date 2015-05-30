@@ -49,9 +49,12 @@ bool BVH::interseccion(BVH* bvh){
     if (! cajaLimitadora->interseccion(bvh->cajaLimitadora)) {
         return false;
     }
+    cout << "INTERSECCION" << endl;
     for (int i = 0; i < cajasAABB->size(); i++){
         for (int j = 0; j < bvh->cajasAABB->size(); j++){
+            cout << *((*cajasAABB)[i]) << " ~ " << *((*(bvh->cajasAABB))[j]) << endl;
             if ((*cajasAABB)[i]->interseccion((*(bvh->cajasAABB))[j]))
+                cout << "COLISION" << endl;
                 return true;
         }
     }
