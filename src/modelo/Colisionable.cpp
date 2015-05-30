@@ -33,12 +33,9 @@ bool Colisionable::vaAColisionar(Colisionable* otro, double anchoAct, double alt
 	ancho = anchoAct;
 	alto = anchoAct;
     int miMitadAncho = ancho/2.0, otroMitadAncho = otro->ancho/2.0;
-    return (((posicionAnterior.X() + ancho < otro->posicion.X() && posicionCandidata.X() + ancho >= otro->posicion.X()) ||
-             (posicionAnterior.X() > otro->posicion.X() + otro->ancho && posicionCandidata.X() <= otro->posicion.X() + otro->ancho)) &&
+    return (((posicionAnterior.X() < otro->posicion.X() && posicionCandidata.X() >= otro->posicion.X()) ||
+             (posicionAnterior.X() > otro->posicion.X() && posicionCandidata.X() <= otro->posicion.X())) &&
              (posicionCandidata.Y() <= otro->posicion.Y() + otro->alto && posicionCandidata.Y() >= otro->posicion.Y()));
-//    return (((posicionAnterior.X() < otro->posicion.X() && posicionCandidata.X() >= otro->posicion.X()) ||
-//             (posicionAnterior.X() > otro->posicion.X() && posicionCandidata.X() <= otro->posicion.X())) &&
-//             (posicionCandidata.Y() <= otro->posicion.Y() + otro->alto));
 }
 
 double Colisionable::getAlto(){
