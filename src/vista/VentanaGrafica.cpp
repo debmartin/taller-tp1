@@ -86,10 +86,10 @@ void VentanaGrafica::recibirNotificacion(Observable* unObservable){
 	Vector2f posicionPersonaje = unPersonaje->getPosicion();
 
 	//Personaje en el margen izquierdo.
-	float posicion = posicionPersonaje.X();
+	float posicion = posicionPersonaje.X() - unPersonaje->getAnchoEnvolvente();
 	if( posicion <= getPosLogico().X()){
 		//this->limite_logico_izquierdo = posicionPersonaje.X();
-		this->posLogico = Vector2f(posicionPersonaje.X(), posLogico.Y());
+		this->posLogico = Vector2f(posicion, posLogico.Y());
 		this->escenario->scrollear_capas();
 	}
 	//Personaje en el margen derecho
@@ -158,7 +158,7 @@ bool VentanaGrafica::esValida(Vector2f posicion, double ancho){
 bool VentanaGrafica::enExtremos(float distancia, double ancho){
 //    cout << "VENTANA: " << posLogico << " ~ " << tamLogico<< endl;
 //    cout << "DISTANCIA: " << distancia;
-    float ancho_restante = this->tamLogico.X() - ancho;
+    float ancho_restante = this->tamLogico.X() - ancho/2;
     return (distancia >= ancho_restante);
 }
 

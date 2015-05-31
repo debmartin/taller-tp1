@@ -107,8 +107,8 @@ void EscenarioGrafico::scrollear_capas(){
 }
 
 bool EscenarioGrafico::esValida(Vector2f posicion, double ancho_personaje){
-
-    if (posicion.X() < LIMITE_IZQUIERDO || posicion.X() >= (ancho_logico - ancho_personaje))
+//    cout << "ESCENARIO: " << this->ancho_logico << " ~ " << (posicion.X() + ancho_personaje) << endl;
+    if ((posicion.X() - ancho_personaje)  <= LIMITE_IZQUIERDO || (posicion.X() + ancho_personaje) >= ancho_logico)
         return false;
     if (posicion.Y() < y_piso_logico || posicion.Y() >= alto_logico)
         return false;
