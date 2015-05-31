@@ -267,7 +267,6 @@ Jugador* CargadorDeOjbetos::cargarJugador2() {
 
 map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(float ancho_logico_personaje, float alto_logico_personaje){
 	vector<AABB*>* cajasAABB_reposo = new vector<AABB*>;
-	vector<AABB*>* cajasAABB_caminando = new vector<AABB*>;
 	vector<AABB*>* cajasAABB_salto_diagonal = new vector<AABB*>;
 	vector<AABB*>* cajasAABB_salto_vertical = new vector<AABB*>;
 	vector<AABB*>* cajasAABB_patada_alta = new vector<AABB*>;
@@ -301,19 +300,6 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(flo
 	AABB* reposo_caja2 = new AABB(reposo_caja2_PuntoMin, reposo_caja2_PuntoMax);
 	cajasAABB_reposo->push_back(reposo_caja1);
 	cajasAABB_reposo->push_back(reposo_caja2);
-
-	//CAMINANDO//
-	Vector2f caminando_caja1_PuntoMin(CAMINANDO_CAJA1_X1_PORCENTUAL*ancho_logico_personaje, CAMINANDO_CAJA1_Y1_PORCENTUAL*alto_logico_personaje);
-	Vector2f caminando_caja1_PuntoMax(CAMINANDO_CAJA1_X2_PORCENTUAL*ancho_logico_personaje, CAMINANDO_CAJA1_Y2_PORCENTUAL*alto_logico_personaje);
-
-	Vector2f caminando_caja2_PuntoMin(CAMINANDO_CAJA2_X1_PORCENTUAL*ancho_logico_personaje, CAMINANDO_CAJA2_Y1_PORCENTUAL*alto_logico_personaje);
-	Vector2f caminando_caja2_PuntoMax(CAMINANDO_CAJA2_X2_PORCENTUAL*ancho_logico_personaje, CAMINANDO_CAJA2_Y2_PORCENTUAL*alto_logico_personaje);
-
-	AABB* caminando_caja1 = new AABB(caminando_caja1_PuntoMin, caminando_caja1_PuntoMax);
-	AABB* caminando_caja2 = new AABB(caminando_caja2_PuntoMin, caminando_caja2_PuntoMax);
-
-	cajasAABB_caminando->push_back(caminando_caja1);
-	cajasAABB_caminando->push_back(caminando_caja2);
 
 	//PATADA ALTA//
 	Vector2f patada_alta_caja1_PuntoMin(PATADA_ALTA_CAJA1_X1_PORCENTUAL*ancho_logico_personaje, PATADA_ALTA_CAJA1_Y1_PORCENTUAL*alto_logico_personaje);
@@ -560,7 +546,6 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(flo
 	Vector2f pivote(ancho_logico_personaje/2, 0);
 	//Armo los BVH de cada estado
 	BVH* BVH_reposo = new BVH(cajasAABB_reposo, pivote);
-	BVH* BVH_caminando = new BVH(cajasAABB_caminando, pivote);
 	BVH* BVH_patada_alta = new BVH(cajasAABB_patada_alta, pivote);
 	BVH* BVH_pinia_alta = new BVH(cajasAABB_pinia_alta, pivote);
 	BVH* BVH_agachado = new BVH(cajasAABB_agachado, pivote);
