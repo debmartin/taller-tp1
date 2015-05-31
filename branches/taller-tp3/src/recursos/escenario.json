@@ -268,7 +268,6 @@
     ],
     
 	"jugador-1": {
-        "personaje": "sub-zero",
         "tipo-control": "TECLADO",   // "TECLADO" o "JOYSTICK"
         "control":{
         			"JOY_PINIA_ALTA": 0,
@@ -282,7 +281,6 @@
         }
 	},
 	"jugador-2": {
-        "personaje": "sonya",
         "tipo-control": "JOYSTICK",  // "TECLADO" o "JOYSTICK"
         "control":{
         			"JOY_PINIA_ALTA": 0,

@@ -25,13 +25,14 @@ private:
 
 public:
 	JugadorDef();
-	JugadorDef(string personaje, string tipo_control, ControlDef* controlDef);
+	JugadorDef(string tipo_control, ControlDef* controlDef);
 	virtual ~JugadorDef();
 	friend ostream& operator<<(ostream &o, const JugadorDef &j);
 	string toString();
 	string getIdPersonaje() const;
 	ControlDef* getControlDef() const;
 	string getTipoControl() const;
+	void cargarIdPersonajeDesdeMenu(string nuevoIdPersonaje);
 };
 
 #endif /* SRC_JSON_JUGADORDEF_H_ */

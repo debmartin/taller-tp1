@@ -16,8 +16,8 @@ JugadorDef::JugadorDef() {
 
 }
 
-JugadorDef::JugadorDef(string personaje, string tipo_control, ControlDef* controlDef) {
-	this->idPersonaje = personaje;
+JugadorDef::JugadorDef(string tipo_control, ControlDef* controlDef) {
+	this->idPersonaje = "";
 	this->tipo_control = tipo_control;
 	this->controlDef = controlDef;
 }
@@ -49,4 +49,8 @@ ostream& operator <<(ostream &o, const JugadorDef &j) {
 	o<<"JugadorDef -> [personaje, tipo_control]=["<<j.idPersonaje<<","<<j.idPersonaje<<"]";
 	o<<"JugadorDef -> [control]=["<<*j.controlDef<<"]";
 	return o;
+}
+
+void JugadorDef::cargarIdPersonajeDesdeMenu(string nuevoIdPersonaje) {
+	this->idPersonaje = nuevoIdPersonaje;
 }

@@ -356,7 +356,6 @@ JugadorDef* Parser::parsearJugador(string tag_jugador) {
     Json::Value valorJugador;
     valorJugador = root.get(tag_jugador.c_str(), &valorJugador);
 
-    string personaje = "";
     string tipo_control = "";
     int control_pinia_alta = 0;
     int control_patada_alta = 0;
@@ -374,9 +373,7 @@ JugadorDef* Parser::parsearJugador(string tag_jugador) {
         string tag = it2.key().asString();
         Json::Value subvalor = valorJugador[tag];
 
-        if ( tag == TAG_JUGADOR_PERSONAJE ) {
-        	personaje = subvalor.asString();
-        } else if ( tag == TAG_JUGADOR_TIPO_CONTROL ) {
+        if ( tag == TAG_JUGADOR_TIPO_CONTROL ) {
         	tipo_control = subvalor.asString();
         }
         else if ( tag == TAG_JUGADOR_CONTROL ) {
@@ -404,7 +401,7 @@ JugadorDef* Parser::parsearJugador(string tag_jugador) {
 
     ControlDef* controlDef = new ControlDef(correspondenciaTeclas,correspondenciaEjes);
 
-    JugadorDef* jugadorParseado = new JugadorDef(personaje, tipo_control, controlDef);
+    JugadorDef* jugadorParseado = new JugadorDef(tipo_control, controlDef);
     return jugadorParseado;
 }
 
