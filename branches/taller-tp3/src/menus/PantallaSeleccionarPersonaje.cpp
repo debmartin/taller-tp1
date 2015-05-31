@@ -15,6 +15,7 @@
 
 #include "../utils/Logger.h"
 #include "../vista/Renderizador.h"
+#include "Boton.h"
 #include "Botonera.h"
 #include "Posicion.h"
 
@@ -40,11 +41,13 @@ void PantallaSeleccionarPersonaje::iniciar() {
 
 	int screen_width = 640;
 	int screen_height = 480;
-	Posicion* pos_botoneraPersonajes = new Posicion(screen_width/4,screen_height/7);
+	int botonera_filas = 3;
+	int botonera_colummas = 4;
+	Posicion* pos_botoneraPersonajes = new Posicion(screen_width/2-(BUTTON_WIDTH*botonera_colummas)/2,screen_height/8);
 	Posicion* posIni_enfocadoPersonajes = new Posicion(3,1);
-	Botonera* botoneraPersonajes = new Botonera(3,4,pos_botoneraPersonajes, posIni_enfocadoPersonajes);
+	Botonera* botoneraPersonajes = new Botonera(botonera_filas,botonera_colummas,pos_botoneraPersonajes, posIni_enfocadoPersonajes);
 
-	if( !botoneraPersonajes->loadMedia() )
+	if( !botoneraPersonajes->loadMedia("RECURSOS/grilla_eleccion_personajes.jpg") )
 	{
 		Logger::getInstance()->error("Fallo la carga del archivo imagen");
 	}

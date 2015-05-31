@@ -15,6 +15,7 @@
 
 #include "../utils/Logger.h"
 #include "../vista/Renderizador.h"
+#include "Boton.h"
 #include "Botonera.h"
 #include "Posicion.h"
 
@@ -38,11 +39,11 @@ void PantallaSeleccionarModo::iniciar() {
 
 	int screen_width = 640;
 	int screen_height = 480;
-	Posicion* pos_modosDeJuego = new Posicion(screen_width/2,screen_height/4);
+	Posicion* pos_modosDeJuego = new Posicion(screen_width/2-BUTTON_WIDTH/2, screen_height/8);
 	Posicion* posIni_enfocadoModosDeJuegos = new Posicion(0,0);
 	Botonera* botoneraModosDeJuego = new Botonera(3,1,pos_modosDeJuego,posIni_enfocadoModosDeJuegos);
 
-	if( !botoneraModosDeJuego->loadMedia() )
+	if( !botoneraModosDeJuego->loadMedia("RECURSOS/grilla_eleccion_modo.jpg") )
 	{
 		Logger::getInstance()->error("Fallo la carga del archivo imagen");
 	}
