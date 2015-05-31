@@ -18,7 +18,8 @@ ArmaDibujable::ArmaDibujable(Animacion* animIni, Vector2f posicionIni, Vector2f 
 							animIni,
 							Renderizador::Instance()->getRenderer(),
 							posicionIni,
-							orientacion);
+							orientacion,
+							SPR_ABAJO_CENTRO);
 
 	armaDibujable->escalarConTamanio(tamanioPx.X(), tamanioPx.Y());
 	estado = NO_VISIBLE;
