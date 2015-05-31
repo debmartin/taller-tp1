@@ -18,7 +18,7 @@
 #define VELOCIDAD_CAIDA_SUAVE 200
 
 #define TIEMPO_BLOQUEO_PATADA 35
-#define TIEMPO_BLOQUEO_PINIA 25
+#define TIEMPO_BLOQUEO_GOLPE 25
 #define TIEMPO_FESTEJO_VICTORIA 300
 
 Personaje::Personaje(
@@ -49,6 +49,10 @@ Personaje::Personaje(
 	this->direccion = DIRECCION_DERECHA;
 }
 
+Personaje::~Personaje(){
+//    delete trayectoria;
+}
+
 double Personaje::getAlto() const {
 	return alto;
 }
@@ -65,20 +69,12 @@ Vector2f Personaje::getDimensionesLogicas() const {
 	return Vector2f(this->getAncho(), this->getAlto());
 }
 
-void Personaje::setPosicion(double x, double y) {
-	this->posicion.setCoordenada(x,y);
-}
-
 Vector2f Personaje::getPosicion(){
 	return this->posicion;
 }
 
-estado_personaje Personaje::getEstado(){
-	return ((estado_personaje) estado->Id());
-}
-
-int Personaje::getEnergia(){
-	return this->energia;
+void Personaje::setPosicion(double x, double y) {
+	this->posicion.setCoordenada(x,y);
 }
 
 void Personaje::agregarArma(Objeto* unArma){
@@ -87,8 +83,42 @@ void Personaje::agregarArma(Objeto* unArma){
 	arma->posicionar(posicionObjeto);
 }
 
+int Personaje::getEnergia(){
+	return this->energia;
+}
+
 Objeto* Personaje::getArma(){
 	return arma;
+}
+
+void Personaje::update(Colisionable* enemigo){
+	Logger::getInstance()->debug("Personaje: update.");
+
+	if(estaMuerto() && !estaSaltando()){
+		morir();
+	}
+
+    if(estaBloqueado()){
+        if(tiempoBloqueo <= 0){
+           mantenerReposo();
+        }
+        tiempoBloqueo -= 1.0;
+    }
+
+    posicionAnterior = posicion;
+    calcularNuevaPosicion(enemigo);
+    estado->actualizar(posicion);
+	arma->update(enemigo);
+
+	notificarObservadores();
+}
+
+void Personaje::agregarObservador(Observador* unObservador){
+	Observable::agregarObservador(unObservador);
+}
+
+void Personaje::notificarObservadores(){
+	Observable::notificarObservadores();
 }
 
 //Devuelve un vector posicion referenciado desde el eje con origen de coordenadas arriba izquierda.
@@ -100,15 +130,144 @@ Vector2f Personaje::obtenerPosicionEnVentana(){
 	return P2;
 }
 
+float calcularDistancia(float pos1, float pos2, float ancho) {
+	float distancia = pos1 - pos2;
+	if (distancia < 0) distancia = -distancia;
+
+    return distancia + ancho;
+}
+
+void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
+    posicionCandidata = estado->obtenerProximaPosicion();
+
+    if (! vaAColisionar(enemigo)) {
+        calcularPosicionSinColision(enemigo);
+        return;
+    }
+    if (estaCaminando()){
+        arrastrar(enemigo);
+    } else if (estaSaltando()) {
+        float distanciaAObjetivo = calcularDistancia(posicionCandidata.X(), enemigo->getPosicion().X(), estado->calcularAncho());
+
+        if (posicionable->esValida(posicionCandidata, estado->calcularAncho())){
+            posicion = posicionCandidata;
+        } else if (posicionCandidata.Y() <= posicionInicial.Y()) {
+            volverAlPiso(distanciaAObjetivo);
+        } else {
+            caer();
+        }
+        if (estaAtacando())
+            colisionar(enemigo);
+    } else {
+        colisionar(enemigo);
+    }
+}
+
+void Personaje::calcularPosicionSinColision(Colisionable* enemigo){
+	float distanciaAObjetivo = calcularDistancia(posicionCandidata.X(), enemigo->getPosicion().X(), estado->calcularAncho());
+
+    if (posicionable->esValida(posicionCandidata, estado->calcularAncho()) && posicionCandidata.Y() >= posicionInicial.Y()) {
+        if (! posicionable->enExtremos(distanciaAObjetivo, estado->calcularAncho())){
+            posicion = posicionCandidata;
+        }else{
+            posicion = Vector2f(posicion.X(), posicionCandidata.Y());
+        }
+	} else if (posicionCandidata.Y() < posicionInicial.Y()) {
+	    volverAlPiso(distanciaAObjetivo);
+    } else if (posicionCandidata.Y() > posicionInicial.Y()) {
+        caer();
+    } else {
+        mantenerReposo();
+    }
+}
+
+void Personaje::cambiarNumeroPersonaje(){
+	if(this->numeroJugador == NUMERO_DE_PERSONAJE_1){
+		this->numeroJugador = NUMERO_DE_PERSONAJE_2;
+	}else{
+		this->numeroJugador = NUMERO_DE_PERSONAJE_1;
+	}
+}
+
 bool Personaje::llegoAlLimiteIzquierdo(){
 	return VentanaGrafica::Instance()->llegoAlLimiteIzquierdo(Vector2f(posicion.X() - getAnchoEnvolvente()/2, posicion.Y()));
-	//return VentanaGrafica::Instance()->llegoAlLimiteIzquierdo(this->getPivote().X() - this->getAnchoEnvolvente()/2);
 }
 
 bool Personaje::llegoAlLimiteDerecho(){
 	return VentanaGrafica::Instance()->llegoAlLimiteDerecho(Vector2f(posicion.X() + getAnchoEnvolvente()/2, posicion.Y()));
 }
 
+////////Estados////////
+bool Personaje::estaSaltando(){
+    return (estado->estaSaltando());
+}
+
+bool Personaje::estaSaltandoVertical(){
+    return (estado->estaSaltandoVertical());
+}
+
+bool Personaje::estaSaltandoDiagonalDerecha(){
+    return (estado->estaSaltandoDiagonalDerecha());
+}
+
+bool Personaje::estaSaltandoDiagonalIzquierda(){
+    return (estado->estaSaltandoDiagonalIzquierda());
+}
+
+bool Personaje::estaAgachado(){
+    return (estado->estaAgachado());
+}
+
+bool Personaje::estaEnReposo(){
+    return (estado->estaEsperando());
+}
+
+bool Personaje::estaBloqueado(){
+	return (estado->estaBloqueado());
+}
+
+bool Personaje::estaCaminando(){
+	return (estado->estaCaminando());
+}
+
+bool Personaje::estaAtacando(){
+    return (estado->estaAtacando());
+}
+
+bool Personaje::estaDefendiendo(){
+    return (estado->estaDefendiendo());
+}
+
+bool Personaje::estaEnCaida(){
+    return (estado->estaEnCaida());
+}
+
+bool Personaje::estaMuerto(){
+    return (this->energia <= 0);
+}
+
+bool Personaje::ejecutandoMovimientoEspecial(){
+	return (estado->ejecutandoMovimientoEspecial());
+}
+
+bool Personaje::estaInhabilitado(){
+    return (estado->Id() == PINIA_ALTA) || (estado->Id() == PINIA_BAJA) || (estado->Id() == GANCHO);
+}
+
+void Personaje::cambiarEstado(Estado* nuevo) {
+    //delete estado;
+    estado = nuevo;
+}
+
+estado_personaje Personaje::getEstado(){
+	return ((estado_personaje) estado->Id());
+}
+
+Estado* Personaje::verEstado(){
+	return estado;
+}
+
+////Movimientos y poderes////
 void Personaje::caminarDerecha(){
     cambiarEstado(new CaminandoDerecha(posicion, (*cajasPorEstado)[CAMINANDO_DERECHA], direccion));
     Logger::getInstance()->debug("Personaje: caminando derecha. Se setea trayectoria.");
@@ -141,14 +300,13 @@ void Personaje::agacharse(){
 
 void Personaje::piniaAlta(){
     cambiarEstado(new PiniaAlta(posicion, (*cajasPorEstado)[PINIA_ALTA]));
-    bloquearPersonaje(TIEMPO_BLOQUEO_PINIA);
+    bloquearPersonaje(TIEMPO_BLOQUEO_GOLPE);
 	Logger::getInstance()->debug("Personaje: golpe alto.");
-	//VentanaGrafica::Instance()->vibrar();
 }
 
 void Personaje::piniaBaja(){
     cambiarEstado(new PiniaBaja(posicion, (*cajasPorEstado)[PINIA_BAJA]));
-    bloquearPersonaje(TIEMPO_BLOQUEO_PINIA);
+    bloquearPersonaje(TIEMPO_BLOQUEO_GOLPE);
 	Logger::getInstance()->debug("Personaje: golpe bajo.");
 }
 
@@ -232,7 +390,7 @@ void Personaje::caidaIzquierda(){
 
 void Personaje::golpeado(){
 	cambiarEstado(new Golpeado(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
-	bloquearPersonaje(10);
+	bloquearPersonaje(TIEMPO_BLOQUEO_GOLPE);
 }
 
 void Personaje::victoria(){
@@ -249,56 +407,9 @@ void Personaje::morir(){
 	}
 }
 
-void Personaje::recibirGolpe(Colisionable* otro){
-	if(otro->ejecutandoMovimientoEspecial()){
-		if(otro->verEstado()->efectuandoGancho()){
-			if(this->direccion == DIRECCION_IZQUIERDA){
-				caidaDerecha();
-			}else if(this->direccion == DIRECCION_DERECHA){
-				caidaIzquierda();
-			}
-			VentanaGrafica::Instance()->vibrar();
-		//Si el oponente pega una patada:
-		}else if(!estaSaltando()){
-			golpeado();
-			Vector2f vectorEmpuje = (direccion == DIRECCION_DERECHA) ? VECTOR_EMPUJE_IZQUIERDA : VECTOR_EMPUJE_DERECHA;
-//			empujar(vectorEmpuje);
-		}else if(estaSaltando() && this->direccion == DIRECCION_IZQUIERDA){
-		    caidaDerecha();
-		    VentanaGrafica::Instance()->vibrar();
-		}else if(estaSaltando() && this->direccion == DIRECCION_DERECHA){
-		    caidaIzquierda();
-		    VentanaGrafica::Instance()->vibrar();
-		}
-	}else if(estaSaltando() && this->direccion == DIRECCION_IZQUIERDA){
-		caidaDerecha();
-		VentanaGrafica::Instance()->vibrar();
-	}else if(estaSaltando() && this->direccion == DIRECCION_DERECHA){
-		caidaIzquierda();
-		VentanaGrafica::Instance()->vibrar();
-	}else{
-	    golpeado();
-	}
-    Logger::getInstance()->debug("Personaje: recibiendo golpe.");
-}
-
-
 void Personaje::mantenerReposo(){
     cambiarEstado(new EnEspera(posicion, (*cajasPorEstado)[EN_ESPERA]));
     Logger::getInstance()->debug("Personaje: en reposo.");
-}
-
-void Personaje::cambiarEstado(Estado* nuevo) {
-    //delete estado;
-    estado = nuevo;
-}
-
-void Personaje::agregarObservador(Observador* unObservador){
-	Observable::agregarObservador(unObservador);
-}
-
-void Personaje::notificarObservadores(){
-	Observable::notificarObservadores();
 }
 
 void Personaje::caer(){
@@ -344,6 +455,67 @@ bool Personaje::empujar(Vector2f& diferencia) {
     return false;
 }
 
+void Personaje::bloquearPersonaje(float segundos){
+	cambiarEstado(new Bloqueado(estado));
+	this->tiempoBloqueo = segundos;
+}
+
+void Personaje::recibirDanio(int danio){
+	this->energia -= danio;
+}
+
+void Personaje::recibirGolpe(Colisionable* otro){
+	if(otro->ejecutandoMovimientoEspecial()){
+		if(otro->verEstado()->efectuandoGancho()){
+			if(this->direccion == DIRECCION_IZQUIERDA){
+				caidaDerecha();
+			}else if(this->direccion == DIRECCION_DERECHA){
+				caidaIzquierda();
+			}
+			VentanaGrafica::Instance()->vibrar();
+		//Si el oponente pega una patada:
+		}else if(!estaSaltando()){
+			golpeado();
+			Vector2f vectorEmpuje = (direccion == DIRECCION_DERECHA) ? VECTOR_EMPUJE_IZQUIERDA : VECTOR_EMPUJE_DERECHA;
+			empujar(vectorEmpuje);
+		}else if(estaSaltando() && this->direccion == DIRECCION_IZQUIERDA){
+		    caidaDerecha();
+		    VentanaGrafica::Instance()->vibrar();
+		}else if(estaSaltando() && this->direccion == DIRECCION_DERECHA){
+		    caidaIzquierda();
+		    VentanaGrafica::Instance()->vibrar();
+		}
+	}else if(estaSaltando() && this->direccion == DIRECCION_IZQUIERDA){
+		caidaDerecha();
+		VentanaGrafica::Instance()->vibrar();
+	}else if(estaSaltando() && this->direccion == DIRECCION_DERECHA){
+		caidaIzquierda();
+		VentanaGrafica::Instance()->vibrar();
+	}else{
+	    golpeado();
+	}
+    Logger::getInstance()->debug("Personaje: recibiendo golpe.");
+}
+
+void Personaje::arrojarArma(){
+	if(!estaSaltando()){
+		cambiarEstado(new EnEspera(posicion, TIRANDO_PODER,(*cajasPorEstado)[TIRANDO_PODER]));
+		bloquearPersonaje(50);
+	}
+
+	//Posiciono el poder respecto a la posicion del personaje
+	Vector2f posicionObjeto;
+	if(this->direccion == DIRECCION_DERECHA){
+		posicionObjeto.setCoordenada(posicion.X(), posicion.Y()+ estado->calcularAlto() * 0.67);
+	}else{
+		posicionObjeto.setCoordenada(posicion.X()-ancho/2, posicion.Y() + estado->calcularAlto() * 0.67);
+	}
+
+	arma->posicionar(posicionObjeto);
+	arma->arrojar();
+}
+
+////////Colision////////
 void Personaje::colisionar(Colisionable* otro){
     if (estaAtacando()) {
         ataqueActual = estado->obtenerAtaque();
@@ -377,6 +549,10 @@ void Personaje::colisionar(Colisionable* otro){
     }
 }
 
+BVH* Personaje::obtenerCajaColision(){
+    return estado->obtenerCajaColision();
+}
+
 bool Personaje::vaAColisionar(Colisionable* enemigo){
 	double anchoFict = estado->calcularAncho();
 	double altoFict = estado->calcularAlto();
@@ -396,187 +572,29 @@ void Personaje::volverAlPiso(float distanciaAObjetivo){
     mantenerReposo();
 }
 
-float calcularDistancia(float pos1, float pos2, float ancho) {
-	float distancia = pos1 - pos2;
-	if (distancia < 0) distancia = -distancia;
-
-    return distancia + ancho;
-}
-
-void Personaje::calcularPosicionSinColision(Colisionable* enemigo){
-	float distanciaAObjetivo = calcularDistancia(posicionCandidata.X(), enemigo->getPosicion().X(), estado->calcularAncho());
-
-    if (posicionable->esValida(posicionCandidata, estado->calcularAncho()) && posicionCandidata.Y() >= posicionInicial.Y()) {
-        if (! posicionable->enExtremos(distanciaAObjetivo, estado->calcularAncho())){
-            posicion = posicionCandidata;
-        }else{
-            posicion = Vector2f(posicion.X(), posicionCandidata.Y());
-        }
-	} else if (posicionCandidata.Y() < posicionInicial.Y()) {
-	    volverAlPiso(distanciaAObjetivo);
-    } else if (posicionCandidata.Y() > posicionInicial.Y()) {
-        caer();
-    } else {
-        mantenerReposo();
-    }
-}
-
 void Personaje::espejarBVH() {
 	int i = 1;
-	//cout << "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" << endl;
     for (map<estado_personaje, BVH*>::iterator it = this->cajasPorEstado->begin() ; it != this->cajasPorEstado->end(); ++it)
     {
     	(it)->second->espejarBVH();
-    	//cout << ">>>>>>>>>>>>>>>>>>>>>>>>" << i++ << endl;
     }
 }
 
 void Personaje::orientar(DireccionObjeto nuevaOrientacion) {
-	//cout << "?????????????????PIVOTE-INI:" << this->obtenerCajaColision()->getPivote() << endl;
 	if (this->direccion == nuevaOrientacion)
 		return;
 
 	this->direccion = nuevaOrientacion;
 	this->arma->orientar(nuevaOrientacion);
 	espejarBVH();
-	//cout << "?????????????????PIVOTE-FIN:" << this->obtenerCajaColision()->getPivote() << endl;
 }
 
-void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
-    posicionCandidata = estado->obtenerProximaPosicion();
-
-    if (! vaAColisionar(enemigo)) {
-        calcularPosicionSinColision(enemigo);
-        return;
-    }
-    if (estaCaminando()){
-        arrastrar(enemigo);
-    } else if (estaSaltando()) {
-        float distanciaAObjetivo = calcularDistancia(posicionCandidata.X(), enemigo->getPosicion().X(), estado->calcularAncho());
-
-        if (posicionable->esValida(posicionCandidata, estado->calcularAncho())){
-            posicion = posicionCandidata;
-        } else if (posicionCandidata.Y() <= posicionInicial.Y()) {
-            volverAlPiso(distanciaAObjetivo);
-        } else {
-            caer();
-        }
-        if (estaAtacando())
-            colisionar(enemigo);
-    } else {
-        colisionar(enemigo);
-    }
- }
-
-void Personaje::update(Colisionable* enemigo){
-	Logger::getInstance()->debug("Personaje: update.");
-
-	if(estaMuerto() && !estaSaltando()){
-		morir();
-	}
-
-    if(estaBloqueado()){
-        if(tiempoBloqueo <= 0){
-           mantenerReposo();
-        }
-        tiempoBloqueo -= 1.0;
-    }
-
-    posicionAnterior = posicion;
-    calcularNuevaPosicion(enemigo);
-    estado->actualizar(posicion);
-	arma->update(enemigo);
-
-	notificarObservadores();
+float Personaje::getAnchoEnvolvente() {
+	return this->estado->calcularAncho();
 }
 
-Personaje::~Personaje(){
-//    delete trayectoria;
-}
-
-bool Personaje::estaSaltando(){
-    return (estado->estaSaltando());
-}
-
-bool Personaje::estaSaltandoVertical(){
-    return (estado->estaSaltandoVertical());
-}
-
-bool Personaje::estaSaltandoDiagonalDerecha(){
-    return (estado->estaSaltandoDiagonalDerecha());
-}
-
-bool Personaje::estaSaltandoDiagonalIzquierda(){
-    return (estado->estaSaltandoDiagonalIzquierda());
-}
-
-bool Personaje::ejecutandoMovimientoEspecial(){
-	return (estado->ejecutandoMovimientoEspecial());
-}
-
-bool Personaje::estaAgachado(){
-    return (estado->estaAgachado());
-}
-
-bool Personaje::estaEnReposo(){
-    return (estado->estaEsperando());
-}
-
-bool Personaje::estaBloqueado(){
-	return (estado->estaBloqueado());
-}
-
-bool Personaje::estaCaminando(){
-	return (estado->estaCaminando());
-}
-
-bool Personaje::estaAtacando(){
-    return (estado->estaAtacando());
-}
-
-bool Personaje::estaDefendiendo(){
-    return (estado->estaDefendiendo());
-}
-
-bool Personaje::estaEnCaida(){
-    return (estado->estaEnCaida());
-}
-
-bool Personaje::estaMuerto(){
-    return (this->energia <= 0);
-}
-
-void Personaje::arrojarArma(){
-	if(!estaSaltando()){
-		cambiarEstado(new EnEspera(posicion, TIRANDO_PODER,(*cajasPorEstado)[TIRANDO_PODER]));
-		bloquearPersonaje(50);
-	}
-
-	//Posiciono el poder respecto a la posicion del personaje
-	Vector2f posicionObjeto;
-	if(this->direccion == DIRECCION_DERECHA){
-		posicionObjeto.setCoordenada(posicion.X(), posicion.Y()+ estado->calcularAlto() * 0.67);
-	}else{
-		posicionObjeto.setCoordenada(posicion.X()-ancho/2, posicion.Y() + estado->calcularAlto() * 0.67);
-	}
-
-	arma->posicionar(posicionObjeto);
-	arma->arrojar();
-}
-
-void Personaje::recibirDanio(int danio){
-	this->energia -= danio;
-}
-
-
-BVH* Personaje::obtenerCajaColision(){
-    return estado->obtenerCajaColision();
-}
-
-
-void Personaje::bloquearPersonaje(float segundos){
-	cambiarEstado(new Bloqueado(estado));
-	this->tiempoBloqueo = segundos;
+float Personaje::getAltoEnvolvente() {
+	return this->estado->calcularAlto();
 }
 
 
@@ -602,28 +620,4 @@ void Personaje::definirPosicionIncial_enX(double x)
 	Vector2f posicionIncial(x,y);
 	this->posicion = posicionIncial;
 	this->posicionInicial = posicionIncial;
-}
-
-void Personaje::cambiarNumeroPersonaje(){
-	if(this->numeroJugador == NUMERO_DE_PERSONAJE_1){
-		this->numeroJugador = NUMERO_DE_PERSONAJE_2;
-	}else{
-		this->numeroJugador = NUMERO_DE_PERSONAJE_1;
-	}
-}
-
-float Personaje::getAnchoEnvolvente() {
-	return this->estado->calcularAncho();
-}
-
-float Personaje::getAltoEnvolvente() {
-	return this->estado->calcularAlto();
-}
-
-Estado* Personaje::verEstado(){
-	return estado;
-}
-
-bool Personaje::estaInhabilitado(){
-    return (estado->Id() == PINIA_ALTA) || (estado->Id() == PINIA_BAJA) || (estado->Id() == GANCHO);
 }
