@@ -56,9 +56,6 @@ void Arma::cambiarTrayectoria(Trayectoria* unaTrayectoria){
 }
 
 void Arma::arrojar(){
-//	cout<<"*******************"<<endl;
-//	cout<<"Arrojando arma"<<endl;
-//	cout<<"*******************"<<endl;
 	tCreacion = SDL_GetTicks() / 1000.0f;
 	if(direccionArma == DIRECCION_DERECHA){
 		cambiarTrayectoria(new MRU(posicion, Vector2f(velocidad_arma, VELOCIDAD_ARMA_NULA)));
@@ -82,8 +79,7 @@ void Arma::update(Colisionable* enemigo){
 	} else {
         posicion = POS_INICIAL_OBJETO;
 	}
-//	cout << "arma " << posicion << endl;
-//	cout << "Caja Arma: " << *cajaBVH_arma << endl;
+
 	cajaBVH_arma->desplazarBVH(posicion - posicionAnterior);
 	notificarObservadores();
 }
@@ -104,7 +100,6 @@ Vector2f Arma::obtenerPosicionEnVentana(){
 
 //Colisiones
 void Arma::colisionar(Colisionable* otro){
-	//if(!(otro->verEstado()->estaAgachado()))
 	Colisionable::colisionar(otro);
 	cambiarEstado(NO_VISIBLE);
 }

@@ -30,7 +30,7 @@ bool Renderizador::init(string titulo, Vector2f posicion, Vector2f tamanio, bool
 
 		Logger::getInstance()->debug("Renderizador: SDL init.");
 
-		// init the window
+		// Inicializacion de ventana
 		int flags;
 		if (fullscreen)
 			flags = SDL_WINDOW_FULLSCREEN;
