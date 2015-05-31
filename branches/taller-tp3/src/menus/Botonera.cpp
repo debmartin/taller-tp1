@@ -64,7 +64,7 @@ bool Botonera::loadMedia() {
 	//Loading success flag
 	bool success = true;
 	//Load sprites
-	if( !this->gButtonSpriteSheetTexture->loadFromFile( "button.png" ) )
+	if( !this->gButtonSpriteSheetTexture->loadFromFile( "RECURSOS/button.png" ) )
 	{
 		Logger::getInstance()->error("Failed to load button sprite texture!");
 		success = false;
