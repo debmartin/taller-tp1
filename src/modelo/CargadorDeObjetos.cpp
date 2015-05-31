@@ -7,7 +7,7 @@
 
 #include "CargadorDeObjetos.h"
 
-#include <iostream>
+#include <SDL2/SDL_render.h>
 #include <list>
 #include <utility>
 #include <vector>
@@ -22,6 +22,8 @@
 #include "../json/PersonajeDef.h"
 #include "../json/SpriteDef.h"
 #include "../json/VentanaDef.h"
+#include "../menus/PantallaSeleccionarModo.h"
+#include "../menus/PantallaSeleccionarPersonaje.h"
 #include "../utils/Logger.h"
 #include "../vista/Animacion.h"
 #include "../vista/ArmaDibujable.h"
@@ -34,6 +36,7 @@
 #include "CajasColision.h"
 #include "fisica/AABB.h"
 #include "Jugador.h"
+#include "Objeto.h"
 #include "Vector2f.h"
 
 CargadorDeOjbetos::CargadorDeOjbetos(string escenario_path) {
@@ -252,7 +255,10 @@ Jugador* CargadorDeOjbetos::cargarJugador(JugadorDef* jugadorDef)
 Jugador* CargadorDeOjbetos::cargarJugador1() {
 
 	list<JugadorDef*>::iterator it = parser->getJugadoresDef()->begin();
-	Jugador* jugador = cargarJugador(*it);
+	JugadorDef* jugadorDef1 = *it;
+	jugadorDef1->cargarIdPersonajeDesdeMenu(this->getIdPersonaje1Elegido());
+
+	Jugador* jugador = cargarJugador(jugadorDef1);
 	jugador->getPersonaje()->getArma()->orientar(DIRECCION_IZQUIERDA);
 	return jugador;
 }
@@ -260,7 +266,10 @@ Jugador* CargadorDeOjbetos::cargarJugador1() {
 Jugador* CargadorDeOjbetos::cargarJugador2() {
 
 	list<JugadorDef*>::iterator it = parser->getJugadoresDef()->begin();
-	Jugador* jugador = cargarJugador(*++it);
+	JugadorDef* jugadorDef2 = *++it;
+	jugadorDef2->cargarIdPersonajeDesdeMenu(this->getIdPersonaje2Elegido());
+
+	Jugador* jugador = cargarJugador(jugadorDef2);
 	jugador->getPersonaje()->cambiarNumeroPersonaje();
 	return jugador;
 }
@@ -628,4 +637,25 @@ BVH* CargadorDeOjbetos::cargarCajasColisionArmaPersonaje(float ancho_logico_arma
 	BVH* BVH_arma = new BVH(cajasAABB_arma, pivote);
 
 	return BVH_arma;
+}
+
+void CargadorDeOjbetos::cargarInfo_desdeMenus() {
+
+	PantallaSeleccionarModo* pantallaSeleccionarModo = new PantallaSeleccionarModo();
+	pantallaSeleccionarModo->iniciar();
+	string modo_juego_elegido = pantallaSeleccionarModo->getModoDeJuegoElegido();
+
+	PantallaSeleccionarPersonaje* pantallaSeleccionarPersonajes = new PantallaSeleccionarPersonaje(modo_juego_elegido);
+	pantallaSeleccionarPersonajes->iniciar();
+
+	this->idPersonaje1Elegido = pantallaSeleccionarPersonajes->getIdPersonaje1Elegido();
+	this->idPersonaje2Elegido = pantallaSeleccionarPersonajes->getIdPersonaje2Elegido();
+}
+
+string CargadorDeOjbetos::getIdPersonaje1Elegido() const {
+	return idPersonaje1Elegido;
+}
+
+string CargadorDeOjbetos::getIdPersonaje2Elegido() const {
+	return idPersonaje2Elegido;
 }

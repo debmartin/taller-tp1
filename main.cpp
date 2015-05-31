@@ -1,9 +1,7 @@
 #include <SDL2/SDL_stdinc.h>
 #include <SDL2/SDL_timer.h>
-#include <iostream>
 #include <string>
 
-#include "src/controlador/Control.h"
 #include "src/Juego.h"
 #include "src/modelo/CargadorDeObjetos.h"
 #include "src/modelo/Jugador.h"
@@ -18,6 +16,8 @@ Juego* cargarJuego(string escenarioPath){
 	Logger::getInstance()->info("#################################################");
 
 	CargadorDeOjbetos cargador_de_objetos(escenarioPath);
+
+	cargador_de_objetos.cargarInfo_desdeMenus();
 
 	Jugador* jugador1 = cargador_de_objetos.cargarJugador1();
 	Jugador* jugador2 = cargador_de_objetos.cargarJugador2();

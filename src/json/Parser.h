@@ -49,7 +49,6 @@
 #define TAG_COLOR_ALTERNATIVO_DESPLAZAMIENTO "desplazamiento"
 #define TAG_JUGADOR_1 "jugador-1"
 #define TAG_JUGADOR_2 "jugador-2"
-#define TAG_JUGADOR_PERSONAJE "personaje"
 #define TAG_JUGADOR_TIPO_CONTROL "tipo-control"
 #define TAG_JUGADOR_CONTROL "control"
 #define TAG_JUGADOR_CONTROL_ID "id"

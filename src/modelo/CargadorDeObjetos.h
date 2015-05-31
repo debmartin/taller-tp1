@@ -37,6 +37,8 @@ using namespace std;
 class CargadorDeOjbetos{
 private:
 	Parser* parser;
+	string idPersonaje1Elegido;
+	string idPersonaje2Elegido;
 public:
 	CargadorDeOjbetos(string escenario_path);
 	virtual ~CargadorDeOjbetos();
@@ -48,6 +50,10 @@ public:
 	Jugador* cargarJugador2();
 	map<estado_personaje, BVH*>* cargarCajasColisionPersonaje(float ancho_logico_personaje, float alto_logico_personaje);
 	BVH* cargarCajasColisionArmaPersonaje(float ancho_logico_arma, float alto_logico_arma);
+	void cargarInfo_desdeMenus();
+	string getIdPersonaje1Elegido() const;
+	string getIdPersonaje2Elegido() const;
+
 private:
 	Jugador* cargarJugador(JugadorDef* jugadorDef);
 
