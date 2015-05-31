@@ -7,6 +7,17 @@
 
 #include "PantallaSeleccionarPersonaje.h"
 
+#include <SDL2/SDL_events.h>
+#include <SDL2/SDL_keycode.h>
+#include <SDL2/SDL_stdinc.h>
+#include <SDL2/SDL_timer.h>
+#include <SDL2/SDL_video.h>
+
+#include "../utils/Logger.h"
+#include "../vista/Renderizador.h"
+#include "Botonera.h"
+#include "Posicion.h"
+
 PantallaSeleccionarPersonaje::PantallaSeleccionarPersonaje(string modo_juego_elegido) {
 	this->modo_juego_elegido = modo_juego_elegido;
 }
@@ -17,10 +28,74 @@ PantallaSeleccionarPersonaje::~PantallaSeleccionarPersonaje() {
 
 void PantallaSeleccionarPersonaje::iniciar() {
 
-	//TODO elegir desde del menu ...
-
 	this->IdPersonaje1Elegido = "sub-zero";
 	this->IdPersonaje2Elegido = "sonya";
+
+	//TODO falta sincronizar con el renderizador que ya esta iniciado
+
+	//cambio el titulo a pantalla
+	SDL_SetWindowTitle( Renderizador::Instance()->getWindow(), "Eleccion de Personajes" );
+
+	bool juegoCorriendo = true;
+
+	int screen_width = 640;
+	int screen_height = 480;
+	Posicion* pos_botoneraPersonajes = new Posicion(screen_width/4,screen_height/7);
+	Posicion* posIni_enfocadoPersonajes = new Posicion(3,1);
+	Botonera* botoneraPersonajes = new Botonera(3,4,pos_botoneraPersonajes, posIni_enfocadoPersonajes);
+
+	if( !botoneraPersonajes->loadMedia() )
+	{
+		Logger::getInstance()->error("Fallo la carga del archivo imagen");
+	}
+	else
+	{
+		bool salirEleccionPersonajes = false;
+
+	    static const int FPS = 60;
+	    static const int DELAY_TIME = 1000.0f / FPS;
+	    Uint32 frameStart, frameTime;
+
+	    while( !salirEleccionPersonajes && juegoCorriendo )
+		{
+			frameStart = SDL_GetTicks();
+			// INICIO CODIGO USUARIO
+			//manejo el evento
+			SDL_Event evento;
+
+			if (SDL_PollEvent(&evento))
+			{
+				//para salir del juego con la tecla ESC
+				if( evento.type == SDL_KEYUP && evento.key.repeat == 0 ){
+					if (evento.key.keysym.sym == SDLK_ESCAPE){
+						salirEleccionPersonajes = true;
+					}
+				}
+
+				if (evento.type == SDL_QUIT){
+					juegoCorriendo = false;
+				}
+
+				//Si se presiona una tecla
+				if ( evento.key.repeat == 0 ){
+					botoneraPersonajes->manejarEvento(evento);
+				}
+
+				botoneraPersonajes->actualizarModelo();
+
+			}
+
+			botoneraPersonajes->dibujar();
+
+	        frameTime = SDL_GetTicks() - frameStart;
+
+	        if (frameTime < DELAY_TIME)
+	            SDL_Delay((int)(DELAY_TIME - frameTime));
+		}
+	}
+
+	delete botoneraPersonajes;
+
 
 }
 
