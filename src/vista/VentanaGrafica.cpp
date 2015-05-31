@@ -22,8 +22,7 @@ VentanaGrafica* VentanaGrafica::Instance()
 	return instancia_unica;
 }
 
-VentanaGrafica::VentanaGrafica() {} // TODO: GASTON: INICIALIZAR CORRECTAMENTE
-    //escenario(NULL), limite_logico_izquierdo(0), ancho_logico_ventana(0), ancho_ventanaPx(0) { }
+VentanaGrafica::VentanaGrafica(){ }
 
 bool VentanaGrafica::init(string titulo, Vector2f posicionVentanaPrograma, Vector2f tamanioPixels, Vector2f tamanioLogico, bool fullscreen){
 
@@ -88,7 +87,6 @@ void VentanaGrafica::recibirNotificacion(Observable* unObservable){
 	//Personaje en el margen izquierdo.
 	float posicion = posicionPersonaje.X() - unPersonaje->getAnchoEnvolvente();
 	if( posicion <= getPosLogico().X()){
-		//this->limite_logico_izquierdo = posicionPersonaje.X();
 		this->posLogico = Vector2f(posicion, posLogico.Y());
 		this->escenario->scrollear_capas();
 	}
@@ -96,7 +94,6 @@ void VentanaGrafica::recibirNotificacion(Observable* unObservable){
 	posicion = posicionPersonaje.X()+ unPersonaje->getAnchoEnvolvente();
 	if( posicion >= getLimiteLogicoDerecho()){
 		//Muevo los limites de la ventana.
-		//this->limite_logico_izquierdo = posicion - this->tamLogico.X();
 		this->posLogico = Vector2f(posicion - this->tamLogico.X(), posLogico.Y());
 		this->escenario->scrollear_capas();
 	}
@@ -120,7 +117,6 @@ float VentanaGrafica::getAnchoLogico() {
 }
 
 float VentanaGrafica::getAnchoPx(){
-	//return this->ancho_ventanaPx;
 	return this->tamPixels.X();
 }
 

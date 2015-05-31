@@ -89,6 +89,7 @@ public:
 	Vector2f getPosicion();
 	void setPosicion(double x, double y);
 	int getEnergia();
+	void agregarArma(Objeto* unArma);
 	Objeto* getArma();
 
 	void update(Colisionable* enemigo);
@@ -97,10 +98,7 @@ public:
 	Vector2f obtenerPosicionEnVentana();
 	void calcularNuevaPosicion(Colisionable* enemigo);
 	void calcularPosicionSinColision(Colisionable* enemigo);
-	void cambiarDireccion();
 	void cambiarNumeroPersonaje();
-	void cambiarTrayectoria(Trayectoria* t);
-	void agregarArma(Objeto* unArma);
 	bool llegoAlLimiteIzquierdo();
 	bool llegoAlLimiteDerecho();
 
@@ -118,11 +116,11 @@ public:
 	bool estaMuerto();
 	bool ejecutandoMovimientoEspecial();
 	bool estaEnCaida();
+	bool estaInhabilitado();
 	void cambiarEstado(Estado* nuevo);
 	estado_personaje getEstado();
 	Estado* verEstado();
-	bool estaInhabilitado();
-	bool estaGolpeado();
+
 
 	//Movimientos y poderes
 	void caminarDerecha();
@@ -146,21 +144,20 @@ public:
 	void gancho();
 	void defender();
 	void defenderAgachado();
-	void recibirGolpe(Colisionable* otro);
-	void ejecutarPoder(Poder* poder, Objeto* objeto);
-	void arrojarArma();
 	void caer();
 	void arrastrar(Colisionable* otro);
 	bool empujar(Vector2f& diferencia);
-	void recibirDanio(int danio);
 	void bloquearPersonaje(float segundos);
 	void caidaDerecha();
 	void caidaIzquierda();
 	void golpeado();
 	void victoria();
 	void morir();
+	void recibirDanio(int danio);
+	void recibirGolpe(Colisionable* otro);
+	void arrojarArma();
 
-	// CAJAS DE COLISION
+	//Colision
 	virtual void colisionar(Colisionable* otro);
 	void corregirPorColision(Colisionable* enemigo);
     BVH* obtenerCajaColision();
