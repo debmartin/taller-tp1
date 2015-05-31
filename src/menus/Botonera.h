@@ -10,6 +10,7 @@
 
 #include <SDL2/SDL_rect.h>
 #include <map>
+#include <string>
 
 class Posicion;
 
@@ -38,7 +39,7 @@ private:
 public:
 	Botonera();
 	Botonera(int cant_filas, int cant_columnas, Posicion* posicion, Posicion* posIni_enfocado);
-	bool loadMedia();
+	bool loadMedia(string path_imagen);
 	virtual ~Botonera();
 	void manejarEvento( SDL_Event evento );
 	void actualizarModelo();

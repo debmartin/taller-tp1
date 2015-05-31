@@ -21,8 +21,8 @@ using namespace std;
 
 union SDL_Event;
 
-const int BUTTON_WIDTH = 80;
-const int BUTTON_HEIGHT = 80;
+const int BUTTON_WIDTH = 118.20;
+const int BUTTON_HEIGHT = 127;
 
 enum LButtonSprite
 {

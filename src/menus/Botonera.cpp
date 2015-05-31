@@ -52,7 +52,7 @@ Botonera::Botonera(int cant_filas, int cant_columnas, Posicion* posicion, Posici
 	{
 		SDL_Rect rect;
 		rect.x = 0;
-		rect.y = i * 200;
+		rect.y = i * 127;
 		rect.w = BUTTON_WIDTH;
 		rect.h = BUTTON_HEIGHT;
 		this->map_gSpriteClips->insert ( pair<int,SDL_Rect>(i,rect) );
@@ -60,11 +60,11 @@ Botonera::Botonera(int cant_filas, int cant_columnas, Posicion* posicion, Posici
 
 }
 
-bool Botonera::loadMedia() {
+bool Botonera::loadMedia(string path_imagen) {
 	//Loading success flag
 	bool success = true;
 	//Load sprites
-	if( !this->gButtonSpriteSheetTexture->loadFromFile( "RECURSOS/button.png" ) )
+	if( !this->gButtonSpriteSheetTexture->loadFromFile(path_imagen) )
 	{
 		Logger::getInstance()->error("Failed to load button sprite texture!");
 		success = false;
