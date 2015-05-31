@@ -68,7 +68,7 @@ void ArmaDibujable::recibirNotificacion(Observable* unObservable){
 
 	Vector2f posicion_abajo_izquierda_logica_en_escenario =
 			unArma->obtenerCajaColision()->calcularPosicion();
-	//cout << "ABAJO_IZQUIERDA:" << posicion_abajo_izquierda_logica_en_escenario << endl;
+
 	Vector2f posicion_abajo_izquierda_logica_en_ventana =
 			VentanaGrafica::Instance()->calcularPosicionEnVentana(posicion_abajo_izquierda_logica_en_escenario);
 
