@@ -3,7 +3,7 @@
 
 Estado::Estado(Trayectoria* trayectoriaInicial, estado_personaje id, BVH* caja) :
     trayectoria(trayectoriaInicial), ataqueEstado(NULL),
-    tCreacion(((float)(SDL_GetTicks()))/1000.0f), id(id), cajas(caja) {
+    tCreacion(((float)(SDL_GetTicks()))/1000.0f), id(id), cajas(caja), ataqueEfectuado(false) {
     Vector2f posInicial = trayectoria->getPosicion(0);
     caja->setPosicion(posInicial);
  //   cout<<"******Cajas********"<<endl;
@@ -140,4 +140,12 @@ double Estado::calcularAncho() {
 
 double Estado::calcularAlto() {
     return cajas->calcularAltoEnvolvente();
+}
+
+void Estado::efectuarAtaque() {
+    ataqueEfectuado = true;
+}
+
+bool Estado::ataqueFueEfectuado() {
+    return ataqueEfectuado;
 }

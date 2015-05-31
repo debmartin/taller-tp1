@@ -56,9 +56,9 @@ void Arma::cambiarTrayectoria(Trayectoria* unaTrayectoria){
 }
 
 void Arma::arrojar(){
-	cout<<"*******************"<<endl;
-	cout<<"Arrojando arma"<<endl;
-	cout<<"*******************"<<endl;
+//	cout<<"*******************"<<endl;
+//	cout<<"Arrojando arma"<<endl;
+//	cout<<"*******************"<<endl;
 	tCreacion = SDL_GetTicks() / 1000.0f;
 	if(direccionArma == DIRECCION_DERECHA){
 		cambiarTrayectoria(new MRU(posicion, Vector2f(velocidad_arma, VELOCIDAD_ARMA_NULA)));

@@ -9,10 +9,10 @@
 #define VECTOR_VELOCIDAD_NULA Vector2f(0, 0)
 #define D_DERECHA 0
 
-CaminandoIzquierda::CaminandoIzquierda(Vector2f posInicial, bool enLimite, BVH* caja, bool direccion) :
-    Estado((enLimite) ? ((Trayectoria*) new Reposo(posInicial)) : ((Trayectoria*) new MRU(posInicial, Vector2f(-VELOCIDAD_DESP_HORIZONTAL_CAMINANDO, VELOCIDAD_NULA))), CAMINANDO_IZQUIERDA, caja) {
-	if(direccion == D_DERECHA)
-		    getTrayectoria()->reducirVelocidad(Vector2f(-VELOCIDAD_DESP_HORIZONTAL_RETROCEDIENDO, VELOCIDAD_NULA));
+CaminandoIzquierda::CaminandoIzquierda(Vector2f posInicial, BVH* caja, bool direccion) :
+    Estado((Trayectoria*) new MRU(posInicial, Vector2f(-VELOCIDAD_DESP_HORIZONTAL_CAMINANDO, VELOCIDAD_NULA)), CAMINANDO_IZQUIERDA, caja) {
+//	if(direccion == D_DERECHA)
+//		    getTrayectoria()->reducirVelocidad(Vector2f(-VELOCIDAD_DESP_HORIZONTAL_RETROCEDIENDO, VELOCIDAD_NULA));
 	//ctor
 }
 
