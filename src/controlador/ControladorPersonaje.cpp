@@ -109,7 +109,7 @@ void ControladorPersonaje::identificarOrdenJoystickPersonaje(Personaje* personaj
 	        personaje->arrojarArma();
 	    }
 	    else{
-	        personaje->mantenerReposo();
+	    	personaje->mantenerReposo();
 	    }
 	}/*
 	if((*estadoJoy)["JOY_PODER"]){

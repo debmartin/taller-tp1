@@ -94,12 +94,12 @@ Objeto* Personaje::getArma(){
 void Personaje::update(Colisionable* enemigo){
 	Logger::getInstance()->debug("Personaje: update.");
 
-	if(estaMuerto() && !estaSaltando()){
+	if(estaMuerto() && ! estaSaltando()){
 		morir();
 	}
 
     if(estaBloqueado()){
-        if(tiempoBloqueo <= 0){
+    	if(tiempoBloqueo <= 0){
            mantenerReposo();
         }
         tiempoBloqueo -= 1.0;
@@ -177,7 +177,8 @@ void Personaje::calcularPosicionSinColision(Colisionable* enemigo){
     } else if (posicionCandidata.Y() > posicionInicial.Y()) {
         caer();
     } else {
-        mantenerReposo();
+    	if(!estaMuerto())
+    		mantenerReposo();
     }
 }
 
@@ -399,12 +400,8 @@ void Personaje::victoria(){
 }
 
 void Personaje::morir(){
-	if(estaEnCaida()){
-		bloquearPersonaje(TIEMPO_FESTEJO_VICTORIA-tiempoBloqueo);
-	}else{
-		cambiarEstado(new EnEspera(posicion, MUERTO, (*cajasPorEstado)[CAIDA_IZQUIERDA]));
-		bloquearPersonaje(TIEMPO_FESTEJO_VICTORIA);
-	}
+	cambiarEstado(new EnEspera(posicion, MUERTO, (*cajasPorEstado)[CAIDA_IZQUIERDA]));
+	bloquearPersonaje(TIEMPO_FESTEJO_VICTORIA);
 }
 
 void Personaje::mantenerReposo(){
@@ -475,9 +472,10 @@ void Personaje::recibirGolpe(Colisionable* otro){
 			VentanaGrafica::Instance()->vibrar();
 		//Si el oponente pega una patada:
 		}else if(!estaSaltando()){
-			golpeado();
 			Vector2f vectorEmpuje = (direccion == DIRECCION_DERECHA) ? VECTOR_EMPUJE_IZQUIERDA : VECTOR_EMPUJE_DERECHA;
+			cout<<"empujar"<<endl;
 			empujar(vectorEmpuje);
+			golpeado();
 		}else if(estaSaltando() && this->direccion == DIRECCION_IZQUIERDA){
 		    caidaDerecha();
 		    VentanaGrafica::Instance()->vibrar();
@@ -569,7 +567,8 @@ void Personaje::volverAlPiso(float distanciaAObjetivo){
     } else {
         posicion = Vector2f(posicion.X(), posicionInicial.Y());
     }
-    mantenerReposo();
+    if(!estaMuerto())
+    	mantenerReposo();
 }
 
 void Personaje::espejarBVH() {

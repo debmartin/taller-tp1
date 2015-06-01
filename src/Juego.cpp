@@ -72,8 +72,6 @@ void Juego::update(bool& recargar)
 
 	VentanaGrafica::Instance()->actualizar();
 
-
-	// FIN CODIGO USUARIO
 	if (jugador1->getPersonaje()->estaMuerto() && !ejecutandoFinal) {
 		jugador2->getPersonaje()->victoria();
 		ejecutandoFinal = true;
@@ -85,11 +83,9 @@ void Juego::update(bool& recargar)
 		ejecutandoFinal = true;
         Logger::getInstance()->info("GAME OVER JUGADOR 2");
     }
-	if(!(jugador1->getPersonaje()->estaBloqueado()) && ejecutandoFinal){
-		finalizarRound(recargar);
+	if((!(jugador1->getPersonaje()->estaBloqueado()) && !(jugador2->getPersonaje()->estaBloqueado())) && ejecutandoFinal){
+		//finalizarRound(recargar);
 	}
-
-	// INICIO CODIGO USUARIO
 }
 
 void Juego::handleEvents(bool& recargar)
