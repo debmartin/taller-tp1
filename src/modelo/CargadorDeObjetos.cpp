@@ -276,7 +276,6 @@ Jugador* CargadorDeOjbetos::cargarJugador2() {
 
 map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(float ancho_logico_personaje, float alto_logico_personaje){
 	vector<AABB*>* cajasAABB_reposo = new vector<AABB*>;
-	vector<AABB*>* cajasAABB_caminando = new vector<AABB*>;
 	vector<AABB*>* cajasAABB_salto_diagonal = new vector<AABB*>;
 	vector<AABB*>* cajasAABB_salto_vertical = new vector<AABB*>;
 	vector<AABB*>* cajasAABB_patada_alta = new vector<AABB*>;
@@ -291,7 +290,6 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(flo
 	vector<AABB*>* cajasAABB_pinia_saltando_diagonal_izquierda = new vector<AABB*>;
 	vector<AABB*>* cajasAABB_pinia_saltando_vertical = new vector<AABB*>;
 	vector<AABB*>* cajasAABB_agachado = new vector<AABB*>;
-	vector<AABB*>* cajasAABB_defendiendo = new vector<AABB*>;
 	vector<AABB*>* cajasAABB_defendiendo_agachado = new vector<AABB*>;
 	vector<AABB*>* cajasAABB_gancho = new vector<AABB*>;
 	vector<AABB*>* cajasAABB_golpeado = new vector<AABB*>;
@@ -310,19 +308,6 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(flo
 	AABB* reposo_caja2 = new AABB(reposo_caja2_PuntoMin, reposo_caja2_PuntoMax);
 	cajasAABB_reposo->push_back(reposo_caja1);
 	cajasAABB_reposo->push_back(reposo_caja2);
-
-	//CAMINANDO//
-	Vector2f caminando_caja1_PuntoMin(CAMINANDO_CAJA1_X1_PORCENTUAL*ancho_logico_personaje, CAMINANDO_CAJA1_Y1_PORCENTUAL*alto_logico_personaje);
-	Vector2f caminando_caja1_PuntoMax(CAMINANDO_CAJA1_X2_PORCENTUAL*ancho_logico_personaje, CAMINANDO_CAJA1_Y2_PORCENTUAL*alto_logico_personaje);
-
-	Vector2f caminando_caja2_PuntoMin(CAMINANDO_CAJA2_X1_PORCENTUAL*ancho_logico_personaje, CAMINANDO_CAJA2_Y1_PORCENTUAL*alto_logico_personaje);
-	Vector2f caminando_caja2_PuntoMax(CAMINANDO_CAJA2_X2_PORCENTUAL*ancho_logico_personaje, CAMINANDO_CAJA2_Y2_PORCENTUAL*alto_logico_personaje);
-
-	AABB* caminando_caja1 = new AABB(caminando_caja1_PuntoMin, caminando_caja1_PuntoMax);
-	AABB* caminando_caja2 = new AABB(caminando_caja2_PuntoMin, caminando_caja2_PuntoMax);
-
-	cajasAABB_caminando->push_back(caminando_caja1);
-	cajasAABB_caminando->push_back(caminando_caja2);
 
 	//PATADA ALTA//
 	Vector2f patada_alta_caja1_PuntoMin(PATADA_ALTA_CAJA1_X1_PORCENTUAL*ancho_logico_personaje, PATADA_ALTA_CAJA1_Y1_PORCENTUAL*alto_logico_personaje);
@@ -494,19 +479,6 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(flo
 	cajasAABB_pinia_saltando_vertical->push_back(pinia_saltando_vertical_caja1);
 	cajasAABB_pinia_saltando_vertical->push_back(pinia_saltando_vertical_caja2);
 
-	//DEFENDIENDO//
-	Vector2f defendiendo_caja1_PuntoMin(DEFENDIENDO_CAJA1_X1_PORCENTUAL*ancho_logico_personaje, DEFENDIENDO_CAJA1_Y1_PORCENTUAL*alto_logico_personaje);
-	Vector2f defendiendo_caja1_PuntoMax(DEFENDIENDO_CAJA1_X2_PORCENTUAL*ancho_logico_personaje, DEFENDIENDO_CAJA1_Y2_PORCENTUAL*alto_logico_personaje);
-
-	Vector2f defendiendo_caja2_PuntoMin(DEFENDIENDO_CAJA2_X1_PORCENTUAL*ancho_logico_personaje, DEFENDIENDO_CAJA2_Y1_PORCENTUAL*alto_logico_personaje);
-	Vector2f defendiendo_caja2_PuntoMax(DEFENDIENDO_CAJA2_X2_PORCENTUAL*ancho_logico_personaje, DEFENDIENDO_CAJA2_Y2_PORCENTUAL*alto_logico_personaje);
-
-	AABB* defendiendo_caja1 = new AABB(defendiendo_caja1_PuntoMin, defendiendo_caja1_PuntoMax);
-	AABB* defendiendo_caja2 = new AABB(defendiendo_caja2_PuntoMin, defendiendo_caja2_PuntoMax);
-
-	cajasAABB_defendiendo->push_back(defendiendo_caja1);
-	cajasAABB_defendiendo->push_back(defendiendo_caja2);
-
 	//DEFENDIENDO AGACHADO//
 	Vector2f defendiendo_agachado_caja1_PuntoMin(DEFENDIENDO_AGACHADO_CAJA1_X1_PORCENTUAL*ancho_logico_personaje, DEFENDIENDO_AGACHADO_CAJA1_Y1_PORCENTUAL*alto_logico_personaje);
 	Vector2f defendiendo_agachado_caja1_PuntoMax(DEFENDIENDO_AGACHADO_CAJA1_X2_PORCENTUAL*ancho_logico_personaje, DEFENDIENDO_AGACHADO_CAJA1_Y2_PORCENTUAL*alto_logico_personaje);
@@ -569,7 +541,6 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(flo
 	Vector2f pivote(ancho_logico_personaje/2, 0);
 	//Armo los BVH de cada estado
 	BVH* BVH_reposo = new BVH(cajasAABB_reposo, pivote);
-	BVH* BVH_caminando = new BVH(cajasAABB_caminando, pivote);
 	BVH* BVH_patada_alta = new BVH(cajasAABB_patada_alta, pivote);
 	BVH* BVH_pinia_alta = new BVH(cajasAABB_pinia_alta, pivote);
 	BVH* BVH_agachado = new BVH(cajasAABB_agachado, pivote);
@@ -584,7 +555,6 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(flo
 	BVH* BVH_pinia_saltando_diagonal_derecha = new BVH(cajasAABB_pinia_saltando_diagonal_derecha, pivote);
 	BVH* BVH_pinia_saltando_diagonal_izquierda = new BVH(cajasAABB_pinia_saltando_diagonal_izquierda, pivote);
 	BVH* BVH_pinia_saltando_vertical = new BVH(cajasAABB_pinia_saltando_vertical, pivote);
-	BVH* BVH_defendiendo = new BVH(cajasAABB_defendiendo, pivote);
 	BVH* BVH_defendiendo_agachado = new BVH(cajasAABB_defendiendo_agachado, pivote);
 	BVH* BVH_gancho = new BVH(cajasAABB_gancho, pivote);
 	BVH* BVH_golpeado = new BVH(cajasAABB_golpeado, pivote);
@@ -594,8 +564,8 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(flo
 
 	map<estado_personaje, BVH*>* mapa_BVH = new map<estado_personaje, BVH*>;
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(EN_ESPERA, BVH_reposo));
-	mapa_BVH->insert(pair<estado_personaje, BVH*>(CAMINANDO_DERECHA, BVH_caminando));
-	mapa_BVH->insert(pair<estado_personaje, BVH*>(CAMINANDO_IZQUIERDA, BVH_caminando));
+	mapa_BVH->insert(pair<estado_personaje, BVH*>(CAMINANDO_DERECHA, BVH_reposo));
+	mapa_BVH->insert(pair<estado_personaje, BVH*>(CAMINANDO_IZQUIERDA, BVH_reposo));
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(SALTANDO_OBLICUO_DERECHA, BVH_salto_diagonal));
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(SALTANDO_OBLICUO_IZQUIERDA, BVH_salto_diagonal));
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(SALTANDO_VERTICAL, BVH_salto_vertical));
@@ -611,7 +581,7 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(flo
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(PINIA_SALTANDO_DIAGONAL_IZQUIERDA, BVH_pinia_saltando_diagonal_izquierda));
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(PINIA_SALTANDO_VERTICAL, BVH_pinia_saltando_vertical));
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(AGACHADO, BVH_agachado));
-	mapa_BVH->insert(pair<estado_personaje, BVH*>(DEFENDIENDO, BVH_defendiendo));
+	mapa_BVH->insert(pair<estado_personaje, BVH*>(DEFENDIENDO, BVH_reposo));
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(DEFENDIENDO_AGACHADO, BVH_defendiendo_agachado));
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(GANCHO, BVH_gancho));
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(RECIBIENDO_GOLPE, BVH_golpeado));
