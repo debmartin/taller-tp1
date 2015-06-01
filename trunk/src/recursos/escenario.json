@@ -11,17 +11,17 @@
     },
     "capas": [
         { 
-            "imagen_fondo": "RECURSOS/ESCENARIOS/GOROSLAIR/goro1.png",
+            "imagen_fondo": "RECURSOS/ESCENARIOS/TEST/grilla-opaca.png",
             "id_capa": "capa_1", 
             "ancho": 1000 
         },               
 	    { 
-            "imagen_fondo": "RECURSOS/ESCENARIOS/GOROSLAIR/goro2.png",
+            "imagen_fondo": "RECURSOS/ESCENARIOS/TEST/grilla-roja.png",
             "id_capa": "capa_2", 
             "ancho": 1600 
         },
 	    { 
-            "imagen_fondo": "RECURSOS/ESCENARIOS/GOROSLAIR/goro3.png",
+            "imagen_fondo": "RECURSOS/ESCENARIOS/TEST/grilla-transparente.png",
             "id_capa": "capa_3", 
             "ancho": 1800 
         }
