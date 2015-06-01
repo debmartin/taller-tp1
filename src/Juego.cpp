@@ -83,8 +83,9 @@ void Juego::update(bool& recargar)
 		ejecutandoFinal = true;
         Logger::getInstance()->info("GAME OVER JUGADOR 2");
     }
-	if((!(jugador1->getPersonaje()->estaBloqueado()) && !(jugador2->getPersonaje()->estaBloqueado())) && ejecutandoFinal){
-		//finalizarRound(recargar);
+	if((!(jugador1->getPersonaje()->estaBloqueado()) && jugador2->getPersonaje()->estaMuerto() && ejecutandoFinal) ||
+			(!(jugador2->getPersonaje()->estaBloqueado()) && jugador1->getPersonaje()->estaMuerto() && ejecutandoFinal)){
+		finalizarRound(recargar);
 	}
 }
 

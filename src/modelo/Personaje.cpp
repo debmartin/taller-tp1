@@ -19,7 +19,7 @@
 
 #define TIEMPO_BLOQUEO_PATADA 35
 #define TIEMPO_BLOQUEO_GOLPE 25
-#define TIEMPO_FESTEJO_VICTORIA 300
+#define TIEMPO_FESTEJO_VICTORIA 250
 
 Personaje::Personaje(
 		string idIn,
@@ -94,7 +94,7 @@ Objeto* Personaje::getArma(){
 void Personaje::update(Colisionable* enemigo){
 	Logger::getInstance()->debug("Personaje: update.");
 
-	if(estaMuerto() && ! estaSaltando()){
+	if(estaMuerto() && !estaSaltando()){
 		morir();
 	}
 
