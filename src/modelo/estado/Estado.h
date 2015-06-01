@@ -83,6 +83,8 @@ class Estado
         float obtenerTiempoDeCreacion();
         double calcularAncho();
         double calcularAlto();
+        void efectuarAtaque();
+        bool ataqueFueEfectuado();
     protected:
         Ataque* ataqueEstado;
     private:
@@ -90,6 +92,7 @@ class Estado
         float tCreacion;
         estado_personaje id;
         BVH* cajas;
+        bool ataqueEfectuado;
 };
 
 #endif // ESTADO_H

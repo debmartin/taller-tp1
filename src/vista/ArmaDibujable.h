@@ -19,6 +19,10 @@ private:
 	Sprite* armaDibujable;
 	estado_objeto estado;
 
+    // ENVOLVENTE
+    Animacion* animacionEnvolvente;
+    Sprite* spriteEnvolvente;
+
 public:
 	ArmaDibujable();
 	ArmaDibujable(Animacion* animIni, Vector2f posicionIni, Vector2f tamanioPx, OrientacionSprite orientacion);

@@ -40,3 +40,7 @@ bool PateandoSaltandoDiagonalDerecha::estaSaltando(){
 bool PateandoSaltandoDiagonalDerecha::estaSaltandoDiagonalDerecha(){
     return true;
 }
+
+bool PateandoSaltandoDiagonalDerecha::ejecutandoMovimientoEspecial(){
+    return true;
+}

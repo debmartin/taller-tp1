@@ -7,7 +7,7 @@
 class CaminandoDerecha : public Estado
 {
     public:
-        CaminandoDerecha(Vector2f posInicial, bool enLimite, BVH* caja, bool direccion);
+        CaminandoDerecha(Vector2f posInicial, BVH* caja, bool direccion);
         virtual ~CaminandoDerecha();
         bool estaCaminando();
     protected:
