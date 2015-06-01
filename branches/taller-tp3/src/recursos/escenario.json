@@ -140,24 +140,25 @@
 		    		    "fps": 15,
 		    		    "velocidad": 600        		     
 		    			},
-		    "combos": {
-		    			"Ice Freeze": {
-		    							"tecla1": "ABAJO",
-		    							"tecla2": "ADELANTE",
-		    							"tecla3": "JOY_PINIA_BAJA"
-		    							},
-		    			"Slide": {
-		    							"tecla1": "ATRAS",
-		    							"tecla2": "JOY_PINIA_BAJA",
-		    							"tecla3": "JOY_PATADA_BAJA",
-		    							"tecla4": "JOY_DEFENSA"
-		    							},
-		    			"Fatality1": {
-		    							"tecla1": "ADELANTE",
-		    							"tecla2": "ABAJO",
-		    							"tecla3": "ADELANTE",
-		    							"tecla4": "JOY_PINIA_ALTA"
-		    							}
+		    "combo-1": {
+		    			"nombre_combo": "Ice Freeze",
+		    			"tecla1": "JOY_ABAJO",
+		    			"tecla2": "JOY_DERECHA",
+		    			"tecla3": "JOY_PINIA_BAJA"
+		    			},
+		    "combo-2": {
+		    			"nombre_combo": "Slide",
+		    			"tecla1": "JOY_IZQUIERDA",
+		    			"tecla2": "JOY_PINIA_BAJA",
+		    			"tecla3": "JOY_PATADA_BAJA",
+		    			"tecla4": "JOY_DEFENSA"
+		    			},
+		    "combo-3": {
+		    			"nombre_combo": "Fatality1",
+		    			"tecla1": "JOY_DERECHA",
+		    			"tecla2": "JOY_ABAJO",
+		    			"tecla3": "JOY_DERECHA",
+		    			"tecla4": "JOY_PINIA_ALTA"
 		    			},
 			"color-alternativo": {
 						"h-inicial": 53,
@@ -278,29 +279,31 @@
 		    		    "fps": 15,
 		    		    "velocidad": 600	//Velocidad máxima 65535
 		    			},
-		    "combos": {
-		    			"Ring Toss": {
-		    							"tecla1": "ATRAS",
-		    							"tecla2": "ATRAS",
-		    							"tecla3": "JOY_PINIA_BAJA"
-		    							},
-		    			"Leg Grab": {
-		    							"tecla1": "JOY_PINIA_BAJA",
-		    							"tecla2": "JOY_DEFENSA",
-		    							"tecla3": "JOY_PATADA_BAJA"
-		    							},
-		    			"Square Flight": {
-		    							"tecla1": "ADELANTE",
-		    							"tecla2": "ATRAS",
-		    							"tecla3": "JOY_PINIA_BAJA"
-		    							},
-		    			"Fatality1": {
-		    							"tecla1": "ADELANTE",
-		    							"tecla2": "ADELANTE",
-		    							"tecla3": "ATRAS",
-		    							"tecla4": "ATRAS",
-		    							"tecla5": "JOY_DEFENSA"
-		    						}
+		    "combo-1": {
+		    			"nombre_combo": "Ring Toss",
+		    			"tecla1": "JOY_IZQUIERDA",
+		    			"tecla2": "JOY_IZQUIERDA",
+		    			"tecla3": "JOY_PINIA_BAJA"
+		    			},
+		    "combo-2": {
+		    			"nombre_combo": "Leg Grab",
+		    			"tecla1": "JOY_PINIA_BAJA",
+		    			"tecla2": "JOY_DEFENSA",
+		    			"tecla3": "JOY_PATADA_BAJA"
+		    			},
+		    "combo-3": {
+		    			"nombre_combo": "Square Flight",
+		    			"tecla1": "JOY_DERECHA",
+		    			"tecla2": "JOY_IZQUIERDA",
+		    			"tecla3": "JOY_PINIA_BAJA"
+		    			},
+			"combo-4": {
+		    			"nombre_combo": "Fatality1",
+		    			"tecla1": "JOY_DERECHA",
+		    			"tecla2": "JOY_DERECHA",
+		    			"tecla3": "JOY_IZQUIERDA",
+		    			"tecla4": "JOY_IZQUIERDA",
+		    			"tecla5": "JOY_DEFENSA"
 		    			},
 			"color-alternativo": {
 						"h-inicial": 53,

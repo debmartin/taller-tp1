@@ -43,6 +43,8 @@
 #define TAG_PERSONAJE_ARMA_ALTO "alto"
 #define TAG_PERSONAJE_ARMA_ANCHO "ancho"
 #define TAG_PERSONAJE_VELOCIDAD_ARMA "velocidad"
+#define TAG_PERSONAJE_COMBO "combo-"
+#define TAG_NOMBRE_COMBO "nombre_combo"
 #define TAG_COLOR_ALTERNATIVO "color-alternativo"
 #define TAG_COLOR_ALTERNATIVO_HINICIAL "h-inicial"
 #define TAG_COLOR_ALTERNATIVO_HFINAL "h-final"
