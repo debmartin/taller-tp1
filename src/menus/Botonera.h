@@ -31,14 +31,14 @@ class Botonera {
 private:
 	int cant_filas;
 	int cant_columnas;
-	Posicion* posicion;
 	Textura* gButtonSpriteSheetTexture;
 	map<int,SDL_Rect>* map_gSpriteClips;
 	Boton*** matriz;
 	Posicion* posEnfocado;
+	string IdContenidoElegido;
 public:
 	Botonera();
-	Botonera(int cant_filas, int cant_columnas, Posicion* posicion, Posicion* posIni_enfocado);
+	Botonera(string tipo, int cant_filas, int cant_columnas, Posicion* posicion, Posicion* posIni_enfocado);
 	bool loadMedia(string path_imagen);
 	virtual ~Botonera();
 	void manejarEvento( SDL_Event evento );
@@ -47,6 +47,9 @@ public:
 
 	int getCantColumnas();
 	int getCantFilas();
+	string getIdContenidoElegido();
+private:
+	void elegirIdContenido(string idContenido);
 };
 
 #endif /* SRC_BOTONERA_H_ */

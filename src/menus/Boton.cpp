@@ -7,6 +7,7 @@
 
 #include "Boton.h"
 
+#include <string>
 #include <utility>
 
 #include "Posicion.h"
@@ -32,7 +33,7 @@ Posicion* Boton::getPosicionModelo() const {
 
 ostream& operator <<(ostream &o, const Boton &b) {
 
-        o<<"Boton -> [x,y]:["<<b.mPosition.x<<","<<b.mPosition.y<<"]";
+        o<<"Boton -> [x,y, idContenido]:["<<b.mPosition.x<<","<<b.mPosition.y<<","<<b.idContenido<<"]";
         return o;
 }
 
@@ -57,4 +58,12 @@ void Boton::render(Textura* gButtonSpriteSheetTexture, map<int,SDL_Rect>* mapSpr
 {
 	//Show current button sprite
 	gButtonSpriteSheetTexture->render( mPosition.x, mPosition.y, &mapSpriteClips->find(mCurrentSprite)->second );
+}
+
+string Boton::getIdContenido() const {
+	return idContenido;
+}
+
+void Boton::cargarIdContenido(string idContenido) {
+	this->idContenido = idContenido;
 }

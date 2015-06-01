@@ -9,6 +9,7 @@
 #define SRC_BOTON_H_
 
 #include <map>
+#include <string>
 
 class Posicion;
 
@@ -44,6 +45,7 @@ private:
 	// poscion en la matriz de la botonera
 	Posicion* posicionModelo;
 	bool elegido;
+	string idContenido;
 
 public:
 
@@ -57,7 +59,8 @@ public:
 	friend ostream& operator<<(ostream &o, const Boton &b);
 	Posicion* getPosicionModelo() const;
 	void elegirSprite();
-
+	void cargarIdContenido(string idContenido);
+	string getIdContenido() const;
 };
 
 #endif /* SRC_BOTON_H_ */

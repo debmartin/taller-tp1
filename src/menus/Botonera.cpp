@@ -7,25 +7,52 @@
 
 #include "Botonera.h"
 
-#include <stddef.h>
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_keyboard.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_scancode.h>
 #include <SDL2/SDL_stdinc.h>
 #include <iostream>
+#include <list>
 #include <utility>
 
+#include "../utils/Logger.h"
 #include "../vista/Renderizador.h"
 #include "Boton.h"
 #include "Posicion.h"
 #include "Textura.h"
 
-Botonera::Botonera(int cant_filas, int cant_columnas, Posicion* posicion, Posicion* posIni_enfocado) {
+Botonera::Botonera(string tipo, int cant_filas, int cant_columnas, Posicion* posicion, Posicion* posIni_enfocado) {
 
 	this->cant_columnas = cant_columnas;
 	this->cant_filas = cant_filas;
 	this->posEnfocado = new Posicion(posIni_enfocado->getX(), posIni_enfocado->getY());
+
+	list<string>* idContenidos = new list<string>();
+	if ( tipo == "modos" )
+	{
+		idContenidos->push_back("P1_vs_P2");
+		idContenidos->push_back("P1_vs_CPU");
+		idContenidos->push_back("Practica");
+
+	}
+	else if (tipo == "personajes")
+	{
+		idContenidos->push_back("sonya");
+		idContenidos->push_back("sub-zero");
+		idContenidos->push_back("personaje_03");
+		idContenidos->push_back("personaje_04");
+		idContenidos->push_back("personaje_05");
+		idContenidos->push_back("personaje_06");
+		idContenidos->push_back("personaje_07");
+		idContenidos->push_back("personaje_08");
+		idContenidos->push_back("personaje_09");
+		idContenidos->push_back("personaje_10");
+		idContenidos->push_back("personaje_11");
+		idContenidos->push_back("personaje_12");
+	}
+
+	list<string>::iterator itIdContenidos = idContenidos->begin();
 
     this->matriz = new Boton**[this->cant_filas];
 	for ( int y = 0 ; y < this->cant_filas ; y++ )
@@ -40,8 +67,10 @@ Botonera::Botonera(int cant_filas, int cant_columnas, Posicion* posicion, Posici
 			Posicion* posicionVista = new Posicion(posicion->getX() + BUTTON_WIDTH * x, posicion->getY() + BUTTON_HEIGHT * y);
 
 			Boton* boton = new Boton(posicionModelo, posicionVista);
+			boton->cargarIdContenido(*(itIdContenidos++));
 
 			this->matriz[y][x] = boton;
+
 		}
 	}
 
@@ -141,12 +170,12 @@ void Botonera::actualizarModelo() {
 			{
 				if ( this->posEnfocado->estoyElegido() )
 				{
-					cout<<"Elegida: "<<*matriz[y][x]->getPosicionModelo()<<endl;
 					matriz[y][x]->getPosicionModelo()->elegir();
+					this->elegirIdContenido(matriz[y][x]->getIdContenido());
+
 				}
 				else
 				{
-					cout<<"Enforcada: "<<*matriz[y][x]->getPosicionModelo()<<endl;
 					matriz[y][x]->getPosicionModelo()->enfocar();
 					matriz[y][x]->getPosicionModelo()->deselegir();
 				}
@@ -181,4 +210,12 @@ void Botonera::dibujar() {
 
 	//UPDATE screen
 	SDL_RenderPresent( Renderizador::Instance()->getRenderer() );
+}
+
+void Botonera::elegirIdContenido(string idContenido) {
+	this->IdContenidoElegido = idContenido;
+}
+
+string Botonera::getIdContenidoElegido() {
+	return this->IdContenidoElegido;
 }

@@ -29,11 +29,6 @@ PantallaSeleccionarPersonaje::~PantallaSeleccionarPersonaje() {
 
 void PantallaSeleccionarPersonaje::iniciar() {
 
-	this->IdPersonaje1Elegido = "sub-zero";
-	this->IdPersonaje2Elegido = "sonya";
-
-	//TODO falta sincronizar con el renderizador que ya esta iniciado
-
 	//cambio el titulo a pantalla
 	SDL_SetWindowTitle( Renderizador::Instance()->getWindow(), "Eleccion de Personajes" );
 
@@ -45,7 +40,7 @@ void PantallaSeleccionarPersonaje::iniciar() {
 	int botonera_colummas = 4;
 	Posicion* pos_botoneraPersonajes = new Posicion(screen_width/2-(BUTTON_WIDTH*botonera_colummas)/2,screen_height/8);
 	Posicion* posIni_enfocadoPersonajes = new Posicion(3,1);
-	Botonera* botoneraPersonajes = new Botonera(botonera_filas,botonera_colummas,pos_botoneraPersonajes, posIni_enfocadoPersonajes);
+	Botonera* botoneraPersonajes = new Botonera("personajes", botonera_filas,botonera_colummas,pos_botoneraPersonajes, posIni_enfocadoPersonajes);
 
 	if( !botoneraPersonajes->loadMedia("RECURSOS/grilla_eleccion_personajes.jpg") )
 	{
@@ -95,6 +90,12 @@ void PantallaSeleccionarPersonaje::iniciar() {
 	        if (frameTime < DELAY_TIME)
 	            SDL_Delay((int)(DELAY_TIME - frameTime));
 		}
+
+	     this->IdPersonaje1Elegido = botoneraPersonajes->getIdContenidoElegido();
+	     this->IdPersonaje2Elegido = botoneraPersonajes->getIdContenidoElegido();
+
+	 	this->IdPersonaje1Elegido = "sub-zero";
+	 	this->IdPersonaje2Elegido = "sonya";
 	}
 
 	delete botoneraPersonajes;
