@@ -400,7 +400,7 @@ void Personaje::victoria(){
 }
 
 void Personaje::morir(){
-	cambiarEstado(new EnEspera(posicion, MUERTO, (*cajasPorEstado)[CAIDA_IZQUIERDA]));
+	cambiarEstado(new EnEspera(posicion, MUERTO, (*cajasPorEstado)[EN_ESPERA]));
 	bloquearPersonaje(TIEMPO_FESTEJO_VICTORIA);
 }
 
