@@ -140,6 +140,25 @@
 		    		    "fps": 15,
 		    		    "velocidad": 600        		     
 		    			},
+		    "combos": {
+		    			"Ice Freeze": {
+		    							"tecla1": "ABAJO",
+		    							"tecla2": "ADELANTE",
+		    							"tecla3": "JOY_PINIA_BAJA"
+		    							},
+		    			"Slide": {
+		    							"tecla1": "ATRAS",
+		    							"tecla2": "JOY_PINIA_BAJA",
+		    							"tecla3": "JOY_PATADA_BAJA",
+		    							"tecla4": "JOY_DEFENSA"
+		    							},
+		    			"Fatality1": {
+		    							"tecla1": "ADELANTE",
+		    							"tecla2": "ABAJO",
+		    							"tecla3": "ADELANTE",
+		    							"tecla4": "JOY_PINIA_ALTA"
+		    							}
+		    			},
 			"color-alternativo": {
 						"h-inicial": 53,
 						"h-final": 220,
@@ -258,6 +277,30 @@
 		    			"cant_fotogramas": 1,
 		    		    "fps": 15,
 		    		    "velocidad": 600	//Velocidad máxima 65535
+		    			},
+		    "combos": {
+		    			"Ring Toss": {
+		    							"tecla1": "ATRAS",
+		    							"tecla2": "ATRAS",
+		    							"tecla3": "JOY_PINIA_BAJA"
+		    							},
+		    			"Leg Grab": {
+		    							"tecla1": "JOY_PINIA_BAJA",
+		    							"tecla2": "JOY_DEFENSA",
+		    							"tecla3": "JOY_PATADA_BAJA"
+		    							},
+		    			"Square Flight": {
+		    							"tecla1": "ADELANTE",
+		    							"tecla2": "ATRAS",
+		    							"tecla3": "JOY_PINIA_BAJA"
+		    							},
+		    			"Fatality1": {
+		    							"tecla1": "ADELANTE",
+		    							"tecla2": "ADELANTE",
+		    							"tecla3": "ATRAS",
+		    							"tecla4": "ATRAS",
+		    							"tecla5": "JOY_DEFENSA"
+		    						}
 		    			},
 			"color-alternativo": {
 						"h-inicial": 53,
