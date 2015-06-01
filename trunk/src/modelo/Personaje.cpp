@@ -463,7 +463,7 @@ void Personaje::recibirDanio(int danio){
 
 void Personaje::recibirGolpe(Colisionable* otro){
 	if(otro->ejecutandoMovimientoEspecial()){
-		if(otro->verEstado()->efectuandoGancho()){
+		if(otro->verEstado()->efectuandoGancho() || otro->verEstado()->estaSaltando()){
 			if(this->direccion == DIRECCION_IZQUIERDA){
 				caidaDerecha();
 			}else if(this->direccion == DIRECCION_DERECHA){

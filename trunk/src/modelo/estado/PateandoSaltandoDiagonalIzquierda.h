@@ -18,6 +18,7 @@ public:
 	bool estaAtacando();
 	bool estaSaltando();
 	bool estaSaltandoDiagonalIzquierda();
+	bool ejecutandoMovimientoEspecial();
 };
 
 #endif /* SRC_MODELO_ESTADO_PATEANDOSALTANDODIAGONALIZQUIERDA_H_ */
