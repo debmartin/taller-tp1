@@ -20,7 +20,6 @@
 #include "Posicion.h"
 
 PantallaSeleccionarModo::PantallaSeleccionarModo() {
-	this->modo_juego_elegido = JUEGO_MODO_P1_VS_P2;
 
 }
 
@@ -41,7 +40,7 @@ void PantallaSeleccionarModo::iniciar() {
 	int screen_height = 480;
 	Posicion* pos_modosDeJuego = new Posicion(screen_width/2-BUTTON_WIDTH/2, screen_height/8);
 	Posicion* posIni_enfocadoModosDeJuegos = new Posicion(0,0);
-	Botonera* botoneraModosDeJuego = new Botonera(3,1,pos_modosDeJuego,posIni_enfocadoModosDeJuegos);
+	Botonera* botoneraModosDeJuego = new Botonera("modos",3,1,pos_modosDeJuego,posIni_enfocadoModosDeJuegos);
 
 	if( !botoneraModosDeJuego->loadMedia("RECURSOS/grilla_eleccion_modo.jpg") )
 	{
@@ -91,6 +90,7 @@ void PantallaSeleccionarModo::iniciar() {
 				SDL_Delay((int)(DELAY_TIME - frameTime));
 		}
 
+		modo_juego_elegido = botoneraModosDeJuego->getIdContenidoElegido();
 	}
 
 	delete botoneraModosDeJuego;
