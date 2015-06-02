@@ -44,6 +44,7 @@ typedef enum estado_personaje
 	TIRANDO_PODER,
 	MUERTO,
 	VICTORIA,
+	SLICE,
 	BLOQUEADO
 } estado_personaje;
 
