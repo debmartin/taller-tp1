@@ -42,7 +42,7 @@ public:
 	bool loadMedia(string path_imagen);
 	virtual ~Botonera();
 	void manejarEvento( SDL_Event evento );
-	void actualizarModelo();
+	void actualizarModelo(bool* salirMenu);
 	void dibujar();
 
 	int getCantColumnas();

@@ -33,7 +33,7 @@ Botonera::Botonera(string tipo, int cant_filas, int cant_columnas, Posicion* pos
 	{
 		idContenidos->push_back("P1_vs_P2");
 		idContenidos->push_back("P1_vs_CPU");
-		idContenidos->push_back("Practica");
+		idContenidos->push_back("Práctica");
 
 	}
 	else if (tipo == "personajes")
@@ -156,7 +156,7 @@ int Botonera::getCantColumnas() {
 	return this->cant_columnas;
 }
 
-void Botonera::actualizarModelo() {
+void Botonera::actualizarModelo(bool* salirMenu) {
 
 	for ( int y = 0 ; y < this->cant_filas ; y++ )
 	{
@@ -172,6 +172,7 @@ void Botonera::actualizarModelo() {
 				{
 					matriz[y][x]->getPosicionModelo()->elegir();
 					this->elegirIdContenido(matriz[y][x]->getIdContenido());
+					*salirMenu = true;
 
 				}
 				else

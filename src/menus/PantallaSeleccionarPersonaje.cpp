@@ -8,7 +8,6 @@
 #include "PantallaSeleccionarPersonaje.h"
 
 #include <SDL2/SDL_events.h>
-#include <SDL2/SDL_keycode.h>
 #include <SDL2/SDL_stdinc.h>
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_video.h>
@@ -30,7 +29,10 @@ PantallaSeleccionarPersonaje::~PantallaSeleccionarPersonaje() {
 void PantallaSeleccionarPersonaje::iniciar() {
 
 	//cambio el titulo a pantalla
-	SDL_SetWindowTitle( Renderizador::Instance()->getWindow(), "Eleccion de Personajes" );
+	string titulo = "Eleccion de Personajes( Modo: ";
+	titulo.append(this->modo_juego_elegido);
+	titulo.append(" ).");
+	SDL_SetWindowTitle( Renderizador::Instance()->getWindow(), titulo.c_str() );
 
 	bool juegoCorriendo = true;
 
@@ -63,13 +65,6 @@ void PantallaSeleccionarPersonaje::iniciar() {
 
 			if (SDL_PollEvent(&evento))
 			{
-				//para salir del juego con la tecla ESC
-				if( evento.type == SDL_KEYUP && evento.key.repeat == 0 ){
-					if (evento.key.keysym.sym == SDLK_ESCAPE){
-						salirEleccionPersonajes = true;
-					}
-				}
-
 				if (evento.type == SDL_QUIT){
 					juegoCorriendo = false;
 				}
@@ -79,7 +74,7 @@ void PantallaSeleccionarPersonaje::iniciar() {
 					botoneraPersonajes->manejarEvento(evento);
 				}
 
-				botoneraPersonajes->actualizarModelo();
+				botoneraPersonajes->actualizarModelo(&salirEleccionPersonajes);
 
 			}
 
