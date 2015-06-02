@@ -152,6 +152,7 @@ Juego::~Juego(){
 //    delete jugadorDibujable1;
 //    delete jugador1;
 //    delete escenarioG;
+	delete this->controladorPersonaje;
 }
 
 void Juego::posicionarPersonajes_enEjeX()

@@ -142,26 +142,6 @@ int ControladorJoystick::yvalue(JoyNumber joy) {
 	return m_joystickValues[joy].first->getY();
 }
 
-ControladorJoystick::~ControladorJoystick()
-{
-    // clear our arrays
-    m_joystickValues.clear();
-    m_joysticks.clear();
-    m_buttonStates.clear();
-
-    correspondenciaTeclas->clear();
-    delete correspondenciaTeclas;
-    correspondenciaEjes->clear();
-    delete correspondenciaEjes;
-
-    estadoJoystick1->clear();
-    delete estadoJoystick1;
-    estadoJoystick2->clear();
-    delete estadoJoystick2;
-    estadoJoystickNulo->clear();
-    delete estadoJoystickNulo;
-}
-
 bool ControladorJoystick::getAxisState(JoyNumber joy, string nombreDireccion) {
 	if(m_joystickValues.size() == 0)
 		return false;
@@ -305,4 +285,48 @@ void ControladorJoystick::resetControladorJoystick(){
 	(*this->estadoJoystick2)["JOY_ABAJO"]		  = false;
 	(*this->estadoJoystick2)["JOY_IZQUIERDA"]	  = false;
 	(*this->estadoJoystick2)["JOY_DERECHA"]		  = false;
+}
+
+
+ControladorJoystick::~ControladorJoystick()
+{
+    // clear our arrays
+    m_joystickValues.clear();
+    m_joysticks.clear();
+    m_buttonStates.clear();
+
+    correspondenciaTeclas->clear();
+    delete correspondenciaTeclas;
+    correspondenciaEjes->clear();
+    delete correspondenciaEjes;
+
+    estadoJoystick1->clear();
+    delete estadoJoystick1;
+    estadoJoystick2->clear();
+    delete estadoJoystick2;
+    estadoJoystickNulo->clear();
+    delete estadoJoystickNulo;
+}
+
+
+void ControladorJoystick::clean() {
+    // clear our arrays
+
+    m_joystickValues.clear();
+    m_joysticks.clear();
+    m_buttonStates.clear();
+
+	/*
+    correspondenciaTeclas->clear();
+    delete correspondenciaTeclas;
+    correspondenciaEjes->clear();
+    delete correspondenciaEjes;
+    */
+
+    estadoJoystick1->clear();
+    delete estadoJoystick1;
+    estadoJoystick2->clear();
+    delete estadoJoystick2;
+    estadoJoystickNulo->clear();
+    delete estadoJoystickNulo;
 }
