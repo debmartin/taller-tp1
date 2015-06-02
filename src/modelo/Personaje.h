@@ -38,6 +38,7 @@
 #include "estado/Golpeado.h"
 #include "estado/CaidaDerecha.h"
 #include "estado/CaidaIzquierda.h"
+#include "estado/Deslizar.h"
 #include "../utils/Loggeable.h"
 #include "Observable.h"
 #include "Vector2f.h"
@@ -101,6 +102,7 @@ public:
 	void cambiarNumeroPersonaje();
 	bool llegoAlLimiteIzquierdo();
 	bool llegoAlLimiteDerecho();
+	bool pegadoAlOponente(Colisionable* enemigo);
 
 	//Estados
 	bool estaSaltando();
@@ -153,6 +155,7 @@ public:
 	void golpeado();
 	void victoria();
 	void morir();
+	void deslizar();
 	void recibirDanio(int danio);
 	void recibirGolpe(Colisionable* otro);
 	void arrojarArma();

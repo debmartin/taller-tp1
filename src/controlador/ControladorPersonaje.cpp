@@ -100,7 +100,8 @@ void ControladorPersonaje::identificarOrdenJoystickPersonaje(Personaje* personaj
 	    }else if((*estadoJoy)["JOY_PATADA_ALTA"]){
 	        personaje->patadaAlta();
 	    }else if((*estadoJoy)["JOY_PINIA_BAJA"]){
-	        personaje->piniaBaja();
+	    	personaje->deslizar();
+	        //personaje->piniaBaja();
 	    }else if((*estadoJoy)["JOY_PATADA_BAJA"]){
 	        personaje->patadaBaja();
 	    }else if((*estadoJoy)["JOY_DEFENSA"]){
@@ -177,7 +178,8 @@ void ControladorPersonaje::identificarOrdenPersonaje1(){
 		}else if(estadoTeclado[SDL_SCANCODE_H]){
 			personaje1->patadaAlta();
 		}else if(estadoTeclado[SDL_SCANCODE_J]){
-			personaje1->piniaBaja();
+			personaje1->deslizar();
+			//personaje1->piniaBaja();
 		}else if(estadoTeclado[SDL_SCANCODE_K]){
 			personaje1->patadaBaja();
 		}else if(estadoTeclado[SDL_SCANCODE_L]){
@@ -250,7 +252,8 @@ void ControladorPersonaje::identificarOrdenPersonaje2(){
 		}else if(estadoTeclado[SDL_SCANCODE_V]){
 			personaje2->patadaAlta();
 		}else if(estadoTeclado[SDL_SCANCODE_B]){
-			personaje2->piniaBaja();
+			personaje2->deslizar();
+			//personaje2->piniaBaja();
 		}else if(estadoTeclado[SDL_SCANCODE_N]){
 			personaje2->patadaBaja();
 		}else if(estadoTeclado[SDL_SCANCODE_M]){

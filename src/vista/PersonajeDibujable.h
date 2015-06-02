@@ -43,6 +43,7 @@ class ArmaDibujable;
 #define ID_PERSONAJE_TIRANDO_PODER "tirando-poder"
 #define ID_PERSONAJE_VICTORIA "victoria"
 #define ID_PERSONAJE_MUERTO "caida"
+#define ID_PERSONAJE_SLICE "salto-diagonal-patada"
 
 class PersonajeDibujable : public Dibujable, public Observador {
 private:

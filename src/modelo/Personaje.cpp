@@ -20,6 +20,7 @@
 #define TIEMPO_BLOQUEO_PATADA 35
 #define TIEMPO_BLOQUEO_GOLPE 25
 #define TIEMPO_FESTEJO_VICTORIA 250
+#define DISTANCIA_MINIMA 50
 
 Personaje::Personaje(
 		string idIn,
@@ -196,6 +197,13 @@ bool Personaje::llegoAlLimiteIzquierdo(){
 
 bool Personaje::llegoAlLimiteDerecho(){
 	return VentanaGrafica::Instance()->llegoAlLimiteDerecho(Vector2f(posicion.X() + getAnchoEnvolvente()/2, posicion.Y()));
+}
+
+bool Personaje::pegadoAlOponente(Colisionable* enemigo){
+	float distanciaAObjetivo = calcularDistancia(posicionCandidata.X(), enemigo->getPosicion().X(), estado->calcularAncho());
+	if(distanciaAObjetivo <= DISTANCIA_MINIMA)
+		return true;
+	return false;
 }
 
 ////////Estados////////
@@ -402,6 +410,11 @@ void Personaje::victoria(){
 void Personaje::morir(){
 	cambiarEstado(new EnEspera(posicion, MUERTO, (*cajasPorEstado)[EN_ESPERA]));
 	bloquearPersonaje(TIEMPO_FESTEJO_VICTORIA);
+}
+
+void Personaje::deslizar(){
+	cambiarEstado(new Deslizar(posicion, (*cajasPorEstado)[SALTANDO_VERTICAL], direccion));
+	bloquearPersonaje(50);
 }
 
 void Personaje::mantenerReposo(){
