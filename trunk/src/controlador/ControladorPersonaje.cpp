@@ -281,6 +281,7 @@ void ControladorPersonaje::continuarAccionPreviaPersonaje2(){
 }
 
 ControladorPersonaje::~ControladorPersonaje() {
+	ControladorJoystick::Instance()->clean();
 	SDL_JoystickClose(joysticks[personaje1]);
 	SDL_JoystickClose(joysticks[personaje2]);
 }

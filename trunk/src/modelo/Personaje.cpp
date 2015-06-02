@@ -19,7 +19,7 @@
 
 #define TIEMPO_BLOQUEO_PATADA 35
 #define TIEMPO_BLOQUEO_GOLPE 25
-#define TIEMPO_FESTEJO_VICTORIA 250
+#define TIEMPO_FESTEJO_VICTORIA 100
 
 Personaje::Personaje(
 		string idIn,
