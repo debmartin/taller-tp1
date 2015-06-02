@@ -8,7 +8,6 @@
 #include "PantallaSeleccionarModo.h"
 
 #include <SDL2/SDL_events.h>
-#include <SDL2/SDL_keycode.h>
 #include <SDL2/SDL_stdinc.h>
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_video.h>
@@ -63,12 +62,6 @@ void PantallaSeleccionarModo::iniciar() {
 
 			if (SDL_PollEvent(&evento))
 			{
-				if( evento.type == SDL_KEYUP && evento.key.repeat == 0 ){
-					if (evento.key.keysym.sym == SDLK_ESCAPE){
-						salirMenuModosDeJuego = true;
-					}
-				}
-
 				if (evento.type == SDL_QUIT){
 					juegoCorriendo = false;
 				}
@@ -78,7 +71,7 @@ void PantallaSeleccionarModo::iniciar() {
 					botoneraModosDeJuego->manejarEvento(evento);
 				}
 
-				botoneraModosDeJuego->actualizarModelo();
+				botoneraModosDeJuego->actualizarModelo(&salirMenuModosDeJuego);
 
 			}
 
