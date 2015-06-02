@@ -72,13 +72,13 @@ void Juego::update(bool& recargar)
 
 	VentanaGrafica::Instance()->actualizar();
 
-	if (jugador1->getPersonaje()->estaMuerto() && !ejecutandoFinal) {
+	if (jugador1->getPersonaje()->estaMuerto() && !ejecutandoFinal && !jugador2->getPersonaje()->estaSaltando()) {
 		jugador2->getPersonaje()->victoria();
 		ejecutandoFinal = true;
         Logger::getInstance()->info("GAME OVER JUGADOR 1");
 
     }
-	if (jugador2->getPersonaje()->estaMuerto() && !ejecutandoFinal) {
+	if (jugador2->getPersonaje()->estaMuerto() && !ejecutandoFinal && !jugador1->getPersonaje()->estaSaltando()) {
 		jugador1->getPersonaje()->victoria();
 		ejecutandoFinal = true;
         Logger::getInstance()->info("GAME OVER JUGADOR 2");
