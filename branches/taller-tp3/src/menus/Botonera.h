@@ -34,22 +34,35 @@ private:
 	Textura* gButtonSpriteSheetTexture;
 	map<int,SDL_Rect>* map_gSpriteClips;
 	Boton*** matriz;
-	Posicion* posEnfocado;
-	string IdContenidoElegido;
+	Posicion* posicionEnfocadaDelJugador1;
+	Posicion* posicionEnfocadaDelJugador2;
+	string IdContenidoElegido_paraJugador1;
+	string IdContenidoElegido_paraJugador2;
+	bool salirMenu_jugador1;
+	bool salirMenu_jugador2;
+	string tipo;
 public:
 	Botonera();
-	Botonera(string tipo, int cant_filas, int cant_columnas, Posicion* posicion, Posicion* posIni_enfocado);
+	Botonera(string tipo, int cant_filas, int cant_columnas, Posicion* posicion);
 	bool loadMedia(string path_imagen);
 	virtual ~Botonera();
-	void manejarEvento( SDL_Event evento );
+	void manejarEventoJugador1( SDL_Event evento );
+	void manejarEventoJugador2( SDL_Event evento );
 	void actualizarModelo(bool* salirMenu);
 	void dibujar();
 
 	int getCantColumnas();
 	int getCantFilas();
-	string getIdContenidoElegido();
+
+	void setPosicionEnfocadaDelJugador1(Posicion* posicionEnfocadaDelJugador1);
+	void setPosicionEnfocadaDelJugador2(Posicion* posicionEnfocadaDelJugador2);
+
+	string getIdContenidoElegidoParaJugador1();
+	string getIdContenidoElegidoParaJugador2();
+
 private:
-	void elegirIdContenido(string idContenido);
+	void elegirIdContenidoParaJugador1(string idContenido);
+	void elegirIdContenidoParaJugador2(string idContenido);
 };
 
 #endif /* SRC_BOTONERA_H_ */

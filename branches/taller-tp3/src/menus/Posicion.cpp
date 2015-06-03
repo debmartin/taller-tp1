@@ -9,6 +9,10 @@
 
 #include <sstream>
 
+Posicion::Posicion() {
+	this->x = 0;
+	this->y = 0;
+}
 
 Posicion::Posicion(int x, int y) {
 	this->x = x;
@@ -88,3 +92,4 @@ void Posicion::enfocarArriba() {
 void Posicion::enfocarAbajo() {
 	this->y = this->y + 1;
 }
+
