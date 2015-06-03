@@ -76,6 +76,10 @@ bool Estado::estaGolpeando(){
     return false;
 }
 
+bool Estado::estaEnPiso(){
+    return false;
+}
+
 bool Estado::ejecutandoMovimientoEspecial(){
     return false;
 }
