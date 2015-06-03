@@ -94,11 +94,11 @@ Botonera::Botonera(string tipo, int cant_filas, int cant_columnas, Posicion* pos
 
 }
 
-bool Botonera::loadMedia(string path_imagen) {
+bool Botonera::loadMedia(string path_imagen1, string path_imagen2, string path_imagen3) {
 	//Loading success flag
 	bool success = true;
 	//Load sprites
-	if( !this->gButtonSpriteSheetTexture->loadFromFile(path_imagen) )
+	if( !this->gButtonSpriteSheetTexture->loadFromFile(path_imagen1) )
 	{
 		Logger::getInstance()->error("Failed to load button sprite texture!");
 		success = false;
@@ -198,7 +198,7 @@ void Botonera::manejarEventoJugador2(SDL_Event evento) {
 			this->posicionEnfocadaDelJugador2->enfocarAbajo();
 		}
 	}
-	else if (estadoTeclado[SDL_SCANCODE_BACKSPACE])
+	else if (estadoTeclado[SDL_SCANCODE_SPACE])
 	{
 		this->posicionEnfocadaDelJugador2->elegir();
 	}
@@ -215,8 +215,6 @@ void Botonera::actualizarModelo(bool* salirMenu) {
 	{
 		for ( int x = 0 ; x < this->cant_columnas ; x++ )
 		{
-			matriz[y][x]->elegirSprite();
-
 			Posicion* posicionActual = matriz[y][x]->getPosicionModelo();
 
 			// jugador1
@@ -264,6 +262,7 @@ void Botonera::actualizarModelo(bool* salirMenu) {
 			}
 
 			*salirMenu = (this->salirMenu_jugador1 && this->salirMenu_jugador2);
+			matriz[y][x]->elegirSprite();
 		}
 	}
 }

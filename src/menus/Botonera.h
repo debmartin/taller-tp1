@@ -44,7 +44,7 @@ private:
 public:
 	Botonera();
 	Botonera(string tipo, int cant_filas, int cant_columnas, Posicion* posicion);
-	bool loadMedia(string path_imagen);
+	bool loadMedia(string path_imagen, string path_imagen2, string path_imagen3);
 	virtual ~Botonera();
 	void manejarEventoJugador1( SDL_Event evento );
 	void manejarEventoJugador2( SDL_Event evento );
