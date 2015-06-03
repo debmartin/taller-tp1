@@ -620,6 +620,12 @@ void CargadorDeOjbetos::cargarInfo_desdeMenus() {
 
 	this->idPersonaje1Elegido = pantallaSeleccionarPersonajes->getIdPersonaje1Elegido();
 	this->idPersonaje2Elegido = pantallaSeleccionarPersonajes->getIdPersonaje2Elegido();
+
+	string titulo_ventana_pelea(TITULO_VENTANA_INICIO);
+	titulo_ventana_pelea.append("(Modo: ");
+	titulo_ventana_pelea.append(modo_juego_elegido);
+	titulo_ventana_pelea.append(")");
+	SDL_SetWindowTitle( Renderizador::Instance()->getWindow(), titulo_ventana_pelea.c_str() );
 }
 
 string CargadorDeOjbetos::getIdPersonaje1Elegido() const {

@@ -25,6 +25,7 @@ public:
 	void iniciar();
 	string getIdPersonaje1Elegido();
 	string getIdPersonaje2Elegido();
+	string getModoJuegoElegido() const;
 };
 
 #endif /* SRC_MENUS_PANTALLASELECCIONARPERSONAJE_H_ */

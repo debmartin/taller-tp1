@@ -46,7 +46,7 @@ void PantallaSeleccionarPersonaje::iniciar() {
 	botoneraPersonajes->setPosicionEnfocadaDelJugador1(new Posicion(3,1));
 	botoneraPersonajes->setPosicionEnfocadaDelJugador2(new Posicion(0,1));
 
-	if( !botoneraPersonajes->loadMedia("RECURSOS/grilla_eleccion_personajes.jpg") )
+	if( !botoneraPersonajes->loadMedia("RECURSOS/grilla1_eleccion_personajes.jpg", "RECURSOS/grilla2_eleccion_personajes.jpg", "RECURSOS/grilla2_eleccion_personajes.jpg") )
 	{
 		Logger::getInstance()->error("Fallo la carga del archivo imagen");
 	}
@@ -104,4 +104,8 @@ string PantallaSeleccionarPersonaje::getIdPersonaje1Elegido() {
 
 string PantallaSeleccionarPersonaje::getIdPersonaje2Elegido() {
 	return this->IdPersonaje2Elegido;
+}
+
+string PantallaSeleccionarPersonaje::getModoJuegoElegido() const {
+	return modo_juego_elegido;
 }

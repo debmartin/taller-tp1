@@ -18,7 +18,6 @@ Juego* cargarJuego(string escenarioPath){
 	CargadorDeOjbetos cargador_de_objetos(escenarioPath);
 
 	cargador_de_objetos.cargarInfo_desdeMenus();
-	SDL_SetWindowTitle( Renderizador::Instance()->getWindow(), TITULO_VENTANA_INICIO );
 
 	Jugador* jugador1 = cargador_de_objetos.cargarJugador1();
 	Jugador* jugador2 = cargador_de_objetos.cargarJugador2();

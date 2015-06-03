@@ -25,7 +25,7 @@ class Parser;
 class Personaje;
 class PersonajeDibujable;
 
-#define TITULO_VENTANA_INICIO "Taller de programacion TP: Mortal Kombat"
+#define TITULO_VENTANA_INICIO "Mortal Kombat"
 #define INICIAR_FULLSCREEN false
 #define POS_VENTANA_INICIO Vector2f(100, 100)
 #define POSICION_INICIAL_CAPA Vector2f(0, 0)

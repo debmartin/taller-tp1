@@ -41,9 +41,9 @@ void PantallaSeleccionarModo::iniciar() {
 	Botonera* botoneraModosDeJuego = new Botonera("modos",3,1,pos_modosDeJuego);
 	botoneraModosDeJuego->setPosicionEnfocadaDelJugador1(new Posicion(0,0));
 
-	if( !botoneraModosDeJuego->loadMedia("RECURSOS/grilla_eleccion_modo.jpg") )
+	if( !botoneraModosDeJuego->loadMedia("RECURSOS/grilla1_eleccion_modo.jpg", "RECURSOS/grilla2_eleccion_modo.jpg", "RECURSOS/grilla3_eleccion_modo.jpg") )
 	{
-		Logger::getInstance()->error("Fallo la carga del archivo imagen");
+		Logger::getInstance()->error("Fallo la carga los archivos imagenes");
 	}
 	else
 	{
