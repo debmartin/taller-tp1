@@ -38,6 +38,7 @@
 #include "estado/Golpeado.h"
 #include "estado/CaidaDerecha.h"
 #include "estado/CaidaIzquierda.h"
+#include "estado/Muerto.h"
 #include "../utils/Loggeable.h"
 #include "Observable.h"
 #include "Vector2f.h"
@@ -114,6 +115,7 @@ public:
 	bool estaBloqueado();
 	bool estaCaminando();
 	bool estaMuerto();
+	bool estaEnPiso();
 	bool ejecutandoMovimientoEspecial();
 	bool estaEnCaida();
 	bool estaInhabilitado();
@@ -153,6 +155,7 @@ public:
 	void golpeado();
 	void victoria();
 	void morir();
+	void morirEnPiso();
 	void recibirDanio(int danio);
 	void recibirGolpe(Colisionable* otro);
 	void arrojarArma();

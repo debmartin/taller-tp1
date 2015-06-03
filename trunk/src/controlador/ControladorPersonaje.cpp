@@ -105,16 +105,16 @@ void ControladorPersonaje::identificarOrdenJoystickPersonaje(Personaje* personaj
 	        personaje->patadaBaja();
 	    }else if((*estadoJoy)["JOY_DEFENSA"]){
 	        personaje->defender();
-	    }else if((*estadoJoy)["JOY_PODER"]){
+	    }/*else if((*estadoJoy)["JOY_PODER"]){
 	        personaje->arrojarArma();
-	    }
+	    }*/
 	    else{
 	    	personaje->mantenerReposo();
 	    }
-	}/*
+	}
 	if((*estadoJoy)["JOY_PODER"]){
 	        personaje->arrojarArma();
-	}*/
+	}
 }
 
 

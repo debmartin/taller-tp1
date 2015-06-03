@@ -169,6 +169,10 @@ bool Personaje::estaEnCaida(){
     return (estado->estaEnCaida());
 }
 
+bool Personaje::estaEnPiso(){
+    return (estado->estaEnPiso());
+}
+
 bool Personaje::estaMuerto(){
     return (this->energia <= 0);
 }
@@ -330,6 +334,11 @@ void Personaje::morir(){
 	bloquearPersonaje(TIEMPO_FESTEJO_VICTORIA);
 }
 
+void Personaje::morirEnPiso(){
+	cambiarEstado(new Muerto(posicion, MUERTO2,(*cajasPorEstado)[EN_ESPERA]));
+	bloquearPersonaje(TIEMPO_FESTEJO_VICTORIA);
+}
+
 void Personaje::mantenerReposo(){
     cambiarEstado(new EnEspera(posicion, (*cajasPorEstado)[EN_ESPERA]));
     Logger::getInstance()->debug("Personaje: en reposo.");
@@ -488,8 +497,12 @@ void Personaje::volverAlPiso(float distanciaAObjetivo){
     } else {
         posicion = Vector2f(posicion.X(), posicionInicial.Y());
     }
-    if(!estaMuerto())
+    if(estaMuerto()){
+    	cout<<"Morir en piso"<<endl;
+    	morirEnPiso();
+    }else{
     	mantenerReposo();
+    }
 }
 
 float calcularDistancia(float pos1, float pos2, float ancho) {
@@ -501,7 +514,8 @@ float calcularDistancia(float pos1, float pos2, float ancho) {
 
 void Personaje::calcularPosicionSinColision(Colisionable* enemigo){
 	float distanciaAObjetivo = calcularDistancia(posicionCandidata.X(), enemigo->getPosicion().X(), estado->calcularAncho());
-    if ((estado->Id() == SALTANDO_VERTICAL || posicionable->esValida(posicionCandidata, estado->calcularAncho())) && posicionCandidata.Y() >= posicionInicial.Y()) {
+
+	if ((estado->Id() == SALTANDO_VERTICAL || posicionable->esValida(posicionCandidata, estado->calcularAncho())) && posicionCandidata.Y() >= posicionInicial.Y()) {
         if (! posicionable->enExtremos(distanciaAObjetivo, estado->calcularAncho())){
             posicion = posicionCandidata;
         }else{
@@ -561,12 +575,16 @@ void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
 void Personaje::update(Colisionable* enemigo){
 	Logger::getInstance()->debug("Personaje: update.");
 
-	if(estaMuerto() && !estaSaltando()){
+	if(estaEnPiso())
+		return;
+
+	if(estaMuerto() && !estaSaltando() && !estaEnPiso()){
+		cout<<"Morir"<<endl;
 		morir();
 	}
 
-    cout << id << " ~ " << estado->Id() << " ~ " << posicion << endl;
-    cout << *(estado->obtenerCajaColision()) << endl;
+    //cout << id << " ~ " << estado->Id() << " ~ " << posicion << endl;
+    //cout << *(estado->obtenerCajaColision()) << endl;
     if(estaBloqueado()){
         if(tiempoBloqueo <= 0){
            mantenerReposo();
