@@ -19,7 +19,7 @@
 
 #define TIEMPO_BLOQUEO_PATADA 35
 #define TIEMPO_BLOQUEO_GOLPE 25
-#define TIEMPO_FESTEJO_VICTORIA 250
+#define TIEMPO_FESTEJO_VICTORIA 200
 #define DISTANCIA_MINIMA 50
 
 Personaje::Personaje(
@@ -92,28 +92,6 @@ Objeto* Personaje::getArma(){
 	return arma;
 }
 
-void Personaje::update(Colisionable* enemigo){
-	Logger::getInstance()->debug("Personaje: update.");
-
-	if(estaMuerto() && !estaSaltando()){
-		morir();
-	}
-
-    if(estaBloqueado()){
-    	if(tiempoBloqueo <= 0){
-           mantenerReposo();
-        }
-        tiempoBloqueo -= 1.0;
-    }
-
-    posicionAnterior = posicion;
-    calcularNuevaPosicion(enemigo);
-    estado->actualizar(posicion);
-	arma->update(enemigo);
-
-	notificarObservadores();
-}
-
 void Personaje::agregarObservador(Observador* unObservador){
 	Observable::agregarObservador(unObservador);
 }
@@ -131,58 +109,6 @@ Vector2f Personaje::obtenerPosicionEnVentana(){
 	return P2;
 }
 
-float calcularDistancia(float pos1, float pos2, float ancho) {
-	float distancia = pos1 - pos2;
-	if (distancia < 0) distancia = -distancia;
-
-    return distancia + ancho;
-}
-
-void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
-    posicionCandidata = estado->obtenerProximaPosicion();
-
-    if (! vaAColisionar(enemigo)) {
-        calcularPosicionSinColision(enemigo);
-        return;
-    }
-    if (estaCaminando()){
-        arrastrar(enemigo);
-    } else if (estaSaltando()) {
-        float distanciaAObjetivo = calcularDistancia(posicionCandidata.X(), enemigo->getPosicion().X(), estado->calcularAncho());
-
-        if (posicionable->esValida(posicionCandidata, estado->calcularAncho())){
-            posicion = posicionCandidata;
-        } else if (posicionCandidata.Y() <= posicionInicial.Y()) {
-            volverAlPiso(distanciaAObjetivo);
-        } else {
-            caer();
-        }
-        if (estaAtacando())
-            colisionar(enemigo);
-    } else {
-        colisionar(enemigo);
-    }
-}
-
-void Personaje::calcularPosicionSinColision(Colisionable* enemigo){
-	float distanciaAObjetivo = calcularDistancia(posicionCandidata.X(), enemigo->getPosicion().X(), estado->calcularAncho());
-
-    if (posicionable->esValida(posicionCandidata, estado->calcularAncho()) && posicionCandidata.Y() >= posicionInicial.Y()) {
-        if (! posicionable->enExtremos(distanciaAObjetivo, estado->calcularAncho())){
-            posicion = posicionCandidata;
-        }else{
-            posicion = Vector2f(posicion.X(), posicionCandidata.Y());
-        }
-	} else if (posicionCandidata.Y() < posicionInicial.Y()) {
-	    volverAlPiso(distanciaAObjetivo);
-    } else if (posicionCandidata.Y() > posicionInicial.Y()) {
-        caer();
-    } else {
-    	if(!estaMuerto())
-    		mantenerReposo();
-    }
-}
-
 void Personaje::cambiarNumeroPersonaje(){
 	if(this->numeroJugador == NUMERO_DE_PERSONAJE_1){
 		this->numeroJugador = NUMERO_DE_PERSONAJE_2;
@@ -197,13 +123,6 @@ bool Personaje::llegoAlLimiteIzquierdo(){
 
 bool Personaje::llegoAlLimiteDerecho(){
 	return VentanaGrafica::Instance()->llegoAlLimiteDerecho(Vector2f(posicion.X() + getAnchoEnvolvente()/2, posicion.Y()));
-}
-
-bool Personaje::pegadoAlOponente(Colisionable* enemigo){
-	float distanciaAObjetivo = calcularDistancia(posicionCandidata.X(), enemigo->getPosicion().X(), estado->calcularAncho());
-	if(distanciaAObjetivo <= DISTANCIA_MINIMA)
-		return true;
-	return false;
 }
 
 ////////Estados////////
@@ -249,6 +168,10 @@ bool Personaje::estaDefendiendo(){
 
 bool Personaje::estaEnCaida(){
     return (estado->estaEnCaida());
+}
+
+bool Personaje::estaEnPiso(){
+    return (estado->estaEnPiso());
 }
 
 bool Personaje::estaMuerto(){
@@ -417,6 +340,11 @@ void Personaje::deslizar(){
 	bloquearPersonaje(50);
 }
 
+void Personaje::morirEnPiso(){
+     cambiarEstado(new Muerto(posicion, MUERTO2,(*cajasPorEstado)[EN_ESPERA]));
+     bloquearPersonaje(TIEMPO_FESTEJO_VICTORIA);
+}
+
 void Personaje::mantenerReposo(){
     cambiarEstado(new EnEspera(posicion, (*cajasPorEstado)[EN_ESPERA]));
     Logger::getInstance()->debug("Personaje: en reposo.");
@@ -485,10 +413,10 @@ void Personaje::recibirGolpe(Colisionable* otro){
 			VentanaGrafica::Instance()->vibrar();
 		//Si el oponente pega una patada:
 		}else if(!estaSaltando()){
-			Vector2f vectorEmpuje = (direccion == DIRECCION_DERECHA) ? VECTOR_EMPUJE_IZQUIERDA : VECTOR_EMPUJE_DERECHA;
-			cout<<"empujar"<<endl;
-			empujar(vectorEmpuje);
 			golpeado();
+			Vector2f vectorEmpuje = (direccion == DIRECCION_DERECHA) ? VECTOR_EMPUJE_IZQUIERDA : VECTOR_EMPUJE_DERECHA;
+			if (! (llegoAlLimiteDerecho() || llegoAlLimiteIzquierdo()))
+				empujar(vectorEmpuje);
 		}else if(estaSaltando() && this->direccion == DIRECCION_IZQUIERDA){
 		    caidaDerecha();
 		    VentanaGrafica::Instance()->vibrar();
@@ -538,11 +466,6 @@ void Personaje::colisionar(Colisionable* otro){
     }
     if (! otro->estaAtacando()) return;
 
-    if (! otro->verEstado()->ataqueFueEfectuado())
-        otro->verEstado()->efectuarAtaque();
-    else
-        return;
-
     int danio = otro->obtenerDanio();
     if (! danio) return;
 
@@ -580,12 +503,40 @@ void Personaje::volverAlPiso(float distanciaAObjetivo){
     } else {
         posicion = Vector2f(posicion.X(), posicionInicial.Y());
     }
-    if(!estaMuerto())
-    	mantenerReposo();
+    if(estaMuerto()){
+        cout<<"Morir en piso"<<endl;
+        morirEnPiso();
+    }else{
+        mantenerReposo();
+    }
+}
+
+float calcularDistancia(float pos1, float pos2, float ancho) {
+        float distancia = pos1 - pos2;
+        if (distancia < 0) distancia = -distancia;
+
+    return distancia + ancho;
+}
+
+void Personaje::calcularPosicionSinColision(Colisionable* enemigo){
+        float distanciaAObjetivo = calcularDistancia(posicionCandidata.X(), enemigo->getPosicion().X(), estado->calcularAncho());
+
+        if ((estado->Id() == SALTANDO_VERTICAL || posicionable->esValida(posicionCandidata, estado->calcularAncho())) && posicionCandidata.Y() >= posicionInicial.Y()) {
+        if (! posicionable->enExtremos(distanciaAObjetivo, estado->calcularAncho())){
+            posicion = posicionCandidata;
+        }else{
+            posicion = Vector2f(posicion.X(), posicionCandidata.Y());
+        }
+        } else if (posicionCandidata.Y() < posicionInicial.Y()) {
+            volverAlPiso(distanciaAObjetivo);
+    } else if (posicionCandidata.Y() > posicionInicial.Y()) {
+        caer();
+    } else {
+        mantenerReposo();
+    }
 }
 
 void Personaje::espejarBVH() {
-	int i = 1;
     for (map<estado_personaje, BVH*>::iterator it = this->cajasPorEstado->begin() ; it != this->cajasPorEstado->end(); ++it)
     {
     	(it)->second->espejarBVH();
@@ -601,6 +552,60 @@ void Personaje::orientar(DireccionObjeto nuevaOrientacion) {
 	espejarBVH();
 }
 
+void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
+    posicionCandidata = estado->obtenerProximaPosicion();
+
+    if (! vaAColisionar(enemigo)) {
+        calcularPosicionSinColision(enemigo);
+        return;
+    }
+    if (estaCaminando()){
+        arrastrar(enemigo);
+    } else if (estaSaltando()) {
+        float distanciaAObjetivo = calcularDistancia(posicionCandidata.X(), enemigo->getPosicion().X(), estado->calcularAncho());
+
+        if (posicionable->esValida(posicionCandidata, estado->calcularAncho())){
+            posicion = posicionCandidata;
+        } else if (posicionCandidata.Y() <= posicionInicial.Y()) {
+            volverAlPiso(distanciaAObjetivo);
+        } else {
+            caer();
+        }
+        if (estaAtacando())
+            colisionar(enemigo);
+    } else {
+        colisionar(enemigo);
+    }
+ }
+
+void Personaje::update(Colisionable* enemigo){
+    Logger::getInstance()->debug("Personaje: update.");
+
+    if(estaEnPiso())
+       return;
+
+    if(estaMuerto() && !estaSaltando() && !estaEnPiso()){
+       morir();
+    }
+
+    //cout << id << " ~ " << estado->Id() << " ~ " << posicion << endl;
+    //cout << *(estado->obtenerCajaColision()) << endl;
+    if(estaBloqueado()){
+        if(tiempoBloqueo <= 0){
+           mantenerReposo();
+        }
+        tiempoBloqueo -= 1.0;
+    }
+
+    posicionAnterior = posicion;
+    calcularNuevaPosicion(enemigo);
+    estado->actualizar(posicion);
+    arma->update(enemigo);
+
+    notificarObservadores();
+}
+
+
 float Personaje::getAnchoEnvolvente() {
 	return this->estado->calcularAncho();
 }
@@ -609,6 +614,12 @@ float Personaje::getAltoEnvolvente() {
 	return this->estado->calcularAlto();
 }
 
+bool Personaje::pegadoAlOponente(Colisionable* enemigo){
+	float distanciaAObjetivo = calcularDistancia(posicionCandidata.X(), enemigo->getPosicion().X(), estado->calcularAncho());
+	if(distanciaAObjetivo <= DISTANCIA_MINIMA)
+		return true;
+	return false;
+}
 
 ostream& operator <<(ostream &o, const Personaje &p) {
 

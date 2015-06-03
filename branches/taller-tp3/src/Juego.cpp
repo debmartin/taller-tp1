@@ -66,28 +66,40 @@ void Juego::render()
 
 void Juego::update(bool& recargar)
 {
-	this->jugador1->getPersonaje()->update(jugador2->getPersonaje());
-	this->jugador2->getPersonaje()->update(jugador1->getPersonaje());
-	this->actualizarOrientacionJugadores();
+        this->jugador1->getPersonaje()->update(jugador2->getPersonaje());
+        this->jugador2->getPersonaje()->update(jugador1->getPersonaje());
+        this->actualizarOrientacionJugadores();
 
-	VentanaGrafica::Instance()->actualizar();
+        VentanaGrafica::Instance()->actualizar();
 
-	if (jugador1->getPersonaje()->estaMuerto() && !ejecutandoFinal) {
-		jugador2->getPersonaje()->victoria();
-		ejecutandoFinal = true;
+        if (jugador2->getPersonaje()->estaMuerto() && jugador1->getPersonaje()->estaMuerto()) {
+                cout<<"Entra1"<<endl;
+                jugador1->getPersonaje()->victoria();
+                jugador2->getPersonaje()->victoria();
+        }
+
+        if (jugador1->getPersonaje()->estaMuerto() && !ejecutandoFinal && !jugador2->getPersonaje()->estaSaltando()) {
+                cout<<"Entra2"<<endl;
+                jugador2->getPersonaje()->victoria();
+                ejecutandoFinal = true;
         Logger::getInstance()->info("GAME OVER JUGADOR 1");
 
     }
-	if (jugador2->getPersonaje()->estaMuerto() && !ejecutandoFinal) {
-		jugador1->getPersonaje()->victoria();
-		ejecutandoFinal = true;
+        if (jugador2->getPersonaje()->estaMuerto() && !ejecutandoFinal && !jugador1->getPersonaje()->estaSaltando()) {
+                cout<<"Entra3"<<endl;
+                jugador1->getPersonaje()->victoria();
+                ejecutandoFinal = true;
         Logger::getInstance()->info("GAME OVER JUGADOR 2");
     }
-	if((!(jugador1->getPersonaje()->estaBloqueado()) && jugador2->getPersonaje()->estaMuerto() && ejecutandoFinal) ||
-			(!(jugador2->getPersonaje()->estaBloqueado()) && jugador1->getPersonaje()->estaMuerto() && ejecutandoFinal)){
-		finalizarRound(recargar);
-	}
+
+        if((!(jugador1->getPersonaje()->estaBloqueado()) && jugador2->getPersonaje()->estaMuerto() && ejecutandoFinal) ||
+                        (!(jugador2->getPersonaje()->estaBloqueado()) && jugador1->getPersonaje()->estaMuerto() && ejecutandoFinal)){
+                finalizarRound(recargar);
+        }else if (jugador2->getPersonaje()->estaMuerto() && jugador1->getPersonaje()->estaMuerto()) {
+                finalizarRound(recargar);
+        }
 }
+
 
 void Juego::handleEvents(bool& recargar)
 {
@@ -152,6 +164,7 @@ Juego::~Juego(){
 //    delete jugadorDibujable1;
 //    delete jugador1;
 //    delete escenarioG;
+	delete this->controladorPersonaje;
 }
 
 void Juego::posicionarPersonajes_enEjeX()
