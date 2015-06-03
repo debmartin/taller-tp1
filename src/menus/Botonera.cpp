@@ -22,34 +22,39 @@
 #include "Posicion.h"
 #include "Textura.h"
 
-Botonera::Botonera(string tipo, int cant_filas, int cant_columnas, Posicion* posicion, Posicion* posIni_enfocado) {
+Botonera::Botonera(string tipo, int cant_filas, int cant_columnas, Posicion* posicion) {
 
+	this->tipo = tipo;
 	this->cant_columnas = cant_columnas;
 	this->cant_filas = cant_filas;
-	this->posEnfocado = new Posicion(posIni_enfocado->getX(), posIni_enfocado->getY());
+	this->posicionEnfocadaDelJugador1 = new Posicion();
+	this->posicionEnfocadaDelJugador2 = new Posicion();
+
+	this->salirMenu_jugador1 = false;
+	this->salirMenu_jugador2 = false;
 
 	list<string>* idContenidos = new list<string>();
-	if ( tipo == "modos" )
+	if ( this->tipo == "modos" )
 	{
 		idContenidos->push_back("P1_vs_P2");
 		idContenidos->push_back("P1_vs_CPU");
 		idContenidos->push_back("Práctica");
 
 	}
-	else if (tipo == "personajes")
+	else if ( this->tipo == "personajes")
 	{
 		idContenidos->push_back("sonya");
+		idContenidos->push_back("sonya");
+		idContenidos->push_back("sonya");
+		idContenidos->push_back("sonya");
+		idContenidos->push_back("sonya");
+		idContenidos->push_back("sonya");
+		idContenidos->push_back("sonya");
+		idContenidos->push_back("sonya");
 		idContenidos->push_back("sub-zero");
-		idContenidos->push_back("personaje_03");
-		idContenidos->push_back("personaje_04");
-		idContenidos->push_back("personaje_05");
-		idContenidos->push_back("personaje_06");
-		idContenidos->push_back("personaje_07");
-		idContenidos->push_back("personaje_08");
-		idContenidos->push_back("personaje_09");
-		idContenidos->push_back("personaje_10");
-		idContenidos->push_back("personaje_11");
-		idContenidos->push_back("personaje_12");
+		idContenidos->push_back("sub-zero");
+		idContenidos->push_back("sub-zero");
+		idContenidos->push_back("sub-zero");
 	}
 
 	list<string>::iterator itIdContenidos = idContenidos->begin();
@@ -107,47 +112,95 @@ Botonera::~Botonera() {
 	this->gButtonSpriteSheetTexture->free();
 }
 
-void Botonera::manejarEvento(SDL_Event evento) {
+void Botonera::manejarEventoJugador1(SDL_Event evento) {
 
 	const Uint8* estadoTeclado = SDL_GetKeyboardState(NULL);
 	if (estadoTeclado[SDL_SCANCODE_LEFT])
 	{
-		if ( this->posEnfocado->getX() > 0 )
+		if ( this->posicionEnfocadaDelJugador1->getX() > 0 )
 		{
-			this->posEnfocado->deselegir();
-			this->posEnfocado->enfocarIzquierda();
+			this->posicionEnfocadaDelJugador1->deselegir();
+			this->posicionEnfocadaDelJugador1->enfocarIzquierda();
 		}
 	}
 	else if (estadoTeclado[SDL_SCANCODE_RIGHT])
 	{
 		int cant_cols = this->cant_columnas;
-		if ( this->posEnfocado->getX() < (--cant_cols) )
+		if ( this->posicionEnfocadaDelJugador1->getX() < (--cant_cols) )
 		{
-			this->posEnfocado->deselegir();
-			this->posEnfocado->enfocarDerecha();
+			this->posicionEnfocadaDelJugador1->deselegir();
+			this->posicionEnfocadaDelJugador1->enfocarDerecha();
 		}
 
 	}
 	else if (estadoTeclado[SDL_SCANCODE_UP])
 	{
-		if ( this->posEnfocado->getY() > 0 )
+		if ( this->posicionEnfocadaDelJugador1->getY() > 0 )
 		{
-			this->posEnfocado->deselegir();
-			this->posEnfocado->enfocarArriba();
+			this->posicionEnfocadaDelJugador1->deselegir();
+			this->posicionEnfocadaDelJugador1->enfocarArriba();
 		}
 	}
 	else if (estadoTeclado[SDL_SCANCODE_DOWN])
 	{
 		int cant_fils = this->cant_filas;
-		if ( this->posEnfocado->getY() < (--cant_fils) )
+		if ( this->posicionEnfocadaDelJugador1->getY() < (--cant_fils) )
 		{
-			this->posEnfocado->deselegir();
-			this->posEnfocado->enfocarAbajo();
+			this->posicionEnfocadaDelJugador1->deselegir();
+			this->posicionEnfocadaDelJugador1->enfocarAbajo();
 		}
 	}
 	else if (estadoTeclado[SDL_SCANCODE_RETURN])
 	{
-		this->posEnfocado->elegir();
+		this->posicionEnfocadaDelJugador1->elegir();
+	}
+
+}
+
+void Botonera::manejarEventoJugador2(SDL_Event evento) {
+
+	const Uint8* estadoTeclado = SDL_GetKeyboardState(NULL);
+	if (estadoTeclado[SDL_SCANCODE_A])
+	{
+		cout<<"SDL_SCANCODE_A"<<endl;
+		if ( this->posicionEnfocadaDelJugador2->getX() > 0 )
+		{
+			this->posicionEnfocadaDelJugador2->deselegir();
+			this->posicionEnfocadaDelJugador2->enfocarIzquierda();
+		}
+	}
+	else if (estadoTeclado[SDL_SCANCODE_D])
+	{
+		cout<<"SDL_SCANCODE_D"<<endl;
+		int cant_cols = this->cant_columnas;
+		if ( this->posicionEnfocadaDelJugador2->getX() < (--cant_cols) )
+		{
+			this->posicionEnfocadaDelJugador2->deselegir();
+			this->posicionEnfocadaDelJugador2->enfocarDerecha();
+		}
+	}
+	else if (estadoTeclado[SDL_SCANCODE_W])
+	{
+		cout<<"SDL_SCANCODE_W"<<endl;
+		if ( this->posicionEnfocadaDelJugador2->getY() > 0 )
+		{
+			this->posicionEnfocadaDelJugador2->deselegir();
+			this->posicionEnfocadaDelJugador2->enfocarArriba();
+		}
+	}
+	else if (estadoTeclado[SDL_SCANCODE_S])
+	{
+		cout<<"SDL_SCANCODE_S"<<endl;
+		int cant_fils = this->cant_filas;
+		if ( this->posicionEnfocadaDelJugador2->getY() < (--cant_fils) )
+		{
+			this->posicionEnfocadaDelJugador2->deselegir();
+			this->posicionEnfocadaDelJugador2->enfocarAbajo();
+		}
+	}
+	else if (estadoTeclado[SDL_SCANCODE_BACKSPACE])
+	{
+		this->posicionEnfocadaDelJugador2->elegir();
 	}
 
 }
@@ -166,13 +219,18 @@ void Botonera::actualizarModelo(bool* salirMenu) {
 
 			Posicion* posicionActual = matriz[y][x]->getPosicionModelo();
 
-			if ( posicionActual->getX()==this->posEnfocado->getX() && posicionActual->getY()==this->posEnfocado->getY())
+			// jugador1
+			if ( posicionActual->getX()==this->posicionEnfocadaDelJugador1->getX() && posicionActual->getY()==this->posicionEnfocadaDelJugador1->getY())
 			{
-				if ( this->posEnfocado->estoyElegido() )
+				if ( this->posicionEnfocadaDelJugador1->estoyElegido() )
 				{
 					matriz[y][x]->getPosicionModelo()->elegir();
-					this->elegirIdContenido(matriz[y][x]->getIdContenido());
-					*salirMenu = true;
+					this->elegirIdContenidoParaJugador1(matriz[y][x]->getIdContenido());
+					this->salirMenu_jugador1 = true;
+					if ( this->tipo=="modos" )
+					{
+						this->salirMenu_jugador2 = true;
+					}
 
 				}
 				else
@@ -183,9 +241,29 @@ void Botonera::actualizarModelo(bool* salirMenu) {
 			}
 			else
 			{
-				matriz[y][x]->getPosicionModelo()->desenfocar();
-				matriz[y][x]->getPosicionModelo()->deselegir();
+				if ( this->tipo=="personajes" && posicionActual->getX()==this->posicionEnfocadaDelJugador2->getX() && posicionActual->getY()==this->posicionEnfocadaDelJugador2->getY())
+				{
+					if ( this->posicionEnfocadaDelJugador2->estoyElegido() )
+					{
+						matriz[y][x]->getPosicionModelo()->elegir();
+						this->elegirIdContenidoParaJugador2(matriz[y][x]->getIdContenido());
+						this->salirMenu_jugador2 = true;
+
+					}
+					else
+					{
+						matriz[y][x]->getPosicionModelo()->enfocar();
+						matriz[y][x]->getPosicionModelo()->deselegir();
+					}
+				}
+				else
+				{
+					matriz[y][x]->getPosicionModelo()->desenfocar();
+					matriz[y][x]->getPosicionModelo()->deselegir();
+				}
 			}
+
+			*salirMenu = (this->salirMenu_jugador1 && this->salirMenu_jugador2);
 		}
 	}
 }
@@ -213,10 +291,26 @@ void Botonera::dibujar() {
 	SDL_RenderPresent( Renderizador::Instance()->getRenderer() );
 }
 
-void Botonera::elegirIdContenido(string idContenido) {
-	this->IdContenidoElegido = idContenido;
+void Botonera::setPosicionEnfocadaDelJugador1(Posicion* posicionEnfocadaDelJugador1) {
+	this->posicionEnfocadaDelJugador1 = posicionEnfocadaDelJugador1;
 }
 
-string Botonera::getIdContenidoElegido() {
-	return this->IdContenidoElegido;
+void Botonera::setPosicionEnfocadaDelJugador2(Posicion* posicionEnfocadaDelJugador2) {
+	this->posicionEnfocadaDelJugador2 = posicionEnfocadaDelJugador2;
+}
+
+string Botonera::getIdContenidoElegidoParaJugador1(){
+	return IdContenidoElegido_paraJugador1;
+}
+
+string Botonera::getIdContenidoElegidoParaJugador2(){
+	return IdContenidoElegido_paraJugador2;
+}
+
+void Botonera::elegirIdContenidoParaJugador1(string idContenido) {
+	this->IdContenidoElegido_paraJugador1 = idContenido;
+}
+
+void Botonera::elegirIdContenidoParaJugador2(string idContenido) {
+	this->IdContenidoElegido_paraJugador2 = idContenido;
 }

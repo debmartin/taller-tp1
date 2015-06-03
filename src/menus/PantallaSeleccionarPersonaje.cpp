@@ -41,8 +41,10 @@ void PantallaSeleccionarPersonaje::iniciar() {
 	int botonera_filas = 3;
 	int botonera_colummas = 4;
 	Posicion* pos_botoneraPersonajes = new Posicion(screen_width/2-(BUTTON_WIDTH*botonera_colummas)/2,screen_height/8);
-	Posicion* posIni_enfocadoPersonajes = new Posicion(3,1);
-	Botonera* botoneraPersonajes = new Botonera("personajes", botonera_filas,botonera_colummas,pos_botoneraPersonajes, posIni_enfocadoPersonajes);
+	Botonera* botoneraPersonajes = new Botonera("personajes", botonera_filas,botonera_colummas,pos_botoneraPersonajes);
+
+	botoneraPersonajes->setPosicionEnfocadaDelJugador1(new Posicion(3,1));
+	botoneraPersonajes->setPosicionEnfocadaDelJugador2(new Posicion(0,1));
 
 	if( !botoneraPersonajes->loadMedia("RECURSOS/grilla_eleccion_personajes.jpg") )
 	{
@@ -71,7 +73,8 @@ void PantallaSeleccionarPersonaje::iniciar() {
 
 				//Si se presiona una tecla
 				if ( evento.key.repeat == 0 ){
-					botoneraPersonajes->manejarEvento(evento);
+					botoneraPersonajes->manejarEventoJugador1(evento);
+					botoneraPersonajes->manejarEventoJugador2(evento);
 				}
 
 				botoneraPersonajes->actualizarModelo(&salirEleccionPersonajes);
@@ -86,11 +89,8 @@ void PantallaSeleccionarPersonaje::iniciar() {
 	            SDL_Delay((int)(DELAY_TIME - frameTime));
 		}
 
-	     this->IdPersonaje1Elegido = botoneraPersonajes->getIdContenidoElegido();
-	     this->IdPersonaje2Elegido = botoneraPersonajes->getIdContenidoElegido();
-
-	 	this->IdPersonaje1Elegido = "sub-zero";
-	 	this->IdPersonaje2Elegido = "sonya";
+	     this->IdPersonaje1Elegido = botoneraPersonajes->getIdContenidoElegidoParaJugador1();
+	     this->IdPersonaje2Elegido = botoneraPersonajes->getIdContenidoElegidoParaJugador2();
 	}
 
 	delete botoneraPersonajes;

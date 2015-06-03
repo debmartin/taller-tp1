@@ -22,6 +22,7 @@ private:
 	bool enfocado;
 	bool elegido;
 public:
+	Posicion();
 	Posicion(int x, int y);
 	virtual ~Posicion();
 	int getX() const;

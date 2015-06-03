@@ -38,8 +38,8 @@ void PantallaSeleccionarModo::iniciar() {
 	int screen_width = 640;
 	int screen_height = 480;
 	Posicion* pos_modosDeJuego = new Posicion(screen_width/2-BUTTON_WIDTH/2, screen_height/8);
-	Posicion* posIni_enfocadoModosDeJuegos = new Posicion(0,0);
-	Botonera* botoneraModosDeJuego = new Botonera("modos",3,1,pos_modosDeJuego,posIni_enfocadoModosDeJuegos);
+	Botonera* botoneraModosDeJuego = new Botonera("modos",3,1,pos_modosDeJuego);
+	botoneraModosDeJuego->setPosicionEnfocadaDelJugador1(new Posicion(0,0));
 
 	if( !botoneraModosDeJuego->loadMedia("RECURSOS/grilla_eleccion_modo.jpg") )
 	{
@@ -68,7 +68,7 @@ void PantallaSeleccionarModo::iniciar() {
 
 				//Si se presiona una tecla
 				if ( evento.key.repeat == 0 ){
-					botoneraModosDeJuego->manejarEvento(evento);
+					botoneraModosDeJuego->manejarEventoJugador1(evento);
 				}
 
 				botoneraModosDeJuego->actualizarModelo(&salirMenuModosDeJuego);
@@ -83,7 +83,7 @@ void PantallaSeleccionarModo::iniciar() {
 				SDL_Delay((int)(DELAY_TIME - frameTime));
 		}
 
-		modo_juego_elegido = botoneraModosDeJuego->getIdContenidoElegido();
+		modo_juego_elegido = botoneraModosDeJuego->getIdContenidoElegidoParaJugador1();
 	}
 
 	delete botoneraModosDeJuego;
