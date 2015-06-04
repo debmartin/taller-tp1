@@ -16,7 +16,7 @@ class Deslizar : public Estado
     public:
 		Deslizar(Vector2f posInicial, BVH* caja, bool direccion);
         virtual ~Deslizar();
-        bool estaCaminando();
+        bool estaAtacando();
     protected:
     private:
 };
