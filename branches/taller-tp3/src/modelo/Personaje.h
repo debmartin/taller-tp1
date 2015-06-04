@@ -155,6 +155,7 @@ public:
 	void caidaDerecha();
 	void caidaIzquierda();
 	void golpeado();
+	void retroceder();
 	void victoria();
 	void morir();
 	void morirEnPiso();

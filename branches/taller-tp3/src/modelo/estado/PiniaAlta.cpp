@@ -19,6 +19,8 @@ bool PiniaAlta::estaAtacando(){
 bool PiniaAlta::estaDefendiendo(){
     return false;
 }
+
 bool PiniaAlta::estaGolpeando(){
     return true;
 }
+

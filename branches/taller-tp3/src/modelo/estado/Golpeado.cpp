@@ -17,6 +17,10 @@ Golpeado::Golpeado(Vector2f posInicial, BVH* caja) :
     Estado(new Reposo(posInicial), RECIBIENDO_GOLPE, caja) {
 }
 
+Golpeado::Golpeado(Vector2f posInicial, estado_personaje estado, BVH* caja) :
+    Estado(new Reposo(posInicial), estado, caja) {
+}
+
 Golpeado::~Golpeado()
 {
     //dtor
