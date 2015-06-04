@@ -9,12 +9,12 @@
 
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_keyboard.h>
+#include <SDL2/SDL_rect.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_scancode.h>
 #include <SDL2/SDL_stdinc.h>
 #include <iostream>
 #include <list>
-#include <utility>
 
 #include "../utils/Logger.h"
 #include "../vista/Renderizador.h"
@@ -74,24 +74,21 @@ Botonera::Botonera(string tipo, int cant_filas, int cant_columnas, Posicion* pos
 			Boton* boton = new Boton(posicionModelo, posicionVista);
 			boton->cargarIdContenido(*(itIdContenidos++));
 
+			SDL_Rect rect;
+			rect.y = y * 127;
+			rect.x = x * 127;
+			rect.w = BUTTON_WIDTH;
+			rect.h = BUTTON_HEIGHT;
+			boton->cargarDimension(rect);
+
 			this->matriz[y][x] = boton;
 
 		}
 	}
 
 	this->gButtonSpriteSheetTexture = new Textura();
-
-	this->map_gSpriteClips = new map<int,SDL_Rect>();
-	for ( int i = 0 ; i < BUTTON_SPRITE_TOTAL ; i++ )
-	{
-		SDL_Rect rect;
-		rect.x = 0;
-		rect.y = i * 127;
-		rect.w = BUTTON_WIDTH;
-		rect.h = BUTTON_HEIGHT;
-		this->map_gSpriteClips->insert ( pair<int,SDL_Rect>(i,rect) );
-	}
-
+	this->gButtonSpriteSheetTexture2 = new Textura();
+	this->gButtonSpriteSheetTexture3 = new Textura();
 }
 
 bool Botonera::loadMedia(string path_imagen1, string path_imagen2, string path_imagen3) {
@@ -100,7 +97,17 @@ bool Botonera::loadMedia(string path_imagen1, string path_imagen2, string path_i
 	//Load sprites
 	if( !this->gButtonSpriteSheetTexture->loadFromFile(path_imagen1) )
 	{
-		Logger::getInstance()->error("Failed to load button sprite texture!");
+		Logger::getInstance()->error("Failed to load button sprite texture 1!");
+		success = false;
+	}
+	if( !this->gButtonSpriteSheetTexture2->loadFromFile(path_imagen2) )
+	{
+		Logger::getInstance()->error("Failed to load button sprite texture 2!");
+		success = false;
+	}
+	if( !this->gButtonSpriteSheetTexture3->loadFromFile(path_imagen3) )
+	{
+		Logger::getInstance()->error("Failed to load button sprite texture 3!");
 		success = false;
 	}
 
@@ -110,6 +117,8 @@ bool Botonera::loadMedia(string path_imagen1, string path_imagen2, string path_i
 
 Botonera::~Botonera() {
 	this->gButtonSpriteSheetTexture->free();
+	this->gButtonSpriteSheetTexture2->free();
+	this->gButtonSpriteSheetTexture3->free();
 }
 
 void Botonera::manejarEventoJugador1(SDL_Event evento) {
@@ -262,7 +271,6 @@ void Botonera::actualizarModelo(bool* salirMenu) {
 			}
 
 			*salirMenu = (this->salirMenu_jugador1 && this->salirMenu_jugador2);
-			matriz[y][x]->elegirSprite();
 		}
 	}
 }
@@ -282,7 +290,20 @@ void Botonera::dibujar() {
 	{
 		for ( int x = 0 ; x < this->cant_columnas ; x++ )
 		{
-			matriz[y][x]->render(this->gButtonSpriteSheetTexture, this->map_gSpriteClips);
+
+			if ( matriz[y][x]->getPosicionModelo()->estoyEnfocado() )
+			{
+				matriz[y][x]->render(this->gButtonSpriteSheetTexture2);
+			}
+			else
+			{
+				matriz[y][x]->render(this->gButtonSpriteSheetTexture);
+			}
+
+			if ( matriz[y][x]->getPosicionModelo()->estoyElegido() )
+			{
+				matriz[y][x]->render(this->gButtonSpriteSheetTexture3);
+			}
 		}
 	}
 

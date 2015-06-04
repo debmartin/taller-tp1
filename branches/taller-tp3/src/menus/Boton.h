@@ -8,11 +8,9 @@
 #ifndef SRC_BOTON_H_
 #define SRC_BOTON_H_
 
-#include <map>
 #include <string>
 
 class Posicion;
-
 class Textura;
 
 using namespace std;
@@ -25,42 +23,32 @@ union SDL_Event;
 const int BUTTON_WIDTH = 118.20;
 const int BUTTON_HEIGHT = 127;
 
-enum LButtonSprite
-{
-	BUTTON_SPRITE_OUT = 0,
-	BUTTON_SPRITE_OVER_MOTION = 1,
-	BUTTON_SPRITE_DOWN = 2,
-	BUTTON_SPRITE_TOTAL = 3
-};
-
-
 //The mouse button
 class Boton{
 
 private:
 	//Top left position
 	SDL_Point mPosition;
-	//Currently used global sprite
-	LButtonSprite mCurrentSprite;
 	// poscion en la matriz de la botonera
 	Posicion* posicionModelo;
 	bool elegido;
 	string idContenido;
+	SDL_Rect dimension;
 
 public:
 
 	Boton(Posicion* posicionModelo, Posicion* posicionVista);
 
 	//Shows button sprite
-	void render(Textura* textura, map<int,SDL_Rect>* gSpriteClips);
+	void render(Textura* textura);
 
 	virtual ~Boton();
 
 	friend ostream& operator<<(ostream &o, const Boton &b);
 	Posicion* getPosicionModelo() const;
-	void elegirSprite();
 	void cargarIdContenido(string idContenido);
 	string getIdContenido() const;
+	void cargarDimension(SDL_Rect dimension);
 };
 
 #endif /* SRC_BOTON_H_ */

@@ -7,9 +7,6 @@
 
 #include "Boton.h"
 
-#include <string>
-#include <utility>
-
 #include "Posicion.h"
 #include "Textura.h"
 
@@ -19,7 +16,6 @@ Boton::Boton(Posicion* posicionModelo, Posicion* posicionVista) {
 	this->posicionModelo = posicionModelo;
 	mPosition.x = posicionVista->getX();
 	mPosition.y = posicionVista->getY();
-	mCurrentSprite = BUTTON_SPRITE_OUT;
 	this->elegido = false;
 }
 
@@ -37,27 +33,10 @@ ostream& operator <<(ostream &o, const Boton &b) {
         return o;
 }
 
-void Boton::elegirSprite() {
-
-	if ( this->posicionModelo->estoyEnfocado() )
-	{
-		mCurrentSprite = BUTTON_SPRITE_OVER_MOTION;
-	}
-	else
-	{
-		mCurrentSprite = BUTTON_SPRITE_OUT;
-	}
-
-	if ( this->posicionModelo->estoyElegido() )
-	{
-		mCurrentSprite = BUTTON_SPRITE_DOWN;
-	}
-}
-
-void Boton::render(Textura* gButtonSpriteSheetTexture, map<int,SDL_Rect>* mapSpriteClips)
+void Boton::render(Textura* gButtonSpriteSheetTexture)
 {
 	//Show current button sprite
-	gButtonSpriteSheetTexture->render( mPosition.x, mPosition.y, &mapSpriteClips->find(mCurrentSprite)->second );
+	gButtonSpriteSheetTexture->render( mPosition.x, mPosition.y, &this->dimension );
 }
 
 string Boton::getIdContenido() const {
@@ -66,4 +45,8 @@ string Boton::getIdContenido() const {
 
 void Boton::cargarIdContenido(string idContenido) {
 	this->idContenido = idContenido;
+}
+
+void Boton::cargarDimension(SDL_Rect dimension) {
+	this->dimension = dimension;
 }
