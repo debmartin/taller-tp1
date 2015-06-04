@@ -8,8 +8,6 @@
 #ifndef SRC_BOTONERA_H_
 #define SRC_BOTONERA_H_
 
-#include <SDL2/SDL_rect.h>
-#include <map>
 #include <string>
 
 class Posicion;
@@ -32,7 +30,8 @@ private:
 	int cant_filas;
 	int cant_columnas;
 	Textura* gButtonSpriteSheetTexture;
-	map<int,SDL_Rect>* map_gSpriteClips;
+	Textura* gButtonSpriteSheetTexture2;
+	Textura* gButtonSpriteSheetTexture3;
 	Boton*** matriz;
 	Posicion* posicionEnfocadaDelJugador1;
 	Posicion* posicionEnfocadaDelJugador2;
@@ -42,7 +41,6 @@ private:
 	bool salirMenu_jugador2;
 	string tipo;
 public:
-	Botonera();
 	Botonera(string tipo, int cant_filas, int cant_columnas, Posicion* posicion);
 	bool loadMedia(string path_imagen, string path_imagen2, string path_imagen3);
 	virtual ~Botonera();
