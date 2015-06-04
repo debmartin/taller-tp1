@@ -77,6 +77,9 @@ Botonera::Botonera(string tipo, int cant_filas, int cant_columnas, Posicion* pos
 			SDL_Rect rect;
 			rect.y = y * 127;
 			rect.x = x * 127;
+			if ( this->tipo == "personajes")
+				rect.x = x * 118.2;
+
 			rect.w = BUTTON_WIDTH;
 			rect.h = BUTTON_HEIGHT;
 			boton->cargarDimension(rect);
