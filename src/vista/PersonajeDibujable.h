@@ -39,6 +39,7 @@ class ArmaDibujable;
 #define ID_PERSONAJE_DEFENDIENDO "defensa-parado"
 #define ID_PERSONAJE_DEFENDIENDO_AGACHADO "defensa-agachado"
 #define ID_PERSONAJE_RECIBIENDO_GOLPE "recibiendo-golpe"
+#define ID_PERSONAJE_RECIBIENDO_PINIA_RETROCEDIENDO "recibiendo-pinia-retrocediendo"
 #define ID_PERSONAJE_CAIDA "caida"
 #define ID_PERSONAJE_TIRANDO_PODER "tirando-poder"
 #define ID_PERSONAJE_VICTORIA "victoria"

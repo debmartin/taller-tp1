@@ -16,6 +16,7 @@ class Golpeado : public Estado
 {
     public:
 		Golpeado(Vector2f posInicial, BVH* caja);
+		Golpeado(Vector2f posInicial, estado_personaje estado, BVH* caja);
         virtual ~Golpeado();
         bool estaEsperando();
         bool estaGolpeado();

@@ -20,7 +20,7 @@
 #define TIEMPO_BLOQUEO_PATADA 35
 #define TIEMPO_BLOQUEO_GOLPE 25
 #define TIEMPO_FESTEJO_VICTORIA 200
-#define DISTANCIA_MINIMA 50
+#define DISTANCIA_MINIMA 110
 
 Personaje::Personaje(
 		string idIn,
@@ -325,6 +325,11 @@ void Personaje::golpeado(){
 	bloquearPersonaje(TIEMPO_BLOQUEO_GOLPE);
 }
 
+void Personaje::retroceder(){
+	cambiarEstado(new Golpeado(posicion, RECIBIENDO_PINIA_RETROCEDIENDO, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
+	bloquearPersonaje(TIEMPO_BLOQUEO_GOLPE);
+}
+
 void Personaje::victoria(){
 	cambiarEstado(new EnEspera(posicion, VICTORIA, (*cajasPorEstado)[EN_ESPERA]));
 	bloquearPersonaje(TIEMPO_FESTEJO_VICTORIA);
@@ -431,7 +436,13 @@ void Personaje::recibirGolpe(Colisionable* otro){
 		caidaIzquierda();
 		VentanaGrafica::Instance()->vibrar();
 	}else{
-	    golpeado();
+		if(pegadoAlOponente(otro)){
+			cout<<"pegado al oponente"<<endl;
+			retroceder();
+		}else{
+			cout<<"separado del oponente"<<endl;
+			golpeado();
+		}
 	}
     Logger::getInstance()->debug("Personaje: recibiendo golpe.");
 }
@@ -616,6 +627,7 @@ float Personaje::getAltoEnvolvente() {
 
 bool Personaje::pegadoAlOponente(Colisionable* enemigo){
 	float distanciaAObjetivo = calcularDistancia(posicionCandidata.X(), enemigo->getPosicion().X(), estado->calcularAncho());
+	cout<<"Distancia al oponente:"<<distanciaAObjetivo<<endl;
 	if(distanciaAObjetivo <= DISTANCIA_MINIMA)
 		return true;
 	return false;

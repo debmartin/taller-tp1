@@ -117,6 +117,11 @@
 		    		    "cant_fotogramas": 4,
 		    		    "fps": 3 
 		    			},
+		    "sprites-recibiendo-pinia-retrocediendo": { 
+			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-recibiendo-pinia-retrocediendo.png",
+		    		    "cant_fotogramas": 6,
+		    		    "fps": 10 
+		    			},
 		    "sprites-caida": { 
 			        	"imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-caida.png",
 		    		    "cant_fotogramas": 5,
@@ -255,6 +260,11 @@
 			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-recibiendo-golpe.png",
 		    		    "cant_fotogramas": 4,
 		    		    "fps": 3 
+		    			},
+		    "sprites-recibiendo-pinia-retrocediendo": { 
+			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-recibiendo-pinia-retrocediendo.png",
+		    		    "cant_fotogramas": 5,
+		    		    "fps": 10 
 		    			},
 		    "sprites-caida": { 
 			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-caida.png",
