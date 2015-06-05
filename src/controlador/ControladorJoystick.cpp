@@ -52,13 +52,19 @@ void ControladorJoystick::initialiseJoysticks(
 				// SETEO DIRECCIONES EN CERO
 				m_joystickValues.push_back(std::make_pair(new Vector2D(0,0), new Vector2D(0,0)));
 
-				// SETEA ESTADO DE TECLAS EN FALSE
+				// SETEA ESTADO DE TECLAS ACTUALES EN FALSE
 				//cout << "CANTIDAD BOTONES[" << i << "]:" << SDL_JoystickNumButtons(joy) << endl;
-				std::vector<bool> tempButtons;
+				std::vector<bool> tempButtons_actual;
 				for(int j = 0; j < SDL_JoystickNumButtons(joy); j++)
-					tempButtons.push_back(false);
+					tempButtons_actual.push_back(false);
+				m_buttonStates_actual.push_back(tempButtons_actual);
 
-				m_buttonStates.push_back(tempButtons);
+				// SETEA ESTADO DE TECLAS ANTERIORES EN FALSE
+				//cout << "CANTIDAD BOTONES[" << i << "]:" << SDL_JoystickNumButtons(joy) << endl;
+				std::vector<int> tempButtons_anterior;
+				for(int j = 0; j < SDL_JoystickNumButtons(joy); j++)
+					tempButtons_anterior.push_back(0);
+				m_cantidad_de_pulsaciones.push_back(tempButtons_anterior);
 			}
 			else
 				std::cout << SDL_GetError();
@@ -76,23 +82,59 @@ bool ControladorJoystick::getButtonState(JoyNumber joy, string nombreBoton) {
 	if(m_joystickValues.size() == 0)
 		return false;
 	if(m_joystickValues.size() == 1)
-		return m_buttonStates[JOYSTICK1][(*this->correspondenciaTeclas)[nombreBoton]];
-	return m_buttonStates[joy][(*this->correspondenciaTeclas)[nombreBoton]];
+		return m_buttonStates_actual[JOYSTICK1][(*this->correspondenciaTeclas)[nombreBoton]];
+	return m_buttonStates_actual[joy][(*this->correspondenciaTeclas)[nombreBoton]];
 }
 
 void ControladorJoystick::handleEventsJoysticks(SDL_Event event) {
 
-
-	// BOTONES
+	// BOTONES ACTUALES
 	if(event.type == SDL_JOYBUTTONDOWN) {
+
+		cout << "HOLA SOY JONY BRAVO" << endl;
 		int whichOne = event.jaxis.which;
-		m_buttonStates[whichOne][event.jbutton.button] = true;
+
+		if (m_cantidad_de_pulsaciones[whichOne][event.jbutton.button] == 0) {
+			cout << "0 pulsaciones" << endl;
+			m_buttonStates_actual[whichOne][event.jbutton.button] = true;
+			//////////////////////////
+			this->resetBotones(whichOne, event.jbutton.button);
+			//////////////////////////
+		}
+		if (m_cantidad_de_pulsaciones[whichOne][event.jbutton.button] == 1) {
+			cout << "1 pulsacion" << endl;
+			m_buttonStates_actual[whichOne][event.jbutton.button] = false;
+		}
+		if (m_cantidad_de_pulsaciones[whichOne][event.jbutton.button] > 1) {
+			cout << "2 pulsaciones" << endl;
+			m_buttonStates_actual[whichOne][event.jbutton.button] = false;
+		}
+
+		m_cantidad_de_pulsaciones[whichOne][0]++;
+
+
+
 	}
+	//cout << "CANTIDAD-PULSACIONES:" << m_cantidad_de_pulsaciones[0][0] << endl;
+
+
+	else if(event.type == SDL_JOYBUTTONUP) {
+		cout << "FALLA" << endl;
+		int whichOne = event.jaxis.which;
+		m_cantidad_de_pulsaciones[whichOne][event.jbutton.button] = 0;
+		m_buttonStates_actual[whichOne][event.jbutton.button] = false;
+	}
+	else {
+		this->resetBotones(0, 8);
+		//cout << "RESETEANDO" << endl;
+	}
+	/*
 	if(event.type == SDL_JOYBUTTONUP) {
 		int whichOne = event.jaxis.which;
-		m_buttonStates[whichOne][event.jbutton.button] = false;
+		m_buttonStates_anterior[whichOne][event.jbutton.button] = false;
+		m_buttonStates_actual[whichOne][event.jbutton.button] = false;
 	}
-
+*/
 	// DIRECCIONES
 
 	if(event.type == SDL_JOYAXISMOTION)
@@ -197,9 +239,14 @@ std::map<string, bool>* ControladorJoystick::getJoystickState(JoyNumber joy) {
 		return this->estadoJoystickNulo;
 	}
 
-	if (m_joystickValues.size() == 1) {
+	if (m_joystickValues.size() == 1 && joy == JOYSTICK1) {
 		refreshJoystickState1();
 		return this->estadoJoystick1;
+	}
+
+	if (m_joystickValues.size() == 1 && joy == JOYSTICK2) {
+		refreshJoystickStateNulo();
+		return this->estadoJoystickNulo;
 	}
 
 	if (joy == JOYSTICK1) {
@@ -293,7 +340,7 @@ ControladorJoystick::~ControladorJoystick()
     // clear our arrays
     m_joystickValues.clear();
     m_joysticks.clear();
-    m_buttonStates.clear();
+    m_buttonStates_actual.clear();
 
     correspondenciaTeclas->clear();
     delete correspondenciaTeclas;
@@ -314,7 +361,7 @@ void ControladorJoystick::clean() {
 
     m_joystickValues.clear();
     m_joysticks.clear();
-    m_buttonStates.clear();
+    m_buttonStates_actual.clear();
 
 	/*
     correspondenciaTeclas->clear();
@@ -330,3 +377,12 @@ void ControladorJoystick::clean() {
     estadoJoystickNulo->clear();
     delete estadoJoystickNulo;
 }
+
+// RESET VERDADERO MENOS EL NRO_BOTON
+void ControladorJoystick::resetBotones(int whichOne, Uint8 nro_boton) {
+	for (Uint8 b = 0; b < 8; b++)
+		if (b != nro_boton)
+			m_buttonStates_actual[whichOne][b] = false;
+
+}
+
