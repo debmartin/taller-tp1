@@ -212,6 +212,7 @@ void Personaje::caminarIzquierda(){
 
 void Personaje::saltarVertical(){
     cambiarEstado(new SaltandoVertical(posicion, (*cajasPorEstado)[SALTANDO_VERTICAL]));
+    //Sonido* sonido = new Sonido("crispy", "RECURSOS/SONIDOS/crispy.wav")
     Logger::getInstance()->debug("Personaje: salto vertical. Se setea trayectoria.");
 }
 
