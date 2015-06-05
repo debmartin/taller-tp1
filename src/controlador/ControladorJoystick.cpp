@@ -91,15 +91,12 @@ void ControladorJoystick::handleEventsJoysticks(SDL_Event event) {
 	// BOTONES ACTUALES
 	if(event.type == SDL_JOYBUTTONDOWN) {
 
-		cout << "HOLA SOY JONY BRAVO" << endl;
 		int whichOne = event.jaxis.which;
 
 		if (m_cantidad_de_pulsaciones[whichOne][event.jbutton.button] == 0) {
 			cout << "0 pulsaciones" << endl;
 			m_buttonStates_actual[whichOne][event.jbutton.button] = true;
-			//////////////////////////
 			this->resetBotones(whichOne, event.jbutton.button);
-			//////////////////////////
 		}
 		if (m_cantidad_de_pulsaciones[whichOne][event.jbutton.button] == 1) {
 			cout << "1 pulsacion" << endl;
@@ -125,16 +122,10 @@ void ControladorJoystick::handleEventsJoysticks(SDL_Event event) {
 		m_buttonStates_actual[whichOne][event.jbutton.button] = false;
 	}
 	else {
-		this->resetBotones(0, 8);
+		//this->resetBotones(0, 8);
 		//cout << "RESETEANDO" << endl;
 	}
-	/*
-	if(event.type == SDL_JOYBUTTONUP) {
-		int whichOne = event.jaxis.which;
-		m_buttonStates_anterior[whichOne][event.jbutton.button] = false;
-		m_buttonStates_actual[whichOne][event.jbutton.button] = false;
-	}
-*/
+
 	// DIRECCIONES
 
 	if(event.type == SDL_JOYAXISMOTION)
