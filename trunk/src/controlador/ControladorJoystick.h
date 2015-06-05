@@ -20,7 +20,8 @@ private:
 	// GUARDA JOYSTICKS
 	std::vector< SDL_Joystick* > m_joysticks;
 	// GUARDA ESTADO DE BOTONES
-	std::vector< std::vector<bool> > m_buttonStates;
+	std::vector< std::vector<bool> > m_buttonStates_actual;
+	std::vector< std::vector<int> > m_cantidad_de_pulsaciones;
 	// GUARDA BOTONES ARRIBA, ABAJO, IZQUIERDA, DERECHA
 	std::vector< std::pair<Vector2D*, Vector2D*> > m_joystickValues;
 
@@ -60,6 +61,7 @@ public:
 	void resetControladorJoystick();
 	void clean();
 	std::map<string, bool>* getJoystickState(JoyNumber joy);
+	void resetBotones(int whichOne, Uint8 nro_boton);
 	virtual ~ControladorJoystick();
 };
 typedef ControladorJoystick TheInputHandler;
