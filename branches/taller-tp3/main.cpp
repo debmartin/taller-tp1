@@ -6,6 +6,7 @@
 #include "src/modelo/CargadorDeObjetos.h"
 #include "src/modelo/Jugador.h"
 #include "src/modelo/Personaje.h"
+#include "src/Musica.h"
 #include "src/utils/Logger.h"
 #include "src/vista/PersonajeDibujable.h"
 #include "src/vista/VentanaGrafica.h"
@@ -74,6 +75,9 @@ int main(int argc, char* args[])
 		}
 		else
 		{
+			Musica* musica = new Musica("RECURSOS/SONIDOS/mortal64.mid", 100);
+			musica->play();
+
 			bool recargar = true;
 			while (recargar){
 				recargar = false;
@@ -81,6 +85,9 @@ int main(int argc, char* args[])
 				Juego* juego = cargarJuego(argumento);
 				correrJuego(juego, recargar);
 			}
+
+			musica->play();
+			delete musica;
 
 			Logger::getInstance()->info("#################################################");
 			Logger::getInstance()->info("################## JUEGO FINALIZADO #############");
