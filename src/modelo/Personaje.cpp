@@ -7,7 +7,13 @@
 
 #include "Personaje.h"
 
+#include <map>
 #include <sstream>
+#include <utility>
+
+#include "../Sonidos.h"
+#include "estado/Estado.h"
+#include "fisica/BVH.h"
 
 #define VELOCIDAD_DESP_HORIZONTAL_SALTANDO 320.0f
 #define VELOCIDAD_DESP_HORIZONTAL_CAMINANDO 215.0f
@@ -212,17 +218,20 @@ void Personaje::caminarIzquierda(){
 
 void Personaje::saltarVertical(){
     cambiarEstado(new SaltandoVertical(posicion, (*cajasPorEstado)[SALTANDO_VERTICAL]));
-    //Sonido* sonido = new Sonido("crispy", "RECURSOS/SONIDOS/crispy.wav")
+    // TODO by ariel: tomarlo desde un hash de sonidos para no cargar el archivo de sonido
+    Sonidos::getInstancia()->reproducirSonido("sonido_saltar");
     Logger::getInstance()->debug("Personaje: salto vertical. Se setea trayectoria.");
 }
 
 void Personaje::saltarOblicuoDerecha(){
     cambiarEstado(new SaltandoOblicuoDerecha(posicion, (*cajasPorEstado)[SALTANDO_OBLICUO_DERECHA]));
+    Sonidos::getInstancia()->reproducirSonido("sonido_saltar");
     Logger::getInstance()->debug("Personaje: salto oblicuo derecha. Se setea trayectoria.");
 }
 
 void Personaje::saltarOblicuoIzquierda(){
     cambiarEstado(new SaltandoOblicuoIzquierda(posicion, (*cajasPorEstado)[SALTANDO_OBLICUO_IZQUIERDA]));
+    Sonidos::getInstancia()->reproducirSonido("sonido_saltar");
     Logger::getInstance()->debug("Personaje: salto oblicuo izquierda. Se setea trayectoria.");
 }
 
@@ -234,64 +243,76 @@ void Personaje::agacharse(){
 void Personaje::piniaAlta(){
     cambiarEstado(new PiniaAlta(posicion, (*cajasPorEstado)[PINIA_ALTA]));
     bloquearPersonaje(TIEMPO_BLOQUEO_GOLPE);
+    Sonidos::getInstancia()->reproducirSonido("sonido_pinia");
 	Logger::getInstance()->debug("Personaje: golpe alto.");
 }
 
 void Personaje::piniaBaja(){
     cambiarEstado(new PiniaBaja(posicion, (*cajasPorEstado)[PINIA_BAJA]));
     bloquearPersonaje(TIEMPO_BLOQUEO_GOLPE);
+    Sonidos::getInstancia()->reproducirSonido("sonido_pinia");
 	Logger::getInstance()->debug("Personaje: golpe bajo.");
 }
 
 void Personaje::piniaSaltandoDiagonalDerecha(){
     cambiarEstado(new PiniaSaltandoDiagonalDerecha(estado->getTrayectoria(), estado->obtenerTiempoDeCreacion(), (*cajasPorEstado)[PINIA_SALTANDO_DIAGONAL_DERECHA]));
+    Sonidos::getInstancia()->reproducirSonido("sonido_pinia");
 	Logger::getInstance()->debug("Personaje: piña saltando.");
 }
 
 void Personaje::piniaSaltandoDiagonalIzquierda(){
     cambiarEstado(new PiniaSaltandoDiagonalIzquierda(estado->getTrayectoria(), estado->obtenerTiempoDeCreacion() , (*cajasPorEstado)[PINIA_SALTANDO_DIAGONAL_IZQUIERDA]));
+    Sonidos::getInstancia()->reproducirSonido("sonido_pinia");
 	Logger::getInstance()->debug("Personaje: piña saltando.");
 }
 
 void Personaje::piniaSaltandoVertical(){
     cambiarEstado(new PiniaSaltandoVertical(estado->getTrayectoria(), estado->obtenerTiempoDeCreacion(), (*cajasPorEstado)[PINIA_SALTANDO_VERTICAL]));
+    Sonidos::getInstancia()->reproducirSonido("sonido_pinia");
 	Logger::getInstance()->debug("Personaje: piña saltando.");
 }
 
 void Personaje::patadaAlta(){
 	cambiarEstado(new PatadaAlta(posicion, (*cajasPorEstado)[PATEANDO_ALTO]));
 	bloquearPersonaje(TIEMPO_BLOQUEO_PATADA);
+	Sonidos::getInstancia()->reproducirSonido("sonido_patada");
 	Logger::getInstance()->debug("Personaje: patada alta.");
 }
 
 void Personaje::patadaBaja(){
     cambiarEstado(new PatadaBaja(posicion, (*cajasPorEstado)[PATEANDO_BAJO]));
     bloquearPersonaje(TIEMPO_BLOQUEO_PATADA);
+    Sonidos::getInstancia()->reproducirSonido("sonido_patada");
 	Logger::getInstance()->debug("Personaje: patada baja.");
 }
 
 void Personaje::patadaAltaAgachado(){
 	cambiarEstado(new PateandoAltoAgachado(posicion, (*cajasPorEstado)[PATEANDO_ALTO_AGACHADO]));
+	Sonidos::getInstancia()->reproducirSonido("sonido_patada");
 	Logger::getInstance()->debug("Personaje: patada alta agachado.");
 }
 
 void Personaje::patadaSaltandoVertical(){
     cambiarEstado(new PateandoSaltandoVertical(estado->getTrayectoria(), estado->obtenerTiempoDeCreacion(), (*cajasPorEstado)[PATEANDO_SALTANDO_VERTICAL]));
+    Sonidos::getInstancia()->reproducirSonido("sonido_patada");
 	Logger::getInstance()->debug("Personaje: patada.");
 }
 
 void Personaje::patadaSaltandoDiagonalDerecha(){
     cambiarEstado(new PateandoSaltandoDiagonalDerecha(estado->getTrayectoria(), estado->obtenerTiempoDeCreacion(), (*cajasPorEstado)[PATEANDO_SALTANDO_DIAGONAL_DERECHA]));
+    Sonidos::getInstancia()->reproducirSonido("sonido_patada");
 	Logger::getInstance()->debug("Personaje: patada.");
 }
 
 void Personaje::patadaSaltandoDiagonalIzquierda(){
     cambiarEstado(new PateandoSaltandoDiagonalIzquierda(estado->getTrayectoria(), estado->obtenerTiempoDeCreacion(), (*cajasPorEstado)[PATEANDO_SALTANDO_DIAGONAL_IZQUIERDA]));
+    Sonidos::getInstancia()->reproducirSonido("sonido_patada");
 	Logger::getInstance()->debug("Personaje: patada.");
 }
 
 void Personaje::gancho(){
 	cambiarEstado(new Gancho(posicion, (*cajasPorEstado)[GANCHO]));
+	Sonidos::getInstancia()->reproducirSonido("sonido_gancho");
     Logger::getInstance()->debug("Personaje: gancho.");
 }
 
@@ -343,6 +364,7 @@ void Personaje::morir(){
 
 void Personaje::deslizar(){
 	cambiarEstado(new Deslizar(posicion, (*cajasPorEstado)[SALTANDO_VERTICAL], direccion));
+	Sonidos::getInstancia()->reproducirSonido("sonido_deslizar");
 	bloquearPersonaje(50);
 }
 
@@ -464,6 +486,7 @@ void Personaje::arrojarArma(){
 
 	arma->posicionar(posicionObjeto);
 	arma->arrojar();
+	Sonidos::getInstancia()->reproducirSonido("sonido_arma");
 }
 
 ////////Colision////////

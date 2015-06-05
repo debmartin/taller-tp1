@@ -7,6 +7,8 @@
 #include "src/modelo/Jugador.h"
 #include "src/modelo/Personaje.h"
 #include "src/Musica.h"
+#include "src/Sonido.h"
+#include "src/Sonidos.h"
 #include "src/utils/Logger.h"
 #include "src/vista/PersonajeDibujable.h"
 #include "src/vista/VentanaGrafica.h"
@@ -75,8 +77,16 @@ int main(int argc, char* args[])
 		}
 		else
 		{
-			Musica* musica = new Musica("RECURSOS/SONIDOS/mortal64.mid", 100);
-			musica->play();
+			Musica* musica = new Musica("mortal64.mid", 100);
+			musica->reproducir();
+
+			//carga de los sonidos
+			Sonidos::getInstancia()->agregar("sonido_saltar", new Sonido("crispy.wav",150,2));
+			Sonidos::getInstancia()->agregar("sonido_pinia", new Sonido("Kungya.wav",150,3));
+			Sonidos::getInstancia()->agregar("sonido_patada", new Sonido("BigHit.wav",150,4));
+			Sonidos::getInstancia()->agregar("sonido_deslizar", new Sonido("ShvDie.wav",150,6));
+			Sonidos::getInstancia()->agregar("sonido_arma", new Sonido("LiuFire.wav",150,7));
+			Sonidos::getInstancia()->agregar("sonido_gancho", new Sonido("NiteAxe.wav",150,8));
 
 			bool recargar = true;
 			while (recargar){
@@ -86,7 +96,7 @@ int main(int argc, char* args[])
 				correrJuego(juego, recargar);
 			}
 
-			musica->play();
+			musica->detener();
 			delete musica;
 
 			Logger::getInstance()->info("#################################################");

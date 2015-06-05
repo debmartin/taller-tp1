@@ -12,13 +12,13 @@ using namespace std;
 
 class Musica{
 private:
-	Mix_Music* musicaDeFondo;
+	Mix_Music* mix_Music;
 public:
 	//rango del volumen va desde 0 hasta 128
-	Musica(string path, int volumen);
-	void play();
-	void stop();
-	void stopGradualmente(int milisegundos);
+	Musica(string nombre_archivo, int volumen);
+	void reproducir();
+	void detener();
+	void detenerGradualmente(int milisegundos);
 	~Musica();
 };
 #endif
