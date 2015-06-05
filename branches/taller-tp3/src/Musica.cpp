@@ -13,40 +13,43 @@
 
 #include "utils/Logger.h"
 
-Musica::Musica(string path, int volumen){
+Musica::Musica(string nombre_archivo, int volumen){
 
 	if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1){
 		Logger::getInstance()->error("error en Mix_OpenAudio ");
 	}
 
-	this->musicaDeFondo = Mix_LoadMUS(path.c_str());
-	if(!this->musicaDeFondo){
+	string path(DIR_SONIDOS);
+	path.append(nombre_archivo);
+
+	this->mix_Music = Mix_LoadMUS(path.c_str());
+	if(!this->mix_Music){
 		std::stringstream ss;
-		ss << "No se puedo cargar la musica de fondo de nombre. " <<  Mix_GetError();
+		ss<<"No se cargo la musica: "<< path;
 		Logger::getInstance()->error(ss.str());
 	}
 
 	Mix_VolumeMusic(volumen);
 }
 
-void Musica::play(){
-	if (this->musicaDeFondo){
-		if (Mix_PlayMusic(this->musicaDeFondo, -1) == -1){
+void Musica::reproducir(){
+	if (this->mix_Music){
+		if (Mix_PlayMusic(this->mix_Music, -1) == -1){
 			Logger::getInstance()->error("error en Mix_PlayMusic de musica de fondo");
 		}
 	}
 }
 
-void Musica::stop(){
-	if (this->musicaDeFondo) {
+void Musica::detener(){
+	if (this->mix_Music) {
 		Mix_HaltMusic();
-		Mix_FreeMusic(this->musicaDeFondo);
+		Mix_FreeMusic(this->mix_Music);
 	}
 }
-void Musica::stopGradualmente(int milisegundos){
-	if (this->musicaDeFondo) {
+void Musica::detenerGradualmente(int milisegundos){
+	if (this->mix_Music) {
 		Mix_FadeOutMusic(milisegundos);
-		Mix_FreeMusic(this->musicaDeFondo);
+		Mix_FreeMusic(this->mix_Music);
 	}
 
 }
