@@ -378,3 +378,13 @@ void ControladorJoystick::resetBotones(int whichOne, Uint8 nro_boton) {
                 if (b != nro_boton)
                         m_buttonStates_actual[whichOne][b] = false;
 }
+
+
+//Para manejar mapa de combos.
+bool ControladorJoystick::combo_completado(){
+	return this->mapaCombos->combo_completado();
+}
+
+int ControladorJoystick::informar_combo(){
+	return this->mapaCombos->informar_combo();
+}

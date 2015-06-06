@@ -7,8 +7,8 @@
 
 #include "Combo.h"
 
-Combo::Combo(map<string, int>* teclas, string nombre):
-	mapaDeTeclas(teclas), nombreCombo(nombre){
+Combo::Combo(map<string, int>* teclas, string nombre, int num):
+	mapaDeTeclas(teclas), nombreCombo(nombre), numeroCombo(num){
 }
 
 Combo::~Combo() {
@@ -17,4 +17,8 @@ Combo::~Combo() {
 
 string Combo::getNombre(){
 	return nombreCombo;
+}
+
+int Combo::getNumero(){
+	return numeroCombo;
 }

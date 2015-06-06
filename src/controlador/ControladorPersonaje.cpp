@@ -29,6 +29,7 @@ ControladorPersonaje::ControladorPersonaje(Jugador* jugador1, Jugador* jugador2,
 bool ControladorPersonaje::manejar_Evento(SDL_Event &evento){
     Logger::getInstance()->debug("Se recibe un evento de teclado.");
 
+
     //Cargo los botones de los joysticks
     TheInputHandler::Instance()->handleEventsJoysticks(evento);
 
@@ -55,6 +56,11 @@ bool ControladorPersonaje::manejar_Evento(SDL_Event &evento){
 
 void ControladorPersonaje::identificarOrdenJoystickPersonaje(Personaje* personaje, JoyNumber numeroJoystick){
 	std::map<string, bool>* estadoJoy = TheInputHandler::Instance()->getJoystickState(numeroJoystick);
+
+	if(TheInputHandler::Instance()->combo_completado()){
+		personaje->ejecutarCombo(TheInputHandler::Instance()->informar_combo());
+		return;
+	}
 
 	if (personaje->estaSaltando()){
 		if(((*estadoJoy)["JOY_PINIA_ALTA"] || (*estadoJoy)["JOY_PINIA_BAJA"]) && personaje->estaSaltandoVertical()){

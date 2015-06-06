@@ -8,6 +8,8 @@
 #ifndef SRC_MODELO_MAPADECOMBOS_H_
 #define SRC_MODELO_MAPADECOMBOS_H_
 
+#include <SDL2/SDL_events.h>
+#include <queue>
 #include <list>
 #include "Combo.h"
 
@@ -18,10 +20,18 @@ private:
 	list<Combo*>* combosJugador1;
 	list<Combo*>* combosJugador2;
 	int toleranciaDeError;
+	map<string, char> mapaDeLetras;
+	queue<SDL_Event> colaDeEventos;
+	Combo* comboActual;
+
+	void pasar_a_string(Combo* combo);
 
 public:
 	MapaDeCombos(list<Combo*>* combosJugador1, list<Combo*>* combosJugador2, int toleranciaDeError);
 	virtual ~MapaDeCombos();
+	void manejar_evento(SDL_Event &evento);
+	bool combo_completado();
+	int informar_combo();
 };
 
 #endif /* SRC_MODELO_MAPADECOMBOS_H_ */
