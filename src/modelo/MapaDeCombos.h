@@ -21,7 +21,7 @@ private:
 	list<Combo*>* combosJugador2;
 	int toleranciaDeError;
 	map<string, char> mapaDeLetras;
-	queue<SDL_Event> colaDeEventos;
+	queue<char> colaDeEventos;
 	Combo* comboActual;
 
 	void pasar_a_string(Combo* combo);
@@ -29,7 +29,7 @@ private:
 public:
 	MapaDeCombos(list<Combo*>* combosJugador1, list<Combo*>* combosJugador2, int toleranciaDeError);
 	virtual ~MapaDeCombos();
-	void manejar_evento(SDL_Event &evento);
+	void agregar_evento(string tecla);
 	bool combo_completado();
 	int informar_combo();
 };
