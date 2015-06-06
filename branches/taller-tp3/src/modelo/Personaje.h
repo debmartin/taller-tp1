@@ -163,6 +163,7 @@ public:
 	void recibirDanio(int danio);
 	void recibirGolpe(Colisionable* otro);
 	void arrojarArma();
+	void ejecutarCombo(int numeroCombo);
 
 	//Colision
 	virtual void colisionar(Colisionable* otro);

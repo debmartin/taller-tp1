@@ -17,11 +17,13 @@ using namespace std;
 class Combo {
 private:
 	string nombreCombo;
+	int numeroCombo;
 	map<string, int>* mapaDeTeclas;
 public:
-	Combo(map<string, int>* mapaDeTeclas, string nombre);
+	Combo(map<string, int>* mapaDeTeclas, string nombre, int numero);
 	virtual ~Combo();
 	string getNombre();
+	int getNumero();
 };
 
 #endif /* SRC_MODELO_COMBO_H_ */

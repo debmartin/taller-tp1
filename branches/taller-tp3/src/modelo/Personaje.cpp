@@ -489,6 +489,10 @@ void Personaje::arrojarArma(){
 	Sonidos::getInstancia()->reproducirSonido("sonido_arma");
 }
 
+void Personaje::ejecutarCombo(int numeroCombo){
+
+}
+
 ////////Colision////////
 void Personaje::colisionar(Colisionable* otro){
     if (estaAtacando()) {

@@ -4,6 +4,8 @@
 #include <map>
 #include "Vector2D.h"
 
+#include "../modelo/MapaDeCombos.h"
+
 using namespace std;
 
 enum JoyNumber {
@@ -46,6 +48,7 @@ private:
         void refreshJoystickState2();
         void refreshJoystickStateNulo();
 
+    	MapaDeCombos* mapaCombos;
 public:
         void handleEventsJoysticks(SDL_Event e);
         //TODO falta utilizar las correspondencias respectivas al jugador 2. Estan en los ultimos 2 parametros
@@ -63,5 +66,9 @@ public:
         std::map<string, bool>* getJoystickState(JoyNumber joy);
         void resetBotones(int whichOne, Uint8 nro_boton);
         virtual ~ControladorJoystick();
+
+        //Para manejar mapa de combos:
+        bool combo_completado();
+        int informar_combo();
 };
 typedef ControladorJoystick TheInputHandler;
