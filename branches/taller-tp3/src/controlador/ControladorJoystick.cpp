@@ -92,35 +92,35 @@ void ControladorJoystick::handleEventsJoysticks(SDL_Event event) {
         // BOTONES ACTUALES
         if(event.type == SDL_JOYBUTTONDOWN) {
 
-                cout << "HOLA SOY JONY BRAVO" << endl;
                 int whichOne = event.jaxis.which;
 
                 if (m_cantidad_de_pulsaciones[whichOne][event.jbutton.button] == 0) {
-                        cout << "0 pulsaciones" << endl;
+                        //cout << "0 pulsaciones" << endl;
                         m_buttonStates_actual[whichOne][event.jbutton.button] = true;
-                        //////////////////////////
+
                         this->resetBotones(whichOne, event.jbutton.button);
-                        //////////////////////////
+
+                        //Agregar el nombre de la tecla presionada.
+                        //this->mapaCombos->agregar_evento(stringTecla);
                 }
                 if (m_cantidad_de_pulsaciones[whichOne][event.jbutton.button] == 1) {
-                        cout << "1 pulsacion" << endl;
+                        //cout << "1 pulsacion" << endl;
                         m_buttonStates_actual[whichOne][event.jbutton.button] = false;
                 }
                 if (m_cantidad_de_pulsaciones[whichOne][event.jbutton.button] > 1) {
-                        cout << "2 pulsaciones" << endl;
+                        //cout << "2 pulsaciones" << endl;
                         m_buttonStates_actual[whichOne][event.jbutton.button] = false;
                 }
 
+                //TODO: acomodar esta linea para que funcione para todos los casos
                 m_cantidad_de_pulsaciones[whichOne][0]++;
-
-
 
         }
         //cout << "CANTIDAD-PULSACIONES:" << m_cantidad_de_pulsaciones[0][0] << endl;
 
 
         else if(event.type == SDL_JOYBUTTONUP) {
-                cout << "FALLA" << endl;
+                //cout << "FALLA" << endl;
                 int whichOne = event.jaxis.which;
                 m_cantidad_de_pulsaciones[whichOne][event.jbutton.button] = 0;
                 m_buttonStates_actual[whichOne][event.jbutton.button] = false;
