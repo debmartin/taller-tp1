@@ -22,6 +22,7 @@ class Colisionable
         virtual bool estaAtacando() = 0;
         virtual bool estaInhabilitado();
         virtual bool ejecutandoMovimientoEspecial();
+        //virtual bool haciendoFatality();
 
     protected:
         Colisionable(Vector2f posicionIn, double anchoIn, double altoIn);

@@ -6,9 +6,6 @@ Estado::Estado(Trayectoria* trayectoriaInicial, estado_personaje id, BVH* caja) 
     tCreacion(((float)(SDL_GetTicks()))/1000.0f), id(id), cajas(caja), ataqueEfectuado(false) {
     Vector2f posInicial = trayectoria->getPosicion(0);
     caja->setPosicion(posInicial);
- //   cout<<"******Cajas********"<<endl;
- //   cout<<*caja<<endl;
- //   cout<<"******************"<<endl;
 }
 
 Estado::Estado(Trayectoria* trayectoriaInicial, float tiempoCreacion, estado_personaje id, BVH* caja) :
@@ -88,6 +85,10 @@ bool Estado::ejecutandoMovimientoEspecial(){
 
 bool Estado::efectuandoGancho(){
     return false;
+}
+
+bool Estado::haciendoFatality(){
+	return false;
 }
 
 Vector2f Estado::obtenerProximaPosicion(){

@@ -179,6 +179,10 @@ bool Personaje::estaEnCaida(){
 bool Personaje::estaEnPiso(){
     return (estado->estaEnPiso());
 }
+/*
+bool Personaje::estaEnFatality(){
+	return (estado->estaEnFatality());
+}*/
 
 bool Personaje::estaMuerto(){
     return (this->energia <= 0);
@@ -368,14 +372,38 @@ void Personaje::deslizar(){
 	bloquearPersonaje(50);
 }
 
+void Personaje::tijera(){
+	cambiarEstado(new EnEspera(posicion, TIJERA, (*cajasPorEstado)[EN_ESPERA]));
+	Sonidos::getInstancia()->reproducirSonido("sonido_deslizar");
+	bloquearPersonaje(50);
+}
+
 void Personaje::morirEnPiso(){
-     cambiarEstado(new Muerto(posicion, MUERTO2,(*cajasPorEstado)[EN_ESPERA]));
+     cambiarEstado(new Muerto(posicion, MUERTO_EN_PISO,(*cajasPorEstado)[EN_ESPERA]));
      bloquearPersonaje(TIEMPO_FESTEJO_VICTORIA);
 }
 
 void Personaje::mantenerReposo(){
     cambiarEstado(new EnEspera(posicion, (*cajasPorEstado)[EN_ESPERA]));
     Logger::getInstance()->debug("Personaje: en reposo.");
+}
+
+void Personaje::bebe(){
+	cambiarEstado(new EnEspera(posicion, BEBE, (*cajasPorEstado)[EN_ESPERA]));
+	Sonidos::getInstancia()->reproducirSonido("sonido_bebe");
+	bloquearPersonaje(TIEMPO_FESTEJO_VICTORIA);
+}
+
+void Personaje::hacerFatality(){
+
+}
+
+void Personaje::recibirFatality(Colisionable* enemigo){
+	/*if(enemigo->tipoDeFatality == BABALITY){
+		bebe();
+	}else{
+		morir();
+	}*/
 }
 
 void Personaje::caer(){
@@ -543,7 +571,6 @@ void Personaje::volverAlPiso(float distanciaAObjetivo){
         posicion = Vector2f(posicion.X(), posicionInicial.Y());
     }
     if(estaMuerto()){
-        cout<<"Morir en piso"<<endl;
         morirEnPiso();
     }else{
         mantenerReposo();
@@ -624,9 +651,13 @@ void Personaje::update(Colisionable* enemigo){
        return;
 
     if(estaMuerto() && !estaSaltando() && !estaEnPiso()){
-       morir();
+       //morir();
+    	bebe();
     }
 
+ /*   if(estaMuerto() && !estaSaltando() && !estaEnPiso() && enemigo->haciendoFatality()){
+        recibirFatality(enemigo);
+    }*/
     //cout << id << " ~ " << estado->Id() << " ~ " << posicion << endl;
     //cout << *(estado->obtenerCajaColision()) << endl;
     if(estaBloqueado()){

@@ -14,7 +14,7 @@
 #define D_IZQUIERDA 1
 
 Deslizar::Deslizar(Vector2f posInicial, BVH* caja, bool direccion) :
-	Estado((Trayectoria*) new MRU(posInicial, Vector2f(VELOCIDAD_DESP_HORIZONTAL_CAMINANDO, VELOCIDAD_NULA)), SLICE, caja) {
+	Estado((Trayectoria*) new MRU(posInicial, Vector2f(VELOCIDAD_DESP_HORIZONTAL_CAMINANDO, VELOCIDAD_NULA)), SLIDE, caja) {
 	ataqueEstado = new Ataque(DANIO_PATADA_ALTA);
 	if(direccion == D_IZQUIERDA)
 	    getTrayectoria()->reducirVelocidad(Vector2f(-VELOCIDAD_DESP_HORIZONTAL_CAMINANDO, VELOCIDAD_NULA));

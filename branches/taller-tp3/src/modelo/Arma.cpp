@@ -126,6 +126,10 @@ bool Arma::empujar(Vector2f& diferencia){
 bool Arma::estaEnReposo(){
 	return true;
 }
+/*
+bool Arma::haciendoFatality(){
+	return false;
+}*/
 
 Estado* Arma::verEstado(){
 	return NULL;

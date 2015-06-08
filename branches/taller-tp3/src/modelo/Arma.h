@@ -55,6 +55,7 @@ public:
     bool empujar(Vector2f& diferencia);
     bool estaEnReposo();
     bool estaAtacando();
+    //bool haciendoFatality();
 };
 
 #endif /* SRC_MODELO_ARMA_H_ */
