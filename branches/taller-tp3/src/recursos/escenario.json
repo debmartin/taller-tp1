@@ -132,6 +132,11 @@
 		    		    "cant_fotogramas": 5,
 		    		    "fps": 5 
 		    			},
+		    "sprites-mareado": { 
+			        	"imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-mareado.png",
+		    		    "cant_fotogramas": 7,
+		    		    "fps": 10 
+		    			},
 		    "sprites-tirando-poder": { 
 			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-tirando-poder.png",
 		    		    "cant_fotogramas": 3,
@@ -300,6 +305,11 @@
 			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-caida.png",
 		    		    "cant_fotogramas": 7,
 		    		    "fps": 5 
+		    			},
+		    "sprites-mareado": { 
+			        	"imagen": "RECURSOS/PERSONAJES/SONIA/sonya-mareado.png",
+		    		    "cant_fotogramas": 7,
+		    		    "fps": 10 
 		    			},
 		    "sprites-tirando-poder": { 
 			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-tirando-poder.png",
