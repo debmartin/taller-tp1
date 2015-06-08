@@ -33,7 +33,7 @@ class ArmaDibujable;
 #define ID_PERSONAJE_PATEANDO_ALTO "patada-alta"
 #define ID_PERSONAJE_PATEANDO_BAJO "patada-baja"
 #define ID_PERSONAJE_PATEANDO_ALTO_AGACHADO "patada-alta-agachado"
-#define ID_PERSONAJE_PATEANDO_SALTANDO_VERTICAL "salto-diagonal-patada"
+#define ID_PERSONAJE_PATEANDO_SALTANDO_VERTICAL "salto-vertical-patada"
 #define ID_PERSONAJE_PATEANDO_SALTANDO_DIAGONAL "salto-diagonal-patada"
 #define ID_PERSONAJE_GANCHO "gancho"
 #define ID_PERSONAJE_DEFENDIENDO "defensa-parado"
@@ -42,9 +42,11 @@ class ArmaDibujable;
 #define ID_PERSONAJE_RECIBIENDO_PINIA_RETROCEDIENDO "recibiendo-pinia-retrocediendo"
 #define ID_PERSONAJE_CAIDA "caida"
 #define ID_PERSONAJE_TIRANDO_PODER "tirando-poder"
+#define ID_PERSONAJE_BEBE "bebe"
 #define ID_PERSONAJE_VICTORIA "victoria"
-#define ID_PERSONAJE_MUERTO "caida"
-#define ID_PERSONAJE_SLICE "salto-diagonal-patada"
+#define ID_PERSONAJE_MUERTO "muerto"
+#define ID_PERSONAJE_SLIDE "deslizamiento"
+#define ID_PERSONAJE_TIJERA "tijera"
 
 class PersonajeDibujable : public Dibujable, public Observador {
 private:

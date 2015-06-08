@@ -30,7 +30,7 @@
         {
 		    "id_personaje": "sub-zero", 
 		    "ancho": 210, 	
-		    "alto": 310, 
+		    "alto": 310,
 		    "z­index": 2, 
 		    "sprites-reposo": { 
 			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-reposo.png",
@@ -56,6 +56,11 @@
 				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-saltando-diagonal.png",
 		    		    "cant_fotogramas": 7,
 		    		    "fps": 15 
+		    			},
+		    "sprites-salto-vertical-patada": { 
+				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-salto-vertical-patada.png",
+		    		    "cant_fotogramas": 1,
+		    		    "fps": 15
 		    			},
 		    "sprites-salto-diagonal-patada": { 
 				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-salto-diagonal-patada.png",
@@ -132,9 +137,29 @@
 		    		    "cant_fotogramas": 3,
 		    		    "fps": 10 
 		    			},
+		    "sprites-deslizamiento": { 
+			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-deslizamiento.png",
+		    		"cant_fotogramas": 1,
+		    		"fps": 10 
+		    			},
+		    "sprites-bebe": { 
+			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-bebe.png",
+		    		    "cant_fotogramas": 1,
+		    		    "fps": 10 
+		    			},
+		    "sprites-tijera": { 
+			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-tijera.png",
+		    		"cant_fotogramas": 6,
+		    		"fps": 10 
+		    			},
 		    "sprites-victoria": { 
 			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-victoria.png",
 		    		    "cant_fotogramas": 4,
+		    		    "fps": 10 
+		    			},
+		    "sprites-muerto": { 
+			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-muerto.gif",
+		    		    "cant_fotogramas": 1,
 		    		    "fps": 10 
 		    			},
 			"arma": {
@@ -199,6 +224,11 @@
 		    "sprites-saltando-diagonal": { 
 				        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-saltando-diagonal.png",
 		    		    "cant_fotogramas": 7,
+		    		    "fps": 15
+		    			},
+		    "sprites-salto-vertical-patada": { 
+				        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-salto-diagonal-patada.png",
+		    		    "cant_fotogramas": 1,
 		    		    "fps": 15
 		    			},
 		    "sprites-salto-diagonal-patada": { 
@@ -276,10 +306,30 @@
 		    		    "cant_fotogramas": 3,
 		    		    "fps": 10 
 		    			},
+		    "sprites-deslizamiento": { 
+			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-salto-diagonal-patada.png",
+		    		"cant_fotogramas": 1,
+		    		"fps": 10 
+		    			},
+		    "sprites-tijera": { 
+			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-tijera.png",
+		    		"cant_fotogramas": 6,
+		    		"fps": 10 
+		    			},
+		    "sprites-bebe": { 
+			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-bebe.png",
+		    		    "cant_fotogramas": 1,
+		    		    "fps": 10 
+		    			},
 		    "sprites-victoria": { 
 			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-victoria.png",
 		    		    "cant_fotogramas": 8,
 		    		    "fps": 10 
+		    			},
+		    "sprites-muerto": { 
+			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-caida.png",
+		    		"cant_fotogramas": 1,
+		    		"fps": 10 
 		    			},
 			"arma": {
 						"alto": 50,

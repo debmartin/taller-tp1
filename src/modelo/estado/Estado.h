@@ -44,9 +44,11 @@ typedef enum estado_personaje
 	CAIDA_IZQUIERDA,
 	TIRANDO_PODER,
 	MUERTO,
-	MUERTO2,
+	MUERTO_EN_PISO,
 	VICTORIA,
-	SLICE,
+	SLIDE,
+	TIJERA,
+	BEBE,
 	BLOQUEADO
 } estado_personaje;
 
@@ -72,6 +74,7 @@ class Estado
         virtual bool estaGolpeado();
         virtual bool estaGolpeando();
         virtual bool estaEnPiso();
+        virtual bool haciendoFatality();
 
         Ataque* obtenerAtaque();
         Vector2f obtenerProximaPosicion();

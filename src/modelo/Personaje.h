@@ -119,6 +119,7 @@ public:
 	bool estaMuerto();
 	bool estaEnPiso();
 	bool ejecutandoMovimientoEspecial();
+	bool haciendoFatality();
 	bool estaEnCaida();
 	bool estaInhabilitado();
 	void cambiarEstado(Estado* nuevo);
@@ -160,10 +161,14 @@ public:
 	void morir();
 	void morirEnPiso();
 	void deslizar();
+	void tijera();
 	void recibirDanio(int danio);
 	void recibirGolpe(Colisionable* otro);
 	void arrojarArma();
 	void ejecutarCombo(int numeroCombo);
+	void hacerFatality();
+	void recibirFatality(Colisionable* enemigo);
+	void bebe();
 
 	//Colision
 	virtual void colisionar(Colisionable* otro);
