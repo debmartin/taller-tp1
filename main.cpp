@@ -87,6 +87,7 @@ int main(int argc, char* args[])
 			Sonidos::getInstancia()->agregar("sonido_deslizar", new Sonido("ShvDie.wav",150,6));
 			Sonidos::getInstancia()->agregar("sonido_arma", new Sonido("LiuFire.wav",150,7));
 			Sonidos::getInstancia()->agregar("sonido_gancho", new Sonido("NiteAxe.wav",150,8));
+			Sonidos::getInstancia()->agregar("sonido_bebe", new Sonido("BabyCry.wav",150,9));
 
 			bool recargar = true;
 			while (recargar){
