@@ -42,6 +42,7 @@ typedef enum estado_personaje
 	RECIBIENDO_PINIA_RETROCEDIENDO,
 	CAIDA_DERECHA,
 	CAIDA_IZQUIERDA,
+	MAREADO,
 	TIRANDO_PODER,
 	MUERTO,
 	MUERTO_EN_PISO,
@@ -49,6 +50,9 @@ typedef enum estado_personaje
 	SLIDE,
 	TIJERA,
 	BEBE,
+	BABALITY,
+	FATALITY1,
+	DECAPITADO,
 	BLOQUEADO
 } estado_personaje;
 
