@@ -70,6 +70,7 @@ class Estado
         virtual bool estaGolpeado();
         virtual bool estaGolpeando();
         virtual bool estaEnPiso();
+        virtual bool estaDesplazandoVertical();
 
         Ataque* obtenerAtaque();
         Vector2f obtenerProximaPosicion();

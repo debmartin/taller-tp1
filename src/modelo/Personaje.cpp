@@ -307,7 +307,7 @@ void Personaje::caidaDerecha(){
     Estado* caida = new CaidaDerecha(posicion, (*cajasPorEstado)[CAIDA_DERECHA]);
     if (! posicionable->esValida(posicion, caida->calcularAncho()))
         caida->agregarCajaColision((*cajasPorEstado)[SALTANDO_VERTICAL]);
-
+//    cout << "caida derecha" << endl;
 	cambiarEstado(caida);
 }
 
@@ -315,7 +315,7 @@ void Personaje::caidaIzquierda(){
     Estado* caida = new CaidaIzquierda(posicion, (*cajasPorEstado)[CAIDA_IZQUIERDA]);
     if (! posicionable->esValida(posicion, caida->calcularAncho()))
         caida->agregarCajaColision((*cajasPorEstado)[SALTANDO_VERTICAL]);
-
+//    cout << "caida izquierda" << endl;
 	cambiarEstado(caida);
 }
 
@@ -498,7 +498,7 @@ void Personaje::volverAlPiso(float distanciaAObjetivo){
         posicion = Vector2f(posicion.X(), posicionInicial.Y());
     }
     if(estaMuerto()){
-    	cout<<"Morir en piso"<<endl;
+//    	cout<<"Morir en piso"<<endl;
     	morirEnPiso();
     }else{
     	mantenerReposo();
@@ -523,7 +523,11 @@ void Personaje::calcularPosicionSinColision(Colisionable* enemigo){
         }
 	} else if (posicionCandidata.Y() < posicionInicial.Y()) {
 	    volverAlPiso(distanciaAObjetivo);
+    } else if (estado->estaDesplazandoVertical()) {
+//        cout << "desp"<<endl;
+        posicion = posicionCandidata;
     } else if (posicionCandidata.Y() > posicionInicial.Y()) {
+//        cout<< "caer sin colision"<<endl;
         caer();
     } else {
         mantenerReposo();
@@ -548,21 +552,29 @@ void Personaje::orientar(DireccionObjeto nuevaOrientacion) {
 
 void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
     posicionCandidata = estado->obtenerProximaPosicion();
-
+//    cout << id << " candidata " << posicionCandidata << endl;
     if (! vaAColisionar(enemigo)) {
+//        cout << "no col" << endl;
         calcularPosicionSinColision(enemigo);
         return;
     }
+//    cout << "col" << endl;
     if (estaCaminando()){
         arrastrar(enemigo);
     } else if (estaSaltando()) {
         float distanciaAObjetivo = calcularDistancia(posicionCandidata.X(), enemigo->getPosicion().X(), estado->calcularAncho());
 
         if (posicionable->esValida(posicionCandidata, estado->calcularAncho())){
+//            cout << "valida" <<endl;
             posicion = posicionCandidata;
         } else if (posicionCandidata.Y() <= posicionInicial.Y()) {
+//        cout << "al piso" <<endl;
             volverAlPiso(distanciaAObjetivo);
+        } else if (estado->estaDesplazandoVertical()) {
+//            cout << "vertical" << endl;
+            posicion = posicionCandidata;
         } else {
+//        cout << "caer" <<endl;
             caer();
         }
         if (estaAtacando())
@@ -579,7 +591,7 @@ void Personaje::update(Colisionable* enemigo){
 		return;
 
 	if(estaMuerto() && !estaSaltando() && !estaEnPiso()){
-		cout<<"Morir"<<endl;
+//		cout<<"Morir"<<endl;
 		morir();
 	}
 
@@ -596,7 +608,7 @@ void Personaje::update(Colisionable* enemigo){
     calcularNuevaPosicion(enemigo);
     estado->actualizar(posicion);
 	arma->update(enemigo);
-
+//    cout << id << " " << posicion << " ~ " << *(estado->obtenerCajaColision()) << endl;
 	notificarObservadores();
 }
 

@@ -153,3 +153,7 @@ void Estado::efectuarAtaque() {
 bool Estado::ataqueFueEfectuado() {
     return ataqueEfectuado;
 }
+
+bool Estado::estaDesplazandoVertical() {
+    return false;
+}
