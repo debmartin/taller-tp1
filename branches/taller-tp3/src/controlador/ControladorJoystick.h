@@ -49,6 +49,7 @@ private:
         void refreshJoystickStateNulo();
 
     	MapaDeCombos* mapaCombos;
+
 public:
         void handleEventsJoysticks(SDL_Event e);
         //TODO falta utilizar las correspondencias respectivas al jugador 2. Estan en los ultimos 2 parametros
@@ -66,6 +67,9 @@ public:
         std::map<string, bool>* getJoystickState(JoyNumber joy);
         void resetBotones(int whichOne, Uint8 nro_boton);
         virtual ~ControladorJoystick();
+
+    	string getStringDeNumeroDeTecla(JoyNumber joy, Uint8 nro_boton);
+    	//string getStringdeNumerodeEje(JoyNumber joy, Uint8 nro_boton);
 
         //Para manejar mapa de combos:
         bool combo_completado();
