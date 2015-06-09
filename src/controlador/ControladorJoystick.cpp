@@ -385,6 +385,16 @@ void ControladorJoystick::resetBotones(int whichOne, Uint8 nro_boton) {
                         m_buttonStates_actual[whichOne][b] = false;
 }
 
+string ControladorJoystick::getStringDeNumeroDeTecla(JoyNumber joy, Uint8 nro_boton) {
+	// TODO: Corroborar numero de JOY
+    for (map<string, int>::iterator it = this->correspondenciaTeclas->begin() ; it != this->correspondenciaTeclas->end(); ++it)
+    	if (it->second == nro_boton)
+    		return it->first;
+
+    cout << "ControladorJoystick::getStringofNumber: TERRIBLE ERROR" << endl;
+    return "ERROR";
+}
+
 /*
 //Para manejar mapa de combos.
 bool ControladorJoystick::combo_completado(){
