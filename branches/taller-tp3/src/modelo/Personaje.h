@@ -71,6 +71,7 @@ private:
 	double ancho;
 	double alto;
 	DireccionObjeto direccion;
+	bool estaViviendo;
 
 public:
 	Personaje(

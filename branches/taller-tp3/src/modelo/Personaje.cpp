@@ -54,6 +54,7 @@ Personaje::Personaje(
 
 	// ORIENTACION INICIAL DE BVH - POR DEFECTO LA ORIENTACION ES DERECHA
 	this->direccion = DIRECCION_DERECHA;
+	this->estaViviendo = true;
 }
 
 Personaje::~Personaje(){
@@ -390,7 +391,11 @@ void Personaje::mantenerReposo(){
 
 void Personaje::bebe(){
 	cambiarEstado(new EnEspera(posicion, BEBE, (*cajasPorEstado)[EN_ESPERA]));
-	Sonidos::getInstancia()->reproducirSonido("sonido_bebe");
+	if ( this->estaViviendo )
+	{
+		Sonidos::getInstancia()->reproducirSonido("sonido_bebe");
+	}
+	this->estaViviendo = false;
 	bloquearPersonaje(TIEMPO_FESTEJO_VICTORIA);
 }
 
