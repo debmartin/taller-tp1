@@ -148,8 +148,8 @@
 		    		"fps": 10 
 		    			},
 		    "sprites-bebe": { 
-			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-bebe.png",
-		    		    "cant_fotogramas": 1,
+			        "imagen": "RECURSOS/PERSONAJES/EFECTOS/fire.png",
+		    		    "cant_fotogramas": 3,
 		    		    "fps": 10 
 		    			},
 		    "sprites-tijera": { 
@@ -163,7 +163,7 @@
 		    		    "fps": 10 
 		    			},
 		    "sprites-muerto": { 
-			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-muerto.gif",
+			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-muerto.png",
 		    		    "cant_fotogramas": 1,
 		    		    "fps": 10 
 		    			},
@@ -342,7 +342,7 @@
 		    		    "fps": 10 
 		    			},
 		    "sprites-muerto": { 
-			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-caida.png",
+			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-muerto.png",
 		    		"cant_fotogramas": 1,
 		    		"fps": 10 
 		    			},
