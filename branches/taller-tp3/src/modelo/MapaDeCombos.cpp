@@ -10,24 +10,14 @@
 MapaDeCombos::MapaDeCombos(list<Combo*>* lista1, list<Combo*>* lista2, int tolerancia):
 	combosJugador1(lista1), combosJugador2(lista2), toleranciaDeError(tolerancia){
 	comboActual = NULL;
-
-
-	for (list<Combo*>::iterator iterador1 = lista1->begin(); iterador1 != lista1->end(); ++iterador1) {
-		pasar_a_string((*iterador1));
-	}
-
-	for (list<Combo*>::iterator iterador2 = lista2->begin(); iterador2 != lista2->end(); ++iterador2) {
-		pasar_a_string((*iterador2));
-	}
 }
 
-/*Arma un string con la secuencia de letras que forman el combo*/
-void MapaDeCombos::pasar_a_string(Combo* combo){
-
+void MapaDeCombos::agregar_tecla(string tecla){
+	this->colaDeEventos.push(tecla);
 }
 
-void MapaDeCombos::agregar_evento(string tecla){
-	this->colaDeEventos.push(this->mapaDeLetras[tecla]);
+void MapaDeCombos::quitar_tecla(){
+	this->colaDeEventos.pop();
 }
 
 bool MapaDeCombos::combo_completado(){
