@@ -16,3 +16,7 @@ Cayendo::~Cayendo()
 bool Cayendo::estaSaltando(){
     return true;
 }
+
+bool Cayendo::estaDesplazandoVertical() {
+    return true;
+}
