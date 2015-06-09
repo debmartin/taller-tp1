@@ -1,5 +1,11 @@
 #include "ControladorJoystick.h"
 
+#include <SDL2/SDL_error.h>
+#include <SDL2/SDL_events.h>
+#include <SDL2/SDL_joystick.h>
+#include <string>
+#include <utility>
+
 #define CANTIDAD_BOTONES 8
 
 ControladorJoystick* ControladorJoystick::instancia_unica = NULL;

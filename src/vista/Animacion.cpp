@@ -81,7 +81,7 @@ void Animacion::cambiarColor(Uint16 Hinicial, Uint16 Hfinal, Uint16 desplazamien
 }
 
 void Animacion::cambiarColor(ColorAlternativoDef* colorAlternativoDef) {
-	this->cambiarColor(colorAlternativoDef->getHfinal(), colorAlternativoDef->getHfinal(), colorAlternativoDef->getDesplazamiento());
+	this->cambiarColor(colorAlternativoDef->getHinicial(), colorAlternativoDef->getHfinal(), colorAlternativoDef->getDesplazamiento());
 }
 ostream& operator <<(ostream &o, const Animacion &a)
 {

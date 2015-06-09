@@ -27,9 +27,9 @@ Juego* cargarJuego(string escenarioPath){
 
 	if ( jugador1->getPersonaje()->getId() == jugador2->getPersonaje()->getId())
 	{
-		jugador2->getPersonajeDibujable()->cambiarColor(jugador1->getPersonajeDibujable()->getColorAlternativo());
+		// TODO dejo de funcionar. no funcionaba antes de agregar las pantallas para el tp3
+		//jugador2->getPersonajeDibujable()->cambiarColor(jugador1->getPersonajeDibujable()->getColorAlternativo());
 	}
-
 	cargador_de_objetos.cargarEscenarioGrafico(jugador1->getPersonajeDibujable(), jugador2->getPersonajeDibujable());
 
 	Juego* juego = new Juego(jugador1, jugador2);
