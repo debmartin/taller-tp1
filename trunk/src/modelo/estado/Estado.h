@@ -43,7 +43,7 @@ typedef enum estado_personaje
 	CAIDA_IZQUIERDA,
 	TIRANDO_PODER,
 	MUERTO,
-	MUERTO2,
+	MUERTO_EN_PISO,
 	VICTORIA,
 	BLOQUEADO
 } estado_personaje;

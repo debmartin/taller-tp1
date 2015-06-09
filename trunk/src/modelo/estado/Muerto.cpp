@@ -8,7 +8,7 @@
 #include "Muerto.h"
 
 Muerto::Muerto(Vector2f posInicial, BVH* caja) :
-    Estado(new Reposo(posInicial), MUERTO2, caja) {
+    Estado(new Reposo(posInicial), MUERTO_EN_PISO, caja) {
 }
 
 Muerto::Muerto(Vector2f posInicial, estado_personaje estado,BVH* caja) :
