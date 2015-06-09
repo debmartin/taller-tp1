@@ -7,8 +7,8 @@
 
 #include "Combo.h"
 
-Combo::Combo(map<string, int>* teclas, string nombre, int num):
-	mapaDeTeclas(teclas), nombreCombo(nombre), numeroCombo(num){
+Combo::Combo(vector<string>* teclas, string nombre, int num):
+	teclas(teclas), nombreCombo(nombre), numeroCombo(num){
 }
 
 Combo::~Combo() {
@@ -21,4 +21,8 @@ string Combo::getNombre(){
 
 int Combo::getNumero(){
 	return numeroCombo;
+}
+
+vector<string>* Combo::verTeclas(){
+	return this->teclas;
 }
