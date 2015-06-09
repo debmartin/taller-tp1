@@ -179,10 +179,10 @@ bool Personaje::estaEnCaida(){
 bool Personaje::estaEnPiso(){
     return (estado->estaEnPiso());
 }
-/*
-bool Personaje::estaEnFatality(){
-	return (estado->estaEnFatality());
-}*/
+
+bool Personaje::haciendoFatality(){
+	return (estado->haciendoFatality());
+}
 
 bool Personaje::estaMuerto(){
     return (this->energia <= 0);
@@ -399,11 +399,11 @@ void Personaje::hacerFatality(){
 }
 
 void Personaje::recibirFatality(Colisionable* enemigo){
-	/*if(enemigo->tipoDeFatality == BABALITY){
+	if(enemigo->verEstado()->Id() == BABALITY){
 		bebe();
 	}else{
 		morir();
-	}*/
+	}
 }
 
 void Personaje::caer(){
@@ -649,15 +649,17 @@ void Personaje::update(Colisionable* enemigo){
 
     if(estaEnPiso())
        return;
+/*
+    if(estaMuerto() && !estaSaltando() && !estaEnPiso() && enemigo->verEstado()->haciendoFatality()){
+    	cout<<"Entra"<<endl;
+       recibirFatality(enemigo);
+    }*/
 
     if(estaMuerto() && !estaSaltando() && !estaEnPiso()){
+    	cout<<"Entra2"<<endl;
        //morir();
     	bebe();
     }
-
- /*   if(estaMuerto() && !estaSaltando() && !estaEnPiso() && enemigo->haciendoFatality()){
-        recibirFatality(enemigo);
-    }*/
     //cout << id << " ~ " << estado->Id() << " ~ " << posicion << endl;
     //cout << *(estado->obtenerCajaColision()) << endl;
     if(estaBloqueado()){

@@ -48,6 +48,8 @@ class ArmaDibujable;
 #define ID_PERSONAJE_MUERTO "muerto"
 #define ID_PERSONAJE_SLIDE "deslizamiento"
 #define ID_PERSONAJE_TIJERA "tijera"
+#define ID_PERSONAJE_FATALITY1 "fatality1"
+#define ID_PERSONAJE_DECAPITADO "decapitado"
 
 class PersonajeDibujable : public Dibujable, public Observador {
 private:

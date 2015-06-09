@@ -104,7 +104,7 @@
 		    			},
 		    "sprites-gancho": { 
 				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-gancho.png",
-		    		    "cant_fotogramas": 1,
+		    		    "cant_fotogramas": 5,
 		    		    "fps": 10
 		    			},
 		    "sprites-defensa-parado": { 
@@ -166,6 +166,11 @@
 			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-muerto.gif",
 		    		    "cant_fotogramas": 1,
 		    		    "fps": 10 
+		    			},
+		    "sprites-fatality1": { 
+			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-fatality1.png",
+		    		"cant_fotogramas": 8,
+		    		"fps": 10 
 		    			},
 			"arma": {
 						"alto": 50,
@@ -339,6 +344,16 @@
 		    "sprites-muerto": { 
 			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-caida.png",
 		    		"cant_fotogramas": 1,
+		    		"fps": 10 
+		    			},
+		    "sprites-fatality1": { 
+			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-fatality-beso.png",
+		    		"cant_fotogramas": 8,
+		    		"fps": 10 
+		    			},
+		    "sprites-decapitado": { 
+			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-decapitado.png",
+		    		"cant_fotogramas": 10,
 		    		"fps": 10 
 		    			},
 			"arma": {
