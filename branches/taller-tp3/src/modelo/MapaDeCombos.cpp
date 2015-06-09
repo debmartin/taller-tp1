@@ -7,7 +7,7 @@
 
 #include "MapaDeCombos.h"
 
-MapaDeCombos::MapaDeCombos(list<Combo*>* lista, int tolerancia):
+MapaDeCombos::MapaDeCombos(vector<Combo*>* lista, int tolerancia):
 	combosJugador(lista), toleranciaDeError(tolerancia){
 	colaDeTeclas = new queue<string>;
 	comboActual = NULL;
@@ -29,6 +29,9 @@ int MapaDeCombos::informar_combo(){
 	return comboActual->getNumero();
 }
 
+void MapaDeCombos::buscarCombo() {
+
+}
 MapaDeCombos::~MapaDeCombos() {
 	// TODO Auto-generated destructor stub
 }
