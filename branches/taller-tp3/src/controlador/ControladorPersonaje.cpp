@@ -16,9 +16,10 @@
 #include "../utils/Logger.h"
 #include "Control.h"
 
-ControladorPersonaje::ControladorPersonaje(Jugador* jugador1, Jugador* jugador2, string tipoControl) :
+ControladorPersonaje::ControladorPersonaje(Jugador* jugador1, Jugador* jugador2, string tipoControl, string modo) :
     personaje1(jugador1->getPersonaje()), personaje2(jugador2->getPersonaje()) {
 	tipoDeControl = tipoControl;
+	modo_juego = modo;
 	ControladorJoystick::Instance()->initialiseJoysticks(jugador1->getControl()->getCorrespondenciaTeclas(),
 														jugador1->getControl()->getCorrespondenciaEjes(),
 														jugador2->getControl()->getCorrespondenciaTeclas(),
@@ -37,7 +38,7 @@ bool ControladorPersonaje::manejar_Evento(SDL_Event &evento){
     	if(!personaje1->estaBloqueado() && !personaje1->estaEnCaida()){
     		identificarOrdenJoystickPersonaje(personaje1, JOYSTICK1);
     	}
-    	if(!personaje2->estaBloqueado() && !personaje2->estaEnCaida()){
+    	if(!personaje2->estaBloqueado() && !personaje2->estaEnCaida() && modo_juego == "P1_vs_P2"){
     		identificarOrdenJoystickPersonaje(personaje2, JOYSTICK2);
     	}
 	}else{
@@ -46,7 +47,7 @@ bool ControladorPersonaje::manejar_Evento(SDL_Event &evento){
 			if(!personaje1->estaBloqueado() ){
 				identificarOrdenPersonaje1();
 			}
-			if(!personaje2->estaBloqueado()){
+			if(!personaje2->estaBloqueado() && modo_juego == "P1_vs_P2"){
 				identificarOrdenPersonaje2();
 			}
 		}

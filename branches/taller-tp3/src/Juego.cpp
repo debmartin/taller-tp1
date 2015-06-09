@@ -28,12 +28,13 @@
 
 using std::pair;
 
-Juego::Juego(Jugador* jugador1, Jugador* jugador2){
+Juego::Juego(Jugador* jugador1, Jugador* jugador2, string modo){
 	juegoCorriendo = true;
 	ejecutandoFinal = false;
 	this->jugador1 = jugador1;
 	this->jugador2 = jugador2;
-
+	this->modo_juego = modo;
+	cout<<"MODO DE JUEGO:"<<modo_juego<<endl;
 	agregarObservadoresJugador(jugador1);
 	agregarObservadoresJugador(jugador2);
 
@@ -41,7 +42,7 @@ Juego::Juego(Jugador* jugador1, Jugador* jugador2){
 	string tipoDeControl_jugador1 = jugador1->getTipoControl();
 	string tipoDeControl_jugador2 = jugador2->getTipoControl();
 
-	controladorPersonaje = new ControladorPersonaje(jugador1, jugador2, tipoDeControl_jugador1);
+	controladorPersonaje = new ControladorPersonaje(jugador1, jugador2, tipoDeControl_jugador1, this->modo_juego);
 	hud = new HUD(Renderizador::Instance()->getWindow(), jugador2->getPersonaje()->getId(), jugador1->getPersonaje()->getId());
 
 	jugador1->getPersonaje()->agregarObservador(hud);
@@ -131,7 +132,9 @@ void Juego::handleEvents(bool& recargar)
 
 	} else {
 	        controladorPersonaje->continuarAccionPreviaPersonaje1();
-	        controladorPersonaje->continuarAccionPreviaPersonaje2();
+	        if(modo_juego == "P1_vs_P2"){
+	        	controladorPersonaje->continuarAccionPreviaPersonaje2();
+	        }
 	}
 }
 

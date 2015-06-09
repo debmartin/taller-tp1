@@ -614,6 +614,7 @@ void CargadorDeOjbetos::cargarInfo_desdeMenus() {
 	PantallaSeleccionarModo* pantallaSeleccionarModo = new PantallaSeleccionarModo();
 	pantallaSeleccionarModo->iniciar();
 	string modo_juego_elegido = pantallaSeleccionarModo->getModoDeJuegoElegido();
+	this->modo_juego = modo_juego_elegido;
 
 	PantallaSeleccionarPersonaje* pantallaSeleccionarPersonajes = new PantallaSeleccionarPersonaje(modo_juego_elegido);
 	pantallaSeleccionarPersonajes->iniciar();
@@ -634,4 +635,71 @@ string CargadorDeOjbetos::getIdPersonaje1Elegido() const {
 
 string CargadorDeOjbetos::getIdPersonaje2Elegido() const {
 	return idPersonaje2Elegido;
+}
+
+vector<Combo*>* CargadorDeOjbetos::cargarCombos(string nombrePersonaje){
+
+	vector<string>* vectorTeclasCombo1 = new vector<string>;
+	vector<string>* vectorTeclasCombo2 = new vector<string>;
+	vector<string>* vectorTeclasCombo3 = new vector<string>;
+	vector<string>* vectorTeclasCombo4 = new vector<string>;
+	vector<Combo*>* vectorDeCombos = new vector<Combo*>;
+
+
+	if(nombrePersonaje == "sub-zero"){
+		vectorTeclasCombo1->push_back("JOY_ABAJO");
+		vectorTeclasCombo1->push_back("JOY_DERECHA");
+		vectorTeclasCombo1->push_back("JOY_PINIA_BAJA");
+		Combo* combo1 = new Combo(vectorTeclasCombo1, "Ice Freeze", 1);
+
+		vectorTeclasCombo2->push_back("JOY_IZQUIERDA");
+		vectorTeclasCombo2->push_back("JOY_PINIA_BAJA");
+		vectorTeclasCombo2->push_back("JOY_PATADA_BAJA");
+		vectorTeclasCombo2->push_back("JOY_DEFENSA");
+		Combo* combo2 = new Combo(vectorTeclasCombo2, "Slide", 2);
+
+		vectorTeclasCombo3->push_back("JOY_DERECHA");
+		vectorTeclasCombo3->push_back("JOY_ABAJO");
+		vectorTeclasCombo3->push_back("JOY_DERECHA");
+		vectorTeclasCombo3->push_back("JOY_PINIA_ALTA");
+		Combo* combo3 = new Combo(vectorTeclasCombo2, "Fatality1", 3);
+
+		vectorDeCombos->push_back(combo1);
+		vectorDeCombos->push_back(combo2);
+		vectorDeCombos->push_back(combo3);
+	}else{
+
+		vectorTeclasCombo1->push_back("JOY_IZQUIERDA");
+		vectorTeclasCombo1->push_back("JOY_IZQUIERDA");
+		vectorTeclasCombo1->push_back("JOY_PINIA_BAJA");
+		Combo* combo1 = new Combo(vectorTeclasCombo1, "Ring Toss", 1);
+
+		vectorTeclasCombo2->push_back("JOY_PINIA_BAJA");
+		vectorTeclasCombo2->push_back("JOY_DEFENSA");
+		vectorTeclasCombo2->push_back("JOY_PATADA_BAJA");
+		Combo* combo2 = new Combo(vectorTeclasCombo2, "Leg Grab", 2);
+
+		vectorTeclasCombo3->push_back("JOY_DERECHA");
+		vectorTeclasCombo3->push_back("JOY_IZQUIERDA");
+		vectorTeclasCombo3->push_back("JOY_PINIA_BAJA");
+		Combo* combo3 = new Combo(vectorTeclasCombo2, "Square Flight", 3);
+
+		vectorTeclasCombo4->push_back("JOY_DERECHA");
+		vectorTeclasCombo4->push_back("JOY_DERECHA");
+		vectorTeclasCombo4->push_back("JOY_IZQUIERDA");
+		vectorTeclasCombo4->push_back("JOY_IZQUIERDA");
+		vectorTeclasCombo2->push_back("JOY_DEFENSA");
+		Combo* combo4 = new Combo(vectorTeclasCombo2, "Fatality1", 4);
+
+		vectorDeCombos->push_back(combo1);
+		vectorDeCombos->push_back(combo2);
+		vectorDeCombos->push_back(combo3);
+		vectorDeCombos->push_back(combo4);
+	}
+
+	return vectorDeCombos;
+}
+
+string CargadorDeOjbetos::verModoDeJuego(){
+	return this->modo_juego;
 }

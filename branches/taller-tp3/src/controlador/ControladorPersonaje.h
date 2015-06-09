@@ -27,8 +27,9 @@ private:
 	SDL_Event eventoGuardado;
 	std::map<Personaje*, SDL_Joystick*> joysticks;
 	string tipoDeControl;
+	string modo_juego;
 public:
-	ControladorPersonaje(Jugador* juagador1, Jugador* jugador2, string tipoControl);
+	ControladorPersonaje(Jugador* juagador1, Jugador* jugador2, string tipoControl, string modo);
 	virtual ~ControladorPersonaje();
 	bool manejar_Evento(SDL_Event &evento);
 	void continuarAccionPreviaPersonaje1();
