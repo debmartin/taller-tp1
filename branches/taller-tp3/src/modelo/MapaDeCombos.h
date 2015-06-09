@@ -17,19 +17,17 @@ using namespace std;
 
 class MapaDeCombos {
 private:
-	list<Combo*>* combosJugador1;
-	list<Combo*>* combosJugador2;
+	list<Combo*>* combosJugador;
 	int toleranciaDeError;
-	queue<string>* colaDeEventosPersonaje1;
-	queue<string>* colaDeEventosPersonaje2;
+	queue<string>* colaDeTeclas;
 	Combo* comboActual;
 
-	void quitar_tecla(int numeroPersonaje);
+	void quitar_tecla();
 
 public:
-	MapaDeCombos(list<Combo*>* combosJugador1, list<Combo*>* combosJugador2, int toleranciaDeError);
+	MapaDeCombos(list<Combo*>* combosJugador, int toleranciaDeError);
 	virtual ~MapaDeCombos();
-	void agregar_tecla(string tecla, int personaje);
+	void agregar_tecla(string tecla);
 	bool combo_completado();
 	int informar_combo();
 };
