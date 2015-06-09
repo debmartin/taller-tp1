@@ -23,6 +23,7 @@ public:
 	void agregar(string idSonido, Sonido* sonido);
 	void reproducirSonido(string idSonido);
 	virtual ~Sonidos();
+	void iniciar();
 };
 
 #endif /* SRC_SONIDOS_H_ */
