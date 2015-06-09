@@ -332,9 +332,9 @@
 		    		"fps": 10 
 		    			},
 		    "sprites-bebe": { 
-			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-bebe.png",
-		    		    "cant_fotogramas": 1,
-		    		    "fps": 10 
+			        "imagen": "RECURSOS/PERSONAJES/EFECTOS/fire.png",
+		    		    "cant_fotogramas": 3,
+		    		    "fps": 1 
 		    			},
 		    "sprites-victoria": { 
 			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-victoria.png",
