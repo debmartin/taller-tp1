@@ -63,6 +63,19 @@ void correrJuego(Juego* g_game, bool& recargar){
     delete VentanaGrafica::Instance();
 }
 
+void agregarSonidos()
+{
+	Sonidos::getInstancia()->iniciar();
+
+	Sonidos::getInstancia()->agregar("sonido_saltar", new Sonido("crispy.wav",150,2));
+	Sonidos::getInstancia()->agregar("sonido_pinia", new Sonido("Kungya.wav",150,2));
+	Sonidos::getInstancia()->agregar("sonido_patada", new Sonido("BigHit.wav",150,2));
+	Sonidos::getInstancia()->agregar("sonido_deslizar", new Sonido("ShvDie.wav",150,2));
+	Sonidos::getInstancia()->agregar("sonido_arma", new Sonido("LiuFire.wav",150,2));
+	Sonidos::getInstancia()->agregar("sonido_gancho", new Sonido("NiteAxe.wav",150,2));
+	Sonidos::getInstancia()->agregar("sonido_bebe", new Sonido("BabyCry.wav",150,2));
+}
+
 int main(int argc, char* args[])
 {
 	//para correr los test
@@ -77,29 +90,21 @@ int main(int argc, char* args[])
 		}
 		else
 		{
-			Musica* musica = new Musica("mortal64.mid", 100);
-			musica->reproducir();
-
-			//carga de los sonidos
-			Sonidos::getInstancia()->agregar("sonido_saltar", new Sonido("crispy.wav",150,2));
-			Sonidos::getInstancia()->agregar("sonido_pinia", new Sonido("Kungya.wav",150,2));
-			Sonidos::getInstancia()->agregar("sonido_patada", new Sonido("BigHit.wav",150,2));
-			Sonidos::getInstancia()->agregar("sonido_deslizar", new Sonido("ShvDie.wav",150,2));
-			Sonidos::getInstancia()->agregar("sonido_arma", new Sonido("LiuFire.wav",150,2));
-			Sonidos::getInstancia()->agregar("sonido_gancho", new Sonido("NiteAxe.wav",150,2));
-			Sonidos::getInstancia()->agregar("sonido_bebe", new Sonido("BabyCry.wav",150,2));
 
 			bool recargar = true;
 			while (recargar){
+				Musica* musica = new Musica("mortal64.mid", 100);
+				musica->reproducir();
+				agregarSonidos();
+
 				recargar = false;
 				string escenario_path(argumento);
 				Juego* juego = cargarJuego(argumento);
 				correrJuego(juego, recargar);
-			}
 
-			cout<<"detener sonidos"<<endl;
-			musica->detener();
-			delete musica;
+				musica->detener();
+				delete musica;
+			}
 
 			Logger::getInstance()->info("#################################################");
 			Logger::getInstance()->info("################## JUEGO FINALIZADO #############");

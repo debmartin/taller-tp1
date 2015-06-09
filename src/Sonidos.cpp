@@ -35,3 +35,9 @@ Sonidos::~Sonidos() {
 	// TODO Auto-generated destructor stub
 }
 
+void Sonidos::iniciar() {
+	for (map<std::string, Sonido*>::iterator it = this->mapaSonidos->begin() ; it != this->mapaSonidos->end(); ++it)
+	{
+		delete it->second;
+	}
+}
