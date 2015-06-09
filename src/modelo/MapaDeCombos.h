@@ -20,15 +20,16 @@ private:
 	list<Combo*>* combosJugador1;
 	list<Combo*>* combosJugador2;
 	int toleranciaDeError;
-	queue<string> colaDeEventos;
+	queue<string>* colaDeEventosPersonaje1;
+	queue<string>* colaDeEventosPersonaje2;
 	Combo* comboActual;
 
-	void quitar_tecla();
+	void quitar_tecla(int numeroPersonaje);
 
 public:
 	MapaDeCombos(list<Combo*>* combosJugador1, list<Combo*>* combosJugador2, int toleranciaDeError);
 	virtual ~MapaDeCombos();
-	void agregar_tecla(string tecla);
+	void agregar_tecla(string tecla, int personaje);
 	bool combo_completado();
 	int informar_combo();
 };
