@@ -335,7 +335,7 @@ void Personaje::morir(){
 }
 
 void Personaje::morirEnPiso(){
-	cambiarEstado(new Muerto(posicion, MUERTO2,(*cajasPorEstado)[EN_ESPERA]));
+	cambiarEstado(new Muerto(posicion, MUERTO_EN_PISO,(*cajasPorEstado)[EN_ESPERA]));
 	bloquearPersonaje(TIEMPO_FESTEJO_VICTORIA);
 }
 

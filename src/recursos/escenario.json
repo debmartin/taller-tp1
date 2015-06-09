@@ -132,6 +132,11 @@
 		    		    "cant_fotogramas": 4,
 		    		    "fps": 10 
 		    			},
+		    "sprites-muerto": { 
+			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-muerto.png",
+		    		    "cant_fotogramas": 1,
+		    		    "fps": 5 
+		    			},
 			"arma": {
 						"alto": 50,
 						"ancho": 150,
@@ -251,6 +256,11 @@
 		    		    "cant_fotogramas": 8,
 		    		    "fps": 10 
 		    			},
+		    "sprites-muerto": { 
+			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-muerto.png",
+		    		    "cant_fotogramas": 1,
+		    		    "fps": 5 
+		    			},
 			"arma": {
 						"alto": 50,
 						"ancho": 150,
@@ -269,7 +279,7 @@
     
 	"jugador-1": {
         "personaje": "sub-zero",
-        "tipo-control": "JOYSTICK",   // "TECLADO" o "JOYSTICK"
+        "tipo-control": "TECLADO",   // "TECLADO" o "JOYSTICK"
         "control":{
         			"JOY_PINIA_ALTA": 0,
         			"JOY_PATADA_ALTA": 1,
@@ -283,7 +293,7 @@
 	},
 	"jugador-2": {
         "personaje": "sonya",
-        "tipo-control": "JOYSTICK",  // "TECLADO" o "JOYSTICK"
+        "tipo-control": "TECLADO",  // "TECLADO" o "JOYSTICK"
         "control":{
         			"JOY_PINIA_ALTA": 0,
         			"JOY_PATADA_ALTA": 1,

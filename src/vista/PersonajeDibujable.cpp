@@ -178,12 +178,12 @@ void PersonajeDibujable::seleccionarSprite(){
 				break;
 			case MUERTO:
 				this->spritePersonaje->setLoopMode(LOOP_NO_REPEAT);
-				spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_MUERTO]);
+				spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_CAIDA]);
 				spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
 				break;
-			case MUERTO2:
+			case MUERTO_EN_PISO:
 				this->spritePersonaje->setLoopMode(LOOP_NO_REPEAT);
-				spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_AGACHADO]);
+				spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_MUERTO]);
 				spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
 				break;
 		}
