@@ -82,12 +82,12 @@ int main(int argc, char* args[])
 
 			//carga de los sonidos
 			Sonidos::getInstancia()->agregar("sonido_saltar", new Sonido("crispy.wav",150,2));
-			Sonidos::getInstancia()->agregar("sonido_pinia", new Sonido("Kungya.wav",150,3));
-			Sonidos::getInstancia()->agregar("sonido_patada", new Sonido("BigHit.wav",150,4));
-			Sonidos::getInstancia()->agregar("sonido_deslizar", new Sonido("ShvDie.wav",150,6));
-			Sonidos::getInstancia()->agregar("sonido_arma", new Sonido("LiuFire.wav",150,7));
-			Sonidos::getInstancia()->agregar("sonido_gancho", new Sonido("NiteAxe.wav",150,8));
-			Sonidos::getInstancia()->agregar("sonido_bebe", new Sonido("BabyCry.wav",150,9));
+			Sonidos::getInstancia()->agregar("sonido_pinia", new Sonido("Kungya.wav",150,2));
+			Sonidos::getInstancia()->agregar("sonido_patada", new Sonido("BigHit.wav",150,2));
+			Sonidos::getInstancia()->agregar("sonido_deslizar", new Sonido("ShvDie.wav",150,2));
+			Sonidos::getInstancia()->agregar("sonido_arma", new Sonido("LiuFire.wav",150,2));
+			Sonidos::getInstancia()->agregar("sonido_gancho", new Sonido("NiteAxe.wav",150,2));
+			Sonidos::getInstancia()->agregar("sonido_bebe", new Sonido("BabyCry.wav",150,2));
 
 			bool recargar = true;
 			while (recargar){
@@ -97,6 +97,7 @@ int main(int argc, char* args[])
 				correrJuego(juego, recargar);
 			}
 
+			cout<<"detener sonidos"<<endl;
 			musica->detener();
 			delete musica;
 
