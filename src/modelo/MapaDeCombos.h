@@ -10,14 +10,14 @@
 
 #include <SDL2/SDL_events.h>
 #include <queue>
-#include <list>
+#include <vector>
 #include "Combo.h"
 
 using namespace std;
 
 class MapaDeCombos {
 private:
-	list<Combo*>* combosJugador;
+	vector<Combo*>* combosJugador;
 	int toleranciaDeError;
 	queue<string>* colaDeTeclas;
 	Combo* comboActual;
@@ -25,11 +25,13 @@ private:
 	void quitar_tecla();
 
 public:
-	MapaDeCombos(list<Combo*>* combosJugador, int toleranciaDeError);
+	MapaDeCombos(vector<Combo*>* combosJugador, int toleranciaDeError);
 	virtual ~MapaDeCombos();
 	void agregar_tecla(string tecla);
 	bool combo_completado();
 	int informar_combo();
+
+	void buscarCombo();
 };
 
 #endif /* SRC_MODELO_MAPADECOMBOS_H_ */
