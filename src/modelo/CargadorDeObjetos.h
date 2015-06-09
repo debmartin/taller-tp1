@@ -12,6 +12,7 @@
 #include <string>
 
 #include "../vista/PersonajeDibujable.h"
+#include "Combo.h"
 #include "estado/Estado.h"
 #include "fisica/BVH.h"
 #include "Personaje.h"
@@ -39,6 +40,7 @@ private:
 	Parser* parser;
 	string idPersonaje1Elegido;
 	string idPersonaje2Elegido;
+	string modo_juego;
 public:
 	CargadorDeOjbetos(string escenario_path);
 	virtual ~CargadorDeOjbetos();
@@ -53,7 +55,8 @@ public:
 	void cargarInfo_desdeMenus();
 	string getIdPersonaje1Elegido() const;
 	string getIdPersonaje2Elegido() const;
-
+	vector<Combo*>* cargarCombos(string nombrePersonaje);
+	string verModoDeJuego();
 private:
 	Jugador* cargarJugador(JugadorDef* jugadorDef);
 
