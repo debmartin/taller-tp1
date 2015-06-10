@@ -458,9 +458,15 @@ void ControladorJoystick::buscar_combo(int numeroJoystick){
 }
 
 void ControladorJoystick::imprimirColaBotones(JoyNumber joy) {
+
+	cout << "========== COLA EVENTOS JOYSTICK" << joy << "===========" << endl;
+
 	if (joy == JOYSTICK1)
 		mapaDeCombosJugador1->imprimir();
 
 	if (joy == JOYSTICK2)
 		mapaDeCombosJugador2->imprimir();
+
+	cout << "============================================" << endl;
+
 }
