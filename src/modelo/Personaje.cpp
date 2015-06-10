@@ -368,7 +368,7 @@ void Personaje::morir(){
 }
 
 void Personaje::deslizar(){
-	cambiarEstado(new Deslizar(posicion, (*cajasPorEstado)[SALTANDO_VERTICAL], direccion));
+	cambiarEstado(new Deslizar(posicion, SLIDE, (*cajasPorEstado)[SALTANDO_VERTICAL], direccion));
 	Sonidos::getInstancia()->reproducirSonido("sonido_deslizar");
 	bloquearPersonaje(50);
 }
@@ -387,6 +387,12 @@ void Personaje::morirEnPiso(){
 void Personaje::mantenerReposo(){
     cambiarEstado(new EnEspera(posicion, (*cajasPorEstado)[EN_ESPERA]));
     Logger::getInstance()->debug("Personaje: en reposo.");
+}
+
+
+void Personaje::ser_arrojado(){
+	cambiarEstado(new Deslizar(posicion, ARROJADO, (*cajasPorEstado)[SALTANDO_VERTICAL], direccion));
+	Logger::getInstance()->debug("Personaje: arrojado.");
 }
 
 void Personaje::bebe(){

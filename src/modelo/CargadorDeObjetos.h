@@ -12,6 +12,7 @@
 #include <string>
 
 #include "../vista/PersonajeDibujable.h"
+#include "../controlador/ControladorJoystickMenu.h"
 #include "Combo.h"
 #include "MapaDeCombos.h"
 #include "estado/Estado.h"

@@ -167,6 +167,11 @@
 		    		    "cant_fotogramas": 1,
 		    		    "fps": 10 
 		    			},
+		    "sprites-quemado": { 
+			        "imagen": "RECURSOS/PERSONAJES/EFECTOS/quemado.png",
+		    		    "cant_fotogramas": 8,
+		    		    "fps": 10 
+		    			},
 		    "sprites-fatality1": { 
 			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-fatality1.png",
 		    		"cant_fotogramas": 8,
@@ -346,6 +351,11 @@
 		    		"cant_fotogramas": 1,
 		    		"fps": 10 
 		    			},
+		    "sprites-quemado": { 
+			        "imagen": "RECURSOS/PERSONAJES/EFECTOS/quemado.png",
+		    		    "cant_fotogramas": 8,
+		    		    "fps": 10 
+		    			},
 		    "sprites-fatality1": { 
 			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-fatality-beso.png",
 		    		"cant_fotogramas": 8,
@@ -399,7 +409,7 @@
     ],
     
 	"jugador-1": {
-        "tipo-control": "TECLADO",   // "TECLADO" o "JOYSTICK"
+        "tipo-control": "JOYSTICK",   // "TECLADO" o "JOYSTICK"
         "tolerancia": 1,
         "control":{
         			"JOY_PINIA_ALTA": 0,
@@ -413,7 +423,7 @@
         }
 	},
 	"jugador-2": {
-        "tipo-control": "TECLADO",  // "TECLADO" o "JOYSTICK"
+        "tipo-control": "JOYSTICK",  // "TECLADO" o "JOYSTICK"
         "tolerancia": 1,
         "control":{
         			"JOY_PINIA_ALTA": 0,

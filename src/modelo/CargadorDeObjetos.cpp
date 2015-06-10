@@ -618,7 +618,7 @@ BVH* CargadorDeOjbetos::cargarCajasColisionArmaPersonaje(float ancho_logico_arma
 
 void CargadorDeOjbetos::cargarInfo_desdeMenus() {
 
-	ControladorJoystick::Instance()->initialiseJoysticks( parser->getControlJugador1()->getCorrespondenciaTeclas(),
+	ControladorJoystickMenu::Instance()->initialiseJoysticks( parser->getControlJugador1()->getCorrespondenciaTeclas(),
 														  parser->getControlJugador1()->getCorrespondenciaEjes(),
 														  parser->getControlJugador2()->getCorrespondenciaTeclas(),
 														  parser->getControlJugador2()->getCorrespondenciaEjes()
