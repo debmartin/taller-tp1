@@ -150,11 +150,11 @@ void ControladorJoystick::handleEventsJoysticks(SDL_Event event) {
                 if(event.jaxis.axis == (*this->correspondenciaEjes)["JOY_EJE_HORIZONTAL"])
                 {
                         if (event.jaxis.value > m_joystickDeadZone) {
-                        	this->mapaDeCombosJugador1->agregar_tecla("JOY_IZQUIERDA");
+                        	this->mapaDeCombosJugador1->agregar_tecla("JOY_DERECHA");
                             m_joystickValues[whichOne].first->setX(1);
                         }
                         else if(event.jaxis.value < -m_joystickDeadZone) {
-                        	this->mapaDeCombosJugador1->agregar_tecla("JOY_DERECHA");
+                        	this->mapaDeCombosJugador1->agregar_tecla("JOY_IZQUIERDA");
                         	m_joystickValues[whichOne].first->setX(-1);
                         }
                         else
