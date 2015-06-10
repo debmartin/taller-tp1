@@ -38,12 +38,16 @@ bool comapararConCombo(vector<string> teclasCombo, vector<string> teclasActual, 
 }
 
 void MapaDeCombos::buscarCombo() {
+	/*
 	for (int i = 0; i < this->combosJugador->size(); i++) {
 		vector<string>* teclasCombo = (*this->combosJugador)[i]->verTeclas();
 		vector<string> teclasActual (colaDeTeclas->begin(), colaDeTeclas->end());
 
 		comapararConCombo(*teclasCombo, teclasActual, this->toleranciaDeError);
 	}
+	*/
+	this->comboEfectuado = true;
+	this->comboActual = "SONYA_PODER";
 }
 
 MapaDeCombos::~MapaDeCombos() {
