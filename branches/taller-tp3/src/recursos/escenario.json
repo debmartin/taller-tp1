@@ -194,7 +194,7 @@
 		    			"tecla4": "JOY_DEFENSA"
 		    			},
 		    "combo-3": {
-		    			"nombre_combo": "Fatality1",
+		    			"nombre_combo": "SubZero Fatality",
 		    			"tecla1": "JOY_DERECHA",
 		    			"tecla2": "JOY_ABAJO",
 		    			"tecla3": "JOY_DERECHA",
@@ -383,7 +383,7 @@
 		    			"tecla3": "JOY_PINIA_BAJA"
 		    			},
 			"combo-4": {
-		    			"nombre_combo": "Fatality1",
+		    			"nombre_combo": "Sonya Fatality",
 		    			"tecla1": "JOY_DERECHA",
 		    			"tecla2": "JOY_DERECHA",
 		    			"tecla3": "JOY_IZQUIERDA",
