@@ -2,11 +2,14 @@
 #define SRC_VISTA_HUD_H_
 
 #include <string>
+#include <deque>
 #include <SDL2/SDL.h>
 #include "../../modelo/Vector2f.h"
 #include "BarraEnergia.h"
 #include "../../modelo/Observador.h"
 #include "../../modelo/Personaje.h"
+
+//#include "../../controlador/ControladorJoystick.h"
 
 #define POSICION_PORCENTUAL_BARRA1 Vector2f(10, 10)
 #define POSICION_PORCENTUAL_BARRA2 Vector2f(60, 10)
@@ -25,6 +28,13 @@ public:
 	void dibujar();
 	virtual ~HUD();
 
+	SDL_Texture* renderText(
+			const std::string& mensaje,
+			const std::string& pathFuente,
+			SDL_Color 		   color,
+			int 			   tamanioFuentePx,
+			SDL_Renderer*      renderer);
+
 private:
 	SDL_Texture*  crearTexturaTransparente(int ancho, int alto);
 	SDL_Window*   gWindow;
@@ -32,6 +42,9 @@ private:
 	BarraEnergia* barraDeEnergia1;
 	BarraEnergia* barraDeEnergia2;
 	SDL_Texture*  tHUD;
+
+	deque<string>* colaDeTeclas1;
+	deque<string>* colaDeTeclas2;
 };
 
 #endif /* SRC_VISTA_HUD_H_ */

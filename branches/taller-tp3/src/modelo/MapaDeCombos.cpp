@@ -95,6 +95,10 @@ void MapaDeCombos::imprimir() {
 		cout << teclasActual[i] << endl;
 }
 
+deque<string>* MapaDeCombos::getColaDeTeclas() {
+	return this->colaDeTeclas;
+}
+
 MapaDeCombos::~MapaDeCombos() {
 	// TODO Auto-generated destructor stub
 }

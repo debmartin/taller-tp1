@@ -10,6 +10,17 @@ HUD::HUD(SDL_Window* gWindow, string nombre_personaje1, string nombre_personaje2
 	this->barraDeEnergia2 = new BarraEnergia(gWindow, nombre_personaje2, BARRA_DERECHA);
 	this->tHUD = crearTexturaTransparente(640, 480);
 
+	this->colaDeTeclas1 = new deque<string>;
+	this->colaDeTeclas2 = new deque<string>;
+
+	this->colaDeTeclas1->push_back("EVENTO 1");
+	this->colaDeTeclas1->push_back("EVENTO 2");
+	this->colaDeTeclas1->push_back("EVENTO 3");
+
+	this->colaDeTeclas2->push_back("EVENTO A");
+	this->colaDeTeclas2->push_back("EVENTO B");
+	this->colaDeTeclas2->push_back("EVENTO C");
+
 }
 
 SDL_Texture* HUD::crearTexturaTransparente(int ancho, int alto) {
@@ -74,6 +85,26 @@ void HUD::dibujar(){
 	this->tHUD = updateTexture();
 	SDL_RenderCopy(this->gRenderer, this->tHUD, NULL, NULL);
 
+	//IMPRIMO COLA DE COMBOS 1
+	int x = 30; int y = 70;
+	std::deque<string>::iterator it = colaDeTeclas1->begin();
+	while (it != colaDeTeclas1->end()) {
+		SDL_Texture* combos = renderText(*it++, "RECURSOS/HUD/mk2.ttf", { 255, 239, 36, 255 }, 11, gRenderer);
+		SDL_Rect destRect = {x, y, 100, 20}; y += 15;
+		SDL_RenderCopy(this->gRenderer, combos, NULL, &destRect);
+		SDL_DestroyTexture(combos);
+	}
+
+	//IMPRIMO COLA DE COMBOS 2
+	x = 500; y = 70;
+	it = colaDeTeclas1->begin();
+	while (it != colaDeTeclas1->end()) {
+		SDL_Texture* combos = renderText(*it++, "RECURSOS/HUD/mk2.ttf", { 255, 239, 36, 255 }, 11, gRenderer);
+		SDL_Rect destRect = {x, y, 100, 20}; y += 15;
+		SDL_RenderCopy(this->gRenderer, combos, NULL, &destRect);
+		SDL_DestroyTexture(combos);
+	}
+
 }
 
 void HUD::recibirNotificacion(Observable* unObservable){
@@ -88,3 +119,36 @@ void HUD::recibirNotificacion(Observable* unObservable){
 		}
 	}
 }
+
+
+SDL_Texture* HUD::renderText(
+		const std::string& mensaje,
+		const std::string& pathFuente,
+		SDL_Color 		   color,
+		int 			   tamanioFuentePx,
+		SDL_Renderer*      renderer)
+{
+
+	TTF_Font *fuente = TTF_OpenFont(pathFuente.c_str(), tamanioFuentePx);
+	if (fuente == NULL){
+		std::cout << "ERROR: TTF_OpenFont" << endl;
+		std::cout << TTF_GetError() << std::endl;
+		return NULL;
+	}
+
+	SDL_Surface *surf = TTF_RenderText_Blended(fuente, mensaje.c_str(), color);
+	if (surf == NULL){
+		TTF_CloseFont(fuente);
+		std::cout << "ERROR: TTF_RenderText" << endl;
+		return NULL;
+	}
+	SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surf);
+	if (texture == NULL){
+		std::cout << "CreateTexture" << endl;
+	}
+
+	SDL_FreeSurface(surf);
+	TTF_CloseFont(fuente);
+	return texture;
+}
+
