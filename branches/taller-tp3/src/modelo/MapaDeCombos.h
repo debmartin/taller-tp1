@@ -9,7 +9,7 @@
 #define SRC_MODELO_MAPADECOMBOS_H_
 
 #include <SDL2/SDL_events.h>
-#include <queue>
+#include <deque>
 #include <vector>
 #include "Combo.h"
 
@@ -19,7 +19,7 @@ class MapaDeCombos {
 private:
 	vector<Combo*>* combosJugador;
 	int toleranciaDeError;
-	queue<string>* colaDeTeclas;
+	deque<string>* colaDeTeclas;
 	Combo* comboActual;
 
 	void quitar_tecla();
