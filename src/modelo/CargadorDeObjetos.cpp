@@ -13,10 +13,12 @@
 #include <utility>
 #include <vector>
 
+#include "../controlador/ControladorJoystick.h"
 #include "../controlador/ControlJoystick.h"
 #include "../controlador/ControlTeclado.h"
 #include "../json/ArmaDef.h"
 #include "../json/CapaDef.h"
+#include "../json/ControlDef.h"
 #include "../json/EscenarioDef.h"
 #include "../json/JugadorDef.h"
 #include "../json/Parser.h"
@@ -615,6 +617,12 @@ BVH* CargadorDeOjbetos::cargarCajasColisionArmaPersonaje(float ancho_logico_arma
 }
 
 void CargadorDeOjbetos::cargarInfo_desdeMenus() {
+
+	ControladorJoystick::Instance()->initialiseJoysticks( parser->getControlJugador1()->getCorrespondenciaTeclas(),
+														  parser->getControlJugador1()->getCorrespondenciaEjes(),
+														  parser->getControlJugador2()->getCorrespondenciaTeclas(),
+														  parser->getControlJugador2()->getCorrespondenciaEjes()
+														 );
 
 	string tipoDeControl_jugador1 = parser->getTipoControlJugador1();
 	string tipoDeControl_jugador2 = parser->getTipoControlJugador2();

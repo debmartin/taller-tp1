@@ -84,7 +84,6 @@ private:
 	list<JugadorDef*>* jugadoresDef;
 
 public:
-	Parser();
 	Parser(string archivo_json);
 
 	list<CapaDef*>* getCapasDef() const;
@@ -103,7 +102,8 @@ public:
 	list<JugadorDef*>* getJugadoresDef() const;
 	string getTipoControlJugador1();
 	string getTipoControlJugador2();
-
+    ControlDef* getControlJugador1();
+    ControlDef* getControlJugador2();
 private:
 	void inicializar();
 	void inciarValidacionSemantica();

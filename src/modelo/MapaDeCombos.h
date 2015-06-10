@@ -8,9 +8,10 @@
 #ifndef SRC_MODELO_MAPADECOMBOS_H_
 #define SRC_MODELO_MAPADECOMBOS_H_
 
-#include <SDL2/SDL_events.h>
 #include <deque>
+#include <string>
 #include <vector>
+
 #include "Combo.h"
 
 using namespace std;

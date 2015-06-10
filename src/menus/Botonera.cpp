@@ -99,7 +99,6 @@ Botonera::Botonera(string tipo, int cant_filas, int cant_columnas, Posicion* pos
 	this->tipoDeControl_jugador2 = tipoDeControl_jugador2;
 	this->modo_juego_elegido = modo_juego_elegido;
 
-	ControladorJoystick::Instance()->initialiseJoysticks();
 }
 
 bool Botonera::loadMedia(string path_imagen1, string path_imagen2, string path_imagen3) {
@@ -130,6 +129,7 @@ Botonera::~Botonera() {
 	this->gButtonSpriteSheetTexture->free();
 	this->gButtonSpriteSheetTexture2->free();
 	this->gButtonSpriteSheetTexture3->free();
+	ControladorJoystick::Instance()->clean();
 }
 
 void Botonera::manejarEventoJugador(SDL_Event evento) {
@@ -156,6 +156,7 @@ void Botonera::manejarEventoJugador(SDL_Event evento) {
 			//}
 		}
 	}
+
 }
 
 int Botonera::getCantColumnas() {
