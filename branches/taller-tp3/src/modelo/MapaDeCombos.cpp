@@ -15,11 +15,11 @@ MapaDeCombos::MapaDeCombos(vector<Combo*>* lista, int tolerancia):
 }
 
 void MapaDeCombos::agregar_tecla(string tecla){
-	this->colaDeTeclas->push_front(tecla);
+	this->colaDeTeclas->push_back(tecla);
 }
 
 void MapaDeCombos::quitar_tecla(){
-	this->colaDeTeclas->pop_back();
+	this->colaDeTeclas->pop_front();
 }
 
 bool MapaDeCombos::combo_completado(){
