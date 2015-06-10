@@ -8,7 +8,7 @@
 #include "PatadaGiratoria.h"
 
 PatadaGiratoria::PatadaGiratoria(Vector2f posInicial, BVH* caja) :
-	Estado(new Reposo(posInicial), PATEANDO_ALTO_AGACHADO, caja) {
+	Estado(new Reposo(posInicial), PATADA_GIRATORIA, caja) {
 	ataqueEstado = new Ataque(DANIO_PATADA_SALTANDO);
 }
 
@@ -26,4 +26,8 @@ bool PatadaGiratoria::estaAgachado(){
 
 bool PatadaGiratoria::ejecutandoMovimientoEspecial(){
     return true;
+}
+
+bool PatadaGiratoria::efectuandoPatadaGiratoria(){
+	return true;
 }
