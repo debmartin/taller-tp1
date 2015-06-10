@@ -643,6 +643,8 @@ void CargadorDeOjbetos::cargarInfo_desdeMenus() {
 	titulo_ventana_pelea.append(modo_juego_elegido);
 	titulo_ventana_pelea.append(")");
 	SDL_SetWindowTitle( Renderizador::Instance()->getWindow(), titulo_ventana_pelea.c_str() );
+
+	ControladorJoystickMenu::Instance()->clean();
 }
 
 string CargadorDeOjbetos::getIdPersonaje1Elegido() const {
