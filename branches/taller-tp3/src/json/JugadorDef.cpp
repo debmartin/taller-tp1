@@ -16,9 +16,10 @@ JugadorDef::JugadorDef() {
 
 }
 
-JugadorDef::JugadorDef(string tipo_control, ControlDef* controlDef) {
+JugadorDef::JugadorDef(string tipo_control, int tolerancia, ControlDef* controlDef) {
 	this->idPersonaje = "";
 	this->tipo_control = tipo_control;
+	this->tolerancia = tolerancia;
 	this->controlDef = controlDef;
 }
 
@@ -30,6 +31,10 @@ string JugadorDef::toString() {
 
 string JugadorDef::getTipoControl() const {
 	return tipo_control;
+}
+
+int JugadorDef::getTolerancia() const {
+	return tolerancia;
 }
 
 ControlDef* JugadorDef::getControlDef() const {

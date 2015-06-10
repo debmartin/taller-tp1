@@ -12,10 +12,11 @@
 Jugador::Jugador() {
 }
 
-Jugador::Jugador(Personaje* personaje, PersonajeDibujable* personajeDibujable, Control* control, string tipo_control) {
+Jugador::Jugador(Personaje* personaje, PersonajeDibujable* personajeDibujable, Control* control, string tipo_control, MapaDeCombos* mapa) {
 	this->personaje = personaje;
 	this->personajeDibujable = personajeDibujable;
 	this->control = control;
+	this->mapa_de_combos = mapa;
 	this->tipo_control = tipo_control;
 }
 
@@ -49,4 +50,8 @@ Control* Jugador::getControl() const {
 
 string Jugador::getTipoControl() const {
 	return tipo_control;
+}
+
+MapaDeCombos* Jugador::getMapaDeCombos() {
+	return mapa_de_combos;
 }

@@ -24,6 +24,8 @@ ControladorPersonaje::ControladorPersonaje(Jugador* jugador1, Jugador* jugador2,
 														jugador1->getControl()->getCorrespondenciaEjes(),
 														jugador2->getControl()->getCorrespondenciaTeclas(),
 														jugador2->getControl()->getCorrespondenciaEjes());
+
+	ControladorJoystick::Instance()->cargarMapasDeCombos(jugador1->getMapaDeCombos(), jugador2->getMapaDeCombos());
 }
 
 

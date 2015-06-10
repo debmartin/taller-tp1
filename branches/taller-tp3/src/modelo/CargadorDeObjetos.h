@@ -13,6 +13,7 @@
 
 #include "../vista/PersonajeDibujable.h"
 #include "Combo.h"
+#include "MapaDeCombos.h"
 #include "estado/Estado.h"
 #include "fisica/BVH.h"
 #include "Personaje.h"

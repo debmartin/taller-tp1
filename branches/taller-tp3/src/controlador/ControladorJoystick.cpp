@@ -395,6 +395,11 @@ string ControladorJoystick::getStringDeNumeroDeTecla(JoyNumber joy, Uint8 nro_bo
     return "ERROR";
 }
 
+bool ControladorJoystick::cargarMapasDeCombos(MapaDeCombos* mapaJugador1, MapaDeCombos* mapaJugador2){
+	this->mapaDeCombosJugador1 = mapaJugador1;
+	this->mapaDeCombosJugador2 = mapaJugador2;
+}
+
 /*
 //Para manejar mapa de combos.
 bool ControladorJoystick::combo_completado(){
