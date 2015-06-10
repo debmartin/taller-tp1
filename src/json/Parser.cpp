@@ -430,3 +430,12 @@ void Parser::parsearJugadores() {
 	}
 
 }
+
+string Parser::getTipoControlJugador1() {
+
+	return this->parsearJugador(TAG_JUGADOR_1)->getTipoControl();
+}
+
+string Parser::getTipoControlJugador2() {
+	return this->parsearJugador(TAG_JUGADOR_2)->getTipoControl();
+}
