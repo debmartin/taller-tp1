@@ -32,6 +32,7 @@ public:
 	bool combo_completado();
 	string informar_combo();
 	void buscarCombo();
+	deque<string>* getColaDeTeclas();
 
     void imprimir();
 };
