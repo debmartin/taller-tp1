@@ -36,6 +36,7 @@ public:
 	void continuarAccionPreviaPersonaje2();
 private:
 	void identificarOrdenJoystickPersonaje(Personaje* personaje, JoyNumber numeroJoystick);
+	void identificarCombo(Personaje* personaje, JoyNumber numeroJoystick);
 	void identificarOrdenPersonaje(Personaje* personaje);
 	void identificarOrdenPersonaje1();
 	void identificarOrdenPersonaje2();
