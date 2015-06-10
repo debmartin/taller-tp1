@@ -438,3 +438,11 @@ void ControladorJoystick::buscar_combo(int numeroJoystick){
 		this->mapaDeCombosJugador2->buscarCombo();
 	}
 }
+
+void ControladorJoystick::imprimirColaBotones(JoyNumber joy) {
+	if (joy == JOYSTICK1)
+		mapaDeCombosJugador1->imprimir();
+
+	if (joy == JOYSTICK2)
+		mapaDeCombosJugador2->imprimir();
+}

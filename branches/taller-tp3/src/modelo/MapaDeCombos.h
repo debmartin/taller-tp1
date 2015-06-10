@@ -31,6 +31,8 @@ public:
 	bool combo_completado();
 	string informar_combo();
 	void buscarCombo();
+
+    void imprimir();
 };
 
 #endif /* SRC_MODELO_MAPADECOMBOS_H_ */

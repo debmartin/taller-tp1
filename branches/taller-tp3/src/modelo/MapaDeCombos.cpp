@@ -46,8 +46,16 @@ void MapaDeCombos::buscarCombo() {
 		comapararConCombo(*teclasCombo, teclasActual, this->toleranciaDeError);
 	}
 	*/
-	this->comboEfectuado = true;
-	this->comboActual = "SONYA_PODER";
+	//this->comboEfectuado = true;
+	//this->comboActual = "SONYA_PODER";
+}
+
+
+void MapaDeCombos::imprimir() {
+	cout << "---------------------------------" << endl;
+	vector<string> teclasActual (colaDeTeclas->begin(), colaDeTeclas->end());
+	for (int i = 0; i < teclasActual.size(); i++)
+		cout << teclasActual[i] << endl;
 }
 
 MapaDeCombos::~MapaDeCombos() {

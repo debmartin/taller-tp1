@@ -72,6 +72,9 @@ void ControladorPersonaje::identificarCombo(Personaje* personaje, JoyNumber nume
 void ControladorPersonaje::identificarOrdenJoystickPersonaje(Personaje* personaje, JoyNumber numeroJoystick){
 	std::map<string, bool>* estadoJoy = TheInputHandler::Instance()->getJoystickState(numeroJoystick);
 
+	TheInputHandler::Instance()->imprimirColaBotones(JOYSTICK1);
+	TheInputHandler::Instance()->imprimirColaBotones(JOYSTICK2);
+
 	if (personaje->estaSaltando()){
 		if(((*estadoJoy)["JOY_PINIA_ALTA"] || (*estadoJoy)["JOY_PINIA_BAJA"]) && personaje->estaSaltandoVertical()){
 			personaje->piniaSaltandoVertical();
