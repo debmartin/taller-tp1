@@ -68,12 +68,12 @@ public:
         void resetBotones(int whichOne, Uint8 nro_boton);
         virtual ~ControladorJoystick();
 
-    	string getStringDeNumeroDeTecla(JoyNumber joy, Uint8 nro_boton);
+    	string getStringDeNumeroDeTecla(int joy, Uint8 nro_boton);
     	//string getStringdeNumerodeEje(JoyNumber joy, Uint8 nro_boton);
 
         //Para manejar mapa de combos:
     	bool cargarMapasDeCombos(MapaDeCombos* mapaJugador1, MapaDeCombos* mapaJugador2);
-        bool combo_completado();
-        int informar_combo();
+        bool combo_completado(int numeroJoystick);
+        string informar_combo(int numeroJoystick);
 };
 typedef ControladorJoystick TheInputHandler;

@@ -20,8 +20,8 @@ private:
 	vector<Combo*>* combosJugador;
 	int toleranciaDeError;
 	deque<string>* colaDeTeclas;
-	Combo* comboActual;
-
+	string comboActual;
+	bool comboEfectuado;
 	void quitar_tecla();
 
 public:
@@ -29,7 +29,7 @@ public:
 	virtual ~MapaDeCombos();
 	void agregar_tecla(string tecla);
 	bool combo_completado();
-	int informar_combo();
+	string informar_combo();
 
 	void buscarCombo();
 };

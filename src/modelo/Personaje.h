@@ -166,7 +166,7 @@ public:
 	void recibirDanio(int danio);
 	void recibirGolpe(Colisionable* otro);
 	void arrojarArma();
-	void ejecutarCombo(int numeroCombo);
+	void ejecutarCombo(string nombreCombo);
 	void hacerFatality();
 	void recibirFatality(Colisionable* enemigo);
 	void bebe();

@@ -10,7 +10,8 @@
 MapaDeCombos::MapaDeCombos(vector<Combo*>* lista, int tolerancia):
 	combosJugador(lista), toleranciaDeError(tolerancia) {
 	colaDeTeclas = new deque<string>;
-	comboActual = NULL;
+	comboActual = "";
+	comboEfectuado = false;
 }
 
 void MapaDeCombos::agregar_tecla(string tecla){
@@ -22,11 +23,14 @@ void MapaDeCombos::quitar_tecla(){
 }
 
 bool MapaDeCombos::combo_completado(){
-	return (comboActual != NULL);
+	return comboEfectuado;
 }
 
-int MapaDeCombos::informar_combo(){
-	return comboActual->getNumero();
+string MapaDeCombos::informar_combo(){
+	if(comboEfectuado){
+		comboEfectuado = false;
+		return comboActual;
+	}
 }
 
 bool comapararConCombo(vector<string> teclasCombo, vector<string> teclasActual, int tolerancia) {
