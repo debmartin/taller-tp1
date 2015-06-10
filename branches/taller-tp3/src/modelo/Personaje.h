@@ -170,6 +170,7 @@ public:
 	void hacerFatality();
 	void recibirFatality(Colisionable* enemigo);
 	void bebe();
+	void ser_arrojado();
 
 	//Colision
 	virtual void colisionar(Colisionable* otro);

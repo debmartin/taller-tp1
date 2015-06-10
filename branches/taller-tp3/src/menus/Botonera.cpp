@@ -129,18 +129,18 @@ Botonera::~Botonera() {
 	this->gButtonSpriteSheetTexture->free();
 	this->gButtonSpriteSheetTexture2->free();
 	this->gButtonSpriteSheetTexture3->free();
-	ControladorJoystick::Instance()->clean();
+	ControladorJoystickMenu::Instance()->clean();
 }
 
 void Botonera::manejarEventoJugador(SDL_Event evento) {
 
     //Cargo los botones de los joysticks
-    TheInputHandler::Instance()->handleEventsJoysticks(evento);
+    TheInputHandlerMenu::Instance()->handleEventsJoysticks(evento);
 
     if(this->tipoDeControl_jugador1 == "JOYSTICK"){
-    	identificarOrdenJoystickPersonaje(JOYSTICK1);
+    	identificarOrdenJoystickPersonaje(JOYSTICK1MENU);
     	if( this->modo_juego_elegido == "P1_vs_P2"){
-    		identificarOrdenJoystickPersonaje(JOYSTICK2);
+    		identificarOrdenJoystickPersonaje(JOYSTICK2MENU);
     	}
 	}else{
 		//Si se presiona una tecla
@@ -371,9 +371,8 @@ void Botonera::identificarOrdenPersonaje2() {
 	}
 }
 
-void Botonera::identificarOrdenJoystickPersonaje(JoyNumber numeroJoystick) {
-
-	std::map<string, bool>* estadoJoy = TheInputHandler::Instance()->getJoystickState(numeroJoystick);
+void Botonera::identificarOrdenJoystickPersonaje(JoyNumberMenu numeroJoystick) {
+	std::map<string, bool>* estadoJoy = TheInputHandlerMenu::Instance()->getJoystickState(numeroJoystick);
 
 	if ( (*estadoJoy)["JOY_IZQUIERDA"] ){
 		Logger::getInstance()->error("Se presiona: Tecla izquierda.");

@@ -10,7 +10,7 @@
 
 #include <string>
 
-#include "../controlador/ControladorJoystick.h"
+#include "../controlador/ControladorJoystickMenu.h"
 
 class Posicion;
 
@@ -64,7 +64,7 @@ public:
 	string getIdContenidoElegidoParaJugador2();
 	void identificarOrdenPersonaje1();
 	void identificarOrdenPersonaje2();
-	void identificarOrdenJoystickPersonaje(JoyNumber numeroJoystick);
+	void identificarOrdenJoystickPersonaje(JoyNumberMenu numeroJoystick);
 private:
 	void elegirIdContenidoParaJugador1(string idContenido);
 	void elegirIdContenidoParaJugador2(string idContenido);
