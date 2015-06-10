@@ -8,17 +8,15 @@
 #include "Botonera.h"
 
 #include <SDL2/SDL_events.h>
-#include <SDL2/SDL_keyboard.h>
 #include <SDL2/SDL_rect.h>
 #include <SDL2/SDL_render.h>
-#include <SDL2/SDL_scancode.h>
-#include <iostream>
 #include <list>
-#include <map>
 
+#include "../controlador/ControladorJoystickMenu.h"
 #include "../utils/Logger.h"
 #include "../vista/Renderizador.h"
 #include "Boton.h"
+#include "ControladorBotonera.h"
 #include "Posicion.h"
 #include "Textura.h"
 
@@ -98,6 +96,7 @@ Botonera::Botonera(string tipo, int cant_filas, int cant_columnas, Posicion* pos
 	this->tipoDeControl_jugador1 = tipoDeControl_jugador1;
 	this->tipoDeControl_jugador2 = tipoDeControl_jugador2;
 	this->modo_juego_elegido = modo_juego_elegido;
+	this->controladorBotonera = new ControladorBotonera(this->cant_filas, this->cant_columnas);
 
 }
 
@@ -137,21 +136,21 @@ void Botonera::manejarEventoJugador(SDL_Event evento) {
     TheInputHandlerMenu::Instance()->handleEventsJoysticks(evento);
 
     if(this->tipoDeControl_jugador1 == "JOYSTICK"){
-    	identificarOrdenJoystick(this->posicionEnfocadaDelJugador1, JOYSTICK1MENU);
+    	this->controladorBotonera->identificarOrdenJoystick(this->posicionEnfocadaDelJugador1, JOYSTICK1MENU);
     	if( this->modo_juego_elegido == "P1_vs_P2"){
-    		identificarOrdenJoystick(this->posicionEnfocadaDelJugador2, JOYSTICK2MENU);
+    		this->controladorBotonera->identificarOrdenJoystick(this->posicionEnfocadaDelJugador2, JOYSTICK2MENU);
     	}
 	}else{
 		//Si se presiona una tecla
 		if ( evento.key.repeat == 0 )
 		{
-			identificarOrdenPersonaje1();
+			this->controladorBotonera->identificarOrdenJugador1(this->posicionEnfocadaDelJugador1);
 			/* TODO descomentar cuando se implemente la forma de elegirse aleatoriamente
 			 * el personaje 2 cuando se juega con la CPU o es en modo practica
 			 */
 			//if( this->modo_juego_elegido == "P1_vs_P2")
 			//{
-				identificarOrdenPersonaje2();
+			this->controladorBotonera->identificarOrdenJugador2(this->posicionEnfocadaDelJugador2);
 			//}
 		}
 	}
@@ -277,118 +276,4 @@ void Botonera::elegirIdContenidoParaJugador1(string idContenido) {
 
 void Botonera::elegirIdContenidoParaJugador2(string idContenido) {
 	this->IdContenidoElegido_paraJugador2 = idContenido;
-}
-
-void Botonera::identificarOrdenPersonaje1() {
-
-	const Uint8* estadoTeclado = SDL_GetKeyboardState(NULL);
-	if (estadoTeclado[SDL_SCANCODE_LEFT])
-	{
-		this->posicionarIzquierda(this->posicionEnfocadaDelJugador1);
-	}
-	else if (estadoTeclado[SDL_SCANCODE_RIGHT])
-	{
-		this->posicionarDerecha(this->posicionEnfocadaDelJugador1);
-	}
-	else if (estadoTeclado[SDL_SCANCODE_UP])
-	{
-		this->posicionarArriba(this->posicionEnfocadaDelJugador1);
-	}
-	else if (estadoTeclado[SDL_SCANCODE_DOWN])
-	{
-		this->posicionarAbajo(this->posicionEnfocadaDelJugador1);
-	}
-	else if (estadoTeclado[SDL_SCANCODE_RETURN])
-	{
-		this->elegir(this->posicionEnfocadaDelJugador1);
-	}
-}
-
-void Botonera::identificarOrdenPersonaje2() {
-
-	const Uint8* estadoTeclado = SDL_GetKeyboardState(NULL);
-	if (estadoTeclado[SDL_SCANCODE_A])
-	{
-		this->posicionarIzquierda(this->posicionEnfocadaDelJugador2);
-	}
-	else if (estadoTeclado[SDL_SCANCODE_D])
-	{
-		this->posicionarDerecha(this->posicionEnfocadaDelJugador2);
-	}
-	else if (estadoTeclado[SDL_SCANCODE_W])
-	{
-		this->posicionarArriba(this->posicionEnfocadaDelJugador2);
-	}
-	else if (estadoTeclado[SDL_SCANCODE_S])
-	{
-		this->posicionarAbajo(this->posicionEnfocadaDelJugador2);
-	}
-	else if (estadoTeclado[SDL_SCANCODE_SPACE])
-	{
-		this->elegir(this->posicionEnfocadaDelJugador2);
-	}
-}
-
-void Botonera::identificarOrdenJoystick(Posicion* unaPosicionEnfocada, JoyNumberMenu numeroJoystick) {
-	std::map<string, bool>* estadoJoy = TheInputHandlerMenu::Instance()->getJoystickState(numeroJoystick);
-
-	if ( (*estadoJoy)["JOY_IZQUIERDA"] ){
-		this->posicionarIzquierda(unaPosicionEnfocada);
-
-	}else if ( (*estadoJoy)["JOY_DERECHA"] ){
-		this->posicionarDerecha(unaPosicionEnfocada);
-
-	}else if ( (*estadoJoy)["JOY_ARRIBA"] ){
-		this->posicionarArriba(unaPosicionEnfocada);
-
-	}else if ( (*estadoJoy)["JOY_ABAJO"] ){
-		this->posicionarAbajo(unaPosicionEnfocada);
-
-	}else if((*estadoJoy)["JOY_PINIA_BAJA"]){
-		this->elegir(unaPosicionEnfocada);
-	}
-
-}
-
-void Botonera::posicionarArriba(Posicion* unaPosicionEnfocada) {
-
-	if ( unaPosicionEnfocada->getY() > 0 )
-	{
-		unaPosicionEnfocada->deselegir();
-		unaPosicionEnfocada->enfocarArriba();
-	}
-}
-
-void Botonera::posicionarAbajo(Posicion* unaPosicionEnfocada) {
-
-	int cant_fils = this->cant_filas;
-	if ( unaPosicionEnfocada->getY() < (--cant_fils) )
-	{
-		unaPosicionEnfocada->deselegir();
-		unaPosicionEnfocada->enfocarAbajo();
-	}
-}
-
-void Botonera::posicionarIzquierda(Posicion* unaPosicionEnfocada) {
-
-	if ( unaPosicionEnfocada->getX() > 0 )
-	{
-		unaPosicionEnfocada->deselegir();
-		unaPosicionEnfocada->enfocarIzquierda();
-	}
-}
-
-void Botonera::posicionarDerecha(Posicion* unaPosicionEnfocada) {
-
-	int cant_cols = this->cant_columnas;
-	if ( unaPosicionEnfocada->getX() < (--cant_cols) )
-	{
-		unaPosicionEnfocada->deselegir();
-		unaPosicionEnfocada->enfocarDerecha();
-	}
-}
-
-void Botonera::elegir(Posicion* unaPosicionEnfocada) {
-
-	unaPosicionEnfocada->elegir();
 }
