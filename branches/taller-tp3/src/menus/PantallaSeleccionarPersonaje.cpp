@@ -8,6 +8,7 @@
 #include "PantallaSeleccionarPersonaje.h"
 
 #include <SDL2/SDL_events.h>
+#include <SDL2/SDL_keyboard.h>
 #include <SDL2/SDL_stdinc.h>
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_video.h>
@@ -16,6 +17,7 @@
 #include "../vista/Renderizador.h"
 #include "Boton.h"
 #include "Botonera.h"
+#include "CajaDeTexto.h"
 #include "Posicion.h"
 
 PantallaSeleccionarPersonaje::PantallaSeleccionarPersonaje(string modo_juego_elegido, string tipoDeControl_jugador1, string tipoDeControl_jugador2):
@@ -47,12 +49,22 @@ void PantallaSeleccionarPersonaje::iniciar() {
 	botoneraPersonajes->setPosicionEnfocadaDelJugador1(new Posicion(3,1));
 	botoneraPersonajes->setPosicionEnfocadaDelJugador2(new Posicion(0,1));
 
-	if( !botoneraPersonajes->loadMedia("RECURSOS/grilla1_eleccion_personajes.jpg", "RECURSOS/grilla2_eleccion_personajes.jpg", "RECURSOS/grilla3_eleccion_personajes.jpg") )
+	CajaDeTexto* cajaDeTexto = new CajaDeTexto(5,100,100);
+
+	if( !botoneraPersonajes->loadMedia("RECURSOS/grilla1_eleccion_personajes.jpg", "RECURSOS/grilla2_eleccion_personajes.jpg", "RECURSOS/grilla3_eleccion_personajes.jpg")
+		&& !cajaDeTexto->loadMedia() )
 	{
 		Logger::getInstance()->error("Fallo la carga del archivo imagen");
 	}
 	else
 	{
+
+		//The current input text.
+		std::string inputText = "";
+
+		//Enable text input
+		SDL_StartTextInput();
+
 		bool salirEleccionPersonajes = false;
 
 	    static const int FPS = 60;
@@ -64,6 +76,9 @@ void PantallaSeleccionarPersonaje::iniciar() {
 			frameStart = SDL_GetTicks();
 			SDL_Event evento;
 
+			//The rerender text flag
+			bool renderText = false;
+
 			if (SDL_PollEvent(&evento))
 			{
 				if (evento.type == SDL_QUIT){
@@ -71,9 +86,12 @@ void PantallaSeleccionarPersonaje::iniciar() {
 				}
 				botoneraPersonajes->manejarEventoJugador(evento);
 				botoneraPersonajes->actualizarModelo(&salirEleccionPersonajes);
+			    renderText = cajaDeTexto->manejarEvento(&inputText, evento);
 			}
 
 			botoneraPersonajes->dibujar();
+			//TODO falta sincronizar con el screen de la botonera
+			cajaDeTexto->dibujar(renderText, inputText);
 
 	        frameTime = SDL_GetTicks() - frameStart;
 
@@ -81,13 +99,15 @@ void PantallaSeleccionarPersonaje::iniciar() {
 	            SDL_Delay((int)(DELAY_TIME - frameTime));
 		}
 
-	     this->IdPersonaje1Elegido = botoneraPersonajes->getIdContenidoElegidoParaJugador1();
-	     this->IdPersonaje2Elegido = botoneraPersonajes->getIdContenidoElegidoParaJugador2();
+		//Disable text input
+		SDL_StopTextInput();
+
+		this->IdPersonaje1Elegido = botoneraPersonajes->getIdContenidoElegidoParaJugador1();
+		this->IdPersonaje2Elegido = botoneraPersonajes->getIdContenidoElegidoParaJugador2();
 	}
 
 	delete botoneraPersonajes;
-
-
+	delete cajaDeTexto;
 }
 
 string PantallaSeleccionarPersonaje::getIdPersonaje1Elegido() {
