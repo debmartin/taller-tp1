@@ -383,6 +383,7 @@ void Personaje::retroceder(){
 
 void Personaje::victoria(){
 	cambiarEstado(new EnEspera(posicion, VICTORIA, (*cajasPorEstado)[EN_ESPERA]));
+	Sonidos::getInstancia()->reproducirSonido("sonido_finish");
 	bloquearPersonaje(TIEMPO_FESTEJO_VICTORIA);
 }
 
@@ -431,7 +432,7 @@ void Personaje::bebe(){
 }
 
 void Personaje::hacerFatality(){
-
+	cambiarEstado(new Fatality(posicion, EN_ESPERA, (*cajasPorEstado)[EN_ESPERA]));
 }
 
 void Personaje::recibirFatality(Colisionable* enemigo){
@@ -575,6 +576,8 @@ void Personaje::ejecutarCombo(string nombreCombo){
 			deslizar();
 		}else if(nombreCombo == "SubZero Fatality"){
 			//tijera();
+		}else if(nombreCombo == "Babality"){
+			hacerFatality();
 		}
 }
 
@@ -703,6 +706,12 @@ void Personaje::update(Colisionable* enemigo){
     if(estaMuerto() && !estaSaltando() && !estaEnPiso() && enemigo->verEstado()->haciendoFatality()){
     	cout<<"Entra"<<endl;
        recibirFatality(enemigo);
+    }*/
+/*
+    if(enemigo->ejecutandoMovimientoEspecial() && !estaSaltando() && !estaEnPiso()){
+        if(enemigo->verEstado()->haciendoFatality()){
+        	bebe();
+        }
     }*/
 
     if(estaMuerto() && !estaSaltando() && !estaEnPiso()){
