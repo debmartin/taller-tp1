@@ -411,9 +411,9 @@ void ControladorJoystick::clean() {
 
 // RESET VERDADERO. Reseteo los botones menos el indicado por nro_boton.
 void ControladorJoystick::resetBotones(int whichOne, Uint8 nro_boton) {
-        for (Uint8 b = 0; b < 8; b++)
-                if (b != nro_boton)
-                        m_buttonStates_actual[whichOne][b] = false;
+	for (Uint8 b = 0; b < 8; b++)
+		if (b != nro_boton)
+			m_buttonStates_actual[whichOne][b] = false;
 }
 
 string ControladorJoystick::getStringDeNumeroDeTecla(int joy, Uint8 nro_boton) {

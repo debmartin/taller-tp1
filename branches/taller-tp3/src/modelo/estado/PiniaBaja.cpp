@@ -2,7 +2,7 @@
 #include "../Reposo.h"
 
 PiniaBaja::PiniaBaja(Vector2f posInicial, BVH* caja) :
-    Estado(new Reposo(posInicial), PINIA_BAJA, caja){
+    Estado(new Reposo(posInicial), PINIA_BAJA, caja, SALTANDO_VERTICAL){
     ataqueEstado = new Ataque(DANIO_PINIA_BAJA);
 }
 

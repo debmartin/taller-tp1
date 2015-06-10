@@ -9,7 +9,7 @@
 #include "../Reposo.h"
 
 Gancho::Gancho(Vector2f posInicial, BVH* caja) :
-    Estado(new Reposo(posInicial), GANCHO, caja) {
+    Estado(new Reposo(posInicial), GANCHO, caja, AGACHADO) {
 	ataqueEstado = new Ataque(DANIO_GANCHO);
 }
 

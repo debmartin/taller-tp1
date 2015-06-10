@@ -14,11 +14,11 @@
 
 
 Golpeado::Golpeado(Vector2f posInicial, BVH* caja) :
-    Estado(new Reposo(posInicial), RECIBIENDO_GOLPE, caja) {
+    Estado(new Reposo(posInicial), RECIBIENDO_GOLPE, caja, EN_ESPERA) {
 }
 
 Golpeado::Golpeado(Vector2f posInicial, estado_personaje estado, BVH* caja) :
-    Estado(new Reposo(posInicial), estado, caja) {
+    Estado(new Reposo(posInicial), estado, caja, EN_ESPERA) {
 }
 
 Golpeado::~Golpeado()

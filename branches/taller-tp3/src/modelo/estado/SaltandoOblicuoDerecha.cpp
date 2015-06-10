@@ -7,7 +7,7 @@
 
 
 SaltandoOblicuoDerecha::SaltandoOblicuoDerecha(Vector2f posInicial, BVH* caja) :
-    Estado(new MRUV(posInicial, Vector2f(VELOCIDAD_DESP_HORIZONTAL_SALTANDO, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD), SALTANDO_OBLICUO_DERECHA, caja){
+    Estado(new MRUV(posInicial, Vector2f(VELOCIDAD_DESP_HORIZONTAL_SALTANDO, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD), SALTANDO_OBLICUO_DERECHA, caja, PINIA_ALTA){
 }
 
 SaltandoOblicuoDerecha::~SaltandoOblicuoDerecha()

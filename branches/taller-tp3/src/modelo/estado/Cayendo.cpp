@@ -4,7 +4,7 @@
 #define VECTOR_GRAVEDAD Vector2f(0, -2600.f)
 
 Cayendo::Cayendo(Vector2f posInicial, Vector2f velocidad, estado_personaje id, BVH* caja) :
-    Estado(new MRUV(posInicial, velocidad, VECTOR_GRAVEDAD), id, caja) {
+    Estado(new MRUV(posInicial, velocidad, VECTOR_GRAVEDAD), id, caja, PATEANDO_ALTO) {
     //ctor
 }
 

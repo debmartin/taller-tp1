@@ -18,6 +18,7 @@
 #include "estado/Estado.h"
 #include "fisica/BVH.h"
 #include "Personaje.h"
+#include "PersonajeInteligente.h"
 
 class JugadorDef;
 

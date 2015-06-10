@@ -6,7 +6,7 @@
 #define VECTOR_GRAVEDAD Vector2f(0, -2600.f)
 
 SaltandoOblicuoIzquierda::SaltandoOblicuoIzquierda(Vector2f posInicial, BVH* caja) :
-    Estado(new MRUV(posInicial, Vector2f(-VELOCIDAD_DESP_HORIZONTAL_SALTANDO, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD), SALTANDO_OBLICUO_IZQUIERDA, caja){
+    Estado(new MRUV(posInicial, Vector2f(-VELOCIDAD_DESP_HORIZONTAL_SALTANDO, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD), SALTANDO_OBLICUO_IZQUIERDA, caja, PINIA_ALTA){
 	//ctor
 }
 
