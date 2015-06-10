@@ -72,6 +72,8 @@ public:
         void resetBotones(int whichOne, Uint8 nro_boton);
         virtual ~ControladorJoystick();
 
+        void imprimirColaBotones(JoyNumber joy);
+
     	string getStringDeNumeroDeTecla(int joy, Uint8 nro_boton);
     	//string getStringdeNumerodeEje(JoyNumber joy, Uint8 nro_boton);
 
