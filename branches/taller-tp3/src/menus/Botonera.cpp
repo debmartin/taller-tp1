@@ -129,7 +129,7 @@ Botonera::~Botonera() {
 	this->gButtonSpriteSheetTexture->free();
 	this->gButtonSpriteSheetTexture2->free();
 	this->gButtonSpriteSheetTexture3->free();
-	ControladorJoystickMenu::Instance()->clean();
+	//ControladorJoystickMenu::Instance()->clean();
 }
 
 void Botonera::manejarEventoJugador(SDL_Event evento) {
@@ -138,9 +138,9 @@ void Botonera::manejarEventoJugador(SDL_Event evento) {
     TheInputHandlerMenu::Instance()->handleEventsJoysticks(evento);
 
     if(this->tipoDeControl_jugador1 == "JOYSTICK"){
-    	identificarOrdenJoystickPersonaje(JOYSTICK1MENU);
+    	identificarOrdenJoystick(this->posicionEnfocadaDelJugador1, JOYSTICK1MENU);
     	if( this->modo_juego_elegido == "P1_vs_P2"){
-    		identificarOrdenJoystickPersonaje(JOYSTICK2MENU);
+    		identificarOrdenJoystick(this->posicionEnfocadaDelJugador2, JOYSTICK2MENU);
     	}
 	}else{
 		//Si se presiona una tecla
@@ -285,42 +285,23 @@ void Botonera::identificarOrdenPersonaje1() {
 	const Uint8* estadoTeclado = SDL_GetKeyboardState(NULL);
 	if (estadoTeclado[SDL_SCANCODE_LEFT])
 	{
-		if ( this->posicionEnfocadaDelJugador1->getX() > 0 )
-		{
-			this->posicionEnfocadaDelJugador1->deselegir();
-			this->posicionEnfocadaDelJugador1->enfocarIzquierda();
-		}
+		this->posicionarIzquierda(this->posicionEnfocadaDelJugador1);
 	}
 	else if (estadoTeclado[SDL_SCANCODE_RIGHT])
 	{
-		int cant_cols = this->cant_columnas;
-		if ( this->posicionEnfocadaDelJugador1->getX() < (--cant_cols) )
-		{
-			this->posicionEnfocadaDelJugador1->deselegir();
-			this->posicionEnfocadaDelJugador1->enfocarDerecha();
-		}
-
+		this->posicionarDerecha(this->posicionEnfocadaDelJugador1);
 	}
 	else if (estadoTeclado[SDL_SCANCODE_UP])
 	{
-		if ( this->posicionEnfocadaDelJugador1->getY() > 0 )
-		{
-			this->posicionEnfocadaDelJugador1->deselegir();
-			this->posicionEnfocadaDelJugador1->enfocarArriba();
-		}
+		this->posicionarArriba(this->posicionEnfocadaDelJugador1);
 	}
 	else if (estadoTeclado[SDL_SCANCODE_DOWN])
 	{
-		int cant_fils = this->cant_filas;
-		if ( this->posicionEnfocadaDelJugador1->getY() < (--cant_fils) )
-		{
-			this->posicionEnfocadaDelJugador1->deselegir();
-			this->posicionEnfocadaDelJugador1->enfocarAbajo();
-		}
+		this->posicionarAbajo(this->posicionEnfocadaDelJugador1);
 	}
 	else if (estadoTeclado[SDL_SCANCODE_RETURN])
 	{
-		this->posicionEnfocadaDelJugador1->elegir();
+		this->elegir(this->posicionEnfocadaDelJugador1);
 	}
 }
 
@@ -329,65 +310,86 @@ void Botonera::identificarOrdenPersonaje2() {
 	const Uint8* estadoTeclado = SDL_GetKeyboardState(NULL);
 	if (estadoTeclado[SDL_SCANCODE_A])
 	{
-		cout<<"SDL_SCANCODE_A"<<endl;
-		if ( this->posicionEnfocadaDelJugador2->getX() > 0 )
-		{
-			this->posicionEnfocadaDelJugador2->deselegir();
-			this->posicionEnfocadaDelJugador2->enfocarIzquierda();
-		}
+		this->posicionarIzquierda(this->posicionEnfocadaDelJugador2);
 	}
 	else if (estadoTeclado[SDL_SCANCODE_D])
 	{
-		cout<<"SDL_SCANCODE_D"<<endl;
-		int cant_cols = this->cant_columnas;
-		if ( this->posicionEnfocadaDelJugador2->getX() < (--cant_cols) )
-		{
-			this->posicionEnfocadaDelJugador2->deselegir();
-			this->posicionEnfocadaDelJugador2->enfocarDerecha();
-		}
+		this->posicionarDerecha(this->posicionEnfocadaDelJugador2);
 	}
 	else if (estadoTeclado[SDL_SCANCODE_W])
 	{
-		cout<<"SDL_SCANCODE_W"<<endl;
-		if ( this->posicionEnfocadaDelJugador2->getY() > 0 )
-		{
-			this->posicionEnfocadaDelJugador2->deselegir();
-			this->posicionEnfocadaDelJugador2->enfocarArriba();
-		}
+		this->posicionarArriba(this->posicionEnfocadaDelJugador2);
 	}
 	else if (estadoTeclado[SDL_SCANCODE_S])
 	{
-		cout<<"SDL_SCANCODE_S"<<endl;
-		int cant_fils = this->cant_filas;
-		if ( this->posicionEnfocadaDelJugador2->getY() < (--cant_fils) )
-		{
-			this->posicionEnfocadaDelJugador2->deselegir();
-			this->posicionEnfocadaDelJugador2->enfocarAbajo();
-		}
+		this->posicionarAbajo(this->posicionEnfocadaDelJugador2);
 	}
 	else if (estadoTeclado[SDL_SCANCODE_SPACE])
 	{
-		this->posicionEnfocadaDelJugador2->elegir();
+		this->elegir(this->posicionEnfocadaDelJugador2);
 	}
 }
 
-void Botonera::identificarOrdenJoystickPersonaje(JoyNumberMenu numeroJoystick) {
+void Botonera::identificarOrdenJoystick(Posicion* unaPosicionEnfocada, JoyNumberMenu numeroJoystick) {
 	std::map<string, bool>* estadoJoy = TheInputHandlerMenu::Instance()->getJoystickState(numeroJoystick);
 
 	if ( (*estadoJoy)["JOY_IZQUIERDA"] ){
-		Logger::getInstance()->error("Se presiona: Tecla izquierda.");
+		this->posicionarIzquierda(unaPosicionEnfocada);
 
 	}else if ( (*estadoJoy)["JOY_DERECHA"] ){
-		Logger::getInstance()->error("Se presiona: Tecla derecha.");
+		this->posicionarDerecha(unaPosicionEnfocada);
 
 	}else if ( (*estadoJoy)["JOY_ARRIBA"] ){
-		Logger::getInstance()->error("Se presiona: Tecla arriba.");
+		this->posicionarArriba(unaPosicionEnfocada);
 
 	}else if ( (*estadoJoy)["JOY_ABAJO"] ){
-		Logger::getInstance()->error("Se presiona: Tecla abajo.");
+		this->posicionarAbajo(unaPosicionEnfocada);
 
-	}else if((*estadoJoy)["JOY_PINIA_ALTA"]){
-		Logger::getInstance()->error("Se presiona: Seleccion opcion.");
+	}else if((*estadoJoy)["JOY_PINIA_BAJA"]){
+		this->elegir(unaPosicionEnfocada);
 	}
 
+}
+
+void Botonera::posicionarArriba(Posicion* unaPosicionEnfocada) {
+
+	if ( unaPosicionEnfocada->getY() > 0 )
+	{
+		unaPosicionEnfocada->deselegir();
+		unaPosicionEnfocada->enfocarArriba();
+	}
+}
+
+void Botonera::posicionarAbajo(Posicion* unaPosicionEnfocada) {
+
+	int cant_fils = this->cant_filas;
+	if ( unaPosicionEnfocada->getY() < (--cant_fils) )
+	{
+		unaPosicionEnfocada->deselegir();
+		unaPosicionEnfocada->enfocarAbajo();
+	}
+}
+
+void Botonera::posicionarIzquierda(Posicion* unaPosicionEnfocada) {
+
+	if ( unaPosicionEnfocada->getX() > 0 )
+	{
+		unaPosicionEnfocada->deselegir();
+		unaPosicionEnfocada->enfocarIzquierda();
+	}
+}
+
+void Botonera::posicionarDerecha(Posicion* unaPosicionEnfocada) {
+
+	int cant_cols = this->cant_columnas;
+	if ( unaPosicionEnfocada->getX() < (--cant_cols) )
+	{
+		unaPosicionEnfocada->deselegir();
+		unaPosicionEnfocada->enfocarDerecha();
+	}
+}
+
+void Botonera::elegir(Posicion* unaPosicionEnfocada) {
+
+	unaPosicionEnfocada->elegir();
 }

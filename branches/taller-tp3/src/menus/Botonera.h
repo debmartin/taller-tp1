@@ -64,10 +64,16 @@ public:
 	string getIdContenidoElegidoParaJugador2();
 	void identificarOrdenPersonaje1();
 	void identificarOrdenPersonaje2();
-	void identificarOrdenJoystickPersonaje(JoyNumberMenu numeroJoystick);
+	void identificarOrdenJoystick(Posicion* unaPosicionEnfocada, JoyNumberMenu numeroJoystick);
 private:
 	void elegirIdContenidoParaJugador1(string idContenido);
 	void elegirIdContenidoParaJugador2(string idContenido);
+
+	void posicionarArriba(Posicion* unaPosicionEnfocada);
+	void posicionarAbajo(Posicion* unaPosicionEnfocada);
+	void posicionarIzquierda(Posicion* unaPosicionEnfocada);
+	void posicionarDerecha(Posicion* unaPosicionEnfocada);
+	void elegir(Posicion* unaPosicionEnfocada);
 
 };
 
