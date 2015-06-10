@@ -7,6 +7,8 @@
 
 #include "MapaDeCombos.h"
 
+#include <iostream>
+
 MapaDeCombos::MapaDeCombos(vector<Combo*>* lista, int tolerancia):
 	combosJugador(lista), toleranciaDeError(tolerancia) {
 	colaDeTeclas = new deque<string>;

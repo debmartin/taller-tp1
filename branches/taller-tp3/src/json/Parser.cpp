@@ -8,9 +8,11 @@
 #include "Parser.h"
 
 #include <iostream>
+#include <map>
 
 #include "../utils/Logger.h"
 #include "../utils/Util.h"
+#include "ArmaDef.h"
 #include "ColorAlternativoDef.h"
 #include "ControlDef.h"
 #include "EscenarioDef.h"
@@ -19,10 +21,6 @@
 
 
 using std::string;
-
-Parser::Parser() {
-
-}
 
 Parser::Parser(string archivo_json)
 {
@@ -438,4 +436,12 @@ string Parser::getTipoControlJugador1() {
 
 string Parser::getTipoControlJugador2() {
 	return this->parsearJugador(TAG_JUGADOR_2)->getTipoControl();
+}
+
+ControlDef* Parser::getControlJugador1() {
+	return this->parsearJugador(TAG_JUGADOR_1)->getControlDef();
+}
+
+ControlDef* Parser::getControlJugador2() {
+	return this->parsearJugador(TAG_JUGADOR_2)->getControlDef();
 }

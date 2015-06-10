@@ -1,5 +1,6 @@
 #include "ControladorJoystick.h"
 
+#include <SDL2/SDL.h>
 #include <SDL2/SDL_error.h>
 #include <SDL2/SDL_events.h>
 #include <iostream>
@@ -31,9 +32,8 @@ void ControladorJoystick::initialiseJoysticks(
                 std::map<string, int>* correspondenciaTeclasJ2,
                 std::map<string, int>* correspondenciaEjesJ2) {
 
-		//TODO (by Ariel): Lo comente porque el compilador no me reconocia las referencias a estas constantes
-        //if(SDL_WasInit(SDL_INIT_JOYSTICK) == 0)
-          //      SDL_InitSubSystem(SDL_INIT_JOYSTICK);
+        if(SDL_WasInit(SDL_INIT_JOYSTICK) == 0)
+                SDL_InitSubSystem(SDL_INIT_JOYSTICK);
 
         if (correspondenciaTeclasJ1)
                 this->correspondenciaTeclas = correspondenciaTeclasJ1;
