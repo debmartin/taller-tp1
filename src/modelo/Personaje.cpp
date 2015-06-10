@@ -25,6 +25,9 @@
 
 #define TIEMPO_BLOQUEO_PATADA 35
 #define TIEMPO_BLOQUEO_GOLPE 25
+#define TIEMPO_BLOQUEO_DERRIBADO 35
+#define TIEMPO_BLOQUEO_GANCHO 15
+#define TIEMPO_BLOQUEO_PATADA_GIRATORIA 45
 #define TIEMPO_FESTEJO_VICTORIA 200
 #define DISTANCIA_MINIMA 110
 
@@ -193,6 +196,10 @@ bool Personaje::ejecutandoMovimientoEspecial(){
 	return (estado->ejecutandoMovimientoEspecial());
 }
 
+bool Personaje::efectuandoPatadaGiratoria(){
+	return (estado->efectuandoPatadaGiratoria());
+}
+
 bool Personaje::estaInhabilitado(){
     return (estado->Id() == PINIA_ALTA) || (estado->Id() == PINIA_BAJA) || (estado->Id() == GANCHO);
 }
@@ -298,8 +305,8 @@ void Personaje::patadaAltaAgachado(){
 }
 
 void Personaje::patadaGiratoria(){
-	cambiarEstado(new PateandoAltoAgachado(posicion, (*cajasPorEstado)[PATEANDO_ALTO_AGACHADO]));
-	Sonidos::getInstancia()->reproducirSonido("sonido_patada");
+	cambiarEstado(new PatadaGiratoria(posicion, (*cajasPorEstado)[PATEANDO_ALTO_AGACHADO]));
+	bloquearPersonaje(TIEMPO_BLOQUEO_PATADA_GIRATORIA);
 	Logger::getInstance()->debug("Personaje: patada giratoria.");
 }
 
@@ -324,6 +331,7 @@ void Personaje::patadaSaltandoDiagonalIzquierda(){
 void Personaje::gancho(){
 	cambiarEstado(new Gancho(posicion, (*cajasPorEstado)[GANCHO]));
 	Sonidos::getInstancia()->reproducirSonido("sonido_gancho");
+	bloquearPersonaje(TIEMPO_BLOQUEO_GANCHO);
     Logger::getInstance()->debug("Personaje: gancho.");
 }
 
@@ -360,7 +368,12 @@ void Personaje::golpeado(){
 
 void Personaje::derribado(){
 	cambiarEstado(new Golpeado(posicion, DERRIBADO,(*cajasPorEstado)[RECIBIENDO_GOLPE]));
-	bloquearPersonaje(TIEMPO_BLOQUEO_GOLPE);
+	bloquearPersonaje(TIEMPO_BLOQUEO_DERRIBADO);
+}
+
+void Personaje::mareado(){
+	cambiarEstado(new Golpeado(posicion, MAREADO, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
+	bloquearPersonaje(TIEMPO_FESTEJO_VICTORIA);
 }
 
 void Personaje::retroceder(){
@@ -491,6 +504,8 @@ void Personaje::recibirGolpe(Colisionable* otro){
 			}
 			VentanaGrafica::Instance()->vibrar();
 		//Si el oponente pega una patada:
+		}else if(otro->verEstado()->efectuandoPatadaGiratoria()){
+			derribado();
 		}else if(!estaSaltando()){
 			golpeado();
 			Vector2f vectorEmpuje = (direccion == DIRECCION_DERECHA) ? VECTOR_EMPUJE_IZQUIERDA : VECTOR_EMPUJE_DERECHA;
@@ -512,7 +527,8 @@ void Personaje::recibirGolpe(Colisionable* otro){
 	}else{
 		if(pegadoAlOponente(otro)){
 			cout<<"pegado al oponente"<<endl;
-			retroceder();
+			golpeado();
+			//retroceder();
 		}else{
 			cout<<"separado del oponente"<<endl;
 			golpeado();
@@ -541,23 +557,25 @@ void Personaje::arrojarArma(){
 }
 
 void Personaje::ejecutarCombo(string nombreCombo){
-	if(nombreCombo == "SONYA_PODER"){
-		arrojarArma();
-	}else if(nombreCombo == "Ring Toss"){
-		arrojarArma();
-	}else if(nombreCombo == "Leg Grab"){
-		tijera();
-	}else if(nombreCombo == "Square Flight"){
-		tijera();
-	}else if(nombreCombo == "Sonya Fatality"){
-		tijera();
-	}else if(nombreCombo == "Ice Freeze"){
-		arrojarArma();
-	}else if(nombreCombo == "Slide"){
-		deslizar();
-	}else if(nombreCombo == "SubZero Fatality"){
-		tijera();
-	}
+		if(nombreCombo == "SONYA_PODER"){
+			arrojarArma();
+		}else if(nombreCombo == "Ring Toss"){
+			arrojarArma();
+		}else if(nombreCombo == "Leg Grab"){
+			tijera();
+		}else if(nombreCombo == "Patada Giratoria"){
+			patadaGiratoria();
+		}else if(nombreCombo == "Square Flight"){
+			deslizar();
+		}else if(nombreCombo == "Sonya Fatality"){
+			//tijera();
+		}else if(nombreCombo == "Ice Freeze"){
+			arrojarArma();
+		}else if(nombreCombo == "Slide"){
+			deslizar();
+		}else if(nombreCombo == "SubZero Fatality"){
+			//tijera();
+		}
 }
 
 ////////Colision////////
@@ -688,9 +706,8 @@ void Personaje::update(Colisionable* enemigo){
     }*/
 
     if(estaMuerto() && !estaSaltando() && !estaEnPiso()){
-    	cout<<"Entra2"<<endl;
-       //morir();
-    	bebe();
+    	mareado();
+    	//bebe();
     }
     //cout << id << " ~ " << estado->Id() << " ~ " << posicion << endl;
     //cout << *(estado->obtenerCajaColision()) << endl;

@@ -114,7 +114,7 @@
 		    			},
 		    "sprites-gancho": { 
 				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-gancho.png",
-		    		    "cant_fotogramas": 5,
+		    		    "cant_fotogramas": 1,
 		    		    "fps": 10
 		    			},
 		    "sprites-defensa-parado": { 

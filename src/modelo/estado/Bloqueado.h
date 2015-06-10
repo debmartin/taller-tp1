@@ -14,6 +14,7 @@ class Bloqueado : public Estado
         bool ejecutandoMovimientoEspecial();
         bool estaEnPiso();
         bool efectuandoPatadaGiratoria();
+        bool efectuandoGancho();
     protected:
     private:
         Estado* estadoDeBloqueo;
