@@ -87,6 +87,10 @@ bool Estado::efectuandoGancho(){
     return false;
 }
 
+bool Estado::efectuandoPatadaGiratoria(){
+    return false;
+}
+
 bool Estado::haciendoFatality(){
 	return false;
 }

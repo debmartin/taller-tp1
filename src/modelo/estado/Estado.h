@@ -78,6 +78,7 @@ class Estado
         virtual bool estaCaminando();
         virtual bool estaEnCaida();
         virtual bool efectuandoGancho();
+        virtual bool efectuandoPatadaGiratoria();
         virtual bool estaGolpeado();
         virtual bool estaGolpeando();
         virtual bool estaEnPiso();
