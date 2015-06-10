@@ -75,5 +75,6 @@ public:
     	bool cargarMapasDeCombos(MapaDeCombos* mapaJugador1, MapaDeCombos* mapaJugador2);
         bool combo_completado(int numeroJoystick);
         string informar_combo(int numeroJoystick);
+        void buscar_combo(int numeroJoystick);
 };
 typedef ControladorJoystick TheInputHandler;

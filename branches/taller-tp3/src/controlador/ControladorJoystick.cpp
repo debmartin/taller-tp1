@@ -421,3 +421,11 @@ string ControladorJoystick::informar_combo(int numeroJoystick){
 		return this->mapaDeCombosJugador2->informar_combo();
 	}
 }
+
+void ControladorJoystick::buscar_combo(int numeroJoystick){
+	if(numeroJoystick == 0){
+		this->mapaDeCombosJugador1->buscarCombo();
+	}else{
+		this->mapaDeCombosJugador2->buscarCombo();
+	}
+}

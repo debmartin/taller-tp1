@@ -60,6 +60,7 @@ bool ControladorPersonaje::manejar_Evento(SDL_Event &evento){
 void ControladorPersonaje::identificarOrdenJoystickPersonaje(Personaje* personaje, JoyNumber numeroJoystick){
 	std::map<string, bool>* estadoJoy = TheInputHandler::Instance()->getJoystickState(numeroJoystick);
 
+	TheInputHandler::Instance()->buscar_combo(numeroJoystick);
 	if(TheInputHandler::Instance()->combo_completado(numeroJoystick)){
 		personaje->ejecutarCombo(TheInputHandler::Instance()->informar_combo(numeroJoystick));
 		return;

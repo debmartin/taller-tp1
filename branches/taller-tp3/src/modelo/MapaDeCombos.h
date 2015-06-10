@@ -30,7 +30,6 @@ public:
 	void agregar_tecla(string tecla);
 	bool combo_completado();
 	string informar_combo();
-
 	void buscarCombo();
 };
 
