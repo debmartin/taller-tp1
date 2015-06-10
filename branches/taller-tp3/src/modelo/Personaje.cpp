@@ -480,10 +480,11 @@ void Personaje::recibirGolpe(Colisionable* otro){
 			VentanaGrafica::Instance()->vibrar();
 		//Si el oponente pega una patada:
 		}else if(!estaSaltando()){
-			golpeado();
-			Vector2f vectorEmpuje = (direccion == DIRECCION_DERECHA) ? VECTOR_EMPUJE_IZQUIERDA : VECTOR_EMPUJE_DERECHA;
-			if (! (llegoAlLimiteDerecho() || llegoAlLimiteIzquierdo()))
-				empujar(vectorEmpuje);
+			ser_arrojado();
+		//	golpeado();
+		//	Vector2f vectorEmpuje = (direccion == DIRECCION_DERECHA) ? VECTOR_EMPUJE_IZQUIERDA : VECTOR_EMPUJE_DERECHA;
+		//	if (! (llegoAlLimiteDerecho() || llegoAlLimiteIzquierdo()))
+		//		empujar(vectorEmpuje);
 		}else if(estaSaltando() && this->direccion == DIRECCION_IZQUIERDA){
 		    caidaDerecha();
 		    VentanaGrafica::Instance()->vibrar();

@@ -137,6 +137,11 @@
 		    		    "cant_fotogramas": 7,
 		    		    "fps": 10 
 		    			},
+		    "sprites-arrojado": { 
+			        	"imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-arrojado.png",
+		    		    "cant_fotogramas": 6,
+		    		    "fps": 10 
+		    			},
 		    "sprites-tirando-poder": { 
 			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-tirando-poder.png",
 		    		    "cant_fotogramas": 3,
@@ -321,6 +326,11 @@
 		    		    "cant_fotogramas": 7,
 		    		    "fps": 10 
 		    			},
+		    "sprites-arrojado": { 
+			        	"imagen": "RECURSOS/PERSONAJES/SONIA/sonya-arrojado.png",
+		    		    "cant_fotogramas": 7,
+		    		    "fps": 10 
+		    			},
 		    "sprites-tirando-poder": { 
 			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-tirando-poder.png",
 		    		    "cant_fotogramas": 3,
@@ -409,7 +419,7 @@
     ],
     
 	"jugador-1": {
-        "tipo-control": "JOYSTICK",   // "TECLADO" o "JOYSTICK"
+        "tipo-control": "TECLADO",   // "TECLADO" o "JOYSTICK"
         "tolerancia": 1,
         "control":{
         			"JOY_PINIA_ALTA": 0,
@@ -423,7 +433,7 @@
         }
 	},
 	"jugador-2": {
-        "tipo-control": "JOYSTICK",  // "TECLADO" o "JOYSTICK"
+        "tipo-control": "TECLADO",  // "TECLADO" o "JOYSTICK"
         "tolerancia": 1,
         "control":{
         			"JOY_PINIA_ALTA": 0,
