@@ -481,8 +481,7 @@ void Personaje::recibirGolpe(Colisionable* otro){
 			VentanaGrafica::Instance()->vibrar();
 		//Si el oponente pega una patada:
 		}else if(!estaSaltando()){
-			ser_arrojado();
-			//golpeado();
+			golpeado();
 			Vector2f vectorEmpuje = (direccion == DIRECCION_DERECHA) ? VECTOR_EMPUJE_IZQUIERDA : VECTOR_EMPUJE_DERECHA;
 			if (! (llegoAlLimiteDerecho() || llegoAlLimiteIzquierdo()))
 				empujar(vectorEmpuje);
@@ -502,12 +501,10 @@ void Personaje::recibirGolpe(Colisionable* otro){
 	}else{
 		if(pegadoAlOponente(otro)){
 			cout<<"pegado al oponente"<<endl;
-			//retroceder();
-			ser_arrojado();
+			retroceder();
 		}else{
 			cout<<"separado del oponente"<<endl;
-			//golpeado();
-			ser_arrojado();
+			golpeado();
 		}
 	}
     Logger::getInstance()->debug("Personaje: recibiendo golpe.");
