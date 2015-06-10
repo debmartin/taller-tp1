@@ -35,9 +35,29 @@ string MapaDeCombos::informar_combo(){
 	}
 }
 
-bool comapararConCombo(vector<string> teclasCombo, vector<string> teclasActual, int tolerancia) {
-	return true;
+bool comapararConCombo(vector<string> combo, vector<string> eventos, size_t tolerancia) {
+
+	if (tolerancia > combo.size())
+		tolerancia = combo.size();
+
+	size_t cantidadCoincidenciasEncontradas = 0;
+
+	for (size_t i = 0;  i <= (eventos.size() - combo.size()); i++) { // RECORRO EVENTO
+
+		cantidadCoincidenciasEncontradas = 0;
+
+		for (size_t k = i; k < (i + combo.size()); k++) { // RECORRO SUB-EVENTOS
+
+			if (eventos[k] == combo[k-i])
+				cantidadCoincidenciasEncontradas++;
+		}
+
+		if ((combo.size() - cantidadCoincidenciasEncontradas) <= tolerancia)
+			return true;
+	}
+	return false;
 }
+
 
 void MapaDeCombos::buscarCombo() {
 	/*
