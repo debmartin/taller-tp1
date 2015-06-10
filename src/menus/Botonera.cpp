@@ -129,7 +129,6 @@ Botonera::~Botonera() {
 	this->gButtonSpriteSheetTexture->free();
 	this->gButtonSpriteSheetTexture2->free();
 	this->gButtonSpriteSheetTexture3->free();
-	//ControladorJoystickMenu::Instance()->clean();
 }
 
 void Botonera::manejarEventoJugador(SDL_Event evento) {
