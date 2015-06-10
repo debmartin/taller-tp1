@@ -616,9 +616,8 @@ BVH* CargadorDeOjbetos::cargarCajasColisionArmaPersonaje(float ancho_logico_arma
 
 void CargadorDeOjbetos::cargarInfo_desdeMenus() {
 
-	//for test: elejir el tipo de control de los personajes
-	string tipoDeControl_jugador1 = "TECLADO";//"TECLADO";
-	string tipoDeControl_jugador2 = "TECLADO";//"JOYSTICK";
+	string tipoDeControl_jugador1 = parser->getTipoControlJugador1();
+	string tipoDeControl_jugador2 = parser->getTipoControlJugador2();
 
 	PantallaSeleccionarModo* pantallaSeleccionarModo = new PantallaSeleccionarModo(tipoDeControl_jugador1,tipoDeControl_jugador2);
 	pantallaSeleccionarModo->iniciar();

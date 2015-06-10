@@ -101,6 +101,8 @@ public:
 	double getPersonajeDefSpritesAncho() const;
 	void setPersonajeDefSpritesAncho(double personajeSpritesAncho);
 	list<JugadorDef*>* getJugadoresDef() const;
+	string getTipoControlJugador1();
+	string getTipoControlJugador2();
 
 private:
 	void inicializar();
