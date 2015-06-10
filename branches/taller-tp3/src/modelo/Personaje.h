@@ -145,6 +145,7 @@ public:
 	void patadaAlta();
 	void patadaBaja();
 	void patadaAltaAgachado();
+	void patadaGiratoria();
 	void patadaSaltandoVertical();
 	void patadaSaltandoDiagonalDerecha();
 	void patadaSaltandoDiagonalIzquierda();
@@ -163,6 +164,7 @@ public:
 	void morir();
 	void morirEnPiso();
 	void deslizar();
+	void derribado();
 	void tijera();
 	void recibirDanio(int danio);
 	void recibirGolpe(Colisionable* otro);

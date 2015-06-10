@@ -146,6 +146,16 @@ void PersonajeDibujable::seleccionarSprite(){
 				spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_PATEANDO_ALTO_AGACHADO]);
 				spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
 				break;
+			case PATADA_GIRATORIA:
+				this->spritePersonaje->setLoopMode(LOOP_NO_REPEAT);
+				spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_PATADA_GIRATORIA]);
+				spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
+				break;
+			case DERRIBADO:
+				this->spritePersonaje->setLoopMode(LOOP_NO_REPEAT);
+				spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_DERRIBADO]);
+				spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
+				break;
 			case GANCHO:
 				this->spritePersonaje->setLoopMode(LOOP_NO_REPEAT);
 				spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_GANCHO]);
