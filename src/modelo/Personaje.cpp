@@ -523,7 +523,23 @@ void Personaje::arrojarArma(){
 }
 
 void Personaje::ejecutarCombo(string nombreCombo){
-
+	if(nombreCombo == "SONYA_PODER"){
+		arrojarArma();
+	}else if(nombreCombo == "Ring Toss"){
+		arrojarArma();
+	}else if(nombreCombo == "Leg Grab"){
+		tijera();
+	}else if(nombreCombo == "Square Flight"){
+		tijera();
+	}else if(nombreCombo == "Sonya Fatality"){
+		tijera();
+	}else if(nombreCombo == "Ice Freeze"){
+		arrojarArma();
+	}else if(nombreCombo == "Slide"){
+		deslizar();
+	}else if(nombreCombo == "SubZero Fatality"){
+		tijera();
+	}
 }
 
 ////////Colision////////
