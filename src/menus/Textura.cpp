@@ -7,15 +7,14 @@
 
 #include "Textura.h"
 
-#include <SDL2/SDL_error.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_pixels.h>
 #include <SDL2/SDL_rect.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_stdinc.h>
 #include <SDL2/SDL_surface.h>
-#include <cstdio>
 
+#include "../utils/Logger.h"
 #include "../vista/Renderizador.h"
 
 Textura::Textura()
@@ -44,7 +43,7 @@ bool Textura::loadFromFile( std::string path )
 	SDL_Surface* loadedSurface = IMG_Load( path.c_str() );
 	if( loadedSurface == NULL )
 	{
-		printf( "Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError() );
+		Logger::getInstance()->error("SDL_image Error. Unable to load image");
 	}
 	else
 	{
@@ -55,7 +54,7 @@ bool Textura::loadFromFile( std::string path )
         newTexture = SDL_CreateTextureFromSurface( Renderizador::Instance()->getRenderer(), loadedSurface );
 		if( newTexture == NULL )
 		{
-			printf( "Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError() );
+			Logger::getInstance()->error("SDL Error. Unable to create texture from.");
 		}
 		else
 		{
@@ -71,6 +70,43 @@ bool Textura::loadFromFile( std::string path )
 	//Return success
 	mTexture = newTexture;
 	return mTexture != NULL;
+}
+
+bool Textura::loadFromRenderedText(std::string textureText,
+		SDL_Color textColor) {
+
+	//Get rid of preexisting texture
+	this->free();
+	//Render text surface
+	SDL_Surface* textSurface = TTF_RenderText_Solid( this->gFont, textureText.c_str(), textColor );
+
+	if( textSurface != NULL )
+	{
+		//Create texture from surface pixels
+        mTexture = SDL_CreateTextureFromSurface( Renderizador::Instance()->getRenderer(), textSurface );
+		if( mTexture == NULL )
+		{
+			Logger::getInstance()->error("SDL Error. Unable to create texture from rendered text!");
+		}
+		else
+		{
+			//Get image dimensions
+			mWidth = textSurface->w;
+			mHeight = textSurface->h;
+		}
+
+		//Get rid of old surface
+		SDL_FreeSurface( textSurface );
+	}
+	else
+	{
+		Logger::getInstance()->error("SDL_ttf Error. Unable to render text surface");
+	}
+
+
+	//Return success
+	return mTexture != NULL;
+
 }
 
 void Textura::free()
@@ -99,4 +135,8 @@ void Textura::render( int x, int y, SDL_Rect* clip )
 
 	//Render to screen
 	SDL_RenderCopyEx( Renderizador::Instance()->getRenderer(), mTexture, clip, &renderQuad, 0.0, NULL, SDL_FLIP_NONE );
+}
+
+void Textura::setFont(TTF_Font* gFont) {
+	this->gFont = gFont;
 }
