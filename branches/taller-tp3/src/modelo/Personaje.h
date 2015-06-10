@@ -23,6 +23,7 @@
 #include "estado/PatadaAlta.h"
 #include "estado/PatadaBaja.h"
 #include "estado/PateandoAltoAgachado.h"
+#include "estado/PatadaGiratoria.h"
 #include "estado/PateandoSaltandoVertical.h"
 #include "estado/PateandoSaltandoDiagonalDerecha.h"
 #include "estado/PateandoSaltandoDiagonalIzquierda.h"
@@ -124,6 +125,7 @@ public:
 	bool estaMuerto();
 	bool estaEnPiso();
 	bool ejecutandoMovimientoEspecial();
+	bool efectuandoPatadaGiratoria();
 	bool haciendoFatality();
 	bool estaEnCaida();
 	bool estaInhabilitado();
@@ -177,6 +179,7 @@ public:
 	void recibirFatality(Colisionable* enemigo);
 	void bebe();
 	void ser_arrojado();
+	void mareado();
 
 	//Colision
 	virtual void colisionar(Colisionable* otro);

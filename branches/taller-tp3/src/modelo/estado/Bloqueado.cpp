@@ -36,3 +36,7 @@ bool Bloqueado::estaEnPiso(){
 bool Bloqueado::efectuandoPatadaGiratoria(){
 	return (estadoDeBloqueo->efectuandoPatadaGiratoria());
 }
+
+bool Bloqueado::efectuandoGancho(){
+	return (estadoDeBloqueo->efectuandoGancho());
+}
