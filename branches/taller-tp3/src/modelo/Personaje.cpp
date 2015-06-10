@@ -522,7 +522,7 @@ void Personaje::arrojarArma(){
 	Sonidos::getInstancia()->reproducirSonido("sonido_arma");
 }
 
-void Personaje::ejecutarCombo(int numeroCombo){
+void Personaje::ejecutarCombo(string nombreCombo){
 
 }
 

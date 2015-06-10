@@ -107,7 +107,11 @@ void ControladorJoystick::handleEventsJoysticks(SDL_Event event) {
                         this->resetBotones(whichOne, event.jbutton.button);
 
                         //Agregar el nombre de la tecla presionada.
-                        //this->mapaCombos->agregar_evento(stringTecla);
+                        if (whichOne == 0){
+                        	this->mapaDeCombosJugador1->agregar_tecla(getStringDeNumeroDeTecla(whichOne, event.jbutton.button));
+                        }else{
+                        	this->mapaDeCombosJugador2->agregar_tecla(getStringDeNumeroDeTecla(whichOne, event.jbutton.button));
+                        }
                 }
                 if (m_cantidad_de_pulsaciones[whichOne][event.jbutton.button] == 1) {
                         //cout << "1 pulsacion" << endl;
@@ -385,7 +389,7 @@ void ControladorJoystick::resetBotones(int whichOne, Uint8 nro_boton) {
                         m_buttonStates_actual[whichOne][b] = false;
 }
 
-string ControladorJoystick::getStringDeNumeroDeTecla(JoyNumber joy, Uint8 nro_boton) {
+string ControladorJoystick::getStringDeNumeroDeTecla(int joy, Uint8 nro_boton) {
 	// TODO: Corroborar numero de JOY
     for (map<string, int>::iterator it = this->correspondenciaTeclas->begin() ; it != this->correspondenciaTeclas->end(); ++it)
     	if (it->second == nro_boton)
@@ -400,12 +404,20 @@ bool ControladorJoystick::cargarMapasDeCombos(MapaDeCombos* mapaJugador1, MapaDe
 	this->mapaDeCombosJugador2 = mapaJugador2;
 }
 
-/*
+
 //Para manejar mapa de combos.
-bool ControladorJoystick::combo_completado(){
-	return this->mapaCombos->combo_completado();
+bool ControladorJoystick::combo_completado(int numeroJoystick){
+	if(numeroJoystick == 0){
+		return this->mapaDeCombosJugador1->combo_completado();
+	}else{
+		return this->mapaDeCombosJugador2->combo_completado();
+	}
 }
 
-int ControladorJoystick::informar_combo(){
-	return this->mapaCombos->informar_combo();
-}*/
+string ControladorJoystick::informar_combo(int numeroJoystick){
+	if(numeroJoystick == 0){
+		return this->mapaDeCombosJugador1->informar_combo();
+	}else{
+		return this->mapaDeCombosJugador2->informar_combo();
+	}
+}
