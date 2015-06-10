@@ -245,8 +245,10 @@ Jugador* CargadorDeOjbetos::cargarJugador(JugadorDef* jugadorDef)
 		control = new ControlJoystick(jugadorDef->getControlDef());
 	}
 
-
-	Jugador* jugador = new Jugador(personaje, personajeDibujable, control, tipo_control);
+	//Cargo los combos del jugador.
+	vector<Combo*>* vectorDeCombos = cargarCombos(idPersonaje);
+	MapaDeCombos* mapaDeCombos = new MapaDeCombos(vectorDeCombos, jugadorDef->getTolerancia());
+	Jugador* jugador = new Jugador(personaje, personajeDibujable, control, tipo_control, mapaDeCombos);
 
 	return jugador;
 
@@ -256,6 +258,7 @@ Jugador* CargadorDeOjbetos::cargarJugador1() {
 
 	list<JugadorDef*>::iterator it = parser->getJugadoresDef()->begin();
 	JugadorDef* jugadorDef1 = *it;
+
 	jugadorDef1->cargarIdPersonajeDesdeMenu(this->getIdPersonaje1Elegido());
 
 	Jugador* jugador = cargarJugador(jugadorDef1);
@@ -267,6 +270,7 @@ Jugador* CargadorDeOjbetos::cargarJugador2() {
 
 	list<JugadorDef*>::iterator it = parser->getJugadoresDef()->begin();
 	JugadorDef* jugadorDef2 = *++it;
+
 	jugadorDef2->cargarIdPersonajeDesdeMenu(this->getIdPersonaje2Elegido());
 
 	Jugador* jugador = cargarJugador(jugadorDef2);

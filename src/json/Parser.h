@@ -52,6 +52,7 @@
 #define TAG_JUGADOR_1 "jugador-1"
 #define TAG_JUGADOR_2 "jugador-2"
 #define TAG_JUGADOR_TIPO_CONTROL "tipo-control"
+#define TAG_JUGADOR_TOLERANCIA "tolerancia"
 #define TAG_JUGADOR_CONTROL "control"
 #define TAG_JUGADOR_CONTROL_ID "id"
 #define TAG_JUGADOR_CONTROL_JOY_PINIA_ALTA "JOY_PINIA_ALTA"

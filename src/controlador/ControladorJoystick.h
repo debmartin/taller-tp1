@@ -48,8 +48,8 @@ private:
         void refreshJoystickState2();
         void refreshJoystickStateNulo();
 
-    	MapaDeCombos* mapaCombos;
-
+    	MapaDeCombos* mapaDeCombosJugador1;
+    	MapaDeCombos* mapaDeCombosJugador2;
 public:
         void handleEventsJoysticks(SDL_Event e);
         //TODO falta utilizar las correspondencias respectivas al jugador 2. Estan en los ultimos 2 parametros
@@ -72,6 +72,7 @@ public:
     	//string getStringdeNumerodeEje(JoyNumber joy, Uint8 nro_boton);
 
         //Para manejar mapa de combos:
+    	bool cargarMapasDeCombos(MapaDeCombos* mapaJugador1, MapaDeCombos* mapaJugador2);
         bool combo_completado();
         int informar_combo();
 };
