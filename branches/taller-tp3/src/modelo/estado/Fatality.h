@@ -18,6 +18,7 @@ class Fatality : public Estado
         virtual ~Fatality();
         bool estaEsperando();
         bool haciendoFatality();
+        bool ejecutandoMovimientoEspecial();
     protected:
     private:
 };

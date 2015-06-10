@@ -662,6 +662,7 @@ vector<Combo*>* CargadorDeOjbetos::cargarCombos(string nombrePersonaje){
 	vector<string>* vectorTeclasCombo3 = new vector<string>;
 	vector<string>* vectorTeclasCombo4 = new vector<string>;
 	vector<string>* vectorTeclasCombo5 = new vector<string>;
+	vector<string>* vectorTeclasCombo6 = new vector<string>;
 	vector<Combo*>* vectorDeCombos = new vector<Combo*>;
 
 
@@ -687,10 +688,16 @@ vector<Combo*>* CargadorDeOjbetos::cargarCombos(string nombrePersonaje){
 		vectorTeclasCombo4->push_back("JOY_PATADA_BAJA");
 		Combo* combo4 = new Combo(vectorTeclasCombo4, "Patada Giratoria", 4);
 
+		vectorTeclasCombo5->push_back("JOY_DERECHA");
+		vectorTeclasCombo5->push_back("JOY_IZQUIERDA");
+		vectorTeclasCombo5->push_back("JOY_DEFENSA");
+		Combo* combo5 = new Combo(vectorTeclasCombo5, "Babality", 5);
+
 		vectorDeCombos->push_back(combo1);
 		vectorDeCombos->push_back(combo2);
 		vectorDeCombos->push_back(combo3);
 		vectorDeCombos->push_back(combo4);
+		vectorDeCombos->push_back(combo5);
 	}else{
 
 		vectorTeclasCombo1->push_back("JOY_IZQUIERDA");
@@ -719,11 +726,17 @@ vector<Combo*>* CargadorDeOjbetos::cargarCombos(string nombrePersonaje){
 		vectorTeclasCombo5->push_back("JOY_PATADA_BAJA");
 		Combo* combo5 = new Combo(vectorTeclasCombo5, "Patada Giratoria", 5);
 
+		vectorTeclasCombo6->push_back("JOY_DERECHA");
+		vectorTeclasCombo6->push_back("JOY_IZQUIERDA");
+		vectorTeclasCombo6->push_back("JOY_DEFENSA");
+		Combo* combo6 = new Combo(vectorTeclasCombo6, "Babality", 6);
+
 		vectorDeCombos->push_back(combo1);
 		vectorDeCombos->push_back(combo2);
 		vectorDeCombos->push_back(combo3);
 		vectorDeCombos->push_back(combo4);
 		vectorDeCombos->push_back(combo5);
+		vectorDeCombos->push_back(combo6);
 	}
 
 	return vectorDeCombos;
