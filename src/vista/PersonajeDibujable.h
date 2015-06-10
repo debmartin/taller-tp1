@@ -33,6 +33,8 @@ class ArmaDibujable;
 #define ID_PERSONAJE_PATEANDO_ALTO "patada-alta"
 #define ID_PERSONAJE_PATEANDO_BAJO "patada-baja"
 #define ID_PERSONAJE_PATEANDO_ALTO_AGACHADO "patada-alta-agachado"
+#define ID_PERSONAJE_PATADA_GIRATORIA "patada-giratoria"
+#define ID_PERSONAJE_DERRIBADO "derribado"
 #define ID_PERSONAJE_PATEANDO_SALTANDO_VERTICAL "salto-vertical-patada"
 #define ID_PERSONAJE_PATEANDO_SALTANDO_DIAGONAL "salto-diagonal-patada"
 #define ID_PERSONAJE_GANCHO "gancho"

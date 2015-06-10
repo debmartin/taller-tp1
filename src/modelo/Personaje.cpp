@@ -297,6 +297,12 @@ void Personaje::patadaAltaAgachado(){
 	Logger::getInstance()->debug("Personaje: patada alta agachado.");
 }
 
+void Personaje::patadaGiratoria(){
+	cambiarEstado(new PateandoAltoAgachado(posicion, (*cajasPorEstado)[PATEANDO_ALTO_AGACHADO]));
+	Sonidos::getInstancia()->reproducirSonido("sonido_patada");
+	Logger::getInstance()->debug("Personaje: patada giratoria.");
+}
+
 void Personaje::patadaSaltandoVertical(){
     cambiarEstado(new PateandoSaltandoVertical(estado->getTrayectoria(), estado->obtenerTiempoDeCreacion(), (*cajasPorEstado)[PATEANDO_SALTANDO_VERTICAL]));
     Sonidos::getInstancia()->reproducirSonido("sonido_patada");
@@ -349,6 +355,11 @@ void Personaje::caidaIzquierda(){
 
 void Personaje::golpeado(){
 	cambiarEstado(new Golpeado(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
+	bloquearPersonaje(TIEMPO_BLOQUEO_GOLPE);
+}
+
+void Personaje::derribado(){
+	cambiarEstado(new Golpeado(posicion, DERRIBADO,(*cajasPorEstado)[RECIBIENDO_GOLPE]));
 	bloquearPersonaje(TIEMPO_BLOQUEO_GOLPE);
 }
 

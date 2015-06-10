@@ -102,6 +102,16 @@
 		    		    "cant_fotogramas": 1,
 		    		    "fps": 10
 		    			},
+		    "sprites-patada-giratoria": { 
+				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-patada-giratoria.png",
+		    		    "cant_fotogramas": 8,
+		    		    "fps": 10
+		    			},
+		    "sprites-derribado": { 
+				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-derribado.png",
+		    		    "cant_fotogramas": 6,
+		    		    "fps": 10
+		    			},
 		    "sprites-gancho": { 
 				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-gancho.png",
 		    		    "cant_fotogramas": 5,
@@ -289,6 +299,16 @@
 		    "sprites-patada-alta-agachado": { 
 				        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-patada-alta-agachado.png",
 		    		    "cant_fotogramas": 1,
+		    		    "fps": 10
+		    			},
+		    "sprites-patada-giratoria": { 
+				        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-patada-giratoria.png",
+		    		    "cant_fotogramas": 7,
+		    		    "fps": 10
+		    			},
+		    "sprites-derribado": { 
+				        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-derribada.png",
+		    		    "cant_fotogramas": 6,
 		    		    "fps": 10
 		    			},
 		    "sprites-gancho": { 
