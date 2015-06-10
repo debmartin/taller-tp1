@@ -42,6 +42,7 @@ class ArmaDibujable;
 #define ID_PERSONAJE_RECIBIENDO_PINIA_RETROCEDIENDO "recibiendo-pinia-retrocediendo"
 #define ID_PERSONAJE_CAIDA "caida"
 #define ID_PERSONAJE_MAREADO "mareado"
+#define ID_PERSONAJE_ARROJADO "arrojado"
 #define ID_PERSONAJE_TIRANDO_PODER "tirando-poder"
 #define ID_PERSONAJE_BEBE "bebe"
 #define ID_PERSONAJE_VICTORIA "victoria"

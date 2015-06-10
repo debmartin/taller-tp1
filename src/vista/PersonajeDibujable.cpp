@@ -181,6 +181,11 @@ void PersonajeDibujable::seleccionarSprite(){
 				spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_TIRANDO_PODER]);
 				spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
 				break;
+			case ARROJADO:
+				this->spritePersonaje->setLoopMode(LOOP_NO_REPEAT);
+				spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_ARROJADO]);
+				spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
+				break;
 			case VICTORIA:
 				this->spritePersonaje->setLoopMode(LOOP_NO_REPEAT);
 				spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_VICTORIA]);
