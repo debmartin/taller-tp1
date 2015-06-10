@@ -391,7 +391,8 @@ void Personaje::mantenerReposo(){
 
 
 void Personaje::ser_arrojado(){
-	cambiarEstado(new Deslizar(posicion, ARROJADO, (*cajasPorEstado)[SALTANDO_VERTICAL], direccion));
+	cout<<"Ser arrojado"<<endl;
+	cambiarEstado(new Arrojado(posicion, ARROJADO, (*cajasPorEstado)[SALTANDO_VERTICAL], direccion));
 	Logger::getInstance()->debug("Personaje: arrojado.");
 }
 
@@ -481,10 +482,10 @@ void Personaje::recibirGolpe(Colisionable* otro){
 		//Si el oponente pega una patada:
 		}else if(!estaSaltando()){
 			ser_arrojado();
-		//	golpeado();
-		//	Vector2f vectorEmpuje = (direccion == DIRECCION_DERECHA) ? VECTOR_EMPUJE_IZQUIERDA : VECTOR_EMPUJE_DERECHA;
-		//	if (! (llegoAlLimiteDerecho() || llegoAlLimiteIzquierdo()))
-		//		empujar(vectorEmpuje);
+			//golpeado();
+			Vector2f vectorEmpuje = (direccion == DIRECCION_DERECHA) ? VECTOR_EMPUJE_IZQUIERDA : VECTOR_EMPUJE_DERECHA;
+			if (! (llegoAlLimiteDerecho() || llegoAlLimiteIzquierdo()))
+				empujar(vectorEmpuje);
 		}else if(estaSaltando() && this->direccion == DIRECCION_IZQUIERDA){
 		    caidaDerecha();
 		    VentanaGrafica::Instance()->vibrar();
@@ -501,10 +502,12 @@ void Personaje::recibirGolpe(Colisionable* otro){
 	}else{
 		if(pegadoAlOponente(otro)){
 			cout<<"pegado al oponente"<<endl;
-			retroceder();
+			//retroceder();
+			ser_arrojado();
 		}else{
 			cout<<"separado del oponente"<<endl;
-			golpeado();
+			//golpeado();
+			ser_arrojado();
 		}
 	}
     Logger::getInstance()->debug("Personaje: recibiendo golpe.");

@@ -40,6 +40,7 @@
 #include "estado/CaidaIzquierda.h"
 #include "estado/Muerto.h"
 #include "estado/Deslizar.h"
+#include "estado/Arrojado.h"
 #include "../utils/Loggeable.h"
 #include "Observable.h"
 #include "Vector2f.h"
