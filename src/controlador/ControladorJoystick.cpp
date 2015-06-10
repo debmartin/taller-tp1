@@ -150,11 +150,21 @@ void ControladorJoystick::handleEventsJoysticks(SDL_Event event) {
                 if(event.jaxis.axis == (*this->correspondenciaEjes)["JOY_EJE_HORIZONTAL"])
                 {
                         if (event.jaxis.value > m_joystickDeadZone) {
-                        	this->mapaDeCombosJugador1->agregar_tecla("JOY_DERECHA");
+
+                        	if (whichOne == 0)
+                        		this->mapaDeCombosJugador1->agregar_tecla("JOY_DERECHA");
+                        	else
+                        		this->mapaDeCombosJugador2->agregar_tecla("JOY_DERECHA");
+
                             m_joystickValues[whichOne].first->setX(1);
                         }
                         else if(event.jaxis.value < -m_joystickDeadZone) {
-                        	this->mapaDeCombosJugador1->agregar_tecla("JOY_IZQUIERDA");
+
+                        	if (whichOne == 0)
+                        		this->mapaDeCombosJugador1->agregar_tecla("JOY_IZQUIERDA");
+                        	else
+                        		this->mapaDeCombosJugador2->agregar_tecla("JOY_IZQUIERDA");
+
                         	m_joystickValues[whichOne].first->setX(-1);
                         }
                         else
@@ -165,12 +175,20 @@ void ControladorJoystick::handleEventsJoysticks(SDL_Event event) {
                 if(event.jaxis.axis == (*this->correspondenciaEjes)["JOY_EJE_VERTICAL"])
                 {
                         if (event.jaxis.value > m_joystickDeadZone) {
-                                m_joystickValues[whichOne].first->setY(1);
+                        	if (whichOne == 0)
                                 this->mapaDeCombosJugador1->agregar_tecla("JOY_ABAJO");
+                        	else
+                        		this->mapaDeCombosJugador2->agregar_tecla("JOY_ABAJO");
+
+                        	m_joystickValues[whichOne].first->setY(1);
                         }
                         else if(event.jaxis.value < -m_joystickDeadZone) {
-                                m_joystickValues[whichOne].first->setY(-1);
+                        	if (whichOne == 0)
                                 this->mapaDeCombosJugador1->agregar_tecla("JOY_ARRIBA");
+                        	else
+                        		this->mapaDeCombosJugador2->agregar_tecla("JOY_ARRIBA");
+
+                        	m_joystickValues[whichOne].first->setY(-1);
                         }
                         else
                                 m_joystickValues[whichOne].first->setY(0);

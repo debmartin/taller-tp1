@@ -67,7 +67,6 @@ bool comapararConCombo(vector<string> combo, vector<string> eventos, size_t tole
 
 
 void MapaDeCombos::buscarCombo() {
-	cout << "111" << endl;
 	// PARA TODOS LOS COMBOS DEL JUGADOR
 	for (size_t i = 0; i < this->combosJugador->size(); i++) {
 		// OBTENGO COMBO ACTUAL
@@ -77,7 +76,7 @@ void MapaDeCombos::buscarCombo() {
 		vector<string> teclasActual (colaDeTeclas->begin(), colaDeTeclas->end());
 
 		// COMPARO
-		cout << "COMBO-ACTUAL-NOMBRE:" << (*this->combosJugador)[i]->getNombre() << endl;
+		//cout << "COMBO-ACTUAL-NOMBRE:" << (*this->combosJugador)[i]->getNombre() << endl;
 		int cantidadEventosAQuitar = 0;
 		bool comboEncontrado = comapararConCombo(*teclasCombo, teclasActual, 0, cantidadEventosAQuitar);//this->toleranciaDeError);
 		if (comboEncontrado) {
@@ -91,7 +90,6 @@ void MapaDeCombos::buscarCombo() {
 
 
 void MapaDeCombos::imprimir() {
-	cout << "---------------------------------" << endl;
 	vector<string> teclasActual (colaDeTeclas->begin(), colaDeTeclas->end());
 	for (size_t i = 0; i < teclasActual.size(); i++)
 		cout << teclasActual[i] << endl;
