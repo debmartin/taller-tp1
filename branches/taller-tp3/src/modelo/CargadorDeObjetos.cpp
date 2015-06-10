@@ -8,6 +8,7 @@
 #include "CargadorDeObjetos.h"
 
 #include <SDL2/SDL_render.h>
+#include <SDL2/SDL_video.h>
 #include <list>
 #include <utility>
 #include <vector>
@@ -615,12 +616,16 @@ BVH* CargadorDeOjbetos::cargarCajasColisionArmaPersonaje(float ancho_logico_arma
 
 void CargadorDeOjbetos::cargarInfo_desdeMenus() {
 
-	PantallaSeleccionarModo* pantallaSeleccionarModo = new PantallaSeleccionarModo();
+	//for test: elejir el tipo de control de los personajes
+	string tipoDeControl_jugador1 = "TECLADO";//"TECLADO";
+	string tipoDeControl_jugador2 = "TECLADO";//"JOYSTICK";
+
+	PantallaSeleccionarModo* pantallaSeleccionarModo = new PantallaSeleccionarModo(tipoDeControl_jugador1,tipoDeControl_jugador2);
 	pantallaSeleccionarModo->iniciar();
 	string modo_juego_elegido = pantallaSeleccionarModo->getModoDeJuegoElegido();
 	this->modo_juego = modo_juego_elegido;
 
-	PantallaSeleccionarPersonaje* pantallaSeleccionarPersonajes = new PantallaSeleccionarPersonaje(modo_juego_elegido);
+	PantallaSeleccionarPersonaje* pantallaSeleccionarPersonajes = new PantallaSeleccionarPersonaje(modo_juego_elegido,tipoDeControl_jugador1,tipoDeControl_jugador2);
 	pantallaSeleccionarPersonajes->iniciar();
 
 	this->idPersonaje1Elegido = pantallaSeleccionarPersonajes->getIdPersonaje1Elegido();

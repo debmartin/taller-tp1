@@ -20,7 +20,7 @@ private:
 	string IdPersonaje2Elegido;
 	string modo_juego_elegido;
 public:
-	PantallaSeleccionarPersonaje(string modo_juego_elegido);
+	PantallaSeleccionarPersonaje(string modo_juego_elegido, string tipoDeControl_jugador1, string tipoDeControl_jugador2);
 	virtual ~PantallaSeleccionarPersonaje();
 	void iniciar();
 	string getIdPersonaje1Elegido();

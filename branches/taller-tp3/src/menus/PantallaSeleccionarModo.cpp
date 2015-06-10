@@ -18,8 +18,8 @@
 #include "Botonera.h"
 #include "Posicion.h"
 
-PantallaSeleccionarModo::PantallaSeleccionarModo() {
-
+PantallaSeleccionarModo::PantallaSeleccionarModo(string tipoDeControl_jugador1,
+		string tipoDeControl_jugador2):Pantalla(tipoDeControl_jugador1, tipoDeControl_jugador2) {
 }
 
 PantallaSeleccionarModo::~PantallaSeleccionarModo() {
@@ -27,8 +27,6 @@ PantallaSeleccionarModo::~PantallaSeleccionarModo() {
 }
 
 void PantallaSeleccionarModo::iniciar() {
-
-	//TODO falta sincronizar con el renderizador que ya esta iniciado
 
 	//cambio el titulo a pantalla
 	SDL_SetWindowTitle( Renderizador::Instance()->getWindow(), "Eleccion de Modo" );
@@ -38,7 +36,7 @@ void PantallaSeleccionarModo::iniciar() {
 	int screen_width = 640;
 	int screen_height = 480;
 	Posicion* pos_modosDeJuego = new Posicion(screen_width/2-BUTTON_WIDTH/2, screen_height/8);
-	Botonera* botoneraModosDeJuego = new Botonera("modos",3,1,pos_modosDeJuego);
+	Botonera* botoneraModosDeJuego = new Botonera("modos",3,1,pos_modosDeJuego, getTipoDeControlJugador1(), getTipoDeControlJugador2());
 	botoneraModosDeJuego->setPosicionEnfocadaDelJugador1(new Posicion(0,0));
 
 	if( !botoneraModosDeJuego->loadMedia("RECURSOS/grilla1_eleccion_modo.jpg", "RECURSOS/grilla2_eleccion_modo.jpg", "RECURSOS/grilla3_eleccion_modo.jpg") )
@@ -56,8 +54,6 @@ void PantallaSeleccionarModo::iniciar() {
 		while( !salirMenuModosDeJuego && juegoCorriendo )
 		{
 			frameStart = SDL_GetTicks();
-			// INICIO CODIGO USUARIO
-			//manejo el evento
 			SDL_Event evento;
 
 			if (SDL_PollEvent(&evento))
@@ -66,13 +62,8 @@ void PantallaSeleccionarModo::iniciar() {
 					juegoCorriendo = false;
 				}
 
-				//Si se presiona una tecla
-				if ( evento.key.repeat == 0 ){
-					botoneraModosDeJuego->manejarEventoJugador1(evento);
-				}
-
+				botoneraModosDeJuego->manejarEventoJugador(evento);
 				botoneraModosDeJuego->actualizarModelo(&salirMenuModosDeJuego);
-
 			}
 
 			botoneraModosDeJuego->dibujar();

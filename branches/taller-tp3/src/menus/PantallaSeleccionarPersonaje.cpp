@@ -18,7 +18,8 @@
 #include "Botonera.h"
 #include "Posicion.h"
 
-PantallaSeleccionarPersonaje::PantallaSeleccionarPersonaje(string modo_juego_elegido) {
+PantallaSeleccionarPersonaje::PantallaSeleccionarPersonaje(string modo_juego_elegido, string tipoDeControl_jugador1, string tipoDeControl_jugador2):
+																Pantalla(tipoDeControl_jugador1, tipoDeControl_jugador2) {
 	this->modo_juego_elegido = modo_juego_elegido;
 }
 
@@ -41,8 +42,8 @@ void PantallaSeleccionarPersonaje::iniciar() {
 	int botonera_filas = 3;
 	int botonera_colummas = 4;
 	Posicion* pos_botoneraPersonajes = new Posicion(screen_width/2-(BUTTON_WIDTH*botonera_colummas)/2,screen_height/8);
-	Botonera* botoneraPersonajes = new Botonera("personajes", botonera_filas,botonera_colummas,pos_botoneraPersonajes);
-
+	Botonera* botoneraPersonajes = new Botonera("personajes", botonera_filas,botonera_colummas,pos_botoneraPersonajes,
+						getTipoDeControlJugador1(), getTipoDeControlJugador2(), this->modo_juego_elegido);
 	botoneraPersonajes->setPosicionEnfocadaDelJugador1(new Posicion(3,1));
 	botoneraPersonajes->setPosicionEnfocadaDelJugador2(new Posicion(0,1));
 
@@ -61,8 +62,6 @@ void PantallaSeleccionarPersonaje::iniciar() {
 	    while( !salirEleccionPersonajes && juegoCorriendo )
 		{
 			frameStart = SDL_GetTicks();
-			// INICIO CODIGO USUARIO
-			//manejo el evento
 			SDL_Event evento;
 
 			if (SDL_PollEvent(&evento))
@@ -70,15 +69,8 @@ void PantallaSeleccionarPersonaje::iniciar() {
 				if (evento.type == SDL_QUIT){
 					juegoCorriendo = false;
 				}
-
-				//Si se presiona una tecla
-				if ( evento.key.repeat == 0 ){
-					botoneraPersonajes->manejarEventoJugador1(evento);
-					botoneraPersonajes->manejarEventoJugador2(evento);
-				}
-
+				botoneraPersonajes->manejarEventoJugador(evento);
 				botoneraPersonajes->actualizarModelo(&salirEleccionPersonajes);
-
 			}
 
 			botoneraPersonajes->dibujar();

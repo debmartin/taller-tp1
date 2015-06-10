@@ -10,6 +10,8 @@
 
 #include <string>
 
+#include "../controlador/ControladorJoystick.h"
+
 class Posicion;
 
 union SDL_Event;
@@ -40,12 +42,15 @@ private:
 	bool salirMenu_jugador1;
 	bool salirMenu_jugador2;
 	string tipo;
+
+	string tipoDeControl_jugador1;
+	string tipoDeControl_jugador2;
+	string modo_juego_elegido;
 public:
-	Botonera(string tipo, int cant_filas, int cant_columnas, Posicion* posicion);
+	Botonera(string tipo, int cant_filas, int cant_columnas, Posicion* posicion, string tipoDeControl_jugador1, string tipoDeControl_jugador2, string modo_juego_elegido="");
 	bool loadMedia(string path_imagen, string path_imagen2, string path_imagen3);
 	virtual ~Botonera();
-	void manejarEventoJugador1( SDL_Event evento );
-	void manejarEventoJugador2( SDL_Event evento );
+	void manejarEventoJugador( SDL_Event evento );
 	void actualizarModelo(bool* salirMenu);
 	void dibujar();
 
@@ -57,10 +62,13 @@ public:
 
 	string getIdContenidoElegidoParaJugador1();
 	string getIdContenidoElegidoParaJugador2();
-
+	void identificarOrdenPersonaje1();
+	void identificarOrdenPersonaje2();
+	void identificarOrdenJoystickPersonaje(JoyNumber numeroJoystick);
 private:
 	void elegirIdContenidoParaJugador1(string idContenido);
 	void elegirIdContenidoParaJugador2(string idContenido);
+
 };
 
 #endif /* SRC_BOTONERA_H_ */

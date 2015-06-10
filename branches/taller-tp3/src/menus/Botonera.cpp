@@ -12,9 +12,9 @@
 #include <SDL2/SDL_rect.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_scancode.h>
-#include <SDL2/SDL_stdinc.h>
 #include <iostream>
 #include <list>
+#include <map>
 
 #include "../utils/Logger.h"
 #include "../vista/Renderizador.h"
@@ -22,7 +22,9 @@
 #include "Posicion.h"
 #include "Textura.h"
 
-Botonera::Botonera(string tipo, int cant_filas, int cant_columnas, Posicion* posicion) {
+Botonera::Botonera(string tipo, int cant_filas, int cant_columnas, Posicion* posicion,
+					string tipoDeControl_jugador1, string tipoDeControl_jugador2,
+					string modo_juego_elegido) {
 
 	this->tipo = tipo;
 	this->cant_columnas = cant_columnas;
@@ -92,6 +94,12 @@ Botonera::Botonera(string tipo, int cant_filas, int cant_columnas, Posicion* pos
 	this->gButtonSpriteSheetTexture = new Textura();
 	this->gButtonSpriteSheetTexture2 = new Textura();
 	this->gButtonSpriteSheetTexture3 = new Textura();
+
+	this->tipoDeControl_jugador1 = tipoDeControl_jugador1;
+	this->tipoDeControl_jugador2 = tipoDeControl_jugador2;
+	this->modo_juego_elegido = modo_juego_elegido;
+
+	ControladorJoystick::Instance()->initialiseJoysticks();
 }
 
 bool Botonera::loadMedia(string path_imagen1, string path_imagen2, string path_imagen3) {
@@ -124,97 +132,30 @@ Botonera::~Botonera() {
 	this->gButtonSpriteSheetTexture3->free();
 }
 
-void Botonera::manejarEventoJugador1(SDL_Event evento) {
+void Botonera::manejarEventoJugador(SDL_Event evento) {
 
-	const Uint8* estadoTeclado = SDL_GetKeyboardState(NULL);
-	if (estadoTeclado[SDL_SCANCODE_LEFT])
-	{
-		if ( this->posicionEnfocadaDelJugador1->getX() > 0 )
-		{
-			this->posicionEnfocadaDelJugador1->deselegir();
-			this->posicionEnfocadaDelJugador1->enfocarIzquierda();
-		}
-	}
-	else if (estadoTeclado[SDL_SCANCODE_RIGHT])
-	{
-		int cant_cols = this->cant_columnas;
-		if ( this->posicionEnfocadaDelJugador1->getX() < (--cant_cols) )
-		{
-			this->posicionEnfocadaDelJugador1->deselegir();
-			this->posicionEnfocadaDelJugador1->enfocarDerecha();
-		}
+    //Cargo los botones de los joysticks
+    TheInputHandler::Instance()->handleEventsJoysticks(evento);
 
-	}
-	else if (estadoTeclado[SDL_SCANCODE_UP])
-	{
-		if ( this->posicionEnfocadaDelJugador1->getY() > 0 )
+    if(this->tipoDeControl_jugador1 == "JOYSTICK"){
+    	identificarOrdenJoystickPersonaje(JOYSTICK1);
+    	if( this->modo_juego_elegido == "P1_vs_P2"){
+    		identificarOrdenJoystickPersonaje(JOYSTICK2);
+    	}
+	}else{
+		//Si se presiona una tecla
+		if ( evento.key.repeat == 0 )
 		{
-			this->posicionEnfocadaDelJugador1->deselegir();
-			this->posicionEnfocadaDelJugador1->enfocarArriba();
+			identificarOrdenPersonaje1();
+			/* TODO descomentar cuando se implemente la forma de elegirse aleatoriamente
+			 * el personaje 2 cuando se juega con la CPU o es en modo practica
+			 */
+			//if( this->modo_juego_elegido == "P1_vs_P2")
+			//{
+				identificarOrdenPersonaje2();
+			//}
 		}
 	}
-	else if (estadoTeclado[SDL_SCANCODE_DOWN])
-	{
-		int cant_fils = this->cant_filas;
-		if ( this->posicionEnfocadaDelJugador1->getY() < (--cant_fils) )
-		{
-			this->posicionEnfocadaDelJugador1->deselegir();
-			this->posicionEnfocadaDelJugador1->enfocarAbajo();
-		}
-	}
-	else if (estadoTeclado[SDL_SCANCODE_RETURN])
-	{
-		this->posicionEnfocadaDelJugador1->elegir();
-	}
-
-}
-
-void Botonera::manejarEventoJugador2(SDL_Event evento) {
-
-	const Uint8* estadoTeclado = SDL_GetKeyboardState(NULL);
-	if (estadoTeclado[SDL_SCANCODE_A])
-	{
-		cout<<"SDL_SCANCODE_A"<<endl;
-		if ( this->posicionEnfocadaDelJugador2->getX() > 0 )
-		{
-			this->posicionEnfocadaDelJugador2->deselegir();
-			this->posicionEnfocadaDelJugador2->enfocarIzquierda();
-		}
-	}
-	else if (estadoTeclado[SDL_SCANCODE_D])
-	{
-		cout<<"SDL_SCANCODE_D"<<endl;
-		int cant_cols = this->cant_columnas;
-		if ( this->posicionEnfocadaDelJugador2->getX() < (--cant_cols) )
-		{
-			this->posicionEnfocadaDelJugador2->deselegir();
-			this->posicionEnfocadaDelJugador2->enfocarDerecha();
-		}
-	}
-	else if (estadoTeclado[SDL_SCANCODE_W])
-	{
-		cout<<"SDL_SCANCODE_W"<<endl;
-		if ( this->posicionEnfocadaDelJugador2->getY() > 0 )
-		{
-			this->posicionEnfocadaDelJugador2->deselegir();
-			this->posicionEnfocadaDelJugador2->enfocarArriba();
-		}
-	}
-	else if (estadoTeclado[SDL_SCANCODE_S])
-	{
-		cout<<"SDL_SCANCODE_S"<<endl;
-		int cant_fils = this->cant_filas;
-		if ( this->posicionEnfocadaDelJugador2->getY() < (--cant_fils) )
-		{
-			this->posicionEnfocadaDelJugador2->deselegir();
-			this->posicionEnfocadaDelJugador2->enfocarAbajo();
-		}
-	}
-	else if (estadoTeclado[SDL_SCANCODE_SPACE])
-	{
-		this->posicionEnfocadaDelJugador2->elegir();
-	}
-
 }
 
 int Botonera::getCantColumnas() {
@@ -336,4 +277,117 @@ void Botonera::elegirIdContenidoParaJugador1(string idContenido) {
 
 void Botonera::elegirIdContenidoParaJugador2(string idContenido) {
 	this->IdContenidoElegido_paraJugador2 = idContenido;
+}
+
+void Botonera::identificarOrdenPersonaje1() {
+
+	const Uint8* estadoTeclado = SDL_GetKeyboardState(NULL);
+	if (estadoTeclado[SDL_SCANCODE_LEFT])
+	{
+		if ( this->posicionEnfocadaDelJugador1->getX() > 0 )
+		{
+			this->posicionEnfocadaDelJugador1->deselegir();
+			this->posicionEnfocadaDelJugador1->enfocarIzquierda();
+		}
+	}
+	else if (estadoTeclado[SDL_SCANCODE_RIGHT])
+	{
+		int cant_cols = this->cant_columnas;
+		if ( this->posicionEnfocadaDelJugador1->getX() < (--cant_cols) )
+		{
+			this->posicionEnfocadaDelJugador1->deselegir();
+			this->posicionEnfocadaDelJugador1->enfocarDerecha();
+		}
+
+	}
+	else if (estadoTeclado[SDL_SCANCODE_UP])
+	{
+		if ( this->posicionEnfocadaDelJugador1->getY() > 0 )
+		{
+			this->posicionEnfocadaDelJugador1->deselegir();
+			this->posicionEnfocadaDelJugador1->enfocarArriba();
+		}
+	}
+	else if (estadoTeclado[SDL_SCANCODE_DOWN])
+	{
+		int cant_fils = this->cant_filas;
+		if ( this->posicionEnfocadaDelJugador1->getY() < (--cant_fils) )
+		{
+			this->posicionEnfocadaDelJugador1->deselegir();
+			this->posicionEnfocadaDelJugador1->enfocarAbajo();
+		}
+	}
+	else if (estadoTeclado[SDL_SCANCODE_RETURN])
+	{
+		this->posicionEnfocadaDelJugador1->elegir();
+	}
+}
+
+void Botonera::identificarOrdenPersonaje2() {
+
+	const Uint8* estadoTeclado = SDL_GetKeyboardState(NULL);
+	if (estadoTeclado[SDL_SCANCODE_A])
+	{
+		cout<<"SDL_SCANCODE_A"<<endl;
+		if ( this->posicionEnfocadaDelJugador2->getX() > 0 )
+		{
+			this->posicionEnfocadaDelJugador2->deselegir();
+			this->posicionEnfocadaDelJugador2->enfocarIzquierda();
+		}
+	}
+	else if (estadoTeclado[SDL_SCANCODE_D])
+	{
+		cout<<"SDL_SCANCODE_D"<<endl;
+		int cant_cols = this->cant_columnas;
+		if ( this->posicionEnfocadaDelJugador2->getX() < (--cant_cols) )
+		{
+			this->posicionEnfocadaDelJugador2->deselegir();
+			this->posicionEnfocadaDelJugador2->enfocarDerecha();
+		}
+	}
+	else if (estadoTeclado[SDL_SCANCODE_W])
+	{
+		cout<<"SDL_SCANCODE_W"<<endl;
+		if ( this->posicionEnfocadaDelJugador2->getY() > 0 )
+		{
+			this->posicionEnfocadaDelJugador2->deselegir();
+			this->posicionEnfocadaDelJugador2->enfocarArriba();
+		}
+	}
+	else if (estadoTeclado[SDL_SCANCODE_S])
+	{
+		cout<<"SDL_SCANCODE_S"<<endl;
+		int cant_fils = this->cant_filas;
+		if ( this->posicionEnfocadaDelJugador2->getY() < (--cant_fils) )
+		{
+			this->posicionEnfocadaDelJugador2->deselegir();
+			this->posicionEnfocadaDelJugador2->enfocarAbajo();
+		}
+	}
+	else if (estadoTeclado[SDL_SCANCODE_SPACE])
+	{
+		this->posicionEnfocadaDelJugador2->elegir();
+	}
+}
+
+void Botonera::identificarOrdenJoystickPersonaje(JoyNumber numeroJoystick) {
+
+	std::map<string, bool>* estadoJoy = TheInputHandler::Instance()->getJoystickState(numeroJoystick);
+
+	if ( (*estadoJoy)["JOY_IZQUIERDA"] ){
+		Logger::getInstance()->error("Se presiona: Tecla izquierda.");
+
+	}else if ( (*estadoJoy)["JOY_DERECHA"] ){
+		Logger::getInstance()->error("Se presiona: Tecla derecha.");
+
+	}else if ( (*estadoJoy)["JOY_ARRIBA"] ){
+		Logger::getInstance()->error("Se presiona: Tecla arriba.");
+
+	}else if ( (*estadoJoy)["JOY_ABAJO"] ){
+		Logger::getInstance()->error("Se presiona: Tecla abajo.");
+
+	}else if((*estadoJoy)["JOY_PINIA_ALTA"]){
+		Logger::getInstance()->error("Se presiona: Seleccion opcion.");
+	}
+
 }

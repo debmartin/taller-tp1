@@ -8,11 +8,23 @@
 #include "Pantalla.h"
 
 Pantalla::Pantalla() {
-	// TODO Auto-generated constructor stub
 
+}
+
+Pantalla::Pantalla(string tipoDeControl_jugador1,
+		string tipoDeControl_jugador2) {
+	this->tipoDeControl_jugador1 = tipoDeControl_jugador1;
+	this->tipoDeControl_jugador2 = tipoDeControl_jugador2;
 }
 
 Pantalla::~Pantalla() {
 	// TODO Auto-generated destructor stub
 }
 
+string Pantalla::getTipoDeControlJugador1() const {
+	return tipoDeControl_jugador1;
+}
+
+string Pantalla::getTipoDeControlJugador2() const {
+	return tipoDeControl_jugador2;
+}
