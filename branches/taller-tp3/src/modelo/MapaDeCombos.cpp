@@ -35,8 +35,13 @@ string MapaDeCombos::informar_combo(){
 	}
 }
 
-bool comapararConCombo(vector<string> combo, vector<string> eventos, size_t tolerancia) {
+bool comapararConCombo(vector<string> combo, vector<string> eventos, size_t tolerancia, int& cantidadEventosAQuitar) {
 
+	// LA CANTIDAD DE EVENTOS SIEMPRE DEBE SER MAYOR O IGUAL AL TAMANIO DEL COMBO
+	if (combo.size() > eventos.size())
+		return false;
+
+	// LA TOLERANCIA NO PUEDE SER MAYOR AL TAMANIO DEL COMBO
 	if (tolerancia > combo.size())
 		tolerancia = combo.size();
 
@@ -52,31 +57,43 @@ bool comapararConCombo(vector<string> combo, vector<string> eventos, size_t tole
 				cantidadCoincidenciasEncontradas++;
 		}
 
-		if ((combo.size() - cantidadCoincidenciasEncontradas) <= tolerancia)
+		if ((combo.size() - cantidadCoincidenciasEncontradas) <= tolerancia) {
+			cantidadEventosAQuitar = i + combo.size();
 			return true;
+		}
 	}
 	return false;
 }
 
 
 void MapaDeCombos::buscarCombo() {
-	/*
-	for (int i = 0; i < this->combosJugador->size(); i++) {
+	cout << "111" << endl;
+	// PARA TODOS LOS COMBOS DEL JUGADOR
+	for (size_t i = 0; i < this->combosJugador->size(); i++) {
+		// OBTENGO COMBO ACTUAL
 		vector<string>* teclasCombo = (*this->combosJugador)[i]->verTeclas();
+
+		// OBTENGO EVENTOS REALIZADOS POR EL USUARIO
 		vector<string> teclasActual (colaDeTeclas->begin(), colaDeTeclas->end());
 
-		comapararConCombo(*teclasCombo, teclasActual, this->toleranciaDeError);
+		// COMPARO
+		cout << "COMBO-ACTUAL-NOMBRE:" << (*this->combosJugador)[i]->getNombre() << endl;
+		int cantidadEventosAQuitar = 0;
+		bool comboEncontrado = comapararConCombo(*teclasCombo, teclasActual, 0, cantidadEventosAQuitar);//this->toleranciaDeError);
+		if (comboEncontrado) {
+			this->comboEfectuado = true;
+			this->comboActual = (*this->combosJugador)[i]->getNombre();
+			for (int veces = 0; veces < cantidadEventosAQuitar; veces ++)
+				this->quitar_tecla();
+		}
 	}
-	*/
-	//this->comboEfectuado = true;
-	//this->comboActual = "SONYA_PODER";
 }
 
 
 void MapaDeCombos::imprimir() {
 	cout << "---------------------------------" << endl;
 	vector<string> teclasActual (colaDeTeclas->begin(), colaDeTeclas->end());
-	for (int i = 0; i < teclasActual.size(); i++)
+	for (size_t i = 0; i < teclasActual.size(); i++)
 		cout << teclasActual[i] << endl;
 }
 
