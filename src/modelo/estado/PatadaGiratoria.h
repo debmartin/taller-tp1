@@ -19,5 +19,6 @@ class PatadaGiratoria : public Estado
 		bool estaAtacando();
 		bool estaAgachado();
 		bool ejecutandoMovimientoEspecial();
+		bool efectuandoPatadaGiratoria();
 };
 #endif /* SRC_MODELO_ESTADO_PATADAGIRATORIA_H_ */
