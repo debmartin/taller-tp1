@@ -1,16 +1,16 @@
 #include "Estado.h"
 #include <SDL2/SDL_timer.h>
 
-Estado::Estado(Trayectoria* trayectoriaInicial, estado_personaje id, BVH* caja) :
+Estado::Estado(Trayectoria* trayectoriaInicial, estado_personaje id, BVH* caja, estado_personaje estadoContrario) :
     trayectoria(trayectoriaInicial), ataqueEstado(NULL),
-    tCreacion(((float)(SDL_GetTicks()))/1000.0f), id(id), cajas(caja), ataqueEfectuado(false) {
+    tCreacion(((float)(SDL_GetTicks()))/1000.0f), id(id), cajas(caja), ataqueEfectuado(false), estadoContrarioId(estadoContrario) {
     Vector2f posInicial = trayectoria->getPosicion(0);
     caja->setPosicion(posInicial);
 }
 
-Estado::Estado(Trayectoria* trayectoriaInicial, float tiempoCreacion, estado_personaje id, BVH* caja) :
+Estado::Estado(Trayectoria* trayectoriaInicial, float tiempoCreacion, estado_personaje id, BVH* caja, estado_personaje estadoContrario) :
     trayectoria(trayectoriaInicial), ataqueEstado(NULL),
-    tCreacion(tiempoCreacion), id(id), cajas(caja) {
+    tCreacion(tiempoCreacion), id(id), cajas(caja), estadoContrarioId(estadoContrario) {
     //ctor
 }
 
@@ -155,4 +155,12 @@ void Estado::efectuarAtaque() {
 
 bool Estado::ataqueFueEfectuado() {
     return ataqueEfectuado;
+}
+
+bool Estado::estaDesplazandoVertical() {
+    return false;
+}
+
+estado_personaje Estado::obtenerEstadoContrario(){
+    return estadoContrarioId;
 }

@@ -14,15 +14,15 @@
 
 
 CaidaDerecha::CaidaDerecha(Vector2f posInicial, BVH* caja) :
-    Estado(new MRUV(posInicial, Vector2f(VELOCIDAD_DESP_HORIZONTAL_SALTANDO, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD), CAIDA_DERECHA, caja){
+    Estado(new MRUV(posInicial, Vector2f(VELOCIDAD_DESP_HORIZONTAL_SALTANDO, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD), CAIDA_DERECHA, caja, EN_ESPERA){
 }
 
 CaidaDerecha::CaidaDerecha(Vector2f posInicial, float velocidadEnY, BVH* caja) :
-    Estado(new MRUV(posInicial, Vector2f(VELOCIDAD_DESP_HORIZONTAL_SALTANDO, velocidadEnY), VECTOR_GRAVEDAD), CAIDA_DERECHA, caja){
+    Estado(new MRUV(posInicial, Vector2f(VELOCIDAD_DESP_HORIZONTAL_SALTANDO, velocidadEnY), VECTOR_GRAVEDAD), CAIDA_DERECHA, caja, EN_ESPERA){
 }
 
 CaidaDerecha::CaidaDerecha(Vector2f posInicial, estado_personaje estado , BVH* caja) :
-    Estado(new MRUV(posInicial, Vector2f(VELOCIDAD_DESP_HORIZONTAL_SALTANDO, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD), estado, caja){
+    Estado(new MRUV(posInicial, Vector2f(VELOCIDAD_DESP_HORIZONTAL_SALTANDO, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD), estado, caja, EN_ESPERA){
 }
 
 CaidaDerecha::~CaidaDerecha()

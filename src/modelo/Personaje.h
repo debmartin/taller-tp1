@@ -75,6 +75,8 @@ private:
 	bool estaViviendo;
 
 public:
+    typedef void (Personaje::*Funcion) (void);
+
 	Personaje(
 			string id,
 			double ancho,
@@ -95,8 +97,9 @@ public:
 	int getEnergia();
 	void agregarArma(Objeto* unArma);
 	Objeto* getArma();
+	void obtenerAntidoto(Personaje* otro);
 
-	void update(Colisionable* enemigo);
+	virtual void update(Colisionable* enemigo);
 	void agregarObservador(Observador* unObservador);
 	void notificarObservadores();
 	Vector2f obtenerPosicionEnVentana();

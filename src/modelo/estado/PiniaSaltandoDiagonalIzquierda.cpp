@@ -13,7 +13,7 @@
 #define VECTOR_GRAVEDAD Vector2f(0, -2600.f)
 
 PiniaSaltandoDiagonalIzquierda::PiniaSaltandoDiagonalIzquierda(Trayectoria* trayectoriaActual, float tiempoCreacion, BVH* caja) :
-    Estado(trayectoriaActual, tiempoCreacion, PINIA_SALTANDO_DIAGONAL_IZQUIERDA, caja){
+    Estado(trayectoriaActual, tiempoCreacion, PINIA_SALTANDO_DIAGONAL_IZQUIERDA, caja, DEFENDIENDO){
 	ataqueEstado = new Ataque(DANIO_PINIA_SALTANDO);
 }
 

@@ -62,8 +62,8 @@ typedef enum estado_personaje
 class Estado
 {
     public:
-        Estado(Trayectoria* trayectoriaInicial, estado_personaje id, BVH* caja);
-        Estado(Trayectoria* trayectoriaInicial, float tiempoCreacion, estado_personaje id, BVH* caja);
+        Estado(Trayectoria* trayectoriaInicial, estado_personaje id, BVH* caja, estado_personaje estadoContrario);
+        Estado(Trayectoria* trayectoriaInicial, float tiempoCreacion, estado_personaje id, BVH* caja, estado_personaje estadoContrario);
         virtual ~Estado();
         virtual bool estaAtacando();
         virtual bool estaDefendiendo();
@@ -82,6 +82,7 @@ class Estado
         virtual bool estaGolpeando();
         virtual bool estaEnPiso();
         virtual bool haciendoFatality();
+        virtual bool estaDesplazandoVertical();
 
         Ataque* obtenerAtaque();
         Vector2f obtenerProximaPosicion();
@@ -99,6 +100,7 @@ class Estado
         double calcularAlto();
         void efectuarAtaque();
         bool ataqueFueEfectuado();
+        estado_personaje obtenerEstadoContrario();
     protected:
         Ataque* ataqueEstado;
     private:
@@ -107,6 +109,7 @@ class Estado
         estado_personaje id;
         BVH* cajas;
         bool ataqueEfectuado;
+        estado_personaje estadoContrarioId;
 };
 
 #endif // ESTADO_H

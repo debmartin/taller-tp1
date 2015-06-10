@@ -9,7 +9,7 @@
 #include "../Reposo.h"
 
 PatadaAlta::PatadaAlta(Vector2f posInicial, BVH* caja) :
-    Estado(new Reposo(posInicial), PATEANDO_ALTO, caja) {
+    Estado(new Reposo(posInicial), PATEANDO_ALTO, caja, AGACHADO) {
     ataqueEstado = new Ataque(DANIO_PATADA_ALTA);
 }
 

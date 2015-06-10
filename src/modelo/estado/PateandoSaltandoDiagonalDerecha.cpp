@@ -15,12 +15,12 @@
 #define VECTOR_GRAVEDAD Vector2f(0, -2600.f)
 
 PateandoSaltandoDiagonalDerecha::PateandoSaltandoDiagonalDerecha(Trayectoria* trayectoriaActual, float tiempoDeCreacion, BVH* caja) :
-	Estado(trayectoriaActual, tiempoDeCreacion, PATEANDO_SALTANDO_DIAGONAL_DERECHA, caja) {
+	Estado(trayectoriaActual, tiempoDeCreacion, PATEANDO_SALTANDO_DIAGONAL_DERECHA, caja, DEFENDIENDO_AGACHADO) {
 	ataqueEstado = new Ataque(DANIO_PATADA_SALTANDO);
 }
 
 PateandoSaltandoDiagonalDerecha::PateandoSaltandoDiagonalDerecha(Vector2f posInicial, BVH* caja) :
-	Estado(new MRUV(posInicial, Vector2f(VELOCIDAD_DESP_HORIZONTAL_SALTANDO, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD), PATEANDO_SALTANDO_DIAGONAL_DERECHA, caja) {
+	Estado(new MRUV(posInicial, Vector2f(VELOCIDAD_DESP_HORIZONTAL_SALTANDO, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD), PATEANDO_SALTANDO_DIAGONAL_DERECHA, caja, DEFENDIENDO_AGACHADO) {
 	ataqueEstado = new Ataque(DANIO_PATADA_SALTANDO);
 }
 

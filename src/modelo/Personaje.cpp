@@ -616,15 +616,8 @@ void Personaje::volverAlPiso(float distanciaAObjetivo){
     }
 }
 
-float calcularDistancia(float pos1, float pos2, float ancho) {
-        float distancia = pos1 - pos2;
-        if (distancia < 0) distancia = -distancia;
-
-    return distancia + ancho;
-}
-
 void Personaje::calcularPosicionSinColision(Colisionable* enemigo){
-        float distanciaAObjetivo = calcularDistancia(posicionCandidata.X(), enemigo->getPosicion().X(), estado->calcularAncho());
+	float distanciaAObjetivo = calcularProximaDistancia(enemigo);
 
         if ((estado->Id() == SALTANDO_VERTICAL || posicionable->esValida(posicionCandidata, estado->calcularAncho())) && posicionCandidata.Y() >= posicionInicial.Y()) {
         if (! posicionable->enExtremos(distanciaAObjetivo, estado->calcularAncho())){
@@ -667,7 +660,7 @@ void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
     if (estaCaminando()){
         arrastrar(enemigo);
     } else if (estaSaltando()) {
-        float distanciaAObjetivo = calcularDistancia(posicionCandidata.X(), enemigo->getPosicion().X(), estado->calcularAncho());
+        float distanciaAObjetivo = calcularDistancia(enemigo);
 
         if (posicionable->esValida(posicionCandidata, estado->calcularAncho())){
             posicion = posicionCandidata;
@@ -726,7 +719,7 @@ float Personaje::getAltoEnvolvente() {
 }
 
 bool Personaje::pegadoAlOponente(Colisionable* enemigo){
-	float distanciaAObjetivo = calcularDistancia(posicionCandidata.X(), enemigo->getPosicion().X(), estado->calcularAncho());
+	float distanciaAObjetivo = calcularProximaDistancia(enemigo);
 	cout<<"Distancia al oponente:"<<distanciaAObjetivo<<endl;
 	if(distanciaAObjetivo <= DISTANCIA_MINIMA)
 		return true;
@@ -755,4 +748,57 @@ void Personaje::definirPosicionIncial_enX(double x)
 	Vector2f posicionIncial(x,y);
 	this->posicion = posicionIncial;
 	this->posicionInicial = posicionIncial;
+}
+
+void Personaje::obtenerAntidoto(Personaje* otro){
+    switch(estado->obtenerEstadoContrario()) {
+        case CAMINANDO_DERECHA:
+            return (otro->caminarDerecha());
+        case CAMINANDO_IZQUIERDA:
+            return (otro->caminarIzquierda());
+        case EN_ESPERA:
+            return (otro->mantenerReposo());
+        case SALTANDO_VERTICAL:
+            return (otro->saltarVertical());
+        case SALTANDO_OBLICUO_DERECHA:
+            return (otro->saltarOblicuoDerecha());
+        case SALTANDO_OBLICUO_IZQUIERDA:
+            return (otro->saltarOblicuoIzquierda());
+        case AGACHADO:
+            return (otro->agacharse());
+        case DEFENDIENDO:
+            return (otro->defender());
+        case DEFENDIENDO_AGACHADO:
+            return (otro->defenderAgachado());
+        case PINIA_ALTA:
+            return (otro->piniaAlta());
+        case PINIA_BAJA:
+            return (otro->piniaBaja());
+        case PINIA_SALTANDO_DIAGONAL_DERECHA:
+            return (otro->piniaSaltandoDiagonalDerecha());
+        case PINIA_SALTANDO_DIAGONAL_IZQUIERDA:
+            return (otro->piniaSaltandoDiagonalIzquierda());
+        case PINIA_SALTANDO_VERTICAL:
+            return (otro->piniaSaltandoVertical());
+        case PATEANDO_ALTO:
+            return (otro->patadaAlta());
+        case PATEANDO_BAJO:
+            return (otro->patadaBaja());
+        case PATEANDO_SALTANDO_DIAGONAL_DERECHA:
+            return (otro->patadaSaltandoDiagonalDerecha());
+        case PATEANDO_SALTANDO_DIAGONAL_IZQUIERDA:
+            return (otro->patadaSaltandoDiagonalIzquierda());
+        case PATEANDO_SALTANDO_VERTICAL:
+            return (otro->patadaSaltandoVertical());
+        case PATEANDO_ALTO_AGACHADO:
+            return (otro->patadaAltaAgachado());
+        case GANCHO:
+            return (otro->gancho());
+        case CAIDA_DERECHA:
+            return (otro->caidaDerecha());
+        case CAIDA_IZQUIERDA:
+            return (otro->caidaIzquierda());
+        default:
+            otro->mantenerReposo();
+    }
 }

@@ -13,7 +13,7 @@
 #define VECTOR_GRAVEDAD Vector2f(0, -2600.f)
 
 PateandoSaltandoVertical::PateandoSaltandoVertical(Trayectoria* trayectoriaActual, float tiempoDeCreacion, BVH* caja) :
-	Estado(trayectoriaActual, tiempoDeCreacion, PATEANDO_SALTANDO_VERTICAL, caja) {
+	Estado(trayectoriaActual, tiempoDeCreacion, PATEANDO_SALTANDO_VERTICAL, caja, DEFENDIENDO_AGACHADO) {
 	ataqueEstado = new Ataque(DANIO_PATADA_SALTANDO);
 }
 

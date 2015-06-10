@@ -6,8 +6,7 @@
 #include "fisica/BVH.h"
 #include "estado/Estado.h"
 
-class Colisionable
-{
+class Colisionable {
     public:
         virtual void colisionar(Colisionable* otro);
         virtual bool vaAColisionar(Colisionable* otro, double anchoAct, double altoAct);
@@ -22,7 +21,11 @@ class Colisionable
         virtual bool estaAtacando() = 0;
         virtual bool estaInhabilitado();
         virtual bool ejecutandoMovimientoEspecial();
+        float calcularDistancia(Colisionable* otro);
+        bool estaCerca(Colisionable* otro);
         //virtual bool haciendoFatality();
+        float calcularProximaDistancia(Colisionable* otro);
+
 
     protected:
         Colisionable(Vector2f posicionIn, double anchoIn, double altoIn);

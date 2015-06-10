@@ -3,7 +3,7 @@
 #include "../Reposo.h"
 
 Agachado::Agachado(Vector2f posInicial, BVH* caja) :
-    Estado(new Reposo(posInicial), AGACHADO, caja) {
+    Estado(new Reposo(posInicial), AGACHADO, caja, PATEANDO_BAJO) {
     //ctor
 }
 

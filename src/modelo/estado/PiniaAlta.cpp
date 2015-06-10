@@ -3,7 +3,7 @@
 #include "../Reposo.h"
 
 PiniaAlta::PiniaAlta(Vector2f posInicial, BVH* caja) :
-    Estado(new Reposo(posInicial), PINIA_ALTA, caja){
+    Estado(new Reposo(posInicial), PINIA_ALTA, caja, PATEANDO_BAJO){
     ataqueEstado = new Ataque(DANIO_PINIA_ALTA);
 }
 

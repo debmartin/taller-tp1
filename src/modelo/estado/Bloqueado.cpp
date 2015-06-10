@@ -3,7 +3,7 @@
 #include "Estado.h"
 
 Bloqueado::Bloqueado(Estado* estadoActual) :
-    Estado(estadoActual->getTrayectoria(), estadoActual->Id(), estadoActual->obtenerCajaColision()){
+    Estado(estadoActual->getTrayectoria(), estadoActual->Id(), estadoActual->obtenerCajaColision(), EN_ESPERA){
 	if(estadoActual->estaAtacando()){
 		ataqueEstado = new Ataque(estadoActual->obtenerAtaque()->obtenerDanio());
 	}

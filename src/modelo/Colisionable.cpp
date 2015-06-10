@@ -31,7 +31,7 @@ Vector2f Colisionable::getPosicion(){
 
 bool Colisionable::vaAColisionar(Colisionable* otro, double anchoAct, double altoAct){
 	ancho = anchoAct;
-	alto = anchoAct;
+	alto = altoAct;
     int miMitadAncho = ancho/2.0, otroMitadAncho = otro->ancho/2.0;
     return (((posicionAnterior.X() < otro->posicion.X() && posicionCandidata.X() >= otro->posicion.X()) ||
              (posicionAnterior.X() > otro->posicion.X() && posicionCandidata.X() <= otro->posicion.X())) &&
@@ -52,4 +52,22 @@ bool Colisionable::estaInhabilitado(){
 
 bool Colisionable::ejecutandoMovimientoEspecial(){
     return false;
+}
+
+float Colisionable::calcularDistancia(Colisionable* otro) {
+	float distancia = posicion.X() - otro->posicion.X();
+	if (distancia < 0) distancia = -distancia;
+
+    return distancia + ancho;
+}
+
+float Colisionable::calcularProximaDistancia(Colisionable* otro) {
+	float distancia = posicionCandidata.X() - otro->posicion.X();
+	if (distancia < 0) distancia = -distancia;
+
+    return distancia + ancho;
+}
+
+bool Colisionable::estaCerca(Colisionable* otro){
+    return calcularDistancia(otro) <= 2*ancho;
 }

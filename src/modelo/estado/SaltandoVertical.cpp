@@ -6,7 +6,7 @@
 #define VECTOR_GRAVEDAD Vector2f(0, -2600.f)
 
 SaltandoVertical::SaltandoVertical(Vector2f posInicial, BVH* caja) :
-    Estado(new MRUV(posInicial, Vector2f(VELOCIDAD_NULA, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD), SALTANDO_VERTICAL, caja){
+    Estado(new MRUV(posInicial, Vector2f(VELOCIDAD_NULA, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD), SALTANDO_VERTICAL, caja, PATEANDO_SALTANDO_VERTICAL){
     //ctor
 }
 

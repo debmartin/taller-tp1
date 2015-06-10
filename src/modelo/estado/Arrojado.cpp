@@ -14,7 +14,7 @@
 #define D_IZQUIERDA 1
 
 Arrojado::Arrojado(Vector2f posInicial, estado_personaje estado, BVH* caja, bool direccion) :
-	Estado((Trayectoria*) new MRU(posInicial, Vector2f(VELOCIDAD_DESP_HORIZONTAL_CAMINANDO, VELOCIDAD_NULA)), estado, caja) {
+	Estado((Trayectoria*) new MRU(posInicial, Vector2f(VELOCIDAD_DESP_HORIZONTAL_CAMINANDO, VELOCIDAD_NULA)), estado, caja, EN_ESPERA) {
 	if(direccion == D_IZQUIERDA)
 	    getTrayectoria()->reducirVelocidad(Vector2f(-VELOCIDAD_DESP_HORIZONTAL_CAMINANDO, VELOCIDAD_NULA));
 }

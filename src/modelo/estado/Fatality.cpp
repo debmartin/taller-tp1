@@ -9,7 +9,7 @@
 #include "../Reposo.h"
 
 Fatality::Fatality(Vector2f posInicial, estado_personaje estado, BVH* caja) :
-    Estado(new Reposo(posInicial), estado, caja) {
+    Estado(new Reposo(posInicial), estado, caja, EN_ESPERA) {
     Logger::getInstance()->debug("Personaje: en fatality.");
 }
 

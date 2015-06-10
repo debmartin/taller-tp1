@@ -2,7 +2,7 @@
 #include "../Reposo.h"
 
 Defendiendo::Defendiendo(Vector2f posInicial, BVH* caja) :
-    Estado(new Reposo(posInicial), DEFENDIENDO, caja) {
+    Estado(new Reposo(posInicial), DEFENDIENDO, caja, GANCHO) {
     //ctor
 }
 
