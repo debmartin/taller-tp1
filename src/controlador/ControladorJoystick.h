@@ -1,10 +1,14 @@
-#include "SDL2/SDL.h"
-#include <vector>
-#include <iostream>
+#include <SDL2/SDL_joystick.h>
+#include <SDL2/SDL_stdinc.h>
 #include <map>
+#include <string>
+#include <utility>
+#include <vector>
+
 #include "Vector2D.h"
 
-#include "../modelo/MapaDeCombos.h"
+class MapaDeCombos;
+union SDL_Event;
 
 using namespace std;
 

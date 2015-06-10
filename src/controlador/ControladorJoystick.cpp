@@ -2,9 +2,9 @@
 
 #include <SDL2/SDL_error.h>
 #include <SDL2/SDL_events.h>
-#include <SDL2/SDL_joystick.h>
-#include <string>
-#include <utility>
+#include <iostream>
+
+#include "../modelo/MapaDeCombos.h"
 
 #define CANTIDAD_BOTONES 8
 
@@ -31,8 +31,9 @@ void ControladorJoystick::initialiseJoysticks(
                 std::map<string, int>* correspondenciaTeclasJ2,
                 std::map<string, int>* correspondenciaEjesJ2) {
 
-        if(SDL_WasInit(SDL_INIT_JOYSTICK) == 0)
-                SDL_InitSubSystem(SDL_INIT_JOYSTICK);
+		//TODO (by Ariel): Lo comente porque el compilador no me reconocia las referencias a estas constantes
+        //if(SDL_WasInit(SDL_INIT_JOYSTICK) == 0)
+          //      SDL_InitSubSystem(SDL_INIT_JOYSTICK);
 
         if (correspondenciaTeclasJ1)
                 this->correspondenciaTeclas = correspondenciaTeclasJ1;
