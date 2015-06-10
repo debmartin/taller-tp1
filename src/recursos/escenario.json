@@ -104,7 +104,7 @@
 		    			},
 		    "sprites-patada-giratoria": { 
 				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-patada-giratoria.png",
-		    		    "cant_fotogramas": 8,
+		    		    "cant_fotogramas": 7,
 		    		    "fps": 10
 		    			},
 		    "sprites-derribado": { 
