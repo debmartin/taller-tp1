@@ -56,7 +56,6 @@ bool ControladorPersonaje::manejar_Evento(SDL_Event &evento){
 void ControladorPersonaje::identificarOrdenJoystickPersonaje(Personaje* personaje, JoyNumber numeroJoystick){
 	std::map<string, bool>* estadoJoy = TheInputHandler::Instance()->getJoystickState(numeroJoystick);
 
-	cout << "BOTON-PINIA-ALTA:" << (*estadoJoy)["JOY_PINIA_ALTA"] << endl;
 	if (personaje->estaSaltando()){
 		if(((*estadoJoy)["JOY_PINIA_ALTA"] || (*estadoJoy)["JOY_PINIA_BAJA"]) && personaje->estaSaltandoVertical()){
 			personaje->piniaSaltandoVertical();
@@ -97,7 +96,6 @@ void ControladorPersonaje::identificarOrdenJoystickPersonaje(Personaje* personaj
 	        Logger::getInstance()->debug("Se presiona: Tecla abajo.");
 	        personaje->agacharse();
 	    }else if((*estadoJoy)["JOY_PINIA_ALTA"]){
-	    	cout << "PINIA-ALTA-JOYSTICK" << endl;
 	        personaje->piniaAlta();
 	    }else if((*estadoJoy)["JOY_PATADA_ALTA"]){
 	        personaje->patadaAlta();

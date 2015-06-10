@@ -94,16 +94,13 @@ void ControladorJoystick::handleEventsJoysticks(SDL_Event event) {
 		int whichOne = event.jaxis.which;
 
 		if (m_cantidad_de_pulsaciones[whichOne][event.jbutton.button] == 0) {
-			cout << "0 pulsaciones" << endl;
 			m_buttonStates_actual[whichOne][event.jbutton.button] = true;
 			this->resetBotones(whichOne, event.jbutton.button);
 		}
 		if (m_cantidad_de_pulsaciones[whichOne][event.jbutton.button] == 1) {
-			cout << "1 pulsacion" << endl;
 			m_buttonStates_actual[whichOne][event.jbutton.button] = false;
 		}
 		if (m_cantidad_de_pulsaciones[whichOne][event.jbutton.button] > 1) {
-			cout << "2 pulsaciones" << endl;
 			m_buttonStates_actual[whichOne][event.jbutton.button] = false;
 		}
 
@@ -116,7 +113,6 @@ void ControladorJoystick::handleEventsJoysticks(SDL_Event event) {
 
 
 	else if(event.type == SDL_JOYBUTTONUP) {
-		cout << "FALLA" << endl;
 		int whichOne = event.jaxis.which;
 		m_cantidad_de_pulsaciones[whichOne][event.jbutton.button] = 0;
 		m_buttonStates_actual[whichOne][event.jbutton.button] = false;
