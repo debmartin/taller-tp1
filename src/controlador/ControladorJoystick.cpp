@@ -137,7 +137,7 @@ void ControladorJoystick::handleEventsJoysticks(SDL_Event event) {
                 m_buttonStates_actual[whichOne][event.jbutton.button] = false;
         }
         else {
-                //this->resetBotones(0, CANTIDAD_BOTONES);
+                this->resetBotones(0, CANTIDAD_BOTONES);
         }
 
         // DIRECCIONES

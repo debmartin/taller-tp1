@@ -21,6 +21,7 @@ class Juego {
 private:
 	bool juegoCorriendo;
 	bool ejecutandoFinal;
+	bool ejecutandoFatality;
 	Jugador* jugador1;
 	Jugador* jugador2;
 	string modo_juego;

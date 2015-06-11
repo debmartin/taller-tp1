@@ -192,6 +192,10 @@ bool Personaje::estaMuerto(){
     return (this->energia <= 0);
 }
 
+bool Personaje::estaMareado(){
+	 return (estado->estaMareado());
+}
+
 bool Personaje::ejecutandoMovimientoEspecial(){
 	return (estado->ejecutandoMovimientoEspecial());
 }
@@ -231,19 +235,19 @@ void Personaje::caminarIzquierda(){
 void Personaje::saltarVertical(){
     cambiarEstado(new SaltandoVertical(posicion, (*cajasPorEstado)[SALTANDO_VERTICAL]));
     // TODO by ariel: tomarlo desde un hash de sonidos para no cargar el archivo de sonido
-    Sonidos::getInstancia()->reproducirSonido("sonido_saltar");
+    //Sonidos::getInstancia()->reproducirSonido("sonido_saltar");
     Logger::getInstance()->debug("Personaje: salto vertical. Se setea trayectoria.");
 }
 
 void Personaje::saltarOblicuoDerecha(){
     cambiarEstado(new SaltandoOblicuoDerecha(posicion, (*cajasPorEstado)[SALTANDO_OBLICUO_DERECHA]));
-    Sonidos::getInstancia()->reproducirSonido("sonido_saltar");
+    //Sonidos::getInstancia()->reproducirSonido("sonido_saltar");
     Logger::getInstance()->debug("Personaje: salto oblicuo derecha. Se setea trayectoria.");
 }
 
 void Personaje::saltarOblicuoIzquierda(){
     cambiarEstado(new SaltandoOblicuoIzquierda(posicion, (*cajasPorEstado)[SALTANDO_OBLICUO_IZQUIERDA]));
-    Sonidos::getInstancia()->reproducirSonido("sonido_saltar");
+    //Sonidos::getInstancia()->reproducirSonido("sonido_saltar");
     Logger::getInstance()->debug("Personaje: salto oblicuo izquierda. Se setea trayectoria.");
 }
 
@@ -372,7 +376,7 @@ void Personaje::derribado(){
 }
 
 void Personaje::mareado(){
-	cambiarEstado(new Golpeado(posicion, MAREADO, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
+	cambiarEstado(new Mareado(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
 	bloquearPersonaje(TIEMPO_FESTEJO_VICTORIA);
 }
 
@@ -436,11 +440,11 @@ void Personaje::hacerFatality(){
 }
 
 void Personaje::recibirFatality(Colisionable* enemigo){
-	if(enemigo->verEstado()->Id() == BABALITY){
-		bebe();
-	}else{
-		morir();
-	}
+	//if(enemigo->verEstado()->Id() == BABALITY){
+	bebe();
+	//}else{
+		//morir();
+	//}
 }
 
 void Personaje::caer(){
@@ -703,9 +707,10 @@ void Personaje::update(Colisionable* enemigo){
     if(estaEnPiso())
        return;
 /*
-    if(estaMuerto() && !estaSaltando() && !estaEnPiso() && enemigo->verEstado()->haciendoFatality()){
-    	cout<<"Entra"<<endl;
-       recibirFatality(enemigo);
+    if(estaMuerto() && estaMareado() && enemigo->ejecutandoMovimientoEspecial()){
+    	if(enemigo->verEstado()->haciendoFatality()){
+    		recibirFatality(enemigo);
+    	}
     }*/
 /*
     if(enemigo->ejecutandoMovimientoEspecial() && !estaSaltando() && !estaEnPiso()){
@@ -718,8 +723,7 @@ void Personaje::update(Colisionable* enemigo){
     	mareado();
     	//bebe();
     }
-    //cout << id << " ~ " << estado->Id() << " ~ " << posicion << endl;
-    //cout << *(estado->obtenerCajaColision()) << endl;
+
     if(estaBloqueado()){
         if(tiempoBloqueo <= 0){
            mantenerReposo();

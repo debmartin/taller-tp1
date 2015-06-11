@@ -230,31 +230,56 @@ void CargadorDeOjbetos::cargarEscenarioGrafico(PersonajeDibujable* personajeDibu
 Jugador* CargadorDeOjbetos::cargarJugador(JugadorDef* jugadorDef)
 {
 	string idPersonaje = jugadorDef->getIdPersonaje();
+/*
+	if(this->modo_juego == "P1_vs_CPU"){
+		PersonajeInteligente* personaje = this->cargarPersonajes()->find(idPersonaje)->second;
+		PersonajeDibujable* personajeDibujable = this->cargarPersonajesDibujables()->find(idPersonaje)->second;
 
-	Personaje* personaje = this->cargarPersonajes()->find(idPersonaje)->second;
-	PersonajeDibujable* personajeDibujable = this->cargarPersonajesDibujables()->find(idPersonaje)->second;
+		((Arma*)personaje->getArma())->agregarObservador(personajeDibujable->getArma());
 
-	((Arma*)personaje->getArma())->agregarObservador(personajeDibujable->getArma());
+		// by ariel: se puede usar tambien ControlTeclado
+		string tipo_control = jugadorDef->getTipoControl();
+		Control* control;
+		if ( tipo_control == "TECLADO" )
+		{
+			control = new ControlTeclado(jugadorDef->getControlDef());
+		}
+		else
+		{
+			control = new ControlJoystick(jugadorDef->getControlDef());
+		}
 
-	// by ariel: se puede usar tambien ControlTeclado
-	string tipo_control = jugadorDef->getTipoControl();
-	Control* control;
-	if ( tipo_control == "TECLADO" )
-	{
-		control = new ControlTeclado(jugadorDef->getControlDef());
-	}
-	else
-	{
-		control = new ControlJoystick(jugadorDef->getControlDef());
-	}
+		//Cargo los combos del jugador.
+		vector<Combo*>* vectorDeCombos = cargarCombos(idPersonaje);
+		MapaDeCombos* mapaDeCombos = new MapaDeCombos(vectorDeCombos, jugadorDef->getTolerancia());
+		Jugador* jugador = new Jugador(personaje, personajeDibujable, control, tipo_control, mapaDeCombos);
 
-	//Cargo los combos del jugador.
-	vector<Combo*>* vectorDeCombos = cargarCombos(idPersonaje);
-	MapaDeCombos* mapaDeCombos = new MapaDeCombos(vectorDeCombos, jugadorDef->getTolerancia());
-	Jugador* jugador = new Jugador(personaje, personajeDibujable, control, tipo_control, mapaDeCombos);
+		return jugador;
+	}else{*/
+		Personaje* personaje = this->cargarPersonajes()->find(idPersonaje)->second;
+		PersonajeDibujable* personajeDibujable = this->cargarPersonajesDibujables()->find(idPersonaje)->second;
 
-	return jugador;
+		((Arma*)personaje->getArma())->agregarObservador(personajeDibujable->getArma());
 
+		// by ariel: se puede usar tambien ControlTeclado
+		string tipo_control = jugadorDef->getTipoControl();
+		Control* control;
+		if ( tipo_control == "TECLADO" )
+		{
+			control = new ControlTeclado(jugadorDef->getControlDef());
+		}
+		else
+		{
+			control = new ControlJoystick(jugadorDef->getControlDef());
+		}
+
+		//Cargo los combos del jugador.
+		vector<Combo*>* vectorDeCombos = cargarCombos(idPersonaje);
+		MapaDeCombos* mapaDeCombos = new MapaDeCombos(vectorDeCombos, jugadorDef->getTolerancia());
+		Jugador* jugador = new Jugador(personaje, personajeDibujable, control, tipo_control, mapaDeCombos);
+
+		return jugador;
+	//}
 }
 
 Jugador* CargadorDeOjbetos::cargarJugador1() {
@@ -689,7 +714,7 @@ vector<Combo*>* CargadorDeOjbetos::cargarCombos(string nombrePersonaje){
 		Combo* combo4 = new Combo(vectorTeclasCombo4, "Patada Giratoria", 4);
 
 		vectorTeclasCombo5->push_back("JOY_DERECHA");
-		vectorTeclasCombo5->push_back("JOY_IZQUIERDA");
+		vectorTeclasCombo5->push_back("JOY_DERECHA");
 		vectorTeclasCombo5->push_back("JOY_DEFENSA");
 		Combo* combo5 = new Combo(vectorTeclasCombo5, "Babality", 5);
 
@@ -727,7 +752,7 @@ vector<Combo*>* CargadorDeOjbetos::cargarCombos(string nombrePersonaje){
 		Combo* combo5 = new Combo(vectorTeclasCombo5, "Patada Giratoria", 5);
 
 		vectorTeclasCombo6->push_back("JOY_DERECHA");
-		vectorTeclasCombo6->push_back("JOY_IZQUIERDA");
+		vectorTeclasCombo6->push_back("JOY_DERECHA");
 		vectorTeclasCombo6->push_back("JOY_DEFENSA");
 		Combo* combo6 = new Combo(vectorTeclasCombo6, "Babality", 6);
 

@@ -40,3 +40,7 @@ bool Bloqueado::efectuandoPatadaGiratoria(){
 bool Bloqueado::efectuandoGancho(){
 	return (estadoDeBloqueo->efectuandoGancho());
 }
+
+bool Bloqueado::estaMareado(){
+	return (estadoDeBloqueo->estaMareado());
+}

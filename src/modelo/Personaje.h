@@ -40,6 +40,7 @@
 #include "estado/CaidaDerecha.h"
 #include "estado/CaidaIzquierda.h"
 #include "estado/Muerto.h"
+#include "estado/Mareado.h"
 #include "estado/Deslizar.h"
 #include "estado/Arrojado.h"
 #include "estado/Fatality.h"
@@ -130,6 +131,7 @@ public:
 	bool haciendoFatality();
 	bool estaEnCaida();
 	bool estaInhabilitado();
+	bool estaMareado();
 	void cambiarEstado(Estado* nuevo);
 	estado_personaje getEstado();
 	Estado* verEstado();
