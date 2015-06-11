@@ -75,7 +75,7 @@ bool Textura::loadFromFile( std::string path )
 bool Textura::loadFromRenderedText(std::string textureText, SDL_Color textColor) {
 
 	//Get rid of preexisting texture
-	//this->free();
+	this->free();
 
 	SDL_Surface* textSurface = TTF_RenderText_Solid( this->gFont, textureText.c_str(), textColor );
 	if( textSurface != NULL )
