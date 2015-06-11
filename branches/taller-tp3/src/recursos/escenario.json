@@ -440,7 +440,7 @@
     
 	"jugador-1": {
         "tipo-control": "JOYSTICK",   // "TECLADO" o "JOYSTICK"
-        "tolerancia": 1,
+        "tolerancia": 0,
         "control":{
         			"JOY_PINIA_ALTA": 0,
         			"JOY_PATADA_ALTA": 1,
@@ -454,7 +454,7 @@
 	},
 	"jugador-2": {
         "tipo-control": "JOYSTICK",  // "TECLADO" o "JOYSTICK"
-        "tolerancia": 1,
+        "tolerancia": 0,
         "control":{
         			"JOY_PINIA_ALTA": 0,
         			"JOY_PATADA_ALTA": 1,

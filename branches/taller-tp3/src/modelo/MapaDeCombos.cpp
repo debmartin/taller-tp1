@@ -78,7 +78,7 @@ void MapaDeCombos::buscarCombo() {
 		// COMPARO
 		//cout << "COMBO-ACTUAL-NOMBRE:" << (*this->combosJugador)[i]->getNombre() << endl;
 		int cantidadEventosAQuitar = 0;
-		bool comboEncontrado = comapararConCombo(*teclasCombo, teclasActual, 0, cantidadEventosAQuitar);//this->toleranciaDeError);
+		bool comboEncontrado = comapararConCombo(*teclasCombo, teclasActual, this->toleranciaDeError, cantidadEventosAQuitar);//this->toleranciaDeError);
 		if (comboEncontrado) {
 			this->comboEfectuado = true;
 			this->comboActual = (*this->combosJugador)[i]->getNombre();

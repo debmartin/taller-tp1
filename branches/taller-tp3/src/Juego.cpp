@@ -31,6 +31,7 @@ using std::pair;
 Juego::Juego(Jugador* jugador1, Jugador* jugador2, string modo){
 	juegoCorriendo = true;
 	ejecutandoFinal = false;
+	ejecutandoFatality = false;
 	this->jugador1 = jugador1;
 	this->jugador2 = jugador2;
 	this->modo_juego = modo;
@@ -72,22 +73,30 @@ void Juego::update(bool& recargar)
         this->actualizarOrientacionJugadores();
 
         VentanaGrafica::Instance()->actualizar();
-
+/*
+        if(jugador1->getPersonaje()->ejecutandoMovimientoEspecial()){
+        	if(jugador2->getPersonaje()->estaMuerto() && jugador2->getPersonaje()->estaMareado() && jugador1->getPersonaje()->haciendoFatality()){
+        		return;
+        	}
+        }
+        if(jugador2->getPersonaje()->ejecutandoMovimientoEspecial()){
+        	if(jugador2->getPersonaje()->estaMuerto() && jugador2->getPersonaje()->estaMareado() && jugador2->getPersonaje()->haciendoFatality()){
+        		return;
+        	}
+        }
+*/
         if (jugador2->getPersonaje()->estaMuerto() && jugador1->getPersonaje()->estaMuerto()) {
-                //cout<<"Entra1"<<endl;
                 jugador1->getPersonaje()->victoria();
                 jugador2->getPersonaje()->victoria();
         }
 
         if (jugador1->getPersonaje()->estaMuerto() && !ejecutandoFinal && !jugador2->getPersonaje()->estaSaltando()) {
-                //cout<<"Entra2"<<endl;
                 jugador2->getPersonaje()->victoria();
                 ejecutandoFinal = true;
         Logger::getInstance()->info("GAME OVER JUGADOR 1");
 
     }
         if (jugador2->getPersonaje()->estaMuerto() && !ejecutandoFinal && !jugador1->getPersonaje()->estaSaltando()) {
-                //cout<<"Entra3"<<endl;
                 jugador1->getPersonaje()->victoria();
                 ejecutandoFinal = true;
         Logger::getInstance()->info("GAME OVER JUGADOR 2");

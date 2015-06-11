@@ -1,6 +1,6 @@
 #include "HUD.h"
 
-HUD::HUD(SDL_Window* gWindow, string nombre_personaje1, string nombre_personaje2) {
+HUD::HUD(SDL_Window* gWindow, string nombre_personaje1, string nombre_personaje2, bool combosVisibles) {
 
 	this->gWindow         = gWindow;
 
@@ -13,6 +13,7 @@ HUD::HUD(SDL_Window* gWindow, string nombre_personaje1, string nombre_personaje2
 	this->colaDeTeclas1 = new deque<string>;
 	this->colaDeTeclas2 = new deque<string>;
 
+	this->combosVisibles = combosVisibles;
 	this->colaDeTeclas1->push_back("EVENTO 1");
 	this->colaDeTeclas1->push_back("EVENTO 2");
 	this->colaDeTeclas1->push_back("EVENTO 3");
@@ -85,26 +86,27 @@ void HUD::dibujar(){
 	this->tHUD = updateTexture();
 	SDL_RenderCopy(this->gRenderer, this->tHUD, NULL, NULL);
 
-	//IMPRIMO COLA DE COMBOS 1
-	int x = 30; int y = 70;
-	std::deque<string>::iterator it = colaDeTeclas1->begin();
-	while (it != colaDeTeclas1->end()) {
-		SDL_Texture* combos = renderText(*it++, "RECURSOS/HUD/mk2.ttf", { 255, 239, 36, 255 }, 11, gRenderer);
-		SDL_Rect destRect = {x, y, 100, 20}; y += 15;
-		SDL_RenderCopy(this->gRenderer, combos, NULL, &destRect);
-		SDL_DestroyTexture(combos);
-	}
+	if(this->combosVisibles){
+		//IMPRIMO COLA DE COMBOS 1
+		int x = 30; int y = 70;
+		std::deque<string>::iterator it = colaDeTeclas1->begin();
+		while (it != colaDeTeclas1->end()) {
+			SDL_Texture* combos = renderText(*it++, "RECURSOS/HUD/mk2.ttf", { 255, 239, 36, 255 }, 11, gRenderer);
+			SDL_Rect destRect = {x, y, 100, 20}; y += 15;
+			SDL_RenderCopy(this->gRenderer, combos, NULL, &destRect);
+			SDL_DestroyTexture(combos);
+		}
 
-	//IMPRIMO COLA DE COMBOS 2
-	x = 500; y = 70;
-	it = colaDeTeclas1->begin();
-	while (it != colaDeTeclas1->end()) {
-		SDL_Texture* combos = renderText(*it++, "RECURSOS/HUD/mk2.ttf", { 255, 239, 36, 255 }, 11, gRenderer);
-		SDL_Rect destRect = {x, y, 100, 20}; y += 15;
-		SDL_RenderCopy(this->gRenderer, combos, NULL, &destRect);
-		SDL_DestroyTexture(combos);
+		//IMPRIMO COLA DE COMBOS 2
+		x = 500; y = 70;
+		it = colaDeTeclas1->begin();
+		while (it != colaDeTeclas1->end()) {
+			SDL_Texture* combos = renderText(*it++, "RECURSOS/HUD/mk2.ttf", { 255, 239, 36, 255 }, 11, gRenderer);
+			SDL_Rect destRect = {x, y, 100, 20}; y += 15;
+			SDL_RenderCopy(this->gRenderer, combos, NULL, &destRect);
+			SDL_DestroyTexture(combos);
+		}
 	}
-
 }
 
 void HUD::recibirNotificacion(Observable* unObservable){
