@@ -86,11 +86,11 @@ void PantallaSeleccionarPersonaje::iniciar() {
 				}
 				botoneraPersonajes->manejarEventoJugador(evento);
 				botoneraPersonajes->actualizarModelo(&salirEleccionPersonajes);
-			    //renderText = cajaDeTexto->manejarEvento(&inputText, evento);
+			    renderText = cajaDeTexto->manejarEvento(&inputText, evento);
 			}
 
 			botoneraPersonajes->dibujar();
-			//TODO falta sincronizar con el screen de la botonera
+			//TODO corregir error en la llamada de TTF_RenderText_Solid en Textura, que hace que al escribir el primer caracter, piche!
 			//cajaDeTexto->dibujar(renderText, inputText);
 
 	        frameTime = SDL_GetTicks() - frameStart;

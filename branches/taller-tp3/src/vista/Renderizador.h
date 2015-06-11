@@ -8,12 +8,13 @@
 #ifndef SRC_VISTA_RENDERIZADOR_H_
 #define SRC_VISTA_RENDERIZADOR_H_
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
 #include <string>
-#include "Dibujable.h"
+
 #include "../modelo/Vector2f.h"
-#include "../utils/Logger.h"
+
+class Dibujable;
+struct SDL_Renderer;
+struct SDL_Window;
 
 using namespace std;
 
