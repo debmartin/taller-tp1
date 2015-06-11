@@ -22,6 +22,7 @@ public:
 	void identificarOrdenJugador1(Posicion* unaPosicionEnfocadaDelJugador1);
 	void identificarOrdenJugador2(Posicion* unaPosicionEnfocadaDelJugador2);
 	void identificarOrdenJoystick(Posicion* unaPosicionEnfocada, JoyNumberMenu numeroJoystick);
+	Posicion* posicionarAleatoriamente();
 private:
 	void posicionarArriba(Posicion* unaPosicionEnfocada);
 	void posicionarAbajo(Posicion* unaPosicionEnfocada);

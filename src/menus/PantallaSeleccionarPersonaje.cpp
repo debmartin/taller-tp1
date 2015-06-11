@@ -86,12 +86,12 @@ void PantallaSeleccionarPersonaje::iniciar() {
 				}
 				botoneraPersonajes->manejarEventoJugador(evento);
 				botoneraPersonajes->actualizarModelo(&salirEleccionPersonajes);
-			    renderText = cajaDeTexto->manejarEvento(&inputText, evento);
+			    //renderText = cajaDeTexto->manejarEvento(&inputText, evento);
 			}
 
 			botoneraPersonajes->dibujar();
 			//TODO falta sincronizar con el screen de la botonera
-			cajaDeTexto->dibujar(renderText, inputText);
+			//cajaDeTexto->dibujar(renderText, inputText);
 
 	        frameTime = SDL_GetTicks() - frameStart;
 
