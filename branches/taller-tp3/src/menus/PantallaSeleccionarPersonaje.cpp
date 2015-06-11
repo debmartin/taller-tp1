@@ -91,7 +91,7 @@ void PantallaSeleccionarPersonaje::iniciar() {
 
 			botoneraPersonajes->dibujar();
 			//TODO corregir error en la llamada de TTF_RenderText_Solid en Textura, que hace que al escribir el primer caracter, piche!
-			cajaDeTexto->dibujar(renderText, inputText);
+			//cajaDeTexto->dibujar(renderText, inputText);
 
 	        frameTime = SDL_GetTicks() - frameStart;
 
