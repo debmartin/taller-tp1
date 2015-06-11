@@ -97,6 +97,7 @@ Botonera::Botonera(string tipo, int cant_filas, int cant_columnas, Posicion* pos
 	this->tipoDeControl_jugador2 = tipoDeControl_jugador2;
 	this->modo_juego_elegido = modo_juego_elegido;
 	this->controladorBotonera = new ControladorBotonera(this->cant_filas, this->cant_columnas);
+	this->elegirPosicionAleatoriamente = true;
 
 }
 
@@ -140,18 +141,31 @@ void Botonera::manejarEventoJugador(SDL_Event evento) {
     	if( this->modo_juego_elegido == "P1_vs_P2"){
     		this->controladorBotonera->identificarOrdenJoystick(this->posicionEnfocadaDelJugador2, JOYSTICK2MENU);
     	}
+		else
+		{
+			if ( this->elegirPosicionAleatoriamente )
+			{
+				this->posicionEnfocadaDelJugador2 = this->controladorBotonera->posicionarAleatoriamente();
+				this->elegirPosicionAleatoriamente = false;
+			}
+		}
 	}else{
 		//Si se presiona una tecla
 		if ( evento.key.repeat == 0 )
 		{
 			this->controladorBotonera->identificarOrdenJugador1(this->posicionEnfocadaDelJugador1);
-			/* TODO descomentar cuando se implemente la forma de elegirse aleatoriamente
-			 * el personaje 2 cuando se juega con la CPU o es en modo practica
-			 */
-			//if( this->modo_juego_elegido == "P1_vs_P2")
-			//{
-			this->controladorBotonera->identificarOrdenJugador2(this->posicionEnfocadaDelJugador2);
-			//}
+			if( this->modo_juego_elegido == "P1_vs_P2")
+			{
+				this->controladorBotonera->identificarOrdenJugador2(this->posicionEnfocadaDelJugador2);
+			}
+			else
+			{
+				if ( this->elegirPosicionAleatoriamente )
+				{
+					this->posicionEnfocadaDelJugador2 = this->controladorBotonera->posicionarAleatoriamente();
+					this->elegirPosicionAleatoriamente = false;
+				}
+			}
 		}
 	}
 

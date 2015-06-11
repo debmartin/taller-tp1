@@ -10,6 +10,8 @@
 #include <SDL2/SDL_keyboard.h>
 #include <SDL2/SDL_scancode.h>
 #include <SDL2/SDL_stdinc.h>
+#include <cstdlib>
+#include <ctime>
 #include <map>
 #include <string>
 
@@ -135,4 +137,16 @@ void ControladorBotonera::posicionarDerecha(Posicion* unaPosicionEnfocada) {
 
 void ControladorBotonera::elegir(Posicion* unaPosicionEnfocada) {
 	unaPosicionEnfocada->elegir();
+}
+
+Posicion* ControladorBotonera::posicionarAleatoriamente()
+{
+	srand(time(NULL));
+	int posX_rand = rand()%this->cant_columnas;
+	int posY_rand = rand()%this->cant_filas;
+
+	Posicion* posicionAleatoria = new Posicion(posX_rand, posY_rand);
+	posicionAleatoria->elegir();
+
+	return posicionAleatoria;
 }
