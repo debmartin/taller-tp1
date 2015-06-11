@@ -74,6 +74,7 @@ void agregarSonidos()
 	Sonidos::getInstancia()->agregar("sonido_arma", new Sonido("LiuFire.wav",150,2));
 	Sonidos::getInstancia()->agregar("sonido_gancho", new Sonido("NiteAxe.wav",150,2));
 	Sonidos::getInstancia()->agregar("sonido_bebe", new Sonido("BabyCry.wav",150,2));
+	Sonidos::getInstancia()->agregar("sonido_finish", new Sonido("FinHim2.wav",150,2));
 }
 
 int main(int argc, char* args[])
