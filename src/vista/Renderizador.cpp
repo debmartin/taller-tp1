@@ -6,7 +6,16 @@
  */
 
 #include "Renderizador.h"
+
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_hints.h>
+#include <SDL2/SDL_render.h>
+#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_video.h>
 #include <iostream>
+
+#include "../utils/Logger.h"
+#include "Dibujable.h"
 
 Renderizador* Renderizador::instancia_unica = NULL;
 
@@ -27,6 +36,12 @@ bool Renderizador::init(string titulo, Vector2f posicion, Vector2f tamanio, bool
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
 	{
+
+		//Set texture filtering to linear
+		if( !SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" ) )
+		{
+			Logger::getInstance()->debug("Warning: Linear texture filtering not enabled!");
+		}
 
 		Logger::getInstance()->debug("Renderizador: SDL init.");
 
@@ -66,8 +81,9 @@ bool Renderizador::init(string titulo, Vector2f posicion, Vector2f tamanio, bool
 		Logger::getInstance()->debug("Renderizador: falla en SDL init.");
 		return false;
 	}
-	if (TTF_Init() != 0){
-			std::cout << "ERROR: TTF_Init" << endl;
+	if (TTF_Init() == -1){
+		std::cout << "ERROR: TTF_Init" << endl;
+		return false;
 	}
 
 	Logger::getInstance()->debug("Renderizador: inicializacion finalizada.");

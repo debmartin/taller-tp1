@@ -25,7 +25,7 @@ private:
 	int cant_caracteres;
 	int pos_x;
 	int pos_y;
-	Textura* gInputTextTexture;
+	Textura* textura;
 	SDL_Color textColor; // se define en el constructor
 public:
 	CajaDeTexto(int cant_caracteres, int pos_x, int pos_y);
