@@ -132,6 +132,7 @@ public:
 	bool estaEnCaida();
 	bool estaInhabilitado();
 	bool estaMareado();
+	bool estaHaciendoToma();
 	void cambiarEstado(Estado* nuevo);
 	estado_personaje getEstado();
 	Estado* verEstado();

@@ -196,6 +196,10 @@ bool Personaje::estaMareado(){
 	 return (estado->estaMareado());
 }
 
+bool Personaje::estaHaciendoToma(){
+	return (estado->estaHaciendoToma());
+}
+
 bool Personaje::ejecutandoMovimientoEspecial(){
 	return (estado->ejecutandoMovimientoEspecial());
 }
@@ -532,11 +536,13 @@ void Personaje::recibirGolpe(Colisionable* otro){
 	}else{
 		if(pegadoAlOponente(otro)){
 			cout<<"pegado al oponente"<<endl;
-			golpeado();
+			ser_arrojado();
+			//golpeado();
 			//retroceder();
 		}else{
 			cout<<"separado del oponente"<<endl;
-			golpeado();
+			//golpeado();
+			ser_arrojado();
 		}
 	}
     Logger::getInstance()->debug("Personaje: recibiendo golpe.");
@@ -682,6 +688,10 @@ void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
         calcularPosicionSinColision(enemigo);
         return;
     }
+/*
+    if(estaHaciendoToma()){
+    	posicion = posicionCandidata;
+    }*/
     if (estaCaminando()){
         arrastrar(enemigo);
     } else if (estaSaltando()) {
