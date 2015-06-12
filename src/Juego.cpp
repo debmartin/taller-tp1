@@ -16,6 +16,7 @@
 #include "controlador/ControladorPersonaje.h"
 #include "modelo/Jugador.h"
 #include "modelo/Personaje.h"
+#include "modelo/PersonajeInteligente.h"
 #include "modelo/Vector2f.h"
 #include "utils/Logger.h"
 #include "vista/EscenarioGrafico.h"
@@ -75,9 +76,14 @@ void Juego::render()
 
 void Juego::update(bool& recargar)
 {
-        this->jugador1->getPersonaje()->update(jugador2->getPersonaje());
-        this->jugador2->getPersonaje()->update(jugador1->getPersonaje());
-        this->actualizarOrientacionJugadores();
+	this->jugador1->getPersonaje()->update(jugador2->getPersonaje());
+	if(this->modo_juego == "P1_vs_CPU"){
+	    ((PersonajeInteligente*)(this->jugador2->getPersonaje()))->calcularProximoMovimiento(this->jugador1->getPersonaje());
+	    this->jugador2->getPersonaje()->update(jugador1->getPersonaje());
+	}else{
+	     this->jugador2->getPersonaje()->update(jugador1->getPersonaje());
+	}
+    this->actualizarOrientacionJugadores();
 
         VentanaGrafica::Instance()->actualizar();
 /*
