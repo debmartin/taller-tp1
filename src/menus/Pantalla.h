@@ -20,13 +20,16 @@ class Pantalla {
 protected:
 	string tipoDeControl_jugador1;
 	string tipoDeControl_jugador2;
+	int anchopx;
+	int altopx;
 public:
-	Pantalla();
-	Pantalla(string tipoDeControl_jugador1, string tipoDeControl_jugador2);
+	Pantalla(int anchopx, int altopx, string tipoDeControl_jugador1, string tipoDeControl_jugador2);
 	virtual ~Pantalla();
 	virtual void iniciar() = 0;
 	string getTipoDeControlJugador1() const;
 	string getTipoDeControlJugador2() const;
+	int getAltopx() const;
+	int getAnchopx() const;
 };
 
 #endif /* SRC_MENUS_PANTALLA_H_ */

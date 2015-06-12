@@ -18,7 +18,7 @@ class PantallaSeleccionarModo: public Pantalla {
 private:
 	string modo_juego_elegido;
 public:
-	PantallaSeleccionarModo(string tipoDeControl_jugador1, string tipoDeControl_jugador2);
+	PantallaSeleccionarModo(int anchopx, int altopx, string tipoDeControl_jugador1, string tipoDeControl_jugador2);
 	virtual ~PantallaSeleccionarModo();
 	void iniciar();
 	string getModoDeJuegoElegido();

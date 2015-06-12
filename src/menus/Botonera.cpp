@@ -9,12 +9,10 @@
 
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_rect.h>
-#include <SDL2/SDL_render.h>
 #include <list>
 
 #include "../controlador/ControladorJoystickMenu.h"
 #include "../utils/Logger.h"
-#include "../vista/Renderizador.h"
 #include "Boton.h"
 #include "ControladorBotonera.h"
 #include "Posicion.h"
@@ -238,11 +236,6 @@ int Botonera::getCantFilas() {
 
 void Botonera::dibujar() {
 
-	//CLEAR screen
-	SDL_SetRenderDrawColor( Renderizador::Instance()->getRenderer(), 0x0F, 0x00, 0x00, 0xFF );
-	SDL_RenderClear( Renderizador::Instance()->getRenderer() );
-
-	//RENDER buttons
 	for ( int y = 0 ; y < this->cant_filas ; y++ )
 	{
 		for ( int x = 0 ; x < this->cant_columnas ; x++ )
@@ -264,8 +257,6 @@ void Botonera::dibujar() {
 		}
 	}
 
-	//UPDATE screen
-	SDL_RenderPresent( Renderizador::Instance()->getRenderer() );
 }
 
 void Botonera::setPosicionEnfocadaDelJugador1(Posicion* posicionEnfocadaDelJugador1) {

@@ -7,14 +7,12 @@
 
 #include "Pantalla.h"
 
-Pantalla::Pantalla() {
-
-}
-
-Pantalla::Pantalla(string tipoDeControl_jugador1,
+Pantalla::Pantalla(int anchopx, int altopx, string tipoDeControl_jugador1,
 		string tipoDeControl_jugador2) {
 	this->tipoDeControl_jugador1 = tipoDeControl_jugador1;
 	this->tipoDeControl_jugador2 = tipoDeControl_jugador2;
+	this->anchopx = anchopx;
+	this->altopx = altopx;
 }
 
 Pantalla::~Pantalla() {
@@ -27,4 +25,12 @@ string Pantalla::getTipoDeControlJugador1() const {
 
 string Pantalla::getTipoDeControlJugador2() const {
 	return tipoDeControl_jugador2;
+}
+
+int Pantalla::getAnchopx() const {
+	return anchopx;
+}
+
+int Pantalla::getAltopx() const {
+	return altopx;
 }
