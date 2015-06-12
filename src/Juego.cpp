@@ -28,7 +28,7 @@
 
 using std::pair;
 
-Juego::Juego(Jugador* jugador1, Jugador* jugador2, string modo){
+Juego::Juego(Jugador* jugador1, Jugador* jugador2, string modo, string nombrePersonaje1, string nombrePersonaje2){
 	juegoCorriendo = true;
 	ejecutandoFinal = false;
 	ejecutandoFatality = false;
@@ -44,7 +44,7 @@ Juego::Juego(Jugador* jugador1, Jugador* jugador2, string modo){
 	string tipoDeControl_jugador2 = jugador2->getTipoControl();
 
 	controladorPersonaje = new ControladorPersonaje(jugador1, jugador2, tipoDeControl_jugador1, this->modo_juego);
-	hud = new HUD(Renderizador::Instance()->getWindow(), jugador2->getPersonaje()->getId(), jugador1->getPersonaje()->getId());
+	hud = new HUD(Renderizador::Instance()->getWindow(), nombrePersonaje1, nombrePersonaje2);
 
 	jugador1->getPersonaje()->agregarObservador(hud);
 	jugador2->getPersonaje()->agregarObservador(hud);

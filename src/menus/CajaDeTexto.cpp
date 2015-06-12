@@ -9,9 +9,13 @@
 
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_keycode.h>
+#include <SDL2/SDL_mouse.h>
+#include <SDL2/SDL_rect.h>
+#include <SDL2/SDL_render.h>
 #include <SDL2/SDL_ttf.h>
 
 #include "../utils/Logger.h"
+#include "../vista/Renderizador.h"
 #include "Textura.h"
 
 CajaDeTexto::CajaDeTexto(int cant_caracteres, SDL_Color textColor, int pos_x, int pos_y) {
@@ -19,9 +23,11 @@ CajaDeTexto::CajaDeTexto(int cant_caracteres, SDL_Color textColor, int pos_x, in
 	this->cant_caracteres = cant_caracteres;
 	this->pos_x = pos_x;
 	this->pos_y = pos_y;
+	this->alto = 30;
+	this->ancho = (cant_caracteres * this->alto) / 2;
 	this->textura = new Textura();
 	this->textColor = textColor;
-	this->estoyEnfocado = false;
+	this->enfocado = false;
 	this->texto = "";
 }
 
@@ -32,10 +38,17 @@ CajaDeTexto::~CajaDeTexto() {
 bool CajaDeTexto::manejarEvento(SDL_Event e) {
 	bool renderText = false;
 
-	//TODO logica para enfocar o desenfocar el cuadro de texto
-	this->estoyEnfocado = true;
+	this->enfocado = false;
+	//Get mouse position
+	int x, y;
+	SDL_GetMouseState( &x, &y );
 
-	if ( this->estoyEnfocado )
+	if( x > pos_x && x < (pos_x+ancho) && y > pos_y && y < (pos_y+alto))
+	{
+		this->enfocado = true;
+	}
+
+	if ( this->enfocado )
 	{
 		//Special key input
 		if( e.type == SDL_KEYDOWN )
@@ -72,6 +85,12 @@ void CajaDeTexto::dibujar(bool renderText) {
 		}
 	}
 
+	//dibujar un cuado blanco y encime el texto
+	//Render red filled quad
+	SDL_Rect fillRect = { this->pos_x, this->pos_y, this->ancho, this->alto };
+	SDL_SetRenderDrawColor( Renderizador::Instance()->getRenderer(), 0xFF, 0xFF, 0xFF, 0xFF );
+	SDL_RenderFillRect( Renderizador::Instance()->getRenderer(), &fillRect );
+
 	//Render text textures
 	this->textura->render(this->pos_x, this->pos_y);
 
@@ -82,7 +101,7 @@ bool CajaDeTexto::loadMedia() {
 	bool success = true;
 
 	//Open the font
-	TTF_Font* gFont = TTF_OpenFont( "RECURSOS/lazy.ttf", 28 );
+	TTF_Font* gFont = TTF_OpenFont( "RECURSOS/lazy.ttf", this->alto );
 	this->textura->setFont(gFont);
 
 	if( gFont == NULL )
@@ -96,4 +115,8 @@ bool CajaDeTexto::loadMedia() {
 
 string CajaDeTexto::getTexto() const {
 	return texto;
+}
+
+bool CajaDeTexto::estoyEnfocado() {
+	return this->enfocado;
 }
