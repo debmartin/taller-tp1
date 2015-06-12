@@ -9,20 +9,18 @@
 
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_keycode.h>
-#include <SDL2/SDL_render.h>
 #include <SDL2/SDL_ttf.h>
 
 #include "../utils/Logger.h"
-#include "../vista/Renderizador.h"
 #include "Textura.h"
 
-CajaDeTexto::CajaDeTexto(int cant_caracteres, int pos_x, int pos_y) {
+CajaDeTexto::CajaDeTexto(int cant_caracteres, SDL_Color textColor, int pos_x, int pos_y) {
 
 	this->cant_caracteres = cant_caracteres;
 	this->pos_x = pos_x;
 	this->pos_y = pos_y;
 	this->textura = new Textura();
-	this->textColor = { 0, 0, 0, 0xFF };
+	this->textColor = textColor;
 }
 
 CajaDeTexto::~CajaDeTexto() {
@@ -57,10 +55,6 @@ bool CajaDeTexto::manejarEvento(string* inputText, SDL_Event e) {
 
 void CajaDeTexto::dibujar(bool renderText, string inputText) {
 
-	//CLEAR screen
-	SDL_SetRenderDrawColor( Renderizador::Instance()->getRenderer(), 0x0F, 0x00, 0x00, 0xFF );
-	SDL_RenderClear( Renderizador::Instance()->getRenderer() );
-
 	if( renderText )
 	{
 		if( inputText != "" )
@@ -74,8 +68,6 @@ void CajaDeTexto::dibujar(bool renderText, string inputText) {
 	//Render text textures
 	this->textura->render(this->pos_x, this->pos_y);
 
-	//UPDATE screen
-	SDL_RenderPresent( Renderizador::Instance()->getRenderer() );
 }
 
 bool CajaDeTexto::loadMedia() {

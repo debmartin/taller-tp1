@@ -28,7 +28,7 @@ private:
 	Textura* textura;
 	SDL_Color textColor; // se define en el constructor
 public:
-	CajaDeTexto(int cant_caracteres, int pos_x, int pos_y);
+	CajaDeTexto(int cant_caracteres, SDL_Color textColor, int pos_x, int pos_y);
 	virtual ~CajaDeTexto();
 	bool manejarEvento(string* inputText, SDL_Event e);
 	void dibujar(bool renderText, string inputText);

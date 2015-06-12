@@ -651,13 +651,17 @@ void CargadorDeOjbetos::cargarInfo_desdeMenus() {
 
 	string tipoDeControl_jugador1 = parser->getTipoControlJugador1();
 	string tipoDeControl_jugador2 = parser->getTipoControlJugador2();
+	int anchopx = parser->getVentanaDef()->getAnchoPx();
+	int altopx = parser->getVentanaDef()->getAltoPx();
 
-	PantallaSeleccionarModo* pantallaSeleccionarModo = new PantallaSeleccionarModo(tipoDeControl_jugador1,tipoDeControl_jugador2);
+	PantallaSeleccionarModo* pantallaSeleccionarModo = new PantallaSeleccionarModo(anchopx, altopx, tipoDeControl_jugador1,
+																tipoDeControl_jugador2);
 	pantallaSeleccionarModo->iniciar();
 	string modo_juego_elegido = pantallaSeleccionarModo->getModoDeJuegoElegido();
 	this->modo_juego = modo_juego_elegido;
 
-	PantallaSeleccionarPersonaje* pantallaSeleccionarPersonajes = new PantallaSeleccionarPersonaje(modo_juego_elegido,tipoDeControl_jugador1,tipoDeControl_jugador2);
+	PantallaSeleccionarPersonaje* pantallaSeleccionarPersonajes = new PantallaSeleccionarPersonaje(anchopx, altopx, modo_juego_elegido,
+																		tipoDeControl_jugador1,tipoDeControl_jugador2);
 	pantallaSeleccionarPersonajes->iniciar();
 
 	this->idPersonaje1Elegido = pantallaSeleccionarPersonajes->getIdPersonaje1Elegido();

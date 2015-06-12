@@ -8,6 +8,7 @@
 #include "PantallaSeleccionarModo.h"
 
 #include <SDL2/SDL_events.h>
+#include <SDL2/SDL_render.h>
 #include <SDL2/SDL_stdinc.h>
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_video.h>
@@ -18,8 +19,9 @@
 #include "Botonera.h"
 #include "Posicion.h"
 
-PantallaSeleccionarModo::PantallaSeleccionarModo(string tipoDeControl_jugador1,
-		string tipoDeControl_jugador2):Pantalla(tipoDeControl_jugador1, tipoDeControl_jugador2) {
+PantallaSeleccionarModo::PantallaSeleccionarModo(int anchopx, int altopx, string tipoDeControl_jugador1,
+												 string tipoDeControl_jugador2):
+												 Pantalla(anchopx, altopx, tipoDeControl_jugador1, tipoDeControl_jugador2) {
 }
 
 PantallaSeleccionarModo::~PantallaSeleccionarModo() {
@@ -33,9 +35,7 @@ void PantallaSeleccionarModo::iniciar() {
 
 	bool juegoCorriendo = true;
 
-	int screen_width = 640;
-	int screen_height = 480;
-	Posicion* pos_modosDeJuego = new Posicion(screen_width/2-BUTTON_WIDTH/2, screen_height/8);
+	Posicion* pos_modosDeJuego = new Posicion(this->getAnchopx()/2-BUTTON_WIDTH/2, this->getAltopx()/8);
 	Botonera* botoneraModosDeJuego = new Botonera("modos",3,1,pos_modosDeJuego, getTipoDeControlJugador1(), getTipoDeControlJugador2());
 	botoneraModosDeJuego->setPosicionEnfocadaDelJugador1(new Posicion(0,0));
 
@@ -66,7 +66,13 @@ void PantallaSeleccionarModo::iniciar() {
 				botoneraModosDeJuego->actualizarModelo(&salirMenuModosDeJuego);
 			}
 
+			// CLEAR screen
+			SDL_SetRenderDrawColor( Renderizador::Instance()->getRenderer(), 0x0F, 0x00, 0x00, 0xFF );
+			SDL_RenderClear( Renderizador::Instance()->getRenderer() );
+			// DIBUJA
 			botoneraModosDeJuego->dibujar();
+			// UPDATE screen
+			SDL_RenderPresent( Renderizador::Instance()->getRenderer() );
 
 			frameTime = SDL_GetTicks() - frameStart;
 
