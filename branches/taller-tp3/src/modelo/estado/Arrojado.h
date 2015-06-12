@@ -16,6 +16,7 @@ class Arrojado : public Estado
     public:
 		Arrojado(Vector2f posInicial, estado_personaje estado, BVH* caja, bool direccion);
         virtual ~Arrojado();
+        bool estaHaciendoToma();
     protected:
     private:
 };

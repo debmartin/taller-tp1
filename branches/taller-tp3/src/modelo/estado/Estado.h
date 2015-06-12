@@ -85,6 +85,7 @@ class Estado
         virtual bool haciendoFatality();
         virtual bool estaDesplazandoVertical();
         virtual bool estaMareado();
+        virtual bool estaHaciendoToma();
 
         Ataque* obtenerAtaque();
         Vector2f obtenerProximaPosicion();

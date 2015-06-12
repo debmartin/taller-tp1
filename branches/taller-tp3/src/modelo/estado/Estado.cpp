@@ -79,6 +79,11 @@ bool Estado::estaMareado(){
     return false;
 }
 
+bool Estado::estaHaciendoToma(){
+	cout<<"Estado esta haciendo toma"<<endl;
+    return false;
+}
+
 bool Estado::estaEnPiso(){
 	return false;
 }

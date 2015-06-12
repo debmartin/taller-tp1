@@ -23,3 +23,6 @@ Arrojado::~Arrojado() {
 	// TODO Auto-generated destructor stub
 }
 
+bool Arrojado::estaHaciendoToma(){
+	return true;
+}
