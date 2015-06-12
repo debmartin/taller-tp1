@@ -53,7 +53,7 @@ void PantallaSeleccionarPersonaje::iniciar() {
 	int cant_letras = 9;
 
 	SDL_Color textColor1 = { 0xFF, 0, 0, 0xFF };
-	int posX_1 = 10; //this->getAnchopx() - 140;//20;
+	int posX_1 = 10;
 	int posY_1 = this->getAltopx() - 50;
 	CajaDeTexto* cajaDeTextoPersonaje1 = new CajaDeTexto(cant_letras,textColor1,posX_1,posY_1);
 
@@ -71,11 +71,6 @@ void PantallaSeleccionarPersonaje::iniciar() {
 
 	if( loadMedia_botonera && loadMedia_cajaDeTextoPersonaje1 && loadMedia_cajaDeTextoPersonaje2 )
 	{
-
-		//The current input text.
-		string inputText1 = "";
-		string inputText2 = "";
-
 		//Enable text input
 		SDL_StartTextInput();
 
@@ -109,8 +104,8 @@ void PantallaSeleccionarPersonaje::iniciar() {
 
 				botoneraPersonajes->manejarEventoJugador(evento);
 				botoneraPersonajes->actualizarModelo(&salirEleccionPersonajes);
-			    renderText1 = cajaDeTextoPersonaje1->manejarEvento(&inputText1, evento);
-			    renderText2 = cajaDeTextoPersonaje1->manejarEvento(&inputText2, evento);
+			    renderText1 = cajaDeTextoPersonaje1->manejarEvento(evento);
+			    renderText2 = cajaDeTextoPersonaje2->manejarEvento(evento);
 			}
 
 			// CLEAR screen
@@ -118,8 +113,8 @@ void PantallaSeleccionarPersonaje::iniciar() {
 			SDL_RenderClear( Renderizador::Instance()->getRenderer() );
 			// DIBUJAR
 			botoneraPersonajes->dibujar();
-			cajaDeTextoPersonaje1->dibujar(renderText1, inputText1);
-			cajaDeTextoPersonaje2->dibujar(renderText2, inputText2);
+			cajaDeTextoPersonaje1->dibujar(renderText1);
+			cajaDeTextoPersonaje2->dibujar(renderText2);
 			// UPDATE screen
 			SDL_RenderPresent( Renderizador::Instance()->getRenderer() );
 
@@ -134,6 +129,8 @@ void PantallaSeleccionarPersonaje::iniciar() {
 
 		this->IdPersonaje1Elegido = botoneraPersonajes->getIdContenidoElegidoParaJugador1();
 		this->IdPersonaje2Elegido = botoneraPersonajes->getIdContenidoElegidoParaJugador2();
+		this->nombrePersonaje1 = cajaDeTextoPersonaje1->getTexto();
+		this->nombrePersonaje1 = cajaDeTextoPersonaje1->getTexto();
 
 	}else {
 		if ( !loadMedia_botonera )
@@ -155,6 +152,14 @@ string PantallaSeleccionarPersonaje::getIdPersonaje1Elegido() {
 
 string PantallaSeleccionarPersonaje::getIdPersonaje2Elegido() {
 	return this->IdPersonaje2Elegido;
+}
+
+string PantallaSeleccionarPersonaje::getNombrePersonaje1() const {
+	return nombrePersonaje1;
+}
+
+string PantallaSeleccionarPersonaje::getNombrePersonaje2() const {
+	return nombrePersonaje2;
 }
 
 string PantallaSeleccionarPersonaje::getModoJuegoElegido() const {

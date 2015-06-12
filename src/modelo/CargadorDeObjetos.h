@@ -44,6 +44,8 @@ private:
 	string idPersonaje1Elegido;
 	string idPersonaje2Elegido;
 	string modo_juego;
+	string nombrePersonajeElegido1;
+	string nombrePersonajeElegido2;
 public:
 	CargadorDeOjbetos(string escenario_path);
 	virtual ~CargadorDeOjbetos();

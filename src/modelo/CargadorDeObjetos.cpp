@@ -666,6 +666,8 @@ void CargadorDeOjbetos::cargarInfo_desdeMenus() {
 
 	this->idPersonaje1Elegido = pantallaSeleccionarPersonajes->getIdPersonaje1Elegido();
 	this->idPersonaje2Elegido = pantallaSeleccionarPersonajes->getIdPersonaje2Elegido();
+	this->nombrePersonajeElegido1 = pantallaSeleccionarPersonajes->getNombrePersonaje1();
+	this->nombrePersonajeElegido2 = pantallaSeleccionarPersonajes->getNombrePersonaje2();
 
 	string titulo_ventana_pelea(TITULO_VENTANA_INICIO);
 	titulo_ventana_pelea.append("(Modo: ");
