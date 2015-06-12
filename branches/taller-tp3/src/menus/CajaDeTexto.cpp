@@ -21,45 +21,52 @@ CajaDeTexto::CajaDeTexto(int cant_caracteres, SDL_Color textColor, int pos_x, in
 	this->pos_y = pos_y;
 	this->textura = new Textura();
 	this->textColor = textColor;
+	this->estoyEnfocado = false;
+	this->texto = "";
 }
 
 CajaDeTexto::~CajaDeTexto() {
 	delete this->textura;
 }
 
-bool CajaDeTexto::manejarEvento(string* inputText, SDL_Event e) {
+bool CajaDeTexto::manejarEvento(SDL_Event e) {
 	bool renderText = false;
 
-	//Special key input
-	if( e.type == SDL_KEYDOWN )
+	//TODO logica para enfocar o desenfocar el cuadro de texto
+	this->estoyEnfocado = true;
+
+	if ( this->estoyEnfocado )
 	{
-		//Handle backspace
-		if( e.key.keysym.sym == SDLK_BACKSPACE && (*inputText).length() > 0 )
+		//Special key input
+		if( e.type == SDL_KEYDOWN )
 		{
-			//lop off character
-			(*inputText).erase((*inputText).length()-1,1);
+			//Handle backspace
+			if( e.key.keysym.sym == SDLK_BACKSPACE && this->texto.length() > 0 )
+			{
+				//lop off character
+				this->texto.erase(this->texto.length()-1,1);
+				renderText = true;
+			}
+		}
+		//Special text input event
+		else if( e.type == SDL_TEXTINPUT )
+		{
+			//Append character
+			if ( this->texto.length() < this->cant_caracteres)
+				this->texto += e.text.text;
 			renderText = true;
 		}
 	}
-	//Special text input event
-	else if( e.type == SDL_TEXTINPUT )
-	{
-		//Append character
-		if ( (*inputText).length() < this->cant_caracteres)
-			*inputText += e.text.text;
-		renderText = true;
-	}
-
 	return renderText;
 }
 
-void CajaDeTexto::dibujar(bool renderText, string inputText) {
+void CajaDeTexto::dibujar(bool renderText) {
 
 	if( renderText )
 	{
-		if( inputText != "" )
+		if( this->texto != "" )
 		{
-			this->textura->loadFromRenderedText( inputText.c_str(), this->textColor );
+			this->textura->loadFromRenderedText( this->texto.c_str(), this->textColor );
 		}else{
 			this->textura->loadFromRenderedText( " ", this->textColor );
 		}
@@ -85,4 +92,8 @@ bool CajaDeTexto::loadMedia() {
 	}
 
 	return success;
+}
+
+string CajaDeTexto::getTexto() const {
+	return texto;
 }

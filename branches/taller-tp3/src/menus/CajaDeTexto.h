@@ -26,13 +26,16 @@ private:
 	int pos_x;
 	int pos_y;
 	Textura* textura;
-	SDL_Color textColor; // se define en el constructor
+	SDL_Color textColor;
+	bool estoyEnfocado;
+	string texto;
 public:
 	CajaDeTexto(int cant_caracteres, SDL_Color textColor, int pos_x, int pos_y);
 	virtual ~CajaDeTexto();
-	bool manejarEvento(string* inputText, SDL_Event e);
-	void dibujar(bool renderText, string inputText);
+	bool manejarEvento(SDL_Event e);
+	void dibujar(bool renderText);
 	bool loadMedia();
+	string getTexto() const;
 };
 
 #endif /* CAJADETEXTO_H_ */
