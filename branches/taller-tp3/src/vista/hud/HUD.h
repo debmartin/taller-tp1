@@ -18,7 +18,16 @@
 class HUD: public Observador {
 public:
 	HUD() {};
-	HUD(SDL_Window* gWindow, string nombre_personaje1, string nombre_personaje2, bool combosVisibles = false);
+
+	HUD(
+		SDL_Window* gWindow,
+		string nombre_personaje1,
+		string nombre_personaje2,
+		deque<string>* colaDeTeclas1,
+		deque<string>* colaDeTeclas2,
+		bool combosVisibles = true
+	);
+
 	void disminuirEnergia1(float offset);
 	void disminuirEnergia2(float offset);
 	void setEnergia1(float nuevaEnergia);
@@ -45,6 +54,7 @@ private:
 
 	deque<string>* colaDeTeclas1;
 	deque<string>* colaDeTeclas2;
+
 	bool combosVisibles;
 };
 

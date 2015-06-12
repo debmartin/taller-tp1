@@ -44,7 +44,14 @@ Juego::Juego(Jugador* jugador1, Jugador* jugador2, string modo, string nombrePer
 	string tipoDeControl_jugador2 = jugador2->getTipoControl();
 
 	controladorPersonaje = new ControladorPersonaje(jugador1, jugador2, tipoDeControl_jugador1, this->modo_juego);
-	hud = new HUD(Renderizador::Instance()->getWindow(), nombrePersonaje1, nombrePersonaje2);
+
+	hud = new HUD(
+			Renderizador::Instance()->getWindow(),
+			nombrePersonaje1,
+			nombrePersonaje2,
+			ControladorJoystick::Instance()->getColaDeTeclas(0),
+			ControladorJoystick::Instance()->getColaDeTeclas(1),
+			true);
 
 	jugador1->getPersonaje()->agregarObservador(hud);
 	jugador2->getPersonaje()->agregarObservador(hud);
