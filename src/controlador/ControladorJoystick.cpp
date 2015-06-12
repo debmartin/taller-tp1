@@ -457,6 +457,12 @@ void ControladorJoystick::buscar_combo(int numeroJoystick){
 	}
 }
 
+deque<string>* ControladorJoystick::getColaDeTeclas(int numeroJoystick) {
+	if (numeroJoystick == 0)
+		return this->mapaDeCombosJugador1->getColaDeTeclas();
+	return this->mapaDeCombosJugador2->getColaDeTeclas();
+}
+
 void ControladorJoystick::imprimirColaBotones(JoyNumber joy) {
 
 	cout << "========== COLA EVENTOS JOYSTICK" << joy << "===========" << endl;

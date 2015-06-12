@@ -4,6 +4,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <deque>
 
 #include "Vector2D.h"
 
@@ -82,5 +83,6 @@ public:
         bool combo_completado(int numeroJoystick);
         string informar_combo(int numeroJoystick);
         void buscar_combo(int numeroJoystick);
+        deque<string>* getColaDeTeclas(int numeroJoystick);
 };
 typedef ControladorJoystick TheInputHandler;
