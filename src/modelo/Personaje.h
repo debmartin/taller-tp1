@@ -47,11 +47,15 @@
 #include "Objeto.h"
 #include "Colisionable.h"
 #include "../vista/Posicionable.h"
+#include "Fatality.h"
+#include <unistd.h>
+#include <ostream>
 
 #define DELTA_PASO 1
 #define ENERGIA_INICIAL 100
 #define NUMERO_DE_PERSONAJE_1 1
 #define NUMERO_DE_PERSONAJE_2 2
+#define NULL 0
 
 using namespace std;
 
@@ -70,6 +74,8 @@ private:
 	double ancho;
 	double alto;
 	DireccionObjeto direccion;
+	Fatality* fatality1;
+	Fatality* fatality2;
 
 public:
 	Personaje(
@@ -176,6 +182,10 @@ public:
 	string toString();
 	string getId() const;
 	void definirPosicionIncial_enX(double x);
+	void setFatality1(Fatality* fatalityprincipal);
+	void setFatality2(Fatality* fatalitysecundaria);
+	Fatality* getFatalityPrincipal();
+	Fatality* getFatalitySecundaria();
 };
 
 #endif /* SRC_MODELO_PERSONAJE_H_ */
