@@ -29,7 +29,7 @@ private:
 	HUD* hud;
 
 public:
-	Juego(Jugador* jugador1, Jugador* jugador2, string modo);
+	Juego(Jugador* jugador1, Jugador* jugador2, string modo, string nombrePersonaje1, string nombrePersonaje2);
 	void render();
 	void update(bool& recargar);
 	void handleEvents(bool& recargar);

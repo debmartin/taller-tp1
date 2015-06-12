@@ -1,8 +1,8 @@
 {
     "ventana": { 
-        "anchopx": 640, 
-        "altopx": 480, 
-        "ancho": 640
+        "anchopx": 800,  
+        "altopx": 600,  
+        "ancho": 600    
     }, 
 	"escenario": {
         "ancho": 1800,
@@ -439,7 +439,7 @@
     ],
     
 	"jugador-1": {
-        "tipo-control": "TECLADO",   // "TECLADO" o "JOYSTICK"
+        "tipo-control": "JOYSTICK",   // "TECLADO" o "JOYSTICK"
         "tolerancia": 0,
         "control":{
         			"JOY_PINIA_ALTA": 0,
@@ -453,7 +453,7 @@
         }
 	},
 	"jugador-2": {
-        "tipo-control": "TECLADO",  // "TECLADO" o "JOYSTICK"
+        "tipo-control": "JOYSTICK",  // "TECLADO" o "JOYSTICK"
         "tolerancia": 0,
         "control":{
         			"JOY_PINIA_ALTA": 0,

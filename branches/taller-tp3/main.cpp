@@ -32,7 +32,12 @@ Juego* cargarJuego(string escenarioPath){
 	}
 	cargador_de_objetos.cargarEscenarioGrafico(jugador1->getPersonajeDibujable(), jugador2->getPersonajeDibujable());
 
-	Juego* juego = new Juego(jugador1, jugador2, cargador_de_objetos.verModoDeJuego());
+	//
+	string modoJuego = cargador_de_objetos.verModoDeJuego();
+	string nombrePersonaje1 = cargador_de_objetos.getNombrePersonajeElegido1();
+	string nombrePersonaje2 = cargador_de_objetos.getNombrePersonajeElegido2();
+
+	Juego* juego = new Juego(jugador1, jugador2, modoJuego, nombrePersonaje1, nombrePersonaje2);
 
     return juego;
 }

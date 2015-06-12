@@ -43,7 +43,7 @@ void PantallaSeleccionarPersonaje::iniciar() {
 	int botonera_filas = 3;
 	int botonera_colummas = 4;
 
-	Posicion* pos_botoneraPersonajes = new Posicion(this->getAnchopx()/2-(BUTTON_WIDTH*botonera_colummas)/2, 20);
+	Posicion* pos_botoneraPersonajes = new Posicion(this->getAnchopx()/2-(BUTTON_WIDTH*botonera_colummas)/2, this->getAltopx()/10);
 	Botonera* botoneraPersonajes = new Botonera("personajes", botonera_filas,botonera_colummas,pos_botoneraPersonajes,
 						getTipoDeControlJugador1(), getTipoDeControlJugador2(), this->modo_juego_elegido);
 
@@ -102,7 +102,10 @@ void PantallaSeleccionarPersonaje::iniciar() {
 			        }
 			    }
 
-				botoneraPersonajes->manejarEventoJugador(evento);
+			    if ( !cajaDeTextoPersonaje1->estoyEnfocado() && !cajaDeTextoPersonaje2->estoyEnfocado() )
+			    {
+			    	botoneraPersonajes->manejarEventoJugador(evento);
+			    }
 				botoneraPersonajes->actualizarModelo(&salirEleccionPersonajes);
 			    renderText1 = cajaDeTextoPersonaje1->manejarEvento(evento);
 			    renderText2 = cajaDeTextoPersonaje2->manejarEvento(evento);
@@ -130,7 +133,7 @@ void PantallaSeleccionarPersonaje::iniciar() {
 		this->IdPersonaje1Elegido = botoneraPersonajes->getIdContenidoElegidoParaJugador1();
 		this->IdPersonaje2Elegido = botoneraPersonajes->getIdContenidoElegidoParaJugador2();
 		this->nombrePersonaje1 = cajaDeTextoPersonaje1->getTexto();
-		this->nombrePersonaje1 = cajaDeTextoPersonaje1->getTexto();
+		this->nombrePersonaje2 = cajaDeTextoPersonaje2->getTexto();
 
 	}else {
 		if ( !loadMedia_botonera )

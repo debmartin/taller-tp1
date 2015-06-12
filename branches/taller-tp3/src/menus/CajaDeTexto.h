@@ -25,9 +25,11 @@ private:
 	int cant_caracteres;
 	int pos_x;
 	int pos_y;
+	int ancho;
+	int alto;
 	Textura* textura;
 	SDL_Color textColor;
-	bool estoyEnfocado;
+	bool enfocado;
 	string texto;
 public:
 	CajaDeTexto(int cant_caracteres, SDL_Color textColor, int pos_x, int pos_y);
@@ -36,6 +38,7 @@ public:
 	void dibujar(bool renderText);
 	bool loadMedia();
 	string getTexto() const;
+	bool estoyEnfocado();
 };
 
 #endif /* CAJADETEXTO_H_ */

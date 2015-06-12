@@ -287,7 +287,7 @@ Jugador* CargadorDeOjbetos::cargarJugador1() {
 	list<JugadorDef*>::iterator it = parser->getJugadoresDef()->begin();
 	JugadorDef* jugadorDef1 = *it;
 
-	jugadorDef1->cargarIdPersonajeDesdeMenu(this->getIdPersonaje1Elegido());
+	jugadorDef1->cargarIdPersonajeDesdeMenu(this->idPersonaje1Elegido);
 
 	Jugador* jugador = cargarJugador(jugadorDef1);
 	jugador->getPersonaje()->getArma()->orientar(DIRECCION_IZQUIERDA);
@@ -299,7 +299,7 @@ Jugador* CargadorDeOjbetos::cargarJugador2() {
 	list<JugadorDef*>::iterator it = parser->getJugadoresDef()->begin();
 	JugadorDef* jugadorDef2 = *++it;
 
-	jugadorDef2->cargarIdPersonajeDesdeMenu(this->getIdPersonaje2Elegido());
+	jugadorDef2->cargarIdPersonajeDesdeMenu(this->idPersonaje2Elegido);
 
 	Jugador* jugador = cargarJugador(jugadorDef2);
 	jugador->getPersonaje()->cambiarNumeroPersonaje();
@@ -678,14 +678,6 @@ void CargadorDeOjbetos::cargarInfo_desdeMenus() {
 	ControladorJoystickMenu::Instance()->clean();
 }
 
-string CargadorDeOjbetos::getIdPersonaje1Elegido() const {
-	return idPersonaje1Elegido;
-}
-
-string CargadorDeOjbetos::getIdPersonaje2Elegido() const {
-	return idPersonaje2Elegido;
-}
-
 vector<Combo*>* CargadorDeOjbetos::cargarCombos(string nombrePersonaje){
 
 	vector<string>* vectorTeclasCombo1 = new vector<string>;
@@ -775,4 +767,12 @@ vector<Combo*>* CargadorDeOjbetos::cargarCombos(string nombrePersonaje){
 
 string CargadorDeOjbetos::verModoDeJuego(){
 	return this->modo_juego;
+}
+
+string CargadorDeOjbetos::getNombrePersonajeElegido1() const {
+	return nombrePersonajeElegido1;
+}
+
+string CargadorDeOjbetos::getNombrePersonajeElegido2() const {
+	return nombrePersonajeElegido2;
 }

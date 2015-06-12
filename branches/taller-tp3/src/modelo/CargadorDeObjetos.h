@@ -58,10 +58,11 @@ public:
 	map<estado_personaje, BVH*>* cargarCajasColisionPersonaje(float ancho_logico_personaje, float alto_logico_personaje);
 	BVH* cargarCajasColisionArmaPersonaje(float ancho_logico_arma, float alto_logico_arma);
 	void cargarInfo_desdeMenus();
-	string getIdPersonaje1Elegido() const;
-	string getIdPersonaje2Elegido() const;
 	vector<Combo*>* cargarCombos(string nombrePersonaje);
 	string verModoDeJuego();
+	string getNombrePersonajeElegido1() const;
+	string getNombrePersonajeElegido2() const;
+
 private:
 	Jugador* cargarJugador(JugadorDef* jugadorDef);
 
