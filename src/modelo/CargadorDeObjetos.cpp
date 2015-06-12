@@ -7,13 +7,11 @@
 
 #include "CargadorDeObjetos.h"
 
-#include <SDL2/SDL_render.h>
 #include <SDL2/SDL_video.h>
 #include <list>
 #include <utility>
 #include <vector>
 
-#include "../controlador/ControladorJoystick.h"
 #include "../controlador/ControlJoystick.h"
 #include "../controlador/ControlTeclado.h"
 #include "../json/ArmaDef.h"
@@ -230,14 +228,13 @@ void CargadorDeOjbetos::cargarEscenarioGrafico(PersonajeDibujable* personajeDibu
 Jugador* CargadorDeOjbetos::cargarJugador(JugadorDef* jugadorDef)
 {
 	string idPersonaje = jugadorDef->getIdPersonaje();
-/*
+
 	if(this->modo_juego == "P1_vs_CPU"){
-		PersonajeInteligente* personaje = this->cargarPersonajes()->find(idPersonaje)->second;
+		PersonajeInteligente* personaje = (PersonajeInteligente*)this->cargarPersonajes()->find(idPersonaje)->second;
 		PersonajeDibujable* personajeDibujable = this->cargarPersonajesDibujables()->find(idPersonaje)->second;
 
 		((Arma*)personaje->getArma())->agregarObservador(personajeDibujable->getArma());
 
-		// by ariel: se puede usar tambien ControlTeclado
 		string tipo_control = jugadorDef->getTipoControl();
 		Control* control;
 		if ( tipo_control == "TECLADO" )
@@ -255,13 +252,12 @@ Jugador* CargadorDeOjbetos::cargarJugador(JugadorDef* jugadorDef)
 		Jugador* jugador = new Jugador(personaje, personajeDibujable, control, tipo_control, mapaDeCombos);
 
 		return jugador;
-	}else{*/
+	}else{
 		Personaje* personaje = this->cargarPersonajes()->find(idPersonaje)->second;
 		PersonajeDibujable* personajeDibujable = this->cargarPersonajesDibujables()->find(idPersonaje)->second;
 
 		((Arma*)personaje->getArma())->agregarObservador(personajeDibujable->getArma());
 
-		// by ariel: se puede usar tambien ControlTeclado
 		string tipo_control = jugadorDef->getTipoControl();
 		Control* control;
 		if ( tipo_control == "TECLADO" )
@@ -279,7 +275,7 @@ Jugador* CargadorDeOjbetos::cargarJugador(JugadorDef* jugadorDef)
 		Jugador* jugador = new Jugador(personaje, personajeDibujable, control, tipo_control, mapaDeCombos);
 
 		return jugador;
-	//}
+	}
 }
 
 Jugador* CargadorDeOjbetos::cargarJugador1() {
