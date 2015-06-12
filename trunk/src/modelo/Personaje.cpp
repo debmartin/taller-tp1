@@ -42,6 +42,8 @@ Personaje::Personaje(
 	cajasPorEstado(cajas_orientacion_derecha)
 
 {
+	this->fatality1=NULL;
+	this->fatality2=NULL;
 	this->energia = ENERGIA_INICIAL;
 	this->tiempoBloqueo = 0;
 
@@ -644,3 +646,27 @@ void Personaje::definirPosicionIncial_enX(double x)
 	this->posicion = posicionIncial;
 	this->posicionInicial = posicionIncial;
 }
+
+void Personaje::setFatality1(Fatality* fatalityprincipal)
+{
+	if (this->fatality1==NULL)
+	{
+		this->fatality1=fatalityprincipal;
+	}
+}
+void Personaje::setFatality2(Fatality* fatalitysecundaria)
+{
+	if (this->fatality1==NULL)
+	{
+		this->fatality1=fatalitysecundaria;
+	}
+}
+
+Fatality* Personaje::getFatalityPrincipal()
+{
+	return this->fatality1;
+}
+Fatality* Personaje::getFatalitySecundaria(){
+	return this->fatality2;
+}
+
