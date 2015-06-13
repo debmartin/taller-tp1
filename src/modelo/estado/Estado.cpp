@@ -80,7 +80,10 @@ bool Estado::estaMareado(){
 }
 
 bool Estado::estaHaciendoToma(){
-	cout<<"Estado esta haciendo toma"<<endl;
+    return false;
+}
+
+bool Estado::estaTomandoAlOponente(){
     return false;
 }
 

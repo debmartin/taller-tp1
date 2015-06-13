@@ -43,6 +43,7 @@
 #include "estado/Mareado.h"
 #include "estado/Deslizar.h"
 #include "estado/Arrojado.h"
+#include "estado/TomandoOponente.h"
 #include "estado/Fatality.h"
 #include "../utils/Loggeable.h"
 #include "Observable.h"
@@ -133,6 +134,7 @@ public:
 	bool estaInhabilitado();
 	bool estaMareado();
 	bool estaHaciendoToma();
+	bool estaTomandoAlOponente();
 	void cambiarEstado(Estado* nuevo);
 	estado_personaje getEstado();
 	Estado* verEstado();
