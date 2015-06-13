@@ -23,3 +23,7 @@ Muerto::~Muerto()
 bool Muerto::estaEnPiso(){
     return true;
 }
+
+bool Muerto::estaMuerto(){
+    return true;
+}

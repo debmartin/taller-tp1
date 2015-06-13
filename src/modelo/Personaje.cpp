@@ -187,12 +187,20 @@ bool Personaje::haciendoFatality(){
 	return (estado->haciendoFatality());
 }
 
+bool Personaje::recibioFatality(){
+	return (estado->recibioFatality());
+}
+
 bool Personaje::estaSinEnergia(){
     return (this->energia <= 0);
 }
 
 bool Personaje::estaMareado(){
 	 return (estado->estaMareado());
+}
+
+bool Personaje::estaMuerto(){
+	 return (estado->estaMuerto());
 }
 
 bool Personaje::estaHaciendoToma(){
@@ -395,7 +403,11 @@ void Personaje::victoria(){
 }
 
 void Personaje::morir(){
-	cambiarEstado(new EnEspera(posicion, MUERTO, (*cajasPorEstado)[EN_ESPERA]));
+	if(recibioFatality()){
+		cambiarEstado(new Muerto(posicion, estado->Id(), (*cajasPorEstado)[EN_ESPERA]));
+	}else{
+		cambiarEstado(new EnEspera(posicion, MUERTO, (*cajasPorEstado)[EN_ESPERA]));
+	}
 	bloquearPersonaje(TIEMPO_FESTEJO_VICTORIA);
 }
 
@@ -711,16 +723,21 @@ void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
 void Personaje::update(Colisionable* enemigo){
     Logger::getInstance()->debug("Personaje: update.");
 
-    if(estaEnPiso())
+    if(estaEnPiso() ){
        return;
 
-    if(estaMareado() && enemigo->ejecutandoMovimientoEspecial() && !haciendoFatality()){
+	}
+	else if(estaMareado() && enemigo->ejecutandoMovimientoEspecial() && !recibioFatality()){
+
     	if(enemigo->verEstado()->haciendoFatality()){
     		recibirFatality(enemigo);
     	}
-    }
+    }/*else if(recibioFatality() && !estaBloqueado()){
+    	morir();
+    }*/
 
-    else if(estaSinEnergia() && !estaSaltando() && !estaEnPiso() && !haciendoFatality()){
+    else if(estaSinEnergia() && !estaSaltando() && !estaEnPiso() && !haciendoFatality() && !estaMareado()){
+    	cout<<"BBBBBB"<<endl;
     	mareado();
     }
 

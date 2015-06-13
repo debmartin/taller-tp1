@@ -129,9 +129,11 @@ public:
 	bool ejecutandoMovimientoEspecial();
 	bool efectuandoPatadaGiratoria();
 	bool haciendoFatality();
+	bool recibioFatality();
 	bool estaEnCaida();
 	bool estaInhabilitado();
 	bool estaMareado();
+	bool estaMuerto();
 	bool estaHaciendoToma();
 	bool estaTomandoAlOponente();
 	void cambiarEstado(Estado* nuevo);
