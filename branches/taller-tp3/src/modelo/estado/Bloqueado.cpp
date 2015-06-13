@@ -44,3 +44,11 @@ bool Bloqueado::efectuandoGancho(){
 bool Bloqueado::estaMareado(){
 	return (estadoDeBloqueo->estaMareado());
 }
+
+bool Bloqueado::estaTomandoAlOponente(){
+	return (estadoDeBloqueo->estaTomandoAlOponente());
+}
+
+bool Bloqueado::estaHaciendoToma(){
+	return (estadoDeBloqueo->estaHaciendoToma());
+}

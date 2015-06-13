@@ -185,8 +185,8 @@ void ControladorPersonaje::identificarOrdenPersonaje1(){
 		}else if(estadoTeclado[SDL_SCANCODE_H]){
 			personaje1->patadaAlta();
 		}else if(estadoTeclado[SDL_SCANCODE_J]){
-			personaje1->deslizar();
-			//personaje1->piniaBaja();
+			//personaje1->deslizar();
+			personaje1->piniaBaja();
 		}else if(estadoTeclado[SDL_SCANCODE_K]){
 			personaje1->tijera();
 			//personaje1->patadaBaja();
@@ -248,8 +248,8 @@ void ControladorPersonaje::identificarOrdenPersonaje2(){
 		}else if(estadoTeclado[SDL_SCANCODE_V]){
 			personaje2->patadaAlta();
 		}else if(estadoTeclado[SDL_SCANCODE_B]){
-			personaje2->deslizar();
-			//personaje2->piniaBaja();
+			//personaje2->deslizar();
+			personaje2->piniaBaja();
 		}else if(estadoTeclado[SDL_SCANCODE_N]){
 			personaje2->tijera();
 			//personaje2->patadaBaja();

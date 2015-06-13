@@ -407,7 +407,7 @@ void Personaje::deslizar(){
 }
 
 void Personaje::tijera(){
-	cambiarEstado(new EnEspera(posicion, TIJERA, (*cajasPorEstado)[EN_ESPERA]));
+	cambiarEstado(new TomandoOponente(posicion, TIJERA, (*cajasPorEstado)[EN_ESPERA]));
 	Sonidos::getInstancia()->reproducirSonido("sonido_deslizar");
 	bloquearPersonaje(50);
 }
@@ -426,6 +426,7 @@ void Personaje::mantenerReposo(){
 void Personaje::ser_arrojado(){
 	cout<<"Ser arrojado"<<endl;
 	cambiarEstado(new Arrojado(posicion, ARROJADO, (*cajasPorEstado)[SALTANDO_VERTICAL], direccion));
+	bloquearPersonaje(100);
 	Logger::getInstance()->debug("Personaje: arrojado.");
 }
 
@@ -515,7 +516,10 @@ void Personaje::recibirGolpe(Colisionable* otro){
 		//Si el oponente pega una patada:
 		}else if(otro->verEstado()->efectuandoPatadaGiratoria()){
 			derribado();
-		}else if(!estaSaltando()){
+		}/*else if(otro->verEstado()->estaTomandoAlOponente()){
+			cout<<"Personajeser arrojado"<<endl;
+			ser_arrojado();
+		}*/else if(!estaSaltando()){
 			golpeado();
 			Vector2f vectorEmpuje = (direccion == DIRECCION_DERECHA) ? VECTOR_EMPUJE_IZQUIERDA : VECTOR_EMPUJE_DERECHA;
 			if (! (llegoAlLimiteDerecho() || llegoAlLimiteIzquierdo()))
@@ -536,13 +540,11 @@ void Personaje::recibirGolpe(Colisionable* otro){
 	}else{
 		if(pegadoAlOponente(otro)){
 			cout<<"pegado al oponente"<<endl;
-			ser_arrojado();
-			//golpeado();
+			golpeado();
 			//retroceder();
 		}else{
 			cout<<"separado del oponente"<<endl;
-			//golpeado();
-			ser_arrojado();
+			golpeado();
 		}
 	}
     Logger::getInstance()->debug("Personaje: recibiendo golpe.");
@@ -690,8 +692,10 @@ void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
     }
 /*
     if(estaHaciendoToma()){
+    	cout<<"Personaje esta haciendo toma"<<endl;
     	posicion = posicionCandidata;
-    }*/
+    }
+    else */
     if (estaCaminando()){
         arrastrar(enemigo);
     } else if (estaSaltando()) {
