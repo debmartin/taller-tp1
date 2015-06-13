@@ -18,7 +18,7 @@
 #include "../vista/Renderizador.h"
 #include "Textura.h"
 
-CajaDeTexto::CajaDeTexto(int cant_caracteres, SDL_Color textColor, int pos_x, int pos_y) {
+CajaDeTexto::CajaDeTexto(int cant_caracteres, int pos_x, int pos_y) {
 
 	this->cant_caracteres = cant_caracteres;
 	this->pos_x = pos_x;
@@ -26,7 +26,7 @@ CajaDeTexto::CajaDeTexto(int cant_caracteres, SDL_Color textColor, int pos_x, in
 	this->alto = 30;
 	this->ancho = (cant_caracteres * this->alto) / 2;
 	this->textura = new Textura();
-	this->textColor = textColor;
+	this->textColor = { 0xFF, 0, 0, 0xFF };
 	this->enfocado = false;
 	this->texto = "";
 }

@@ -32,7 +32,7 @@ private:
 	bool enfocado;
 	string texto;
 public:
-	CajaDeTexto(int cant_caracteres, SDL_Color textColor, int pos_x, int pos_y);
+	CajaDeTexto(int cant_caracteres, int pos_x, int pos_y);
 	virtual ~CajaDeTexto();
 	bool manejarEvento(SDL_Event e);
 	void dibujar(bool renderText);

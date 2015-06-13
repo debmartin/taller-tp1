@@ -77,19 +77,19 @@ void Posicion::deselegir() {
 	this->elegido = false;
 }
 
-void Posicion::enfocarIzquierda() {
+void Posicion::posicionarIzquierda() {
 	this->x = this->x - 1;
 }
 
-void Posicion::enfocarDerecha() {
+void Posicion::posicionarDerecha() {
 	this->x = this->x + 1;
 }
 
-void Posicion::enfocarArriba() {
+void Posicion::posicionarArriba() {
 	this->y = this->y - 1;
 }
 
-void Posicion::enfocarAbajo() {
+void Posicion::posicionarAbajo() {
 	this->y = this->y + 1;
 }
 

@@ -20,7 +20,7 @@ using namespace std;
 
 union SDL_Event;
 
-const int BUTTON_WIDTH = 90; // ancho original -> 118.20;
+const int BUTTON_WIDTH = 118.20;
 const int BUTTON_HEIGHT = 127;
 
 //The mouse button

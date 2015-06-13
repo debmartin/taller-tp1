@@ -35,7 +35,7 @@ public:
 	string getNombrePersonaje1() const;
 	string getNombrePersonaje2() const;
 private:
-	void dibujarPersonajeEnfocado(int posX, int posY, string idPersonajeEnfocado);
+	void dibujarPersonajeEnfocado(int posX, int posY, string idPersonajeEnfocado, OrientacionSprite orientacion);
 };
 
 #endif /* SRC_MENUS_PANTALLASELECCIONARPERSONAJE_H_ */
