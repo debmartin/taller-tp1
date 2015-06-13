@@ -10,17 +10,42 @@
 #include "src/Sonido.h"
 #include "src/Sonidos.h"
 #include "src/utils/Logger.h"
-#include "src/vista/PersonajeDibujable.h"
 #include "src/vista/VentanaGrafica.h"
 
-Juego* cargarJuego(string escenarioPath){
+// variables globales
+string idPersonaje1Elegido_g;
+string idPersonaje2Elegido_g;
+string modo_juego_g;
+string nombrePersonajeElegido1_g;
+string nombrePersonajeElegido2_g;
+
+Juego* cargarJuego(string escenarioPath, int& cant_rounds){
 	Logger::getInstance()->info("#################################################");
 	Logger::getInstance()->info("############ INICIA LA CARGA DEL JUEGO ##########");
 	Logger::getInstance()->info("#################################################");
 
 	CargadorDeOjbetos cargador_de_objetos(escenarioPath);
 
-	cargador_de_objetos.cargarInfo_desdeMenus();
+	if ( (cant_rounds%2) == 1 )
+	{
+		cargador_de_objetos.cargarInfo_desdeMenus();
+
+		// tomar la info desde los menus y cargarla en variables globales
+		idPersonaje1Elegido_g = cargador_de_objetos.getIdPersonaje1Elegido();
+		idPersonaje2Elegido_g = cargador_de_objetos.getIdPersonaje2Elegido();
+		modo_juego_g = cargador_de_objetos.verModoDeJuego();
+		nombrePersonajeElegido1_g = cargador_de_objetos.getNombrePersonajeElegido1();
+		nombrePersonajeElegido2_g = cargador_de_objetos.getNombrePersonajeElegido2();
+	}
+	else
+	{
+		// recargar info que se cargaron en las variables globales de arriba
+		cargador_de_objetos.setIdPersonaje1Elegido(idPersonaje1Elegido_g);
+		cargador_de_objetos.setIdPersonaje2Elegido(idPersonaje2Elegido_g);
+		cargador_de_objetos.setModoJuego(modo_juego_g);
+		cargador_de_objetos.setNombrePersonajeElegido1(nombrePersonajeElegido1_g);
+		cargador_de_objetos.setNombrePersonajeElegido2(nombrePersonajeElegido2_g);
+	}
 
 	Jugador* jugador1 = cargador_de_objetos.cargarJugador1();
 	Jugador* jugador2 = cargador_de_objetos.cargarJugador2();
@@ -89,33 +114,28 @@ int main(int argc, char* args[])
 	{
 		string argumento(args[1]);
 		Logger::getInstance()->info("argumento desde la consola: "+argumento);
-		if ( argumento == "-test" )
+
+		bool recargar = true;
+		int cant_rounds = 1;
+		while (recargar)
 		{
-//			Test tests;
-//			tests.ejecutar();
+			Musica* musica = new Musica("mortal64.mid", 100);
+			musica->reproducir();
+			agregarSonidos();
+
+			recargar = false;
+			string escenario_path(argumento);
+			Juego* juego = cargarJuego(argumento, cant_rounds);
+			correrJuego(juego, recargar);
+			cant_rounds++;
+
+			musica->detener();
+			delete musica;
 		}
-		else
-		{
 
-			bool recargar = true;
-			while (recargar){
-				Musica* musica = new Musica("mortal64.mid", 100);
-				musica->reproducir();
-				agregarSonidos();
-
-				recargar = false;
-				string escenario_path(argumento);
-				Juego* juego = cargarJuego(argumento);
-				correrJuego(juego, recargar);
-
-				musica->detener();
-				delete musica;
-			}
-
-			Logger::getInstance()->info("#################################################");
-			Logger::getInstance()->info("################## JUEGO FINALIZADO #############");
-			Logger::getInstance()->info("#################################################");
-		}
+		Logger::getInstance()->info("#################################################");
+		Logger::getInstance()->info("################## JUEGO FINALIZADO #############");
+		Logger::getInstance()->info("#################################################");
 	}
 
 	return 0;
