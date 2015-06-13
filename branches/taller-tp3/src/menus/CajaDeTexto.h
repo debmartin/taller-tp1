@@ -39,6 +39,7 @@ public:
 	bool loadMedia();
 	string getTexto() const;
 	bool estoyEnfocado();
+	void setTexto(string texto);
 };
 
 #endif /* CAJADETEXTO_H_ */

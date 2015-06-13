@@ -101,7 +101,6 @@ Botonera::Botonera(string tipo, int cant_filas, int cant_columnas, Posicion* pos
 	this->modo_juego_elegido = modo_juego_elegido;
 	this->controladorBotonera = new ControladorBotonera(this->cant_filas, this->cant_columnas);
 	this->elegirPosicionAleatoriamente = true;
-
 }
 
 bool Botonera::loadMedia(string path_imagen1, string path_imagen2, string path_imagen3) {
@@ -140,7 +139,7 @@ void Botonera::manejarEventoJugador(SDL_Event evento) {
     TheInputHandlerMenu::Instance()->handleEventsJoysticks(evento);
 
     if(this->tipoDeControl_jugador1 == "JOYSTICK"){
-    	this->controladorBotonera->identificarOrdenJoystick(this->posicionEnfocadaDelJugador1, JOYSTICK1MENU);
+    		this->controladorBotonera->identificarOrdenJoystick(this->posicionEnfocadaDelJugador1, JOYSTICK1MENU);
     	if( this->modo_juego_elegido == "P1_vs_P2"){
     		this->controladorBotonera->identificarOrdenJoystick(this->posicionEnfocadaDelJugador2, JOYSTICK2MENU);
     	}
@@ -184,7 +183,6 @@ void Botonera::actualizarModelo(bool* salirMenu) {
 			if ( posicionActual->getX()==this->posicionEnfocadaDelJugador1->getX() && posicionActual->getY()==this->posicionEnfocadaDelJugador1->getY())
 			{
 				this->salirMenu_jugador1 = false;
-
 				if ( this->posicionEnfocadaDelJugador1->estoyElegido() )
 				{
 					matriz[y][x]->getPosicionModelo()->elegir();
@@ -200,6 +198,7 @@ void Botonera::actualizarModelo(bool* salirMenu) {
 				{
 					matriz[y][x]->getPosicionModelo()->enfocar();
 					matriz[y][x]->getPosicionModelo()->deselegir();
+					this->idContenidoElegido_paraJugador1 = "";
 					this->idContenidoEnfocado_paraJugador1 = matriz[y][x]->getIdContenido();
 				}
 			}
@@ -220,6 +219,7 @@ void Botonera::actualizarModelo(bool* salirMenu) {
 					{
 						matriz[y][x]->getPosicionModelo()->enfocar();
 						matriz[y][x]->getPosicionModelo()->deselegir();
+						this->idContenidoElegido_paraJugador2 = "";
 						this->idContenidoEnfocado_paraJugador2 = matriz[y][x]->getIdContenido();
 					}
 				}
