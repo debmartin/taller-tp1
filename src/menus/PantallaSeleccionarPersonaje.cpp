@@ -9,22 +9,28 @@
 
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_keyboard.h>
+#include <SDL2/SDL_keycode.h>
+#include <SDL2/SDL_pixels.h>
+#include <SDL2/SDL_rect.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_stdinc.h>
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_video.h>
+#include <utility>
 
 #include "../utils/Logger.h"
 #include "../vista/Renderizador.h"
+#include "../vista/Sprite.h"
 #include "Boton.h"
 #include "Botonera.h"
 #include "CajaDeTexto.h"
 #include "Posicion.h"
 
 PantallaSeleccionarPersonaje::PantallaSeleccionarPersonaje(int anchopx, int altopx, string modo_juego_elegido, string tipoDeControl_jugador1,
-														   string tipoDeControl_jugador2):
+														   string tipoDeControl_jugador2, map<string, PersonajeDibujable*>* personajesDibujables):
 														   Pantalla(anchopx, altopx, tipoDeControl_jugador1, tipoDeControl_jugador2) {
 	this->modo_juego_elegido = modo_juego_elegido;
+	this->personajesDibujables = personajesDibujables;
 }
 
 PantallaSeleccionarPersonaje::~PantallaSeleccionarPersonaje() {
@@ -190,7 +196,10 @@ void PantallaSeleccionarPersonaje::dibujarPersonajeEnfocado(int posX, int posY, 
 	else if ( idPersonajeEnfocado == "sonya" )
 	{
 		// TODO dibujar el sprite "sprites-reposo" de sonya
+		this->personajesDibujables->find("sonya")->second->getSpritePersonaje()->dibujar();
+
 		SDL_SetRenderDrawColor( Renderizador::Instance()->getRenderer(), 0, 0xFF, 0, 0xFF );
+
 	}
 	else{
 		// TODO dibujar el sprite "sprites-reposo" de otro personaje

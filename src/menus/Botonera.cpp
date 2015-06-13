@@ -144,14 +144,6 @@ void Botonera::manejarEventoJugador(SDL_Event evento) {
     	if( this->modo_juego_elegido == "P1_vs_P2"){
     		this->controladorBotonera->identificarOrdenJoystick(this->posicionEnfocadaDelJugador2, JOYSTICK2MENU);
     	}
-		else
-		{
-			if ( this->elegirPosicionAleatoriamente )
-			{
-				this->posicionEnfocadaDelJugador2 = this->controladorBotonera->posicionarAleatoriamente();
-				this->elegirPosicionAleatoriamente = false;
-			}
-		}
 	}else{
 		//Si se presiona una tecla
 		if ( evento.key.repeat == 0 )
@@ -161,16 +153,18 @@ void Botonera::manejarEventoJugador(SDL_Event evento) {
 			{
 				this->controladorBotonera->identificarOrdenJugador2(this->posicionEnfocadaDelJugador2);
 			}
-			else
-			{
-				if ( this->elegirPosicionAleatoriamente )
-				{
-					this->posicionEnfocadaDelJugador2 = this->controladorBotonera->posicionarAleatoriamente();
-					this->elegirPosicionAleatoriamente = false;
-				}
-			}
 		}
 	}
+
+    if( this->modo_juego_elegido != "P1_vs_P2")
+    {
+		if ( this->elegirPosicionAleatoriamente )
+		{
+			this->posicionEnfocadaDelJugador2 = this->controladorBotonera->posicionarAleatoriamente();
+			this->idContenidoEnfocado_paraJugador2 = matriz[this->posicionEnfocadaDelJugador2->getY()][this->posicionEnfocadaDelJugador2->getX()]->getIdContenido();
+			this->elegirPosicionAleatoriamente = false;
+		}
+    }
 
 }
 
