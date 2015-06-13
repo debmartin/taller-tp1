@@ -50,6 +50,9 @@ private:
 	string modo_juego_elegido;
 	ControladorBotonera* controladorBotonera;
 	bool elegirPosicionAleatoriamente;
+
+	bool esEligidoContenido1;
+	bool esEligidoContenido2;
 public:
 	Botonera(string tipo, int cant_filas, int cant_columnas, Posicion* posicion, string tipoDeControl_jugador1, string tipoDeControl_jugador2, string modo_juego_elegido="");
 	bool loadMedia(string path_imagen, string path_imagen2, string path_imagen3);

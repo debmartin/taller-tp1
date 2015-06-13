@@ -83,6 +83,8 @@ void PantallaSeleccionarPersonaje::iniciar() {
 		SDL_StartTextInput();
 
 		bool salirEleccionPersonajes = false;
+		bool setear_texto1 = true;
+		bool setear_texto2 = true;
 
 	    static const int FPS = 60;
 	    static const int DELAY_TIME = 1000.0f / FPS;
@@ -114,9 +116,30 @@ void PantallaSeleccionarPersonaje::iniciar() {
 			    {
 			    	botoneraPersonajes->manejarEventoJugador(evento);
 			    }
+
 				botoneraPersonajes->actualizarModelo(&salirEleccionPersonajes);
-			    renderText1 = cajaDeTextoPersonaje1->manejarEvento(evento);
-			    renderText2 = cajaDeTextoPersonaje2->manejarEvento(evento);
+
+				///
+				if ( botoneraPersonajes->getIdContenidoElegidoParaJugador1()!="" && setear_texto1)
+				{
+					renderText1 = true;
+					cajaDeTextoPersonaje1->setTexto(botoneraPersonajes->getIdContenidoElegidoParaJugador1());
+					setear_texto1 = false;
+				}
+				else
+				{
+					renderText1 = cajaDeTextoPersonaje1->manejarEvento(evento);
+				}
+
+				if ( botoneraPersonajes->getIdContenidoElegidoParaJugador2()!="" && setear_texto2)
+				{
+					renderText2 = true;
+					cajaDeTextoPersonaje2->setTexto(botoneraPersonajes->getIdContenidoElegidoParaJugador2());
+					setear_texto2 = false;
+				}else
+				{
+					renderText2 = cajaDeTextoPersonaje2->manejarEvento(evento);
+				}
 			}
 
 			// CLEAR screen

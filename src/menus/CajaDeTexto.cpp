@@ -119,3 +119,7 @@ string CajaDeTexto::getTexto() const {
 bool CajaDeTexto::estoyEnfocado() {
 	return this->enfocado;
 }
+
+void CajaDeTexto::setTexto(string texto) {
+	this->texto = texto;
+}
