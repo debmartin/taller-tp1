@@ -11,8 +11,8 @@
 #include <map>
 #include <string>
 
+#include "../modelo/estado/Estado.h"
 #include "../modelo/Observador.h"
-#include "../modelo/Personaje.h"
 #include "../modelo/Vector2f.h"
 #include "Animacion.h"
 #include "Dibujable.h"
@@ -86,6 +86,7 @@ public:
 	void cambiarOrientacionHaciaIzquierda();
 	void cambiarColor(ColorAlternativoDef* colorAlternativo);
 	ColorAlternativoDef* getColorAlternativo() const;
+	Sprite* getSpritePersonaje() const;
 };
 
 #endif /* SRC_VISTA_PERSONAJEDIBUJABLE_H_ */

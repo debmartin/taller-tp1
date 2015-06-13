@@ -9,8 +9,11 @@
 
 #include <utility>
 
+#include "../modelo/fisica/BVH.h"
+#include "../modelo/Personaje.h"
 #include "../utils/Logger.h"
 #include "ArmaDibujable.h"
+#include "Renderizador.h"
 #include "VentanaGrafica.h"
 
 PersonajeDibujable::PersonajeDibujable() {
@@ -317,4 +320,8 @@ void PersonajeDibujable::cambiarColor(ColorAlternativoDef* colorAlternativoDef) 
 		it->second->cambiarColor(colorAlternativoDef);
 	}
 
+}
+
+Sprite* PersonajeDibujable::getSpritePersonaje() const {
+	return spritePersonaje;
 }

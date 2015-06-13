@@ -8,8 +8,10 @@
 #ifndef SRC_MENUS_PANTALLASELECCIONARPERSONAJE_H_
 #define SRC_MENUS_PANTALLASELECCIONARPERSONAJE_H_
 
+#include <map>
 #include <string>
 
+#include "../vista/PersonajeDibujable.h"
 #include "Pantalla.h"
 
 using namespace std;
@@ -21,8 +23,10 @@ private:
 	string modo_juego_elegido;
 	string nombrePersonaje1;
 	string nombrePersonaje2;
+	map<string, PersonajeDibujable*>* personajesDibujables;
 public:
-	PantallaSeleccionarPersonaje(int anchopx, int altopx, string modo_juego_elegido, string tipoDeControl_jugador1, string tipoDeControl_jugador2);
+	PantallaSeleccionarPersonaje(int anchopx, int altopx, string modo_juego_elegido, string tipoDeControl_jugador1,
+								string tipoDeControl_jugador2, map<string, PersonajeDibujable*>* personajesDibujables);
 	virtual ~PantallaSeleccionarPersonaje();
 	void iniciar();
 	string getIdPersonaje1Elegido();
