@@ -147,8 +147,6 @@ void PantallaSeleccionarPersonaje::iniciar() {
 		this->nombrePersonaje1 = cajaDeTextoPersonaje1->getTexto();
 		this->nombrePersonaje2 = cajaDeTextoPersonaje2->getTexto();
 
-		cout<<this->nombrePersonaje1<<" "<<this->nombrePersonaje2<<endl;
-
 	}else {
 		if ( !loadMedia_botonera )
 			Logger::getInstance()->error("No se pudo cargar imagenes para la botonera en la pantalla de eleccion de personajes");
