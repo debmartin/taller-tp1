@@ -10,15 +10,13 @@
 
 #include <map>
 #include <string>
+#include <vector>
 
 #include "../vista/PersonajeDibujable.h"
-#include "../controlador/ControladorJoystickMenu.h"
 #include "Combo.h"
-#include "MapaDeCombos.h"
 #include "estado/Estado.h"
 #include "fisica/BVH.h"
 #include "Personaje.h"
-#include "PersonajeInteligente.h"
 
 class JugadorDef;
 
@@ -59,9 +57,17 @@ public:
 	BVH* cargarCajasColisionArmaPersonaje(float ancho_logico_arma, float alto_logico_arma);
 	void cargarInfo_desdeMenus();
 	vector<Combo*>* cargarCombos(string nombrePersonaje);
+
+	string getIdPersonaje1Elegido() const;
+	string getIdPersonaje2Elegido() const;
 	string verModoDeJuego();
 	string getNombrePersonajeElegido1() const;
 	string getNombrePersonajeElegido2() const;
+	void setIdPersonaje1Elegido(string idPersonaje1Elegido);
+	void setIdPersonaje2Elegido(string idPersonaje2Elegido);
+	void setModoJuego(string modoJuego);
+	void setNombrePersonajeElegido1(string nombrePersonajeElegido1);
+	void setNombrePersonajeElegido2(string nombrePersonajeElegido2);
 
 private:
 	Jugador* cargarJugador(JugadorDef* jugadorDef);

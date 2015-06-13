@@ -10,8 +10,8 @@
 #include <SDL2/SDL_video.h>
 #include <list>
 #include <utility>
-#include <vector>
 
+#include "../controlador/ControladorJoystickMenu.h"
 #include "../controlador/ControlJoystick.h"
 #include "../controlador/ControlTeclado.h"
 #include "../json/ArmaDef.h"
@@ -37,7 +37,9 @@
 #include "CajasColision.h"
 #include "fisica/AABB.h"
 #include "Jugador.h"
+#include "MapaDeCombos.h"
 #include "Objeto.h"
+#include "PersonajeInteligente.h"
 #include "Vector2f.h"
 
 CargadorDeOjbetos::CargadorDeOjbetos(string escenario_path) {
@@ -639,13 +641,13 @@ void CargadorDeOjbetos::cargarInfo_desdeMenus() {
 																tipoDeControl_jugador2);
 	pantallaSeleccionarModo->iniciar();
 	string modo_juego_elegido = pantallaSeleccionarModo->getModoDeJuegoElegido();
-	this->modo_juego = modo_juego_elegido;
 
 	PantallaSeleccionarPersonaje* pantallaSeleccionarPersonajes = new PantallaSeleccionarPersonaje(anchopx, altopx, modo_juego_elegido,
 																		tipoDeControl_jugador1,tipoDeControl_jugador2,
 																		this->cargarPersonajesDibujables());
 	pantallaSeleccionarPersonajes->iniciar();
 
+	this->modo_juego = modo_juego_elegido;
 	this->idPersonaje1Elegido = pantallaSeleccionarPersonajes->getIdPersonaje1Elegido();
 	this->idPersonaje2Elegido = pantallaSeleccionarPersonajes->getIdPersonaje2Elegido();
 	this->nombrePersonajeElegido1 = pantallaSeleccionarPersonajes->getNombrePersonaje1();
@@ -747,6 +749,14 @@ vector<Combo*>* CargadorDeOjbetos::cargarCombos(string nombrePersonaje){
 	return vectorDeCombos;
 }
 
+string CargadorDeOjbetos::getIdPersonaje1Elegido() const {
+	return idPersonaje1Elegido;
+}
+
+string CargadorDeOjbetos::getIdPersonaje2Elegido() const {
+	return idPersonaje2Elegido;
+}
+
 string CargadorDeOjbetos::verModoDeJuego(){
 	return this->modo_juego;
 }
@@ -757,4 +767,28 @@ string CargadorDeOjbetos::getNombrePersonajeElegido1() const {
 
 string CargadorDeOjbetos::getNombrePersonajeElegido2() const {
 	return nombrePersonajeElegido2;
+}
+
+void CargadorDeOjbetos::setIdPersonaje1Elegido(
+		string idPersonaje1Elegido) {
+	this->idPersonaje1Elegido = idPersonaje1Elegido;
+}
+
+void CargadorDeOjbetos::setIdPersonaje2Elegido(
+		string idPersonaje2Elegido) {
+	this->idPersonaje2Elegido = idPersonaje2Elegido;
+}
+
+void CargadorDeOjbetos::setModoJuego(string modoJuego) {
+	modo_juego = modoJuego;
+}
+
+void CargadorDeOjbetos::setNombrePersonajeElegido1(
+		string nombrePersonajeElegido1) {
+	this->nombrePersonajeElegido1 = nombrePersonajeElegido1;
+}
+
+void CargadorDeOjbetos::setNombrePersonajeElegido2(
+		string nombrePersonajeElegido2) {
+	this->nombrePersonajeElegido2 = nombrePersonajeElegido2;
 }
