@@ -33,6 +33,10 @@ bool Bloqueado::estaEnPiso(){
 	return (estadoDeBloqueo->estaEnPiso());
 }
 
+bool Bloqueado::estaMuerto(){
+	return (estadoDeBloqueo->estaMuerto());
+}
+
 bool Bloqueado::efectuandoPatadaGiratoria(){
 	return (estadoDeBloqueo->efectuandoPatadaGiratoria());
 }

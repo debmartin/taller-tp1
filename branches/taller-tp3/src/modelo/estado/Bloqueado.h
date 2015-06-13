@@ -13,6 +13,7 @@ class Bloqueado : public Estado
         bool estaGolpeando();
         bool ejecutandoMovimientoEspecial();
         bool estaEnPiso();
+        bool estaMuerto();
         bool efectuandoPatadaGiratoria();
         bool efectuandoGancho();
         bool estaMareado();

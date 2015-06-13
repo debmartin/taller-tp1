@@ -14,10 +14,11 @@
 class Muerto : public Estado
 {
     public:
-                Muerto(Vector2f posInicial, BVH* caja);
-                Muerto(Vector2f posInicial, estado_personaje estado,BVH* caja);
+        Muerto(Vector2f posInicial, BVH* caja);
+        Muerto(Vector2f posInicial, estado_personaje estado,BVH* caja);
         virtual ~Muerto();
         bool estaEnPiso();
+        bool estaMuerto();
     protected:
     private:
 };

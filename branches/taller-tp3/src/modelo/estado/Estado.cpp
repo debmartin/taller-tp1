@@ -79,6 +79,10 @@ bool Estado::estaMareado(){
     return false;
 }
 
+bool Estado::estaMuerto(){
+    return false;
+}
+
 bool Estado::estaHaciendoToma(){
     return false;
 }
@@ -104,6 +108,10 @@ bool Estado::efectuandoPatadaGiratoria(){
 }
 
 bool Estado::haciendoFatality(){
+	return false;
+}
+
+bool Estado::recibioFatality(){
 	return false;
 }
 

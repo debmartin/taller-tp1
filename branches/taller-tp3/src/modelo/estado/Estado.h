@@ -83,8 +83,10 @@ class Estado
         virtual bool estaGolpeando();
         virtual bool estaEnPiso();
         virtual bool haciendoFatality();
+        virtual bool recibioFatality();
         virtual bool estaDesplazandoVertical();
         virtual bool estaMareado();
+        virtual bool estaMuerto();
         virtual bool estaHaciendoToma();
         virtual bool estaTomandoAlOponente();
 
