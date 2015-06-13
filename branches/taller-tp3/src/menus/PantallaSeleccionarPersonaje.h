@@ -30,6 +30,8 @@ public:
 	string getModoJuegoElegido() const;
 	string getNombrePersonaje1() const;
 	string getNombrePersonaje2() const;
+private:
+	void dibujarPersonajeEnfocado(int posX, int posY, string idPersonajeEnfocado);
 };
 
 #endif /* SRC_MENUS_PANTALLASELECCIONARPERSONAJE_H_ */
