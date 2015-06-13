@@ -57,7 +57,6 @@ Personaje::Personaje(
 
 	// ORIENTACION INICIAL DE BVH - POR DEFECTO LA ORIENTACION ES DERECHA
 	this->direccion = DIRECCION_DERECHA;
-	this->estaViviendo = true;
 }
 
 Personaje::~Personaje(){
@@ -188,7 +187,7 @@ bool Personaje::haciendoFatality(){
 	return (estado->haciendoFatality());
 }
 
-bool Personaje::estaMuerto(){
+bool Personaje::estaSinEnergia(){
     return (this->energia <= 0);
 }
 
@@ -381,7 +380,7 @@ void Personaje::derribado(){
 
 void Personaje::mareado(){
 	cambiarEstado(new Mareado(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
-	bloquearPersonaje(TIEMPO_FESTEJO_VICTORIA);
+	//bloquearPersonaje(TIEMPO_FESTEJO_VICTORIA);
 }
 
 void Personaje::retroceder(){
@@ -431,25 +430,19 @@ void Personaje::ser_arrojado(){
 }
 
 void Personaje::bebe(){
-	cambiarEstado(new EnEspera(posicion, BEBE, (*cajasPorEstado)[EN_ESPERA]));
-	if ( this->estaViviendo )
-	{
-		Sonidos::getInstancia()->reproducirSonido("sonido_bebe");
-	}
-	this->estaViviendo = false;
-	bloquearPersonaje(TIEMPO_FESTEJO_VICTORIA);
+	cambiarEstado(new Fatality(posicion, BEBE, (*cajasPorEstado)[EN_ESPERA]));
+	Sonidos::getInstancia()->reproducirSonido("sonido_bebe");
+	//bloquearPersonaje(TIEMPO_FESTEJO_VICTORIA);
 }
 
 void Personaje::hacerFatality(){
+	cout<<"Haciendo fatalityyyy"<<endl;
 	cambiarEstado(new Fatality(posicion, EN_ESPERA, (*cajasPorEstado)[EN_ESPERA]));
+	bloquearPersonaje(100);
 }
 
 void Personaje::recibirFatality(Colisionable* enemigo){
-	//if(enemigo->verEstado()->Id() == BABALITY){
 	bebe();
-	//}else{
-		//morir();
-	//}
 }
 
 void Personaje::caer(){
@@ -642,7 +635,7 @@ void Personaje::volverAlPiso(float distanciaAObjetivo){
     } else {
         posicion = Vector2f(posicion.X(), posicionInicial.Y());
     }
-    if(estaMuerto()){
+    if(estaSinEnergia()){
         morirEnPiso();
     }else{
         mantenerReposo();
@@ -720,22 +713,15 @@ void Personaje::update(Colisionable* enemigo){
 
     if(estaEnPiso())
        return;
-/*
-    if(estaMuerto() && estaMareado() && enemigo->ejecutandoMovimientoEspecial()){
+
+    if(estaMareado() && enemigo->ejecutandoMovimientoEspecial() && !haciendoFatality()){
     	if(enemigo->verEstado()->haciendoFatality()){
     		recibirFatality(enemigo);
     	}
-    }*/
-/*
-    if(enemigo->ejecutandoMovimientoEspecial() && !estaSaltando() && !estaEnPiso()){
-        if(enemigo->verEstado()->haciendoFatality()){
-        	bebe();
-        }
-    }*/
+    }
 
-    if(estaMuerto() && !estaSaltando() && !estaEnPiso()){
+    else if(estaSinEnergia() && !estaSaltando() && !estaEnPiso() && !haciendoFatality()){
     	mareado();
-    	//bebe();
     }
 
     if(estaBloqueado()){

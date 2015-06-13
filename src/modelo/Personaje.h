@@ -76,7 +76,6 @@ private:
 	double ancho;
 	double alto;
 	DireccionObjeto direccion;
-	bool estaViviendo;
 
 public:
     typedef void (Personaje::*Funcion) (void);
@@ -125,7 +124,7 @@ public:
 	bool estaDefendiendo();
 	bool estaBloqueado();
 	bool estaCaminando();
-	bool estaMuerto();
+	bool estaSinEnergia();
 	bool estaEnPiso();
 	bool ejecutandoMovimientoEspecial();
 	bool efectuandoPatadaGiratoria();
