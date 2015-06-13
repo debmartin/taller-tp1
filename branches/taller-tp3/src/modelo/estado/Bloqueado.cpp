@@ -52,3 +52,7 @@ bool Bloqueado::estaTomandoAlOponente(){
 bool Bloqueado::estaHaciendoToma(){
 	return (estadoDeBloqueo->estaHaciendoToma());
 }
+
+bool Bloqueado::haciendoFatality(){
+	return (estadoDeBloqueo->haciendoFatality());
+}

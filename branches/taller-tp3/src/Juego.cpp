@@ -98,29 +98,29 @@ void Juego::update(bool& recargar)
         	}
         }
 */
-        if (jugador2->getPersonaje()->estaMuerto() && jugador1->getPersonaje()->estaMuerto()) {
+        if (jugador2->getPersonaje()->estaSinEnergia() && jugador1->getPersonaje()->estaSinEnergia()) {
                 jugador1->getPersonaje()->victoria();
                 jugador2->getPersonaje()->victoria();
         }
-
-        if (jugador1->getPersonaje()->estaMuerto() && !ejecutandoFinal && !jugador2->getPersonaje()->estaSaltando()) {
-                jugador2->getPersonaje()->victoria();
+/*
+        if (jugador1->getPersonaje()->estaSinEnergia() && !ejecutandoFinal && !jugador2->getPersonaje()->estaSaltando()) {
+                //jugador2->getPersonaje()->victoria();
                 ejecutandoFinal = true;
         Logger::getInstance()->info("GAME OVER JUGADOR 1");
 
     }
-        if (jugador2->getPersonaje()->estaMuerto() && !ejecutandoFinal && !jugador1->getPersonaje()->estaSaltando()) {
-                jugador1->getPersonaje()->victoria();
+        if (jugador2->getPersonaje()->estaSinEnergia() && !ejecutandoFinal && !jugador1->getPersonaje()->estaSaltando()) {
+                //jugador1->getPersonaje()->victoria();
                 ejecutandoFinal = true;
         Logger::getInstance()->info("GAME OVER JUGADOR 2");
     }
 
-        if((!(jugador1->getPersonaje()->estaBloqueado()) && jugador2->getPersonaje()->estaMuerto() && ejecutandoFinal) ||
-                        (!(jugador2->getPersonaje()->estaBloqueado()) && jugador1->getPersonaje()->estaMuerto() && ejecutandoFinal)){
-                finalizarRound(recargar);
-        }else if (jugador2->getPersonaje()->estaMuerto() && jugador1->getPersonaje()->estaMuerto()) {
-                finalizarRound(recargar);
-        }
+        if((!(jugador1->getPersonaje()->estaBloqueado()) && jugador2->getPersonaje()->estaSinEnergia() && ejecutandoFinal) ||
+                        (!(jugador2->getPersonaje()->estaBloqueado()) && jugador1->getPersonaje()->estaSinEnergia() && ejecutandoFinal)){
+                //finalizarRound(recargar);
+        }else if (jugador2->getPersonaje()->estaSinEnergia() && jugador1->getPersonaje()->estaSinEnergia()) {
+                //finalizarRound(recargar);
+        }*/
 }
 
 

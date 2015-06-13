@@ -98,7 +98,7 @@ HUD::~HUD() {
 void HUD::dibujar(){
 	this->tHUD = updateTexture();
 	SDL_RenderCopy(this->gRenderer, this->tHUD, NULL, NULL);
-
+/*
 	//IMPRIMO COLA DE COMBOS 1
 	int x = 30; int y = 70;
 	std::deque<string>::iterator it1 = colaDeTeclas1->begin();
@@ -120,7 +120,7 @@ void HUD::dibujar(){
 		SDL_RenderCopy(this->gRenderer, combos, NULL, &destRect);
 		SDL_DestroyTexture(combos);
 	}
-
+*/
 }
 
 void HUD::recibirNotificacion(Observable* unObservable){
