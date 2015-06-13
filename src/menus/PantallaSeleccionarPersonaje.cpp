@@ -11,13 +11,13 @@
 #include <SDL2/SDL_keyboard.h>
 #include <SDL2/SDL_keycode.h>
 #include <SDL2/SDL_pixels.h>
-#include <SDL2/SDL_rect.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_stdinc.h>
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_video.h>
 #include <utility>
 
+#include "../modelo/Vector2f.h"
 #include "../utils/Logger.h"
 #include "../vista/Renderizador.h"
 #include "../vista/Sprite.h"
@@ -62,15 +62,13 @@ void PantallaSeleccionarPersonaje::iniciar() {
 
 	int cant_letras = 9;
 
-	SDL_Color textColor1 = { 0xFF, 0, 0, 0xFF };
-	int posX_1 = 10;
-	int posY_1 = this->getAltopx() - 50;
-	CajaDeTexto* cajaDeTextoPersonaje1 = new CajaDeTexto(cant_letras,textColor1,posX_1,posY_1);
+	int posX_1 = posX_botonera + ancho_botonera + 15;
+	int posY_1 = posY_botonera + alto_botonera;
+	CajaDeTexto* cajaDeTextoPersonaje1 = new CajaDeTexto(cant_letras,posX_1,posY_1);
 
-	SDL_Color textColor2 = { 0, 0xFF, 0, 0xFF };
-	int posX_2 = this->getAnchopx() - 140;
-	int posY_2 = this->getAltopx() - 50;
-	CajaDeTexto* cajaDeTextoPersonaje2 = new CajaDeTexto(cant_letras,textColor2,posX_2,posY_2);
+	int posX_2 = 10;
+	int posY_2 = posY_botonera + alto_botonera;
+	CajaDeTexto* cajaDeTextoPersonaje2 = new CajaDeTexto(cant_letras,posX_2,posY_2);
 
 	bool loadMedia_botonera = botoneraPersonajes->loadMedia("RECURSOS/grilla1_eleccion_personajes.jpg",
 															"RECURSOS/grilla2_eleccion_personajes.jpg",
@@ -129,8 +127,8 @@ void PantallaSeleccionarPersonaje::iniciar() {
 			botoneraPersonajes->dibujar();
 			cajaDeTextoPersonaje1->dibujar(renderText1);
 			cajaDeTextoPersonaje2->dibujar(renderText2);
-			this->dibujarPersonajeEnfocado(posX_botonera+ancho_botonera+30,posY_botonera+30, botoneraPersonajes->getIdContenidoEnfocadoParaJugador1());
-			this->dibujarPersonajeEnfocado(50,posY_botonera+30, botoneraPersonajes->getIdContenidoEnfocadoParaJugador2());
+			this->dibujarPersonajeEnfocado(posX_botonera+ancho_botonera+80,posY_botonera+30, botoneraPersonajes->getIdContenidoEnfocadoParaJugador1(),ORIENTACION_IZQUIERDA);
+			this->dibujarPersonajeEnfocado(80,posY_botonera+30, botoneraPersonajes->getIdContenidoEnfocadoParaJugador2(), ORIENTACION_DERECHA);
 
 			// UPDATE screen
 			SDL_RenderPresent( Renderizador::Instance()->getRenderer() );
@@ -148,6 +146,8 @@ void PantallaSeleccionarPersonaje::iniciar() {
 		this->IdPersonaje2Elegido = botoneraPersonajes->getIdContenidoElegidoParaJugador2();
 		this->nombrePersonaje1 = cajaDeTextoPersonaje1->getTexto();
 		this->nombrePersonaje2 = cajaDeTextoPersonaje2->getTexto();
+
+		cout<<this->nombrePersonaje1<<" "<<this->nombrePersonaje2<<endl;
 
 	}else {
 		if ( !loadMedia_botonera )
@@ -183,30 +183,11 @@ string PantallaSeleccionarPersonaje::getModoJuegoElegido() const {
 	return modo_juego_elegido;
 }
 
-void PantallaSeleccionarPersonaje::dibujarPersonajeEnfocado(int posX, int posY, string idPersonajeEnfocado) {
+void PantallaSeleccionarPersonaje::dibujarPersonajeEnfocado(int posX, int posY, string idPersonajeEnfocado, OrientacionSprite orientacion) {
 
-	int ancho_cuadro = 150;
-	int alto_cuadro = 300;
-
-	if ( idPersonajeEnfocado == "sub-zero" )
-	{
-		// TODO dibujar el sprite "sprites-reposo" de sub-zero
-		SDL_SetRenderDrawColor( Renderizador::Instance()->getRenderer(), 0xFF, 0, 0, 0xFF );
-	}
-	else if ( idPersonajeEnfocado == "sonya" )
-	{
-		// TODO dibujar el sprite "sprites-reposo" de sonya
-		this->personajesDibujables->find("sonya")->second->getSpritePersonaje()->dibujar();
-
-		SDL_SetRenderDrawColor( Renderizador::Instance()->getRenderer(), 0, 0xFF, 0, 0xFF );
-
-	}
-	else{
-		// TODO dibujar el sprite "sprites-reposo" de otro personaje
-		SDL_SetRenderDrawColor( Renderizador::Instance()->getRenderer(), 0, 0, 0xFF, 0xFF );
-	}
-
-	SDL_Rect fillRect = { posX, posY, ancho_cuadro, alto_cuadro };
-	SDL_RenderFillRect( Renderizador::Instance()->getRenderer(), &fillRect );
-
+	Vector2f vectorPosicion(posX, posY);
+	Sprite* spritePersonaje = this->personajesDibujables->find(idPersonajeEnfocado)->second->getSpritePersonaje();
+	spritePersonaje->setPosicion(vectorPosicion);
+	spritePersonaje->setOrientacion(orientacion);
+	spritePersonaje->dibujar();
 }

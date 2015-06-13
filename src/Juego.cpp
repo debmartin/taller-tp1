@@ -48,8 +48,8 @@ Juego::Juego(Jugador* jugador1, Jugador* jugador2, string modo, string nombrePer
 
 	hud = new HUD(
 			Renderizador::Instance()->getWindow(),
-			nombrePersonaje1,
 			nombrePersonaje2,
+			nombrePersonaje1,
 			ControladorJoystick::Instance()->getColaDeTeclas(0),
 			ControladorJoystick::Instance()->getColaDeTeclas(1),
 			true);

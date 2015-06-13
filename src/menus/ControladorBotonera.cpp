@@ -105,7 +105,7 @@ void ControladorBotonera::posicionarArriba(Posicion* unaPosicionEnfocada) {
 	if ( unaPosicionEnfocada->getY() > 0 )
 	{
 		unaPosicionEnfocada->deselegir();
-		unaPosicionEnfocada->enfocarArriba();
+		unaPosicionEnfocada->posicionarArriba();
 	}
 }
 
@@ -114,7 +114,7 @@ void ControladorBotonera::posicionarAbajo(Posicion* unaPosicionEnfocada) {
 	if ( unaPosicionEnfocada->getY() < (--cant_fils) )
 	{
 		unaPosicionEnfocada->deselegir();
-		unaPosicionEnfocada->enfocarAbajo();
+		unaPosicionEnfocada->posicionarAbajo();
 	}
 }
 
@@ -122,7 +122,7 @@ void ControladorBotonera::posicionarIzquierda(Posicion* unaPosicionEnfocada) {
 	if ( unaPosicionEnfocada->getX() > 0 )
 	{
 		unaPosicionEnfocada->deselegir();
-		unaPosicionEnfocada->enfocarIzquierda();
+		unaPosicionEnfocada->posicionarIzquierda();
 	}
 }
 
@@ -131,7 +131,7 @@ void ControladorBotonera::posicionarDerecha(Posicion* unaPosicionEnfocada) {
 	if ( unaPosicionEnfocada->getX() < (--cant_cols) )
 	{
 		unaPosicionEnfocada->deselegir();
-		unaPosicionEnfocada->enfocarDerecha();
+		unaPosicionEnfocada->posicionarDerecha();
 	}
 }
 

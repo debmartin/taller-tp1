@@ -36,10 +36,10 @@ public:
 	void elegir();
 	void deselegir();
 
-	void enfocarIzquierda();
-	void enfocarDerecha();
-	void enfocarArriba();
-	void enfocarAbajo();
+	void posicionarIzquierda();
+	void posicionarDerecha();
+	void posicionarArriba();
+	void posicionarAbajo();
 
 	friend ostream& operator<<(ostream &o, const Posicion &p);
 	string toString();

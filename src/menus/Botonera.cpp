@@ -183,6 +183,8 @@ void Botonera::actualizarModelo(bool* salirMenu) {
 			// jugador1
 			if ( posicionActual->getX()==this->posicionEnfocadaDelJugador1->getX() && posicionActual->getY()==this->posicionEnfocadaDelJugador1->getY())
 			{
+				this->salirMenu_jugador1 = false;
+
 				if ( this->posicionEnfocadaDelJugador1->estoyElegido() )
 				{
 					matriz[y][x]->getPosicionModelo()->elegir();
@@ -205,6 +207,8 @@ void Botonera::actualizarModelo(bool* salirMenu) {
 			{
 				if ( this->tipo=="personajes" && posicionActual->getX()==this->posicionEnfocadaDelJugador2->getX() && posicionActual->getY()==this->posicionEnfocadaDelJugador2->getY())
 				{
+					this->salirMenu_jugador2 = false;
+
 					if ( this->posicionEnfocadaDelJugador2->estoyElegido() )
 					{
 						matriz[y][x]->getPosicionModelo()->elegir();
