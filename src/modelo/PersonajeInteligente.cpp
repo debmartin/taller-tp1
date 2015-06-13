@@ -32,7 +32,8 @@ void PersonajeInteligente::caminarLejosEnemigo(Colisionable* enemigo) {
 }
 
 void PersonajeInteligente::calcularProximoMovimiento(Personaje* otro){
-    bool otroEstaCerca = estaCerca(otro);
+    if (estaBloqueado() || estaEnCaida()) return;
+
     if (contadorAtaque < TURNO_MAX){
         contadorAtaque++;
         return;
@@ -45,6 +46,7 @@ void PersonajeInteligente::calcularProximoMovimiento(Personaje* otro){
         contadorReposo = TURNO_MIN;
         return;
     }
+    bool otroEstaCerca = estaCerca(otro);
     contadorAtaque = TURNO_MIN;
     if (otroEstaCerca){
         otro->obtenerAntidoto(this);
