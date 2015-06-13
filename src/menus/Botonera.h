@@ -37,8 +37,10 @@ private:
 	Boton*** matriz;
 	Posicion* posicionEnfocadaDelJugador1;
 	Posicion* posicionEnfocadaDelJugador2;
-	string IdContenidoElegido_paraJugador1;
-	string IdContenidoElegido_paraJugador2;
+	string idContenidoElegido_paraJugador1;
+	string idContenidoElegido_paraJugador2;
+	string idContenidoEnfocado_paraJugador1;
+	string idContenidoEnfocado_paraJugador2;
 	bool salirMenu_jugador1;
 	bool salirMenu_jugador2;
 	string tipo;
@@ -64,10 +66,8 @@ public:
 
 	string getIdContenidoElegidoParaJugador1();
 	string getIdContenidoElegidoParaJugador2();
-
-private:
-	void elegirIdContenidoParaJugador1(string idContenido);
-	void elegirIdContenidoParaJugador2(string idContenido);
+	string getIdContenidoEnfocadoParaJugador1() const;
+	string getIdContenidoEnfocadoParaJugador2() const;
 };
 
 #endif /* SRC_BOTONERA_H_ */

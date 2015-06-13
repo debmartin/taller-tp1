@@ -43,7 +43,11 @@ void PantallaSeleccionarPersonaje::iniciar() {
 	int botonera_filas = 3;
 	int botonera_colummas = 4;
 
-	Posicion* pos_botoneraPersonajes = new Posicion(this->getAnchopx()/2-(BUTTON_WIDTH*botonera_colummas)/2, this->getAltopx()/10);
+	int ancho_botonera = BUTTON_WIDTH*botonera_colummas;
+	int alto_botonera = BUTTON_HEIGHT*botonera_filas;
+	int posX_botonera = this->getAnchopx()/2 - ancho_botonera/2;
+	int posY_botonera = this->getAltopx()/10;
+	Posicion* pos_botoneraPersonajes = new Posicion(posX_botonera, posY_botonera);
 	Botonera* botoneraPersonajes = new Botonera("personajes", botonera_filas,botonera_colummas,pos_botoneraPersonajes,
 						getTipoDeControlJugador1(), getTipoDeControlJugador2(), this->modo_juego_elegido);
 
@@ -114,10 +118,14 @@ void PantallaSeleccionarPersonaje::iniciar() {
 			// CLEAR screen
 			SDL_SetRenderDrawColor( Renderizador::Instance()->getRenderer(), 0x0F, 0x00, 0x00, 0xFF );
 			SDL_RenderClear( Renderizador::Instance()->getRenderer() );
+
 			// DIBUJAR
 			botoneraPersonajes->dibujar();
 			cajaDeTextoPersonaje1->dibujar(renderText1);
 			cajaDeTextoPersonaje2->dibujar(renderText2);
+			this->dibujarPersonajeEnfocado(posX_botonera+ancho_botonera+30,posY_botonera+30, botoneraPersonajes->getIdContenidoEnfocadoParaJugador1());
+			this->dibujarPersonajeEnfocado(50,posY_botonera+30, botoneraPersonajes->getIdContenidoEnfocadoParaJugador2());
+
 			// UPDATE screen
 			SDL_RenderPresent( Renderizador::Instance()->getRenderer() );
 
@@ -167,4 +175,29 @@ string PantallaSeleccionarPersonaje::getNombrePersonaje2() const {
 
 string PantallaSeleccionarPersonaje::getModoJuegoElegido() const {
 	return modo_juego_elegido;
+}
+
+void PantallaSeleccionarPersonaje::dibujarPersonajeEnfocado(int posX, int posY, string idPersonajeEnfocado) {
+
+	int ancho_cuadro = 150;
+	int alto_cuadro = 300;
+
+	if ( idPersonajeEnfocado == "sub-zero" )
+	{
+		// TODO dibujar el sprite "sprites-reposo" de sub-zero
+		SDL_SetRenderDrawColor( Renderizador::Instance()->getRenderer(), 0xFF, 0, 0, 0xFF );
+	}
+	else if ( idPersonajeEnfocado == "sonya" )
+	{
+		// TODO dibujar el sprite "sprites-reposo" de sonya
+		SDL_SetRenderDrawColor( Renderizador::Instance()->getRenderer(), 0, 0xFF, 0, 0xFF );
+	}
+	else{
+		// TODO dibujar el sprite "sprites-reposo" de otro personaje
+		SDL_SetRenderDrawColor( Renderizador::Instance()->getRenderer(), 0, 0, 0xFF, 0xFF );
+	}
+
+	SDL_Rect fillRect = { posX, posY, ancho_cuadro, alto_cuadro };
+	SDL_RenderFillRect( Renderizador::Instance()->getRenderer(), &fillRect );
+
 }

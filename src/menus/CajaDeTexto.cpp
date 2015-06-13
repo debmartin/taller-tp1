@@ -85,8 +85,7 @@ void CajaDeTexto::dibujar(bool renderText) {
 		}
 	}
 
-	//dibujar un cuado blanco y encime el texto
-	//Render red filled quad
+	//dibujar un cuadro blanco y despues el texto
 	SDL_Rect fillRect = { this->pos_x, this->pos_y, this->ancho, this->alto };
 	SDL_SetRenderDrawColor( Renderizador::Instance()->getRenderer(), 0xFF, 0xFF, 0xFF, 0xFF );
 	SDL_RenderFillRect( Renderizador::Instance()->getRenderer(), &fillRect );
