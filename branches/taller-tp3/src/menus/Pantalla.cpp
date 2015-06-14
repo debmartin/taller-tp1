@@ -7,6 +7,8 @@
 
 #include "Pantalla.h"
 
+#include "Botonera.h"
+
 Pantalla::Pantalla(int anchopx, int altopx, string tipoDeControl_jugador1,
 		string tipoDeControl_jugador2) {
 	this->tipoDeControl_jugador1 = tipoDeControl_jugador1;
@@ -14,6 +16,7 @@ Pantalla::Pantalla(int anchopx, int altopx, string tipoDeControl_jugador1,
 	this->anchopx = anchopx;
 	this->altopx = altopx;
 	this->salir = false;
+	this->botonera = new Botonera();
 }
 
 Pantalla::~Pantalla() {

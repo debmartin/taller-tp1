@@ -28,7 +28,6 @@ private:
 	string nombrePersonaje1;
 	string nombrePersonaje2;
 	map<string, PersonajeDibujable*>* personajesDibujables;
-	Botonera* botoneraPersonajes;
 	CajaDeTexto* cajaDeTextoPersonaje1;
 	CajaDeTexto* cajaDeTextoPersonaje2;
 	bool setearNombrePersonaje1;

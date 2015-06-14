@@ -25,7 +25,7 @@ PantallaSeleccionarModo::PantallaSeleccionarModo(int anchopx, int altopx, string
 }
 
 PantallaSeleccionarModo::~PantallaSeleccionarModo() {
-
+	delete this->botonera; this->botonera = NULL;
 }
 
 void PantallaSeleccionarModo::iniciar() {
@@ -36,10 +36,10 @@ void PantallaSeleccionarModo::iniciar() {
 	bool juegoCorriendo = true;
 
 	Posicion* pos_modosDeJuego = new Posicion(this->getAnchopx()/2-BUTTON_WIDTH/2, this->getAltopx()/8);
-	Botonera* botoneraModosDeJuego = new Botonera("modos",3,1,pos_modosDeJuego, getTipoDeControlJugador1(), getTipoDeControlJugador2());
-	botoneraModosDeJuego->setPosicionEnfocadaDelJugador1(new Posicion(0,0));
+	botonera = new Botonera("modos",3,1,pos_modosDeJuego, getTipoDeControlJugador1(), getTipoDeControlJugador2());
+	botonera->setPosicionEnfocadaDelJugador1(new Posicion(0,0));
 
-	if( !botoneraModosDeJuego->loadMedia("RECURSOS/grilla1_eleccion_modo.jpg", "RECURSOS/grilla2_eleccion_modo.jpg", "RECURSOS/grilla3_eleccion_modo.jpg") )
+	if( !botonera->loadMedia("RECURSOS/grilla1_eleccion_modo.jpg", "RECURSOS/grilla2_eleccion_modo.jpg", "RECURSOS/grilla3_eleccion_modo.jpg") )
 	{
 		Logger::getInstance()->error("Fallo la carga los archivos imagenes");
 	}
@@ -62,9 +62,9 @@ void PantallaSeleccionarModo::iniciar() {
 					juegoCorriendo = false;
 				}
 
-				botoneraModosDeJuego->manejarEventoJugador(evento);
-				botoneraModosDeJuego->actualizarModelo();
-				if ( botoneraModosDeJuego->elModoYaFueElegido() )
+				botonera->manejarEventoJugador(evento);
+				botonera->actualizarModelo();
+				if ( botonera->elModoYaFueElegido() )
 				{
 					salirMenuModosDeJuego = true;
 				}
@@ -74,7 +74,7 @@ void PantallaSeleccionarModo::iniciar() {
 			SDL_SetRenderDrawColor( Renderizador::Instance()->getRenderer(), 0x0F, 0x00, 0x00, 0xFF );
 			SDL_RenderClear( Renderizador::Instance()->getRenderer() );
 			// DIBUJA
-			botoneraModosDeJuego->dibujar();
+			botonera->dibujar();
 			// UPDATE screen
 			SDL_RenderPresent( Renderizador::Instance()->getRenderer() );
 
@@ -84,10 +84,8 @@ void PantallaSeleccionarModo::iniciar() {
 				SDL_Delay((int)(DELAY_TIME - frameTime));
 		}
 
-		modo_juego_elegido = botoneraModosDeJuego->getIdContenidoElegidoParaJugador1();
+		modo_juego_elegido = botonera->getIdContenidoElegidoParaJugador1();
 	}
-
-	delete botoneraModosDeJuego;
 
 }
 
