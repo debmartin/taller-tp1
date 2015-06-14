@@ -12,6 +12,7 @@
 #include <string>
 
 #include "../vista/PersonajeDibujable.h"
+#include "../vista/Sprite.h"
 #include "Pantalla.h"
 
 using namespace std;
@@ -34,6 +35,7 @@ public:
 	string getModoJuegoElegido() const;
 	string getNombrePersonaje1() const;
 	string getNombrePersonaje2() const;
+	bool iniciarSalida();
 private:
 	void dibujarPersonajeEnfocado(int posX, int posY, string idPersonajeEnfocado, OrientacionSprite orientacion);
 };

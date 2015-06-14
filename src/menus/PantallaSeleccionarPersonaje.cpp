@@ -9,18 +9,17 @@
 
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_keyboard.h>
-#include <SDL2/SDL_keycode.h>
-#include <SDL2/SDL_pixels.h>
 #include <SDL2/SDL_render.h>
+#include <SDL2/SDL_scancode.h>
 #include <SDL2/SDL_stdinc.h>
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_video.h>
 #include <utility>
 
+#include "../controlador/ControladorJoystickMenu.h"
 #include "../modelo/Vector2f.h"
 #include "../utils/Logger.h"
 #include "../vista/Renderizador.h"
-#include "../vista/Sprite.h"
 #include "Boton.h"
 #include "Botonera.h"
 #include "CajaDeTexto.h"
@@ -105,21 +104,19 @@ void PantallaSeleccionarPersonaje::iniciar() {
 					juegoCorriendo = false;
 				}
 
-				//para salir del juego con la tecla ESC
-			    if( evento.type == SDL_KEYUP && evento.key.repeat == 0 ){
-			        if (evento.key.keysym.sym == SDLK_ESCAPE){
-			            juegoCorriendo = false;
-			        }
-			    }
-
 			    if ( !cajaDeTextoPersonaje1->estoyEnfocado() && !cajaDeTextoPersonaje2->estoyEnfocado() )
 			    {
 			    	botoneraPersonajes->manejarEventoJugador(evento);
 			    }
 
-				botoneraPersonajes->actualizarModelo(&salirEleccionPersonajes);
+				botoneraPersonajes->actualizarModelo();
 
-				///
+				if ( botoneraPersonajes->losPersonajesYaFueronElegidos() )
+				{
+					salirEleccionPersonajes = this->iniciarSalida();
+				}
+
+				// cargar el nombre del personaje 1
 				if ( botoneraPersonajes->getIdContenidoElegidoParaJugador1()!="" && setear_texto1)
 				{
 					renderText1 = true;
@@ -131,6 +128,7 @@ void PantallaSeleccionarPersonaje::iniciar() {
 					renderText1 = cajaDeTextoPersonaje1->manejarEvento(evento);
 				}
 
+				// cargar el nombre del personaje 2
 				if ( botoneraPersonajes->getIdContenidoElegidoParaJugador2()!="" && setear_texto2)
 				{
 					renderText2 = true;
@@ -140,6 +138,7 @@ void PantallaSeleccionarPersonaje::iniciar() {
 				{
 					renderText2 = cajaDeTextoPersonaje2->manejarEvento(evento);
 				}
+
 			}
 
 			// CLEAR screen
@@ -211,4 +210,27 @@ void PantallaSeleccionarPersonaje::dibujarPersonajeEnfocado(int posX, int posY, 
 	spritePersonaje->setPosicion(vectorPosicion);
 	spritePersonaje->setOrientacion(orientacion);
 	spritePersonaje->dibujar();
+}
+
+bool PantallaSeleccionarPersonaje::iniciarSalida() {
+
+	if(this->tipoDeControl_jugador1 == "JOYSTICK"){
+
+		map<string, bool>* estadoJoy1 = TheInputHandlerMenu::Instance()->getJoystickState(JOYSTICK1MENU);
+		map<string, bool>* estadoJoy2 = TheInputHandlerMenu::Instance()->getJoystickState(JOYSTICK2MENU);
+
+		if ( (*estadoJoy1)["JOY_PATADA_ALTA"] || (*estadoJoy1)["JOY_PATADA_ALTA"] ){
+			this->salir = true;
+		}
+	}
+	else{
+
+		const Uint8* estadoTeclado = SDL_GetKeyboardState(NULL);
+		if (estadoTeclado[SDL_SCANCODE_J])
+		{
+			this->salir = true;
+		}
+	}
+
+	return this->salir;
 }

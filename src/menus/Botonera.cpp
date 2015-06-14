@@ -28,9 +28,6 @@ Botonera::Botonera(string tipo, int cant_filas, int cant_columnas, Posicion* pos
 	this->posicionEnfocadaDelJugador1 = new Posicion();
 	this->posicionEnfocadaDelJugador2 = new Posicion();
 
-	this->salirMenu_jugador1 = false;
-	this->salirMenu_jugador2 = false;
-
 	list<string>* idContenidos = new list<string>();
 	if ( this->tipo == "modos" )
 	{
@@ -171,7 +168,7 @@ int Botonera::getCantColumnas() {
 	return this->cant_columnas;
 }
 
-void Botonera::actualizarModelo(bool* salirMenu) {
+void Botonera::actualizarModelo() {
 
 	for ( int y = 0 ; y < this->cant_filas ; y++ )
 	{
@@ -182,17 +179,10 @@ void Botonera::actualizarModelo(bool* salirMenu) {
 			// jugador1
 			if ( posicionActual->getX()==this->posicionEnfocadaDelJugador1->getX() && posicionActual->getY()==this->posicionEnfocadaDelJugador1->getY())
 			{
-				this->salirMenu_jugador1 = false;
 				if ( this->posicionEnfocadaDelJugador1->estoyElegido() )
 				{
 					matriz[y][x]->getPosicionModelo()->elegir();
 					this->idContenidoElegido_paraJugador1 = matriz[y][x]->getIdContenido();
-					this->salirMenu_jugador1 = true;
-					if ( this->tipo=="modos" )
-					{
-						this->salirMenu_jugador2 = true;
-					}
-
 				}
 				else
 				{
@@ -206,14 +196,10 @@ void Botonera::actualizarModelo(bool* salirMenu) {
 			{
 				if ( this->tipo=="personajes" && posicionActual->getX()==this->posicionEnfocadaDelJugador2->getX() && posicionActual->getY()==this->posicionEnfocadaDelJugador2->getY())
 				{
-					this->salirMenu_jugador2 = false;
-
 					if ( this->posicionEnfocadaDelJugador2->estoyElegido() )
 					{
 						matriz[y][x]->getPosicionModelo()->elegir();
 						this->idContenidoElegido_paraJugador2 = matriz[y][x]->getIdContenido();
-						this->salirMenu_jugador2 = true;
-
 					}
 					else
 					{
@@ -229,8 +215,6 @@ void Botonera::actualizarModelo(bool* salirMenu) {
 					matriz[y][x]->getPosicionModelo()->deselegir();
 				}
 			}
-
-			*salirMenu = (this->salirMenu_jugador1 && this->salirMenu_jugador2);
 		}
 	}
 }
@@ -286,4 +270,12 @@ string Botonera::getIdContenidoEnfocadoParaJugador1() const {
 
 string Botonera::getIdContenidoEnfocadoParaJugador2() const {
 	return idContenidoEnfocado_paraJugador2;
+}
+
+bool Botonera::elModoYaFueElegido() {
+	return ( this->idContenidoElegido_paraJugador1 != "" );
+}
+
+bool Botonera::losPersonajesYaFueronElegidos() {
+	return ( this->idContenidoElegido_paraJugador1 != "" && this->idContenidoElegido_paraJugador2 != "" );
 }

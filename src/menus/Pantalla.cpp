@@ -13,6 +13,7 @@ Pantalla::Pantalla(int anchopx, int altopx, string tipoDeControl_jugador1,
 	this->tipoDeControl_jugador2 = tipoDeControl_jugador2;
 	this->anchopx = anchopx;
 	this->altopx = altopx;
+	this->salir = false;
 }
 
 Pantalla::~Pantalla() {
