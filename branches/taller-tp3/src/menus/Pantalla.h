@@ -22,6 +22,7 @@ protected:
 	string tipoDeControl_jugador2;
 	int anchopx;
 	int altopx;
+	bool salir;
 public:
 	Pantalla(int anchopx, int altopx, string tipoDeControl_jugador1, string tipoDeControl_jugador2);
 	virtual ~Pantalla();

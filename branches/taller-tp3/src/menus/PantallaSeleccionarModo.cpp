@@ -63,7 +63,11 @@ void PantallaSeleccionarModo::iniciar() {
 				}
 
 				botoneraModosDeJuego->manejarEventoJugador(evento);
-				botoneraModosDeJuego->actualizarModelo(&salirMenuModosDeJuego);
+				botoneraModosDeJuego->actualizarModelo();
+				if ( botoneraModosDeJuego->elModoYaFueElegido() )
+				{
+					salirMenuModosDeJuego = true;
+				}
 			}
 
 			// CLEAR screen
