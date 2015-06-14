@@ -98,6 +98,8 @@ Botonera::Botonera(string tipo, int cant_filas, int cant_columnas, Posicion* pos
 	this->modo_juego_elegido = modo_juego_elegido;
 	this->controladorBotonera = new ControladorBotonera(this->cant_filas, this->cant_columnas);
 	this->elegirPosicionAleatoriamente = true;
+	this->esElegidoPersonaje1 = false;
+	this->esElegidoPersonaje2 = false;
 }
 
 bool Botonera::loadMedia(string path_imagen1, string path_imagen2, string path_imagen3) {
@@ -135,19 +137,29 @@ void Botonera::manejarEventoJugador(SDL_Event evento) {
     //Cargo los botones de los joysticks
     TheInputHandlerMenu::Instance()->handleEventsJoysticks(evento);
 
-    if(this->tipoDeControl_jugador1 == "JOYSTICK"){
+    if(this->tipoDeControl_jugador1 == "JOYSTICK")
+    {
+    	if ( !this->esElegidoPersonaje1 )
     		this->controladorBotonera->identificarOrdenJoystick(this->posicionEnfocadaDelJugador1, JOYSTICK1MENU);
-    	if( this->modo_juego_elegido == "P1_vs_P2"){
-    		this->controladorBotonera->identificarOrdenJoystick(this->posicionEnfocadaDelJugador2, JOYSTICK2MENU);
+    	if( this->modo_juego_elegido == "P1_vs_P2")
+    	{
+    		if ( !this->esElegidoPersonaje2 )
+    			this->controladorBotonera->identificarOrdenJoystick(this->posicionEnfocadaDelJugador2, JOYSTICK2MENU);
     	}
-	}else{
+
+	}
+    else
+    {
 		//Si se presiona una tecla
 		if ( evento.key.repeat == 0 )
 		{
-			this->controladorBotonera->identificarOrdenJugador1(this->posicionEnfocadaDelJugador1);
+			if ( !this->esElegidoPersonaje1 )
+				this->controladorBotonera->identificarOrdenJugador1(this->posicionEnfocadaDelJugador1);
+
 			if( this->modo_juego_elegido == "P1_vs_P2")
 			{
-				this->controladorBotonera->identificarOrdenJugador2(this->posicionEnfocadaDelJugador2);
+				if ( !this->esElegidoPersonaje2 )
+					this->controladorBotonera->identificarOrdenJugador2(this->posicionEnfocadaDelJugador2);
 			}
 		}
 	}
@@ -183,6 +195,7 @@ void Botonera::actualizarModelo() {
 				{
 					matriz[y][x]->getPosicionModelo()->elegir();
 					this->idContenidoElegido_paraJugador1 = matriz[y][x]->getIdContenido();
+					this->esElegidoPersonaje1 = true;
 				}
 				else
 				{
@@ -190,6 +203,7 @@ void Botonera::actualizarModelo() {
 					matriz[y][x]->getPosicionModelo()->deselegir();
 					this->idContenidoElegido_paraJugador1 = "";
 					this->idContenidoEnfocado_paraJugador1 = matriz[y][x]->getIdContenido();
+					this->esElegidoPersonaje1 = false;
 				}
 			}
 			else
@@ -200,6 +214,7 @@ void Botonera::actualizarModelo() {
 					{
 						matriz[y][x]->getPosicionModelo()->elegir();
 						this->idContenidoElegido_paraJugador2 = matriz[y][x]->getIdContenido();
+						this->esElegidoPersonaje2 = true;
 					}
 					else
 					{
@@ -207,6 +222,7 @@ void Botonera::actualizarModelo() {
 						matriz[y][x]->getPosicionModelo()->deselegir();
 						this->idContenidoElegido_paraJugador2 = "";
 						this->idContenidoEnfocado_paraJugador2 = matriz[y][x]->getIdContenido();
+						this->esElegidoPersonaje2 = false;
 					}
 				}
 				else
