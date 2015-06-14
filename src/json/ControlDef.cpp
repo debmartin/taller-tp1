@@ -45,11 +45,11 @@ ControlDef::~ControlDef() {
 	// TODO Auto-generated destructor stub
 }
 
-std::map<string, int>* ControlDef::getCorrespondenciaEjes() {
+std::map<string, int>* ControlDef::getCorrespondenciaEjes() const{
 	return correspondenciaEjes;
 }
 
-std::map<string, int>* ControlDef::getCorrespondenciaTeclas() {
+std::map<string, int>* ControlDef::getCorrespondenciaTeclas() const{
 	return correspondenciaTeclas;
 }
 
