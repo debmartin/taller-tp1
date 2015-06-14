@@ -9,7 +9,6 @@
 
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_keyboard.h>
-#include <SDL2/SDL_keycode.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_scancode.h>
 #include <SDL2/SDL_stdinc.h>
@@ -18,7 +17,6 @@
 #include <utility>
 
 #include "../controlador/ControladorJoystickMenu.h"
-#include "../modelo/estado/Estado.h"
 #include "../modelo/Vector2f.h"
 #include "../utils/Logger.h"
 #include "../vista/Renderizador.h"
@@ -108,13 +106,6 @@ void PantallaSeleccionarPersonaje::iniciar() {
 			{
 				if (evento.type == SDL_QUIT){
 					juegoCorriendo = false;
-				}
-
-				//para salir del juego con la tecla ESC
-				if( evento.type == SDL_KEYUP && evento.key.repeat == 0 ){
-					if (evento.key.keysym.sym == SDLK_ESCAPE){
-						juegoCorriendo = false;
-					}
 				}
 
 				this->botonera->manejarEventoJugador(evento);
