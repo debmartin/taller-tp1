@@ -54,11 +54,6 @@ void ControladorJoystickMenu::initialiseJoysticks(
     	(*this->correspondenciaTeclas)["JOY_SELECT"] = 8;
     	(*this->correspondenciaTeclas)["JOY_START"] = 9;
 
-        for ( std::map<string,int>::iterator it = correspondenciaTeclasJ1->begin(); it!=correspondenciaTeclasJ1->end(); it++ )
-        {
-        	cout<<it->first<<","<<it->second<<endl;
-        }
-
         this->estadoJoystick1    = new std::map<string, bool>;
         this->estadoJoystick2    = new std::map<string, bool>;
         this->estadoJoystickNulo = new std::map<string, bool>;

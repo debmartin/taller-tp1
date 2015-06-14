@@ -27,8 +27,8 @@ public:
 	virtual ~ControlDef();
     friend ostream& operator<<(ostream &o, const ControlDef &c);
     string toString();
-	std::map<string, int>* getCorrespondenciaEjes();
-	std::map<string, int>* getCorrespondenciaTeclas();
+	std::map<string, int>* getCorrespondenciaEjes() const;
+	std::map<string, int>* getCorrespondenciaTeclas() const;
 };
 
 #endif /* SRC_JSON_CONTROLDEF_H_ */
