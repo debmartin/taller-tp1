@@ -361,15 +361,18 @@ void Personaje::defenderAgachado(){
 }
 
 void Personaje::caidaDerecha(){
-    Estado* caida = new CaidaDerecha(posicion, (*cajasPorEstado)[CAIDA_DERECHA]);
-    if (! posicionable->esValida(posicion, caida->calcularAncho()))
+    //Estado* caida = new CaidaDerecha(posicion, (*cajasPorEstado)[CAIDA_DERECHA]);
+    Estado* caida = new CaidaDerecha(posicion, ARROJADO, (*cajasPorEstado)[CAIDA_DERECHA]);
+
+	if (! posicionable->esValida(posicion, caida->calcularAncho()))
         caida->agregarCajaColision((*cajasPorEstado)[SALTANDO_VERTICAL]);
 
 	cambiarEstado(caida);
 }
 
 void Personaje::caidaIzquierda(){
-    Estado* caida = new CaidaIzquierda(posicion, (*cajasPorEstado)[CAIDA_IZQUIERDA]);
+    //Estado* caida = new CaidaIzquierda(posicion, (*cajasPorEstado)[CAIDA_IZQUIERDA]);
+    Estado* caida = new CaidaIzquierda(posicion, ARROJADO, (*cajasPorEstado)[CAIDA_IZQUIERDA]);
     if (! posicionable->esValida(posicion, caida->calcularAncho()))
         caida->agregarCajaColision((*cajasPorEstado)[SALTANDO_VERTICAL]);
 
@@ -521,10 +524,16 @@ void Personaje::recibirGolpe(Colisionable* otro){
 		//Si el oponente pega una patada:
 		}else if(otro->verEstado()->efectuandoPatadaGiratoria()){
 			derribado();
-		}/*else if(otro->verEstado()->estaTomandoAlOponente()){
+		}else if(otro->verEstado()->estaTomandoAlOponente()){
 			cout<<"Personajeser arrojado"<<endl;
-			ser_arrojado();
-		}*/else if(!estaSaltando()){
+			//ser_arrojado();
+			if(this->direccion == DIRECCION_IZQUIERDA){
+				caidaIzquierda();
+			}else if(this->direccion == DIRECCION_DERECHA){
+
+					caidaDerecha();
+			}
+		}else if(!estaSaltando()){
 			golpeado();
 			Vector2f vectorEmpuje = (direccion == DIRECCION_DERECHA) ? VECTOR_EMPUJE_IZQUIERDA : VECTOR_EMPUJE_DERECHA;
 			if (! (llegoAlLimiteDerecho() || llegoAlLimiteIzquierdo()))
@@ -695,13 +704,12 @@ void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
         calcularPosicionSinColision(enemigo);
         return;
     }
-/*
+
     if(estaHaciendoToma()){
     	cout<<"Personaje esta haciendo toma"<<endl;
     	posicion = posicionCandidata;
     }
-    else */
-    if (estaCaminando()){
+    else if (estaCaminando()){
         arrastrar(enemigo);
     } else if (estaSaltando()) {
         float distanciaAObjetivo = calcularDistancia(enemigo);
