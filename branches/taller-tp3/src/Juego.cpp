@@ -78,6 +78,7 @@ void Juego::update(bool& recargar)
 {
 	this->jugador1->getPersonaje()->update(jugador2->getPersonaje());
 	if(this->modo_juego == "P1_vs_CPU"){
+		cout<<"paso_1"<<endl;
 	    ((PersonajeInteligente*)(this->jugador2->getPersonaje()))->calcularProximoMovimiento(this->jugador1->getPersonaje());
 	    this->jugador2->getPersonaje()->update(jugador1->getPersonaje());
 	}else{

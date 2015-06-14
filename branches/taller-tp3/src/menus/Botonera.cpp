@@ -18,6 +18,10 @@
 #include "Posicion.h"
 #include "Textura.h"
 
+Botonera::Botonera() {
+
+}
+
 Botonera::Botonera(string tipo, int cant_filas, int cant_columnas, Posicion* posicion,
 					string tipoDeControl_jugador1, string tipoDeControl_jugador2,
 					string modo_juego_elegido) {
@@ -292,6 +296,10 @@ bool Botonera::elModoYaFueElegido() {
 	return ( this->idContenidoElegido_paraJugador1 != "" );
 }
 
-bool Botonera::losPersonajesYaFueronElegidos() {
-	return ( this->idContenidoElegido_paraJugador1 != "" && this->idContenidoElegido_paraJugador2 != "" );
+bool Botonera::seEligioElPersonaje1() {
+	return this->idContenidoElegido_paraJugador1 != "";
+}
+
+bool Botonera::seEligioElPersonaje2() {
+	return this->idContenidoElegido_paraJugador2 != "";
 }

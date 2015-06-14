@@ -18,6 +18,10 @@
 #include "../vista/Renderizador.h"
 #include "Textura.h"
 
+CajaDeTexto::CajaDeTexto() {
+
+}
+
 CajaDeTexto::CajaDeTexto(int cant_caracteres, int pos_x, int pos_y) {
 
 	this->cant_caracteres = cant_caracteres;
