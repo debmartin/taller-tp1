@@ -78,8 +78,8 @@ void Juego::update(bool& recargar)
 {
 	this->jugador1->getPersonaje()->update(jugador2->getPersonaje());
 	if(this->modo_juego == "P1_vs_CPU"){
-		cout<<"paso_1"<<endl;
 	    ((PersonajeInteligente*)(this->jugador2->getPersonaje()))->calcularProximoMovimiento(this->jugador1->getPersonaje());
+	    cout<<"pincha dentro de este update :( ( Juego::update(bool& recargar)-->linea 82 cuando se llama a notificarObservadores() )"<<endl;
 	    this->jugador2->getPersonaje()->update(jugador1->getPersonaje());
 	}else{
 	     this->jugador2->getPersonaje()->update(jugador1->getPersonaje());

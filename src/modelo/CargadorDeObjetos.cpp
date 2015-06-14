@@ -660,6 +660,8 @@ void CargadorDeOjbetos::cargarInfo_desdeMenus() {
 	SDL_SetWindowTitle( Renderizador::Instance()->getWindow(), titulo_ventana_pelea.c_str() );
 
 	ControladorJoystickMenu::Instance()->clean();
+	delete pantallaSeleccionarModo; pantallaSeleccionarModo=NULL;
+	delete pantallaSeleccionarPersonajes; pantallaSeleccionarPersonajes=NULL;
 }
 
 vector<Combo*>* CargadorDeOjbetos::cargarCombos(string nombrePersonaje){
