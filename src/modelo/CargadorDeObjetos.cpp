@@ -233,7 +233,7 @@ Jugador* CargadorDeOjbetos::cargarJugador(JugadorDef* jugadorDef)
 
 	Personaje* personaje;
 
-	if(this->modo_juego == "P1_vs_CPU")
+	if( this->modo_juego == "P1_vs_CPU" && jugadorDef->getId() == TAG_JUGADOR_2)
 	{
 		personaje = (PersonajeInteligente*)this->cargarPersonajes()->find(idPersonaje)->second;
 	}
@@ -653,15 +653,24 @@ void CargadorDeOjbetos::cargarInfo_desdeMenus() {
 	this->nombrePersonajeElegido1 = pantallaSeleccionarPersonajes->getNombrePersonaje1();
 	this->nombrePersonajeElegido2 = pantallaSeleccionarPersonajes->getNombrePersonaje2();
 
+	delete pantallaSeleccionarModo; pantallaSeleccionarModo=NULL;
+	delete pantallaSeleccionarPersonajes; pantallaSeleccionarPersonajes=NULL;
+
+	/* PARA TEST. para cargar informacion sin usar pantallas antes de la pelea
+	this->modo_juego = "P1_vs_CPU";
+	this->idPersonaje1Elegido = "sub-zero";
+	this->idPersonaje2Elegido = "sonya";
+	this->nombrePersonajeElegido1 = "mi sub-zero";
+	this->nombrePersonajeElegido2 = "mi sonya";
+	*/
+
 	string titulo_ventana_pelea(TITULO_VENTANA_INICIO);
 	titulo_ventana_pelea.append("(Modo: ");
-	titulo_ventana_pelea.append(modo_juego_elegido);
+	titulo_ventana_pelea.append(this->modo_juego);
 	titulo_ventana_pelea.append(")");
 	SDL_SetWindowTitle( Renderizador::Instance()->getWindow(), titulo_ventana_pelea.c_str() );
 
 	ControladorJoystickMenu::Instance()->clean();
-	delete pantallaSeleccionarModo; pantallaSeleccionarModo=NULL;
-	delete pantallaSeleccionarPersonajes; pantallaSeleccionarPersonajes=NULL;
 }
 
 vector<Combo*>* CargadorDeOjbetos::cargarCombos(string nombrePersonaje){

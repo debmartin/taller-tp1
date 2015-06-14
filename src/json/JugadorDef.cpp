@@ -16,7 +16,8 @@ JugadorDef::JugadorDef() {
 
 }
 
-JugadorDef::JugadorDef(string tipo_control, int tolerancia, ControlDef* controlDef) {
+JugadorDef::JugadorDef(string id, string tipo_control, int tolerancia, ControlDef* controlDef) {
+	this->id = id;
 	this->idPersonaje = "";
 	this->tipo_control = tipo_control;
 	this->tolerancia = tolerancia;
@@ -58,4 +59,8 @@ ostream& operator <<(ostream &o, const JugadorDef &j) {
 
 void JugadorDef::cargarIdPersonajeDesdeMenu(string nuevoIdPersonaje) {
 	this->idPersonaje = nuevoIdPersonaje;
+}
+
+string JugadorDef::getId() const {
+	return id;
 }

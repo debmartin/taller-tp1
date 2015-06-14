@@ -411,7 +411,7 @@ JugadorDef* Parser::parsearJugador(string tag_jugador) {
 
     ControlDef* controlDef = new ControlDef(correspondenciaTeclas,correspondenciaEjes);
 
-    JugadorDef* jugadorParseado = new JugadorDef(tipo_control, tolerancia, controlDef);
+    JugadorDef* jugadorParseado = new JugadorDef(tag_jugador, tipo_control, tolerancia, controlDef);
     return jugadorParseado;
 }
 
