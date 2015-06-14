@@ -195,7 +195,7 @@ bool PantallaSeleccionarPersonaje::iniciarSalida() {
 		map<string, bool>* estadoJoy1 = TheInputHandlerMenu::Instance()->getJoystickState(JOYSTICK1MENU);
 		map<string, bool>* estadoJoy2 = TheInputHandlerMenu::Instance()->getJoystickState(JOYSTICK2MENU);
 
-		if ( (*estadoJoy1)["JOY_PATADA_ALTA"] || (*estadoJoy2)["JOY_PATADA_ALTA"] ){
+		if ( (*estadoJoy1)["JOY_START"] || (*estadoJoy2)["JOY_START"] ){
 			this->salir = true;
 		}
 	}
