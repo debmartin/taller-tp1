@@ -30,10 +30,17 @@ PantallaSeleccionarPersonaje::PantallaSeleccionarPersonaje(int anchopx, int alto
 														   Pantalla(anchopx, altopx, tipoDeControl_jugador1, tipoDeControl_jugador2) {
 	this->modo_juego_elegido = modo_juego_elegido;
 	this->personajesDibujables = personajesDibujables;
+	this->botoneraPersonajes = new Botonera();
+	this->cajaDeTextoPersonaje1 = new CajaDeTexto();
+	this->cajaDeTextoPersonaje2 = new CajaDeTexto();
+	this->setearNombrePersonaje1 = true;
+	this->setearNombrePersonaje2 = true;
 }
 
 PantallaSeleccionarPersonaje::~PantallaSeleccionarPersonaje() {
-	// TODO Auto-generated destructor stub
+	delete this->botoneraPersonajes;
+	delete this->cajaDeTextoPersonaje1;
+	delete this->cajaDeTextoPersonaje2;
 }
 
 void PantallaSeleccionarPersonaje::iniciar() {
@@ -53,28 +60,28 @@ void PantallaSeleccionarPersonaje::iniciar() {
 	int posX_botonera = this->getAnchopx()/2 - ancho_botonera/2;
 	int posY_botonera = this->getAltopx()/10;
 	Posicion* pos_botoneraPersonajes = new Posicion(posX_botonera, posY_botonera);
-	Botonera* botoneraPersonajes = new Botonera("personajes", botonera_filas,botonera_colummas,pos_botoneraPersonajes,
+	this->botoneraPersonajes = new Botonera("personajes", botonera_filas,botonera_colummas,pos_botoneraPersonajes,
 						getTipoDeControlJugador1(), getTipoDeControlJugador2(), this->modo_juego_elegido);
 
-	botoneraPersonajes->setPosicionEnfocadaDelJugador1(new Posicion(3,1));
-	botoneraPersonajes->setPosicionEnfocadaDelJugador2(new Posicion(0,1));
+	this->botoneraPersonajes->setPosicionEnfocadaDelJugador1(new Posicion(3,1));
+	this->botoneraPersonajes->setPosicionEnfocadaDelJugador2(new Posicion(0,1));
 
 	int cant_letras = 9;
 
 	int posX_1 = posX_botonera + ancho_botonera + 15;
 	int posY_1 = posY_botonera + alto_botonera;
-	CajaDeTexto* cajaDeTextoPersonaje1 = new CajaDeTexto(cant_letras,posX_1,posY_1);
+	this->cajaDeTextoPersonaje1 = new CajaDeTexto(cant_letras,posX_1,posY_1);
 
 	int posX_2 = 10;
 	int posY_2 = posY_botonera + alto_botonera;
-	CajaDeTexto* cajaDeTextoPersonaje2 = new CajaDeTexto(cant_letras,posX_2,posY_2);
+	this->cajaDeTextoPersonaje2 = new CajaDeTexto(cant_letras,posX_2,posY_2);
 
-	bool loadMedia_botonera = botoneraPersonajes->loadMedia("RECURSOS/grilla1_eleccion_personajes.jpg",
+	bool loadMedia_botonera = this->botoneraPersonajes->loadMedia("RECURSOS/grilla1_eleccion_personajes.jpg",
 															"RECURSOS/grilla2_eleccion_personajes.jpg",
 															"RECURSOS/grilla3_eleccion_personajes.jpg");
 
-	bool loadMedia_cajaDeTextoPersonaje1 = cajaDeTextoPersonaje1->loadMedia();
-	bool loadMedia_cajaDeTextoPersonaje2 = cajaDeTextoPersonaje2->loadMedia();
+	bool loadMedia_cajaDeTextoPersonaje1 = this->cajaDeTextoPersonaje1->loadMedia();
+	bool loadMedia_cajaDeTextoPersonaje2 = this->cajaDeTextoPersonaje2->loadMedia();
 
 	if( loadMedia_botonera && loadMedia_cajaDeTextoPersonaje1 && loadMedia_cajaDeTextoPersonaje2 )
 	{
@@ -82,8 +89,6 @@ void PantallaSeleccionarPersonaje::iniciar() {
 		SDL_StartTextInput();
 
 		bool salirEleccionPersonajes = false;
-		bool setear_texto1 = true;
-		bool setear_texto2 = true;
 
 	    static const int FPS = 60;
 	    static const int DELAY_TIME = 1000.0f / FPS;
@@ -104,41 +109,16 @@ void PantallaSeleccionarPersonaje::iniciar() {
 					juegoCorriendo = false;
 				}
 
-			    if ( !cajaDeTextoPersonaje1->estoyEnfocado() && !cajaDeTextoPersonaje2->estoyEnfocado() )
-			    {
-			    	botoneraPersonajes->manejarEventoJugador(evento);
-			    }
+				this->botoneraPersonajes->manejarEventoJugador(evento);
+				this->botoneraPersonajes->actualizarModelo();
 
-				botoneraPersonajes->actualizarModelo();
+				this->manejarEventoNombreDelPersonaje1(evento, &renderText1);
+				this->manejarEventoNombreDelPersonaje2(evento, &renderText2);
 
-				if ( botoneraPersonajes->losPersonajesYaFueronElegidos() )
+				if ( this->botoneraPersonajes->seEligioElPersonaje1() && this->botoneraPersonajes->seEligioElPersonaje2() )
 				{
 					salirEleccionPersonajes = this->iniciarSalida();
 				}
-
-				// cargar el nombre del personaje 1
-				if ( botoneraPersonajes->getIdContenidoElegidoParaJugador1()!="" && setear_texto1)
-				{
-					renderText1 = true;
-					cajaDeTextoPersonaje1->setTexto(botoneraPersonajes->getIdContenidoElegidoParaJugador1());
-					setear_texto1 = false;
-				}
-				else
-				{
-					renderText1 = cajaDeTextoPersonaje1->manejarEvento(evento);
-				}
-
-				// cargar el nombre del personaje 2
-				if ( botoneraPersonajes->getIdContenidoElegidoParaJugador2()!="" && setear_texto2)
-				{
-					renderText2 = true;
-					cajaDeTextoPersonaje2->setTexto(botoneraPersonajes->getIdContenidoElegidoParaJugador2());
-					setear_texto2 = false;
-				}else
-				{
-					renderText2 = cajaDeTextoPersonaje2->manejarEvento(evento);
-				}
-
 			}
 
 			// CLEAR screen
@@ -146,11 +126,11 @@ void PantallaSeleccionarPersonaje::iniciar() {
 			SDL_RenderClear( Renderizador::Instance()->getRenderer() );
 
 			// DIBUJAR
-			botoneraPersonajes->dibujar();
-			cajaDeTextoPersonaje1->dibujar(renderText1);
-			cajaDeTextoPersonaje2->dibujar(renderText2);
-			this->dibujarPersonajeEnfocado(posX_botonera+ancho_botonera+80,posY_botonera+30, botoneraPersonajes->getIdContenidoEnfocadoParaJugador1(),ORIENTACION_IZQUIERDA);
-			this->dibujarPersonajeEnfocado(80,posY_botonera+30, botoneraPersonajes->getIdContenidoEnfocadoParaJugador2(), ORIENTACION_DERECHA);
+			this->botoneraPersonajes->dibujar();
+			this->cajaDeTextoPersonaje1->dibujar(renderText1);
+			this->cajaDeTextoPersonaje2->dibujar(renderText2);
+			this->dibujarPersonajeEnfocado(posX_botonera+ancho_botonera+80,posY_botonera+30, this->botoneraPersonajes->getIdContenidoEnfocadoParaJugador1(),ORIENTACION_IZQUIERDA);
+			this->dibujarPersonajeEnfocado(80,posY_botonera+30, this->botoneraPersonajes->getIdContenidoEnfocadoParaJugador2(), ORIENTACION_DERECHA);
 
 			// UPDATE screen
 			SDL_RenderPresent( Renderizador::Instance()->getRenderer() );
@@ -164,10 +144,10 @@ void PantallaSeleccionarPersonaje::iniciar() {
 		//Disable text input
 		SDL_StopTextInput();
 
-		this->IdPersonaje1Elegido = botoneraPersonajes->getIdContenidoElegidoParaJugador1();
-		this->IdPersonaje2Elegido = botoneraPersonajes->getIdContenidoElegidoParaJugador2();
-		this->nombrePersonaje1 = cajaDeTextoPersonaje1->getTexto();
-		this->nombrePersonaje2 = cajaDeTextoPersonaje2->getTexto();
+		this->IdPersonaje1Elegido = this->botoneraPersonajes->getIdContenidoElegidoParaJugador1();
+		this->IdPersonaje2Elegido = this->botoneraPersonajes->getIdContenidoElegidoParaJugador2();
+		this->nombrePersonaje1 = this->cajaDeTextoPersonaje1->getTexto();
+		this->nombrePersonaje2 = this->cajaDeTextoPersonaje2->getTexto();
 
 	}else {
 		if ( !loadMedia_botonera )
@@ -177,10 +157,6 @@ void PantallaSeleccionarPersonaje::iniciar() {
 		if ( !loadMedia_cajaDeTextoPersonaje2 )
 			Logger::getInstance()->error("No se pudo cargar imagenes para la caja de texto del personaje 2 en la pantalla de eleccion de personajes");
 	}
-
-	delete botoneraPersonajes;
-	delete cajaDeTextoPersonaje1;
-	delete cajaDeTextoPersonaje2;
 }
 
 string PantallaSeleccionarPersonaje::getIdPersonaje1Elegido() {
@@ -233,4 +209,37 @@ bool PantallaSeleccionarPersonaje::iniciarSalida() {
 	}
 
 	return this->salir;
+}
+
+void PantallaSeleccionarPersonaje::manejarEventoNombreDelPersonaje1(SDL_Event evento, bool* renderText1) {
+
+	if ( this->botoneraPersonajes->seEligioElPersonaje1() )
+	{
+		if ( this->botoneraPersonajes->getIdContenidoElegidoParaJugador1()!="" && this->setearNombrePersonaje1)
+		{
+			(*renderText1) = true;
+			this->cajaDeTextoPersonaje1->setTexto(this->botoneraPersonajes->getIdContenidoElegidoParaJugador1());
+			this->setearNombrePersonaje1 = false;
+		}
+		else
+		{
+			(*renderText1) = this->cajaDeTextoPersonaje1->manejarEvento(evento);
+		}
+	}
+}
+
+void PantallaSeleccionarPersonaje::manejarEventoNombreDelPersonaje2(SDL_Event evento, bool* renderText2) {
+
+	if ( this->botoneraPersonajes->seEligioElPersonaje2() )
+	{
+		if ( this->botoneraPersonajes->getIdContenidoElegidoParaJugador2()!="" && this->setearNombrePersonaje2)
+		{
+			(*renderText2) = true;
+			this->cajaDeTextoPersonaje2->setTexto(this->botoneraPersonajes->getIdContenidoElegidoParaJugador2());
+			this->setearNombrePersonaje2 = false;
+		}else
+		{
+			(*renderText2) = this->cajaDeTextoPersonaje2->manejarEvento(evento);
+		}
+	}
 }
