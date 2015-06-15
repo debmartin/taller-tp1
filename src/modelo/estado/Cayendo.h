@@ -10,6 +10,7 @@ class Cayendo : public Estado
         Cayendo(Vector2f posInicial, Vector2f velocidad, estado_personaje id, BVH* caja);
         virtual ~Cayendo();
         bool estaSaltando();
+        bool estaDesplazandoVertical();
     protected:
     private:
 };
