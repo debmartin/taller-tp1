@@ -484,13 +484,13 @@ void Personaje::hacerFatality(){
 
 void Personaje::updateFatality(){
 	if(estado->Id()== ANIMALITY){
-		//cout<<"ENTRA A UPDATEFATALITY CON ID ANIMALITY"<<endl;
+		cout<<"ENTRA A UPDATEFATALITY CON ID ANIMALITY"<<endl;
 		if(!estaBloqueado()){
 			cout<<"NO ESTA BLOQUEADO"<<endl;
 			volar_horizontal(ANIMALITY2);
 		}
 	}else if(estado->Id()== ANIMALITY2 && !estaVolandoVertical()){
-		//cout<<"ENTRA A UPDATEFATALITY CON ID ANIMALITY2"<<endl;
+		cout<<"ENTRA A UPDATEFATALITY CON ID ANIMALITY2"<<endl;
 		if(!estaBloqueado()){
 			cout<<"NO ESTA BLOQUEADO"<<endl;
 			volar_vertical(ANIMALITY2, ANIMALITY);
@@ -500,10 +500,10 @@ void Personaje::updateFatality(){
 
 void Personaje::recibirFatality(Colisionable* enemigo){
 	cout<<"ESTADO ENEMIGO:"<<enemigo->verEstado()->Id()<<endl;
-	//if(enemigo->verEstado()->estaVolandoVertical()){
+	if(enemigo->verEstado()->estaVolandoVertical()){
 		//cout<<"VOLAR VERTICAL"<<endl;
-		//volar_vertical(RECIBIENDO_GOLPE);
-	//}
+		volar_vertical(RECIBIENDO_GOLPE);
+	}
 	//bebe();
 }
 
@@ -792,8 +792,8 @@ void Personaje::update(Colisionable* enemigo){
 		//cout<<"UPDATE FATALITY"<<endl;
 		updateFatality();
 	}
-	else if(estaMareado() && enemigo->ejecutandoMovimientoEspecial() && !recibioFatality()){
-
+	//else if(estaMareado() && enemigo->ejecutandoMovimientoEspecial() && !recibioFatality()){
+	else if(estaMareado() && !recibioFatality()){
     	if(enemigo->verEstado()->haciendoFatality()){
     		cout<<"RECIBIR FATALITY"<<endl;
     		recibirFatality(enemigo);
