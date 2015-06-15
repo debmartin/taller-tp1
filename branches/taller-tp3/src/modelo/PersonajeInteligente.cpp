@@ -12,7 +12,7 @@ PersonajeInteligente::PersonajeInteligente(string id,
         map<estado_personaje, BVH*>* cajas_orientacion_derecha,
         DireccionObjeto orientacionInicialPersonaje) :
     Personaje(id, ancho, alto, posInicial, posc, numJugador, cajas_orientacion_derecha, orientacionInicialPersonaje),
-    contadorAtaque(TURNO_MAX), contadorReposo(TURNO_MAX){
+    contadorAtaque(TURNO_MAX), contadorReposo(TURNO_MAX), turno(TURNO_MIN), estados_anteriores(EN_ESPERA, CAMINANDO_DERECHA) {
 }
 
 PersonajeInteligente::~PersonajeInteligente(){
@@ -50,8 +50,17 @@ void PersonajeInteligente::calcularProximoMovimiento(Personaje* otro){
     contadorAtaque = TURNO_MIN;
     if (otroEstaCerca){
         otro->obtenerAntidoto(this);
-    } else if (! estaCaminando()) {
+    } else if (! estaCaminando() && ataquesEnemigoRepetidos()) {
         caminarHaciaEnemigo(otro);
+    } else if (ataquesEnemigoRepetidos()){
+        arrojarArma();
     }
+    if (turno)
+        estados_anteriores.first = otro->estado;
+    else
+        estados_anteriores.second = otro->estado;
 }
 
+bool PersonajeInteligente::ataquesEnemigoRepetidos(){
+    return (estados_anteriores.first == estados_anteriores.second);
+}

@@ -19,9 +19,12 @@ class PersonajeInteligente : public Personaje {
     private:
         void caminarHaciaEnemigo(Colisionable* enemigo);
         void caminarLejosEnemigo(Colisionable* enemigo);
+        bool ataquesEnemigoRepetidos();
 
         int contadorReposo;
         int contadorAtaque;
+        int turno;
+        std::pair<estado_personaje> estados_anteriores;
 };
 
 #endif // PERSONAJEINTELIGENTE_H
