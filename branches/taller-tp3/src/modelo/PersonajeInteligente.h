@@ -24,7 +24,7 @@ class PersonajeInteligente : public Personaje {
         int contadorReposo;
         int contadorAtaque;
         int turno;
-        std::pair<estado_personaje> estados_anteriores;
+        std::pair<estado_personaje, estado_personaje> estados_anteriores;
 };
 
 #endif // PERSONAJEINTELIGENTE_H
