@@ -22,6 +22,7 @@
 #define VECTOR_VELOCIDAD_NULA Vector2f(0, 0)
 #define VECTOR_GRAVEDAD Vector2f(0, -2600.f)
 #define VELOCIDAD_CAIDA_SUAVE 200
+#define VELOCIDAD_HORIZONTAL_ANIMALITY 300
 
 #define TIEMPO_BLOQUEO_PATADA 35
 #define TIEMPO_BLOQUEO_GOLPE 25
@@ -420,6 +421,22 @@ void Personaje::deslizar(){
 	bloquearPersonaje(50);
 }
 
+void Personaje::volar_horizontal(estado_personaje id_estado){
+	cambiarEstado(new Deslizar(posicion, id_estado, (*cajasPorEstado)[estado->Id()], direccion, VELOCIDAD_HORIZONTAL_ANIMALITY));
+	bloquearPersonaje(50);
+}
+
+void Personaje::volar_vertical(estado_personaje id_estado, estado_personaje id_estado_caja){
+	cambiarEstado(new VueloVertical(posicion, id_estado, (*cajasPorEstado)[id_estado_caja]));
+	//bloquearPersonaje(50);
+}
+
+void Personaje::volar_vertical(estado_personaje id_estado){
+	cambiarEstado(new VueloVertical(posicion, id_estado, (*cajasPorEstado)[id_estado]));
+	//bloquearPersonaje(50);
+}
+
+
 void Personaje::tijera(){
 	cambiarEstado(new TomandoOponente(posicion, TIJERA, (*cajasPorEstado)[EN_ESPERA]));
 	Sonidos::getInstancia()->reproducirSonido("sonido_deslizar");
@@ -450,14 +467,38 @@ void Personaje::bebe(){
 	//bloquearPersonaje(TIEMPO_FESTEJO_VICTORIA);
 }
 
+void Personaje::animality(){
+	cout<<"Haciendo fatalityyyy"<<endl;
+	cambiarEstado(new Fatality(posicion, ANIMALITY, (*cajasPorEstado)[ANIMALITY]));
+	bloquearPersonaje(50);
+}
+
 void Personaje::hacerFatality(){
 	cout<<"Haciendo fatalityyyy"<<endl;
-	cambiarEstado(new Fatality(posicion, EN_ESPERA, (*cajasPorEstado)[EN_ESPERA]));
-	bloquearPersonaje(100);
+	cambiarEstado(new Fatality(posicion, estado->Id(), (*cajasPorEstado)[estado->Id()]));
+}
+
+void Personaje::updateFatality(){
+	if(estado->Id()== ANIMALITY){
+		cout<<"ENTRA A UPDATEFATALITY CON ID ANIMALITY"<<endl;
+		if(!estaBloqueado()){
+			cout<<"NO ESTA BLOQUEADO"<<endl;
+			volar_horizontal(ANIMALITY2);
+		}
+	}else if(estado->Id()== ANIMALITY2){
+		cout<<"ENTRA A UPDATEFATALITY CON ID ANIMALITY2"<<endl;
+		if(!estaBloqueado()){
+			cout<<"NO ESTA BLOQUEADO"<<endl;
+			volar_vertical(ANIMALITY2, ANIMALITY);
+		}
+	}
 }
 
 void Personaje::recibirFatality(Colisionable* enemigo){
-	bebe();
+	if(enemigo->verEstado()->Id() == ANIMALITY2 && enemigo->verEstado()->estaVolandoVertical()){
+		volar_vertical(RECIBIENDO_GOLPE);
+	}
+	//bebe();
 }
 
 void Personaje::caer(){
@@ -602,8 +643,8 @@ void Personaje::ejecutarCombo(string nombreCombo){
 			deslizar();
 		}else if(nombreCombo == "SubZero Fatality"){
 			//tijera();
-		}else if(nombreCombo == "Babality"){
-			hacerFatality();
+		}else if(nombreCombo == "Animality"){
+			animality();
 		}
 }
 
@@ -666,18 +707,20 @@ void Personaje::volverAlPiso(float distanciaAObjetivo){
 void Personaje::calcularPosicionSinColision(Colisionable* enemigo){
 	float distanciaAObjetivo = calcularProximaDistancia(enemigo);
 
-        if ((estado->Id() == SALTANDO_VERTICAL || posicionable->esValida(posicionCandidata, estado->calcularAncho())) && posicionCandidata.Y() >= posicionInicial.Y()) {
+   if ((estado->Id() == SALTANDO_VERTICAL || posicionable->esValida(posicionCandidata, estado->calcularAncho())) && posicionCandidata.Y() >= posicionInicial.Y()) {
         if (! posicionable->enExtremos(distanciaAObjetivo, estado->calcularAncho())){
             posicion = posicionCandidata;
         }else{
             posicion = Vector2f(posicion.X(), posicionCandidata.Y());
         }
-        } else if (posicionCandidata.Y() < posicionInicial.Y()) {
+    } else if (posicionCandidata.Y() < posicionInicial.Y()) {
             volverAlPiso(distanciaAObjetivo);
     } else if (posicionCandidata.Y() > posicionInicial.Y()) {
         caer();
     } else {
-        mantenerReposo();
+    	if(!haciendoFatality()){
+    		mantenerReposo();
+    	}
     }
 }
 
@@ -724,6 +767,7 @@ void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
         if (estaAtacando())
             colisionar(enemigo);
     } else {
+    	cout<<"COLISIONAR"<<endl;
         colisionar(enemigo);
     }
  }
@@ -734,6 +778,9 @@ void Personaje::update(Colisionable* enemigo){
     if(estaEnPiso() ){
        return;
 
+	}else if(haciendoFatality() && !estaBloqueado()){
+		cout<<"UPDATE FATALITY"<<endl;
+		updateFatality();
 	}
 	else if(estaMareado() && enemigo->ejecutandoMovimientoEspecial() && !recibioFatality()){
 
@@ -750,8 +797,14 @@ void Personaje::update(Colisionable* enemigo){
     }
 
     if(estaBloqueado()){
+    	cout<<"Bloqueo:"<<tiempoBloqueo<<endl;
         if(tiempoBloqueo <= 0){
-           mantenerReposo();
+        	if(haciendoFatality()){
+        		hacerFatality();
+        	}else{
+        		cout<<"DEBBBBBBBB"<<endl;
+        		mantenerReposo();
+        	}
         }
         tiempoBloqueo -= 1.0;
     }

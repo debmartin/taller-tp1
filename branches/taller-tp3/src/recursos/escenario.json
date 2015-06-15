@@ -40,7 +40,7 @@
 		    "sprites-caminando": { 
 				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-caminando.png",
 		    		    "cant_fotogramas": 9,
-		    		    "fps": 13
+		    		    "fps": 12
 		    			},
 		    "sprites-agachado": { 
 				        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-agachado.png",
@@ -391,6 +391,16 @@
 		    		"cant_fotogramas": 8,
 		    		"fps": 10 
 		    			},
+		    "sprites-animality": { 
+			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-aguila.png",
+		    		"cant_fotogramas": 9,
+		    		"fps": 10 
+		    			},
+		    "sprites-animality2": { 
+			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-vuelo-aguila.png",
+		    		"cant_fotogramas": 2,
+		    		"fps": 5 
+		    			},
 		    "sprites-decapitado": { 
 			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-decapitado.png",
 		    		"cant_fotogramas": 10,
@@ -439,7 +449,7 @@
     ],
     
 	"jugador-1": {
-        "tipo-control": "TECLADO",   // "TECLADO" o "JOYSTICK"
+        "tipo-control": "JOYSTICK",   // "TECLADO" o "JOYSTICK"
         "tolerancia": 0,
         "control":{
         			"JOY_PINIA_ALTA": 0,
@@ -453,7 +463,7 @@
         }
 	},
 	"jugador-2": {
-        "tipo-control": "TECLADO",  // "TECLADO" o "JOYSTICK"
+        "tipo-control": "JOYSTICK",  // "TECLADO" o "JOYSTICK"
         "tolerancia": 0,
         "control":{
         			"JOY_PINIA_ALTA": 0,

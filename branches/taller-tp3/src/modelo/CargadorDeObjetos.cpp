@@ -311,6 +311,8 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(flo
 	vector<AABB*>* cajasAABB_caida_derecha = new vector<AABB*>;
 	vector<AABB*>* cajasAABB_caida_izquierda = new vector<AABB*>;
 	vector<AABB*>* cajasAABB_tirando_poder = new vector<AABB*>;
+	vector<AABB*>* cajasAABB_animality = new vector<AABB*>;
+	vector<AABB*>* cajasAABB_animality2 = new vector<AABB*>;
 
 	//REPOSO//
 	Vector2f reposo_caja1_PuntoMin(REPOSO_CAJA1_X1_PORCENTUAL*ancho_logico_personaje, REPOSO_CAJA1_Y1_PORCENTUAL*alto_logico_personaje);
@@ -553,6 +555,20 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(flo
 	AABB* tirando_poder_caja1 = new AABB(tirando_poder_caja1_PuntoMin, tirando_poder_caja1_PuntoMax);
 	cajasAABB_tirando_poder->push_back(tirando_poder_caja1);
 
+	//ANIMALITY//
+	Vector2f animality_caja1_PuntoMin(ANIMALITY_CAJA1_X1_PORCENTUAL*ancho_logico_personaje, ANIMALITY_CAJA1_Y1_PORCENTUAL*alto_logico_personaje);
+	Vector2f animality_caja1_PuntoMax(ANIMALITY_CAJA1_X2_PORCENTUAL*ancho_logico_personaje, ANIMALITY_CAJA1_Y2_PORCENTUAL*alto_logico_personaje);
+
+	AABB* animality_caja1 = new AABB(animality_caja1_PuntoMin, animality_caja1_PuntoMax);
+	cajasAABB_animality->push_back(animality_caja1);
+
+	//ANIMALITY//
+	Vector2f animality2_caja1_PuntoMin(ANIMALITY2_CAJA1_X1_PORCENTUAL*ancho_logico_personaje, ANIMALITY2_CAJA1_Y1_PORCENTUAL*alto_logico_personaje);
+	Vector2f animality2_caja1_PuntoMax(ANIMALITY2_CAJA1_X2_PORCENTUAL*ancho_logico_personaje, ANIMALITY2_CAJA1_Y2_PORCENTUAL*alto_logico_personaje);
+
+	AABB* animality2_caja1 = new AABB(animality2_caja1_PuntoMin, animality2_caja1_PuntoMax);
+	cajasAABB_animality2->push_back(animality2_caja1);
+
 	Vector2f pivote(ancho_logico_personaje/2, 0);
 	//Armo los BVH de cada estado
 	BVH* BVH_reposo = new BVH(cajasAABB_reposo, pivote);
@@ -576,6 +592,8 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(flo
 	BVH* BVH_caida_derecha = new BVH(cajasAABB_caida_derecha, pivote);
 	BVH* BVH_caida_izquierda = new BVH(cajasAABB_caida_izquierda, pivote);
 	BVH* BVH_tirando_poder = new BVH(cajasAABB_tirando_poder, pivote);
+	BVH* BVH_animality = new BVH(cajasAABB_animality, pivote);
+	BVH* BVH_animality2 = new BVH(cajasAABB_animality2, pivote);
 
 	map<estado_personaje, BVH*>* mapa_BVH = new map<estado_personaje, BVH*>;
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(EN_ESPERA, BVH_reposo));
@@ -603,6 +621,8 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(flo
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(CAIDA_DERECHA, BVH_caida_derecha));
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(CAIDA_IZQUIERDA, BVH_caida_izquierda));
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(TIRANDO_PODER, BVH_tirando_poder));
+	mapa_BVH->insert(pair<estado_personaje, BVH*>(ANIMALITY, BVH_animality));
+	mapa_BVH->insert(pair<estado_personaje, BVH*>(ANIMALITY2, BVH_animality2));
 
 	return mapa_BVH;
 }
@@ -745,9 +765,8 @@ vector<Combo*>* CargadorDeOjbetos::cargarCombos(string nombrePersonaje){
 		Combo* combo5 = new Combo(vectorTeclasCombo5, "Patada Giratoria", 5);
 
 		vectorTeclasCombo6->push_back("JOY_DERECHA");
-		vectorTeclasCombo6->push_back("JOY_DERECHA");
 		vectorTeclasCombo6->push_back("JOY_DEFENSA");
-		Combo* combo6 = new Combo(vectorTeclasCombo6, "Babality", 6);
+		Combo* combo6 = new Combo(vectorTeclasCombo6, "Animality", 6);
 
 		vectorDeCombos->push_back(combo1);
 		vectorDeCombos->push_back(combo2);
