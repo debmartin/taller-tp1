@@ -24,3 +24,19 @@ VueloVertical::~VueloVertical()
 bool VueloVertical::estaVolandoVertical(){
     return true;
 }
+
+bool VueloVertical::haciendoFatality(){
+	if(Id() == ANIMALITY2){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+bool VueloVertical::recibioFatality(){
+	if(Id() == RECIBIENDO_GOLPE){
+		return true;
+	}else{
+		return false;
+	}
+}

@@ -60,3 +60,7 @@ bool Bloqueado::estaHaciendoToma(){
 bool Bloqueado::haciendoFatality(){
 	return (estadoDeBloqueo->haciendoFatality());
 }
+
+bool Bloqueado::estaVolandoVertical(){
+	return (estadoDeBloqueo->estaVolandoVertical());
+}

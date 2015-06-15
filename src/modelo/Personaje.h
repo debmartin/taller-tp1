@@ -137,6 +137,7 @@ public:
 	bool estaMuerto();
 	bool estaHaciendoToma();
 	bool estaTomandoAlOponente();
+	bool estaVolandoVertical();
 	void cambiarEstado(Estado* nuevo);
 	estado_personaje getEstado();
 	Estado* verEstado();
