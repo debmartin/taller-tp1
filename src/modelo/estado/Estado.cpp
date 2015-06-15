@@ -91,6 +91,11 @@ bool Estado::estaTomandoAlOponente(){
     return false;
 }
 
+bool Estado::estaVolandoVertical(){
+    return false;
+}
+
+
 bool Estado::estaEnPiso(){
 	return false;
 }

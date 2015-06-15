@@ -15,8 +15,10 @@ class Deslizar : public Estado
 {
     public:
 		Deslizar(Vector2f posInicial, estado_personaje estado, BVH* caja, bool direccion);
+		Deslizar(Vector2f posInicial, estado_personaje estado, BVH* caja, bool direccion, float velocidad_horizontal);
         virtual ~Deslizar();
         bool estaAtacando();
+        bool haciendoFatality();
     protected:
     private:
 };

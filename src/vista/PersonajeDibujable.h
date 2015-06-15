@@ -47,6 +47,8 @@ class ArmaDibujable;
 #define ID_PERSONAJE_ARROJADO "arrojado"
 #define ID_PERSONAJE_TIRANDO_PODER "tirando-poder"
 #define ID_PERSONAJE_BEBE "bebe"
+#define ID_PERSONAJE_ANIMALITY "animality"
+#define ID_PERSONAJE_ANIMALITY2 "animality2"
 #define ID_PERSONAJE_VICTORIA "victoria"
 #define ID_PERSONAJE_MUERTO "muerto"
 #define ID_PERSONAJE_SLIDE "deslizamiento"

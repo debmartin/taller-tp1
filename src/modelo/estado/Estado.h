@@ -56,6 +56,8 @@ typedef enum estado_personaje
 	BABALITY,
 	FATALITY1,
 	DECAPITADO,
+	ANIMALITY,
+	ANIMALITY2,
 	BLOQUEADO
 } estado_personaje;
 
@@ -89,6 +91,7 @@ class Estado
         virtual bool estaMuerto();
         virtual bool estaHaciendoToma();
         virtual bool estaTomandoAlOponente();
+        virtual bool estaVolandoVertical();
 
         Ataque* obtenerAtaque();
         Vector2f obtenerProximaPosicion();

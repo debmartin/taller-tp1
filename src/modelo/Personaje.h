@@ -42,6 +42,7 @@
 #include "estado/Muerto.h"
 #include "estado/Mareado.h"
 #include "estado/Deslizar.h"
+#include "estado/VueloVertical.h"
 #include "estado/Arrojado.h"
 #include "estado/TomandoOponente.h"
 #include "estado/Fatality.h"
@@ -176,6 +177,9 @@ public:
 	void morir();
 	void morirEnPiso();
 	void deslizar();
+	void volar_horizontal(estado_personaje id_estado);
+	void volar_vertical(estado_personaje id_estado, estado_personaje id_estado_caja);
+	void volar_vertical(estado_personaje id_estado);
 	void derribado();
 	void tijera();
 	void recibirDanio(int danio);
@@ -183,8 +187,10 @@ public:
 	void arrojarArma();
 	void ejecutarCombo(string nombreCombo);
 	void hacerFatality();
+	void updateFatality();
 	void recibirFatality(Colisionable* enemigo);
 	void bebe();
+	void animality();
 	void ser_arrojado();
 	void mareado();
 
