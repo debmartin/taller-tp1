@@ -15,6 +15,8 @@ public:
 	VueloVertical(Vector2f posInicial, estado_personaje estado, BVH* caja);
 	virtual ~VueloVertical();
 	bool estaVolandoVertical();
+	bool haciendoFatality();
+	bool recibioFatality();
 };
 
 #endif /* SRC_MODELO_ESTADO_VUELOVERTICAL_H_ */

@@ -216,6 +216,10 @@ bool Personaje::efectuandoPatadaGiratoria(){
 	return (estado->efectuandoPatadaGiratoria());
 }
 
+bool Personaje::estaVolandoVertical(){
+	return(estado->estaVolandoVertical());
+}
+
 bool Personaje::estaInhabilitado(){
     return (estado->Id() == PINIA_ALTA) || (estado->Id() == PINIA_BAJA) || (estado->Id() == GANCHO);
 }
@@ -485,7 +489,7 @@ void Personaje::updateFatality(){
 			cout<<"NO ESTA BLOQUEADO"<<endl;
 			volar_horizontal(ANIMALITY2);
 		}
-	}else if(estado->Id()== ANIMALITY2){
+	}else if(estado->Id()== ANIMALITY2 && !estaVolandoVertical()){
 		//cout<<"ENTRA A UPDATEFATALITY CON ID ANIMALITY2"<<endl;
 		if(!estaBloqueado()){
 			cout<<"NO ESTA BLOQUEADO"<<endl;
@@ -495,9 +499,10 @@ void Personaje::updateFatality(){
 }
 
 void Personaje::recibirFatality(Colisionable* enemigo){
-	if(enemigo->verEstado()->Id() == ANIMALITY2 && enemigo->verEstado()->estaVolandoVertical()){
-		volar_vertical(RECIBIENDO_GOLPE);
-	}
+	//if(enemigo->verEstado()->estaVolandoVertical()){
+		//cout<<"VOLAR VERTICAL"<<endl;
+		//volar_vertical(RECIBIENDO_GOLPE);
+	//}
 	//bebe();
 }
 
@@ -785,13 +790,14 @@ void Personaje::update(Colisionable* enemigo){
 	else if(estaMareado() && enemigo->ejecutandoMovimientoEspecial() && !recibioFatality()){
 
     	if(enemigo->verEstado()->haciendoFatality()){
+    		cout<<"RECIBIR FATALITY"<<endl;
     		recibirFatality(enemigo);
     	}
     }/*else if(recibioFatality() && !estaBloqueado()){
     	morir();
     }*/
 
-    else if(estaSinEnergia() && !estaSaltando() && !estaEnPiso() && !haciendoFatality() && !estaMareado()){
+    else if(estaSinEnergia() && !estaSaltando() && !estaEnPiso() && !haciendoFatality() && !estaMareado() && !recibioFatality()){
     	//cout<<"BBBBBB"<<endl;
     	mareado();
     }

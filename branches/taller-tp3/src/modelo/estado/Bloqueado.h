@@ -20,6 +20,7 @@ class Bloqueado : public Estado
         bool estaTomandoAlOponente();
         bool estaHaciendoToma();
         bool haciendoFatality();
+        bool estaVolandoVertical();
     protected:
     private:
         Estado* estadoDeBloqueo;
