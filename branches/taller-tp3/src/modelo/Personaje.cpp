@@ -499,6 +499,7 @@ void Personaje::updateFatality(){
 }
 
 void Personaje::recibirFatality(Colisionable* enemigo){
+	cout<<"ESTADO ENEMIGO:"<<enemigo->verEstado()->Id()<<endl;
 	//if(enemigo->verEstado()->estaVolandoVertical()){
 		//cout<<"VOLAR VERTICAL"<<endl;
 		//volar_vertical(RECIBIENDO_GOLPE);
@@ -712,14 +713,16 @@ void Personaje::volverAlPiso(float distanciaAObjetivo){
 void Personaje::calcularPosicionSinColision(Colisionable* enemigo){
 	float distanciaAObjetivo = calcularProximaDistancia(enemigo);
 
-   if ((estado->Id() == SALTANDO_VERTICAL || posicionable->esValida(posicionCandidata, estado->calcularAncho())) && posicionCandidata.Y() >= posicionInicial.Y()) {
-        if (! posicionable->enExtremos(distanciaAObjetivo, estado->calcularAncho())){
-            posicion = posicionCandidata;
-        }else{
-            posicion = Vector2f(posicion.X(), posicionCandidata.Y());
-        }
-    } else if (posicionCandidata.Y() < posicionInicial.Y()) {
+		if ((estado->Id() == SALTANDO_VERTICAL || posicionable->esValida(posicionCandidata, estado->calcularAncho())) && posicionCandidata.Y() >= posicionInicial.Y()) {
+		if (! posicionable->enExtremos(distanciaAObjetivo, estado->calcularAncho())){
+			posicion = posicionCandidata;
+		}else{
+			posicion = Vector2f(posicion.X(), posicionCandidata.Y());
+		}
+		} else if (posicionCandidata.Y() < posicionInicial.Y()) {
             volverAlPiso(distanciaAObjetivo);
+	} else if (estado->estaDesplazandoVertical()) {
+		posicion = posicionCandidata;
     } else if (posicionCandidata.Y() > posicionInicial.Y()) {
         caer();
     } else {
@@ -766,6 +769,8 @@ void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
             posicion = posicionCandidata;
         } else if (posicionCandidata.Y() <= posicionInicial.Y()) {
             volverAlPiso(distanciaAObjetivo);
+        } else if (estado->estaDesplazandoVertical()) {
+        	posicion = posicionCandidata;
         } else {
             caer();
         }
