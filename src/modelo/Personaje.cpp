@@ -468,25 +468,25 @@ void Personaje::bebe(){
 }
 
 void Personaje::animality(){
-	cout<<"Haciendo fatalityyyy"<<endl;
+	//cout<<"Haciendo fatalityyyy"<<endl;
 	cambiarEstado(new Fatality(posicion, ANIMALITY, (*cajasPorEstado)[ANIMALITY]));
 	bloquearPersonaje(50);
 }
 
 void Personaje::hacerFatality(){
-	cout<<"Haciendo fatalityyyy"<<endl;
+	//cout<<"Haciendo fatalityyyy"<<endl;
 	cambiarEstado(new Fatality(posicion, estado->Id(), (*cajasPorEstado)[estado->Id()]));
 }
 
 void Personaje::updateFatality(){
 	if(estado->Id()== ANIMALITY){
-		cout<<"ENTRA A UPDATEFATALITY CON ID ANIMALITY"<<endl;
+		//cout<<"ENTRA A UPDATEFATALITY CON ID ANIMALITY"<<endl;
 		if(!estaBloqueado()){
 			cout<<"NO ESTA BLOQUEADO"<<endl;
 			volar_horizontal(ANIMALITY2);
 		}
 	}else if(estado->Id()== ANIMALITY2){
-		cout<<"ENTRA A UPDATEFATALITY CON ID ANIMALITY2"<<endl;
+		//cout<<"ENTRA A UPDATEFATALITY CON ID ANIMALITY2"<<endl;
 		if(!estaBloqueado()){
 			cout<<"NO ESTA BLOQUEADO"<<endl;
 			volar_vertical(ANIMALITY2, ANIMALITY);
@@ -767,7 +767,7 @@ void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
         if (estaAtacando())
             colisionar(enemigo);
     } else {
-    	cout<<"COLISIONAR"<<endl;
+    	//cout<<"COLISIONAR"<<endl;
         colisionar(enemigo);
     }
  }
@@ -779,7 +779,7 @@ void Personaje::update(Colisionable* enemigo){
        return;
 
 	}else if(haciendoFatality() && !estaBloqueado()){
-		cout<<"UPDATE FATALITY"<<endl;
+		//cout<<"UPDATE FATALITY"<<endl;
 		updateFatality();
 	}
 	else if(estaMareado() && enemigo->ejecutandoMovimientoEspecial() && !recibioFatality()){
@@ -792,17 +792,16 @@ void Personaje::update(Colisionable* enemigo){
     }*/
 
     else if(estaSinEnergia() && !estaSaltando() && !estaEnPiso() && !haciendoFatality() && !estaMareado()){
-    	cout<<"BBBBBB"<<endl;
+    	//cout<<"BBBBBB"<<endl;
     	mareado();
     }
 
     if(estaBloqueado()){
-    	cout<<"Bloqueo:"<<tiempoBloqueo<<endl;
+    	//cout<<"Bloqueo:"<<tiempoBloqueo<<endl;
         if(tiempoBloqueo <= 0){
         	if(haciendoFatality()){
         		hacerFatality();
         	}else{
-        		cout<<"DEBBBBBBBB"<<endl;
         		mantenerReposo();
         	}
         }
