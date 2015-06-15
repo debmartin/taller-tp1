@@ -56,9 +56,9 @@ void PersonajeInteligente::calcularProximoMovimiento(Personaje* otro){
         arrojarArma();
     }
     if (turno)
-        estados_anteriores.first = otro->estado;
+        estados_anteriores.first = otro->verEstado()->Id();
     else
-        estados_anteriores.second = otro->estado;
+        estados_anteriores.second = otro->verEstado()->Id();
 }
 
 bool PersonajeInteligente::ataquesEnemigoRepetidos(){
