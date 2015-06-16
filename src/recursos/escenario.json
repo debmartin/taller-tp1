@@ -199,6 +199,16 @@
 		    			},
 		    "sprites-fatality1": { 
 			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-fatality1.png",
+		    		"cant_fotogramas": 3,
+		    		"fps": 10 
+		    			},
+		    "sprites-gancho-fatality": { 
+			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-gancho-fatality.png",
+		    		"cant_fotogramas": 4,
+		    		"fps": 10 
+		    			},
+		    "sprites-decapitado": { 
+			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-decapitado.png",
 		    		"cant_fotogramas": 8,
 		    		"fps": 10 
 		    			},
@@ -392,8 +402,8 @@
 		    		"fps": 5 
 		    			},
 		    "sprites-decapitado": { 
-			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-decapitado.png",
-		    		"cant_fotogramas": 10,
+			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-decapitada.png",
+		    		"cant_fotogramas": 8,
 		    		"fps": 10 
 		    			},
 			"arma": {

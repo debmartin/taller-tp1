@@ -368,6 +368,13 @@ void Personaje::gancho(){
     Logger::getInstance()->debug("Personaje: gancho.");
 }
 
+void Personaje::ganchoFatality(){
+	hacerFatality(FATALITY1);
+	Sonidos::getInstancia()->reproducirSonido("sonido_gancho");
+	bloquearPersonaje(TIEMPO_BLOQUEO_GANCHO);
+    Logger::getInstance()->debug("Personaje: gancho.");
+}
+
 void Personaje::defender(){
     cambiarEstado(new Defendiendo(posicion, (*cajasPorEstado)[DEFENDIENDO]));
 	Logger::getInstance()->debug("Personaje: defensa.");
@@ -506,6 +513,16 @@ void Personaje::animality(){
 	}
 }
 
+void Personaje::tirar_beso(){
+	hacerFatality(FATALITY1);
+	bloquearPersonaje(25);
+}
+
+void Personaje::decapitar(){
+	cambiarEstado(new RecibiendoFatality(posicion, DECAPITADO, (*cajasPorEstado)[EN_ESPERA]));
+	bloquearPersonaje(100);
+}
+
 void Personaje::hacerFatality(){
 	//cout<<"Haciendo fatalityyyy"<<endl;
 	cambiarEstado(new Fatality(posicion, estado->Id(), (*cajasPorEstado)[estado->Id()]));
@@ -516,7 +533,7 @@ void Personaje::hacerFatality(estado_personaje id_estado){
 	cambiarEstado(new Fatality(posicion, id_estado, (*cajasPorEstado)[estado->Id()]));
 }
 
-void Personaje::updateFatality(){
+void Personaje::updateFatality(Colisionable* enemigo){
 	if(estado->Id()== ANIMALITY){
 		cout<<"ENTRA A UPDATEFATALITY CON ID ANIMALITY"<<endl;
 		if(!estaBloqueado()){
@@ -538,16 +555,24 @@ void Personaje::updateFatality(){
 			cout<<"NO ESTA BLOQUEADO"<<endl;
 			hacerFatality(OSO2);
 		}
+	}else if(estado->Id()== FATALITY1){
+		if(!estaBloqueado() && id == "sonya"){
+			cout<<"NO ESTA BLOQUEADO"<<endl;
+			hacerFatality(OSO2);
+		}else if(!estaBloqueado()){
+			hacerFatality(GANCHO_FATALITY);
+		}
 	}
 }
 
 void Personaje::recibirFatality(Colisionable* enemigo){
 	cout<<"ESTADO ENEMIGO:"<<enemigo->verEstado()->Id()<<endl;
 	if(enemigo->verEstado()->estaVolandoVertical()){
-		//cout<<"VOLAR VERTICAL"<<endl;
 		volar_vertical(RECIBIENDO_GOLPE);
+	}else if(enemigo->verEstado()->haciendoFatality() && enemigo->verEstado()->Id() == GANCHO_FATALITY){
+		cout<<"DECAPITAR"<<endl;
+		decapitar();
 	}
-	//bebe();
 }
 
 void Personaje::caer(){
@@ -674,14 +699,13 @@ void Personaje::arrojarArma(){
 		posicionObjeto.setCoordenada(posicion.X()-ancho/2, posicion.Y() + estado->calcularAlto() * 0.67);
 	}
 
-	arma->posicionar(posicionObjeto);
-	arma->arrojar();
 	if(id == "sonya"){
 		Sonidos::getInstancia()->reproducirSonido("sonido_arma_sonya");
 	}else{
 		Sonidos::getInstancia()->reproducirSonido("sonido_arma");
 	}
-	//Sonidos::getInstancia()->reproducirSonido("sonido_arma");
+	arma->posicionar(posicionObjeto);
+	arma->arrojar();
 }
 
 void Personaje::ejecutarCombo(string nombreCombo){
@@ -695,9 +719,9 @@ void Personaje::ejecutarCombo(string nombreCombo){
 			deslizar();
 		}else if(nombreCombo == "Fatality"){
 			if(id == "sonya"){
-				hacerFatality(FATALITY1);
+				tirar_beso();
 			}else{
-				hacerFatality(FATALITY1);
+				ganchoFatality();
 			}
 		}else if(nombreCombo == "Ice Freeze"){
 			arrojarArma();
@@ -843,7 +867,7 @@ void Personaje::update(Colisionable* enemigo){
 
 	}else if(haciendoFatality() && !estaBloqueado()){
 		cout<<"UPDATE FATALITY"<<endl;
-		updateFatality();
+		updateFatality(enemigo);
 	}
 	//else if(estaMareado() && enemigo->ejecutandoMovimientoEspecial() && !recibioFatality()){
 	else if(estaMareado() && !recibioFatality()){
@@ -852,11 +876,11 @@ void Personaje::update(Colisionable* enemigo){
     		recibirFatality(enemigo);
     	}
     }/*else if(recibioFatality() && !estaBloqueado()){
-    	morir();
+    	updateFatality(enemigo);
     }*/
 
     else if(estaSinEnergia() && !estaSaltando() && !estaEnPiso() && !haciendoFatality() && !estaMareado() && !recibioFatality()){
-    	//cout<<"BBBBBB"<<endl;
+    	cout<<"BBBBBB"<<endl;
     	mareado();
     }
 

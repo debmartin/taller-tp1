@@ -259,6 +259,11 @@ void PersonajeDibujable::seleccionarSprite(){
 				spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_DECAPITADO]);
 				spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
 				break;
+			case GANCHO_FATALITY:
+				this->spritePersonaje->setLoopMode(LOOP_NO_REPEAT);
+				spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_GANCHO_FATALITY]);
+				spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
+				break;
 		}
 	}
 	estadoAnterior = estado;

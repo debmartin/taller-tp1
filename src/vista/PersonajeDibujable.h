@@ -55,6 +55,7 @@ class ArmaDibujable;
 #define ID_PERSONAJE_TIJERA "tijera"
 #define ID_PERSONAJE_FATALITY1 "fatality1"
 #define ID_PERSONAJE_DECAPITADO "decapitado"
+#define ID_PERSONAJE_GANCHO_FATALITY "gancho-fatality"
 
 class PersonajeDibujable : public Dibujable, public Observador {
 private:

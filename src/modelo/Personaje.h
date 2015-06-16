@@ -46,6 +46,7 @@
 #include "estado/Arrojado.h"
 #include "estado/TomandoOponente.h"
 #include "estado/Fatality.h"
+#include "estado/RecibiendoFatality.h"
 #include "../utils/Loggeable.h"
 #include "Observable.h"
 #include "Vector2f.h"
@@ -164,6 +165,7 @@ public:
 	void patadaSaltandoDiagonalDerecha();
 	void patadaSaltandoDiagonalIzquierda();
 	void gancho();
+	void ganchoFatality();
 	void defender();
 	void defenderAgachado();
 	void caer();
@@ -180,6 +182,7 @@ public:
 	void morir();
 	void morirEnPiso();
 	void deslizar();
+	void decapitar();
 	void volar_horizontal(estado_personaje id_estado);
 	void volar_vertical(estado_personaje id_estado, estado_personaje id_estado_caja);
 	void volar_vertical(estado_personaje id_estado);
@@ -188,10 +191,11 @@ public:
 	void recibirDanio(int danio);
 	void recibirGolpe(Colisionable* otro);
 	void arrojarArma();
+	void tirar_beso();
 	void ejecutarCombo(string nombreCombo);
 	void hacerFatality();
 	void hacerFatality(estado_personaje id_estado);
-	void updateFatality();
+	void updateFatality(Colisionable* enemigo);
 	void recibirFatality(Colisionable* enemigo);
 	void bebe();
 	void animality();
