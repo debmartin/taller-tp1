@@ -95,7 +95,7 @@ void ControladorBotonera::identificarOrdenJoystick(
 	}else if ( (*estadoJoy)["JOY_ABAJO"] ){
 		this->posicionarAbajo(unaPosicionEnfocada);
 
-	}else if((*estadoJoy)["JOY_SELECT"]){
+	}else if((*estadoJoy)["JOY_PINIA_BAJA"]){
 		this->elegir(unaPosicionEnfocada);
 	}
 

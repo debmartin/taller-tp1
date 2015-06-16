@@ -98,29 +98,31 @@ HUD::~HUD() {
 void HUD::dibujar(){
 	this->tHUD = updateTexture();
 	SDL_RenderCopy(this->gRenderer, this->tHUD, NULL, NULL);
-/*
-	//IMPRIMO COLA DE COMBOS 1
-	int x = 30; int y = 70;
-	std::deque<string>::iterator it1 = colaDeTeclas1->begin();
-	while (it1 != colaDeTeclas1->end()) {
-		SDL_Color color1 = { 255, 239, 36, 255 };
-		SDL_Texture* combos = renderText(*it1++, "RECURSOS/HUD/mk2.ttf", color1, 11, gRenderer);
-		SDL_Rect destRect = {x, y, 100, 20}; y += 15;
-		SDL_RenderCopy(this->gRenderer, combos, NULL, &destRect);
-		SDL_DestroyTexture(combos);
+
+	if (this->combosVisibles) {
+		//IMPRIMO COLA DE COMBOS 1
+		int x = 30; int y = 70;
+		std::deque<string>::iterator it1 = colaDeTeclas1->begin();
+		while (it1 != colaDeTeclas1->end()) {
+			SDL_Color color1 = { 255, 239, 36, 255 };
+			SDL_Texture* combos = renderText(*it1++, "RECURSOS/HUD/mk2.ttf", color1, 11, gRenderer);
+			SDL_Rect destRect = {x, y, 100, 20}; y += 15;
+			SDL_RenderCopy(this->gRenderer, combos, NULL, &destRect);
+			SDL_DestroyTexture(combos);
+		}
+
+		//IMPRIMO COLA DE COMBOS 2
+		x = 500; y = 70;
+		std::deque<string>::iterator it2 = colaDeTeclas2->begin();
+		while (it2 != colaDeTeclas2->end()) {
+			SDL_Color color2 = { 255, 239, 36, 255 };
+			SDL_Texture* combos = renderText(*it2++, "RECURSOS/HUD/mk2.ttf", color2, 11, gRenderer);
+			SDL_Rect destRect = {x, y, 100, 20}; y += 15;
+			SDL_RenderCopy(this->gRenderer, combos, NULL, &destRect);
+			SDL_DestroyTexture(combos);
+		}
 	}
 
-	//IMPRIMO COLA DE COMBOS 2
-	x = 500; y = 70;
-	std::deque<string>::iterator it2 = colaDeTeclas2->begin();
-	while (it2 != colaDeTeclas2->end()) {
-		SDL_Color color2 = { 255, 239, 36, 255 };
-		SDL_Texture* combos = renderText(*it2++, "RECURSOS/HUD/mk2.ttf", color2, 11, gRenderer);
-		SDL_Rect destRect = {x, y, 100, 20}; y += 15;
-		SDL_RenderCopy(this->gRenderer, combos, NULL, &destRect);
-		SDL_DestroyTexture(combos);
-	}
-*/
 }
 
 void HUD::recibirNotificacion(Observable* unObservable){

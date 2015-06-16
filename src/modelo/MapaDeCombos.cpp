@@ -17,6 +17,9 @@ MapaDeCombos::MapaDeCombos(vector<Combo*>* lista, int tolerancia):
 }
 
 void MapaDeCombos::agregar_tecla(string tecla){
+
+	if (this->colaDeTeclas->size() >= LONGITUD_BUFFER)
+		this->quitar_tecla();
 	this->colaDeTeclas->push_back(tecla);
 }
 
@@ -33,41 +36,45 @@ string MapaDeCombos::informar_combo(){
 		comboEfectuado = false;
 		return comboActual;
 	}
+	cout << "ERROR: MapaDeCombos::informar_combo()" << endl;
+	return "ERROR";
 }
 
 bool comapararConCombo(vector<string> combo, vector<string> eventos, size_t tolerancia, int& cantidadEventosAQuitar) {
 
-	// LA CANTIDAD DE EVENTOS SIEMPRE DEBE SER MAYOR O IGUAL AL TAMANIO DEL COMBO
-	if (combo.size() > eventos.size())
-		return false;
+	size_t indiceCombo = 0;
+	size_t coincidencias = 0;
+	size_t discrepancias = 0;
 
-	// LA TOLERANCIA NO PUEDE SER MAYOR AL TAMANIO DEL COMBO
-	if (tolerancia > combo.size())
-		tolerancia = combo.size();
+	for (size_t k = 0; k < eventos.size(); k++) {
+		if (eventos[k] == combo[0]) {
+			indiceCombo = 0;
+			coincidencias = 0;
+			discrepancias = 0;
 
-	size_t cantidadCoincidenciasEncontradas = 0;
-
-	for (size_t i = 0;  i <= (eventos.size() - combo.size()); i++) { // RECORRO EVENTO
-
-		cantidadCoincidenciasEncontradas = 0;
-
-		for (size_t k = i; k < (i + combo.size()); k++) { // RECORRO SUB-EVENTOS
-
-			if (eventos[k] == combo[k-i])
-				cantidadCoincidenciasEncontradas++;
-		}
-
-		if ((combo.size() - cantidadCoincidenciasEncontradas) <= tolerancia) {
-			cantidadEventosAQuitar = i + combo.size();
-			return true;
+			for (size_t j = k; j < eventos.size(); j++) {
+				if (eventos[j] == combo[indiceCombo]) {
+					coincidencias++;
+					indiceCombo++;
+					if (coincidencias == combo.size())
+						return true;
+				}
+				else {
+					discrepancias++;
+					if (discrepancias > tolerancia)
+						break;
+				}
+			}
 		}
 	}
+
 	return false;
 }
 
 
 void MapaDeCombos::buscarCombo() {
 	// PARA TODOS LOS COMBOS DEL JUGADOR
+	cout << "---------------------" << endl;
 	for (size_t i = 0; i < this->combosJugador->size(); i++) {
 		// OBTENGO COMBO ACTUAL
 		vector<string>* teclasCombo = (*this->combosJugador)[i]->verTeclas();
@@ -82,8 +89,12 @@ void MapaDeCombos::buscarCombo() {
 		if (comboEncontrado) {
 			this->comboEfectuado = true;
 			this->comboActual = (*this->combosJugador)[i]->getNombre();
+
+			this->colaDeTeclas->clear();
+			/*
 			for (int veces = 0; veces < cantidadEventosAQuitar; veces ++)
 				this->quitar_tecla();
+				*/
 		}
 	}
 }
