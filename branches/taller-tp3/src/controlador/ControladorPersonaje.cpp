@@ -118,11 +118,9 @@ void ControladorPersonaje::identificarOrdenJoystickPersonaje(Personaje* personaj
 	    }else if((*estadoJoy)["JOY_PATADA_ALTA"]){
 	        personaje->patadaAlta();
 	    }else if((*estadoJoy)["JOY_PINIA_BAJA"]){
-	    	//personaje->deslizar();
 	        personaje->piniaBaja();
 	    }else if((*estadoJoy)["JOY_PATADA_BAJA"]){
-	        personaje->tijera();
-	    	//personaje->patadaBaja();
+	        personaje->patadaBaja();
 	    }else if((*estadoJoy)["JOY_DEFENSA"]){
 	        personaje->defender();
 	    }/*else if((*estadoJoy)["JOY_PODER"]){
