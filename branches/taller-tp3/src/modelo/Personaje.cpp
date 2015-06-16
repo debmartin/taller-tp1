@@ -254,19 +254,25 @@ void Personaje::caminarIzquierda(){
 void Personaje::saltarVertical(){
     cambiarEstado(new SaltandoVertical(posicion, (*cajasPorEstado)[SALTANDO_VERTICAL]));
     // TODO by ariel: tomarlo desde un hash de sonidos para no cargar el archivo de sonido
-    //Sonidos::getInstancia()->reproducirSonido("sonido_saltar");
+    if(id == "sonya"){
+       	Sonidos::getInstancia()->reproducirSonido("sonido_saltar_sonya");
+    }
     Logger::getInstance()->debug("Personaje: salto vertical. Se setea trayectoria.");
 }
 
 void Personaje::saltarOblicuoDerecha(){
     cambiarEstado(new SaltandoOblicuoDerecha(posicion, (*cajasPorEstado)[SALTANDO_OBLICUO_DERECHA]));
-    //Sonidos::getInstancia()->reproducirSonido("sonido_saltar");
+    if(id == "sonya"){
+       Sonidos::getInstancia()->reproducirSonido("sonido_saltar_sonya");
+    }
     Logger::getInstance()->debug("Personaje: salto oblicuo derecha. Se setea trayectoria.");
 }
 
 void Personaje::saltarOblicuoIzquierda(){
     cambiarEstado(new SaltandoOblicuoIzquierda(posicion, (*cajasPorEstado)[SALTANDO_OBLICUO_IZQUIERDA]));
-    //Sonidos::getInstancia()->reproducirSonido("sonido_saltar");
+    if(id == "sonya"){
+        Sonidos::getInstancia()->reproducirSonido("sonido_saltar_sonya");
+    }
     Logger::getInstance()->debug("Personaje: salto oblicuo izquierda. Se setea trayectoria.");
 }
 
@@ -278,7 +284,11 @@ void Personaje::agacharse(){
 void Personaje::piniaAlta(){
     cambiarEstado(new PiniaAlta(posicion, (*cajasPorEstado)[PINIA_ALTA]));
     bloquearPersonaje(TIEMPO_BLOQUEO_GOLPE);
-    Sonidos::getInstancia()->reproducirSonido("sonido_pinia");
+    if(id == "sonya"){
+    	Sonidos::getInstancia()->reproducirSonido("sonido_golpe_sonya");
+    }else{
+    	Sonidos::getInstancia()->reproducirSonido("sonido_pinia");
+    }
 	Logger::getInstance()->debug("Personaje: golpe alto.");
 }
 
@@ -423,7 +433,12 @@ void Personaje::retroceder(){
 
 void Personaje::victoria(){
 	cambiarEstado(new EnEspera(posicion, VICTORIA, (*cajasPorEstado)[EN_ESPERA]));
-	Sonidos::getInstancia()->reproducirSonido("sonido_finish");
+	//Sonidos::getInstancia()->reproducirSonido("sonido_finish");
+	if(id == "sonya"){
+		Sonidos::getInstancia()->reproducirSonido("sonido_sonya_win");
+	}else{
+		Sonidos::getInstancia()->reproducirSonido("sonido_subzero_win");
+	}
 	bloquearPersonaje(TIEMPO_FESTEJO_VICTORIA);
 }
 
@@ -661,13 +676,16 @@ void Personaje::arrojarArma(){
 
 	arma->posicionar(posicionObjeto);
 	arma->arrojar();
-	Sonidos::getInstancia()->reproducirSonido("sonido_arma");
+	if(id == "sonya"){
+		Sonidos::getInstancia()->reproducirSonido("sonido_arma_sonya");
+	}else{
+		Sonidos::getInstancia()->reproducirSonido("sonido_arma");
+	}
+	//Sonidos::getInstancia()->reproducirSonido("sonido_arma");
 }
 
 void Personaje::ejecutarCombo(string nombreCombo){
-		if(nombreCombo == "SONYA_PODER"){
-			arrojarArma();
-		}else if(nombreCombo == "Ring Toss"){
+		if(nombreCombo == "Ring Toss"){
 			arrojarArma();
 		}else if(nombreCombo == "Leg Grab"){
 			tijera();
@@ -675,14 +693,16 @@ void Personaje::ejecutarCombo(string nombreCombo){
 			patadaGiratoria();
 		}else if(nombreCombo == "Square Flight"){
 			deslizar();
-		}else if(nombreCombo == "Sonya Fatality"){
-
+		}else if(nombreCombo == "Fatality"){
+			if(id == "sonya"){
+				hacerFatality(FATALITY1);
+			}else{
+				hacerFatality(FATALITY1);
+			}
 		}else if(nombreCombo == "Ice Freeze"){
 			arrojarArma();
 		}else if(nombreCombo == "Slide"){
 			deslizar();
-		}else if(nombreCombo == "SubZero Fatality"){
-
 		}else if(nombreCombo == "Animality"){
 			animality();
 		}

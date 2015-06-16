@@ -207,11 +207,6 @@ void Parser::parsearPersonajes()
 				velocidad_arma = obtenerValorInt(valor_velocidad_arma, VELOCIDAD_ARMA_DEFAULT, "Personaje velocidad arma no es valor entero");
 				spriteDefArma = new SpriteDef(p_arma_imagen, TAG_PERSONAJE_ARMA, p_arma_cant_fotogramas, p_arma_fps);
 				arma = new ArmaDef(spriteDefArma, velocidad_arma, ancho_arma, alto_arma);
-			} else if (tag.find(TAG_PERSONAJE_COMBO) != std::string::npos){
-				nombre_combo = (*it)[TAG_NOMBRE_COMBO].asString();
-
-				//TODO: falta completar.
-
 			} else if ( tag == TAG_COLOR_ALTERNATIVO ) {
 
 				Json::Value valorColorAlternativo_hincial = (*it)[TAG_COLOR_ALTERNATIVO_HINICIAL];
