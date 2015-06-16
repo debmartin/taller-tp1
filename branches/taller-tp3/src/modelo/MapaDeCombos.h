@@ -14,6 +14,8 @@
 
 #include "Combo.h"
 
+#define LONGITUD_BUFFER 5
+
 using namespace std;
 
 class MapaDeCombos {
