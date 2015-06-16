@@ -189,10 +189,15 @@
 		    			},
 		    "sprites-animality": { 
 			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-animality.png",
-		    		"cant_fotogramas": 11,
+		    		"cant_fotogramas": 7,
 		    		"fps": 10 
 		    			},
 		    "sprites-animality2": { 
+			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-animality2.png",
+		    		"cant_fotogramas": 3,
+		    		"fps": 10 
+		    			},
+		    "sprites-oso-atacando": { 
 			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-ataque-oso.png",
 		    		"cant_fotogramas": 2,
 		    		"fps": 10 

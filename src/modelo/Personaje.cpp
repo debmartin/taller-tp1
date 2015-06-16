@@ -509,7 +509,7 @@ void Personaje::animality(){
 		bloquearPersonaje(50);
 	}else{
 		cambiarEstado(new Fatality(posicion, OSO, (*cajasPorEstado)[OSO]));
-		bloquearPersonaje(50);
+		bloquearPersonaje(30);
 	}
 }
 
@@ -533,7 +533,7 @@ void Personaje::hacerFatality(estado_personaje id_estado){
 	cambiarEstado(new Fatality(posicion, id_estado, (*cajasPorEstado)[estado->Id()]));
 }
 
-void Personaje::updateFatality(Colisionable* enemigo){
+void Personaje::updateFatality(){
 	if(estado->Id()== ANIMALITY){
 		cout<<"ENTRA A UPDATEFATALITY CON ID ANIMALITY"<<endl;
 		if(!estaBloqueado()){
@@ -554,11 +554,18 @@ void Personaje::updateFatality(Colisionable* enemigo){
 		if(!estaBloqueado()){
 			cout<<"NO ESTA BLOQUEADO"<<endl;
 			hacerFatality(OSO2);
+			bloquearPersonaje(20);
+		}
+	}else if(estado->Id()== OSO2){
+		if(!estaBloqueado()){
+			cout<<"NO ESTA BLOQUEADO"<<endl;
+			hacerFatality(OSO_ATACANDO);
+			bloquearPersonaje(5);
 		}
 	}else if(estado->Id()== FATALITY1){
 		if(!estaBloqueado() && id == "sonya"){
 			cout<<"NO ESTA BLOQUEADO"<<endl;
-			hacerFatality(OSO2);
+			//hacerFatality(BESO);
 		}else if(!estaBloqueado()){
 			hacerFatality(GANCHO_FATALITY);
 		}
@@ -569,9 +576,12 @@ void Personaje::recibirFatality(Colisionable* enemigo){
 	cout<<"ESTADO ENEMIGO:"<<enemigo->verEstado()->Id()<<endl;
 	if(enemigo->verEstado()->estaVolandoVertical()){
 		volar_vertical(RECIBIENDO_GOLPE);
-	}else if(enemigo->verEstado()->haciendoFatality() && enemigo->verEstado()->Id() == GANCHO_FATALITY){
+	}else if(enemigo->verEstado()->Id() == GANCHO_FATALITY){
 		cout<<"DECAPITAR"<<endl;
 		decapitar();
+	}else if(enemigo->verEstado()->Id() == OSO2){
+		cout<<"CAER"<<endl;
+		caida_animality();
 	}
 }
 
@@ -580,6 +590,11 @@ void Personaje::caer(){
     estado_personaje id = estado->Id();
     BVH* cajas = estado->obtenerCajaColision();
     cambiarEstado(new Cayendo(posicion, Vector2f(0, velocActual.Y()), id, cajas));
+}
+
+void Personaje::caida_animality(){
+	cambiarEstado(new RecibiendoFatality(posicion, CAIDA_DERECHA,(*cajasPorEstado)[EN_ESPERA]));
+	bloquearPersonaje(50);
 }
 
 void Personaje::arrastrar(Colisionable* otro){
@@ -867,7 +882,7 @@ void Personaje::update(Colisionable* enemigo){
 
 	}else if(haciendoFatality() && !estaBloqueado()){
 		cout<<"UPDATE FATALITY"<<endl;
-		updateFatality(enemigo);
+		updateFatality();
 	}
 	//else if(estaMareado() && enemigo->ejecutandoMovimientoEspecial() && !recibioFatality()){
 	else if(estaMareado() && !recibioFatality()){
