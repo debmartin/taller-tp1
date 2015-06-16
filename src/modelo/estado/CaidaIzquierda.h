@@ -16,6 +16,7 @@ class CaidaIzquierda : public Estado
 		CaidaIzquierda(Vector2f posInicial, BVH* caja);
 		CaidaIzquierda(Vector2f posInicial, float velocidadEnY, BVH* caja);
 		CaidaIzquierda(Vector2f posInicial, estado_personaje estado , BVH* caja);
+		CaidaIzquierda(Vector2f posInicial, estado_personaje estado , BVH* caja, Vector2f velocidad);
         virtual ~CaidaIzquierda();
         bool estaSaltando();
         bool estaSaltandoDiagonalIzquierda();

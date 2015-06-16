@@ -13,6 +13,7 @@
 class VueloVertical: public Estado {
 public:
 	VueloVertical(Vector2f posInicial, estado_personaje estado, BVH* caja);
+	VueloVertical(Vector2f posInicial, estado_personaje estado, BVH* caja, float velocidad_vertical);
 	virtual ~VueloVertical();
 	bool estaVolandoVertical();
 	bool haciendoFatality();

@@ -171,6 +171,8 @@ public:
 	bool empujar(Vector2f& diferencia);
 	void bloquearPersonaje(float segundos);
 	void caidaDerecha();
+	void ser_arrojado_izquierda();
+	void ser_arrojado_derecha();
 	void caidaIzquierda();
 	void golpeado();
 	void retroceder();
@@ -188,11 +190,11 @@ public:
 	void arrojarArma();
 	void ejecutarCombo(string nombreCombo);
 	void hacerFatality();
+	void hacerFatality(estado_personaje id_estado);
 	void updateFatality();
 	void recibirFatality(Colisionable* enemigo);
 	void bebe();
 	void animality();
-	void ser_arrojado();
 	void mareado();
 
 	//Colision

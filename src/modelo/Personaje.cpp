@@ -22,13 +22,16 @@
 #define VECTOR_VELOCIDAD_NULA Vector2f(0, 0)
 #define VECTOR_GRAVEDAD Vector2f(0, -2600.f)
 #define VELOCIDAD_CAIDA_SUAVE 200
+#define VELOCIDAD_ARROJADO Vector2f(400.0f, 800.0f)
 #define VELOCIDAD_HORIZONTAL_ANIMALITY 300
+#define VELOCIDAD_VERTICAL_ANIMALITY 650
 
 #define TIEMPO_BLOQUEO_PATADA 35
 #define TIEMPO_BLOQUEO_GOLPE 25
 #define TIEMPO_BLOQUEO_DERRIBADO 35
 #define TIEMPO_BLOQUEO_GANCHO 15
 #define TIEMPO_BLOQUEO_PATADA_GIRATORIA 45
+#define TIEMPO_BLOQUEO_TIJERA 80
 #define TIEMPO_FESTEJO_VICTORIA 200
 #define DISTANCIA_MINIMA 110
 
@@ -366,8 +369,7 @@ void Personaje::defenderAgachado(){
 }
 
 void Personaje::caidaDerecha(){
-    //Estado* caida = new CaidaDerecha(posicion, (*cajasPorEstado)[CAIDA_DERECHA]);
-    Estado* caida = new CaidaDerecha(posicion, ARROJADO, (*cajasPorEstado)[CAIDA_DERECHA]);
+    Estado* caida = new CaidaDerecha(posicion, (*cajasPorEstado)[CAIDA_DERECHA]);
 
 	if (! posicionable->esValida(posicion, caida->calcularAncho()))
         caida->agregarCajaColision((*cajasPorEstado)[SALTANDO_VERTICAL]);
@@ -376,14 +378,29 @@ void Personaje::caidaDerecha(){
 }
 
 void Personaje::caidaIzquierda(){
-    //Estado* caida = new CaidaIzquierda(posicion, (*cajasPorEstado)[CAIDA_IZQUIERDA]);
-    Estado* caida = new CaidaIzquierda(posicion, ARROJADO, (*cajasPorEstado)[CAIDA_IZQUIERDA]);
+    Estado* caida = new CaidaIzquierda(posicion, (*cajasPorEstado)[CAIDA_IZQUIERDA]);
     if (! posicionable->esValida(posicion, caida->calcularAncho()))
         caida->agregarCajaColision((*cajasPorEstado)[SALTANDO_VERTICAL]);
 
 	cambiarEstado(caida);
 }
 
+void Personaje::ser_arrojado_derecha(){
+    Estado* caida = new CaidaDerecha(posicion, ARROJADO, (*cajasPorEstado)[CAIDA_DERECHA], VELOCIDAD_ARROJADO);
+
+	if (! posicionable->esValida(posicion, caida->calcularAncho()))
+        caida->agregarCajaColision((*cajasPorEstado)[SALTANDO_VERTICAL]);
+
+	cambiarEstado(caida);
+}
+
+void Personaje::ser_arrojado_izquierda(){
+    Estado* caida = new CaidaIzquierda(posicion, ARROJADO, (*cajasPorEstado)[CAIDA_IZQUIERDA], VELOCIDAD_ARROJADO);
+    if (! posicionable->esValida(posicion, caida->calcularAncho()))
+        caida->agregarCajaColision((*cajasPorEstado)[SALTANDO_VERTICAL]);
+
+	cambiarEstado(caida);
+}
 void Personaje::golpeado(){
 	cambiarEstado(new Golpeado(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
 	bloquearPersonaje(TIEMPO_BLOQUEO_GOLPE);
@@ -444,7 +461,7 @@ void Personaje::volar_vertical(estado_personaje id_estado){
 void Personaje::tijera(){
 	cambiarEstado(new TomandoOponente(posicion, TIJERA, (*cajasPorEstado)[EN_ESPERA]));
 	Sonidos::getInstancia()->reproducirSonido("sonido_deslizar");
-	bloquearPersonaje(50);
+	bloquearPersonaje(TIEMPO_BLOQUEO_TIJERA);
 }
 
 void Personaje::morirEnPiso(){
@@ -457,14 +474,6 @@ void Personaje::mantenerReposo(){
     Logger::getInstance()->debug("Personaje: en reposo.");
 }
 
-
-void Personaje::ser_arrojado(){
-	cout<<"Ser arrojado"<<endl;
-	cambiarEstado(new Arrojado(posicion, ARROJADO, (*cajasPorEstado)[SALTANDO_VERTICAL], direccion));
-	bloquearPersonaje(100);
-	Logger::getInstance()->debug("Personaje: arrojado.");
-}
-
 void Personaje::bebe(){
 	cambiarEstado(new Fatality(posicion, BEBE, (*cajasPorEstado)[EN_ESPERA]));
 	Sonidos::getInstancia()->reproducirSonido("sonido_bebe");
@@ -473,13 +482,23 @@ void Personaje::bebe(){
 
 void Personaje::animality(){
 	//cout<<"Haciendo fatalityyyy"<<endl;
-	cambiarEstado(new Fatality(posicion, ANIMALITY, (*cajasPorEstado)[ANIMALITY]));
-	bloquearPersonaje(50);
+	if(id == "sonya"){
+		cambiarEstado(new Fatality(posicion, ANIMALITY, (*cajasPorEstado)[ANIMALITY]));
+		bloquearPersonaje(50);
+	}else{
+		cambiarEstado(new Fatality(posicion, OSO, (*cajasPorEstado)[OSO]));
+		bloquearPersonaje(50);
+	}
 }
 
 void Personaje::hacerFatality(){
 	//cout<<"Haciendo fatalityyyy"<<endl;
 	cambiarEstado(new Fatality(posicion, estado->Id(), (*cajasPorEstado)[estado->Id()]));
+}
+
+void Personaje::hacerFatality(estado_personaje id_estado){
+	//cout<<"Haciendo fatalityyyy"<<endl;
+	cambiarEstado(new Fatality(posicion, id_estado, (*cajasPorEstado)[estado->Id()]));
 }
 
 void Personaje::updateFatality(){
@@ -494,6 +513,15 @@ void Personaje::updateFatality(){
 		if(!estaBloqueado()){
 			cout<<"NO ESTA BLOQUEADO"<<endl;
 			volar_vertical(ANIMALITY2, ANIMALITY);
+		}
+	}else if(estado->Id()== ANIMALITY2 && estaVolandoVertical()){
+		if(posicion.Y()>VentanaGrafica::Instance()->getEscenario()->getAltoLogico()){
+			mantenerReposo();
+		}
+	}else if(estado->Id()== OSO){
+		if(!estaBloqueado()){
+			cout<<"NO ESTA BLOQUEADO"<<endl;
+			hacerFatality(OSO2);
 		}
 	}
 }
@@ -561,7 +589,13 @@ void Personaje::recibirDanio(int danio){
 
 void Personaje::recibirGolpe(Colisionable* otro){
 	if(otro->ejecutandoMovimientoEspecial()){
-		if(otro->verEstado()->efectuandoGancho() || otro->verEstado()->estaSaltando()){
+		if(otro->verEstado()->estaTomandoAlOponente()){
+			if(this->direccion == DIRECCION_IZQUIERDA){
+				ser_arrojado_izquierda();
+			}else if(this->direccion == DIRECCION_DERECHA){
+				ser_arrojado_derecha();
+			}
+		}else if(otro->verEstado()->efectuandoGancho() || otro->verEstado()->estaSaltando()){
 			if(this->direccion == DIRECCION_IZQUIERDA){
 				caidaDerecha();
 			}else if(this->direccion == DIRECCION_DERECHA){
@@ -578,7 +612,7 @@ void Personaje::recibirGolpe(Colisionable* otro){
 				caidaIzquierda();
 			}else if(this->direccion == DIRECCION_DERECHA){
 
-					caidaDerecha();
+				caidaDerecha();
 			}
 		}else if(!estaSaltando()){
 			golpeado();
@@ -642,13 +676,13 @@ void Personaje::ejecutarCombo(string nombreCombo){
 		}else if(nombreCombo == "Square Flight"){
 			deslizar();
 		}else if(nombreCombo == "Sonya Fatality"){
-			//tijera();
+
 		}else if(nombreCombo == "Ice Freeze"){
 			arrojarArma();
 		}else if(nombreCombo == "Slide"){
 			deslizar();
 		}else if(nombreCombo == "SubZero Fatality"){
-			//tijera();
+
 		}else if(nombreCombo == "Animality"){
 			animality();
 		}
@@ -784,12 +818,11 @@ void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
 
 void Personaje::update(Colisionable* enemigo){
     Logger::getInstance()->debug("Personaje: update.");
-
     if(estaEnPiso() ){
        return;
 
 	}else if(haciendoFatality() && !estaBloqueado()){
-		//cout<<"UPDATE FATALITY"<<endl;
+		cout<<"UPDATE FATALITY"<<endl;
 		updateFatality();
 	}
 	//else if(estaMareado() && enemigo->ejecutandoMovimientoEspecial() && !recibioFatality()){
@@ -808,7 +841,7 @@ void Personaje::update(Colisionable* enemigo){
     }
 
     if(estaBloqueado()){
-    	//cout<<"Bloqueo:"<<tiempoBloqueo<<endl;
+    	cout<<"Bloqueo:"<<tiempoBloqueo<<endl;
         if(tiempoBloqueo <= 0){
         	if(haciendoFatality()){
         		hacerFatality();
