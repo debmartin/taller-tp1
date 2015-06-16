@@ -314,6 +314,7 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(flo
 	vector<AABB*>* cajasAABB_animality = new vector<AABB*>;
 	vector<AABB*>* cajasAABB_animality2 = new vector<AABB*>;
 	vector<AABB*>* cajasAABB_animality3 = new vector<AABB*>;
+	vector<AABB*>* cajasAABB_fatality1 = new vector<AABB*>;
 
 	//REPOSO//
 	Vector2f reposo_caja1_PuntoMin(REPOSO_CAJA1_X1_PORCENTUAL*ancho_logico_personaje, REPOSO_CAJA1_Y1_PORCENTUAL*alto_logico_personaje);
@@ -582,6 +583,18 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(flo
 	cajasAABB_animality3->push_back(animality3_caja1);
 	cajasAABB_animality3->push_back(animality3_caja2);
 
+	//FATALITY//
+	Vector2f fatality1_caja1_PuntoMin(REPOSO_CAJA1_X1_PORCENTUAL*ancho_logico_personaje, REPOSO_CAJA1_Y1_PORCENTUAL*alto_logico_personaje);
+	Vector2f fatality1_caja1_PuntoMax(REPOSO_CAJA1_X2_PORCENTUAL*ancho_logico_personaje, REPOSO_CAJA1_Y2_PORCENTUAL*alto_logico_personaje);
+
+	Vector2f fatality1_caja2_PuntoMin(REPOSO_CAJA2_X1_PORCENTUAL*ancho_logico_personaje, REPOSO_CAJA2_Y1_PORCENTUAL*alto_logico_personaje);
+	Vector2f fatality1_caja2_PuntoMax(REPOSO_CAJA2_X2_PORCENTUAL*ancho_logico_personaje, REPOSO_CAJA2_Y2_PORCENTUAL*alto_logico_personaje);
+
+	AABB* fatality1_caja1 = new AABB(fatality1_caja1_PuntoMin, fatality1_caja1_PuntoMax);
+	AABB* fatality1_caja2 = new AABB(fatality1_caja2_PuntoMin, fatality1_caja2_PuntoMax);
+	cajasAABB_fatality1->push_back(fatality1_caja1);
+	cajasAABB_fatality1->push_back(fatality1_caja2);
+
 	Vector2f pivote(ancho_logico_personaje/2, 0);
 	//Armo los BVH de cada estado
 	BVH* BVH_reposo = new BVH(cajasAABB_reposo, pivote);
@@ -608,6 +621,7 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(flo
 	BVH* BVH_animality = new BVH(cajasAABB_animality, pivote);
 	BVH* BVH_animality2 = new BVH(cajasAABB_animality2, pivote);
 	BVH* BVH_animality3 = new BVH(cajasAABB_animality3, pivote);
+	BVH* BVH_fatality1 = new BVH(cajasAABB_fatality1, pivote);
 
 	map<estado_personaje, BVH*>* mapa_BVH = new map<estado_personaje, BVH*>;
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(EN_ESPERA, BVH_reposo));
@@ -638,6 +652,7 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(flo
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(ANIMALITY, BVH_animality));
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(ANIMALITY2, BVH_animality2));
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(OSO, BVH_animality3));
+	mapa_BVH->insert(pair<estado_personaje, BVH*>(FATALITY1, BVH_fatality1));
 
 	return mapa_BVH;
 }

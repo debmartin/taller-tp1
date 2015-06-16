@@ -55,6 +55,7 @@ typedef enum estado_personaje
 	BEBE,
 	BABALITY,
 	FATALITY1,
+	GANCHO_FATALITY,
 	DECAPITADO,
 	ANIMALITY,
 	ANIMALITY2,
