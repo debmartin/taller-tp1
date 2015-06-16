@@ -119,7 +119,8 @@ int main(int argc, char* args[])
 		int cant_rounds = 1;
 		while (recargar)
 		{
-			Musica* musica = new Musica("mortal64.mid", 100);
+			//Musica* musica = new Musica("mortal64.mid", 100);
+			Musica* musica = new Musica("mortal-kombat-theme.mp3", 100);
 			musica->reproducir();
 			agregarSonidos();
 
