@@ -51,9 +51,11 @@ void PersonajeInteligente::calcularProximoMovimiento(Personaje* otro){
     if (otroEstaCerca){
         otro->obtenerAntidoto(this);
     } else if (! estaCaminando() && ataquesEnemigoRepetidos()) {
-        caminarHaciaEnemigo(otro);
+        caminarLejosEnemigo(otro);
     } else if (ataquesEnemigoRepetidos()){
         arrojarArma();
+    } else {
+        caminarHaciaEnemigo(otro);
     }
     if (turno)
         estados_anteriores.first = otro->verEstado()->Id();
