@@ -98,13 +98,19 @@ void agregarSonidos()
 	Sonidos::getInstancia()->iniciar();
 
 	Sonidos::getInstancia()->agregar("sonido_saltar", new Sonido("crispy.wav",150,2));
+	Sonidos::getInstancia()->agregar("sonido_saltar_sonya", new Sonido("Snyahup.wav",150,2));
 	Sonidos::getInstancia()->agregar("sonido_pinia", new Sonido("Kungya.wav",150,2));
+	Sonidos::getInstancia()->agregar("sonido_golpe_sonya", new Sonido("Snyaha.wav",150,2));
 	Sonidos::getInstancia()->agregar("sonido_patada", new Sonido("BigHit.wav",150,2));
 	Sonidos::getInstancia()->agregar("sonido_deslizar", new Sonido("ShvDie.wav",150,2));
 	Sonidos::getInstancia()->agregar("sonido_arma", new Sonido("LiuFire.wav",150,2));
+	Sonidos::getInstancia()->agregar("sonido_arma_sub", new Sonido("SubIce2.wav",150,2));
+	Sonidos::getInstancia()->agregar("sonido_arma_sonya", new Sonido("SnyaRing.wav",150,2));
 	Sonidos::getInstancia()->agregar("sonido_gancho", new Sonido("NiteAxe.wav",150,2));
 	Sonidos::getInstancia()->agregar("sonido_bebe", new Sonido("BabyCry.wav",150,2));
 	Sonidos::getInstancia()->agregar("sonido_finish", new Sonido("FinHim2.wav",150,2));
+	Sonidos::getInstancia()->agregar("sonido_sonya_win", new Sonido("SonyaWin1.wav",150,2));
+	Sonidos::getInstancia()->agregar("sonido_subzero_win", new Sonido("SubWin1.wav",150,2));
 }
 
 int main(int argc, char* args[])

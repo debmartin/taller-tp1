@@ -118,7 +118,7 @@ map<string, PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables(
 				}
 		}
 
-		Animacion* SubQuieto = new Animacion(
+		Animacion* PersonajeQuieto = new Animacion(
 										Renderizador::Instance()->getRenderer(),
 										primerSpriteSubQuieto->getImagen(),
 										primerSpriteSubQuieto->getCantFotogramas(),
@@ -126,7 +126,7 @@ map<string, PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables(
 										primerSpriteSubQuieto->getIdSprite());
 
 		personajeDibujableCargado = new PersonajeDibujable(
-													SubQuieto,
+													PersonajeQuieto,
 													posicionTemporalPersonaje,
 													tamanioPx,
 													ORIENTACION_IZQUIERDA,
@@ -735,7 +735,7 @@ vector<Combo*>* CargadorDeOjbetos::cargarCombos(string nombrePersonaje){
 		vectorTeclasCombo3->push_back("JOY_ABAJO");
 		vectorTeclasCombo3->push_back("JOY_DERECHA");
 		vectorTeclasCombo3->push_back("JOY_PINIA_ALTA");
-		Combo* combo3 = new Combo(vectorTeclasCombo3, "Fatality1", 3);
+		Combo* combo3 = new Combo(vectorTeclasCombo3, "Fatality", 3);
 
 		vectorTeclasCombo4->push_back("JOY_IZQUIERDA");
 		vectorTeclasCombo4->push_back("JOY_DERECHA");
@@ -773,7 +773,7 @@ vector<Combo*>* CargadorDeOjbetos::cargarCombos(string nombrePersonaje){
 		vectorTeclasCombo4->push_back("JOY_IZQUIERDA");
 		vectorTeclasCombo4->push_back("JOY_IZQUIERDA");
 		vectorTeclasCombo4->push_back("JOY_DEFENSA");
-		Combo* combo4 = new Combo(vectorTeclasCombo4, "Fatality1", 4);
+		Combo* combo4 = new Combo(vectorTeclasCombo4, "Fatality", 4);
 
 		vectorTeclasCombo5->push_back("JOY_IZQUIERDA");
 		vectorTeclasCombo5->push_back("JOY_DERECHA");
