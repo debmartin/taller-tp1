@@ -7,7 +7,9 @@
 
 #include "Pantalla.h"
 
+#include "../utils/Logger.h"
 #include "Botonera.h"
+#include "Textura.h"
 
 Pantalla::Pantalla(int anchopx, int altopx, string tipoDeControl_jugador1,
 		string tipoDeControl_jugador2) {
@@ -17,6 +19,7 @@ Pantalla::Pantalla(int anchopx, int altopx, string tipoDeControl_jugador1,
 	this->altopx = altopx;
 	this->salir = false;
 	this->botonera = new Botonera();
+	this->fondoPantalla = new Textura();
 }
 
 Pantalla::~Pantalla() {
@@ -37,4 +40,28 @@ int Pantalla::getAnchopx() const {
 
 int Pantalla::getAltopx() const {
 	return altopx;
+}
+
+Textura* Pantalla::getFondoPantalla() const {
+	return fondoPantalla;
+}
+
+bool Pantalla::loadMedia(string path_imagen) {
+	//Loading success flag
+	bool success = true;
+	//Load sprites
+	if( !this->fondoPantalla->loadFromFile(path_imagen) )
+	{
+		Logger::getInstance()->error("Failed to load fondo pantalla!");
+		success = false;
+	}
+
+	return success;
+}
+
+void Pantalla::dibujarFondoPantalla() {
+
+	this->fondoPantalla->setWidth(anchopx);
+	this->fondoPantalla->setHeight(altopx);
+	this->fondoPantalla->render(0,0);
 }

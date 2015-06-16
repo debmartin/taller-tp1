@@ -35,15 +35,16 @@ void PantallaSeleccionarModo::iniciar() {
 
 	bool juegoCorriendo = true;
 
-	Posicion* pos_modosDeJuego = new Posicion(this->getAnchopx()/2-BUTTON_WIDTH/2, this->getAltopx()/8);
-	botonera = new Botonera("modos",3,1,pos_modosDeJuego, getTipoDeControlJugador1(), getTipoDeControlJugador2());
+	int anchopx = 300;
+	int altopx = 150;
+	Posicion* pos_modosDeJuego = new Posicion(this->getAnchopx()/2-this->getAnchopx()/30, this->getAltopx()/4);
+	botonera = new Botonera("modos",anchopx,altopx,3,1,pos_modosDeJuego, getTipoDeControlJugador1(), getTipoDeControlJugador2());
 	botonera->setPosicionEnfocadaDelJugador1(new Posicion(0,0));
 
-	if( !botonera->loadMedia("RECURSOS/grilla1_eleccion_modo.jpg", "RECURSOS/grilla2_eleccion_modo.jpg", "RECURSOS/grilla3_eleccion_modo.jpg") )
-	{
-		Logger::getInstance()->error("Fallo la carga los archivos imagenes");
-	}
-	else
+	bool loadMedia_botonera = botonera->loadMedia("RECURSOS/botonera1_modos.jpg", "RECURSOS/botonera2_modos.jpg", "RECURSOS/botonera3_modos.jpg");
+	bool loadMedia_fondo = this->loadMedia("RECURSOS/fondo_modos.jpg");
+
+	if( loadMedia_botonera && loadMedia_fondo )
 	{
 		bool salirMenuModosDeJuego = false;
 
@@ -73,8 +74,11 @@ void PantallaSeleccionarModo::iniciar() {
 			// CLEAR screen
 			SDL_SetRenderDrawColor( Renderizador::Instance()->getRenderer(), 0x0F, 0x00, 0x00, 0xFF );
 			SDL_RenderClear( Renderizador::Instance()->getRenderer() );
+
 			// DIBUJA
+			this->dibujarFondoPantalla();
 			botonera->dibujar();
+
 			// UPDATE screen
 			SDL_RenderPresent( Renderizador::Instance()->getRenderer() );
 
@@ -85,6 +89,12 @@ void PantallaSeleccionarModo::iniciar() {
 		}
 
 		modo_juego_elegido = botonera->getIdContenidoElegidoParaJugador1();
+
+	}else {
+		if ( !loadMedia_botonera )
+			Logger::getInstance()->error("No se pudo cargar imagenes para la botonera en la pantalla de eleccion de modos");
+		if ( !loadMedia_fondo )
+			Logger::getInstance()->error("No se pudo cargar la imagen de fondo para la pantalla de eleccion de modos");
 	}
 
 }

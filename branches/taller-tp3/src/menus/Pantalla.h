@@ -10,6 +10,8 @@
 
 #include <string>
 
+class Textura;
+
 class Botonera;
 
 #define JUEGO_MODO_P1_VS_P2  "modo_p1_vs_p2"
@@ -26,6 +28,7 @@ protected:
 	int altopx;
 	bool salir;
 	Botonera* botonera;
+	Textura* fondoPantalla;
 public:
 	Pantalla(int anchopx, int altopx, string tipoDeControl_jugador1, string tipoDeControl_jugador2);
 	virtual ~Pantalla();
@@ -34,6 +37,9 @@ public:
 	string getTipoDeControlJugador2() const;
 	int getAltopx() const;
 	int getAnchopx() const;
+	Textura* getFondoPantalla() const;
+	bool loadMedia(string path_imagen);
+	void dibujarFondoPantalla();
 };
 
 #endif /* SRC_MENUS_PANTALLA_H_ */
