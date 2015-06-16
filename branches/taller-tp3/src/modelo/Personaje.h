@@ -169,6 +169,7 @@ public:
 	void defender();
 	void defenderAgachado();
 	void caer();
+	void caida_animality();
 	void arrastrar(Colisionable* otro);
 	bool empujar(Vector2f& diferencia);
 	void bloquearPersonaje(float segundos);
@@ -195,7 +196,7 @@ public:
 	void ejecutarCombo(string nombreCombo);
 	void hacerFatality();
 	void hacerFatality(estado_personaje id_estado);
-	void updateFatality(Colisionable* enemigo);
+	void updateFatality();
 	void recibirFatality(Colisionable* enemigo);
 	void bebe();
 	void animality();
