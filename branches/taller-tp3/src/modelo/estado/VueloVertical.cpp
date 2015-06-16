@@ -16,6 +16,10 @@ VueloVertical::VueloVertical(Vector2f posInicial, estado_personaje estado, BVH* 
     Estado(new MRUV(posInicial, Vector2f(VELOCIDAD_DESP_HORIZONTAL, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD), estado, caja, estado) {
 }
 
+VueloVertical::VueloVertical(Vector2f posInicial, estado_personaje estado, BVH* caja, float velocidad_vertical) :
+    Estado(new MRUV(posInicial, Vector2f(VELOCIDAD_DESP_HORIZONTAL, velocidad_vertical), VECTOR_GRAVEDAD), estado, caja, estado) {
+}
+
 VueloVertical::~VueloVertical()
 {
     //dtor

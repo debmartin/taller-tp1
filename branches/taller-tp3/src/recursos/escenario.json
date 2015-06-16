@@ -149,7 +149,7 @@
 		    			},
 		    "sprites-arrojado": { 
 			        	"imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-arrojado.png",
-		    		    "cant_fotogramas": 6,
+		    		    "cant_fotogramas": 7,
 		    		    "fps": 10 
 		    			},
 		    "sprites-tirando-poder": { 
@@ -186,6 +186,16 @@
 			        "imagen": "RECURSOS/PERSONAJES/EFECTOS/quemado.png",
 		    		    "cant_fotogramas": 8,
 		    		    "fps": 10 
+		    			},
+		    "sprites-animality": { 
+			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-animality.png",
+		    		"cant_fotogramas": 11,
+		    		"fps": 10 
+		    			},
+		    "sprites-animality2": { 
+			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-ataque-oso.png",
+		    		"cant_fotogramas": 2,
+		    		"fps": 10 
 		    			},
 		    "sprites-fatality1": { 
 			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-fatality1.png",
@@ -339,7 +349,7 @@
 		    "sprites-caida": { 
 			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-caida.png",
 		    		    "cant_fotogramas": 7,
-		    		    "fps": 5 
+		    		    "fps": 1 
 		    			},
 		    "sprites-mareado": { 
 			        	"imagen": "RECURSOS/PERSONAJES/SONIA/sonya-mareado.png",
@@ -347,8 +357,8 @@
 		    		    "fps": 10 
 		    			},
 		    "sprites-arrojado": { 
-			        	"imagen": "RECURSOS/PERSONAJES/SONIA/sonya-arrojado.png",
-		    		    "cant_fotogramas": 7,
+			        	"imagen": "RECURSOS/PERSONAJES/SONIA/sonya-arrojada.png",
+		    		    "cant_fotogramas": 8,
 		    		    "fps": 10 
 		    			},
 		    "sprites-tirando-poder": { 
@@ -363,7 +373,7 @@
 		    			},
 		    "sprites-tijera": { 
 			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-tijera.png",
-		    		"cant_fotogramas": 6,
+		    		"cant_fotogramas": 12,
 		    		"fps": 10 
 		    			},
 		    "sprites-bebe": { 

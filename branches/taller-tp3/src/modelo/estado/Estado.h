@@ -58,6 +58,8 @@ typedef enum estado_personaje
 	DECAPITADO,
 	ANIMALITY,
 	ANIMALITY2,
+	OSO,
+	OSO2,
 	BLOQUEADO
 } estado_personaje;
 

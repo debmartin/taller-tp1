@@ -313,6 +313,7 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(flo
 	vector<AABB*>* cajasAABB_tirando_poder = new vector<AABB*>;
 	vector<AABB*>* cajasAABB_animality = new vector<AABB*>;
 	vector<AABB*>* cajasAABB_animality2 = new vector<AABB*>;
+	vector<AABB*>* cajasAABB_animality3 = new vector<AABB*>;
 
 	//REPOSO//
 	Vector2f reposo_caja1_PuntoMin(REPOSO_CAJA1_X1_PORCENTUAL*ancho_logico_personaje, REPOSO_CAJA1_Y1_PORCENTUAL*alto_logico_personaje);
@@ -562,12 +563,24 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(flo
 	AABB* animality_caja1 = new AABB(animality_caja1_PuntoMin, animality_caja1_PuntoMax);
 	cajasAABB_animality->push_back(animality_caja1);
 
-	//ANIMALITY//
+	//ANIMALITY2//
 	Vector2f animality2_caja1_PuntoMin(ANIMALITY2_CAJA1_X1_PORCENTUAL*ancho_logico_personaje, ANIMALITY2_CAJA1_Y1_PORCENTUAL*alto_logico_personaje);
 	Vector2f animality2_caja1_PuntoMax(ANIMALITY2_CAJA1_X2_PORCENTUAL*ancho_logico_personaje, ANIMALITY2_CAJA1_Y2_PORCENTUAL*alto_logico_personaje);
 
 	AABB* animality2_caja1 = new AABB(animality2_caja1_PuntoMin, animality2_caja1_PuntoMax);
 	cajasAABB_animality2->push_back(animality2_caja1);
+
+	//ANIMALITY3//
+	Vector2f animality3_caja1_PuntoMin(REPOSO_CAJA1_X1_PORCENTUAL*ancho_logico_personaje, REPOSO_CAJA1_Y1_PORCENTUAL*alto_logico_personaje);
+	Vector2f animality3_caja1_PuntoMax(REPOSO_CAJA1_X2_PORCENTUAL*ancho_logico_personaje, REPOSO_CAJA1_Y2_PORCENTUAL*alto_logico_personaje);
+
+	Vector2f animality3_caja2_PuntoMin(REPOSO_CAJA2_X1_PORCENTUAL*ancho_logico_personaje, REPOSO_CAJA2_Y1_PORCENTUAL*alto_logico_personaje);
+	Vector2f animality3_caja2_PuntoMax(REPOSO_CAJA2_X2_PORCENTUAL*ancho_logico_personaje, REPOSO_CAJA2_Y2_PORCENTUAL*alto_logico_personaje);
+
+	AABB* animality3_caja1 = new AABB(animality3_caja1_PuntoMin, animality3_caja1_PuntoMax);
+	AABB* animality3_caja2 = new AABB(animality3_caja2_PuntoMin, animality3_caja2_PuntoMax);
+	cajasAABB_animality3->push_back(animality3_caja1);
+	cajasAABB_animality3->push_back(animality3_caja2);
 
 	Vector2f pivote(ancho_logico_personaje/2, 0);
 	//Armo los BVH de cada estado
@@ -594,6 +607,7 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(flo
 	BVH* BVH_tirando_poder = new BVH(cajasAABB_tirando_poder, pivote);
 	BVH* BVH_animality = new BVH(cajasAABB_animality, pivote);
 	BVH* BVH_animality2 = new BVH(cajasAABB_animality2, pivote);
+	BVH* BVH_animality3 = new BVH(cajasAABB_animality3, pivote);
 
 	map<estado_personaje, BVH*>* mapa_BVH = new map<estado_personaje, BVH*>;
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(EN_ESPERA, BVH_reposo));
@@ -623,6 +637,7 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(flo
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(TIRANDO_PODER, BVH_tirando_poder));
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(ANIMALITY, BVH_animality));
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(ANIMALITY2, BVH_animality2));
+	mapa_BVH->insert(pair<estado_personaje, BVH*>(OSO, BVH_animality3));
 
 	return mapa_BVH;
 }
@@ -722,14 +737,14 @@ vector<Combo*>* CargadorDeOjbetos::cargarCombos(string nombrePersonaje){
 		vectorTeclasCombo3->push_back("JOY_PINIA_ALTA");
 		Combo* combo3 = new Combo(vectorTeclasCombo3, "Fatality1", 3);
 
+		vectorTeclasCombo4->push_back("JOY_IZQUIERDA");
 		vectorTeclasCombo4->push_back("JOY_DERECHA");
 		vectorTeclasCombo4->push_back("JOY_PATADA_BAJA");
 		Combo* combo4 = new Combo(vectorTeclasCombo4, "Patada Giratoria", 4);
 
 		vectorTeclasCombo5->push_back("JOY_DERECHA");
-		vectorTeclasCombo5->push_back("JOY_DERECHA");
 		vectorTeclasCombo5->push_back("JOY_DEFENSA");
-		Combo* combo5 = new Combo(vectorTeclasCombo5, "Babality", 5);
+		Combo* combo5 = new Combo(vectorTeclasCombo5, "Animality", 5);
 
 		vectorDeCombos->push_back(combo1);
 		vectorDeCombos->push_back(combo2);
@@ -760,6 +775,7 @@ vector<Combo*>* CargadorDeOjbetos::cargarCombos(string nombrePersonaje){
 		vectorTeclasCombo4->push_back("JOY_DEFENSA");
 		Combo* combo4 = new Combo(vectorTeclasCombo4, "Fatality1", 4);
 
+		vectorTeclasCombo5->push_back("JOY_IZQUIERDA");
 		vectorTeclasCombo5->push_back("JOY_DERECHA");
 		vectorTeclasCombo5->push_back("JOY_PATADA_BAJA");
 		Combo* combo5 = new Combo(vectorTeclasCombo5, "Patada Giratoria", 5);

@@ -121,7 +121,7 @@ bool Estado::recibioFatality(){
 }
 
 Vector2f Estado::obtenerProximaPosicion(){
-    return trayectoria->getPosicion(obtenerTiempoActual());
+	return trayectoria->getPosicion(obtenerTiempoActual());
 }
 
 void Estado::actualizar(Vector2f nuevaPosicion){

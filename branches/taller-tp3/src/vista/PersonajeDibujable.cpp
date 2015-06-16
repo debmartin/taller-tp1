@@ -239,6 +239,16 @@ void PersonajeDibujable::seleccionarSprite(){
 				spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_ANIMALITY2]);
 				spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
 				break;
+			case OSO:
+				this->spritePersonaje->setLoopMode(LOOP_NO_REPEAT);
+				spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_ANIMALITY]);
+				spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
+				break;
+			case OSO2:
+				this->spritePersonaje->setLoopMode(LOOP_NO_REPEAT);
+				spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_ANIMALITY2]);
+				spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
+				break;
 			case FATALITY1:
 				this->spritePersonaje->setLoopMode(LOOP_NO_REPEAT);
 				spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_FATALITY1]);

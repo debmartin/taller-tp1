@@ -26,6 +26,10 @@ CaidaIzquierda::CaidaIzquierda(Vector2f posInicial, estado_personaje estado , BV
     Estado(new MRUV(posInicial, Vector2f(-VELOCIDAD_DESP_HORIZONTAL_SALTANDO, VELOCIDAD_DESP_VERTICAL), VECTOR_GRAVEDAD), estado, caja, EN_ESPERA){
 }
 
+CaidaIzquierda::CaidaIzquierda(Vector2f posInicial, estado_personaje estado , BVH* caja, Vector2f velocidad) :
+    Estado(new MRUV(posInicial, Vector2f(-velocidad.X(), velocidad.Y()), VECTOR_GRAVEDAD), estado, caja, EN_ESPERA){
+}
+
 CaidaIzquierda::~CaidaIzquierda()
 {
     //dtor
