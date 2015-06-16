@@ -2,6 +2,7 @@
 #define PERSONAJEINTELIGENTE_H
 
 #include "Personaje.h"
+#include <utility>
 
 class PersonajeInteligente : public Personaje {
     public:
