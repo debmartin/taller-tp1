@@ -54,12 +54,12 @@ void PantallaSeleccionarPersonaje::iniciar() {
 	int botonera_filas = 3;
 	int botonera_colummas = 4;
 
-	int ancho_botonera = BUTTON_WIDTH*botonera_colummas;
-	int alto_botonera = BUTTON_HEIGHT*botonera_filas;
+	int ancho_botonera = this->getAnchopx()/2;
+	int alto_botonera = this->getAltopx()/2;
 	int posX_botonera = this->getAnchopx()/2 - ancho_botonera/2;
-	int posY_botonera = this->getAltopx()/10;
-	Posicion* pos_botoneraPersonajes = new Posicion(posX_botonera, posY_botonera);
-	this->botonera = new Botonera("personajes", botonera_filas,botonera_colummas,pos_botoneraPersonajes,
+	int posY_botonera = this->getAltopx()/5;
+	Posicion* pos_botonera = new Posicion(posX_botonera, posY_botonera);
+	this->botonera = new Botonera("personajes", ancho_botonera, alto_botonera, botonera_filas,botonera_colummas,pos_botonera,
 						getTipoDeControlJugador1(), getTipoDeControlJugador2(), this->modo_juego_elegido);
 
 	this->botonera->setPosicionEnfocadaDelJugador1(new Posicion(3,1));
@@ -67,12 +67,12 @@ void PantallaSeleccionarPersonaje::iniciar() {
 
 	int cant_letras = 9;
 
-	int posX_1 = posX_botonera + ancho_botonera + 15;
-	int posY_1 = posY_botonera + alto_botonera;
+	int posX_1 = posX_botonera + ancho_botonera + 10;
+	int posY_1 = posY_botonera + alto_botonera + 10;
 	this->cajaDeTextoPersonaje1 = new CajaDeTexto(cant_letras,posX_1,posY_1);
 
 	int posX_2 = 10;
-	int posY_2 = posY_botonera + alto_botonera;
+	int posY_2 = posY_botonera + alto_botonera + 10;
 	this->cajaDeTextoPersonaje2 = new CajaDeTexto(cant_letras,posX_2,posY_2);
 
 	bool loadMedia_botonera = this->botonera->loadMedia("RECURSOS/grilla1_eleccion_personajes.jpg",
@@ -81,8 +81,9 @@ void PantallaSeleccionarPersonaje::iniciar() {
 
 	bool loadMedia_cajaDeTextoPersonaje1 = this->cajaDeTextoPersonaje1->loadMedia();
 	bool loadMedia_cajaDeTextoPersonaje2 = this->cajaDeTextoPersonaje2->loadMedia();
+	bool loadMedia_fondo = this->loadMedia("RECURSOS/fondo_personajes.png");
 
-	if( loadMedia_botonera && loadMedia_cajaDeTextoPersonaje1 && loadMedia_cajaDeTextoPersonaje2 )
+	if( loadMedia_botonera && loadMedia_cajaDeTextoPersonaje1 && loadMedia_cajaDeTextoPersonaje2 && loadMedia_fondo)
 	{
 		//Enable text input
 		SDL_StartTextInput();
@@ -125,11 +126,12 @@ void PantallaSeleccionarPersonaje::iniciar() {
 			SDL_RenderClear( Renderizador::Instance()->getRenderer() );
 
 			// DIBUJAR
+			this->dibujarFondoPantalla();
 			this->botonera->dibujar();
 			this->cajaDeTextoPersonaje1->dibujar(renderText1);
 			this->cajaDeTextoPersonaje2->dibujar(renderText2);
-			this->dibujarPersonajeEnfocado(posX_botonera+ancho_botonera+80,posY_botonera+30, this->botonera->getIdContenidoEnfocadoParaJugador1(),ORIENTACION_IZQUIERDA);
-			this->dibujarPersonajeEnfocado(80,posY_botonera+30, this->botonera->getIdContenidoEnfocadoParaJugador2(), ORIENTACION_DERECHA);
+			this->dibujarPersonajeEnfocado(posX_botonera+ancho_botonera+80,posY_botonera-10, this->botonera->getIdContenidoEnfocadoParaJugador1(),ORIENTACION_IZQUIERDA);
+			this->dibujarPersonajeEnfocado(80,posY_botonera-10, this->botonera->getIdContenidoEnfocadoParaJugador2(), ORIENTACION_DERECHA);
 
 			// UPDATE screen
 			SDL_RenderPresent( Renderizador::Instance()->getRenderer() );
@@ -155,6 +157,8 @@ void PantallaSeleccionarPersonaje::iniciar() {
 			Logger::getInstance()->error("No se pudo cargar imagenes para la caja de texto del personaje 1 en la pantalla de eleccion de personajes");
 		if ( !loadMedia_cajaDeTextoPersonaje2 )
 			Logger::getInstance()->error("No se pudo cargar imagenes para la caja de texto del personaje 2 en la pantalla de eleccion de personajes");
+		if ( !loadMedia_fondo )
+			Logger::getInstance()->error("No se pudo cargar la imagen de fondo para la pantalla de eleccion de personajes");
 	}
 }
 

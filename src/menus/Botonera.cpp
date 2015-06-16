@@ -18,26 +18,35 @@
 #include "Posicion.h"
 #include "Textura.h"
 
+const int ANCHO_FISICO_MODO = 351;
+const int ALTO_FISICO_MODO = 174;
+const int ANCHO_FISICO_PERSONAJE = 473;
+const int ALTO_FISICO_PERSONAJE = 381;
+
 Botonera::Botonera() {
 
 }
 
-Botonera::Botonera(string tipo, int cant_filas, int cant_columnas, Posicion* posicion,
-					string tipoDeControl_jugador1, string tipoDeControl_jugador2,
-					string modo_juego_elegido) {
+Botonera::Botonera(string tipo, int anchopx, int altopx, int cant_filas, int cant_columnas, Posicion* posicion,
+					string tipoDeControl_jugador1, string tipoDeControl_jugador2, string modo_juego_elegido) {
 
 	this->tipo = tipo;
 	this->cant_columnas = cant_columnas;
 	this->cant_filas = cant_filas;
 	this->posicionEnfocadaDelJugador1 = new Posicion();
 	this->posicionEnfocadaDelJugador2 = new Posicion();
-
 	list<string>* idContenidos = new list<string>();
+
+	float ancho_fisico = ANCHO_FISICO_PERSONAJE/cant_columnas;
+	float alto_fisico = ALTO_FISICO_PERSONAJE/cant_filas;
+
 	if ( this->tipo == "modos" )
 	{
 		idContenidos->push_back("P1_vs_P2");
 		idContenidos->push_back("P1_vs_CPU");
 		idContenidos->push_back("Práctica");
+		ancho_fisico = ANCHO_FISICO_MODO/cant_columnas;
+		alto_fisico = ALTO_FISICO_MODO/cant_filas;
 
 	}
 	else if ( this->tipo == "personajes")
@@ -58,6 +67,9 @@ Botonera::Botonera(string tipo, int cant_filas, int cant_columnas, Posicion* pos
 
 	list<string>::iterator itIdContenidos = idContenidos->begin();
 
+	float anchopxDestino_boton = anchopx/cant_columnas;
+	float altopxDestino_boton = altopx/cant_filas;
+
     this->matriz = new Boton**[this->cant_filas];
 	for ( int y = 0 ; y < this->cant_filas ; y++ )
 	{
@@ -67,23 +79,19 @@ Botonera::Botonera(string tipo, int cant_filas, int cant_columnas, Posicion* pos
 		{
 			Posicion* posicionModelo = new Posicion(x,y);
 
-			// es la posicion de arriba a la izquierda
-			Posicion* posicionVista = new Posicion(posicion->getX() + BUTTON_WIDTH * x, posicion->getY() + BUTTON_HEIGHT * y);
+			SDL_Rect rectOrigen;
+			rectOrigen.y = y * alto_fisico;
+			rectOrigen.x = x * ancho_fisico;
+			rectOrigen.w = ancho_fisico;
+			rectOrigen.h = alto_fisico;
 
-			Boton* boton = new Boton(posicionModelo, posicionVista);
-			boton->cargarIdContenido(*(itIdContenidos++));
+			SDL_Rect rectDestino;
+			rectDestino.y = posicion->getY() + altopxDestino_boton * y;
+			rectDestino.x = posicion->getX() + anchopxDestino_boton * x;
+			rectDestino.w = anchopxDestino_boton;
+			rectDestino.h = altopxDestino_boton;
 
-			SDL_Rect rect;
-			rect.y = y * 127;
-			rect.x = x * 127;
-			if ( this->tipo == "personajes")
-				rect.x = x * 118.2;
-
-			rect.w = BUTTON_WIDTH;
-			rect.h = BUTTON_HEIGHT;
-			boton->cargarDimension(rect);
-
-			this->matriz[y][x] = boton;
+			this->matriz[y][x] = new Boton(posicionModelo, *(itIdContenidos++), rectOrigen, rectDestino);
 
 		}
 	}

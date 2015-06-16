@@ -20,35 +20,23 @@ using namespace std;
 
 union SDL_Event;
 
-const int BUTTON_WIDTH = 118.20;
-const int BUTTON_HEIGHT = 127;
-
 //The mouse button
 class Boton{
 
 private:
-	//Top left position
-	SDL_Point mPosition;
-	// poscion en la matriz de la botonera
 	Posicion* posicionModelo;
-	bool elegido;
 	string idContenido;
-	SDL_Rect dimension;
+	SDL_Rect rectOrigen;
+	SDL_Rect rectDestino;
+	bool elegido;
 
 public:
 
-	Boton(Posicion* posicionModelo, Posicion* posicionVista);
-
-	//Shows button sprite
+	Boton(Posicion* posicionModelo, string idContenido, SDL_Rect rectOrigen, SDL_Rect rectDestino);
 	void render(Textura* textura);
-
-	virtual ~Boton();
-
-	friend ostream& operator<<(ostream &o, const Boton &b);
 	Posicion* getPosicionModelo() const;
-	void cargarIdContenido(string idContenido);
 	string getIdContenido() const;
-	void cargarDimension(SDL_Rect dimension);
+	virtual ~Boton();
 };
 
 #endif /* SRC_BOTON_H_ */

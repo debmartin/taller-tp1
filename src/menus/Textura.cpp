@@ -124,12 +124,13 @@ void Textura::render( int x, int y, SDL_Rect* clip )
 	//Set rendering space and render to screen
 	SDL_Rect renderQuad = { x, y, mWidth, mHeight };
 
+	/*
 	//Set clip rendering dimensions
 	if( clip != NULL )
 	{
 		renderQuad.w = clip->w;
 		renderQuad.h = clip->h;
-	}
+	}*/
 
 	//Render to screen
 	SDL_RenderCopyEx( Renderizador::Instance()->getRenderer(), mTexture, clip, &renderQuad, 0.0, NULL, SDL_FLIP_NONE );
@@ -137,4 +138,12 @@ void Textura::render( int x, int y, SDL_Rect* clip )
 
 void Textura::setFont(TTF_Font* gFont) {
 	this->gFont = gFont;
+}
+
+void Textura::setHeight(int height) {
+	mHeight = height;
+}
+
+void Textura::setWidth(int width) {
+	mWidth = width;
 }

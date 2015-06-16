@@ -38,6 +38,8 @@ class Textura
 		void render( int x, int y, SDL_Rect* clip = NULL );
 
 		void setFont(TTF_Font* gFont);
+		void setHeight(int height);
+		void setWidth(int width);
 
 	private:
 		//The actual hardware texture

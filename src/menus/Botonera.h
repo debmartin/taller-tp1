@@ -52,7 +52,7 @@ private:
 	bool esElegidoPersonaje2;
 public:
 	Botonera();
-	Botonera(string tipo, int cant_filas, int cant_columnas, Posicion* posicion, string tipoDeControl_jugador1, string tipoDeControl_jugador2, string modo_juego_elegido="");
+	Botonera(string tipo, int anchopx, int altopx, int cant_filas, int cant_columnas, Posicion* posicion, string tipoDeControl_jugador1, string tipoDeControl_jugador2, string modo_juego_elegido="");
 	bool loadMedia(string path_imagen, string path_imagen2, string path_imagen3);
 	virtual ~Botonera();
 	void manejarEventoJugador( SDL_Event evento );
