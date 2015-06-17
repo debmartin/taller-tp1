@@ -481,3 +481,16 @@ void ControladorJoystick::imprimirColaBotones(JoyNumber joy) {
 	cout << "============================================" << endl;
 
 }
+
+MapaDeCombos* ControladorJoystick::getMapaDeCombos(int numeroJoystick) {
+	if (numeroJoystick == 0)
+		return this->mapaDeCombosJugador1;
+
+	return this->mapaDeCombosJugador2;
+}
+
+
+void ControladorJoystick::update() {
+	this->mapaDeCombosJugador1->update();
+	this->mapaDeCombosJugador2->update();
+}

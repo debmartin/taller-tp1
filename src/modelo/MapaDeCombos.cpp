@@ -18,6 +18,8 @@ MapaDeCombos::MapaDeCombos(vector<Combo*>* lista, int tolerancia):
 
 void MapaDeCombos::agregar_tecla(string tecla){
 
+	this->tiempo_inicio_combo = SDL_GetTicks();
+
 	if (this->colaDeTeclas->size() >= LONGITUD_BUFFER)
 		this->quitar_tecla();
 	this->colaDeTeclas->push_back(tecla);
@@ -32,12 +34,20 @@ bool MapaDeCombos::combo_completado(){
 }
 
 string MapaDeCombos::informar_combo(){
+
 	if(comboEfectuado){
 		comboEfectuado = false;
 		return comboActual;
 	}
 	cout << "ERROR: MapaDeCombos::informar_combo()" << endl;
 	return "ERROR";
+}
+
+void MapaDeCombos::update() {
+
+	if (SDL_GetTicks() - this->tiempo_inicio_combo > TIEMPO_MAXIMO_EN_COLA)
+		this->colaDeTeclas->clear();
+
 }
 
 bool comapararConCombo(vector<string> combo, vector<string> eventos, size_t tolerancia, int& cantidadEventosAQuitar) {
