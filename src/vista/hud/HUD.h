@@ -64,6 +64,8 @@ private:
 	map<string, Sprite*>* mBotones;
 	map<string, Animacion*>* mAnimaciones;
 
+	Animacion* aCaja;
+	Sprite* sCaja;
 	bool combosVisibles;
 
 	Uint32 W(SDL_Texture* t);

@@ -74,6 +74,8 @@ bool HUD::init(
     (*this->mBotones)["JOY_IZQUIERDA"]->escalarConTamanio(64,64);
     (*this->mBotones)["JOY_DERECHA"]->escalarConTamanio(64,64);
 
+   	this->aCaja = new Animacion(this->gRenderer, "RECURSOS/HUD/metal-oxidado.png"  , 1, 1, "METAl-OXIDADO");
+   	this->sCaja = new Sprite(this->aCaja , this->gRenderer, Vector2f(0.0f, 0.0f), ORIENTACION_DERECHA, SPR_ARRIBA_CENTRO);
     return true;
 
 }
@@ -163,10 +165,21 @@ void HUD::dibujar(){
 
 
 		if (this->mostrandoNombreCombo) {
+
+
+
 			SDL_Color color = { 255, 239, 36, 255 };
 
 			SDL_Texture* texturaCombo = renderText(nombreComboActual, "RECURSOS/HUD/mk2.ttf",color,25,this->gRenderer);
 
+
+			//IMPRIMO CAJA COMBO
+			this->sCaja->escalarConTamanio(this->W(texturaCombo) + 25, this->H(texturaCombo) * 1.10 );
+			Vector2f posCaja(320, 399);
+			this->sCaja->setPosicion(posCaja);
+			this->sCaja->dibujar();
+
+			// IMPRIMO NOMBRE COMBO
 			SDL_Rect destRect1 = {320 - (this->W(texturaCombo) / 2) , 400, this->W(texturaCombo), this->H(texturaCombo)};
 			SDL_RenderCopy(this->gRenderer, texturaCombo, NULL, &destRect1);
 		}
