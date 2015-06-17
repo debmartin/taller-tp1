@@ -296,7 +296,8 @@ void PersonajeDibujable::agregarAnimacion(Animacion* nuevaAnimacion){
 void PersonajeDibujable::dibujar(){
 	spritePersonaje->dibujar();
 	armaDibujable->dibujar();
-	spriteEnvolvente->dibujar();
+	if (MOSTRAR_CAJAS_COLISION)
+		spriteEnvolvente->dibujar();
 }
 
 void PersonajeDibujable::actualizar(){
@@ -358,6 +359,13 @@ void PersonajeDibujable::cambiarColor(ColorAlternativoDef* colorAlternativoDef) 
 	for (std::map<std::string, Animacion*>::iterator it = this->animaciones.begin() ; it != this->animaciones.end(); ++it)
 	{
 		it->second->cambiarColor(colorAlternativoDef);
+
+		// TODO: PARCHE: SI ESTO NO ESTA COMIENZA CON UN COLOR EQUIVOCADO
+		if(this->estado == EN_ESPERA){
+				this->spritePersonaje->setLoopMode(LOOP_MOD);
+				this->spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_REPOSO]);
+				this->spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
+		}
 	}
 
 }

@@ -4,8 +4,7 @@ HUD::HUD(
 	SDL_Window* gWindow,
 	string nombre_personaje1,
 	string nombre_personaje2,
-	deque<string>* colaDeTeclas1,
-	deque<string>* colaDeTeclas2,
+	deque<string>* colaDeTeclas,
 	bool combosVisibles)
 {
 
@@ -18,23 +17,37 @@ HUD::HUD(
 	this->tHUD = crearTexturaTransparente(640, 480);
 
 
-	this->colaDeTeclas1 = colaDeTeclas1;
-	this->colaDeTeclas2 = colaDeTeclas2;
+	this->colaDeTeclas = colaDeTeclas;
 
 	this->combosVisibles = combosVisibles;
-/*
-	this->colaDeTeclas1 = new deque<string>;
-	this->colaDeTeclas2 = new deque<string>;
 
-	this->colaDeTeclas1->push_back("EVENTO 1");
-	this->colaDeTeclas1->push_back("EVENTO 2");
-	this->colaDeTeclas1->push_back("EVENTO 3");
+	// CARGA DE ANIMACIONES
+	this->mAnimaciones = new map<string, Animacion*>;
+    (*this->mAnimaciones)["JOY_PINIA_ALTA"]  = new Animacion(this->gRenderer, "RECURSOS/HUD/BOTONES/Δ.png" , 1, 1, "JOY_PINIA_ALTA");
+    (*this->mAnimaciones)["JOY_PATADA_ALTA"] = new Animacion(this->gRenderer, "RECURSOS/HUD/BOTONES/O.png" , 1, 1, "JOY_PATADA_ALTA");
+    (*this->mAnimaciones)["JOY_PINIA_BAJA"]  = new Animacion(this->gRenderer, "RECURSOS/HUD/BOTONES/X.png" , 1, 1, "JOY_PINIA_BAJA");
+    (*this->mAnimaciones)["JOY_PATADA_BAJA"] = new Animacion(this->gRenderer, "RECURSOS/HUD/BOTONES/□.png" , 1, 1, "JOY_PATADA_BAJA");
+    (*this->mAnimaciones)["JOY_DEFENSA"]     = new Animacion(this->gRenderer, "RECURSOS/HUD/BOTONES/R2.png", 1, 1, "JOY_DEFENSA");
+    (*this->mAnimaciones)["JOY_PODER"]       = new Animacion(this->gRenderer, "RECURSOS/HUD/BOTONES/L2.png", 1, 1, "JOY_PODER");
 
-	this->colaDeTeclas2->push_back("EVENTO A");
-	this->colaDeTeclas2->push_back("EVENTO B");
-	this->colaDeTeclas2->push_back("EVENTO C");
-*/
+    (*this->mAnimaciones)["JOY_ARRIBA"]      = new Animacion(this->gRenderer, "RECURSOS/HUD/BOTONES/ARRIBA.png"   , 1, 1, "JOY_ARRIBA");
+    (*this->mAnimaciones)["JOY_ABAJO"]       = new Animacion(this->gRenderer, "RECURSOS/HUD/BOTONES/ABAJO.png"    , 1, 1, "JOY_ABAJO");
+    (*this->mAnimaciones)["JOY_IZQUIERDA"]   = new Animacion(this->gRenderer, "RECURSOS/HUD/BOTONES/IZQUIERDA.png", 1, 1, "JOY_IZQUIERDA");
+    (*this->mAnimaciones)["JOY_DERECHA"]     = new Animacion(this->gRenderer, "RECURSOS/HUD/BOTONES/DERECHA.png"  , 1, 1, "JOY_DERECHA");
 
+    // CARGA DE SPRITES
+	this->mBotones = new map<string, Sprite*>;
+    (*this->mBotones)["JOY_PINIA_ALTA"]  = new Sprite((*this->mAnimaciones)["JOY_PINIA_ALTA"] , this->gRenderer, Vector2f(0.0f, 0.0f));
+    (*this->mBotones)["JOY_PATADA_ALTA"] = new Sprite((*this->mAnimaciones)["JOY_PATADA_ALTA"], this->gRenderer, Vector2f(0.0f, 10.0f));
+    (*this->mBotones)["JOY_PINIA_BAJA"]  = new Sprite((*this->mAnimaciones)["JOY_PINIA_BAJA"] , this->gRenderer, Vector2f(0.0f, 20.0f));
+    (*this->mBotones)["JOY_PATADA_BAJA"] = new Sprite((*this->mAnimaciones)["JOY_PATADA_BAJA"], this->gRenderer, Vector2f(0.0f, 30.0f));
+    (*this->mBotones)["JOY_DEFENSA"]     = new Sprite((*this->mAnimaciones)["JOY_DEFENSA"]    , this->gRenderer, Vector2f(0.0f, 40.0f));
+    (*this->mBotones)["JOY_PODER"]       = new Sprite((*this->mAnimaciones)["JOY_PODER"]      , this->gRenderer, Vector2f(0.0f, 50.0f));
+
+    (*this->mBotones)["JOY_ARRIBA"]      = new Sprite((*this->mAnimaciones)["JOY_ARRIBA"]   , this->gRenderer, Vector2f(0.0f, 60.0f));
+    (*this->mBotones)["JOY_ABAJO"]       = new Sprite((*this->mAnimaciones)["JOY_ABAJO"]    , this->gRenderer, Vector2f(0.0f, 70.0f));
+    (*this->mBotones)["JOY_IZQUIERDA"]   = new Sprite((*this->mAnimaciones)["JOY_IZQUIERDA"], this->gRenderer, Vector2f(0.0f, 80.0f));
+    (*this->mBotones)["JOY_DERECHA"]     = new Sprite((*this->mAnimaciones)["JOY_DERECHA"]  , this->gRenderer, Vector2f(0.0f, 90.0f));
 }
 
 SDL_Texture* HUD::crearTexturaTransparente(int ancho, int alto) {
@@ -93,36 +106,56 @@ void HUD::setEnergia2(float nuevaEnergia) {
 HUD::~HUD() {
 	delete(barraDeEnergia1);
 	delete(barraDeEnergia2);
+
+	this->mAnimaciones->clear();
+	delete(this->mAnimaciones);
+
+	this->mBotones->clear();
+	delete(this->mBotones);
 }
 
 void HUD::dibujar(){
 	this->tHUD = updateTexture();
 	SDL_RenderCopy(this->gRenderer, this->tHUD, NULL, NULL);
 
+	/*
 	if (this->combosVisibles) {
 		//IMPRIMO COLA DE COMBOS 1
 		int x = 30; int y = 70;
-		std::deque<string>::iterator it1 = colaDeTeclas1->begin();
-		while (it1 != colaDeTeclas1->end()) {
+		std::deque<string>::iterator it1 = colaDeTeclas->begin();
+		while (it1 != colaDeTeclas->end()) {
 			SDL_Color color1 = { 255, 239, 36, 255 };
 			SDL_Texture* combos = renderText(*it1++, "RECURSOS/HUD/mk2.ttf", color1, 11, gRenderer);
 			SDL_Rect destRect = {x, y, 100, 20}; y += 15;
 			SDL_RenderCopy(this->gRenderer, combos, NULL, &destRect);
 			SDL_DestroyTexture(combos);
 		}
+	}
+	*/
 
-		//IMPRIMO COLA DE COMBOS 2
-		x = 500; y = 70;
-		std::deque<string>::iterator it2 = colaDeTeclas2->begin();
-		while (it2 != colaDeTeclas2->end()) {
-			SDL_Color color2 = { 255, 239, 36, 255 };
-			SDL_Texture* combos = renderText(*it2++, "RECURSOS/HUD/mk2.ttf", color2, 11, gRenderer);
+
+	if (this->combosVisibles) {
+		//IMPRIMO COLA DE COMBOS 1
+		int x = 30; int y = 70;
+		std::deque<string>::iterator it1 = colaDeTeclas->begin();
+		while (it1 != colaDeTeclas->end()) {
+			//SDL_Color color1 = { 255, 239, 36, 255 };
+			//SDL_Texture* combos = renderText(*it1++, "RECURSOS/HUD/mk2.ttf", color1, 11, gRenderer);
 			SDL_Rect destRect = {x, y, 100, 20}; y += 15;
-			SDL_RenderCopy(this->gRenderer, combos, NULL, &destRect);
-			SDL_DestroyTexture(combos);
+
+			//cout << *it1++ << endl;
+			//Botones->
+			//SDL_RenderCopy(this->gRenderer, mBotones[*it1++], NULL, &destRect);
+			//SDL_DestroyTexture(combos);
 		}
 	}
-
+	/*
+    for (map<std::string, Sprite*>::iterator it = this->mBotones->begin() ; it != this->mBotones->end(); ++it)
+    {
+    	//cout << it->first << endl;
+    	//this->mBotones[it->first]
+    }
+	*/
 }
 
 void HUD::recibirNotificacion(Observable* unObservable){
@@ -140,8 +173,8 @@ void HUD::recibirNotificacion(Observable* unObservable){
 
 
 SDL_Texture* HUD::renderText(
-		const std::string& mensaje,
-		const std::string& pathFuente,
+		std::string& mensaje,
+		std::string& pathFuente,
 		SDL_Color 		   color,
 		int 			   tamanioFuentePx,
 		SDL_Renderer*      renderer)

@@ -68,14 +68,17 @@ void Animacion::cambiarColor(Uint16 Hinicial, Uint16 Hfinal, Uint16 desplazamien
     	SDL_FreeSurface(superficie_tempotal);
 
     	if ( !texturaAuxiliar )
+    		cout << "Error al crear textura auxiliar"<< endl;
     		//Logger::getInstance()->error("Animacion::cambiarColor(): No se pudo crear la textura SDL para la imagen " + pathImagen + " en su cambio de color.");
 
     	// SE SOBRESCRIBE LA TEXTURA LOCAL CON LA AUXILIAR
     	SDL_DestroyTexture(this->textura);
     	this->textura = texturaAuxiliar;
+
 	}
     else
     {
+    	cout << "Animacion::cambiarColor > No se pudo encontrar imagen temporal" << endl;
     	//Logger::getInstance()->error("Animacion::cambiarColor(): No se pudo cargar la imagen " + pathImagen + " para el cambio de color.");
     }
 }
@@ -83,6 +86,7 @@ void Animacion::cambiarColor(Uint16 Hinicial, Uint16 Hfinal, Uint16 desplazamien
 void Animacion::cambiarColor(ColorAlternativoDef* colorAlternativoDef) {
 	this->cambiarColor(colorAlternativoDef->getHinicial(), colorAlternativoDef->getHfinal(), colorAlternativoDef->getDesplazamiento());
 }
+
 ostream& operator <<(ostream &o, const Animacion &a)
 {
 	o<<"Animacion -> [cantFotog, fps, id, pathImagen]=[";

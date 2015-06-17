@@ -32,7 +32,8 @@ ArmaDibujable::ArmaDibujable(Animacion* animIni, Vector2f posicionIni, Vector2f 
 void ArmaDibujable::dibujar(){
 	if(estado == VISIBLE){
 		armaDibujable->dibujar();
-		this->spriteEnvolvente->dibujar();
+		if (MOSTRAR_CAJAS_COLISION)
+			this->spriteEnvolvente->dibujar();
 	}
 }
 

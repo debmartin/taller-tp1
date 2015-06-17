@@ -21,12 +21,15 @@ private:
 public:
 	ColorAlternativoDef();
 	ColorAlternativoDef(double hinicial, double hfinal, double desplazamiento);
-	double getDesplazamiento() const;
-	void setDesplazamiento(double desplazamiento);
-	double getHfinal() const;
-	void setHfinal(double hfinal);
-	double getHinicial() const;
+
 	void setHinicial(double hinicial);
+	void setHfinal(double hfinal);
+	void setDesplazamiento(double desplazamiento);
+
+	double getHinicial() const;
+	double getHfinal() const;
+	double getDesplazamiento() const;
+
 	virtual ~ColorAlternativoDef();
 	friend ostream& operator<<(ostream &o, const ColorAlternativoDef &c);
 	string toString();
