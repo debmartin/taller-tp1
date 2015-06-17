@@ -40,3 +40,7 @@ void Boton::render(Textura* gButtonSpriteSheetTexture)
 string Boton::getIdContenido() const {
 	return idContenido;
 }
+
+SDL_Rect Boton::getRectDestino() const {
+	return rectDestino;
+}

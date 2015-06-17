@@ -37,6 +37,7 @@ public:
 	Posicion* getPosicionModelo() const;
 	string getIdContenido() const;
 	virtual ~Boton();
+	SDL_Rect getRectDestino() const;
 };
 
 #endif /* SRC_BOTON_H_ */

@@ -8,6 +8,7 @@
 #include "Botonera.h"
 
 #include <SDL2/SDL_events.h>
+#include <SDL2/SDL_mouse.h>
 #include <SDL2/SDL_rect.h>
 #include <list>
 
@@ -185,7 +186,6 @@ void Botonera::manejarEventoJugador(SDL_Event evento) {
 			this->elegirPosicionAleatoriamente = false;
 		}
     }
-
 }
 
 int Botonera::getCantColumnas() {
@@ -319,4 +319,63 @@ bool Botonera::seEligioElPersonaje1() {
 
 bool Botonera::seEligioElPersonaje2() {
 	return this->idContenidoElegido_paraJugador2 != "";
+}
+
+void Botonera::manejarEventoMouse(SDL_Event evento) {
+
+	if( evento.type == SDL_MOUSEMOTION || evento.type == SDL_MOUSEBUTTONDOWN )
+	{
+		if ( !this->esElegidoPersonaje1 )
+		{
+			int x_mouse, y_mouse;
+			SDL_GetMouseState( &x_mouse, &y_mouse );
+
+			for ( int y = 0 ; y < this->cant_filas ; y++ )
+			{
+				for ( int x = 0 ; x < this->cant_columnas ; x++ )
+				{
+					SDL_Rect rect = matriz[y][x]->getRectDestino();
+					int xi = rect.x;
+					int xf = rect.x+rect.w;
+					int yi = rect.y;
+					int yf = rect.y+rect.h;
+					if ( x_mouse>xi && x_mouse<xf && y_mouse>yi && y_mouse<yf )
+					{
+						this->posicionEnfocadaDelJugador1->setXY(x,y);
+						this->posicionEnfocadaDelJugador1->enfocar();
+						if ( evento.type == SDL_MOUSEBUTTONDOWN )
+							this->posicionEnfocadaDelJugador1->elegir();
+					}
+				}
+			}
+		}else
+		{
+			if ( !this->esElegidoPersonaje2 )
+			{
+				int x_mouse, y_mouse;
+				SDL_GetMouseState( &x_mouse, &y_mouse );
+
+				for ( int y = 0 ; y < this->cant_filas ; y++ )
+				{
+					for ( int x = 0 ; x < this->cant_columnas ; x++ )
+					{
+						SDL_Rect rect = matriz[y][x]->getRectDestino();
+						int xi = rect.x;
+						int xf = rect.x+rect.w;
+						int yi = rect.y;
+						int yf = rect.y+rect.h;
+						if ( x_mouse>xi && x_mouse<xf && y_mouse>yi && y_mouse<yf )
+						{
+							this->posicionEnfocadaDelJugador2->setXY(x,y);
+							this->posicionEnfocadaDelJugador2->enfocar();
+							if ( evento.type == SDL_MOUSEBUTTONDOWN )
+								this->posicionEnfocadaDelJugador2->elegir();
+						}
+					}
+				}
+			}
+
+		}
+	}
+
 }
