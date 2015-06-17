@@ -1,3 +1,6 @@
+#ifndef SRC_CONTROLADOR_CONTROLADORJOYSTICK_H_
+#define SRC_CONTROLADOR_CONTROLADORJOYSTICK_H_
+
 #include <SDL2/SDL_joystick.h>
 #include <SDL2/SDL_stdinc.h>
 #include <map>
@@ -88,3 +91,5 @@ public:
         MapaDeCombos* getMapaDeCombos(int numeroJoystick);
 };
 typedef ControladorJoystick TheInputHandler;
+
+#endif /* SRC_CONTROLADOR_CONTROLADORJOYSTICK_H_ */
