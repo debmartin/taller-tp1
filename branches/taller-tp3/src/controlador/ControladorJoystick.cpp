@@ -108,11 +108,13 @@ void ControladorJoystick::handleEventsJoysticks(SDL_Event event) {
                         this->resetBotones(whichOne, event.jbutton.button);
 
                         //Agregar el nombre de la tecla presionada.
-                        if (whichOne == 0){
-                        	this->mapaDeCombosJugador1->agregar_tecla(getStringDeNumeroDeTecla(whichOne, event.jbutton.button));
-                        }else{
-                        	this->mapaDeCombosJugador2->agregar_tecla(getStringDeNumeroDeTecla(whichOne, event.jbutton.button));
-                        }
+                        if (getStringDeNumeroDeTecla(whichOne, event.jbutton.button) != "ERROR") {
+							if (whichOne == 0){
+								this->mapaDeCombosJugador1->agregar_tecla(getStringDeNumeroDeTecla(whichOne, event.jbutton.button));
+							}else{
+								this->mapaDeCombosJugador2->agregar_tecla(getStringDeNumeroDeTecla(whichOne, event.jbutton.button));
+							}
+                		}
                 }
                 if (m_cantidad_de_pulsaciones[whichOne][event.jbutton.button] == 1) {
                         //cout << "1 pulsacion" << endl;
@@ -150,20 +152,21 @@ void ControladorJoystick::handleEventsJoysticks(SDL_Event event) {
                 if(event.jaxis.axis == (*this->correspondenciaEjes)["JOY_EJE_HORIZONTAL"])
                 {
                         if (event.jaxis.value > m_joystickDeadZone) {
-
-                        	if (whichOne == 0)
-                        		this->mapaDeCombosJugador1->agregar_tecla("JOY_DERECHA");
-                        	else
-                        		this->mapaDeCombosJugador2->agregar_tecla("JOY_DERECHA");
-
+                        	if (getStringDeNumeroDeTecla(whichOne, event.jbutton.button) != "ERROR") {
+								if (whichOne == 0)
+									this->mapaDeCombosJugador1->agregar_tecla("JOY_DERECHA");
+								else
+									this->mapaDeCombosJugador2->agregar_tecla("JOY_DERECHA");
+                        	}
                             m_joystickValues[whichOne].first->setX(1);
                         }
                         else if(event.jaxis.value < -m_joystickDeadZone) {
-
-                        	if (whichOne == 0)
-                        		this->mapaDeCombosJugador1->agregar_tecla("JOY_IZQUIERDA");
-                        	else
-                        		this->mapaDeCombosJugador2->agregar_tecla("JOY_IZQUIERDA");
+                        	if (getStringDeNumeroDeTecla(whichOne, event.jbutton.button) != "ERROR") {
+								if (whichOne == 0)
+									this->mapaDeCombosJugador1->agregar_tecla("JOY_IZQUIERDA");
+								else
+									this->mapaDeCombosJugador2->agregar_tecla("JOY_IZQUIERDA");
+                        	}
 
                         	m_joystickValues[whichOne].first->setX(-1);
                         }
@@ -175,19 +178,21 @@ void ControladorJoystick::handleEventsJoysticks(SDL_Event event) {
                 if(event.jaxis.axis == (*this->correspondenciaEjes)["JOY_EJE_VERTICAL"])
                 {
                         if (event.jaxis.value > m_joystickDeadZone) {
-                        	if (whichOne == 0)
-                                this->mapaDeCombosJugador1->agregar_tecla("JOY_ABAJO");
-                        	else
-                        		this->mapaDeCombosJugador2->agregar_tecla("JOY_ABAJO");
-
+                        	if (getStringDeNumeroDeTecla(whichOne, event.jbutton.button) != "ERROR") {
+								if (whichOne == 0)
+									this->mapaDeCombosJugador1->agregar_tecla("JOY_ABAJO");
+								else
+									this->mapaDeCombosJugador2->agregar_tecla("JOY_ABAJO");
+                        	}
                         	m_joystickValues[whichOne].first->setY(1);
                         }
                         else if(event.jaxis.value < -m_joystickDeadZone) {
-                        	if (whichOne == 0)
-                                this->mapaDeCombosJugador1->agregar_tecla("JOY_ARRIBA");
-                        	else
-                        		this->mapaDeCombosJugador2->agregar_tecla("JOY_ARRIBA");
-
+                        	if (getStringDeNumeroDeTecla(whichOne, event.jbutton.button) != "ERROR") {
+								if (whichOne == 0)
+									this->mapaDeCombosJugador1->agregar_tecla("JOY_ARRIBA");
+								else
+									this->mapaDeCombosJugador2->agregar_tecla("JOY_ARRIBA");
+                        	}
                         	m_joystickValues[whichOne].first->setY(-1);
                         }
                         else

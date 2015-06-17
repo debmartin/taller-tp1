@@ -38,16 +38,29 @@ HUD::HUD(
     // CARGA DE SPRITES
 	this->mBotones = new map<string, Sprite*>;
     (*this->mBotones)["JOY_PINIA_ALTA"]  = new Sprite((*this->mAnimaciones)["JOY_PINIA_ALTA"] , this->gRenderer, Vector2f(0.0f, 0.0f));
-    (*this->mBotones)["JOY_PATADA_ALTA"] = new Sprite((*this->mAnimaciones)["JOY_PATADA_ALTA"], this->gRenderer, Vector2f(0.0f, 10.0f));
-    (*this->mBotones)["JOY_PINIA_BAJA"]  = new Sprite((*this->mAnimaciones)["JOY_PINIA_BAJA"] , this->gRenderer, Vector2f(0.0f, 20.0f));
-    (*this->mBotones)["JOY_PATADA_BAJA"] = new Sprite((*this->mAnimaciones)["JOY_PATADA_BAJA"], this->gRenderer, Vector2f(0.0f, 30.0f));
-    (*this->mBotones)["JOY_DEFENSA"]     = new Sprite((*this->mAnimaciones)["JOY_DEFENSA"]    , this->gRenderer, Vector2f(0.0f, 40.0f));
-    (*this->mBotones)["JOY_PODER"]       = new Sprite((*this->mAnimaciones)["JOY_PODER"]      , this->gRenderer, Vector2f(0.0f, 50.0f));
+    (*this->mBotones)["JOY_PATADA_ALTA"] = new Sprite((*this->mAnimaciones)["JOY_PATADA_ALTA"], this->gRenderer, Vector2f(0.0f, 0.0f));
+    (*this->mBotones)["JOY_PINIA_BAJA"]  = new Sprite((*this->mAnimaciones)["JOY_PINIA_BAJA"] , this->gRenderer, Vector2f(0.0f, 0.0f));
+    (*this->mBotones)["JOY_PATADA_BAJA"] = new Sprite((*this->mAnimaciones)["JOY_PATADA_BAJA"], this->gRenderer, Vector2f(0.0f, 0.0f));
+    (*this->mBotones)["JOY_DEFENSA"]     = new Sprite((*this->mAnimaciones)["JOY_DEFENSA"]    , this->gRenderer, Vector2f(0.0f, 0.0f));
+    (*this->mBotones)["JOY_PODER"]       = new Sprite((*this->mAnimaciones)["JOY_PODER"]      , this->gRenderer, Vector2f(0.0f, 0.0f));
 
-    (*this->mBotones)["JOY_ARRIBA"]      = new Sprite((*this->mAnimaciones)["JOY_ARRIBA"]   , this->gRenderer, Vector2f(0.0f, 60.0f));
-    (*this->mBotones)["JOY_ABAJO"]       = new Sprite((*this->mAnimaciones)["JOY_ABAJO"]    , this->gRenderer, Vector2f(0.0f, 70.0f));
-    (*this->mBotones)["JOY_IZQUIERDA"]   = new Sprite((*this->mAnimaciones)["JOY_IZQUIERDA"], this->gRenderer, Vector2f(0.0f, 80.0f));
-    (*this->mBotones)["JOY_DERECHA"]     = new Sprite((*this->mAnimaciones)["JOY_DERECHA"]  , this->gRenderer, Vector2f(0.0f, 90.0f));
+    (*this->mBotones)["JOY_ARRIBA"]      = new Sprite((*this->mAnimaciones)["JOY_ARRIBA"]   , this->gRenderer, Vector2f(0.0f, 0.0f));
+    (*this->mBotones)["JOY_ABAJO"]       = new Sprite((*this->mAnimaciones)["JOY_ABAJO"]    , this->gRenderer, Vector2f(0.0f, 0.0f));
+    (*this->mBotones)["JOY_IZQUIERDA"]   = new Sprite((*this->mAnimaciones)["JOY_IZQUIERDA"], this->gRenderer, Vector2f(0.0f, 0.0f));
+    (*this->mBotones)["JOY_DERECHA"]     = new Sprite((*this->mAnimaciones)["JOY_DERECHA"]  , this->gRenderer, Vector2f(0.0f, 0.0f));
+
+    (*this->mBotones)["JOY_PINIA_ALTA"]->escalarConTamanio(64,64);
+    (*this->mBotones)["JOY_PATADA_ALTA"]->escalarConTamanio(64,64);
+    (*this->mBotones)["JOY_PINIA_BAJA"]->escalarConTamanio(64,64);
+    (*this->mBotones)["JOY_PATADA_BAJA"]->escalarConTamanio(64,64);
+    (*this->mBotones)["JOY_DEFENSA"]->escalarConTamanio(64,64);
+    (*this->mBotones)["JOY_PODER"]->escalarConTamanio(64,64);
+
+    (*this->mBotones)["JOY_ARRIBA"]->escalarConTamanio(64,64);
+    (*this->mBotones)["JOY_ABAJO"]->escalarConTamanio(64,64);
+    (*this->mBotones)["JOY_IZQUIERDA"]->escalarConTamanio(64,64);
+    (*this->mBotones)["JOY_DERECHA"]->escalarConTamanio(64,64);
+
 }
 
 SDL_Texture* HUD::crearTexturaTransparente(int ancho, int alto) {
@@ -117,45 +130,22 @@ HUD::~HUD() {
 void HUD::dibujar(){
 	this->tHUD = updateTexture();
 	SDL_RenderCopy(this->gRenderer, this->tHUD, NULL, NULL);
-
-	/*
-	if (this->combosVisibles) {
-		//IMPRIMO COLA DE COMBOS 1
-		int x = 30; int y = 70;
-		std::deque<string>::iterator it1 = colaDeTeclas->begin();
-		while (it1 != colaDeTeclas->end()) {
-			SDL_Color color1 = { 255, 239, 36, 255 };
-			SDL_Texture* combos = renderText(*it1++, "RECURSOS/HUD/mk2.ttf", color1, 11, gRenderer);
-			SDL_Rect destRect = {x, y, 100, 20}; y += 15;
-			SDL_RenderCopy(this->gRenderer, combos, NULL, &destRect);
-			SDL_DestroyTexture(combos);
-		}
-	}
-	*/
-
+	SDL_SetRenderTarget(this->gRenderer, NULL);
 
 	if (this->combosVisibles) {
 		//IMPRIMO COLA DE COMBOS 1
-		int x = 30; int y = 70;
-		std::deque<string>::iterator it1 = colaDeTeclas->begin();
-		while (it1 != colaDeTeclas->end()) {
-			//SDL_Color color1 = { 255, 239, 36, 255 };
-			//SDL_Texture* combos = renderText(*it1++, "RECURSOS/HUD/mk2.ttf", color1, 11, gRenderer);
-			SDL_Rect destRect = {x, y, 100, 20}; y += 15;
+		Vector2f posicion(320.0f - (colaDeTeclas->size() * 70) / 2 , 90.0f);
+		std::deque<string>::iterator it = colaDeTeclas->begin();
+		while (it != colaDeTeclas->end()) {
+			cout << *it << ":" << (*this->mBotones)[*it]->getDimensionesPx() << endl;
 
-			//cout << *it1++ << endl;
-			//Botones->
-			//SDL_RenderCopy(this->gRenderer, mBotones[*it1++], NULL, &destRect);
-			//SDL_DestroyTexture(combos);
+			(*this->mBotones)[*it]->setPosicion(posicion);
+			(*this->mBotones)[*it]->dibujar();
+			posicion += Vector2f(70.0f, 0.0f);
+			*it++;
+
 		}
 	}
-	/*
-    for (map<std::string, Sprite*>::iterator it = this->mBotones->begin() ; it != this->mBotones->end(); ++it)
-    {
-    	//cout << it->first << endl;
-    	//this->mBotones[it->first]
-    }
-	*/
 }
 
 void HUD::recibirNotificacion(Observable* unObservable){
