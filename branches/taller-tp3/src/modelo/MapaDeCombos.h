@@ -16,7 +16,7 @@
 #include "Combo.h"
 
 #define LONGITUD_BUFFER 5
-#define TIEMPO_MAXIMO_EN_COLA 5000 // milisegundos
+
 using namespace std;
 
 class MapaDeCombos {
@@ -29,9 +29,10 @@ private:
 	void quitar_tecla();
 
 	Uint32 tiempo_inicio_combo;
+	Uint32 tiempo_maximo_en_cola;
 
 public:
-	MapaDeCombos(vector<Combo*>* combosJugador, int toleranciaDeError);
+	MapaDeCombos(vector<Combo*>* combosJugador, int toleranciaDeError, Uint32 tiempo_maximo_en_cola = 5000);
 	virtual ~MapaDeCombos();
 	void agregar_tecla(string tecla);
 	bool combo_completado();
