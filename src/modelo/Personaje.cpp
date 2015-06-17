@@ -523,6 +523,10 @@ void Personaje::decapitar(){
 	bloquearPersonaje(100);
 }
 
+void Personaje::detenerse(estado_personaje id_estado){
+	cambiarEstado(new RecibiendoFatality(posicion, id_estado, (*cajasPorEstado)[EN_ESPERA]));
+}
+
 void Personaje::hacerFatality(){
 	//cout<<"Haciendo fatalityyyy"<<endl;
 	cambiarEstado(new Fatality(posicion, estado->Id(), (*cajasPorEstado)[estado->Id()]));
@@ -533,7 +537,7 @@ void Personaje::hacerFatality(estado_personaje id_estado){
 	cambiarEstado(new Fatality(posicion, id_estado, (*cajasPorEstado)[estado->Id()]));
 }
 
-void Personaje::updateFatality(){
+void Personaje::updateFatality(Colisionable* enemigo){
 	if(estado->Id()== ANIMALITY){
 		cout<<"ENTRA A UPDATEFATALITY CON ID ANIMALITY"<<endl;
 		if(!estaBloqueado()){
@@ -560,8 +564,18 @@ void Personaje::updateFatality(){
 		if(!estaBloqueado()){
 			cout<<"NO ESTA BLOQUEADO"<<endl;
 			hacerFatality(OSO_ATACANDO);
-			bloquearPersonaje(5);
+			bloquearPersonaje(50);
 		}
+	}else if(estado->Id()== OSO_ATACANDO){
+		if(!estaBloqueado()){
+			cout<<"NO ESTA BLOQUEADO"<<endl;
+			hacerFatality(OSO3);
+			bloquearPersonaje(30);
+		}
+	}else if(estado->Id() == CAIDA_DERECHA && !estaBloqueado()){
+		cout<<"XXXXXXXXXXXXXXX"<<endl;
+		detenerse(MUERTO_EN_PISO);
+		bloquearPersonaje(50);
 	}else if(estado->Id()== FATALITY1){
 		if(!estaBloqueado() && id == "sonya"){
 			cout<<"NO ESTA BLOQUEADO"<<endl;
@@ -573,7 +587,7 @@ void Personaje::updateFatality(){
 }
 
 void Personaje::recibirFatality(Colisionable* enemigo){
-	cout<<"ESTADO ENEMIGO:"<<enemigo->verEstado()->Id()<<endl;
+	//cout<<"ESTADO ENEMIGO:"<<enemigo->verEstado()->Id()<<endl;
 	if(enemigo->verEstado()->estaVolandoVertical()){
 		volar_vertical(RECIBIENDO_GOLPE);
 	}else if(enemigo->verEstado()->Id() == GANCHO_FATALITY){
@@ -582,6 +596,7 @@ void Personaje::recibirFatality(Colisionable* enemigo){
 	}else if(enemigo->verEstado()->Id() == OSO2){
 		cout<<"CAER"<<endl;
 		caida_animality();
+		bloquearPersonaje(20);
 	}
 }
 
@@ -666,7 +681,6 @@ void Personaje::recibirGolpe(Colisionable* otro){
 			if(this->direccion == DIRECCION_IZQUIERDA){
 				caidaIzquierda();
 			}else if(this->direccion == DIRECCION_DERECHA){
-
 				caidaDerecha();
 			}
 		}else if(!estaSaltando()){
@@ -880,9 +894,9 @@ void Personaje::update(Colisionable* enemigo){
     if(estaEnPiso() ){
        return;
 
-	}else if(haciendoFatality() && !estaBloqueado()){
+	}else if((haciendoFatality() || recibioFatality()) && !estaBloqueado()){
 		cout<<"UPDATE FATALITY"<<endl;
-		updateFatality();
+		updateFatality(enemigo);
 	}
 	//else if(estaMareado() && enemigo->ejecutandoMovimientoEspecial() && !recibioFatality()){
 	else if(estaMareado() && !recibioFatality()){
@@ -890,9 +904,7 @@ void Personaje::update(Colisionable* enemigo){
     		cout<<"RECIBIR FATALITY"<<endl;
     		recibirFatality(enemigo);
     	}
-    }/*else if(recibioFatality() && !estaBloqueado()){
-    	updateFatality(enemigo);
-    }*/
+    }
 
     else if(estaSinEnergia() && !estaSaltando() && !estaEnPiso() && !haciendoFatality() && !estaMareado() && !recibioFatality()){
     	cout<<"BBBBBB"<<endl;
@@ -900,7 +912,7 @@ void Personaje::update(Colisionable* enemigo){
     }
 
     if(estaBloqueado()){
-    	cout<<"Bloqueo:"<<tiempoBloqueo<<endl;
+    	//cout<<"Bloqueo:"<<tiempoBloqueo<<endl;
         if(tiempoBloqueo <= 0){
         	if(haciendoFatality()){
         		hacerFatality();

@@ -104,7 +104,7 @@ bool CajaDeTexto::loadMedia() {
 	bool success = true;
 
 	//Open the font
-	TTF_Font* gFont = TTF_OpenFont( "RECURSOS/lazy.ttf", this->alto );
+	TTF_Font* gFont = TTF_OpenFont( "RECURSOS/HUD/mk2.ttf", this->alto );
 	this->textura->setFont(gFont);
 
 	if( gFont == NULL )
