@@ -656,6 +656,7 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(flo
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(OSO_ATACANDO, BVH_animality3));
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(OSO3, BVH_animality3));
 	mapa_BVH->insert(pair<estado_personaje, BVH*>(FATALITY1, BVH_fatality1));
+	mapa_BVH->insert(pair<estado_personaje, BVH*>(GANCHO_FATALITY, BVH_fatality1));
 
 	return mapa_BVH;
 }
