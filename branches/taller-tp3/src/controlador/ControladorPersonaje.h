@@ -15,6 +15,7 @@
 #include "../modelo/Personaje.h"
 #include "ControladorJoystick.h"
 #include "../modelo/MapaDeCombos.h"
+#include "../vista/hud/HUD.h"
 
 class Jugador;
 

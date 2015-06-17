@@ -40,7 +40,7 @@ string MapaDeCombos::informar_combo(){
 		comboEfectuado = false;
 		return comboActual;
 	}
-	cout << "ERROR: MapaDeCombos::informar_combo()" << endl;
+	//cout << "ERROR: MapaDeCombos::informar_combo()" << endl;
 	return "ERROR";
 }
 
