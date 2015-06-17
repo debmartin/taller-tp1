@@ -11,25 +11,16 @@
 #include "../../modelo/Vector2f.h"
 #include "../../vista/Sprite.h"
 #include "../../vista/Animacion.h"
-
 //#include "../../controlador/ControladorJoystick.h"
 
 #define POSICION_PORCENTUAL_BARRA1 Vector2f(10, 10)
 #define POSICION_PORCENTUAL_BARRA2 Vector2f(60, 10)
 #define DIMENSION_PORCENTUAL_BARRA Vector2f(30, 10)
 
+#define TIEMPO_LIMITE_MOSTRAR_NOMBRE_COMBO 1000
+
 class HUD: public Observador {
 public:
-	HUD() {};
-
-	HUD(
-		SDL_Window* gWindow,
-		string nombre_personaje1,
-		string nombre_personaje2,
-		deque<string>* colaDeTeclas1,
-		bool combosVisibles = true
-	);
-
 	void disminuirEnergia1(float offset);
 	void disminuirEnergia2(float offset);
 	void setEnergia1(float nuevaEnergia);
@@ -37,14 +28,28 @@ public:
 	SDL_Texture* updateTexture();
 	void recibirNotificacion(Observable* unObservable);
 	void dibujar();
-	virtual ~HUD();
-
 	SDL_Texture* renderText(
-			std::string& mensaje,
-			std::string& pathFuente,
+			std::string mensaje,
+			std::string pathFuente,
 			SDL_Color 		   color,
 			int 			   tamanioFuentePx,
 			SDL_Renderer*      renderer);
+
+	void mostrarMensajeCombo(string nombreCombo);
+
+	//SINGLETON
+	static HUD* Instance();
+	bool init(
+			SDL_Window* gWindow,
+			string nombre_personaje1,
+			string nombre_personaje2,
+			deque<string>* colaDeTeclas1,
+			bool combosVisibles = true
+		);
+	virtual ~HUD();
+
+	// MOSTRAR NOMBRE COMBO EN PANTALLA
+	void update();
 
 private:
 	SDL_Texture*  crearTexturaTransparente(int ancho, int alto);
@@ -60,6 +65,18 @@ private:
 	map<string, Animacion*>* mAnimaciones;
 
 	bool combosVisibles;
+
+	Uint32 W(SDL_Texture* t);
+	Uint32 H(SDL_Texture* t);
+
+	// SINGLETON
+	HUD();
+	static HUD* instancia_unica;
+
+	// MOSTRAR NOMBRE COMBO EN PANTALLA
+	string nombreComboActual;
+	bool mostrandoNombreCombo;
+	Uint32 tiempoInicioMostrar;
 };
 
 #endif /* SRC_VISTA_HUD_H_ */

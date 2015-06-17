@@ -26,7 +26,6 @@ private:
 	Jugador* jugador2;
 	string modo_juego;
 	ControladorPersonaje* controladorPersonaje;
-	HUD* hud;
 
 public:
 	Juego(Jugador* jugador1, Jugador* jugador2, string modo, string nombrePersonaje1, string nombrePersonaje2);

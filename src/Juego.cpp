@@ -47,15 +47,15 @@ Juego::Juego(Jugador* jugador1, Jugador* jugador2, string modo, string nombrePer
 	controladorPersonaje = new ControladorPersonaje(jugador1, jugador2, tipoDeControl_jugador1, this->modo_juego);
 
 
-	hud = new HUD(
+	HUD::Instance()->init(
 			Renderizador::Instance()->getWindow(),
 			nombrePersonaje2,
 			nombrePersonaje1,
 			ControladorJoystick::Instance()->getColaDeTeclas(0),
 			(this->modo_juego == "Práctica") ? true : false);
 
-	jugador1->getPersonaje()->agregarObservador(hud);
-	jugador2->getPersonaje()->agregarObservador(hud);
+	jugador1->getPersonaje()->agregarObservador(HUD::Instance());
+	jugador2->getPersonaje()->agregarObservador(HUD::Instance());
 
 	this->posicionarPersonajes_enEjeX();
 }
@@ -69,7 +69,7 @@ void Juego::agregarObservadoresJugador(Jugador* unJugador) {
 void Juego::render()
 {
 	VentanaGrafica::Instance()->dibujarTodo();
-	hud->dibujar();
+	HUD::Instance()->dibujar();
 	SDL_RenderPresent(Renderizador::Instance()->getRenderer());
 
 }
@@ -123,6 +123,7 @@ void Juego::update(bool& recargar)
 
 
         ControladorJoystick::Instance()->update();
+        HUD::Instance()->update();
 }
 
 

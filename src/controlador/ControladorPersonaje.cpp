@@ -64,7 +64,13 @@ void ControladorPersonaje::identificarCombo(Personaje* personaje, JoyNumber nume
 
 	TheInputHandler::Instance()->buscar_combo(numeroJoystick);
 	if(TheInputHandler::Instance()->combo_completado(numeroJoystick)){
-		personaje->ejecutarCombo(TheInputHandler::Instance()->informar_combo(numeroJoystick), enemigo);
+
+		string mensajeCombo = TheInputHandler::Instance()->informar_combo(numeroJoystick);
+
+		if (numeroJoystick == 0)
+			HUD::Instance()->mostrarMensajeCombo(mensajeCombo);
+
+		personaje->ejecutarCombo(mensajeCombo, enemigo);
 		return;
 	}
 }

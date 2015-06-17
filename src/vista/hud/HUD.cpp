@@ -1,6 +1,19 @@
 #include "HUD.h"
 
-HUD::HUD(
+HUD* HUD::instancia_unica = NULL;
+
+HUD* HUD::Instance()
+{
+	if (instancia_unica == NULL)
+	{
+		instancia_unica = new HUD();
+	}
+	return instancia_unica;
+}
+
+HUD::HUD() {}
+
+bool HUD::init(
 	SDL_Window* gWindow,
 	string nombre_personaje1,
 	string nombre_personaje2,
@@ -61,6 +74,8 @@ HUD::HUD(
     (*this->mBotones)["JOY_IZQUIERDA"]->escalarConTamanio(64,64);
     (*this->mBotones)["JOY_DERECHA"]->escalarConTamanio(64,64);
 
+    return true;
+
 }
 
 SDL_Texture* HUD::crearTexturaTransparente(int ancho, int alto) {
@@ -89,9 +104,9 @@ SDL_Texture* HUD::updateTexture() {
 	SDL_RenderClear(this->gRenderer);
 
 	SDL_Rect destRect1 = {30 , 43, 270, 26};
-	SDL_Rect destRect2 = {340, 43, 270, 26};
-
 	SDL_RenderCopy(this->gRenderer, b1, NULL, &destRect1);
+
+	SDL_Rect destRect2 = {340, 43, 270, 26};
 	SDL_RenderCopy(this->gRenderer, b2, NULL, &destRect2);
 
 	//SDL_RenderPresent(this->gRenderer);
@@ -145,7 +160,30 @@ void HUD::dibujar(){
 			*it++;
 
 		}
+
+
+		if (this->mostrandoNombreCombo) {
+			SDL_Color color = { 255, 239, 36, 255 };
+
+			SDL_Texture* texturaCombo = renderText(nombreComboActual, "RECURSOS/HUD/mk2.ttf",color,25,this->gRenderer);
+
+			SDL_Rect destRect1 = {320 - (this->W(texturaCombo) / 2) , 400, this->W(texturaCombo), this->H(texturaCombo)};
+			SDL_RenderCopy(this->gRenderer, texturaCombo, NULL, &destRect1);
+		}
+
 	}
+}
+
+void HUD::mostrarMensajeCombo(string nombreCombo) {
+
+	this->nombreComboActual = nombreCombo;
+	this->mostrandoNombreCombo = true;
+	this->tiempoInicioMostrar = SDL_GetTicks();
+}
+
+void HUD::update() {
+	if (SDL_GetTicks() - this->tiempoInicioMostrar > TIEMPO_LIMITE_MOSTRAR_NOMBRE_COMBO)
+		this->mostrandoNombreCombo = false;
 }
 
 void HUD::recibirNotificacion(Observable* unObservable){
@@ -163,8 +201,8 @@ void HUD::recibirNotificacion(Observable* unObservable){
 
 
 SDL_Texture* HUD::renderText(
-		std::string& mensaje,
-		std::string& pathFuente,
+		std::string mensaje,
+		std::string pathFuente,
 		SDL_Color 		   color,
 		int 			   tamanioFuentePx,
 		SDL_Renderer*      renderer)
@@ -191,5 +229,18 @@ SDL_Texture* HUD::renderText(
 	SDL_FreeSurface(surf);
 	TTF_CloseFont(fuente);
 	return texture;
+}
+
+
+Uint32 HUD::W(SDL_Texture* t) {
+	int w, h;
+	SDL_QueryTexture(t, NULL, NULL, &w, &h);
+	return w;
+}
+
+Uint32 HUD::H(SDL_Texture* t) {
+	int w, h;
+	SDL_QueryTexture(t, NULL, NULL, &w, &h);
+	return h;
 }
 
