@@ -198,10 +198,9 @@ void Botonera::actualizarModelo() {
 	{
 		for ( int x = 0 ; x < this->cant_columnas ; x++ )
 		{
-			Posicion* posicionActual = matriz[y][x]->getPosicionModelo();
+			Posicion* posActual = matriz[y][x]->getPosicionModelo();
 
-			// jugador1
-			if ( posicionActual->getX()==this->posicionEnfocadaDelJugador1->getX() && posicionActual->getY()==this->posicionEnfocadaDelJugador1->getY())
+			if ( this->posicionEnfocadaDelJugador1->tieneMismasCoordenadasQue(posActual) )
 			{
 				if ( this->posicionEnfocadaDelJugador1->estoyElegido() )
 				{
@@ -220,7 +219,22 @@ void Botonera::actualizarModelo() {
 			}
 			else
 			{
-				if ( this->tipo=="personajes" && posicionActual->getX()==this->posicionEnfocadaDelJugador2->getX() && posicionActual->getY()==this->posicionEnfocadaDelJugador2->getY())
+				matriz[y][x]->getPosicionModelo()->desenfocar();
+				matriz[y][x]->getPosicionModelo()->deselegir();
+			}
+		}
+	}
+
+
+	if ( this->tipo=="personajes" )
+	{
+		for ( int y = 0 ; y < this->cant_filas ; y++ )
+		{
+			for ( int x = 0 ; x < this->cant_columnas ; x++ )
+			{
+				Posicion* posActual = matriz[y][x]->getPosicionModelo();
+
+				if ( this->posicionEnfocadaDelJugador2->tieneMismasCoordenadasQue(posActual) )
 				{
 					if ( this->posicionEnfocadaDelJugador2->estoyElegido() )
 					{
@@ -236,11 +250,6 @@ void Botonera::actualizarModelo() {
 						this->idContenidoEnfocado_paraJugador2 = matriz[y][x]->getIdContenido();
 						this->esElegidoPersonaje2 = false;
 					}
-				}
-				else
-				{
-					matriz[y][x]->getPosicionModelo()->desenfocar();
-					matriz[y][x]->getPosicionModelo()->deselegir();
 				}
 			}
 		}

@@ -40,6 +40,7 @@ public:
 	void posicionarDerecha();
 	void posicionarArriba();
 	void posicionarAbajo();
+	bool tieneMismasCoordenadasQue(Posicion* unaPosicion);
 
 	friend ostream& operator<<(ostream &o, const Posicion &p);
 	string toString();
