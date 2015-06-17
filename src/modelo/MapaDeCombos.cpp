@@ -9,8 +9,9 @@
 
 #include <iostream>
 
-MapaDeCombos::MapaDeCombos(vector<Combo*>* lista, int tolerancia):
+MapaDeCombos::MapaDeCombos(vector<Combo*>* lista, int tolerancia, Uint32 tiempo_maximo_en_cola):
 	combosJugador(lista), toleranciaDeError(tolerancia) {
+	this->tiempo_maximo_en_cola = tiempo_maximo_en_cola;
 	colaDeTeclas = new deque<string>;
 	comboActual = "";
 	comboEfectuado = false;
@@ -45,7 +46,7 @@ string MapaDeCombos::informar_combo(){
 
 void MapaDeCombos::update() {
 
-	if (SDL_GetTicks() - this->tiempo_inicio_combo > TIEMPO_MAXIMO_EN_COLA)
+	if (SDL_GetTicks() - this->tiempo_inicio_combo > this->tiempo_maximo_en_cola)
 		this->colaDeTeclas->clear();
 
 }
