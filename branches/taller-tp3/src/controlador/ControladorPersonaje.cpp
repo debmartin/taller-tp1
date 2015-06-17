@@ -37,16 +37,22 @@ bool ControladorPersonaje::manejar_Evento(SDL_Event &evento){
     TheInputHandler::Instance()->handleEventsJoysticks(evento);
 
     if(tipoDeControl == "JOYSTICK"){
+    	cout<<"ENTRA1"<<personaje1->verEstado()->Id()<<endl;
     	if(!personaje1->estaEnCaida() && !personaje1->estaEnFatality() && !personaje1->estaBloqueado() && !personaje1->estaMareado() && !personaje1->estaSinEnergia() && !personaje1->haciendoFatality() && !personaje1->recibioFatality()){
+    		cout<<"ENTRA2"<<personaje1->verEstado()->Id()<<endl;
     		identificarCombo(personaje1, JOYSTICK1, personaje2);
     		if(!personaje1->estaBloqueado()){
+    			cout<<"ENTRA3"<<personaje1->verEstado()->Id()<<endl;
     			identificarOrdenJoystickPersonaje(personaje1, JOYSTICK1);
     		}
     	}
     	if(modo_juego == "P1_vs_P2"){
+    		cout<<"ENTRA1"<<personaje2->verEstado()->Id()<<endl;
     		if(!personaje2->estaEnFatality() && !personaje2->estaEnCaida() && !personaje2->estaBloqueado() && !personaje2->estaMareado() && !personaje2->estaSinEnergia() && personaje1->haciendoFatality() && !personaje2->recibioFatality()){
+    			cout<<"ENTRA2"<<personaje2->verEstado()->Id()<<endl;
     			identificarCombo(personaje2, JOYSTICK2, personaje1);
     			if(!personaje2->estaBloqueado()){
+    				cout<<"ENTRA3"<<personaje2->verEstado()->Id()<<endl;
     				identificarOrdenJoystickPersonaje(personaje2, JOYSTICK2);
     			}
     		}
