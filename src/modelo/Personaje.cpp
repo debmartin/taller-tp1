@@ -32,6 +32,10 @@
 #define TIEMPO_BLOQUEO_GANCHO 15
 #define TIEMPO_BLOQUEO_PATADA_GIRATORIA 45
 #define TIEMPO_BLOQUEO_TIJERA 80
+#define TIEMPO_BLOQUEO_ANIMALITY_SUBZERO_PARTE1 30
+#define TIEMPO_BLOQUEO_ANIMALITY_SUBZERO_PARTE2 20
+#define TIEMPO_BLOQUEO_ANIMALITY_SUBZERO_PARTE3 60
+#define TIEMPO_BLOQUEO_ANIMALITY_SUBZERO_PARTE4 60
 #define TIEMPO_FESTEJO_VICTORIA 200
 #define DISTANCIA_MINIMA 110
 
@@ -514,7 +518,7 @@ void Personaje::animality(){
 		bloquearPersonaje(50);
 	}else{
 		cambiarEstado(new Fatality(posicion, OSO, (*cajasPorEstado)[OSO]));
-		bloquearPersonaje(30);
+		bloquearPersonaje(TIEMPO_BLOQUEO_ANIMALITY_SUBZERO_PARTE1);
 	}
 }
 
@@ -562,29 +566,32 @@ void Personaje::updateFatality(Colisionable* enemigo){
 		if(!estaBloqueado()){
 			cout<<"NO ESTA BLOQUEADO"<<endl;
 			hacerFatality(OSO2);
-			bloquearPersonaje(20);
+			bloquearPersonaje(TIEMPO_BLOQUEO_ANIMALITY_SUBZERO_PARTE2);
 		}
 	}else if(estado->Id()== OSO2){
 		if(!estaBloqueado()){
 			cout<<"NO ESTA BLOQUEADO"<<endl;
 			hacerFatality(OSO_ATACANDO);
-			bloquearPersonaje(50);
+			bloquearPersonaje(TIEMPO_BLOQUEO_ANIMALITY_SUBZERO_PARTE3);
 		}
 	}else if(estado->Id()== OSO_ATACANDO){
 		if(!estaBloqueado()){
 			cout<<"NO ESTA BLOQUEADO"<<endl;
 			hacerFatality(OSO3);
-			bloquearPersonaje(30);
+			bloquearPersonaje(TIEMPO_BLOQUEO_ANIMALITY_SUBZERO_PARTE4);
 		}
 	}else if(recibioFatality() && estado->Id() == CAIDA_DERECHA && !estaBloqueado()){
 		mantenerFatality(MUERTO_EN_PISO);
-		bloquearPersonaje(50);
+		bloquearPersonaje(TIEMPO_BLOQUEO_ANIMALITY_SUBZERO_PARTE3+TIEMPO_BLOQUEO_ANIMALITY_SUBZERO_PARTE4);
+	}else if(!estaMuerto() && recibioFatality() && estado->Id() == MUERTO_EN_PISO && !estaBloqueado()){
+		cout<<"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX:"<<id<<endl;
+		morirEnPiso(MUERTO_EN_PISO);
 	}else if(estado->Id() == DECAPITADO && !estaBloqueado()){
 		morirEnPiso(MUERTO_DECAPITADO);
 	}else if(estado->Id()== FATALITY1){
 		if(!estaBloqueado() && id == "sonya"){
 			cout<<"NO ESTA BLOQUEADO"<<endl;
-			//hacerFatality(BESO);
+
 		}else if(!estaBloqueado()){
 			hacerFatality(GANCHO_FATALITY);
 			bloquearPersonaje(50);
@@ -602,7 +609,7 @@ void Personaje::recibirFatality(Colisionable* enemigo){
 	}else if(enemigo->verEstado()->Id() == OSO2){
 		cout<<"CAER"<<endl;
 		caida_animality();
-		bloquearPersonaje(20);
+		bloquearPersonaje(TIEMPO_BLOQUEO_ANIMALITY_SUBZERO_PARTE2);
 	}
 }
 
