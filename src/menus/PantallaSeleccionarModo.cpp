@@ -64,6 +64,7 @@ void PantallaSeleccionarModo::iniciar() {
 				}
 
 				botonera->manejarEventoJugador(evento);
+				botonera->manejarEventoMouse(evento);
 				botonera->actualizarModelo();
 				if ( botonera->elModoYaFueElegido() )
 				{

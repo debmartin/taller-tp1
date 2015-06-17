@@ -110,6 +110,7 @@ void PantallaSeleccionarPersonaje::iniciar() {
 				}
 
 				this->botonera->manejarEventoJugador(evento);
+				this->botonera->manejarEventoMouse(evento);
 				this->botonera->actualizarModelo();
 
 				this->manejarEventoNombreDelPersonaje1(evento, &renderText1);

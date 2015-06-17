@@ -45,6 +45,8 @@ public:
 	friend ostream& operator<<(ostream &o, const Posicion &p);
 	string toString();
 
+	void setXY(int x, int y);
+
 };
 
 #endif /* SRC_MODELO_POSICION_H_ */

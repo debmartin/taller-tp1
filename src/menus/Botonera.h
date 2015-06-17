@@ -56,6 +56,7 @@ public:
 	bool loadMedia(string path_imagen, string path_imagen2, string path_imagen3);
 	virtual ~Botonera();
 	void manejarEventoJugador( SDL_Event evento );
+	void manejarEventoMouse( SDL_Event evento );
 	void actualizarModelo();
 	void dibujar();
 
@@ -72,6 +73,7 @@ public:
 	bool elModoYaFueElegido();
 	bool seEligioElPersonaje1();
 	bool seEligioElPersonaje2();
+
 };
 
 #endif /* SRC_BOTONERA_H_ */

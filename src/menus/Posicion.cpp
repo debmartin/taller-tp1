@@ -96,3 +96,8 @@ void Posicion::posicionarAbajo() {
 bool Posicion::tieneMismasCoordenadasQue(Posicion* unaPosicion) {
 	return ( this->x==unaPosicion->getX() && this->y==unaPosicion->getY() ) ;
 }
+
+void Posicion::setXY(int x, int y) {
+	this->x = x;
+	this->y = y;
+}
