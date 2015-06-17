@@ -64,7 +64,7 @@ public:
 		Animacion* animInicial,
 		SDL_Renderer* pRenderer,
 		Vector2f posicion,
-		OrientacionSprite orientacion,
+		OrientacionSprite orientacion = ORIENTACION_DERECHA,
 		UbicacionPivote ubicacion = SPR_ARRIBA_IZQUIERDA);
 
 	virtual ~Sprite();

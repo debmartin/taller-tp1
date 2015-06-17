@@ -52,7 +52,6 @@ Juego::Juego(Jugador* jugador1, Jugador* jugador2, string modo, string nombrePer
 			nombrePersonaje2,
 			nombrePersonaje1,
 			ControladorJoystick::Instance()->getColaDeTeclas(0),
-			ControladorJoystick::Instance()->getColaDeTeclas(1),
 			(this->modo_juego == "Práctica") ? true : false);
 
 	jugador1->getPersonaje()->agregarObservador(hud);

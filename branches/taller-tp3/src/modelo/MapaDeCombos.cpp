@@ -74,7 +74,7 @@ bool comapararConCombo(vector<string> combo, vector<string> eventos, size_t tole
 
 void MapaDeCombos::buscarCombo() {
 	// PARA TODOS LOS COMBOS DEL JUGADOR
-	cout << "---------------------" << endl;
+	//cout << "---------------------" << endl;
 	for (size_t i = 0; i < this->combosJugador->size(); i++) {
 		// OBTENGO COMBO ACTUAL
 		vector<string>* teclasCombo = (*this->combosJugador)[i]->verTeclas();

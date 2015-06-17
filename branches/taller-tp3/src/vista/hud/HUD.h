@@ -1,13 +1,16 @@
 #ifndef SRC_VISTA_HUD_H_
 #define SRC_VISTA_HUD_H_
 
+#include <map>
 #include <string>
 #include <deque>
 #include <SDL2/SDL.h>
-#include "../../modelo/Vector2f.h"
 #include "BarraEnergia.h"
 #include "../../modelo/Observador.h"
 #include "../../modelo/Personaje.h"
+#include "../../modelo/Vector2f.h"
+#include "../../vista/Sprite.h"
+#include "../../vista/Animacion.h"
 
 //#include "../../controlador/ControladorJoystick.h"
 
@@ -24,7 +27,6 @@ public:
 		string nombre_personaje1,
 		string nombre_personaje2,
 		deque<string>* colaDeTeclas1,
-		deque<string>* colaDeTeclas2,
 		bool combosVisibles = true
 	);
 
@@ -38,8 +40,8 @@ public:
 	virtual ~HUD();
 
 	SDL_Texture* renderText(
-			const std::string& mensaje,
-			const std::string& pathFuente,
+			std::string& mensaje,
+			std::string& pathFuente,
 			SDL_Color 		   color,
 			int 			   tamanioFuentePx,
 			SDL_Renderer*      renderer);
@@ -52,8 +54,10 @@ private:
 	BarraEnergia* barraDeEnergia2;
 	SDL_Texture*  tHUD;
 
-	deque<string>* colaDeTeclas1;
-	deque<string>* colaDeTeclas2;
+	deque<string>* colaDeTeclas;
+
+	map<string, Sprite*>* mBotones;
+	map<string, Animacion*>* mAnimaciones;
 
 	bool combosVisibles;
 };
