@@ -197,6 +197,11 @@
 		    		"cant_fotogramas": 3,
 		    		"fps": 10 
 		    			},
+		    "sprites-animality3": { 
+			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-convertir-humano.png",
+		    		"cant_fotogramas": 10,
+		    		"fps": 10 
+		    			},
 		    "sprites-oso-atacando": { 
 			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-ataque-oso.png",
 		    		"cant_fotogramas": 2,
@@ -213,7 +218,7 @@
 		    		"fps": 10 
 		    			},
 		    "sprites-decapitado": { 
-			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-decapitado.png",
+			        "imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-decapitado.png",
 		    		"cant_fotogramas": 8,
 		    		"fps": 10 
 		    			},
@@ -344,7 +349,7 @@
 		    "sprites-caida": { 
 			        "imagen": "RECURSOS/PERSONAJES/SONIA/sonya-caida.png",
 		    		    "cant_fotogramas": 7,
-		    		    "fps": 1 
+		    		    "fps": 10 
 		    			},
 		    "sprites-mareado": { 
 			        	"imagen": "RECURSOS/PERSONAJES/SONIA/sonya-mareado.png",

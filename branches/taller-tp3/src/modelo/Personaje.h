@@ -55,6 +55,7 @@
 #include "Objeto.h"
 #include "Colisionable.h"
 #include "../vista/Posicionable.h"
+//#include "../vista/EfectosEspeciales.h"
 
 #define DELTA_PASO 1
 #define ENERGIA_INICIAL 100
@@ -184,6 +185,7 @@ public:
 	void morirEnPiso();
 	void deslizar();
 	void decapitar();
+	void detenerse(estado_personaje id_estado);
 	void volar_horizontal(estado_personaje id_estado);
 	void volar_vertical(estado_personaje id_estado, estado_personaje id_estado_caja);
 	void volar_vertical(estado_personaje id_estado);
@@ -196,7 +198,7 @@ public:
 	void ejecutarCombo(string nombreCombo);
 	void hacerFatality();
 	void hacerFatality(estado_personaje id_estado);
-	void updateFatality();
+	void updateFatality(Colisionable* enemigo);
 	void recibirFatality(Colisionable* enemigo);
 	void bebe();
 	void animality();
