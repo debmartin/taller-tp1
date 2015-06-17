@@ -750,27 +750,31 @@ void Personaje::arrojarArma(){
 	arma->arrojar();
 }
 
-void Personaje::ejecutarCombo(string nombreCombo){
+void Personaje::ejecutarCombo(string nombreCombo, Personaje* enemigo){
 		if(nombreCombo == "Ring Toss"){
 			arrojarArma();
 		}else if(nombreCombo == "Leg Grab"){
 			tijera();
 		}else if(nombreCombo == "Patada Giratoria"){
 			patadaGiratoria();
-		}else if(nombreCombo == "Square Flight"){
-			deslizar();
-		}else if(nombreCombo == "Fatality"){
-			if(id == "sonya"){
-				tirar_beso();
-			}else{
-				ganchoFatality();
-			}
 		}else if(nombreCombo == "Ice Freeze"){
 			arrojarArma();
 		}else if(nombreCombo == "Slide"){
 			deslizar();
-		}else if(nombreCombo == "Animality"){
-			animality();
+
+		//FATALITY//
+		}else if(enemigo->estaMareado()){
+			if(nombreCombo == "Animality"){
+				animality();
+			}else if(nombreCombo == "Square Flight"){
+				deslizar();
+			}else if(nombreCombo == "Fatality"){
+				if(id == "sonya"){
+					tirar_beso();
+				}else{
+					ganchoFatality();
+				}
+			}
 		}
 }
 

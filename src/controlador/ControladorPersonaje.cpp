@@ -37,11 +37,11 @@ bool ControladorPersonaje::manejar_Evento(SDL_Event &evento){
     TheInputHandler::Instance()->handleEventsJoysticks(evento);
 
     if(tipoDeControl == "JOYSTICK"){
-    	identificarCombo(personaje1, JOYSTICK1);
+    	identificarCombo(personaje1, JOYSTICK1, personaje2);
     	if(!personaje1->estaBloqueado() && !personaje1->estaEnCaida()){
     		identificarOrdenJoystickPersonaje(personaje1, JOYSTICK1);
     	}
-    	identificarCombo(personaje2, JOYSTICK2);
+    	identificarCombo(personaje2, JOYSTICK2, personaje1);
     	if(!personaje2->estaBloqueado() && !personaje2->estaEnCaida() && modo_juego == "P1_vs_P2"){
     		identificarOrdenJoystickPersonaje(personaje2, JOYSTICK2);
     	}
@@ -59,12 +59,12 @@ bool ControladorPersonaje::manejar_Evento(SDL_Event &evento){
     return true;
 }
 
-void ControladorPersonaje::identificarCombo(Personaje* personaje, JoyNumber numeroJoystick){
+void ControladorPersonaje::identificarCombo(Personaje* personaje, JoyNumber numeroJoystick, Personaje* enemigo){
 	std::map<string, bool>* estadoJoy = TheInputHandler::Instance()->getJoystickState(numeroJoystick);
 
 	TheInputHandler::Instance()->buscar_combo(numeroJoystick);
 	if(TheInputHandler::Instance()->combo_completado(numeroJoystick)){
-		personaje->ejecutarCombo(TheInputHandler::Instance()->informar_combo(numeroJoystick));
+		personaje->ejecutarCombo(TheInputHandler::Instance()->informar_combo(numeroJoystick), enemigo);
 		return;
 	}
 }

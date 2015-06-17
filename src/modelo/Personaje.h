@@ -195,7 +195,7 @@ public:
 	void recibirGolpe(Colisionable* otro);
 	void arrojarArma();
 	void tirar_beso();
-	void ejecutarCombo(string nombreCombo);
+	void ejecutarCombo(string nombreCombo, Personaje* enemigo);
 	void hacerFatality();
 	void hacerFatality(estado_personaje id_estado);
 	void updateFatality(Colisionable* enemigo);
