@@ -79,6 +79,7 @@ private:
 	double ancho;
 	double alto;
 	DireccionObjeto direccion;
+	bool enFatality;
 
 public:
     typedef void (Personaje::*Funcion) (void);
@@ -139,6 +140,8 @@ public:
 	bool estaHaciendoToma();
 	bool estaTomandoAlOponente();
 	bool estaVolandoVertical();
+	bool esGanador();
+	bool estaEnFatality();
 	void cambiarEstado(Estado* nuevo);
 	estado_personaje getEstado();
 	Estado* verEstado();

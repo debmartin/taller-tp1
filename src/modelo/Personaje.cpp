@@ -64,6 +64,7 @@ Personaje::Personaje(
 {
 	this->energia = ENERGIA_INICIAL;
 	this->tiempoBloqueo = 0;
+	this->enFatality = false;
 
 	// ORIENTACION INICIAL DE BVH - POR DEFECTO LA ORIENTACION ES DERECHA
 	this->direccion = DIRECCION_DERECHA;
@@ -227,6 +228,14 @@ bool Personaje::efectuandoPatadaGiratoria(){
 
 bool Personaje::estaVolandoVertical(){
 	return(estado->estaVolandoVertical());
+}
+
+bool Personaje::esGanador(){
+	return(estado->esGanador());
+}
+
+bool Personaje::estaEnFatality(){
+	return(this->enFatality);
 }
 
 bool Personaje::estaInhabilitado(){
@@ -549,36 +558,29 @@ void Personaje::hacerFatality(estado_personaje id_estado){
 
 void Personaje::updateFatality(Colisionable* enemigo){
 	if(estado->Id()== ANIMALITY){
-		cout<<"ENTRA A UPDATEFATALITY CON ID ANIMALITY"<<endl;
 		if(!estaBloqueado()){
-			cout<<"NO ESTA BLOQUEADO"<<endl;
 			volar_horizontal(ANIMALITY2);
 		}
 	}else if(estado->Id()== ANIMALITY2 && !estaVolandoVertical()){
-		cout<<"ENTRA A UPDATEFATALITY CON ID ANIMALITY2"<<endl;
 		if(!estaBloqueado()){
-			cout<<"NO ESTA BLOQUEADO"<<endl;
 			volar_vertical(ANIMALITY2, ANIMALITY);
 		}
-	}else if(estado->Id()== ANIMALITY2 && estaVolandoVertical()){
+	/*}else if(estado->Id()== ANIMALITY2 && estaVolandoVertical()){
 		if(posicion.Y()>VentanaGrafica::Instance()->getEscenario()->getAltoLogico()){
 			mantenerReposo();
-		}
+		}*/
 	}else if(estado->Id()== OSO){
 		if(!estaBloqueado()){
-			cout<<"NO ESTA BLOQUEADO"<<endl;
 			hacerFatality(OSO2);
 			bloquearPersonaje(TIEMPO_BLOQUEO_ANIMALITY_SUBZERO_PARTE2);
 		}
 	}else if(estado->Id()== OSO2){
 		if(!estaBloqueado()){
-			cout<<"NO ESTA BLOQUEADO"<<endl;
 			hacerFatality(OSO_ATACANDO);
 			bloquearPersonaje(TIEMPO_BLOQUEO_ANIMALITY_SUBZERO_PARTE3);
 		}
 	}else if(estado->Id()== OSO_ATACANDO){
 		if(!estaBloqueado()){
-			cout<<"NO ESTA BLOQUEADO"<<endl;
 			hacerFatality(OSO3);
 			bloquearPersonaje(TIEMPO_BLOQUEO_ANIMALITY_SUBZERO_PARTE4);
 		}
@@ -586,13 +588,11 @@ void Personaje::updateFatality(Colisionable* enemigo){
 		mantenerFatality(MUERTO_EN_PISO);
 		bloquearPersonaje(TIEMPO_BLOQUEO_ANIMALITY_SUBZERO_PARTE3+TIEMPO_BLOQUEO_ANIMALITY_SUBZERO_PARTE4);
 	}else if(!estaMuerto() && recibioFatality() && estado->Id() == MUERTO_EN_PISO && !estaBloqueado()){
-		cout<<"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX:"<<id<<endl;
 		morirEnPiso(MUERTO_EN_PISO);
 	}else if(estado->Id() == DECAPITADO && !estaBloqueado()){
 		morirEnPiso(MUERTO_DECAPITADO);
 	}else if(estado->Id()== FATALITY1){
 		if(!estaBloqueado() && id == "sonya"){
-			cout<<"NO ESTA BLOQUEADO"<<endl;
 
 		}else if(!estaBloqueado()){
 			hacerFatality(GANCHO_FATALITY);
@@ -602,15 +602,15 @@ void Personaje::updateFatality(Colisionable* enemigo){
 }
 
 void Personaje::recibirFatality(Colisionable* enemigo){
-	//cout<<"ESTADO ENEMIGO:"<<enemigo->verEstado()->Id()<<endl;
 	if(enemigo->verEstado()->estaVolandoVertical()){
 		volar_vertical(RECIBIENDO_GOLPE);
+		enFatality = true;
 	}else if(enemigo->verEstado()->Id() == GANCHO_FATALITY){
-		cout<<"DECAPITAR"<<endl;
 		decapitar();
+		enFatality = true;
 	}else if(enemigo->verEstado()->Id() == OSO2){
-		cout<<"CAER"<<endl;
 		caida_animality();
+		enFatality = true;
 		bloquearPersonaje(TIEMPO_BLOQUEO_ANIMALITY_SUBZERO_PARTE2);
 	}
 }
@@ -770,17 +770,20 @@ void Personaje::ejecutarCombo(string nombreCombo, Personaje* enemigo){
 			if(nombreCombo == "Animality" && calcularProximaDistancia(enemigo) <= DISTANCIA_ANIMALITY_SONYA){
 				cout<<"distancia:"<<calcularProximaDistancia(enemigo)<<endl;
 				if(id == "sonya"){
-
 					animality();
+					enFatality = true;
 				}else if(id == "sub-zero" && calcularProximaDistancia(enemigo) <= DISTANCIA_ANIMALITY_SUBZERO){
 					animality();
+					enFatality = true;
 				}
 			}else if(nombreCombo == "Fatality"){
 				if(id == "sonya"){
 					tirar_beso();
+
 				}else{
 					if(pegadoAlOponente(enemigo)){
 						ganchoFatality();
+						enFatality = true;
 					}
 				}
 			}
@@ -926,7 +929,7 @@ void Personaje::update(Colisionable* enemigo){
 	}
 	else if(estaMareado() && !recibioFatality()){
     	if(enemigo->verEstado()->haciendoFatality()){
-    		cout<<"RECIBIR FATALITY"<<id<<endl;
+    		//cout<<"RECIBIR FATALITY"<<id<<endl;
     		recibirFatality(enemigo);
     	}
     }
