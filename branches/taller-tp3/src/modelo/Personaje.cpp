@@ -37,7 +37,9 @@
 #define TIEMPO_BLOQUEO_ANIMALITY_SUBZERO_PARTE3 60
 #define TIEMPO_BLOQUEO_ANIMALITY_SUBZERO_PARTE4 60
 #define TIEMPO_FESTEJO_VICTORIA 200
-#define DISTANCIA_MINIMA 110
+#define DISTANCIA_MINIMA 125
+#define DISTANCIA_ANIMALITY_SUBZERO 110
+#define DISTANCIA_ANIMALITY_SONYA 300
 
 Personaje::Personaje(
 		string idIn,
@@ -761,18 +763,25 @@ void Personaje::ejecutarCombo(string nombreCombo, Personaje* enemigo){
 			arrojarArma();
 		}else if(nombreCombo == "Slide"){
 			deslizar();
-
+		}else if(nombreCombo == "Square Flight"){
+			deslizar();
 		//FATALITY//
 		}else if(enemigo->estaMareado()){
-			if(nombreCombo == "Animality"){
-				animality();
-			}else if(nombreCombo == "Square Flight"){
-				deslizar();
+			if(nombreCombo == "Animality" && calcularProximaDistancia(enemigo) <= DISTANCIA_ANIMALITY_SONYA){
+				cout<<"distancia:"<<calcularProximaDistancia(enemigo)<<endl;
+				if(id == "sonya"){
+
+					animality();
+				}else if(id == "sub-zero" && calcularProximaDistancia(enemigo) <= DISTANCIA_ANIMALITY_SUBZERO){
+					animality();
+				}
 			}else if(nombreCombo == "Fatality"){
 				if(id == "sonya"){
 					tirar_beso();
 				}else{
-					ganchoFatality();
+					if(pegadoAlOponente(enemigo)){
+						ganchoFatality();
+					}
 				}
 			}
 		}
