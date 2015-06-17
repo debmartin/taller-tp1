@@ -427,7 +427,7 @@ string ControladorJoystick::getStringDeNumeroDeTecla(int joy, Uint8 nro_boton) {
     	if (it->second == nro_boton)
     		return it->first;
 
-    cout << "ControladorJoystick::getStringofNumber: TERRIBLE ERROR" << endl;
+    //cout << "ControladorJoystick::getStringofNumber: TERRIBLE ERROR" << endl;
     return "ERROR";
 }
 
