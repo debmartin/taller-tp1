@@ -445,7 +445,7 @@ void Personaje::derribado(){
 
 void Personaje::mareado(){
 	cambiarEstado(new Mareado(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
-	//bloquearPersonaje(TIEMPO_FESTEJO_VICTORIA);
+	Sonidos::getInstancia()->reproducirSonido("sonido_finish");
 }
 
 void Personaje::retroceder(){
@@ -455,7 +455,6 @@ void Personaje::retroceder(){
 
 void Personaje::victoria(){
 	cambiarEstado(new EnEspera(posicion, VICTORIA, (*cajasPorEstado)[EN_ESPERA]));
-	//Sonidos::getInstancia()->reproducirSonido("sonido_finish");
 	if(id == "sonya"){
 		Sonidos::getInstancia()->reproducirSonido("sonido_sonya_win");
 	}else{
@@ -718,9 +717,7 @@ void Personaje::recibirGolpe(Colisionable* otro){
 		VentanaGrafica::Instance()->vibrar();
 	}else{
 		if(pegadoAlOponente(otro)){
-			cout<<"pegado al oponente"<<endl;
 			golpeado();
-			//retroceder();
 		}else{
 			cout<<"separado del oponente"<<endl;
 			golpeado();
@@ -768,7 +765,6 @@ void Personaje::ejecutarCombo(string nombreCombo, Personaje* enemigo){
 		//FATALITY//
 		}else if(enemigo->estaMareado()){
 			if(nombreCombo == "Animality" && calcularProximaDistancia(enemigo) <= DISTANCIA_ANIMALITY_SONYA){
-				cout<<"distancia:"<<calcularProximaDistancia(enemigo)<<endl;
 				if(id == "sonya"){
 					animality();
 					enFatality = true;
@@ -972,7 +968,6 @@ float Personaje::getAltoEnvolvente() {
 
 bool Personaje::pegadoAlOponente(Colisionable* enemigo){
 	float distanciaAObjetivo = calcularProximaDistancia(enemigo);
-	cout<<"Distancia al oponente:"<<distanciaAObjetivo<<endl;
 	if(distanciaAObjetivo <= DISTANCIA_MINIMA)
 		return true;
 	return false;
