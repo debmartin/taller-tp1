@@ -105,7 +105,6 @@ public:
 	Objeto* getArma();
 	void obtenerAntidoto(Personaje* otro);
 
-	virtual void update(Colisionable* enemigo);
 	void agregarObservador(Observador* unObservador);
 	void notificarObservadores();
 	Vector2f obtenerPosicionEnVentana();
@@ -175,17 +174,18 @@ public:
 	bool empujar(Vector2f& diferencia);
 	void bloquearPersonaje(float segundos);
 	void caidaDerecha();
+	void caidaIzquierda();
 	void ser_arrojado_izquierda();
 	void ser_arrojado_derecha();
-	void caidaIzquierda();
 	void golpeado();
 	void retroceder();
 	void victoria();
 	void morir();
 	void morirEnPiso();
+	void morirEnPiso(estado_personaje id_estado);
 	void deslizar();
 	void decapitar();
-	void detenerse(estado_personaje id_estado);
+	void mantenerFatality(estado_personaje id_estado);
 	void volar_horizontal(estado_personaje id_estado);
 	void volar_vertical(estado_personaje id_estado, estado_personaje id_estado_caja);
 	void volar_vertical(estado_personaje id_estado);
@@ -203,6 +203,7 @@ public:
 	void bebe();
 	void animality();
 	void mareado();
+	virtual void update(Colisionable* enemigo);
 
 	//Colision
 	virtual void colisionar(Colisionable* otro);

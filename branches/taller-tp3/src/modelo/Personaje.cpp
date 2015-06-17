@@ -487,8 +487,14 @@ void Personaje::tijera(){
 }
 
 void Personaje::morirEnPiso(){
-     cambiarEstado(new Muerto(posicion, MUERTO_EN_PISO,(*cajasPorEstado)[EN_ESPERA]));
-     bloquearPersonaje(TIEMPO_FESTEJO_VICTORIA);
+	VentanaGrafica::Instance()->vibrar();
+    cambiarEstado(new Muerto(posicion, MUERTO_EN_PISO,(*cajasPorEstado)[EN_ESPERA]));
+    bloquearPersonaje(TIEMPO_FESTEJO_VICTORIA);
+}
+
+void Personaje::morirEnPiso(estado_personaje id_estado){
+    cambiarEstado(new Muerto(posicion, id_estado,(*cajasPorEstado)[EN_ESPERA]));
+    bloquearPersonaje(TIEMPO_FESTEJO_VICTORIA);
 }
 
 void Personaje::mantenerReposo(){
@@ -503,7 +509,6 @@ void Personaje::bebe(){
 }
 
 void Personaje::animality(){
-	//cout<<"Haciendo fatalityyyy"<<endl;
 	if(id == "sonya"){
 		cambiarEstado(new Fatality(posicion, ANIMALITY, (*cajasPorEstado)[ANIMALITY]));
 		bloquearPersonaje(50);
@@ -520,20 +525,19 @@ void Personaje::tirar_beso(){
 
 void Personaje::decapitar(){
 	cambiarEstado(new RecibiendoFatality(posicion, DECAPITADO, (*cajasPorEstado)[EN_ESPERA]));
-	bloquearPersonaje(100);
+	bloquearPersonaje(50);
+	VentanaGrafica::Instance()->vibrar();
 }
 
-void Personaje::detenerse(estado_personaje id_estado){
+void Personaje::mantenerFatality(estado_personaje id_estado){
 	cambiarEstado(new RecibiendoFatality(posicion, id_estado, (*cajasPorEstado)[EN_ESPERA]));
 }
 
 void Personaje::hacerFatality(){
-	//cout<<"Haciendo fatalityyyy"<<endl;
 	cambiarEstado(new Fatality(posicion, estado->Id(), (*cajasPorEstado)[estado->Id()]));
 }
 
 void Personaje::hacerFatality(estado_personaje id_estado){
-	//cout<<"Haciendo fatalityyyy"<<endl;
 	cambiarEstado(new Fatality(posicion, id_estado, (*cajasPorEstado)[estado->Id()]));
 }
 
@@ -572,16 +576,18 @@ void Personaje::updateFatality(Colisionable* enemigo){
 			hacerFatality(OSO3);
 			bloquearPersonaje(30);
 		}
-	}else if(estado->Id() == CAIDA_DERECHA && !estaBloqueado()){
-		cout<<"XXXXXXXXXXXXXXX"<<endl;
-		detenerse(MUERTO_EN_PISO);
+	}else if(recibioFatality() && estado->Id() == CAIDA_DERECHA && !estaBloqueado()){
+		mantenerFatality(MUERTO_EN_PISO);
 		bloquearPersonaje(50);
+	}else if(estado->Id() == DECAPITADO && !estaBloqueado()){
+		morirEnPiso(MUERTO_DECAPITADO);
 	}else if(estado->Id()== FATALITY1){
 		if(!estaBloqueado() && id == "sonya"){
 			cout<<"NO ESTA BLOQUEADO"<<endl;
 			//hacerFatality(BESO);
 		}else if(!estaBloqueado()){
 			hacerFatality(GANCHO_FATALITY);
+			bloquearPersonaje(50);
 		}
 	}
 }
@@ -895,27 +901,28 @@ void Personaje::update(Colisionable* enemigo){
        return;
 
 	}else if((haciendoFatality() || recibioFatality()) && !estaBloqueado()){
-		cout<<"UPDATE FATALITY"<<endl;
+		//cout<<"UPDATE FATALITY"<<id<<endl;
 		updateFatality(enemigo);
 	}
-	//else if(estaMareado() && enemigo->ejecutandoMovimientoEspecial() && !recibioFatality()){
 	else if(estaMareado() && !recibioFatality()){
     	if(enemigo->verEstado()->haciendoFatality()){
-    		cout<<"RECIBIR FATALITY"<<endl;
+    		cout<<"RECIBIR FATALITY"<<id<<endl;
     		recibirFatality(enemigo);
     	}
     }
 
-    else if(estaSinEnergia() && !estaSaltando() && !estaEnPiso() && !haciendoFatality() && !estaMareado() && !recibioFatality()){
-    	cout<<"BBBBBB"<<endl;
+    else if(estaSinEnergia() && !estaMuerto() && !estaSaltando() && !estaEnPiso() && !haciendoFatality() && !estaMareado() && !recibioFatality()){
+    	//cout<<"MAREADO"<<id<<endl;
     	mareado();
     }
 
     if(estaBloqueado()){
-    	//cout<<"Bloqueo:"<<tiempoBloqueo<<endl;
+    	//cout<<"Bloqueo:"<<id<<"tiempo:"<<tiempoBloqueo<<endl;
         if(tiempoBloqueo <= 0){
         	if(haciendoFatality()){
         		hacerFatality();
+        	}else if(recibioFatality()){
+        		mantenerFatality(estado->Id());
         	}else{
         		mantenerReposo();
         	}
@@ -1020,6 +1027,8 @@ void Personaje::obtenerAntidoto(Personaje* otro){
             return (otro->caidaDerecha());
         case CAIDA_IZQUIERDA:
             return (otro->caidaIzquierda());
+        case VICTORIA:
+            return (otro->victoria());
         default:
             otro->mantenerReposo();
     }

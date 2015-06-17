@@ -15,11 +15,11 @@
 
 
 Mareado::Mareado(Vector2f posInicial, BVH* caja) :
-    Estado(new Reposo(posInicial), MAREADO, caja, EN_ESPERA) {
+    Estado(new Reposo(posInicial), MAREADO, caja, VICTORIA) {
 }
 
 Mareado::Mareado(Vector2f posInicial, estado_personaje estado, BVH* caja) :
-    Estado(new Reposo(posInicial), estado, caja, EN_ESPERA) {
+    Estado(new Reposo(posInicial), estado, caja, VICTORIA) {
 }
 
 Mareado::~Mareado()

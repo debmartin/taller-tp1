@@ -214,6 +214,11 @@ void PersonajeDibujable::seleccionarSprite(){
 			    spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_MUERTO]);
 			    spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
 			    break;
+			case MUERTO_DECAPITADO:
+				this->spritePersonaje->setLoopMode(LOOP_NO_REPEAT);
+				spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_MUERTO_DECAPITADO]);
+				spritePersonaje->setSentidoReproduccion(HACIA_ADELANTE);
+				break;
 			case SLIDE:
 				this->spritePersonaje->setLoopMode(LOOP_NO_REPEAT);
 				spritePersonaje->cambiarAnimacion(animaciones[ID_PERSONAJE_SLIDE]);
