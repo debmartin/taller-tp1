@@ -98,6 +98,7 @@ class Estado
         virtual bool estaHaciendoToma();
         virtual bool estaTomandoAlOponente();
         virtual bool estaVolandoVertical();
+        virtual bool esGanador();
 
         Ataque* obtenerAtaque();
         Vector2f obtenerProximaPosicion();

@@ -120,6 +120,10 @@ bool Estado::recibioFatality(){
 	return false;
 }
 
+bool Estado::esGanador(){
+	return false;
+}
+
 Vector2f Estado::obtenerProximaPosicion(){
 	return trayectoria->getPosicion(obtenerTiempoActual());
 }

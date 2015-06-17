@@ -37,13 +37,19 @@ bool ControladorPersonaje::manejar_Evento(SDL_Event &evento){
     TheInputHandler::Instance()->handleEventsJoysticks(evento);
 
     if(tipoDeControl == "JOYSTICK"){
-    	identificarCombo(personaje1, JOYSTICK1, personaje2);
-    	if(!personaje1->estaBloqueado() && !personaje1->estaEnCaida()){
-    		identificarOrdenJoystickPersonaje(personaje1, JOYSTICK1);
+    	if(!personaje1->estaEnCaida() && !personaje1->estaEnFatality() && !personaje1->estaBloqueado() && !personaje1->estaMareado() && !personaje1->estaSinEnergia() && !personaje1->haciendoFatality() && !personaje1->recibioFatality()){
+    		identificarCombo(personaje1, JOYSTICK1, personaje2);
+    		if(!personaje1->estaBloqueado()){
+    			identificarOrdenJoystickPersonaje(personaje1, JOYSTICK1);
+    		}
     	}
-    	identificarCombo(personaje2, JOYSTICK2, personaje1);
-    	if(!personaje2->estaBloqueado() && !personaje2->estaEnCaida() && modo_juego == "P1_vs_P2"){
-    		identificarOrdenJoystickPersonaje(personaje2, JOYSTICK2);
+    	if(modo_juego == "P1_vs_P2"){
+    		if(!personaje2->estaEnFatality() && !personaje2->estaEnCaida() && !personaje2->estaBloqueado() && !personaje2->estaMareado() && !personaje2->estaSinEnergia() && personaje1->haciendoFatality() && !personaje2->recibioFatality()){
+    			identificarCombo(personaje2, JOYSTICK2, personaje1);
+    			if(!personaje2->estaBloqueado()){
+    				identificarOrdenJoystickPersonaje(personaje2, JOYSTICK2);
+    			}
+    		}
     	}
 	}else{
 		//Si se presiona una tecla

@@ -68,3 +68,7 @@ bool Bloqueado::estaVolandoVertical(){
 bool Bloqueado::recibioFatality(){
 	return (estadoDeBloqueo->recibioFatality());
 }
+
+bool Bloqueado::esGanador(){
+	return (Id() == VICTORIA);
+}

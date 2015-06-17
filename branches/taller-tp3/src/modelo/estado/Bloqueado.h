@@ -22,6 +22,7 @@ class Bloqueado : public Estado
         bool haciendoFatality();
         bool estaVolandoVertical();
         bool recibioFatality();
+        bool esGanador();
     protected:
     private:
         Estado* estadoDeBloqueo;
