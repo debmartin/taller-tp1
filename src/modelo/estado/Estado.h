@@ -49,6 +49,7 @@ typedef enum estado_personaje
 	TIRANDO_PODER,
 	MUERTO,
 	MUERTO_EN_PISO,
+	MUERTO_DECAPITADO,
 	VICTORIA,
 	SLIDE,
 	TIJERA,

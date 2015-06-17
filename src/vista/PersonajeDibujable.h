@@ -53,6 +53,7 @@ class ArmaDibujable;
 #define ID_PERSONAJE_OSO_ATACANDO "oso-atacando"
 #define ID_PERSONAJE_VICTORIA "victoria"
 #define ID_PERSONAJE_MUERTO "muerto"
+#define ID_PERSONAJE_MUERTO_DECAPITADO "muerto-decapitado"
 #define ID_PERSONAJE_SLIDE "deslizamiento"
 #define ID_PERSONAJE_TIJERA "tijera"
 #define ID_PERSONAJE_FATALITY1 "fatality1"
