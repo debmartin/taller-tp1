@@ -137,7 +137,7 @@ void HUD::dibujar(){
 		Vector2f posicion(320.0f - (colaDeTeclas->size() * 70) / 2 , 90.0f);
 		std::deque<string>::iterator it = colaDeTeclas->begin();
 		while (it != colaDeTeclas->end()) {
-			cout << *it << ":" << (*this->mBotones)[*it]->getDimensionesPx() << endl;
+			//cout << *it << ":" << (*this->mBotones)[*it]->getDimensionesPx() << endl;
 
 			(*this->mBotones)[*it]->setPosicion(posicion);
 			(*this->mBotones)[*it]->dibujar();

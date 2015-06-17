@@ -120,6 +120,9 @@ void Juego::update(bool& recargar)
         }else if (jugador2->getPersonaje()->estaSinEnergia() && jugador1->getPersonaje()->estaSinEnergia()) {
                 finalizarRound(recargar);
         }
+
+
+        ControladorJoystick::Instance()->update();
 }
 
 

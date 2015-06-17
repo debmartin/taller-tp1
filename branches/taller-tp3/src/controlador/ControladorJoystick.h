@@ -84,5 +84,7 @@ public:
         string informar_combo(int numeroJoystick);
         void buscar_combo(int numeroJoystick);
         deque<string>* getColaDeTeclas(int numeroJoystick);
+
+        MapaDeCombos* getMapaDeCombos(int numeroJoystick);
 };
 typedef ControladorJoystick TheInputHandler;

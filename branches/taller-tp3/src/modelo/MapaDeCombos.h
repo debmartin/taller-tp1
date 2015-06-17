@@ -8,6 +8,7 @@
 #ifndef SRC_MODELO_MAPADECOMBOS_H_
 #define SRC_MODELO_MAPADECOMBOS_H_
 
+#include <SDL2/SDL.h>
 #include <deque>
 #include <string>
 #include <vector>
@@ -15,7 +16,7 @@
 #include "Combo.h"
 
 #define LONGITUD_BUFFER 5
-
+#define TIEMPO_MAXIMO_EN_COLA 5000 // milisegundos
 using namespace std;
 
 class MapaDeCombos {
@@ -27,6 +28,8 @@ private:
 	bool comboEfectuado;
 	void quitar_tecla();
 
+	Uint32 tiempo_inicio_combo;
+
 public:
 	MapaDeCombos(vector<Combo*>* combosJugador, int toleranciaDeError);
 	virtual ~MapaDeCombos();
@@ -35,6 +38,8 @@ public:
 	string informar_combo();
 	void buscarCombo();
 	deque<string>* getColaDeTeclas();
+
+	void update();
 
     void imprimir();
 };
