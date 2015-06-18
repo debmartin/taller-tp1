@@ -31,11 +31,10 @@ CajaDeTexto::CajaDeTexto(int cant_caracteres, int pos_x, int pos_y) {
 	this->alto = 30;
 	this->ancho = (this->cant_caracteres_vista * this->alto) / 2;
 	this->textura = new Textura();
-	this->textColor = { 0xFF, 0, 0, 0xFF };
+	this->textColor = { 0, 0, 0, 0xFF };
 	this->enfocado = false;
 	this->texto = "";
 	this->textoMemoria = "";
-	this->i_aux = 1;
 }
 
 CajaDeTexto::~CajaDeTexto() {
@@ -138,6 +137,9 @@ void CajaDeTexto::dibujar(bool renderText) {
 	SDL_SetRenderDrawColor( Renderizador::Instance()->getRenderer(), 0xFF, 0xFF, 0xFF, 0xFF );
 	SDL_RenderFillRect( Renderizador::Instance()->getRenderer(), &fillRect );
 
+	SDL_Rect fillRect2 = { this->pos_x, this->pos_y, this->ancho/9, this->alto };
+	SDL_SetRenderDrawColor( Renderizador::Instance()->getRenderer(), 32, 178, 170, 0 );
+	SDL_RenderFillRect( Renderizador::Instance()->getRenderer(), &fillRect2 );
 	//Render text textures
 	this->textura->render(this->pos_x, this->pos_y);
 
@@ -148,8 +150,8 @@ bool CajaDeTexto::loadMedia() {
 	bool success = true;
 
 	//Open the font
-	//TTF_Font* gFont = TTF_OpenFont( "RECURSOS/HUD/mk2.ttf", this->alto );
-	TTF_Font* gFont = TTF_OpenFont( "RECURSOS/lazy.ttf", this->alto );
+	TTF_Font* gFont = TTF_OpenFont( "RECURSOS/HUD/mk2.ttf", this->alto );
+	//TTF_Font* gFont = TTF_OpenFont( "RECURSOS/lazy.ttf", this->alto );
 	this->textura->setFont(gFont);
 
 	if( gFont == NULL )
