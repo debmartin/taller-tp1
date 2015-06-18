@@ -25,7 +25,7 @@ CajaDeTexto::CajaDeTexto() {
 CajaDeTexto::CajaDeTexto(int cant_caracteres, int pos_x, int pos_y) {
 
 	this->cant_caracteres = cant_caracteres;
-	this->cant_caracteres_vista = 5;
+	this->cant_caracteres_vista = 9;
 	this->pos_x = pos_x;
 	this->pos_y = pos_y;
 	this->alto = 30;
@@ -66,7 +66,7 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 			{
 				//lop off character
 
-				cout<<"Se borra un caracter:"<<endl;
+				//cout<<"Se borra un caracter:"<<endl;
 				if(this->textoMemoria.length() == 0){
 
 				}else if(this->textoMemoria.length() <= this->cant_caracteres_vista){
@@ -81,11 +81,12 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 					//Texto vista
 					this->texto = this->textoMemoria.substr(this->textoMemoria.length()-this->cant_caracteres_vista,this->cant_caracteres_vista);
 				}
+				/*
 				cout<<"Texto en memoria:"<<endl;
 				cout<<this->textoMemoria<<endl;
 				cout<<"Vista:"<<endl;
 				cout<<this->texto<<endl;
-
+				*/
 				renderText = true;
 			}
 		}
@@ -96,7 +97,7 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 			//Append character
 			if ( this->textoMemoria.length() < this->cant_caracteres)
 			{
-				cout<<"Ingresa caracter"<<endl;
+				//cout<<"Ingresa caracter"<<endl;
 				this->textoMemoria += e.text.text;
 
 				if(this->textoMemoria.length() <= this->cant_caracteres_vista){
@@ -106,11 +107,12 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 				{
 					this->texto = this->textoMemoria.substr(this->textoMemoria.length()-this->cant_caracteres_vista,this->textoMemoria.length());
 				}
-				cout<<"Memoria:"<<endl;
+				/*
+				cout<<"Texto en memoria:"<<endl;
 				cout<<this->textoMemoria<<endl;
 
 				cout<<"Vista:"<<endl;
-				cout<<this->texto<<endl;
+				cout<<this->texto<<endl;*/
 			}
 
 			renderText = true;
