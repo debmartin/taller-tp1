@@ -25,14 +25,17 @@ CajaDeTexto::CajaDeTexto() {
 CajaDeTexto::CajaDeTexto(int cant_caracteres, int pos_x, int pos_y) {
 
 	this->cant_caracteres = cant_caracteres;
+	this->cant_caracteres_vista = 5;
 	this->pos_x = pos_x;
 	this->pos_y = pos_y;
 	this->alto = 30;
-	this->ancho = (cant_caracteres * this->alto) / 2;
+	this->ancho = (this->cant_caracteres_vista * this->alto) / 2;
 	this->textura = new Textura();
 	this->textColor = { 0xFF, 0, 0, 0xFF };
 	this->enfocado = false;
 	this->texto = "";
+	this->textoMemoria = "";
+	this->i_aux = 1;
 }
 
 CajaDeTexto::~CajaDeTexto() {
@@ -57,11 +60,33 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 		//Special key input
 		if( e.type == SDL_KEYDOWN )
 		{
+			int posicion = 0;
 			//Handle backspace
-			if( e.key.keysym.sym == SDLK_BACKSPACE && this->texto.length() > 0 )
+			if( e.key.keysym.sym == SDLK_BACKSPACE && this->textoMemoria.length() > 0 )
 			{
 				//lop off character
-				this->texto.erase(this->texto.length()-1,1);
+
+				if(this->textoMemoria.length() == 0){
+
+				}else if(this->textoMemoria.length() <= this->cant_caracteres_vista){
+					this->textoMemoria = this->textoMemoria.substr(0,this->textoMemoria.length()-1);
+					cout<<"Memoria:"<<endl;
+					cout<<this->textoMemoria<<endl;
+
+					//Texto vista
+					this->texto = this->textoMemoria;
+					cout<<"Vista:"<<endl;
+					cout<<this->texto<<endl;
+				}else{
+					this->textoMemoria = this->textoMemoria.substr(0,this->textoMemoria.length()-1);
+					cout<<"Memoria:"<<endl;
+					cout<<this->textoMemoria<<endl;
+
+					//Texto vista
+					this->texto = this->textoMemoria.substr(this->textoMemoria.length()-this->cant_caracteres_vista,this->cant_caracteres_vista);
+					cout<<"Vista:"<<endl;
+					cout<<this->texto<<endl;
+				}
 				renderText = true;
 			}
 		}
@@ -69,8 +94,16 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 		else if( e.type == SDL_TEXTINPUT )
 		{
 			//Append character
-			if ( this->texto.length() < this->cant_caracteres)
-				this->texto += e.text.text;
+			if ( this->textoMemoria.length() < this->cant_caracteres)
+			{
+				this->textoMemoria += e.text.text;
+
+				if ( this->textoMemoria.length() <= this->cant_caracteres )
+				{
+					this->texto = this->textoMemoria.substr(this->textoMemoria.length()-this->cant_caracteres_vista,this->textoMemoria.length());
+				}
+			}
+
 			renderText = true;
 		}
 	}
@@ -127,4 +160,5 @@ bool CajaDeTexto::estoyEnfocado() {
 
 void CajaDeTexto::setTexto(string texto) {
 	this->texto = texto;
+	this->textoMemoria = texto;
 }

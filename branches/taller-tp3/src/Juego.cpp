@@ -89,18 +89,6 @@ void Juego::update(bool& recargar)
     this->actualizarOrientacionJugadores();
 
         VentanaGrafica::Instance()->actualizar();
-/*
-        if(jugador1->getPersonaje()->ejecutandoMovimientoEspecial()){
-        	if(jugador2->getPersonaje()->estaMuerto() && jugador2->getPersonaje()->estaMareado() && jugador1->getPersonaje()->haciendoFatality()){
-        		return;
-        	}
-        }
-        if(jugador2->getPersonaje()->ejecutandoMovimientoEspecial()){
-        	if(jugador2->getPersonaje()->estaMuerto() && jugador2->getPersonaje()->estaMareado() && jugador2->getPersonaje()->haciendoFatality()){
-        		return;
-        	}
-        }
-*/
 
         if (jugador1->getPersonaje()->estaMuerto() && !ejecutandoFinal && !jugador2->getPersonaje()->estaSaltando()) {
                 jugador2->getPersonaje()->victoria();
@@ -120,7 +108,10 @@ void Juego::update(bool& recargar)
         }else if (jugador2->getPersonaje()->estaSinEnergia() && jugador1->getPersonaje()->estaSinEnergia()) {
                 finalizarRound(recargar);
         }
-
+/*
+        if(modo_juego == "P1_vs_CPU" && jugador1->getPersonaje()->estaMareado()){
+        	finalizarRound(recargar);
+        }*/
 
         ControladorJoystick::Instance()->update();
         HUD::Instance()->update();

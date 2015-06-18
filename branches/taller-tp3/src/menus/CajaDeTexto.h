@@ -23,6 +23,7 @@ using namespace std;
 class CajaDeTexto {
 private:
 	int cant_caracteres;
+	int cant_caracteres_vista;
 	int pos_x;
 	int pos_y;
 	int ancho;
@@ -31,6 +32,8 @@ private:
 	SDL_Color textColor;
 	bool enfocado;
 	string texto;
+	string textoMemoria;
+	int i_aux;
 public:
 	CajaDeTexto();
 	CajaDeTexto(int cant_caracteres, int pos_x, int pos_y);
