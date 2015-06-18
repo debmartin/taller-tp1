@@ -66,42 +66,51 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 			{
 				//lop off character
 
+				cout<<"Se borra un caracter:"<<endl;
 				if(this->textoMemoria.length() == 0){
 
 				}else if(this->textoMemoria.length() <= this->cant_caracteres_vista){
 					this->textoMemoria = this->textoMemoria.substr(0,this->textoMemoria.length()-1);
-					cout<<"Memoria:"<<endl;
-					cout<<this->textoMemoria<<endl;
 
 					//Texto vista
 					this->texto = this->textoMemoria;
-					cout<<"Vista:"<<endl;
-					cout<<this->texto<<endl;
+
 				}else{
 					this->textoMemoria = this->textoMemoria.substr(0,this->textoMemoria.length()-1);
-					cout<<"Memoria:"<<endl;
-					cout<<this->textoMemoria<<endl;
 
 					//Texto vista
 					this->texto = this->textoMemoria.substr(this->textoMemoria.length()-this->cant_caracteres_vista,this->cant_caracteres_vista);
-					cout<<"Vista:"<<endl;
-					cout<<this->texto<<endl;
 				}
+				cout<<"Texto en memoria:"<<endl;
+				cout<<this->textoMemoria<<endl;
+				cout<<"Vista:"<<endl;
+				cout<<this->texto<<endl;
+
 				renderText = true;
 			}
 		}
 		//Special text input event
 		else if( e.type == SDL_TEXTINPUT )
 		{
+
 			//Append character
 			if ( this->textoMemoria.length() < this->cant_caracteres)
 			{
+				cout<<"Ingresa caracter"<<endl;
 				this->textoMemoria += e.text.text;
 
-				if ( this->textoMemoria.length() <= this->cant_caracteres )
+				if(this->textoMemoria.length() <= this->cant_caracteres_vista){
+					this->texto = this->textoMemoria;
+				}
+				else if ( this->textoMemoria.length() <= this->cant_caracteres )
 				{
 					this->texto = this->textoMemoria.substr(this->textoMemoria.length()-this->cant_caracteres_vista,this->textoMemoria.length());
 				}
+				cout<<"Memoria:"<<endl;
+				cout<<this->textoMemoria<<endl;
+
+				cout<<"Vista:"<<endl;
+				cout<<this->texto<<endl;
 			}
 
 			renderText = true;
@@ -151,7 +160,7 @@ bool CajaDeTexto::loadMedia() {
 }
 
 string CajaDeTexto::getTexto() const {
-	return texto;
+	return textoMemoria;
 }
 
 bool CajaDeTexto::estoyEnfocado() {
