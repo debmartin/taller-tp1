@@ -65,7 +65,7 @@ void PantallaSeleccionarPersonaje::iniciar() {
 	this->botonera->setPosicionEnfocadaDelJugador1(new Posicion(3,1));
 	this->botonera->setPosicionEnfocadaDelJugador2(new Posicion(0,1));
 
-	int cant_letras = 9;
+	int cant_letras = 15;
 
 	int posX_1 = posX_botonera + ancho_botonera + 10;
 	int posY_1 = posY_botonera + alto_botonera + 10;

@@ -438,8 +438,8 @@
     ],
     
 	"jugador-1": {
-        "tipo-control": "JOYSTICK",   // "TECLADO" o "JOYSTICK"
-        "tolerancia": 0,
+        "tipo-control": "TECLADO",   // "TECLADO" o "JOYSTICK"
+        "tolerancia": 2,
        
         "control":{
         			"JOY_PINIA_ALTA": 0,
@@ -453,7 +453,7 @@
         }
 	},
 	"jugador-2": {
-        "tipo-control": "JOYSTICK",  // "TECLADO" o "JOYSTICK"
+        "tipo-control": "TECLADO",  // "TECLADO" o "JOYSTICK"
         "tolerancia": 0,
         "control":{
         			"JOY_PINIA_ALTA": 0,
