@@ -171,8 +171,8 @@ void Juego::actualizarOrientacionJugadores() {
 		jugador1->getPersonaje()->orientar(DIRECCION_IZQUIERDA);
 		jugador2->getPersonaje()->orientar(DIRECCION_DERECHA);
 
-		ControladorJoystick::Instance()->getMapaDeCombos(0)->setOrientacion(COMBO_IZQUIERDA);
-		ControladorJoystick::Instance()->getMapaDeCombos(1)->setOrientacion(COMBO_DERECHA);
+		ControladorJoystick::Instance()->getMapaDeCombos(0)->setOrientacion(COMBO_DERECHA);
+		ControladorJoystick::Instance()->getMapaDeCombos(1)->setOrientacion(COMBO_IZQUIERDA);
 
 	}
 	else
@@ -183,8 +183,8 @@ void Juego::actualizarOrientacionJugadores() {
 		jugador1->getPersonaje()->orientar(DIRECCION_DERECHA);
 		jugador2->getPersonaje()->orientar(DIRECCION_IZQUIERDA);
 
-		ControladorJoystick::Instance()->getMapaDeCombos(0)->setOrientacion(COMBO_DERECHA);
-		ControladorJoystick::Instance()->getMapaDeCombos(1)->setOrientacion(COMBO_IZQUIERDA);
+		ControladorJoystick::Instance()->getMapaDeCombos(0)->setOrientacion(COMBO_IZQUIERDA);
+		ControladorJoystick::Instance()->getMapaDeCombos(1)->setOrientacion(COMBO_DERECHA);
 	}
 }
 
