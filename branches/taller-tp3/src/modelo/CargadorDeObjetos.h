@@ -13,7 +13,7 @@
 #include <vector>
 
 #include "../vista/PersonajeDibujable.h"
-#include "Combo.h"
+#include "../controlador/Combo.h"
 #include "estado/Estado.h"
 #include "fisica/BVH.h"
 #include "Personaje.h"

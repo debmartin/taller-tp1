@@ -13,6 +13,7 @@
 #include <string>
 #include <vector>
 
+#include "ColaEventos.h"
 #include "Combo.h"
 
 #define LONGITUD_BUFFER 5
@@ -23,10 +24,8 @@ class MapaDeCombos {
 private:
 	vector<Combo*>* combosJugador;
 	int toleranciaDeError;
-	deque<string>* colaDeTeclas;
-	string comboActual;
-	bool comboEfectuado;
-	void quitar_tecla();
+	ColaEventos* colaDeEventos;
+	//deque<string>* colaDeTeclas;
 
 	Uint32 tiempo_inicio_combo;
 	Uint32 tiempo_maximo_en_cola;
@@ -35,10 +34,8 @@ public:
 	MapaDeCombos(vector<Combo*>* combosJugador, int toleranciaDeError, Uint32 tiempo_maximo_en_cola = 5000);
 	virtual ~MapaDeCombos();
 	void agregar_tecla(string tecla);
-	bool combo_completado();
 	string informar_combo();
-	void buscarCombo();
-	deque<string>* getColaDeTeclas();
+	ColaEventos* getColaDeEventos();
 
 	void update();
 

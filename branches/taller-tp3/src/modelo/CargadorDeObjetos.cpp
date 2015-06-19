@@ -37,7 +37,7 @@
 #include "CajasColision.h"
 #include "fisica/AABB.h"
 #include "Jugador.h"
-#include "MapaDeCombos.h"
+#include "../controlador/MapaDeCombos.h"
 #include "Objeto.h"
 #include "PersonajeInteligente.h"
 #include "Vector2f.h"

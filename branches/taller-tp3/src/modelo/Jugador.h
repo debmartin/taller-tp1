@@ -9,7 +9,7 @@
 #define SRC_MODELO_JUGADOR_H_
 
 #include <string>
-#include "MapaDeCombos.h"
+#include "../controlador/MapaDeCombos.h"
 
 using namespace std;
 

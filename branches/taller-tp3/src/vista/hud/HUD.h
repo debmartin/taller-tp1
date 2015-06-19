@@ -11,6 +11,8 @@
 #include "../../modelo/Vector2f.h"
 #include "../../vista/Sprite.h"
 #include "../../vista/Animacion.h"
+#include "../../controlador/ColaEventos.h"
+
 //#include "../../controlador/ControladorJoystick.h"
 
 #define POSICION_PORCENTUAL_BARRA1 Vector2f(10, 10)
@@ -43,7 +45,7 @@ public:
 			SDL_Window* gWindow,
 			string nombre_personaje1,
 			string nombre_personaje2,
-			deque<string>* colaDeTeclas1,
+			ColaEventos* colaDeTeclas1,
 			bool combosVisibles = true
 		);
 	virtual ~HUD();
@@ -59,10 +61,13 @@ private:
 	BarraEnergia* barraDeEnergia2;
 	SDL_Texture*  tHUD;
 
-	deque<string>* colaDeTeclas;
+	ColaEventos* colaDeTeclas;
 
 	map<string, Sprite*>* mBotones;
 	map<string, Animacion*>* mAnimaciones;
+
+	Animacion* aFondoBoton;
+	Sprite* sFondoBoton;
 
 	Animacion* aCaja;
 	Sprite* sCaja;
