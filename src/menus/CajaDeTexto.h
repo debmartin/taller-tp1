@@ -26,14 +26,17 @@ private:
 	int cant_caracteres_vista;
 	int pos_x;
 	int pos_y;
-	int ancho;
-	int alto;
+	int tamLetra;
+	int anchoLetra;
+	int anchoCajaDeTexto;
+	int altoCajaDeTexto;
 	Textura* textura;
 	SDL_Color textColor;
 	bool enfocado;
 	string texto;
 	string textoMemoria;
-	int i_aux;
+	int posicionSelector;
+	int numeroLetraElegida;
 public:
 	CajaDeTexto();
 	CajaDeTexto(int cant_caracteres, int pos_x, int pos_y);
