@@ -17,7 +17,7 @@ bool HUD::init(
 	SDL_Window* gWindow,
 	string nombre_personaje1,
 	string nombre_personaje2,
-	deque<string>* colaDeTeclas,
+	ColaEventos* colaDeTeclas,
 	bool combosVisibles)
 {
 
@@ -74,8 +74,13 @@ bool HUD::init(
     (*this->mBotones)["JOY_IZQUIERDA"]->escalarConTamanio(64,64);
     (*this->mBotones)["JOY_DERECHA"]->escalarConTamanio(64,64);
 
-   	this->aCaja = new Animacion(this->gRenderer, "RECURSOS/HUD/metal-oxidado.png"  , 1, 1, "METAl-OXIDADO");
+   	this->aCaja = new Animacion(this->gRenderer, "RECURSOS/HUD/metal-oxidado.png"  , 1, 1, "metal-oxidado");
    	this->sCaja = new Sprite(this->aCaja , this->gRenderer, Vector2f(0.0f, 0.0f), ORIENTACION_DERECHA, SPR_ARRIBA_CENTRO);
+
+	this->aFondoBoton = new Animacion(this->gRenderer, "RECURSOS/HUD/BOTONES/fondo-boton.png"  , 1, 1, "RECUADRO");
+	this->sFondoBoton = new Sprite(this->aFondoBoton , this->gRenderer, Vector2f(0.0f, 0.0f), ORIENTACION_DERECHA, SPR_ARRIBA_IZQUIERDA);
+	this->sFondoBoton->escalarConTamanio(64, 64);
+
     return true;
 
 }
@@ -150,23 +155,29 @@ void HUD::dibujar(){
 	SDL_SetRenderTarget(this->gRenderer, NULL);
 
 	if (this->combosVisibles) {
-		//IMPRIMO COLA DE COMBOS 1
-		Vector2f posicion(320.0f - (colaDeTeclas->size() * 70) / 2 , 90.0f);
-		std::deque<string>::iterator it = colaDeTeclas->begin();
-		while (it != colaDeTeclas->end()) {
-			//cout << *it << ":" << (*this->mBotones)[*it]->getDimensionesPx() << endl;
 
-			(*this->mBotones)[*it]->setPosicion(posicion);
-			(*this->mBotones)[*it]->dibujar();
+		// IMPRIMO COLA DE COMBOS
+		Vector2f posicion(320.0f - (colaDeTeclas->size() * 70) / 2 , 90.0f);
+		std::deque<Evento*>::iterator it = colaDeTeclas->begin();
+
+		while (it != colaDeTeclas->end()) {
+
+			if ((*it)->estaColoreado()) {
+				//cout << (*it)->getNombre() << endl;
+				this->sFondoBoton->setPosicion(posicion);
+				this->sFondoBoton->dibujar();
+			}
+
+			(*this->mBotones)[(*it)->getNombre()]->setPosicion(posicion);
+			(*this->mBotones)[(*it)->getNombre()]->dibujar();
 			posicion += Vector2f(70.0f, 0.0f);
 			*it++;
 
 		}
 
 
+		// IMPRIMO NOMBRE DE COMBO
 		if (this->mostrandoNombreCombo) {
-
-
 
 			SDL_Color color = { 255, 239, 36, 255 };
 

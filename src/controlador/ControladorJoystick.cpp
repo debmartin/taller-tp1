@@ -5,7 +5,7 @@
 #include <SDL2/SDL_events.h>
 #include <iostream>
 
-#include "../modelo/MapaDeCombos.h"
+#include "MapaDeCombos.h"
 
 #define CANTIDAD_BOTONES 8
 
@@ -446,19 +446,9 @@ string ControladorJoystick::getStringDeNumeroDeTecla(int joy, Uint8 nro_boton) {
     return "ERROR";
 }
 
-bool ControladorJoystick::cargarMapasDeCombos(MapaDeCombos* mapaJugador1, MapaDeCombos* mapaJugador2){
+void ControladorJoystick::cargarMapasDeCombos(MapaDeCombos* mapaJugador1, MapaDeCombos* mapaJugador2){
 	this->mapaDeCombosJugador1 = mapaJugador1;
 	this->mapaDeCombosJugador2 = mapaJugador2;
-}
-
-
-//Para manejar mapa de combos.
-bool ControladorJoystick::combo_completado(int numeroJoystick){
-	if(numeroJoystick == 0){
-		return this->mapaDeCombosJugador1->combo_completado();
-	}else{
-		return this->mapaDeCombosJugador2->combo_completado();
-	}
 }
 
 string ControladorJoystick::informar_combo(int numeroJoystick){
@@ -469,18 +459,10 @@ string ControladorJoystick::informar_combo(int numeroJoystick){
 	}
 }
 
-void ControladorJoystick::buscar_combo(int numeroJoystick){
-	if(numeroJoystick == 0){
-		this->mapaDeCombosJugador1->buscarCombo();
-	}else{
-		this->mapaDeCombosJugador2->buscarCombo();
-	}
-}
-
-deque<string>* ControladorJoystick::getColaDeTeclas(int numeroJoystick) {
+ColaEventos* ControladorJoystick::getColaDeEventos(int numeroJoystick) {
 	if (numeroJoystick == 0)
-		return this->mapaDeCombosJugador1->getColaDeTeclas();
-	return this->mapaDeCombosJugador2->getColaDeTeclas();
+		return this->mapaDeCombosJugador1->getColaDeEventos();
+	return this->mapaDeCombosJugador2->getColaDeEventos();
 }
 
 void ControladorJoystick::imprimirColaBotones(JoyNumber joy) {

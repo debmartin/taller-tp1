@@ -51,7 +51,7 @@ Juego::Juego(Jugador* jugador1, Jugador* jugador2, string modo, string nombrePer
 			Renderizador::Instance()->getWindow(),
 			nombrePersonaje2,
 			nombrePersonaje1,
-			ControladorJoystick::Instance()->getColaDeTeclas(0),
+			ControladorJoystick::Instance()->getColaDeEventos(0),
 			(this->modo_juego == "Práctica") ? true : false);
 
 	jugador1->getPersonaje()->agregarObservador(HUD::Instance());

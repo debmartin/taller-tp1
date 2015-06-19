@@ -66,17 +66,14 @@ bool ControladorPersonaje::manejar_Evento(SDL_Event &evento){
 }
 
 void ControladorPersonaje::identificarCombo(Personaje* personaje, JoyNumber numeroJoystick, Personaje* enemigo){
-	std::map<string, bool>* estadoJoy = TheInputHandler::Instance()->getJoystickState(numeroJoystick);
 
-	TheInputHandler::Instance()->buscar_combo(numeroJoystick);
-	if(TheInputHandler::Instance()->combo_completado(numeroJoystick)){
-
-		string mensajeCombo = TheInputHandler::Instance()->informar_combo(numeroJoystick);
+	string nombreCombo = TheInputHandler::Instance()->informar_combo(numeroJoystick);
+	if(nombreCombo != "COMBO_NO_ENCONTRADO"){
 
 		if (numeroJoystick == 0)
-			HUD::Instance()->mostrarMensajeCombo(mensajeCombo);
+			HUD::Instance()->mostrarMensajeCombo(nombreCombo);
 
-		personaje->ejecutarCombo(mensajeCombo, enemigo);
+		personaje->ejecutarCombo(nombreCombo, enemigo);
 		return;
 	}
 }

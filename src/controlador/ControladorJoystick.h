@@ -10,6 +10,7 @@
 #include <deque>
 
 #include "Vector2D.h"
+#include "ColaEventos.h"
 
 class MapaDeCombos;
 union SDL_Event;
@@ -82,11 +83,11 @@ public:
     	//string getStringdeNumerodeEje(JoyNumber joy, Uint8 nro_boton);
 
         //Para manejar mapa de combos:
-    	bool cargarMapasDeCombos(MapaDeCombos* mapaJugador1, MapaDeCombos* mapaJugador2);
+    	void cargarMapasDeCombos(MapaDeCombos* mapaJugador1, MapaDeCombos* mapaJugador2);
         bool combo_completado(int numeroJoystick);
         string informar_combo(int numeroJoystick);
         void buscar_combo(int numeroJoystick);
-        deque<string>* getColaDeTeclas(int numeroJoystick);
+        ColaEventos* getColaDeEventos(int numeroJoystick);
 
         MapaDeCombos* getMapaDeCombos(int numeroJoystick);
 };
