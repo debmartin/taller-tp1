@@ -22,6 +22,10 @@ void Evento::colorear() {
 	this->coloreado = true;
 }
 
+void Evento::descolorear() {
+	this->coloreado = false;
+}
+
 bool Evento::estaColoreado() {
 	return this->coloreado;
 }
