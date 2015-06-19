@@ -54,6 +54,8 @@ Juego::Juego(Jugador* jugador1, Jugador* jugador2, string modo, string nombrePer
 			ControladorJoystick::Instance()->getColaDeEventos(0),
 			(this->modo_juego == "Práctica") ? true : false);
 
+	EfectosEspeciales::Instance();
+
 	jugador1->getPersonaje()->agregarObservador(HUD::Instance());
 	jugador2->getPersonaje()->agregarObservador(HUD::Instance());
 
@@ -70,6 +72,7 @@ void Juego::render()
 {
 	VentanaGrafica::Instance()->dibujarTodo();
 	HUD::Instance()->dibujar();
+	EfectosEspeciales::Instance()->dibujar();
 	SDL_RenderPresent(Renderizador::Instance()->getRenderer());
 
 }
@@ -115,6 +118,7 @@ void Juego::update(bool& recargar)
 
         ControladorJoystick::Instance()->update();
         HUD::Instance()->update();
+        EfectosEspeciales::Instance()->update();
 }
 
 

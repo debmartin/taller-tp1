@@ -14,8 +14,13 @@ EfectoSangre::EfectoSangre(Vector2f pos) {
 	spriteEfecto = new Sprite(animacionEfecto,
 			Renderizador::Instance()->getRenderer(),
 			posicion,
-			ORIENTACION_DERECHA, SPR_ABAJO_IZQUIERDA);
+			ORIENTACION_DERECHA, SPR_ABAJO_CENTRO);
+	spriteEfecto->escalarConTamanio(50* VentanaGrafica::Instance()->relacion_de_aspectoX(),50 * VentanaGrafica::Instance()->relacion_de_aspectoY());
+	//spriteEfecto->escalarConTamanio(50,100);
+
+	direccionEfecto = DIRECCION_DERECHA;
 	visible = false;
+	tiempoVisible = 0;
 }
 
 EfectoSangre::~EfectoSangre() {
@@ -29,18 +34,41 @@ Vector2f EfectoSangre::obtenerPosicionEnVentana(){
 }
 
 void EfectoSangre::dibujar(){
-	spriteEfecto->dibujar();
+	if(visible){
+		spriteEfecto->dibujar();
+	}
 }
 
-void EfectoSangre::ejecutarEfecto(Vector2f pos){
-	posicion = pos;
+//La dirección del efectoSangre debe ser opuesta a la direccion del personaje.
+void EfectoSangre::ejecutarEfecto(Vector2f pos, DireccionObjeto direccion){
+	tiempoVisible = 10;
 	visible = true;
+	posicion = pos;
+
+	//Posiciono el efecto
 	Vector2f vector_auxiliar = obtenerPosicionEnVentana();
-	spriteEfecto->setPosicion(vector_auxiliar);
+	Vector2f posicion_final(vector_auxiliar.X()*VentanaGrafica::Instance()->relacion_de_aspectoX(), vector_auxiliar.Y()*VentanaGrafica::Instance()->relacion_de_aspectoY());
+
+	//Actualizo la posicion del Sprite.
+	spriteEfecto->setPosicion(posicion_final);
+
+	if(direccionEfecto == direccion){
+		//Cambio la orientacion del sprite.
+		if(direccion == DIRECCION_DERECHA){
+			spriteEfecto->cambiarOrientacionHaciaIzquierda();
+			direccionEfecto = DIRECCION_IZQUIERDA;
+		}else{
+			spriteEfecto->cambiarOrientacionHaciaDerecha();
+			direccionEfecto = DIRECCION_DERECHA;
+		}
+	}
 }
 
 void EfectoSangre::update(){
-
+	if(tiempoVisible <= 0){
+		visible = false;
+	}
+	tiempoVisible -= 1;
 }
 
 void EfectoSangre::posicionar(Vector2f pos){

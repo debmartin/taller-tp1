@@ -21,6 +21,8 @@ private:
 	Animacion* animacionEfecto;
 	Sprite* spriteEfecto;
 	bool visible;
+	int tiempoVisible;
+	DireccionObjeto direccionEfecto;
 public:
 	EfectoSangre(Vector2f posicion);
 	virtual ~EfectoSangre();
@@ -28,7 +30,7 @@ public:
 	void update();
 	void posicionar(Vector2f posicion);
 	Vector2f obtenerPosicionEnVentana();
-	void ejecutarEfecto(Vector2f pos);
+	void ejecutarEfecto(Vector2f pos, DireccionObjeto direccion);
 };
 
 #endif /* SRC_VISTA_EFECTOSANGRE_H_ */

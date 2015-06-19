@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include "../modelo/Vector2f.h"
+#include "../modelo/Objeto.h"
 
 class Efecto {
 public:
@@ -18,7 +19,7 @@ public:
     virtual void dibujar() = 0;
     virtual void update() = 0;
     virtual void posicionar(Vector2f posicion) = 0;
-    virtual void ejecutarEfecto(Vector2f pos) = 0;
+    virtual void ejecutarEfecto(Vector2f pos, DireccionObjeto direccion) = 0;
 };
 
 #endif /* SRC_VISTA_EFECTO_H_ */
