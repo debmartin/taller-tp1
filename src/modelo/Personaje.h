@@ -55,7 +55,7 @@
 #include "Objeto.h"
 #include "Colisionable.h"
 #include "../vista/Posicionable.h"
-//#include "../vista/EfectosEspeciales.h"
+#include "../vista/EfectosEspeciales.h"
 
 #define DELTA_PASO 1
 #define ENERGIA_INICIAL 100
@@ -206,6 +206,7 @@ public:
 	void bebe();
 	void animality();
 	void mareado();
+	void sangrar();
 	virtual void update(Colisionable* enemigo);
 
 	//Colision

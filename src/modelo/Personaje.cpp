@@ -25,6 +25,7 @@
 #define VELOCIDAD_ARROJADO Vector2f(400.0f, 800.0f)
 #define VELOCIDAD_HORIZONTAL_ANIMALITY 300
 #define VELOCIDAD_VERTICAL_ANIMALITY 650
+#define AJUSTE_ALTURA_ARMA 0.67
 
 #define TIEMPO_BLOQUEO_PATADA 35
 #define TIEMPO_BLOQUEO_GOLPE 25
@@ -436,6 +437,7 @@ void Personaje::ser_arrojado_izquierda(){
 void Personaje::golpeado(){
 	cambiarEstado(new Golpeado(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
 	bloquearPersonaje(TIEMPO_BLOQUEO_GOLPE);
+	sangrar();
 }
 
 void Personaje::derribado(){
@@ -446,6 +448,18 @@ void Personaje::derribado(){
 void Personaje::mareado(){
 	cambiarEstado(new Mareado(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
 	Sonidos::getInstancia()->reproducirSonido("sonido_finish");
+}
+
+void Personaje::sangrar(){
+	//Posiciono el poder respecto a la posicion del personaje
+	Vector2f posicionEfecto;
+	if(this->direccion == DIRECCION_DERECHA){
+		posicionEfecto.setCoordenada(posicion.X() - estado->calcularAncho(), posicion.Y()+ estado->calcularAlto());
+	}else{
+		cout<<"Entraaaaaaa"<<endl;
+		posicionEfecto.setCoordenada(posicion.X() + estado->calcularAncho(), posicion.Y() + estado->calcularAlto());
+	}
+	EfectosEspeciales::Instance()->ejecutarEfecto("sangre", posicionEfecto, direccion);
 }
 
 void Personaje::retroceder(){
@@ -735,9 +749,9 @@ void Personaje::arrojarArma(){
 	//Posiciono el poder respecto a la posicion del personaje
 	Vector2f posicionObjeto;
 	if(this->direccion == DIRECCION_DERECHA){
-		posicionObjeto.setCoordenada(posicion.X(), posicion.Y()+ estado->calcularAlto() * 0.67);
+		posicionObjeto.setCoordenada(posicion.X(), posicion.Y()+ estado->calcularAlto() * AJUSTE_ALTURA_ARMA);
 	}else{
-		posicionObjeto.setCoordenada(posicion.X()-ancho/2, posicion.Y() + estado->calcularAlto() * 0.67);
+		posicionObjeto.setCoordenada(posicion.X()-ancho/2, posicion.Y() + estado->calcularAlto() * AJUSTE_ALTURA_ARMA);
 	}
 
 	if(id == "sonya"){

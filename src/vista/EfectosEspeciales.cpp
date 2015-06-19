@@ -35,8 +35,8 @@ bool EfectosEspeciales::init(){
 
 EfectosEspeciales::~EfectosEspeciales(){}
 
-void EfectosEspeciales::ejecutarEfecto(string id, Vector2f pos){
-	((*this->mapaEfectosEspeciales)[id])->ejecutarEfecto(pos);
+void EfectosEspeciales::ejecutarEfecto(string id, Vector2f pos, DireccionObjeto direccion){
+	((*this->mapaEfectosEspeciales)[id])->ejecutarEfecto(pos, direccion);
 }
 
 void EfectosEspeciales::dibujar(){
@@ -44,4 +44,11 @@ void EfectosEspeciales::dibujar(){
 	{
 		it->second->dibujar();
 	}
+}
+
+void EfectosEspeciales::update(){
+	for (map<std::string, Efecto*>::iterator it = this->mapaEfectosEspeciales->begin() ; it != this->mapaEfectosEspeciales->end(); ++it)
+		{
+			it->second->update();
+		}
 }

@@ -28,7 +28,7 @@ public:
 	static EfectosEspeciales* Instance();
 	void dibujar();
 	void update();
-	void ejecutarEfecto(string id, Vector2f pos);
+	void ejecutarEfecto(string id, Vector2f pos, DireccionObjeto direccion);
 	bool init();
 };
 
