@@ -18,6 +18,11 @@
 
 #define LONGITUD_BUFFER 5
 
+enum OrientacionCombo {
+	COMBO_IZQUIERDA,
+	COMBO_DERECHA
+} typedef OrientacionCombo;
+
 using namespace std;
 
 class MapaDeCombos {
@@ -25,10 +30,13 @@ private:
 	vector<Combo*>* combosJugador;
 	int toleranciaDeError;
 	ColaEventos* colaDeEventos;
-	//deque<string>* colaDeTeclas;
 
 	Uint32 tiempo_inicio_combo;
 	Uint32 tiempo_maximo_en_cola;
+
+	OrientacionCombo orientacion;
+
+	void espejarCombos();
 
 public:
 	MapaDeCombos(vector<Combo*>* combosJugador, int toleranciaDeError, Uint32 tiempo_maximo_en_cola = 5000);
@@ -36,7 +44,7 @@ public:
 	void agregar_tecla(string tecla);
 	string informar_combo();
 	ColaEventos* getColaDeEventos();
-
+	void setOrientacion(OrientacionCombo nuevaOrientacion);
 	void update();
 
     void imprimir();
