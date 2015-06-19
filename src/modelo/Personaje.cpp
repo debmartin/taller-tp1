@@ -456,7 +456,6 @@ void Personaje::sangrar(){
 	if(this->direccion == DIRECCION_DERECHA){
 		posicionEfecto.setCoordenada(posicion.X() - estado->calcularAncho(), posicion.Y()+ estado->calcularAlto());
 	}else{
-		cout<<"Entraaaaaaa"<<endl;
 		posicionEfecto.setCoordenada(posicion.X() + estado->calcularAncho(), posicion.Y() + estado->calcularAlto());
 	}
 	EfectosEspeciales::Instance()->ejecutarEfecto("sangre", posicionEfecto, direccion);
