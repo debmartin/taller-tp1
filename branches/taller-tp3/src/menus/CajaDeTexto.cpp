@@ -28,13 +28,17 @@ CajaDeTexto::CajaDeTexto(int cant_caracteres, int pos_x, int pos_y) {
 	this->cant_caracteres_vista = 9;
 	this->pos_x = pos_x;
 	this->pos_y = pos_y;
-	this->alto = 30;
-	this->ancho = (this->cant_caracteres_vista * this->alto) / 2;
+	this->tamLetra = 20,
+	this->altoCajaDeTexto = 30;
+	this->anchoCajaDeTexto = (this->cant_caracteres_vista * altoCajaDeTexto) / 2;
+	this->anchoLetra = this->anchoCajaDeTexto/this->cant_caracteres_vista;
 	this->textura = new Textura();
 	this->textColor = { 0, 0, 0, 0xFF };
 	this->enfocado = false;
 	this->texto = "";
 	this->textoMemoria = "";
+	this->posicionSelector = pos_x;
+	this->numeroLetraElegida = 0;
 }
 
 CajaDeTexto::~CajaDeTexto() {
@@ -49,7 +53,7 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 	int x, y;
 	SDL_GetMouseState( &x, &y );
 
-	if( x > pos_x && x < (pos_x+ancho) && y > pos_y && y < (pos_y+alto))
+	if( x > pos_x && x < (pos_x+anchoCajaDeTexto) && y > pos_y && y < (pos_y+altoCajaDeTexto))
 	{
 		this->enfocado = true;
 	}
@@ -59,11 +63,23 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 		//Special key input
 		if( e.type == SDL_KEYDOWN )
 		{
+			const Uint8* estadoTeclado = SDL_GetKeyboardState(NULL);
+			if(estadoTeclado[SDL_SCANCODE_LEFT]){
+				cout<<"Apreto izq"<<endl;
+				if(posicionSelector >= pos_x + this->anchoLetra){
+					posicionSelector -= this->anchoLetra;
+				}
+			}else if(estadoTeclado[SDL_SCANCODE_RIGHT]){
+				cout<<"Apreto der"<<endl;
+				if(posicionSelector < this->pos_x + this->anchoLetra * (this->cant_caracteres_vista-1)){
+					posicionSelector += this->anchoLetra;
+				}
+			}
+
 			int posicion = 0;
 			//Handle backspace
 			if( e.key.keysym.sym == SDLK_BACKSPACE && this->textoMemoria.length() > 0 )
 			{
-				//lop off character
 
 				//cout<<"Se borra un caracter:"<<endl;
 				if(this->textoMemoria.length() == 0){
@@ -133,11 +149,11 @@ void CajaDeTexto::dibujar(bool renderText) {
 	}
 
 	//dibujar un cuadro blanco y despues el texto
-	SDL_Rect fillRect = { this->pos_x, this->pos_y, this->ancho, this->alto };
+	SDL_Rect fillRect = { this->pos_x, this->pos_y, this->anchoCajaDeTexto, this->altoCajaDeTexto };
 	SDL_SetRenderDrawColor( Renderizador::Instance()->getRenderer(), 0xFF, 0xFF, 0xFF, 0xFF );
 	SDL_RenderFillRect( Renderizador::Instance()->getRenderer(), &fillRect );
 
-	SDL_Rect fillRect2 = { this->pos_x, this->pos_y, this->ancho/9, this->alto };
+	SDL_Rect fillRect2 = { this->posicionSelector, this->pos_y, this->anchoLetra , this->altoCajaDeTexto };
 	SDL_SetRenderDrawColor( Renderizador::Instance()->getRenderer(), 32, 178, 170, 0 );
 	SDL_RenderFillRect( Renderizador::Instance()->getRenderer(), &fillRect2 );
 	//Render text textures
@@ -150,7 +166,7 @@ bool CajaDeTexto::loadMedia() {
 	bool success = true;
 
 	//Open the font
-	TTF_Font* gFont = TTF_OpenFont( "RECURSOS/HUD/mk2.ttf", this->alto );
+	TTF_Font* gFont = TTF_OpenFont( "RECURSOS/HUD/mk2.ttf", this->tamLetra );
 	//TTF_Font* gFont = TTF_OpenFont( "RECURSOS/lazy.ttf", this->alto );
 	this->textura->setFont(gFont);
 
