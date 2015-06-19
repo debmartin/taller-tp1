@@ -18,6 +18,7 @@ public:
 	virtual ~Evento();
 
 	void colorear();
+	void descolorear();
 	bool estaColoreado();
 	string getNombre();
 

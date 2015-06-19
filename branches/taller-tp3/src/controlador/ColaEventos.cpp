@@ -91,6 +91,9 @@ bool ColaEventos::compararConCombo(vector<string> combo, size_t tolerancia) {
 
 					if (coincidencias == combo.size()) {
 
+						for (size_t r = 0; r < this->eventos->size(); r++)
+							(*this->eventos)[r]->descolorear();
+
 						for (size_t m = 0; m < v_colorear.size(); m++)
 							(*this->eventos)[v_colorear[m]]->colorear();
 
