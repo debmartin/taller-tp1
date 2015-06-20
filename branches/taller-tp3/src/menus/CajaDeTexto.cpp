@@ -28,14 +28,15 @@ CajaDeTexto::CajaDeTexto(int cant_caracteres, int pos_x, int pos_y) {
 	this->cant_caracteres_vista = 9;
 	this->pos_x = pos_x;
 	this->pos_y = pos_y;
-	this->tamLetra = 20,
+
 	this->altoCajaDeTexto = 30;
-	this->anchoCajaDeTexto = (this->cant_caracteres_vista * altoCajaDeTexto) / 2;
+	this->tamLetra = altoCajaDeTexto;
+	this->anchoCajaDeTexto = (this->cant_caracteres_vista * tamLetra) / 2;
 	this->anchoLetra = this->anchoCajaDeTexto/this->cant_caracteres_vista;
 	this->textura = new Textura();
 	this->textColor = { 0, 0, 0, 0xFF };
 	this->enfocado = false;
-	this->texto = "";
+	this->textoVista = "";
 	this->textoMemoria = "";
 	this->posicionSelector = pos_x;
 	this->numeroLetraElegida = 0;
@@ -71,7 +72,7 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 				}
 			}else if(estadoTeclado[SDL_SCANCODE_RIGHT]){
 				cout<<"Apreto der"<<endl;
-				if(posicionSelector < this->pos_x + this->anchoLetra * (this->cant_caracteres_vista-1)){
+				if(posicionSelector < this->pos_x + this->anchoLetra * (this->cant_caracteres_vista)){
 					posicionSelector += this->anchoLetra;
 				}
 			}
@@ -88,13 +89,13 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 					this->textoMemoria = this->textoMemoria.substr(0,this->textoMemoria.length()-1);
 
 					//Texto vista
-					this->texto = this->textoMemoria;
+					this->textoVista = this->textoMemoria;
 
 				}else{
 					this->textoMemoria = this->textoMemoria.substr(0,this->textoMemoria.length()-1);
 
 					//Texto vista
-					this->texto = this->textoMemoria.substr(this->textoMemoria.length()-this->cant_caracteres_vista,this->cant_caracteres_vista);
+					this->textoVista = this->textoMemoria.substr(this->textoMemoria.length()-this->cant_caracteres_vista,this->cant_caracteres_vista);
 				}
 				/*
 				cout<<"Texto en memoria:"<<endl;
@@ -116,11 +117,12 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 				this->textoMemoria += e.text.text;
 
 				if(this->textoMemoria.length() <= this->cant_caracteres_vista){
-					this->texto = this->textoMemoria;
+					this->textoVista = this->textoMemoria;
+					posicionSelector = posicionSelector + this->tamLetra/2;
 				}
 				else if ( this->textoMemoria.length() <= this->cant_caracteres )
 				{
-					this->texto = this->textoMemoria.substr(this->textoMemoria.length()-this->cant_caracteres_vista,this->textoMemoria.length());
+					this->textoVista = this->textoMemoria.substr(this->textoMemoria.length()-this->cant_caracteres_vista,this->textoMemoria.length());
 				}
 				/*
 				cout<<"Texto en memoria:"<<endl;
@@ -140,9 +142,9 @@ void CajaDeTexto::dibujar(bool renderText) {
 
 	if( renderText )
 	{
-		if( this->texto != "" )
+		if( this->textoVista != "" )
 		{
-			this->textura->loadFromRenderedText( this->texto.c_str(), this->textColor );
+			this->textura->loadFromRenderedText( this->textoVista.c_str(), this->textColor );
 		}else{
 			this->textura->loadFromRenderedText( " ", this->textColor );
 		}
@@ -153,7 +155,7 @@ void CajaDeTexto::dibujar(bool renderText) {
 	SDL_SetRenderDrawColor( Renderizador::Instance()->getRenderer(), 0xFF, 0xFF, 0xFF, 0xFF );
 	SDL_RenderFillRect( Renderizador::Instance()->getRenderer(), &fillRect );
 
-	SDL_Rect fillRect2 = { this->posicionSelector, this->pos_y, this->anchoLetra , this->altoCajaDeTexto };
+	SDL_Rect fillRect2 = { this->posicionSelector, this->pos_y, this->anchoLetra/4 , this->altoCajaDeTexto };
 	SDL_SetRenderDrawColor( Renderizador::Instance()->getRenderer(), 32, 178, 170, 0 );
 	SDL_RenderFillRect( Renderizador::Instance()->getRenderer(), &fillRect2 );
 	//Render text textures
@@ -166,8 +168,8 @@ bool CajaDeTexto::loadMedia() {
 	bool success = true;
 
 	//Open the font
-	TTF_Font* gFont = TTF_OpenFont( "RECURSOS/HUD/mk2.ttf", this->tamLetra );
-	//TTF_Font* gFont = TTF_OpenFont( "RECURSOS/lazy.ttf", this->alto );
+	//TTF_Font* gFont = TTF_OpenFont( "RECURSOS/HUD/mk2.ttf", this->tamLetra );
+	TTF_Font* gFont = TTF_OpenFont( "RECURSOS/lazy.ttf", this->tamLetra );
 	this->textura->setFont(gFont);
 
 	if( gFont == NULL )
@@ -188,6 +190,7 @@ bool CajaDeTexto::estoyEnfocado() {
 }
 
 void CajaDeTexto::setTexto(string texto) {
-	this->texto = texto;
+	this->textoVista = texto;
 	this->textoMemoria = texto;
+	this->posicionSelector += this->textoVista.length()*this->tamLetra/2;
 }
