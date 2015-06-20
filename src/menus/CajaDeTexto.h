@@ -33,7 +33,7 @@ private:
 	Textura* textura;
 	SDL_Color textColor;
 	bool enfocado;
-	string texto;
+	string textoVista;
 	string textoMemoria;
 	int posicionSelector;
 	int numeroLetraElegida;
