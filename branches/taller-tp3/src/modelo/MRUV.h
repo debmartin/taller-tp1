@@ -29,6 +29,7 @@ public:
 	void reducirVelocidad(Vector2f velocidadNueva) {
         velInicial = velocidadNueva;
     }
+    void actualizar(Vector2f nuevaPosicion){}
 	~MRUV() {}
 };
 
