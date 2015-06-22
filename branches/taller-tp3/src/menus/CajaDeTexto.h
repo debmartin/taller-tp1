@@ -36,7 +36,7 @@ private:
 	string textoVista;
 	string textoMemoria;
 	int posicionSelector;
-	int numeroLetraElegida;
+	int numeroLetraSeleccionada;
 public:
 	CajaDeTexto();
 	CajaDeTexto(int cant_caracteres, int pos_x, int pos_y);

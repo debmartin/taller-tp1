@@ -39,7 +39,7 @@ CajaDeTexto::CajaDeTexto(int cant_caracteres, int pos_x, int pos_y) {
 	this->textoVista = "";
 	this->textoMemoria = "";
 	this->posicionSelector = pos_x;
-	this->numeroLetraElegida = 0;
+	this->numeroLetraSeleccionada = 0;
 }
 
 CajaDeTexto::~CajaDeTexto() {
@@ -67,19 +67,34 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 			const Uint8* estadoTeclado = SDL_GetKeyboardState(NULL);
 			if(estadoTeclado[SDL_SCANCODE_LEFT]){
 				cout<<"Apreto izq"<<endl;
-				if(posicionSelector >= pos_x + this->anchoLetra){
+				if(posicionSelector == pos_x && numeroLetraSeleccionada != 0){
+					//Acomodo los caracteres de vista:
+					this->numeroLetraSeleccionada-=1;
+					cout<<"num letra:"<<numeroLetraSeleccionada<<endl;
+					this->textoVista = this->textoMemoria.substr(this->numeroLetraSeleccionada, this->cant_caracteres_vista);
+					cout<<"TextoVista:"<<this->textoVista<<endl;
+				}
+				else if(posicionSelector >= pos_x + this->anchoLetra){
 					posicionSelector -= this->anchoLetra;
+					this->numeroLetraSeleccionada-=1;
+					cout<<"num letra:"<<numeroLetraSeleccionada<<endl;
 				}
 			}else if(estadoTeclado[SDL_SCANCODE_RIGHT]){
 				cout<<"Apreto der"<<endl;
-				if(posicionSelector < this->pos_x + this->anchoLetra * (this->cant_caracteres_vista)){
+				if(posicionSelector == this->pos_x + this->anchoLetra * (this->cant_caracteres_vista) && this->numeroLetraSeleccionada != cant_caracteres){
+					this->numeroLetraSeleccionada+=1;
+					cout<<"num letra:"<<numeroLetraSeleccionada<<endl;
+					this->textoVista = this->textoMemoria.substr(this->numeroLetraSeleccionada-this->cant_caracteres_vista, this->cant_caracteres_vista);
+					cout<<"TextoVista:"<<this->textoVista<<endl;
+				}else if(posicionSelector < this->pos_x + this->anchoLetra * (this->cant_caracteres_vista)){
 					posicionSelector += this->anchoLetra;
+					this->numeroLetraSeleccionada+=1;
+					cout<<"num letra:"<<numeroLetraSeleccionada<<endl;
 				}
 			}
 
-			int posicion = 0;
-			//Handle backspace
-			if( e.key.keysym.sym == SDLK_BACKSPACE && this->textoMemoria.length() > 0 )
+			//Se borra un caracter:
+			else if( e.key.keysym.sym == SDLK_BACKSPACE && this->textoMemoria.length() > 0 )
 			{
 
 				//cout<<"Se borra un caracter:"<<endl;
@@ -103,14 +118,13 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 				cout<<"Vista:"<<endl;
 				cout<<this->texto<<endl;
 				*/
-				renderText = true;
 			}
 		}
 		//Special text input event
 		else if( e.type == SDL_TEXTINPUT )
 		{
 
-			//Append character
+			//Se agrega un caracter:
 			if ( this->textoMemoria.length() < this->cant_caracteres)
 			{
 				//cout<<"Ingresa caracter"<<endl;
@@ -119,10 +133,14 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 				if(this->textoMemoria.length() <= this->cant_caracteres_vista){
 					this->textoVista = this->textoMemoria;
 					posicionSelector = posicionSelector + this->tamLetra/2;
+					this->numeroLetraSeleccionada+=1;
+					cout<<"num letra:"<<numeroLetraSeleccionada<<endl;
 				}
 				else if ( this->textoMemoria.length() <= this->cant_caracteres )
 				{
-					this->textoVista = this->textoMemoria.substr(this->textoMemoria.length()-this->cant_caracteres_vista,this->textoMemoria.length());
+					this->textoVista = this->textoMemoria.substr(this->textoMemoria.length()-this->cant_caracteres_vista,this->cant_caracteres_vista);
+					this->numeroLetraSeleccionada+=1;
+					cout<<"num letra:"<<numeroLetraSeleccionada<<endl;
 				}
 				/*
 				cout<<"Texto en memoria:"<<endl;
@@ -131,9 +149,8 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 				cout<<"Vista:"<<endl;
 				cout<<this->texto<<endl;*/
 			}
-
-			renderText = true;
 		}
+		renderText = true;
 	}
 	return renderText;
 }
@@ -193,4 +210,6 @@ void CajaDeTexto::setTexto(string texto) {
 	this->textoVista = texto;
 	this->textoMemoria = texto;
 	this->posicionSelector += this->textoVista.length()*this->tamLetra/2;
+	this->numeroLetraSeleccionada = textoMemoria.length();
+	cout<<"Debug letra seleccionada:"<<numeroLetraSeleccionada<<endl;
 }
