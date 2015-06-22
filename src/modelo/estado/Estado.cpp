@@ -133,6 +133,7 @@ void Estado::actualizar(Vector2f nuevaPosicion){
     //cajas->desplazarBVH(nuevaPosicion - posInicial);
 	Vector2f posInicial = cajas->getPivote();
 	cajas->desplazarBVH(nuevaPosicion - posInicial);
+	trayectoria->actualizar(nuevaPosicion);
 }
 
 Vector2f Estado::obtenerVelocidad(){
