@@ -35,8 +35,11 @@ private:
 	bool enfocado;
 	string textoVista;
 	string textoMemoria;
+	string bufferInferior;
+	string bufferSuperior;
 	int posicionSelector;
-	int numeroLetraSeleccionada;
+	int numeroLetraSeleccionadaVista;
+	int letraSeleccionadaMemoria;
 public:
 	CajaDeTexto();
 	CajaDeTexto(int cant_caracteres, int pos_x, int pos_y);
