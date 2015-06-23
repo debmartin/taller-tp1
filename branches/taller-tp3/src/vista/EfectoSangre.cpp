@@ -10,14 +10,16 @@
 EfectoSangre::EfectoSangre(Vector2f pos) {
 	// TODO Auto-generated constructor stub
 	posicion = pos;
-	animacionEfecto = new Animacion(Renderizador::Instance()->getRenderer(), PATH_EFECTO_SANGRE, 1, 10, "sangre");
+	animacionEfecto = new Animacion(Renderizador::Instance()->getRenderer(), PATH_EFECTO_SANGRE, 8, 10, "sangre");
 	spriteEfecto = new Sprite(animacionEfecto,
 			Renderizador::Instance()->getRenderer(),
 			posicion,
 			ORIENTACION_DERECHA, SPR_ABAJO_CENTRO);
-	spriteEfecto->escalarConTamanio(50* VentanaGrafica::Instance()->relacion_de_aspectoX(),50 * VentanaGrafica::Instance()->relacion_de_aspectoY());
+	spriteEfecto->escalarConTamanio(200* VentanaGrafica::Instance()->relacion_de_aspectoX(),200 * VentanaGrafica::Instance()->relacion_de_aspectoY());
 	//spriteEfecto->escalarConTamanio(50,100);
 
+	spriteEfecto->setLoopMode(LOOP_NO_REPEAT);
+	spriteEfecto->setSentidoReproduccion(HACIA_ADELANTE);
 	direccionEfecto = DIRECCION_DERECHA;
 	visible = false;
 	tiempoVisible = 0;
@@ -41,7 +43,7 @@ void EfectoSangre::dibujar(){
 
 //La dirección del efectoSangre debe ser opuesta a la direccion del personaje.
 void EfectoSangre::ejecutarEfecto(Vector2f pos, DireccionObjeto direccion){
-	tiempoVisible = 10;
+	tiempoVisible = 1000;
 	visible = true;
 	posicion = pos;
 
@@ -65,6 +67,7 @@ void EfectoSangre::ejecutarEfecto(Vector2f pos, DireccionObjeto direccion){
 }
 
 void EfectoSangre::update(){
+	spriteEfecto->update();
 	if(tiempoVisible <= 0){
 		visible = false;
 	}

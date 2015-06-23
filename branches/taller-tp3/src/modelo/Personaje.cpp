@@ -29,7 +29,7 @@
 
 #define TIEMPO_BLOQUEO_PATADA 35
 #define TIEMPO_BLOQUEO_GOLPE 25
-#define TIEMPO_BLOQUEO_DERRIBADO 35
+#define TIEMPO_BLOQUEO_DERRIBADO 55
 #define TIEMPO_BLOQUEO_GANCHO 15
 #define TIEMPO_BLOQUEO_PATADA_GIRATORIA 45
 #define TIEMPO_BLOQUEO_TIJERA 80
@@ -311,45 +311,68 @@ void Personaje::piniaAlta(){
 void Personaje::piniaBaja(){
     cambiarEstado(new PiniaBaja(posicion, (*cajasPorEstado)[PINIA_BAJA]));
     bloquearPersonaje(TIEMPO_BLOQUEO_GOLPE);
-    Sonidos::getInstancia()->reproducirSonido("sonido_pinia");
+    if(id == "sonya"){
+    	Sonidos::getInstancia()->reproducirSonido("sonido_golpe_sonya");
+    }else{
+    	Sonidos::getInstancia()->reproducirSonido("sonido_pinia");
+    }
 	Logger::getInstance()->debug("Personaje: golpe bajo.");
 }
 
 void Personaje::piniaSaltandoDiagonalDerecha(){
     cambiarEstado(new PiniaSaltandoDiagonalDerecha(estado->getTrayectoria(), estado->obtenerTiempoDeCreacion(), (*cajasPorEstado)[PINIA_SALTANDO_DIAGONAL_DERECHA]));
-    Sonidos::getInstancia()->reproducirSonido("sonido_pinia");
+    if(id == "sonya"){
+      Sonidos::getInstancia()->reproducirSonido("sonido_golpe_sonya");
+    }else{
+      Sonidos::getInstancia()->reproducirSonido("sonido_pinia");
+    }
 	Logger::getInstance()->debug("Personaje: piña saltando.");
 }
 
 void Personaje::piniaSaltandoDiagonalIzquierda(){
     cambiarEstado(new PiniaSaltandoDiagonalIzquierda(estado->getTrayectoria(), estado->obtenerTiempoDeCreacion() , (*cajasPorEstado)[PINIA_SALTANDO_DIAGONAL_IZQUIERDA]));
-    Sonidos::getInstancia()->reproducirSonido("sonido_pinia");
+    if(id == "sonya"){
+      Sonidos::getInstancia()->reproducirSonido("sonido_golpe_sonya");
+    }else{
+      Sonidos::getInstancia()->reproducirSonido("sonido_pinia");
+    }
 	Logger::getInstance()->debug("Personaje: piña saltando.");
 }
 
 void Personaje::piniaSaltandoVertical(){
     cambiarEstado(new PiniaSaltandoVertical(estado->getTrayectoria(), estado->obtenerTiempoDeCreacion(), (*cajasPorEstado)[PINIA_SALTANDO_VERTICAL]));
-    Sonidos::getInstancia()->reproducirSonido("sonido_pinia");
+    if(id == "sonya"){
+       Sonidos::getInstancia()->reproducirSonido("sonido_golpe_sonya");
+    }else{
+       Sonidos::getInstancia()->reproducirSonido("sonido_pinia");
+    }
 	Logger::getInstance()->debug("Personaje: piña saltando.");
 }
 
 void Personaje::patadaAlta(){
 	cambiarEstado(new PatadaAlta(posicion, (*cajasPorEstado)[PATEANDO_ALTO]));
 	bloquearPersonaje(TIEMPO_BLOQUEO_PATADA);
-	Sonidos::getInstancia()->reproducirSonido("sonido_patada");
+	 if(id == "sonya"){
+	    Sonidos::getInstancia()->reproducirSonido("sonido_golpe_sonya");
+	}else{
+	    Sonidos::getInstancia()->reproducirSonido("sonido_pinia");
+	}
 	Logger::getInstance()->debug("Personaje: patada alta.");
 }
 
 void Personaje::patadaBaja(){
     cambiarEstado(new PatadaBaja(posicion, (*cajasPorEstado)[PATEANDO_BAJO]));
     bloquearPersonaje(TIEMPO_BLOQUEO_PATADA);
-    Sonidos::getInstancia()->reproducirSonido("sonido_patada");
+    if(id == "sonya"){
+       	Sonidos::getInstancia()->reproducirSonido("sonido_golpe_sonya");
+    }else{
+       Sonidos::getInstancia()->reproducirSonido("sonido_pinia");
+    }
 	Logger::getInstance()->debug("Personaje: patada baja.");
 }
 
 void Personaje::patadaAltaAgachado(){
 	cambiarEstado(new PateandoAltoAgachado(posicion, (*cajasPorEstado)[PATEANDO_ALTO_AGACHADO]));
-	Sonidos::getInstancia()->reproducirSonido("sonido_patada");
 	Logger::getInstance()->debug("Personaje: patada alta agachado.");
 }
 
@@ -437,7 +460,7 @@ void Personaje::ser_arrojado_izquierda(){
 void Personaje::golpeado(){
 	cambiarEstado(new Golpeado(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
 	bloquearPersonaje(TIEMPO_BLOQUEO_GOLPE);
-	sangrar();
+	//sangrar();
 }
 
 void Personaje::derribado(){
@@ -487,7 +510,11 @@ void Personaje::morir(){
 
 void Personaje::deslizar(){
 	cambiarEstado(new Deslizar(posicion, SLIDE, (*cajasPorEstado)[SALTANDO_VERTICAL], direccion));
-	Sonidos::getInstancia()->reproducirSonido("sonido_deslizar");
+	if(id == "sonya"){
+		Sonidos::getInstancia()->reproducirSonido("sonido_golpe2_sonya");
+	}else{
+		Sonidos::getInstancia()->reproducirSonido("sonido_subzero_win");
+	}
 	bloquearPersonaje(50);
 }
 
