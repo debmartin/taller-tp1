@@ -132,16 +132,16 @@ void ControladorPersonaje::identificarOrdenJoystickPersonaje(Personaje* personaj
 	        personaje->patadaBaja();
 	    }else if((*estadoJoy)["JOY_DEFENSA"]){
 	        personaje->defender();
-	    }/*else if((*estadoJoy)["JOY_PODER"]){
+	    }else if((*estadoJoy)["JOY_PODER"]){
 	        personaje->arrojarArma();
-	    }*/
+	    }
 	    else{
 	        personaje->mantenerReposo();
 	    }
-	}
+	}/*
 	if((*estadoJoy)["JOY_PODER"]){
 	        personaje->arrojarArma();
-	}
+	}*/
 }
 
 
@@ -192,20 +192,20 @@ void ControladorPersonaje::identificarOrdenPersonaje1(){
 		}else if(estadoTeclado[SDL_SCANCODE_H]){
 			personaje1->patadaAlta();
 		}else if(estadoTeclado[SDL_SCANCODE_J]){
-			//personaje1->deslizar();
 			personaje1->piniaBaja();
 		}else if(estadoTeclado[SDL_SCANCODE_K]){
-			personaje1->tijera();
-			//personaje1->patadaBaja();
+			personaje1->patadaBaja();
 		}else if(estadoTeclado[SDL_SCANCODE_L]){
 			personaje1->defender();
+		}else if(estadoTeclado[SDL_SCANCODE_F]){
+			personaje1->arrojarArma();
 		}else{
 			personaje1->mantenerReposo();
 		}
-    }
+    }/*
     if(estadoTeclado[SDL_SCANCODE_F]){
 			personaje1->arrojarArma();
-    }
+    }*/
 }
 
 void ControladorPersonaje::identificarOrdenPersonaje2(){
@@ -255,20 +255,20 @@ void ControladorPersonaje::identificarOrdenPersonaje2(){
 		}else if(estadoTeclado[SDL_SCANCODE_V]){
 			personaje2->patadaAlta();
 		}else if(estadoTeclado[SDL_SCANCODE_B]){
-			//personaje2->deslizar();
 			personaje2->piniaBaja();
 		}else if(estadoTeclado[SDL_SCANCODE_N]){
-			personaje2->tijera();
-			//personaje2->patadaBaja();
+			personaje2->patadaBaja();
 		}else if(estadoTeclado[SDL_SCANCODE_M]){
 			personaje2->defender();
+		}else if(estadoTeclado[SDL_SCANCODE_X]){
+			personaje2->arrojarArma();
 		}else{
 			personaje2->mantenerReposo();
 		}
-    }
+    }/*
     if(estadoTeclado[SDL_SCANCODE_X]){
 		personaje2->arrojarArma();
-    }
+    }*/
 }
 
 void ControladorPersonaje::continuarAccionPreviaPersonaje1(){

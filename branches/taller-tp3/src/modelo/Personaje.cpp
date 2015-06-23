@@ -490,7 +490,11 @@ void Personaje::retroceder(){
 }
 
 void Personaje::victoria(){
-	cambiarEstado(new EnEspera(posicion, VICTORIA, (*cajasPorEstado)[EN_ESPERA]));
+	if(estado->Id() == ANIMALITY2){
+		cambiarEstado(new EnEspera(posicion, ANIMALITY2, (*cajasPorEstado)[EN_ESPERA]));
+	}else{
+		cambiarEstado(new EnEspera(posicion, VICTORIA, (*cajasPorEstado)[EN_ESPERA]));
+	}
 	if(id == "sonya"){
 		Sonidos::getInstancia()->reproducirSonido("sonido_sonya_win");
 	}else{
@@ -525,12 +529,10 @@ void Personaje::volar_horizontal(estado_personaje id_estado){
 
 void Personaje::volar_vertical(estado_personaje id_estado, estado_personaje id_estado_caja){
 	cambiarEstado(new VueloVertical(posicion, id_estado, (*cajasPorEstado)[id_estado_caja]));
-	//bloquearPersonaje(50);
 }
 
 void Personaje::volar_vertical(estado_personaje id_estado){
 	cambiarEstado(new VueloVertical(posicion, id_estado, (*cajasPorEstado)[id_estado]));
-	//bloquearPersonaje(50);
 }
 
 
@@ -604,10 +606,6 @@ void Personaje::updateFatality(Colisionable* enemigo){
 		if(!estaBloqueado()){
 			volar_vertical(ANIMALITY2, ANIMALITY);
 		}
-	/*}else if(estado->Id()== ANIMALITY2 && estaVolandoVertical()){
-		if(posicion.Y()>VentanaGrafica::Instance()->getEscenario()->getAltoLogico()){
-			mantenerReposo();
-		}*/
 	}else if(estado->Id()== OSO){
 		if(!estaBloqueado()){
 			hacerFatality(OSO2);
@@ -655,10 +653,14 @@ void Personaje::recibirFatality(Colisionable* enemigo){
 }
 
 void Personaje::caer(){
-    Vector2f velocActual = estado->obtenerVelocidad();
-    estado_personaje id = estado->Id();
-    BVH* cajas = estado->obtenerCajaColision();
-    cambiarEstado(new Cayendo(posicion, Vector2f(0, velocActual.Y()), id, cajas));
+	if(haciendoFatality()){
+		mantenerFatality(estado->Id());
+	}else{
+		Vector2f velocActual = estado->obtenerVelocidad();
+		estado_personaje id = estado->Id();
+		BVH* cajas = estado->obtenerCajaColision();
+		cambiarEstado(new Cayendo(posicion, Vector2f(0, velocActual.Y()), id, cajas));
+	}
 }
 
 void Personaje::caida_animality(){
@@ -800,7 +802,7 @@ void Personaje::ejecutarCombo(string nombreCombo, Personaje* enemigo){
 			arrojarArma();
 		}else if(nombreCombo == "Slide"){
 			deslizar();
-		}else if(nombreCombo == "Square Flight"){
+		}else if(nombreCombo == "Patada Voladora"){
 			deslizar();
 		//FATALITY//
 		}else if(enemigo->estaMareado()){
@@ -929,7 +931,6 @@ void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
     }
 
     if(estaHaciendoToma()){
-    	cout<<"Personaje esta haciendo toma"<<endl;
     	posicion = posicionCandidata;
     }
     else if (estaCaminando()){
@@ -960,23 +961,19 @@ void Personaje::update(Colisionable* enemigo){
        return;
 
 	}else if((haciendoFatality() || recibioFatality()) && !estaBloqueado()){
-		//cout<<"UPDATE FATALITY"<<id<<endl;
 		updateFatality(enemigo);
 	}
 	else if(estaMareado() && !recibioFatality()){
     	if(enemigo->verEstado()->haciendoFatality()){
-    		//cout<<"RECIBIR FATALITY"<<id<<endl;
     		recibirFatality(enemigo);
     	}
     }
 
-    else if(estaSinEnergia() && !estaMuerto() && !estaSaltando() && !estaEnPiso() && !haciendoFatality() && !estaMareado() && !recibioFatality()){
-    	//cout<<"MAREADO"<<id<<endl;
+    else if(estaSinEnergia() && !estaMuerto() && !estaSaltando() && !estaEnPiso() && !haciendoFatality() && !estaMareado() && !recibioFatality() && !estaVolandoVertical()){
     	mareado();
     }
 
     if(estaBloqueado()){
-    	//cout<<"Bloqueo:"<<id<<"tiempo:"<<tiempoBloqueo<<endl;
         if(tiempoBloqueo <= 0){
         	if(haciendoFatality()){
         		hacerFatality();
@@ -1038,13 +1035,15 @@ void Personaje::definirPosicionIncial_enX(double x)
 }
 
 void Personaje::obtenerAntidoto(Personaje* otro){
+	if(haciendoFatality() || otro->recibioFatality() || otro->estaVolandoVertical() || otro->estaMareado())
+		return;
     switch(estado->obtenerEstadoContrario()) {
         case CAMINANDO_DERECHA:
             return (otro->caminarDerecha());
         case CAMINANDO_IZQUIERDA:
             return (otro->caminarIzquierda());
         case EN_ESPERA:
-            return (otro->mantenerReposo());
+        	return (otro->mantenerReposo());
         case SALTANDO_VERTICAL:
             return (otro->saltarVertical());
         case SALTANDO_OBLICUO_DERECHA:

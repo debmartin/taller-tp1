@@ -20,3 +20,9 @@ bool Cayendo::estaSaltando(){
 bool Cayendo::estaDesplazandoVertical() {
 	return true;
 }
+
+bool Cayendo::haciendoFatality(){
+	if(Id() == ANIMALITY2){
+		return true;
+	}return false;
+}

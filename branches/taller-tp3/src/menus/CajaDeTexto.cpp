@@ -98,9 +98,10 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 			{
 
 				cout<<"---------------"<<endl;
-				//cout<<"Se borra un caracter:"<<endl;
+				cout<<"Se borra un caracter:"<<endl;
 				if(this->textoMemoria.length() < this->cant_caracteres_vista){
 					cout<<"Debug1 borrado"<<endl;
+					cout<<"numero letra vista:"<<numeroLetraSeleccionadaVista<<endl;
 					this->textoMemoria = this->textoMemoria.substr(0,numeroLetraSeleccionadaVista-1) + this->textoMemoria.substr(numeroLetraSeleccionadaVista,textoMemoria.length()-numeroLetraSeleccionadaVista);
 					this->textoVista = this->textoMemoria;
 
@@ -109,7 +110,7 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 
 				}else if(numeroLetraSeleccionadaVista <= cant_caracteres_vista && numeroLetraSeleccionadaVista != 0){
 					cout<<"Debug2 borrado"<<endl;
-
+					cout<<"numero letra vista:"<<numeroLetraSeleccionadaVista<<endl;
 					this->textoVista = this->textoVista.substr(0,numeroLetraSeleccionadaVista-1) + this->textoVista.substr(numeroLetraSeleccionadaVista,cant_caracteres_vista-numeroLetraSeleccionadaVista) + bufferSuperior.substr(0,1);;
 					if(bufferSuperior.length() != 0){
 						this->bufferSuperior = bufferSuperior.substr(1,bufferSuperior.length()-1);
@@ -121,6 +122,7 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 
 				}else if(numeroLetraSeleccionadaVista == 0){
 					cout<<"Debug3 borrado"<<endl;
+					cout<<"numero letra vista:"<<numeroLetraSeleccionadaVista<<endl;
 					if(bufferInferior.length() != 0){
 						this->bufferInferior = bufferInferior.substr(0,bufferInferior.length()-1);
 					}
@@ -145,19 +147,19 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 			//Se agrega un caracter:
 			if ( this->textoMemoria.length() < this->cant_caracteres)
 			{
-				//cout<<"Ingresa caracter"<<endl;
+				cout<<"Ingresa caracter"<<endl;
 				//Agrego un caracter intermedio
 				if(this->textoVista.length() < this->cant_caracteres_vista){
-					//cout<<"Debug1"<<endl;
-					//cout<<"numero letra vista:"<<numeroLetraSeleccionadaVista<<endl;
+					cout<<"Debug1"<<endl;
+					cout<<"numero letra vista:"<<numeroLetraSeleccionadaVista<<endl;
 					this->textoMemoria = this->textoMemoria.substr(0, numeroLetraSeleccionadaVista) + e.text.text + this->textoMemoria.substr(numeroLetraSeleccionadaVista, textoMemoria.length()-numeroLetraSeleccionadaVista);
 					this->textoVista = this->textoMemoria;
 					posicionSelector = posicionSelector + this->tamLetra/2;
 					this->numeroLetraSeleccionadaVista+=1;
 				}
 				else if(numeroLetraSeleccionadaVista < cant_caracteres_vista){
-					//cout<<"Debug2"<<endl;
-					//cout<<"numero letra vista:"<<numeroLetraSeleccionadaVista<<endl;
+					cout<<"Debug2"<<endl;
+					cout<<"numero letra vista:"<<numeroLetraSeleccionadaVista<<endl;
 					this->bufferSuperior = this->textoVista.substr(cant_caracteres_vista-1, 1) + bufferSuperior;
 					this->textoVista = this->textoVista.substr(0,numeroLetraSeleccionadaVista) + e.text.text + this->textoVista.substr(numeroLetraSeleccionadaVista,textoVista.length()-numeroLetraSeleccionadaVista-1);
 
@@ -167,8 +169,8 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 					posicionSelector = posicionSelector + this->tamLetra/2;
 				//Agrego un caracter al final del texto de vista:
 				}else if(numeroLetraSeleccionadaVista == cant_caracteres_vista){
-					//cout<<"Debug3"<<endl;
-					//cout<<"numero letra vista:"<<numeroLetraSeleccionadaVista<<endl;
+					cout<<"Debug3"<<endl;
+					cout<<"numero letra vista:"<<numeroLetraSeleccionadaVista<<endl;
 					this->bufferInferior = bufferInferior + textoVista.substr(0, 1);
 					this->textoVista = textoVista.substr(1, cant_caracteres_vista-1) + e.text.text;
 

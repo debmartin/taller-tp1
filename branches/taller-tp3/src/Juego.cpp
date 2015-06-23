@@ -84,7 +84,6 @@ void Juego::update(bool& recargar)
 		if(!((PersonajeInteligente*)(this->jugador2->getPersonaje()))->recibioFatality()){
 			((PersonajeInteligente*)(this->jugador2->getPersonaje()))->calcularProximoMovimiento(this->jugador1->getPersonaje());
 		}
-		cout<<"pincha dentro de este update :( ( Juego::update(bool& recargar)-->linea 82 cuando se llama a notificarObservadores() )"<<endl;
 		this->jugador2->getPersonaje()->update(jugador1->getPersonaje());
 	}else{
 	     this->jugador2->getPersonaje()->update(jugador1->getPersonaje());
