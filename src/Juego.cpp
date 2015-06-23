@@ -92,17 +92,22 @@ void Juego::update(bool& recargar)
 
         VentanaGrafica::Instance()->actualizar();
 
-        if (jugador1->getPersonaje()->estaMuerto() && !ejecutandoFinal && !jugador2->getPersonaje()->estaSaltando()) {
+        if(modo_juego == "P1_vs_CPU" && jugador1->getPersonaje()->estaMareado() && !ejecutandoFinal){
+              	jugador2->getPersonaje()->victoria();
+              	 Logger::getInstance()->info("GAME OVER JUGADOR 1");
+              	ejecutandoFinal = true;
+        }
+        else if (jugador1->getPersonaje()->estaMuerto() && !ejecutandoFinal && !jugador2->getPersonaje()->estaSaltando()) {
                 jugador2->getPersonaje()->victoria();
                 ejecutandoFinal = true;
         Logger::getInstance()->info("GAME OVER JUGADOR 1");
 
-    }
-        if (jugador2->getPersonaje()->estaMuerto() && !ejecutandoFinal && !jugador1->getPersonaje()->estaSaltando()) {
+        }
+        else if (jugador2->getPersonaje()->estaMuerto() && !ejecutandoFinal && !jugador1->getPersonaje()->estaSaltando()) {
                 jugador1->getPersonaje()->victoria();
                 ejecutandoFinal = true;
         Logger::getInstance()->info("GAME OVER JUGADOR 2");
-    }
+        }
 
         if((!(jugador1->getPersonaje()->estaBloqueado()) && jugador2->getPersonaje()->estaSinEnergia() && ejecutandoFinal) ||
                         (!(jugador2->getPersonaje()->estaBloqueado()) && jugador1->getPersonaje()->estaSinEnergia() && ejecutandoFinal)){
@@ -110,10 +115,6 @@ void Juego::update(bool& recargar)
         }else if (jugador2->getPersonaje()->estaSinEnergia() && jugador1->getPersonaje()->estaSinEnergia()) {
                 finalizarRound(recargar);
         }
-/*
-        if(modo_juego == "P1_vs_CPU" && jugador1->getPersonaje()->estaMareado()){
-        	finalizarRound(recargar);
-        }*/
 
         ControladorJoystick::Instance()->update();
         HUD::Instance()->update();
