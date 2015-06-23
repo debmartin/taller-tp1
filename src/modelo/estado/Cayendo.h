@@ -11,6 +11,7 @@ class Cayendo : public Estado
         virtual ~Cayendo();
         bool estaSaltando();
         bool estaDesplazandoVertical();
+        bool haciendoFatality();
     protected:
     private:
 };

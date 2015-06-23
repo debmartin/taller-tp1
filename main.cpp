@@ -104,8 +104,9 @@ void agregarSonidos()
 	Sonidos::getInstancia()->agregar("sonido_saltar_sonya", new Sonido("Snyahup.wav",150,2));
 	Sonidos::getInstancia()->agregar("sonido_pinia", new Sonido("Kungya.wav",150,2));
 	Sonidos::getInstancia()->agregar("sonido_golpe_sonya", new Sonido("Snyaha.wav",150,2));
+	Sonidos::getInstancia()->agregar("sonido_golpe2_sonya", new Sonido("Snyayah.wav",150,2));
 	Sonidos::getInstancia()->agregar("sonido_patada", new Sonido("BigHit.wav",150,2));
-	Sonidos::getInstancia()->agregar("sonido_deslizar", new Sonido("ShvDie.wav",150,2));
+	Sonidos::getInstancia()->agregar("sonido_deslizar", new Sonido("Kungaww.wav",150,2));
 	Sonidos::getInstancia()->agregar("sonido_arma", new Sonido("LiuFire.wav",150,2));
 	Sonidos::getInstancia()->agregar("sonido_arma_sub", new Sonido("SubIce2.wav",150,2));
 	Sonidos::getInstancia()->agregar("sonido_arma_sonya", new Sonido("SnyaRing.wav",150,2));

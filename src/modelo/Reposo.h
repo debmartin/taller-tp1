@@ -11,7 +11,6 @@ public:
 	Reposo(Vector2f posInicial):posInicial(posInicial) {};
 
 	Vector2f getPosicion(float tActual) {
-	    std::cout << "reposo "<<posInicial;
 		return this->posInicial;
 	};
 	void actualizar(Vector2f nuevaPosicion){
