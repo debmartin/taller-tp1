@@ -13,7 +13,7 @@
 #include "Renderizador.h"
 #include "VentanaGrafica.h"
 
-#define PATH_EFECTO_SANGRE "RECURSOS/EFECTOS/SANGRE/sangre25.png"
+#define PATH_EFECTO_SANGRE "RECURSOS/EFECTOS/SANGRE/sangre-golpe.png"
 
 class EfectoSangre: public Efecto {
 private:

@@ -52,18 +52,18 @@ Botonera::Botonera(string tipo, int anchopx, int altopx, int cant_filas, int can
 	}
 	else if ( this->tipo == "personajes")
 	{
-		idContenidos->push_back("sonya");
-		idContenidos->push_back("sonya");
-		idContenidos->push_back("sonya");
-		idContenidos->push_back("sonya");
-		idContenidos->push_back("sonya");
-		idContenidos->push_back("sonya");
-		idContenidos->push_back("sonya");
+		idContenidos->push_back("sub-zero");
 		idContenidos->push_back("sonya");
 		idContenidos->push_back("sub-zero");
+		idContenidos->push_back("sonya");
 		idContenidos->push_back("sub-zero");
+		idContenidos->push_back("sonya");
 		idContenidos->push_back("sub-zero");
+		idContenidos->push_back("sonya");
 		idContenidos->push_back("sub-zero");
+		idContenidos->push_back("sonya");
+		idContenidos->push_back("sub-zero");
+		idContenidos->push_back("sonya");
 	}
 
 	list<string>::iterator itIdContenidos = idContenidos->begin();
