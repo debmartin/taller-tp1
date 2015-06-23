@@ -39,7 +39,6 @@ private:
 	string bufferSuperior;
 	int posicionSelector;
 	int numeroLetraSeleccionadaVista;
-	int letraSeleccionadaMemoria;
 public:
 	CajaDeTexto();
 	CajaDeTexto(int cant_caracteres, int pos_x, int pos_y);
