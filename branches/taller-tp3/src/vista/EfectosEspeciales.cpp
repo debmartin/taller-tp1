@@ -56,15 +56,12 @@ void EfectosEspeciales::destruir(){
 
 void EfectosEspeciales::ejecutarEfecto(string id, Vector2f pos, DireccionObjeto direccion){
 	((*this->mapaEfectosEspeciales)[id])->ejecutarEfecto(pos, direccion);
-
-	cout << "EfectosEspeciales::ejecutarEfecto" << endl;
 }
 
 void EfectosEspeciales::dibujar(){
 	for (map<std::string, Efecto*>::iterator it = this->mapaEfectosEspeciales->begin() ; it != this->mapaEfectosEspeciales->end(); ++it)
 	{
 		it->second->dibujar();
-		//cout << "DDDDDDDDDDDD:" << mapaEfectosEspeciales->size() << endl;
 	}
 }
 

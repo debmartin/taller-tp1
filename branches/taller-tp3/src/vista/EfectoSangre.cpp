@@ -44,8 +44,6 @@ void EfectoSangre::dibujar(){
 
 //La dirección del efectoSangre debe ser opuesta a la direccion del personaje.
 void EfectoSangre::ejecutarEfecto(Vector2f pos, DireccionObjeto direccion){
-
-	cout << "EfectoSangre::ejecutarEfecto" << endl;
 	tiempoVisible = tiempo;
 	visible = true;
 	posicion = pos;

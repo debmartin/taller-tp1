@@ -41,7 +41,8 @@
 #define DISTANCIA_MINIMA 125
 #define DISTANCIA_ANIMALITY_SUBZERO 110
 #define DISTANCIA_ANIMALITY_SONYA 300
-#define AJUSTE_ALTO_EXPLOSION_SANGRE 30
+#define AJUSTE_ALTURA_EXPLOSION_SANGRE 30
+#define AJUSTE_ALTURA_EXPLOSION_SANGRE2 40
 
 Personaje::Personaje(
 		string idIn,
@@ -481,28 +482,28 @@ void Personaje::sangrar(){
 		//Ejecuto explosion de sangre
 		Vector2f posicionEfecto;
 		if(this->direccion == DIRECCION_DERECHA){
-			posicionEfecto.setCoordenada(posicion.X() - estado->calcularAncho()/2, posicion.Y()+40);
+			posicionEfecto.setCoordenada(posicion.X() - estado->calcularAncho()/2, posicion.Y()+AJUSTE_ALTURA_EXPLOSION_SANGRE2);
 		}else{
-			posicionEfecto.setCoordenada(posicion.X() + estado->calcularAncho()/2, posicion.Y()+40);
+			posicionEfecto.setCoordenada(posicion.X() + estado->calcularAncho()/2, posicion.Y()+AJUSTE_ALTURA_EXPLOSION_SANGRE2);
 		}
 		EfectosEspeciales::Instance()->ejecutarEfecto("explosion-sangre", posicionEfecto, direccion);
 	}else if(estado->Id() == MUERTO_DECAPITADO){
 		//Ejecuto explosion de sangre
 		Vector2f posicionEfecto;
 		if(this->direccion == DIRECCION_DERECHA){
-			posicionEfecto.setCoordenada(posicion.X() + estado->calcularAncho()*2, posicion.Y()-60);
+			posicionEfecto.setCoordenada(posicion.X() + estado->calcularAncho()*2, posicion.Y()-AJUSTE_ALTURA_EXPLOSION_SANGRE*2);
 			EfectosEspeciales::Instance()->ejecutarEfecto("sangre", posicionEfecto, DIRECCION_IZQUIERDA);
 		}else{
-			posicionEfecto.setCoordenada(posicion.X() - estado->calcularAncho()*2, posicion.Y()-60);
+			posicionEfecto.setCoordenada(posicion.X() - estado->calcularAncho()*2, posicion.Y()-AJUSTE_ALTURA_EXPLOSION_SANGRE*2);
 			EfectosEspeciales::Instance()->ejecutarEfecto("sangre", posicionEfecto, DIRECCION_DERECHA);
 		}
 	}else if(estado->Id() == DECAPITADO){
 		//Ejecuto explosion de sangre
 		Vector2f posicionEfecto;
 		if(this->direccion == DIRECCION_DERECHA){
-			posicionEfecto.setCoordenada(posicion.X() - estado->calcularAncho()/3, posicion.Y()+ estado->calcularAlto()-AJUSTE_ALTO_EXPLOSION_SANGRE);
+			posicionEfecto.setCoordenada(posicion.X() - estado->calcularAncho()/3, posicion.Y()+ estado->calcularAlto()-AJUSTE_ALTURA_EXPLOSION_SANGRE);
 		}else{
-			posicionEfecto.setCoordenada(posicion.X() + estado->calcularAncho()/3, posicion.Y() + estado->calcularAlto()-AJUSTE_ALTO_EXPLOSION_SANGRE);
+			posicionEfecto.setCoordenada(posicion.X() + estado->calcularAncho()/3, posicion.Y() + estado->calcularAlto()-AJUSTE_ALTURA_EXPLOSION_SANGRE);
 		}
 		EfectosEspeciales::Instance()->ejecutarEfecto("explosion-sangre", posicionEfecto, direccion);
 	}else if(estado->Id() != CAIDA_DERECHA){
