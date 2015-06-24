@@ -122,7 +122,7 @@ void Juego::update(bool& recargar)
 }
 
 
-void Juego::handleEvents(bool& recargar)
+void Juego::handleEvents(bool& recargar, bool menu)
 {
 	SDL_Event evento;
 	// INICIO CODIGO USUARIO
@@ -149,6 +149,7 @@ void Juego::handleEvents(bool& recargar)
 			cout<<"Reset modo practica"<<endl;
 			juegoCorriendo = false;
 			recargar = true;
+			menu = true;
 		}
 
 		else if (evento.type == SDL_QUIT){
