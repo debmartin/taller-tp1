@@ -10,7 +10,7 @@
 #include "../modelo/Personaje.h"
 #include "Vibracion.h"
 
-#define MOSTRAR_CAJAS_COLISION false
+#define MOSTRAR_CAJAS_COLISION true
 #define DELTA_X2 110
 #define DELTA_X 10
 #define DELTA 20
