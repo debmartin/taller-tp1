@@ -123,7 +123,7 @@ void Juego::update(bool& recargar)
 }
 
 
-void Juego::handleEvents(bool& recargar, bool menu)
+void Juego::handleEvents(bool& recargar, bool& menu)
 {
 	SDL_Event evento;
 	// INICIO CODIGO USUARIO
