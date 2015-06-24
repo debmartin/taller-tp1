@@ -194,6 +194,7 @@ Juego::~Juego(){
 //    delete jugador1;
 //    delete escenarioG;
 	delete this->controladorPersonaje;
+	//EfectosEspeciales::Instance()->destruir();
 }
 
 void Juego::posicionarPersonajes_enEjeX()

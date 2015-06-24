@@ -26,14 +26,22 @@ EfectosEspeciales* EfectosEspeciales::Instance()
 
 EfectosEspeciales::EfectosEspeciales(){
 	mapaEfectosEspeciales = new map<string, Efecto*>;
-	(*this->mapaEfectosEspeciales)["sangre"] = new EfectoSangre(Vector2f(0,0));
+	(*this->mapaEfectosEspeciales)["sangre"] = new EfectoSangre(Vector2f(0,0), PATH_EFECTO_SANGRE, CANT_FOTOGRAMAS_EFECTO_SANGRE, FPS_EFECTO_SANGRE, ID_EFECTO_SANGRE, TIEMPO_VISIBLE_SANGRE);
+	(*this->mapaEfectosEspeciales)["explosion-sangre"] = new EfectoSangre(Vector2f(0,0), PATH_EFECTO_EXPLOSION_SANGRE, CANT_FOTOGRAMAS_EFECTO_EXPLOSION_SANGRE, FPS_EFECTO_EXPLOSION_SANGRE, ID_EFECTO_EXPLOSION_SANGRE, TIEMPO_VISIBLE_EXPLOSION_SANGRE);
 }
 
 bool EfectosEspeciales::init(){
 	return true;
 }
 
-EfectosEspeciales::~EfectosEspeciales(){}
+EfectosEspeciales::~EfectosEspeciales(){
+
+}
+
+void EfectosEspeciales::destruir(){
+	(*this->mapaEfectosEspeciales).clear();
+	delete this->mapaEfectosEspeciales;
+}
 
 void EfectosEspeciales::ejecutarEfecto(string id, Vector2f pos, DireccionObjeto direccion){
 	((*this->mapaEfectosEspeciales)[id])->ejecutarEfecto(pos, direccion);

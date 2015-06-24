@@ -7,10 +7,10 @@
 
 #include "EfectoSangre.h"
 
-EfectoSangre::EfectoSangre(Vector2f pos) {
+EfectoSangre::EfectoSangre(Vector2f pos, string path, int cant_fotograma, int fps, string id, int tiempo_visible) {
 	// TODO Auto-generated constructor stub
 	posicion = pos;
-	animacionEfecto = new Animacion(Renderizador::Instance()->getRenderer(), PATH_EFECTO_SANGRE, 8, 10, "sangre");
+	animacionEfecto = new Animacion(Renderizador::Instance()->getRenderer(), path, cant_fotograma, fps, id);
 	spriteEfecto = new Sprite(animacionEfecto,
 			Renderizador::Instance()->getRenderer(),
 			posicion,
@@ -22,6 +22,7 @@ EfectoSangre::EfectoSangre(Vector2f pos) {
 	spriteEfecto->setSentidoReproduccion(HACIA_ADELANTE);
 	direccionEfecto = DIRECCION_DERECHA;
 	visible = false;
+	tiempo = tiempo_visible;
 	tiempoVisible = 0;
 }
 
@@ -43,10 +44,11 @@ void EfectoSangre::dibujar(){
 
 //La dirección del efectoSangre debe ser opuesta a la direccion del personaje.
 void EfectoSangre::ejecutarEfecto(Vector2f pos, DireccionObjeto direccion){
-	tiempoVisible = 1000;
+	tiempoVisible = tiempo;
 	visible = true;
 	posicion = pos;
 
+	spriteEfecto->cambiarAnimacion(animacionEfecto);
 	//Posiciono el efecto
 	Vector2f vector_auxiliar = obtenerPosicionEnVentana();
 	Vector2f posicion_final(vector_auxiliar.X()*VentanaGrafica::Instance()->relacion_de_aspectoX(), vector_auxiliar.Y()*VentanaGrafica::Instance()->relacion_de_aspectoY());

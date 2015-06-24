@@ -41,6 +41,7 @@
 #define DISTANCIA_MINIMA 125
 #define DISTANCIA_ANIMALITY_SUBZERO 110
 #define DISTANCIA_ANIMALITY_SONYA 300
+#define AJUSTE_ALTO_EXPLOSION_SANGRE 30
 
 Personaje::Personaje(
 		string idIn,
@@ -460,7 +461,7 @@ void Personaje::ser_arrojado_izquierda(){
 void Personaje::golpeado(){
 	cambiarEstado(new Golpeado(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
 	bloquearPersonaje(TIEMPO_BLOQUEO_GOLPE);
-	//sangrar();
+	sangrar();
 }
 
 void Personaje::derribado(){
@@ -475,13 +476,49 @@ void Personaje::mareado(){
 
 void Personaje::sangrar(){
 	//Posiciono el poder respecto a la posicion del personaje
-	Vector2f posicionEfecto;
-	if(this->direccion == DIRECCION_DERECHA){
-		posicionEfecto.setCoordenada(posicion.X() - estado->calcularAncho(), posicion.Y()+ estado->calcularAlto());
-	}else{
-		posicionEfecto.setCoordenada(posicion.X() + estado->calcularAncho(), posicion.Y() + estado->calcularAlto());
+
+	if(estado->Id() == MUERTO_EN_PISO){
+		//Ejecuto explosion de sangre
+		cout<<"Explosion sangre"<<endl;
+		Vector2f posicionEfecto;
+		if(this->direccion == DIRECCION_DERECHA){
+			posicionEfecto.setCoordenada(posicion.X() - estado->calcularAncho()/2, posicion.Y()+40);
+		}else{
+			posicionEfecto.setCoordenada(posicion.X() + estado->calcularAncho()/2, posicion.Y()+40);
+		}
+		EfectosEspeciales::Instance()->ejecutarEfecto("explosion-sangre", posicionEfecto, direccion);
+	}else if(estado->Id() == MUERTO_DECAPITADO){
+		cout<<"Explosion sangre decapitado"<<endl;
+		//Ejecuto explosion de sangre
+		Vector2f posicionEfecto;
+		if(this->direccion == DIRECCION_DERECHA){
+			cout<<"Bandera"<<endl;
+			posicionEfecto.setCoordenada(posicion.X() + estado->calcularAncho()*2, posicion.Y()-60);
+			EfectosEspeciales::Instance()->ejecutarEfecto("sangre", posicionEfecto, DIRECCION_IZQUIERDA);
+		}else{
+			posicionEfecto.setCoordenada(posicion.X() - estado->calcularAncho()*2, posicion.Y()-60);
+			EfectosEspeciales::Instance()->ejecutarEfecto("sangre", posicionEfecto, DIRECCION_DERECHA);
+		}
+	}else if(estado->Id() == DECAPITADO){
+		//Ejecuto explosion de sangre
+		cout<<"Explosion sangre"<<endl;
+		Vector2f posicionEfecto;
+		if(this->direccion == DIRECCION_DERECHA){
+			posicionEfecto.setCoordenada(posicion.X() - estado->calcularAncho()/3, posicion.Y()+ estado->calcularAlto()-AJUSTE_ALTO_EXPLOSION_SANGRE);
+		}else{
+			posicionEfecto.setCoordenada(posicion.X() + estado->calcularAncho()/3, posicion.Y() + estado->calcularAlto()-AJUSTE_ALTO_EXPLOSION_SANGRE);
+		}
+		EfectosEspeciales::Instance()->ejecutarEfecto("explosion-sangre", posicionEfecto, direccion);
+	}else if(estado->Id() != CAIDA_DERECHA){
+		cout<<"Sangre golpe"<<endl;
+		Vector2f posicionEfecto;
+		if(this->direccion == DIRECCION_DERECHA){
+			posicionEfecto.setCoordenada(posicion.X() - estado->calcularAncho()/2, posicion.Y()+ estado->calcularAlto()/2);
+		}else{
+			posicionEfecto.setCoordenada(posicion.X() + estado->calcularAncho()/2, posicion.Y() + estado->calcularAlto()/2);
+		}
+		EfectosEspeciales::Instance()->ejecutarEfecto("sangre", posicionEfecto, direccion);
 	}
-	EfectosEspeciales::Instance()->ejecutarEfecto("sangre", posicionEfecto, direccion);
 }
 
 void Personaje::retroceder(){
@@ -544,7 +581,12 @@ void Personaje::tijera(){
 
 void Personaje::morirEnPiso(){
 	VentanaGrafica::Instance()->vibrar();
-    cambiarEstado(new Muerto(posicion, MUERTO_EN_PISO,(*cajasPorEstado)[EN_ESPERA]));
+	if(estado->Id() == RECIBIENDO_GOLPE){
+		cambiarEstado(new Muerto(posicion, MUERTO_EN_PISO,(*cajasPorEstado)[EN_ESPERA]));
+		sangrar();
+	}else{
+		cambiarEstado(new Muerto(posicion, MUERTO_EN_PISO,(*cajasPorEstado)[EN_ESPERA]));
+	}
     bloquearPersonaje(TIEMPO_FESTEJO_VICTORIA);
 }
 
@@ -582,10 +624,14 @@ void Personaje::tirar_beso(){
 void Personaje::decapitar(){
 	cambiarEstado(new RecibiendoFatality(posicion, DECAPITADO, (*cajasPorEstado)[EN_ESPERA]));
 	bloquearPersonaje(50);
+	sangrar();
 	VentanaGrafica::Instance()->vibrar();
 }
 
 void Personaje::mantenerFatality(estado_personaje id_estado){
+	if(id_estado == MUERTO_EN_PISO){
+		sangrar();
+	}
 	cambiarEstado(new RecibiendoFatality(posicion, id_estado, (*cajasPorEstado)[EN_ESPERA]));
 }
 
@@ -623,11 +669,13 @@ void Personaje::updateFatality(Colisionable* enemigo){
 		}
 	}else if(recibioFatality() && estado->Id() == CAIDA_DERECHA && !estaBloqueado()){
 		mantenerFatality(MUERTO_EN_PISO);
+		sangrar();
 		bloquearPersonaje(TIEMPO_BLOQUEO_ANIMALITY_SUBZERO_PARTE3+TIEMPO_BLOQUEO_ANIMALITY_SUBZERO_PARTE4);
 	}else if(!estaMuerto() && recibioFatality() && estado->Id() == MUERTO_EN_PISO && !estaBloqueado()){
 		morirEnPiso(MUERTO_EN_PISO);
 	}else if(estado->Id() == DECAPITADO && !estaBloqueado()){
 		morirEnPiso(MUERTO_DECAPITADO);
+		sangrar();
 	}else if(estado->Id()== FATALITY1){
 		if(!estaBloqueado() && id == "sonya"){
 
