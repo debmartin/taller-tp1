@@ -46,6 +46,7 @@ Juego::Juego(Jugador* jugador1, Jugador* jugador2, string modo, string nombrePer
 
 	controladorPersonaje = new ControladorPersonaje(jugador1, jugador2, tipoDeControl_jugador1, this->modo_juego);
 
+	EfectosEspeciales::Instance()->init();
 
 	HUD::Instance()->init(
 			Renderizador::Instance()->getWindow(),

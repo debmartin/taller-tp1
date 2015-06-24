@@ -14,6 +14,7 @@ class HUD;
 class ControladorPersonaje;
 
 #include <string>
+#include "vista/EfectosEspeciales.h"
 
 using namespace std;
 
