@@ -479,7 +479,6 @@ void Personaje::sangrar(){
 
 	if(estado->Id() == MUERTO_EN_PISO){
 		//Ejecuto explosion de sangre
-		cout<<"Explosion sangre"<<endl;
 		Vector2f posicionEfecto;
 		if(this->direccion == DIRECCION_DERECHA){
 			posicionEfecto.setCoordenada(posicion.X() - estado->calcularAncho()/2, posicion.Y()+40);
@@ -488,11 +487,9 @@ void Personaje::sangrar(){
 		}
 		EfectosEspeciales::Instance()->ejecutarEfecto("explosion-sangre", posicionEfecto, direccion);
 	}else if(estado->Id() == MUERTO_DECAPITADO){
-		cout<<"Explosion sangre decapitado"<<endl;
 		//Ejecuto explosion de sangre
 		Vector2f posicionEfecto;
 		if(this->direccion == DIRECCION_DERECHA){
-			cout<<"Bandera"<<endl;
 			posicionEfecto.setCoordenada(posicion.X() + estado->calcularAncho()*2, posicion.Y()-60);
 			EfectosEspeciales::Instance()->ejecutarEfecto("sangre", posicionEfecto, DIRECCION_IZQUIERDA);
 		}else{
@@ -501,7 +498,6 @@ void Personaje::sangrar(){
 		}
 	}else if(estado->Id() == DECAPITADO){
 		//Ejecuto explosion de sangre
-		cout<<"Explosion sangre"<<endl;
 		Vector2f posicionEfecto;
 		if(this->direccion == DIRECCION_DERECHA){
 			posicionEfecto.setCoordenada(posicion.X() - estado->calcularAncho()/3, posicion.Y()+ estado->calcularAlto()-AJUSTE_ALTO_EXPLOSION_SANGRE);
@@ -510,7 +506,6 @@ void Personaje::sangrar(){
 		}
 		EfectosEspeciales::Instance()->ejecutarEfecto("explosion-sangre", posicionEfecto, direccion);
 	}else if(estado->Id() != CAIDA_DERECHA){
-		cout<<"Sangre golpe"<<endl;
 		Vector2f posicionEfecto;
 		if(this->direccion == DIRECCION_DERECHA){
 			posicionEfecto.setCoordenada(posicion.X() - estado->calcularAncho()/2, posicion.Y()+ estado->calcularAlto()/2);
@@ -780,7 +775,6 @@ void Personaje::recibirGolpe(Colisionable* otro){
 		}else if(otro->verEstado()->efectuandoPatadaGiratoria()){
 			derribado();
 		}else if(otro->verEstado()->estaTomandoAlOponente()){
-			cout<<"Personajeser arrojado"<<endl;
 			//ser_arrojado();
 			if(this->direccion == DIRECCION_IZQUIERDA){
 				caidaIzquierda();
@@ -809,7 +803,6 @@ void Personaje::recibirGolpe(Colisionable* otro){
 		if(pegadoAlOponente(otro)){
 			golpeado();
 		}else{
-			cout<<"separado del oponente"<<endl;
 			golpeado();
 		}
 	}

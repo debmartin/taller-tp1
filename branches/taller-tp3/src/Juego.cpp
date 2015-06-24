@@ -36,7 +36,7 @@ Juego::Juego(Jugador* jugador1, Jugador* jugador2, string modo, string nombrePer
 	this->jugador1 = jugador1;
 	this->jugador2 = jugador2;
 	this->modo_juego = modo;
-	cout<<"MODO DE JUEGO:"<<modo_juego<<endl;
+	//cout<<"MODO DE JUEGO:"<<modo_juego<<endl;
 	agregarObservadoresJugador(jugador1);
 	agregarObservadoresJugador(jugador2);
 
