@@ -27,7 +27,7 @@ Juego* cargarJuego(string escenarioPath, int& cant_rounds, bool menu){
 
 	CargadorDeOjbetos cargador_de_objetos(escenarioPath);
 
-	if ( ((cant_rounds%2) == 1 && modo_juego_g != "Práctica") || (modo_juego_g == "Práctica" && menu))
+	if ( ((cant_rounds%2) == 1 && modo_juego_g != "Práctica") || menu)
 	{
 		cargador_de_objetos.cargarInfo_desdeMenus();
 
@@ -84,7 +84,7 @@ void correrJuego(Juego* g_game, bool& recargar, bool& menu){
 
         g_game->handleEvents(recargar, menu);
 
-        g_game->update(recargar);
+        g_game->update(recargar, menu);
 
         g_game->render();
 
