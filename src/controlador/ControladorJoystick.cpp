@@ -47,8 +47,8 @@ void ControladorJoystick::initialiseJoysticks(
 
 
         //agrego el mapeo para los botones select y start
- //       (*this->correspondenciaTeclas)["JOY_SELECT"] = 8;
- //       (*this->correspondenciaTeclas)["JOY_START"] = 9;
+        (*this->correspondenciaTeclas)["JOY_SELECT"] = 8;
+        (*this->correspondenciaTeclas)["JOY_START"] = 9;
 
         this->estadoJoystick1    = new std::map<string, bool>;
         this->estadoJoystick2    = new std::map<string, bool>;
@@ -312,8 +312,8 @@ void ControladorJoystick::refreshJoystickState1() {
         (*this->estadoJoystick1)["JOY_PATADA_BAJA"]    = this->getButtonState(JOYSTICK1, "JOY_PATADA_BAJA");
         (*this->estadoJoystick1)["JOY_DEFENSA"]            = this->getButtonState(JOYSTICK1, "JOY_DEFENSA");
         (*this->estadoJoystick1)["JOY_PODER"]              = this->getButtonState(JOYSTICK1, "JOY_PODER");
- //       (*this->estadoJoystick1)["JOY_SELECT"]         = this->getButtonState(JOYSTICK1, "JOY_SELECT");
- //       (*this->estadoJoystick1)["JOY_START"]          = this->getButtonState(JOYSTICK1, "JOY_START");
+        (*this->estadoJoystick1)["JOY_SELECT"]         = this->getButtonState(JOYSTICK1, "JOY_SELECT");
+        (*this->estadoJoystick1)["JOY_START"]          = this->getButtonState(JOYSTICK1, "JOY_START");
 
         (*this->estadoJoystick1)["JOY_ARRIBA"]             = this->getAxisState(JOYSTICK1, "JOY_ARRIBA");
         (*this->estadoJoystick1)["JOY_ABAJO"]              = this->getAxisState(JOYSTICK1, "JOY_ABAJO");
@@ -328,8 +328,8 @@ void ControladorJoystick::refreshJoystickState2() {
         (*this->estadoJoystick2)["JOY_PATADA_BAJA"]    = this->getButtonState(JOYSTICK2, "JOY_PATADA_BAJA");
         (*this->estadoJoystick2)["JOY_DEFENSA"]        = this->getButtonState(JOYSTICK2, "JOY_DEFENSA");
         (*this->estadoJoystick2)["JOY_PODER"]          = this->getButtonState(JOYSTICK2, "JOY_PODER");
- //       (*this->estadoJoystick2)["JOY_SELECT"]         = this->getButtonState(JOYSTICK2, "JOY_SELECT");
- //       (*this->estadoJoystick2)["JOY_START"]          = this->getButtonState(JOYSTICK2, "JOY_START");
+        (*this->estadoJoystick2)["JOY_SELECT"]         = this->getButtonState(JOYSTICK2, "JOY_SELECT");
+        (*this->estadoJoystick2)["JOY_START"]          = this->getButtonState(JOYSTICK2, "JOY_START");
 
         (*this->estadoJoystick2)["JOY_ARRIBA"]         = this->getAxisState(JOYSTICK2, "JOY_ARRIBA");
         (*this->estadoJoystick2)["JOY_ABAJO"]          = this->getAxisState(JOYSTICK2, "JOY_ABAJO");
@@ -344,8 +344,8 @@ void ControladorJoystick::refreshJoystickStateNulo() {
         (*this->estadoJoystickNulo)["JOY_PATADA_BAJA"]    = false;
         (*this->estadoJoystickNulo)["JOY_DEFENSA"]        = false;
         (*this->estadoJoystickNulo)["JOY_PODER"]          = false;
- //       (*this->estadoJoystickNulo)["JOY_SELECT"]         = false;
- //       (*this->estadoJoystickNulo)["JOY_START"]          = false;
+        (*this->estadoJoystickNulo)["JOY_SELECT"]         = false;
+        (*this->estadoJoystickNulo)["JOY_START"]          = false;
 
         (*this->estadoJoystickNulo)["JOY_ARRIBA"]         = false;
         (*this->estadoJoystickNulo)["JOY_ABAJO"]          = false;
@@ -361,8 +361,8 @@ void ControladorJoystick::resetControladorJoystick(){
         (*this->estadoJoystick1)["JOY_PATADA_BAJA"]    = false;
         (*this->estadoJoystick1)["JOY_DEFENSA"]        = false;
         (*this->estadoJoystick1)["JOY_PODER"]          = false;
-//        (*this->estadoJoystickNulo)["JOY_SELECT"]      = false;
-//        (*this->estadoJoystickNulo)["JOY_START"]       = false;
+        (*this->estadoJoystickNulo)["JOY_SELECT"]      = false;
+        (*this->estadoJoystickNulo)["JOY_START"]       = false;
 
         (*this->estadoJoystick1)["JOY_ARRIBA"]         = false;
         (*this->estadoJoystick1)["JOY_ABAJO"]          = false;
@@ -376,8 +376,8 @@ void ControladorJoystick::resetControladorJoystick(){
         (*this->estadoJoystick2)["JOY_PATADA_BAJA"]    = false;
         (*this->estadoJoystick2)["JOY_DEFENSA"]        = false;
         (*this->estadoJoystick2)["JOY_PODER"]          = false;
- //       (*this->estadoJoystickNulo)["JOY_SELECT"]      = false;
- //       (*this->estadoJoystickNulo)["JOY_START"]       = false;
+        (*this->estadoJoystickNulo)["JOY_SELECT"]      = false;
+        (*this->estadoJoystickNulo)["JOY_START"]       = false;
 
         (*this->estadoJoystick2)["JOY_ARRIBA"]         = false;
         (*this->estadoJoystick2)["JOY_ABAJO"]          = false;
@@ -431,7 +431,7 @@ void ControladorJoystick::clean() {
 
 // RESET VERDADERO. Reseteo los botones menos el indicado por nro_boton.
 void ControladorJoystick::resetBotones(int whichOne, Uint8 nro_boton) {
-	for (Uint8 b = 0; b < 8; b++)
+	for (Uint8 b = 0; b < 10; b++)
 		if (b != nro_boton)
 			m_buttonStates_actual[whichOne][b] = false;
 }
