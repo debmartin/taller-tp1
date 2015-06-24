@@ -140,7 +140,7 @@
 		    "sprites-caida": { 
 			        	"imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-caida.png",
 		    		    "cant_fotogramas": 5,
-		    		    "fps": 5 
+		    		    "fps": 10 
 		    			},
 		    "sprites-mareado": { 
 			        	"imagen": "RECURSOS/PERSONAJES/SUBZERO/subzero-mareado.png",

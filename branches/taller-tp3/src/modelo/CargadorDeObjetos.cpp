@@ -328,10 +328,16 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(flo
 	Vector2f reposo_caja2_PuntoMin(REPOSO_CAJA2_X1_PORCENTUAL*ancho_logico_personaje, REPOSO_CAJA2_Y1_PORCENTUAL*alto_logico_personaje);
 	Vector2f reposo_caja2_PuntoMax(REPOSO_CAJA2_X2_PORCENTUAL*ancho_logico_personaje, REPOSO_CAJA2_Y2_PORCENTUAL*alto_logico_personaje);
 
+	Vector2f reposo_caja3_PuntoMin(REPOSO_CAJA3_X1_PORCENTUAL*ancho_logico_personaje, REPOSO_CAJA3_Y1_PORCENTUAL*alto_logico_personaje);
+	Vector2f reposo_caja3_PuntoMax(REPOSO_CAJA3_X2_PORCENTUAL*ancho_logico_personaje, REPOSO_CAJA3_Y2_PORCENTUAL*alto_logico_personaje);
+
 	AABB* reposo_caja1 = new AABB(reposo_caja1_PuntoMin, reposo_caja1_PuntoMax);
 	AABB* reposo_caja2 = new AABB(reposo_caja2_PuntoMin, reposo_caja2_PuntoMax);
+	AABB* reposo_caja3 = new AABB(reposo_caja3_PuntoMin, reposo_caja3_PuntoMax);
+
 	cajasAABB_reposo->push_back(reposo_caja1);
 	cajasAABB_reposo->push_back(reposo_caja2);
+	cajasAABB_reposo->push_back(reposo_caja3);
 
 	//PATADA ALTA//
 	Vector2f patada_alta_caja1_PuntoMin(PATADA_ALTA_CAJA1_X1_PORCENTUAL*ancho_logico_personaje, PATADA_ALTA_CAJA1_Y1_PORCENTUAL*alto_logico_personaje);
@@ -536,10 +542,16 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(flo
 	Vector2f recibiendo_golpe_caja2_PuntoMin(REPOSO_CAJA2_X1_PORCENTUAL*ancho_logico_personaje, REPOSO_CAJA2_Y1_PORCENTUAL*alto_logico_personaje);
 	Vector2f recibiendo_golpe_caja2_PuntoMax(REPOSO_CAJA2_X2_PORCENTUAL*ancho_logico_personaje, REPOSO_CAJA2_Y2_PORCENTUAL*alto_logico_personaje);
 
+	Vector2f recibiendo_golpe_caja3_PuntoMin(REPOSO_CAJA3_X1_PORCENTUAL*ancho_logico_personaje, REPOSO_CAJA3_Y1_PORCENTUAL*alto_logico_personaje);
+	Vector2f recibiendo_golpe_caja3_PuntoMax(REPOSO_CAJA3_X2_PORCENTUAL*ancho_logico_personaje, REPOSO_CAJA3_Y2_PORCENTUAL*alto_logico_personaje);
+
 	AABB* recibiendo_golpe_caja1 = new AABB(recibiendo_golpe_caja1_PuntoMin, recibiendo_golpe_caja1_PuntoMax);
 	AABB* recibiendo_golpe_caja2 = new AABB(recibiendo_golpe_caja2_PuntoMin, recibiendo_golpe_caja2_PuntoMax);
+	AABB* recibiendo_golpe_caja3 = new AABB(recibiendo_golpe_caja3_PuntoMin, recibiendo_golpe_caja3_PuntoMax);
+
 	cajasAABB_golpeado->push_back(recibiendo_golpe_caja1);
 	cajasAABB_golpeado->push_back(recibiendo_golpe_caja2);
+	cajasAABB_golpeado->push_back(recibiendo_golpe_caja3);
 
 	//CAIDA DERECHA//
 	Vector2f caida_derecha_caja1_PuntoMin(CAIDA_DERECHA_CAJA1_X1_PORCENTUAL*ancho_logico_personaje, CAIDA_DERECHA_CAJA1_Y1_PORCENTUAL*alto_logico_personaje);
@@ -583,10 +595,16 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(flo
 	Vector2f animality3_caja2_PuntoMin(REPOSO_CAJA2_X1_PORCENTUAL*ancho_logico_personaje, REPOSO_CAJA2_Y1_PORCENTUAL*alto_logico_personaje);
 	Vector2f animality3_caja2_PuntoMax(REPOSO_CAJA2_X2_PORCENTUAL*ancho_logico_personaje, REPOSO_CAJA2_Y2_PORCENTUAL*alto_logico_personaje);
 
+	Vector2f animality3_caja3_PuntoMin(REPOSO_CAJA3_X1_PORCENTUAL*ancho_logico_personaje, REPOSO_CAJA3_Y1_PORCENTUAL*alto_logico_personaje);
+	Vector2f animality3_caja3_PuntoMax(REPOSO_CAJA3_X2_PORCENTUAL*ancho_logico_personaje, REPOSO_CAJA3_Y2_PORCENTUAL*alto_logico_personaje);
+
 	AABB* animality3_caja1 = new AABB(animality3_caja1_PuntoMin, animality3_caja1_PuntoMax);
 	AABB* animality3_caja2 = new AABB(animality3_caja2_PuntoMin, animality3_caja2_PuntoMax);
+	AABB* animality3_caja3 = new AABB(animality3_caja3_PuntoMin, animality3_caja3_PuntoMax);
+
 	cajasAABB_animality3->push_back(animality3_caja1);
 	cajasAABB_animality3->push_back(animality3_caja2);
+	cajasAABB_animality3->push_back(animality3_caja3);
 
 	//FATALITY//
 	Vector2f fatality1_caja1_PuntoMin(REPOSO_CAJA1_X1_PORCENTUAL*ancho_logico_personaje, REPOSO_CAJA1_Y1_PORCENTUAL*alto_logico_personaje);
@@ -595,10 +613,16 @@ map<estado_personaje, BVH*>* CargadorDeOjbetos::cargarCajasColisionPersonaje(flo
 	Vector2f fatality1_caja2_PuntoMin(REPOSO_CAJA2_X1_PORCENTUAL*ancho_logico_personaje, REPOSO_CAJA2_Y1_PORCENTUAL*alto_logico_personaje);
 	Vector2f fatality1_caja2_PuntoMax(REPOSO_CAJA2_X2_PORCENTUAL*ancho_logico_personaje, REPOSO_CAJA2_Y2_PORCENTUAL*alto_logico_personaje);
 
+	Vector2f fatality1_caja3_PuntoMin(REPOSO_CAJA3_X1_PORCENTUAL*ancho_logico_personaje, REPOSO_CAJA3_Y1_PORCENTUAL*alto_logico_personaje);
+	Vector2f fatality1_caja3_PuntoMax(REPOSO_CAJA3_X2_PORCENTUAL*ancho_logico_personaje, REPOSO_CAJA3_Y2_PORCENTUAL*alto_logico_personaje);
+
 	AABB* fatality1_caja1 = new AABB(fatality1_caja1_PuntoMin, fatality1_caja1_PuntoMax);
 	AABB* fatality1_caja2 = new AABB(fatality1_caja2_PuntoMin, fatality1_caja2_PuntoMax);
+	AABB* fatality1_caja3 = new AABB(fatality1_caja3_PuntoMin, fatality1_caja3_PuntoMax);
+
 	cajasAABB_fatality1->push_back(fatality1_caja1);
 	cajasAABB_fatality1->push_back(fatality1_caja2);
+	cajasAABB_fatality1->push_back(fatality1_caja3);
 
 	Vector2f pivote(ancho_logico_personaje/2, 0);
 	//Armo los BVH de cada estado
