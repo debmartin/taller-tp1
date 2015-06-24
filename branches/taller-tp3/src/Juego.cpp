@@ -78,7 +78,7 @@ void Juego::render()
 
 }
 
-void Juego::update(bool& recargar)
+void Juego::update(bool& recargar, bool&menu)
 {
 	this->jugador1->getPersonaje()->update(jugador2->getPersonaje());
 	if(this->modo_juego == "P1_vs_CPU"){
@@ -108,13 +108,21 @@ void Juego::update(bool& recargar)
                 jugador1->getPersonaje()->victoria();
                 ejecutandoFinal = true;
         Logger::getInstance()->info("GAME OVER JUGADOR 2");
-        }
+
+        }else if(HUD::Instance()->seAcaboElTiempo() && (modo_juego == "P1_vs_P2" || modo_juego == "P1_vs_CPU") && !ejecutandoFinal && !jugador1->getPersonaje()->estaSaltando() && !jugador2->getPersonaje()->estaSaltando()){
+        	jugador1->getPersonaje()->victoria();
+        	jugador2->getPersonaje()->victoria();
+        	ejecutandoFinal = true;
+        	menu = true;
+    	}
 
         if((!(jugador1->getPersonaje()->estaBloqueado()) && jugador2->getPersonaje()->estaSinEnergia() && ejecutandoFinal) ||
                         (!(jugador2->getPersonaje()->estaBloqueado()) && jugador1->getPersonaje()->estaSinEnergia() && ejecutandoFinal)){
-                finalizarRound(recargar);
+            finalizarRound(recargar);
         }else if (jugador2->getPersonaje()->estaSinEnergia() && jugador1->getPersonaje()->estaSinEnergia()) {
-                finalizarRound(recargar);
+            finalizarRound(recargar);
+        }else if ((modo_juego == "P1_vs_P2" || modo_juego == "P1_vs_CPU") && HUD::Instance()->seAcaboElTiempo() && (!jugador1->getPersonaje()->estaBloqueado() || !jugador2->getPersonaje()->estaBloqueado()) && ejecutandoFinal){
+        	finalizarRound(recargar);
         }
 
         ControladorJoystick::Instance()->update();
@@ -146,8 +154,7 @@ void Juego::handleEvents(bool& recargar, bool& menu)
 	    }
 
 		std::map<string, bool>* estadoJoy = TheInputHandler::Instance()->getJoystickState(JOYSTICK1);
-		if(modo_juego == "Práctica" && ((*estadoJoy)["JOY_START"] || (*estadoJoy)["JOY_SELECT"])){
-			cout<<"Reset modo practica"<<endl;
+		if(modo_juego == "Práctica" && (*estadoJoy)["JOY_START"]){
 			juegoCorriendo = false;
 			recargar = true;
 			menu = true;

@@ -31,7 +31,7 @@ private:
 public:
 	Juego(Jugador* jugador1, Jugador* jugador2, string modo, string nombrePersonaje1, string nombrePersonaje2);
 	void render();
-	void update(bool& recargar);
+	void update(bool& recargar, bool&menu);
 	void handleEvents(bool& recargar, bool& menu);
 	bool running();
 	void finalizarRound(bool& recargar);
