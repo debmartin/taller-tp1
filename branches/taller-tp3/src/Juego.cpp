@@ -144,7 +144,13 @@ void Juego::handleEvents(bool& recargar)
 	        }
 	    }
 
-		if (evento.type == SDL_QUIT){
+		std::map<string, bool>* estadoJoy = TheInputHandler::Instance()->getJoystickState(JOYSTICK1);
+		if(modo_juego == "Práctica" && estadoJoy["JOY_START"]){
+			juegoCorriendo = false;
+			recargar = true;
+		}
+
+		else if (evento.type == SDL_QUIT){
 			juegoCorriendo = false;
 		} else if (! controladorPersonaje->manejar_Evento(evento)){
 			juegoCorriendo = false;
