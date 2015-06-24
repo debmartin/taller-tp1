@@ -777,7 +777,6 @@ void Personaje::recibirGolpe(Colisionable* otro){
 		}else if(otro->verEstado()->efectuandoPatadaGiratoria()){
 			derribado();
 		}else if(otro->verEstado()->estaTomandoAlOponente()){
-			//ser_arrojado();
 			if(this->direccion == DIRECCION_IZQUIERDA){
 				caidaIzquierda();
 			}else if(this->direccion == DIRECCION_DERECHA){
@@ -972,7 +971,6 @@ void Personaje::calcularNuevaPosicion(Colisionable* enemigo){
         calcularPosicionSinColision(enemigo);
         return;
     }
-
     if(estaHaciendoToma()){
     	posicion = posicionCandidata;
     }

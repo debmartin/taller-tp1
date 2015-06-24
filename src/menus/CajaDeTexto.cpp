@@ -64,13 +64,13 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 		//Special key input
 		if( e.type == SDL_KEYDOWN )
 		{
-			cout<<"--------------------"<<endl;
+			//cout<<"--------------------"<<endl;
 			const Uint8* estadoTeclado = SDL_GetKeyboardState(NULL);
 			if(estadoTeclado[SDL_SCANCODE_LEFT]){
-				cout<<"Apreto izq"<<endl;
+				//cout<<"Apreto izq"<<endl;
 				if(posicionSelector == pos_x && numeroLetraSeleccionadaVista == 0){
 					//Acomodo los caracteres de vista:
-					cout<<"debug2 scroll izquierda"<<endl;
+					//cout<<"debug2 scroll izquierda"<<endl;
 					if(bufferInferior.length() != 0){
 						if(textoVista.length() == cant_caracteres_vista){
 							this->bufferSuperior = textoVista.substr(textoVista.length()-1,1) + bufferSuperior;
@@ -80,32 +80,32 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 						}
 						this->bufferInferior = bufferInferior.substr(0,bufferInferior.length()-1);
 					}
-					cout<<"num letra:"<<numeroLetraSeleccionadaVista<<endl;
+					//cout<<"num letra:"<<numeroLetraSeleccionadaVista<<endl;
 				}
 				else if(posicionSelector >= pos_x + this->anchoLetra){
-					cout<<"debug3 scroll izquierda"<<endl;
+					//cout<<"debug3 scroll izquierda"<<endl;
 					posicionSelector -= this->anchoLetra;
 					this->numeroLetraSeleccionadaVista-=1;
-					cout<<"num letra:"<<numeroLetraSeleccionadaVista<<endl;
+					//cout<<"num letra:"<<numeroLetraSeleccionadaVista<<endl;
 				}
 			}else if(estadoTeclado[SDL_SCANCODE_RIGHT]){
-				cout<<"Apreto der"<<endl;
+				//cout<<"Apreto der"<<endl;
 
 				if(posicionSelector == this->pos_x + this->anchoLetra * (this->cant_caracteres_vista) && numeroLetraSeleccionadaVista == 9){
-					cout<<"debug1 scroll derecha"<<endl;
+					//cout<<"debug1 scroll derecha"<<endl;
 					if(bufferSuperior.length() != 0){
 						this->bufferInferior = bufferInferior + textoVista.substr(0,1);
 						this->textoVista = textoVista.substr(1,textoVista.length()-1) + bufferSuperior.substr(0,1);
 						this->bufferSuperior = bufferSuperior.substr(1,bufferSuperior.length()-1);
 					}
-					cout<<"num letra:"<<numeroLetraSeleccionadaVista<<endl;
+					//cout<<"num letra:"<<numeroLetraSeleccionadaVista<<endl;
 				}else if(posicionSelector < this->pos_x + this->anchoLetra * (this->cant_caracteres_vista)){
-					cout<<"debug2 scroll derecha"<<endl;
+					//cout<<"debug2 scroll derecha"<<endl;
 					if(numeroLetraSeleccionadaVista < textoVista.length()){
 						posicionSelector += this->anchoLetra;
 						this->numeroLetraSeleccionadaVista+=1;
 					}
-					cout<<"num letra:"<<numeroLetraSeleccionadaVista<<endl;
+					//cout<<"num letra:"<<numeroLetraSeleccionadaVista<<endl;
 				}
 			}
 
@@ -113,19 +113,19 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 			else if( e.key.keysym.sym == SDLK_BACKSPACE && this->textoMemoria.length() > 0 )
 			{
 
-				cout<<"---------------"<<endl;
-				cout<<"Se borra un caracter:"<<endl;
+				//cout<<"---------------"<<endl;
+				//cout<<"Se borra un caracter:"<<endl;
 				if(numeroLetraSeleccionadaVista == 0){
-					cout<<"Debug1 borrado"<<endl;
-					cout<<"numero letra vista:"<<numeroLetraSeleccionadaVista<<endl;
+					//cout<<"Debug1 borrado"<<endl;
+					//cout<<"numero letra vista:"<<numeroLetraSeleccionadaVista<<endl;
 					if(bufferInferior.length() != 0){
 						this->bufferInferior = bufferInferior.substr(0,bufferInferior.length()-1);
 					}
 					this->textoMemoria = bufferInferior + textoVista + bufferSuperior;
 				}
 				else if(this->textoMemoria.length() < this->cant_caracteres_vista){
-					cout<<"Debug2 borrado"<<endl;
-					cout<<"numero letra vista:"<<numeroLetraSeleccionadaVista<<endl;
+					//cout<<"Debug2 borrado"<<endl;
+					//cout<<"numero letra vista:"<<numeroLetraSeleccionadaVista<<endl;
 					this->textoVista = textoVista.substr(0,numeroLetraSeleccionadaVista-1) + textoVista.substr(numeroLetraSeleccionadaVista, textoVista.length()-numeroLetraSeleccionadaVista);
 
 					this->numeroLetraSeleccionadaVista-=1;
@@ -133,8 +133,8 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 					this->textoMemoria = bufferInferior + textoVista + bufferSuperior;
 
 				}else if(numeroLetraSeleccionadaVista <= cant_caracteres_vista && numeroLetraSeleccionadaVista != 0){
-					cout<<"Debug3 borrado"<<endl;
-					cout<<"numero letra vista:"<<numeroLetraSeleccionadaVista<<endl;
+					//cout<<"Debug3 borrado"<<endl;
+					//cout<<"numero letra vista:"<<numeroLetraSeleccionadaVista<<endl;
 					this->textoVista = this->textoVista.substr(0,numeroLetraSeleccionadaVista-1) + this->textoVista.substr(numeroLetraSeleccionadaVista,cant_caracteres_vista-numeroLetraSeleccionadaVista) + bufferSuperior.substr(0,1);;
 					if(bufferSuperior.length() != 0){
 						this->bufferSuperior = bufferSuperior.substr(1,bufferSuperior.length()-1);
@@ -145,7 +145,7 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 					posicionSelector -= this->tamLetra/2;
 
 				}
-			}
+			}/*
 			cout<<"Texto en memoria:"<<endl;
 			cout<<this->textoMemoria<<endl;
 
@@ -155,20 +155,20 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 			cout<<"Buffer Inferior:"<<endl;
 			cout<<this->bufferInferior<<endl;
 			cout<<"Buffer Superior:"<<endl;
-			cout<<this->bufferSuperior<<endl;
+			cout<<this->bufferSuperior<<endl;*/
 		}
 		//Special text input event
 		else if( e.type == SDL_TEXTINPUT )
 		{
-			cout<<"---------------"<<endl;
+			//cout<<"---------------"<<endl;
 			//Se agrega un caracter:
 			if ( this->textoMemoria.length() < this->cant_caracteres)
 			{
-				cout<<"Ingresa caracter"<<endl;
+				//cout<<"Ingresa caracter"<<endl;
 				//Agrego un caracter intermedio
 				if(this->textoVista.length() < this->cant_caracteres_vista){
-					cout<<"Debug1"<<endl;
-					cout<<"numero letra vista:"<<numeroLetraSeleccionadaVista<<endl;
+					//cout<<"Debug1"<<endl;
+					//cout<<"numero letra vista:"<<numeroLetraSeleccionadaVista<<endl;
 					this->textoVista = textoVista.substr(0, numeroLetraSeleccionadaVista) + e.text.text + textoVista.substr(numeroLetraSeleccionadaVista, textoVista.length()-numeroLetraSeleccionadaVista);
 					this->textoMemoria = bufferInferior + textoVista + bufferSuperior;
 
@@ -176,8 +176,8 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 					this->numeroLetraSeleccionadaVista+=1;
 				}
 				else if(numeroLetraSeleccionadaVista < cant_caracteres_vista){
-					cout<<"Debug2"<<endl;
-					cout<<"numero letra vista:"<<numeroLetraSeleccionadaVista<<endl;
+					//cout<<"Debug2"<<endl;
+					//cout<<"numero letra vista:"<<numeroLetraSeleccionadaVista<<endl;
 					this->bufferSuperior = this->textoVista.substr(cant_caracteres_vista-1, 1) + bufferSuperior;
 					this->textoVista = this->textoVista.substr(0,numeroLetraSeleccionadaVista) + e.text.text + this->textoVista.substr(numeroLetraSeleccionadaVista,textoVista.length()-numeroLetraSeleccionadaVista-1);
 
@@ -187,14 +187,14 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 					posicionSelector = posicionSelector + this->tamLetra/2;
 				//Agrego un caracter al final del texto de vista:
 				}else if(numeroLetraSeleccionadaVista == cant_caracteres_vista){
-					cout<<"Debug3"<<endl;
-					cout<<"numero letra vista:"<<numeroLetraSeleccionadaVista<<endl;
+					//cout<<"Debug3"<<endl;
+					//cout<<"numero letra vista:"<<numeroLetraSeleccionadaVista<<endl;
 					this->bufferInferior = bufferInferior + textoVista.substr(0, 1);
 					this->textoVista = textoVista.substr(1, cant_caracteres_vista-1) + e.text.text;
 
 					this->textoMemoria = bufferInferior + textoVista + bufferSuperior;
 
-				}
+				}/*
 				cout<<"Texto en memoria:"<<endl;
 				cout<<this->textoMemoria<<endl;
 
@@ -204,7 +204,7 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 				cout<<"Buffer Inferior:"<<endl;
 				cout<<this->bufferInferior<<endl;
 				cout<<"Buffer Superior:"<<endl;
-				cout<<this->bufferSuperior<<endl;
+				cout<<this->bufferSuperior<<endl;*/
 			}
 		}
 		renderText = true;
