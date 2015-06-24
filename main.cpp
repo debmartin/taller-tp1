@@ -20,14 +20,14 @@ string modo_juego_g;
 string nombrePersonajeElegido1_g;
 string nombrePersonajeElegido2_g;
 
-Juego* cargarJuego(string escenarioPath, int& cant_rounds){
+Juego* cargarJuego(string escenarioPath, int& cant_rounds, bool menu){
 	Logger::getInstance()->info("#################################################");
 	Logger::getInstance()->info("############ INICIA LA CARGA DEL JUEGO ##########");
 	Logger::getInstance()->info("#################################################");
 
 	CargadorDeOjbetos cargador_de_objetos(escenarioPath);
 
-	if ( (cant_rounds%2) == 1 )
+	if ( ((cant_rounds%2) == 1 && modo_juego_g != "Práctica") || (modo_juego_g == "Práctica" && menu))
 	{
 		cargador_de_objetos.cargarInfo_desdeMenus();
 
@@ -71,7 +71,7 @@ Juego* cargarJuego(string escenarioPath, int& cant_rounds){
     return juego;
 }
 
-void correrJuego(Juego* g_game, bool& recargar){
+void correrJuego(Juego* g_game, bool& recargar, bool menu){
 	Logger::getInstance()->info("Juego corriendo");
 
     static const int FPS = 60;
@@ -82,7 +82,7 @@ void correrJuego(Juego* g_game, bool& recargar){
 
         frameStart = SDL_GetTicks();
 
-        g_game->handleEvents(recargar);
+        g_game->handleEvents(recargar, menu);
 
         g_game->update(recargar);
 
@@ -128,6 +128,7 @@ int main(int argc, char* args[])
 		Logger::getInstance()->info("argumento desde la consola: "+argumento);
 
 		bool recargar = true;
+		bool menu = true;
 		int cant_rounds = 1;
 		while (recargar)
 		{
@@ -138,8 +139,9 @@ int main(int argc, char* args[])
 
 			recargar = false;
 			string escenario_path(argumento);
-			Juego* juego = cargarJuego(argumento, cant_rounds);
-			correrJuego(juego, recargar);
+			Juego* juego = cargarJuego(argumento, cant_rounds, menu);
+			menu = false;
+			correrJuego(juego, recargar, menu);
 			cant_rounds++;
 
 			musica->detener();
