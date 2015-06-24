@@ -81,6 +81,13 @@ bool HUD::init(
 	this->sFondoBoton = new Sprite(this->aFondoBoton , this->gRenderer, Vector2f(0.0f, 0.0f), ORIENTACION_DERECHA, SPR_ARRIBA_IZQUIERDA);
 	this->sFondoBoton->escalarConTamanio(64, 64);
 
+	// RELOJ
+	this->relojFuncionando = false;
+	this->tiempoTranscurrido = 0;
+	this->tiempoInicial = 0; // ESTE VALOR NO SE UTILIZA
+	this->tiempoMostrado = 0;
+	this->arrancarReloj();
+
     return true;
 
 }
@@ -97,6 +104,29 @@ SDL_Texture* HUD::crearTexturaTransparente(int ancho, int alto) {
 	SDL_SetRenderTarget(this->gRenderer, NULL);
 
 	return tReturn;
+}
+
+void HUD::arrancarReloj() {
+	this->resetReloj();
+	this->playReloj();
+}
+
+void HUD::pausarReloj() {
+	this->relojFuncionando = false;
+}
+
+// Reloj regresa a cero y queda en pausa
+void HUD::resetReloj() {
+	this->tiempoInicial = SDL_GetTicks() / 1000.0f;
+	this->relojFuncionando = false;
+}
+
+void HUD::playReloj() {
+	this->relojFuncionando = true;
+}
+
+bool HUD::seAcaboElTiempo() {
+	return (this->tiempoTranscurrido >= TIEMPO_INICIAL_RELOJ_SEGUNDOS);
 }
 
 SDL_Texture* HUD::updateTexture() {
@@ -194,8 +224,26 @@ void HUD::dibujar(){
 			SDL_Rect destRect1 = {320 - (this->W(texturaCombo) / 2) , 400, this->W(texturaCombo), this->H(texturaCombo)};
 			SDL_RenderCopy(this->gRenderer, texturaCombo, NULL, &destRect1);
 		}
-
 	}
+
+	// IMPRIMO RELOJ
+	char tiempoReloj[256];
+	if (this->tiempoMostrado > 9)
+		sprintf (tiempoReloj,"%d", this->tiempoMostrado);
+	else
+		sprintf (tiempoReloj,"0%d", this->tiempoMostrado);
+
+	SDL_Color color = { 255, 239, 36, 255 };
+	SDL_Texture* tTiempo = renderText(tiempoReloj, "RECURSOS/HUD/mk2.ttf",	color, 30, gRenderer);
+	SDL_Rect destRect3 = {320 - this->W(tTiempo) / 2, 28, this->W(tTiempo), this->H(tTiempo) * 1.6};
+
+	color = { 0, 0, 0, 255 };
+	SDL_Texture* tTiempo2 = renderText(tiempoReloj, "RECURSOS/HUD/mk2.ttf",	color, 30, gRenderer);
+	SDL_Rect destRect4 = {320 - this->W(tTiempo) / 2, 30, this->W(tTiempo2), this->H(tTiempo2) * 1.6};
+
+
+	SDL_RenderCopy(this->gRenderer, tTiempo2, NULL, &destRect4);
+	SDL_RenderCopy(this->gRenderer, tTiempo, NULL, &destRect3);
 }
 
 void HUD::mostrarMensajeCombo(string nombreCombo) {
@@ -208,6 +256,11 @@ void HUD::mostrarMensajeCombo(string nombreCombo) {
 void HUD::update() {
 	if (SDL_GetTicks() - this->tiempoInicioMostrar > TIEMPO_LIMITE_MOSTRAR_NOMBRE_COMBO)
 		this->mostrandoNombreCombo = false;
+
+	if (this->relojFuncionando && this->tiempoTranscurrido < TIEMPO_INICIAL_RELOJ_SEGUNDOS) {
+		this->tiempoTranscurrido = SDL_GetTicks() / 1000.0f - this->tiempoInicial;
+		this->tiempoMostrado = TIEMPO_INICIAL_RELOJ_SEGUNDOS - this->tiempoTranscurrido;
+	}
 }
 
 void HUD::recibirNotificacion(Observable* unObservable){

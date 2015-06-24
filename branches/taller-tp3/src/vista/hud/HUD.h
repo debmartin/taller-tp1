@@ -20,6 +20,7 @@
 #define DIMENSION_PORCENTUAL_BARRA Vector2f(30, 10)
 
 #define TIEMPO_LIMITE_MOSTRAR_NOMBRE_COMBO 1000
+#define TIEMPO_INICIAL_RELOJ_SEGUNDOS 11
 
 class HUD: public Observador {
 public:
@@ -38,6 +39,15 @@ public:
 			SDL_Renderer*      renderer);
 
 	void mostrarMensajeCombo(string nombreCombo);
+
+
+	//RELOJ
+	void arrancarReloj();
+	void pausarReloj();
+	bool seAcaboElTiempo();
+	void resetReloj();
+	void playReloj();
+
 
 	//SINGLETON
 	static HUD* Instance();
@@ -84,6 +94,12 @@ private:
 	string nombreComboActual;
 	bool mostrandoNombreCombo;
 	Uint32 tiempoInicioMostrar;
+
+	// RELOJ
+	bool relojFuncionando;
+	Uint32 tiempoTranscurrido;
+	Uint32 tiempoInicial;
+	Uint32 tiempoMostrado;
 };
 
 #endif /* SRC_VISTA_HUD_H_ */
