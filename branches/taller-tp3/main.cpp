@@ -10,6 +10,7 @@
 #include "src/Sonido.h"
 #include "src/Sonidos.h"
 #include "src/utils/Logger.h"
+#include "src/vista/PersonajeDibujable.h"
 #include "src/vista/VentanaGrafica.h"
 
 // variables globales
@@ -123,6 +124,10 @@ int main(int argc, char* args[])
 	if ( argc > 1 )
 	{
 		string argumento(args[1]);
+
+		string archivo_configuracion(args[1]);
+		Logger::getInstance()->iniciar(archivo_configuracion);
+
 		Logger::getInstance()->info("argumento desde la consola: "+argumento);
 
 		bool recargar = true;
