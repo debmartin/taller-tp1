@@ -113,7 +113,8 @@ void ControladorJoystick::handleEventsJoysticks(SDL_Event event) {
                         this->resetBotones(whichOne, event.jbutton.button);
 
                         //Agregar el nombre de la tecla presionada.
-                        if (getStringDeNumeroDeTecla(whichOne, event.jbutton.button) != "ERROR") {
+                        string stringTecla = getStringDeNumeroDeTecla(whichOne, event.jbutton.button);
+                        if (stringTecla != "ERROR" && stringTecla != "JOY_START" && stringTecla != "JOY_SELECT") {
 							if (whichOne == 0){
 								this->mapaDeCombosJugador1->agregar_tecla(getStringDeNumeroDeTecla(whichOne, event.jbutton.button));
 							}else{

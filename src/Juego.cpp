@@ -145,7 +145,8 @@ void Juego::handleEvents(bool& recargar)
 	    }
 
 		std::map<string, bool>* estadoJoy = TheInputHandler::Instance()->getJoystickState(JOYSTICK1);
-		if(modo_juego == "Práctica" && (*estadoJoy)["JOY_START"]){
+		if(modo_juego == "Práctica" && ((*estadoJoy)["JOY_START"] || (*estadoJoy)["JOY_SELECT"])){
+			cout<<"Reset modo practica"<<endl;
 			juegoCorriendo = false;
 			recargar = true;
 		}
