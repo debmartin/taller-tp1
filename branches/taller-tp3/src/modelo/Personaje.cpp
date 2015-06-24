@@ -471,6 +471,7 @@ void Personaje::derribado(){
 }
 
 void Personaje::mareado(){
+	HUD::Instance()->resetReloj();
 	cambiarEstado(new Mareado(posicion, (*cajasPorEstado)[RECIBIENDO_GOLPE]));
 	Sonidos::getInstancia()->reproducirSonido("sonido_finish");
 }
