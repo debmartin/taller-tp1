@@ -107,16 +107,6 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 					}
 					cout<<"num letra:"<<numeroLetraSeleccionadaVista<<endl;
 				}
-				cout<<"Texto en memoria:"<<endl;
-				cout<<this->textoMemoria<<endl;
-
-				cout<<"Vista:"<<endl;
-				cout<<this->textoVista<<endl;
-
-				cout<<"Buffer Inferior:"<<endl;
-				cout<<this->bufferInferior<<endl;
-				cout<<"Buffer Superior:"<<endl;
-				cout<<this->bufferSuperior<<endl;
 			}
 
 			//Se borra un caracter:
@@ -280,5 +270,4 @@ void CajaDeTexto::setTexto(string texto) {
 	this->numeroLetraSeleccionadaVista = textoMemoria.length();
 	this->bufferInferior = "";
 	this->bufferSuperior = "";
-	cout<<"Debug letra seleccionada:"<<numeroLetraSeleccionadaVista<<endl;
 }
