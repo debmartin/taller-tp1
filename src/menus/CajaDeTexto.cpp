@@ -64,18 +64,23 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 		//Special key input
 		if( e.type == SDL_KEYDOWN )
 		{
+			cout<<"--------------------"<<endl;
 			const Uint8* estadoTeclado = SDL_GetKeyboardState(NULL);
 			if(estadoTeclado[SDL_SCANCODE_LEFT]){
 				cout<<"Apreto izq"<<endl;
 				if(posicionSelector == pos_x && numeroLetraSeleccionadaVista == 0){
 					//Acomodo los caracteres de vista:
 					cout<<"debug2 scroll izquierda"<<endl;
-					cout<<"num letra:"<<numeroLetraSeleccionadaVista<<endl;
 					if(bufferInferior.length() != 0){
-						this->bufferSuperior = textoVista.substr(textoVista.length()-1,1) + bufferSuperior;
-						this->textoVista = bufferInferior.substr(bufferInferior.length()-1,1) + textoVista.substr(0,textoVista.length()-1);
+						if(textoVista.length() == cant_caracteres_vista){
+							this->bufferSuperior = textoVista.substr(textoVista.length()-1,1) + bufferSuperior;
+							this->textoVista = bufferInferior.substr(bufferInferior.length()-1,1) + textoVista.substr(0,textoVista.length()-1);
+						}else{
+							this->textoVista = bufferInferior.substr(bufferInferior.length()-1,1) + textoVista.substr(0,textoVista.length());
+						}
 						this->bufferInferior = bufferInferior.substr(0,bufferInferior.length()-1);
 					}
+					cout<<"num letra:"<<numeroLetraSeleccionadaVista<<endl;
 				}
 				else if(posicionSelector >= pos_x + this->anchoLetra){
 					cout<<"debug3 scroll izquierda"<<endl;
@@ -86,19 +91,20 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 			}else if(estadoTeclado[SDL_SCANCODE_RIGHT]){
 				cout<<"Apreto der"<<endl;
 
-				if(posicionSelector == this->pos_x + this->anchoLetra * (this->cant_caracteres_vista) && this->numeroLetraSeleccionadaVista != cant_caracteres){
+				if(posicionSelector == this->pos_x + this->anchoLetra * (this->cant_caracteres_vista) && numeroLetraSeleccionadaVista == 9){
 					cout<<"debug1 scroll derecha"<<endl;
-					cout<<"num letra:"<<numeroLetraSeleccionadaVista<<endl;
-
 					if(bufferSuperior.length() != 0){
 						this->bufferInferior = bufferInferior + textoVista.substr(0,1);
 						this->textoVista = textoVista.substr(1,textoVista.length()-1) + bufferSuperior.substr(0,1);
 						this->bufferSuperior = bufferSuperior.substr(1,bufferSuperior.length()-1);
 					}
+					cout<<"num letra:"<<numeroLetraSeleccionadaVista<<endl;
 				}else if(posicionSelector < this->pos_x + this->anchoLetra * (this->cant_caracteres_vista)){
 					cout<<"debug2 scroll derecha"<<endl;
-					posicionSelector += this->anchoLetra;
-					this->numeroLetraSeleccionadaVista+=1;
+					if(numeroLetraSeleccionadaVista < textoVista.length()){
+						posicionSelector += this->anchoLetra;
+						this->numeroLetraSeleccionadaVista+=1;
+					}
 					cout<<"num letra:"<<numeroLetraSeleccionadaVista<<endl;
 				}
 				cout<<"Texto en memoria:"<<endl;
@@ -119,17 +125,25 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 
 				cout<<"---------------"<<endl;
 				cout<<"Se borra un caracter:"<<endl;
-				if(this->textoMemoria.length() < this->cant_caracteres_vista){
+				if(numeroLetraSeleccionadaVista == 0){
 					cout<<"Debug1 borrado"<<endl;
 					cout<<"numero letra vista:"<<numeroLetraSeleccionadaVista<<endl;
-					this->textoMemoria = this->textoMemoria.substr(0,numeroLetraSeleccionadaVista-1) + this->textoMemoria.substr(numeroLetraSeleccionadaVista,textoMemoria.length()-numeroLetraSeleccionadaVista);
-					this->textoVista = this->textoMemoria;
+					if(bufferInferior.length() != 0){
+						this->bufferInferior = bufferInferior.substr(0,bufferInferior.length()-1);
+					}
+					this->textoMemoria = bufferInferior + textoVista + bufferSuperior;
+				}
+				else if(this->textoMemoria.length() < this->cant_caracteres_vista){
+					cout<<"Debug2 borrado"<<endl;
+					cout<<"numero letra vista:"<<numeroLetraSeleccionadaVista<<endl;
+					this->textoVista = textoVista.substr(0,numeroLetraSeleccionadaVista-1) + textoVista.substr(numeroLetraSeleccionadaVista, textoVista.length()-numeroLetraSeleccionadaVista);
 
 					this->numeroLetraSeleccionadaVista-=1;
 					posicionSelector -= this->tamLetra/2;
+					this->textoMemoria = bufferInferior + textoVista + bufferSuperior;
 
 				}else if(numeroLetraSeleccionadaVista <= cant_caracteres_vista && numeroLetraSeleccionadaVista != 0){
-					cout<<"Debug2 borrado"<<endl;
+					cout<<"Debug3 borrado"<<endl;
 					cout<<"numero letra vista:"<<numeroLetraSeleccionadaVista<<endl;
 					this->textoVista = this->textoVista.substr(0,numeroLetraSeleccionadaVista-1) + this->textoVista.substr(numeroLetraSeleccionadaVista,cant_caracteres_vista-numeroLetraSeleccionadaVista) + bufferSuperior.substr(0,1);;
 					if(bufferSuperior.length() != 0){
@@ -140,25 +154,18 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 					this->numeroLetraSeleccionadaVista-=1;
 					posicionSelector -= this->tamLetra/2;
 
-				}else if(numeroLetraSeleccionadaVista == 0){
-					cout<<"Debug3 borrado"<<endl;
-					cout<<"numero letra vista:"<<numeroLetraSeleccionadaVista<<endl;
-					if(bufferInferior.length() != 0){
-						this->bufferInferior = bufferInferior.substr(0,bufferInferior.length()-1);
-					}
-					this->textoMemoria = bufferInferior + textoVista + bufferSuperior;
 				}
-				cout<<"Texto en memoria:"<<endl;
-				cout<<this->textoMemoria<<endl;
-
-				cout<<"Vista:"<<endl;
-				cout<<this->textoVista<<endl;
-
-				cout<<"Buffer Inferior:"<<endl;
-				cout<<this->bufferInferior<<endl;
-				cout<<"Buffer Superior:"<<endl;
-				cout<<this->bufferSuperior<<endl;
 			}
+			cout<<"Texto en memoria:"<<endl;
+			cout<<this->textoMemoria<<endl;
+
+			cout<<"Vista:"<<endl;
+			cout<<this->textoVista<<endl;
+
+			cout<<"Buffer Inferior:"<<endl;
+			cout<<this->bufferInferior<<endl;
+			cout<<"Buffer Superior:"<<endl;
+			cout<<this->bufferSuperior<<endl;
 		}
 		//Special text input event
 		else if( e.type == SDL_TEXTINPUT )
@@ -172,8 +179,9 @@ bool CajaDeTexto::manejarEvento(SDL_Event e) {
 				if(this->textoVista.length() < this->cant_caracteres_vista){
 					cout<<"Debug1"<<endl;
 					cout<<"numero letra vista:"<<numeroLetraSeleccionadaVista<<endl;
-					this->textoMemoria = this->textoMemoria.substr(0, numeroLetraSeleccionadaVista) + e.text.text + this->textoMemoria.substr(numeroLetraSeleccionadaVista, textoMemoria.length()-numeroLetraSeleccionadaVista);
-					this->textoVista = this->textoMemoria;
+					this->textoVista = textoVista.substr(0, numeroLetraSeleccionadaVista) + e.text.text + textoVista.substr(numeroLetraSeleccionadaVista, textoVista.length()-numeroLetraSeleccionadaVista);
+					this->textoMemoria = bufferInferior + textoVista + bufferSuperior;
+
 					posicionSelector = posicionSelector + this->tamLetra/2;
 					this->numeroLetraSeleccionadaVista+=1;
 				}
