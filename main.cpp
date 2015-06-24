@@ -71,7 +71,7 @@ Juego* cargarJuego(string escenarioPath, int& cant_rounds, bool menu){
     return juego;
 }
 
-void correrJuego(Juego* g_game, bool& recargar, bool menu){
+void correrJuego(Juego* g_game, bool& recargar, bool& menu){
 	Logger::getInstance()->info("Juego corriendo");
 
     static const int FPS = 60;
