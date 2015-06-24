@@ -30,6 +30,7 @@ public:
 	void update();
 	void ejecutarEfecto(string id, Vector2f pos, DireccionObjeto direccion);
 	bool init();
+	void destruir();
 };
 
 #endif /* SRC_VISTA_EFECTOSESPECIALES_H_ */

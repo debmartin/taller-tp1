@@ -785,7 +785,7 @@ vector<Combo*>* CargadorDeOjbetos::cargarCombos(string nombrePersonaje){
 		vectorTeclasCombo3->push_back("JOY_DERECHA");
 		vectorTeclasCombo3->push_back("JOY_IZQUIERDA");
 		vectorTeclasCombo3->push_back("JOY_PINIA_BAJA");
-		Combo* combo3 = new Combo(vectorTeclasCombo3, "Square Flight", 3);
+		Combo* combo3 = new Combo(vectorTeclasCombo3, "Patada Voladora", 3);
 
 		vectorTeclasCombo4->push_back("JOY_DERECHA");
 		vectorTeclasCombo4->push_back("JOY_DERECHA");
