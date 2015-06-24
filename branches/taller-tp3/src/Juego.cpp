@@ -158,8 +158,11 @@ void Juego::handleEvents(bool& recargar, bool& menu)
 			juegoCorriendo = false;
 			recargar = true;
 			menu = true;
-		}
 
+		}else if(modo_juego == "Práctica" && (*estadoJoy)["JOY_SELECT"]){
+			posicionarPersonajes_enEjeX();
+			ControladorJoystick::Instance()->resetBotones(JOYSTICK1, 10);
+		}
 		else if (evento.type == SDL_QUIT){
 			juegoCorriendo = false;
 		} else if (! controladorPersonaje->manejar_Evento(evento)){
