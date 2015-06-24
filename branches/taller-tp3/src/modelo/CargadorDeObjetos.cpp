@@ -150,13 +150,18 @@ map<string, PersonajeDibujable*>* CargadorDeOjbetos::cargarPersonajesDibujables(
 
 		it_sprites = spritesDef->begin();
 		for (; it_sprites != spritesDef->end(); ++it_sprites) {
-			Animacion* sub_zero = new Animacion(
-										Renderizador::Instance()->getRenderer(),
-										(*it_sprites)->getImagen(),
-										(*it_sprites)->getCantFotogramas(),
-										(*it_sprites)->getFps(),
-										(*it_sprites)->getIdSprite());
-			personajeDibujableCargado->agregarAnimacion(sub_zero);
+
+			if((*it_sprites)->getIdSprite() != ID_PERSONAJE_REPOSO) {
+
+				Animacion* sub_zero = new Animacion(
+											Renderizador::Instance()->getRenderer(),
+											(*it_sprites)->getImagen(),
+											(*it_sprites)->getCantFotogramas(),
+											(*it_sprites)->getFps(),
+											(*it_sprites)->getIdSprite());
+				personajeDibujableCargado->agregarAnimacion(sub_zero);
+
+			}
 		}
 
 		personajesDibujables->insert( pair<string,PersonajeDibujable*>((*it)->getId(),personajeDibujableCargado) );
