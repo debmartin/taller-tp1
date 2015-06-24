@@ -125,9 +125,6 @@ int main(int argc, char* args[])
 	{
 		string argumento(args[1]);
 
-		string archivo_configuracion(args[1]);
-		Logger::getInstance()->iniciar(archivo_configuracion);
-
 		Logger::getInstance()->info("argumento desde la consola: "+argumento);
 
 		bool recargar = true;
