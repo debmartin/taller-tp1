@@ -1,0 +1,4 @@
+Para iniciar el programa se tiene que seguir los siguientes pasos:
+1) desde la consola de linux ir hacia el directorio del programa.
+2) correr la siguiente linea de comando
+	$ ./mortal-kombat "src/recursos/escenario.json" 
